@@ -3,3 +3,5 @@ __pycache__
 env
 tmp
 logs
+build
+testgres.postgres_configuration.egg-info

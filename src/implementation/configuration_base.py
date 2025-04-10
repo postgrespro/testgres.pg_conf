@@ -4,58 +4,58 @@
 from __future__ import annotations
 
 # fmt: off
-from .configuration import PostgresConfiguration
-from .configuration import PostgresConfigurationObject
-from .configuration import PostgresConfigurationComment
-from .configuration import PostgresConfigurationOption
-from .configuration import PostgresConfigurationOptions
-from .configuration import PostgresConfigurationOptionsIterator
-from .configuration import PostgresConfigurationInclude
-from .configuration import PostgresConfigurationFileLine
-from .configuration import PostgresConfigurationFileLines
-from .configuration import PostgresConfigurationFileLinesIterator
-from .configuration import PostgresConfigurationFile
-from .configuration import PostgresConfigurationFiles
-from .configuration import PostgresConfigurationFilesIterator
-from .configuration import PostgresConfigurationSetOptionValueEventID
-from .configuration import PostgresConfigurationSetOptionValueResult
+from ..abstract.configuration import PostgresConfiguration
+from ..abstract.configuration import PostgresConfigurationObject
+from ..abstract.configuration import PostgresConfigurationComment
+from ..abstract.configuration import PostgresConfigurationOption
+from ..abstract.configuration import PostgresConfigurationOptions
+from ..abstract.configuration import PostgresConfigurationOptionsIterator
+from ..abstract.configuration import PostgresConfigurationInclude
+from ..abstract.configuration import PostgresConfigurationFileLine
+from ..abstract.configuration import PostgresConfigurationFileLines
+from ..abstract.configuration import PostgresConfigurationFileLinesIterator
+from ..abstract.configuration import PostgresConfigurationFile
+from ..abstract.configuration import PostgresConfigurationFiles
+from ..abstract.configuration import PostgresConfigurationFilesIterator
+from ..abstract.configuration import PostgresConfigurationSetOptionValueEventID
+from ..abstract.configuration import PostgresConfigurationSetOptionValueResult
 
-from .core.model import ConfigurationData as PgCfgModel__ConfigurationData
-from .core.model import ObjectData as PgCfgModel__ObjectData
-from .core.model import FileLineElementData as PgCfgModel__FileLineElementData
-from .core.model import CommentData as PgCfgModel__CommentData
-from .core.model import OptionData as PgCfgModel__OptionData
-from .core.model import IncludeData as PgCfgModel__IncludeData
-from .core.model import FileLineData as PgCfgModel__FileLineData
-from .core.model import FileData as PgCfgModel__FileData
-from .core.model import FileStatus as PgCfgModel__FileStatus
+from ..core.model import ConfigurationData as PgCfgModel__ConfigurationData
+from ..core.model import ObjectData as PgCfgModel__ObjectData
+from ..core.model import FileLineElementData as PgCfgModel__FileLineElementData
+from ..core.model import CommentData as PgCfgModel__CommentData
+from ..core.model import OptionData as PgCfgModel__OptionData
+from ..core.model import IncludeData as PgCfgModel__IncludeData
+from ..core.model import FileLineData as PgCfgModel__FileLineData
+from ..core.model import FileData as PgCfgModel__FileData
+from ..core.model import FileStatus as PgCfgModel__FileStatus
 
-from .core.handlers import OptionHandlerToPrepareSetValue as PgCfgModel__OptionHandlerToPrepareSetValue
-from .core.handlers import OptionHandlerCtxToPrepareSetValue as PgCfgModel__OptionHandlerCtxPrepareToSetValue
-from .core.handlers import OptionHandlerToPrepareGetValue as PgCfgModel__OptionHandlerToPrepareGetValue
-from .core.handlers import OptionHandlerCtxToPrepareGetValue as PgCfgModel__OptionHandlerCtxPrepareToGetValue
-from .core.handlers import OptionHandlerToPrepareSetValueItem as PgCfgModel__OptionHandlerToPrepareSetValueItem
-from .core.handlers import OptionHandlerCtxToPrepareSetValueItem as PgCfgModel__OptionHandlerCtxPrepareToSetValueItem
-from .core.handlers import OptionHandlerToSetValue as PgCfgModel__OptionHandlerToSetValue
-from .core.handlers import OptionHandlerCtxToSetValue as PgCfgModel__OptionHandlerCtxToSetValue
-from .core.handlers import OptionHandlerToGetValue as PgCfgModel__OptionHandlerToGetValue
-from .core.handlers import OptionHandlerCtxToGetValue as PgCfgModel__OptionHandlerCtxToGetValue
-from .core.handlers import OptionHandlerToAddOption as PgCfgModel__OptionHandlerToAddOption
-from .core.handlers import OptionHandlerCtxToAddOption as PgCfgModel__OptionHandlerCtxToAddOption
-from .core.handlers import OptionHandlerToSetValueItem as PgCfgModel__OptionHandlerToSetValueItem
-from .core.handlers import OptionHandlerCtxToSetValueItem as PgCfgModel__OptionHandlerCtxToSetValueItem
-from .core.handlers import OptionHandlerToWrite as PgCfgModel__OptionHandlerToWrite
-from .core.handlers import OptionHandlerCtxToWrite as PgCfgModel__OptionHandlerCtxToWrite
-from .core.handlers import ConfigurationDataHandler as PgCfgModel__DataHandler
+from ..core.handlers import OptionHandlerToPrepareSetValue as PgCfgModel__OptionHandlerToPrepareSetValue
+from ..core.handlers import OptionHandlerCtxToPrepareSetValue as PgCfgModel__OptionHandlerCtxPrepareToSetValue
+from ..core.handlers import OptionHandlerToPrepareGetValue as PgCfgModel__OptionHandlerToPrepareGetValue
+from ..core.handlers import OptionHandlerCtxToPrepareGetValue as PgCfgModel__OptionHandlerCtxPrepareToGetValue
+from ..core.handlers import OptionHandlerToPrepareSetValueItem as PgCfgModel__OptionHandlerToPrepareSetValueItem
+from ..core.handlers import OptionHandlerCtxToPrepareSetValueItem as PgCfgModel__OptionHandlerCtxPrepareToSetValueItem
+from ..core.handlers import OptionHandlerToSetValue as PgCfgModel__OptionHandlerToSetValue
+from ..core.handlers import OptionHandlerCtxToSetValue as PgCfgModel__OptionHandlerCtxToSetValue
+from ..core.handlers import OptionHandlerToGetValue as PgCfgModel__OptionHandlerToGetValue
+from ..core.handlers import OptionHandlerCtxToGetValue as PgCfgModel__OptionHandlerCtxToGetValue
+from ..core.handlers import OptionHandlerToAddOption as PgCfgModel__OptionHandlerToAddOption
+from ..core.handlers import OptionHandlerCtxToAddOption as PgCfgModel__OptionHandlerCtxToAddOption
+from ..core.handlers import OptionHandlerToSetValueItem as PgCfgModel__OptionHandlerToSetValueItem
+from ..core.handlers import OptionHandlerCtxToSetValueItem as PgCfgModel__OptionHandlerCtxToSetValueItem
+from ..core.handlers import OptionHandlerToWrite as PgCfgModel__OptionHandlerToWrite
+from ..core.handlers import OptionHandlerCtxToWrite as PgCfgModel__OptionHandlerCtxToWrite
+from ..core.handlers import ConfigurationDataHandler as PgCfgModel__DataHandler
 
-from .core.controller_utils import DataControllerUtils as PgCfgModel__DataControllerUtils
-from .core.data_verificator import DataVerificator
-from .core.helpers import Helpers
-from .core.write_utils import WriteUtils
-from .core.read_utils import ReadUtils
-from .core.read_utils import LineReader as ReadUtils__LineReader
-from .core.raise_error import RaiseError
-from .core.bugcheck_error import BugCheckError
+from ..core.controller_utils import DataControllerUtils as PgCfgModel__DataControllerUtils
+from ..core.data_verificator import DataVerificator
+from ..core.helpers import Helpers
+from ..core.write_utils import WriteUtils
+from ..core.read_utils import ReadUtils
+from ..core.read_utils import LineReader as ReadUtils__LineReader
+from ..core.raise_error import RaiseError
+from ..core.bugcheck_error import BugCheckError
 # fmt: on
 
 import typing

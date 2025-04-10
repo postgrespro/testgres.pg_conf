@@ -15,70 +15,70 @@ from .configuration_base import PgCfgModel__OptionHandlerToSetValueItem
 from .configuration_base import PgCfgModel__OptionHandlerToWrite
 
 # fmt: off
-from .core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__generic \
+from ..core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__generic \
     import OptionHandlerToPrepareSetValue__Std__Generic
 
-from .core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__int \
+from ..core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__int \
     import OptionHandlerToPrepareSetValue__Std__Int
 
-from .core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__str \
+from ..core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__str \
     import OptionHandlerToPrepareSetValue__Std__Str
 
-from .core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__unique_str_list \
+from ..core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__unique_str_list \
     import OptionHandlerToPrepareSetValue__Std__UniqueStrList
 
 # -------------
-from .core.option.handlers.prepare_set_value_item.option_handler_to_prepare_set_value_item__std__str \
+from ..core.option.handlers.prepare_set_value_item.option_handler_to_prepare_set_value_item__std__str \
     import OptionHandlerToPrepareSetValueItem__Std__Str
 
 # -------------
-from .core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__generic \
+from ..core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__generic \
     import OptionHandlerToPrepareGetValue__Std__Generic
 
-from .core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__int \
+from ..core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__int \
     import OptionHandlerToPrepareGetValue__Std__Int
 
-from .core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__str \
+from ..core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__str \
     import OptionHandlerToPrepareGetValue__Std__Str
 
 # -------------
-from .core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__unique_str_list \
+from ..core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__unique_str_list \
     import OptionHandlerToPrepareGetValue__Std__UniqueStrList
 
 # -------------
-from .core.option.handlers.set_value.option_handler_to_set_value__std__simple \
+from ..core.option.handlers.set_value.option_handler_to_set_value__std__simple \
     import OptionHandlerToSetValue__Std__Simple
 
 # -------------
-from .core.option.handlers.get_value.option_handler_to_get_value__std__simple \
+from ..core.option.handlers.get_value.option_handler_to_get_value__std__simple \
     import OptionHandlerToGetValue__Std__Simple
 
-from .core.option.handlers.get_value.option_handler_to_get_value__std__union_list \
+from ..core.option.handlers.get_value.option_handler_to_get_value__std__union_list \
     import OptionHandlerToGetValue__Std__UnionList
 
 # -------------
-from .core.option.handlers.add.option_handler_to_add__std \
+from ..core.option.handlers.add.option_handler_to_add__std \
     import OptionHandlerToAddOption__Std
 
 # -------------
-from .core.option.handlers.set_value_item.option_handler_to_set_value_item__std__unique \
+from ..core.option.handlers.set_value_item.option_handler_to_set_value_item__std__unique \
     import OptionHandlerToSetValueItem__Std__Unique
 
 # -------------
-from .core.option.handlers.write.option_handler_to_write__std__generic \
+from ..core.option.handlers.write.option_handler_to_write__std__generic \
     import OptionHandlerToWrite__Std__Generic
 
-from .core.option.handlers.write.option_handler_to_write__std__int \
+from ..core.option.handlers.write.option_handler_to_write__std__int \
     import OptionHandlerToWrite__Std__Int
 
-from .core.option.handlers.write.option_handler_to_write__std__str \
+from ..core.option.handlers.write.option_handler_to_write__std__str \
     import OptionHandlerToWrite__Std__Str
 
-from .core.option.handlers.write.option_handler_to_write__std__unique_str_list \
+from ..core.option.handlers.write.option_handler_to_write__std__unique_str_list \
     import OptionHandlerToWrite__Std__UniqueStrList
 # fmt: on
 
-from .core.bugcheck_error import BugCheckError
+from ..core.bugcheck_error import BugCheckError
 
 # //////////////////////////////////////////////////////////////////////////////
 # class PostgresConfiguration_Std

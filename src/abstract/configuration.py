@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from .core.raise_error import RaiseError
+from ..core.raise_error import RaiseError
 
 import typing
 import enum

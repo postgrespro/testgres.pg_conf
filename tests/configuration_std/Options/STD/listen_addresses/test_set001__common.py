@@ -1,12 +1,12 @@
 # //////////////////////////////////////////////////////////////////////////////
 
 # fmt: off
-from ......src.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from ......src.implementation.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ......src.configuration_base import PostgresConfigurationWriter_Base as PgCfg_Writer_Base
-from ......src.configuration_base import PostgresConfigurationWriterCtx_Base as PgCfg_WriterCtx_Base
+from ......src.implementation.configuration_base import PostgresConfigurationWriter_Base as PgCfg_Writer_Base
+from ......src.implementation.configuration_base import PostgresConfigurationWriterCtx_Base as PgCfg_WriterCtx_Base
 
-from ......src.configuration_base import PgCfgModel__FileData
+from ......src.implementation.configuration_base import PgCfgModel__FileData
 
 from .....TestServices import TestServices
 # fmt: on

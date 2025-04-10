@@ -1,9 +1,9 @@
 # //////////////////////////////////////////////////////////////////////////////
 
 # fmt: off
-from ......src.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from ......src.implementation.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ......src.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
+from ......src.implementation.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
 # fmt: on
 
 from .....TestServices import TestServices

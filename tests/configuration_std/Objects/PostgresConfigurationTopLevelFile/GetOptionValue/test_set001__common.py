@@ -1,7 +1,7 @@
 # //////////////////////////////////////////////////////////////////////////////
 
 # fmt: off
-from ......src.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from ......src.implementation.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 # fmt: on
 
 from .....TestServices import TestServices

@@ -1,14 +1,14 @@
 # //////////////////////////////////////////////////////////////////////////////
 
 # fmt: off
-from ......src.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from ......src.implementation.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ......src.configuration_base import PostgresConfiguration_Base__AllFiles as PgCfg_Base__AllFiles
-from ......src.configuration_base import PostgresConfiguration_Base__AllFilesIterator as PgCfg_Base__AllFilesIterator
-from ......src.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
+from ......src.implementation.configuration_base import PostgresConfiguration_Base__AllFiles as PgCfg_Base__AllFiles
+from ......src.implementation.configuration_base import PostgresConfiguration_Base__AllFilesIterator as PgCfg_Base__AllFilesIterator
+from ......src.implementation.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
 
-from ......src.configuration import PostgresConfigurationFiles as PgCfg_Files
-from ......src.configuration import PostgresConfigurationFilesIterator as PgCfg_FilesIterator
+from ......src.abstract.configuration import PostgresConfigurationFiles as PgCfg_Files
+from ......src.abstract.configuration import PostgresConfigurationFilesIterator as PgCfg_FilesIterator
 # fmt: on
 
 from .....TestServices import TestServices

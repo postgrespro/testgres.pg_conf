@@ -18,6 +18,8 @@ setup(
     name='testgres.postgres_configuration',
     packages=[
         'testgres.postgres_configuration',
+        'testgres.postgres_configuration.abstract',
+        'testgres.postgres_configuration.implementation',
         'testgres.postgres_configuration.core',
         'testgres.postgres_configuration.core.option',
         'testgres.postgres_configuration.core.option.handlers',

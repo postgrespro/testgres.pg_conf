@@ -1,15 +1,15 @@
 # //////////////////////////////////////////////////////////////////////////////
 
 # fmt: off
-from ......src.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from ......src.implementation.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ......src.configuration_base import PostgresConfiguration_Base__AllOptions as PgCfg_Base__AllOptions
-from ......src.configuration_base import PostgresConfiguration_Base__AllOptionsIterator as PgCfg_Base__AllOptionsIterator
-from ......src.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
+from ......src.implementation.configuration_base import PostgresConfiguration_Base__AllOptions as PgCfg_Base__AllOptions
+from ......src.implementation.configuration_base import PostgresConfiguration_Base__AllOptionsIterator as PgCfg_Base__AllOptionsIterator
+from ......src.implementation.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
 
-from ......src.configuration import PostgresConfigurationOption as PgCfg_Option
-from ......src.configuration import PostgresConfigurationOptions as PgCfg_Options
-from ......src.configuration import PostgresConfigurationOptionsIterator as PgCfg_OptionsIterator
+from ......src.abstract.configuration import PostgresConfigurationOption as PgCfg_Option
+from ......src.abstract.configuration import PostgresConfigurationOptions as PgCfg_Options
+from ......src.abstract.configuration import PostgresConfigurationOptionsIterator as PgCfg_OptionsIterator
 # fmt: on
 
 from .....TestServices import TestServices

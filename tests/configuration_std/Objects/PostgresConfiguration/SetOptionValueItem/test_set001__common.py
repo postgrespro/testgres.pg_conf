@@ -1,12 +1,12 @@
 # //////////////////////////////////////////////////////////////////////////////
 
 # fmt: off
-from ......src.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from ......src.implementation.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ......src.configuration_base import PostgresConfigurationSetOptionValueResult_Base as PgCfg_SetOptionResult_Base
-from ......src.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
+from ......src.implementation.configuration_base import PostgresConfigurationSetOptionValueResult_Base as PgCfg_SetOptionResult_Base
+from ......src.implementation.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
 
-from ......src.configuration_base import PostgresConfigurationSetOptionValueEventID as PgCfg_SetOptionEventID
+from ......src.implementation.configuration_base import PostgresConfigurationSetOptionValueEventID as PgCfg_SetOptionEventID
 # fmt: on
 
 from .....TestServices import TestServices

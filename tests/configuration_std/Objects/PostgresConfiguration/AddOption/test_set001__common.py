@@ -1,19 +1,19 @@
 # //////////////////////////////////////////////////////////////////////////////
 
 # fmt: off
-from ......src.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from ......src.implementation.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ......src.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
-from ......src.configuration_base import PostgresConfigurationFileLine_Base as PgCfg_FileLine_Base
-from ......src.configuration_base import PostgresConfigurationFile_Base as PgCfg_File_Base
-from ......src.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
+from ......src.implementation.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
+from ......src.implementation.configuration_base import PostgresConfigurationFileLine_Base as PgCfg_FileLine_Base
+from ......src.implementation.configuration_base import PostgresConfigurationFile_Base as PgCfg_File_Base
+from ......src.implementation.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
 
-from ......src.configuration_base import PostgresConfigurationOption as PgCfg_Option
+from ......src.implementation.configuration_base import PostgresConfigurationOption as PgCfg_Option
 
-from ......src.configuration_base import PgCfgModel__OptionData
-from ......src.configuration_base import PgCfgModel__FileLineData
-from ......src.configuration_base import PgCfgModel__FileData
-from ......src.configuration_base import PgCfgModel__ConfigurationData
+from ......src.implementation.configuration_base import PgCfgModel__OptionData
+from ......src.implementation.configuration_base import PgCfgModel__FileLineData
+from ......src.implementation.configuration_base import PgCfgModel__FileData
+from ......src.implementation.configuration_base import PgCfgModel__ConfigurationData
 
 from .....TestServices import TestServices
 # fmt: on
