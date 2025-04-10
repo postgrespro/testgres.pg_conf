@@ -4074,7 +4074,7 @@ class PostgresConfigurationWriter_Base:
         assert lineContentLen >= 0
 
         if offset is not None and lineContentLen < offset:
-            lineContent += " " * (offset - lineContent)
+            lineContent += " " * (offset - lineContentLen)
         elif lineContentLen > 0:
             lineContent += " "
 
