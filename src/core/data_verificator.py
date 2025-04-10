@@ -1,5 +1,5 @@
 # //////////////////////////////////////////////////////////////////////////////
-# Postgres Configuration. Implementation. Check.
+# Postgres Pro. PostgreSQL Configuration Python Library.
 
 from .raise_error import RaiseError
 

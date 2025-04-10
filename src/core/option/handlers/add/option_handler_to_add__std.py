@@ -1,5 +1,5 @@
 # //////////////////////////////////////////////////////////////////////////////
-# Postgres Configuration. Implementation. Option Add Handler.
+# Postgres Pro. PostgreSQL Configuration Python Library.
 
 from __future__ import annotations
 

@@ -1,5 +1,5 @@
 # //////////////////////////////////////////////////////////////////////////////
-# Postgres Configuration. Implementation.
+# Postgres Pro. PostgreSQL Configuration Python Library.
 
 from .model import OptionData
 from .bugcheck_error import BugCheckError

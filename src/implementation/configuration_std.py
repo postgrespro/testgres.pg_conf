@@ -1,5 +1,5 @@
 # //////////////////////////////////////////////////////////////////////////////
-# Postgres Configuration
+# Postgres Pro. PostgreSQL Configuration Python Library.
 
 from .configuration_base import PostgresConfiguration_Base
 from .configuration_base import PostgresConfigurationReader_Base
