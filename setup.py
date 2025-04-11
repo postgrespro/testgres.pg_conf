@@ -22,7 +22,9 @@ setup(
     packages=[
         'testgres.postgres_configuration',
         'testgres.postgres_configuration.abstract',
+        'testgres.postgres_configuration.abstract.v00',
         'testgres.postgres_configuration.implementation',
+        'testgres.postgres_configuration.implementation.v00',
         'testgres.postgres_configuration.core',
         'testgres.postgres_configuration.core.option',
         'testgres.postgres_configuration.core.option.handlers',
