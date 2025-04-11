@@ -148,7 +148,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     sm_SingleInstance__OptionHandlerToWrite__Std__Str = \
         OptionHandlerToWrite__Std__Str()
 
-    sm_SingleInstance__OptionHandlerToWrite__Std__UniqueStrList=\
+    sm_SingleInstance__OptionHandlerToWrite__Std__UniqueStrList = \
         OptionHandlerToWrite__Std__UniqueStrList()
     # fmt: on
 
