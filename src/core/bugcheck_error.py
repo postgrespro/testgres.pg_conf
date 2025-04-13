@@ -210,7 +210,7 @@ class BugCheckError:
         assert type(typeOfOptionValue) == type
 
         errMsg = "[BUG CHECK] Unknown value type [{1}] of option [{0}].".format(
-            optionName, typeOfOptionValue
+            optionName, typeOfOptionValue.__name__
         )
 
         raise Exception(errMsg)
