@@ -76,7 +76,7 @@ class TestServices:
 
         if not os.path.exists(tmpDir):
             return
-        
+
         logging.info("Tmp directory [{0}] is deleting...".format(tmpDir))
         shutil.rmtree(tmpDir)
         assert not os.path.exists(tmpDir)
