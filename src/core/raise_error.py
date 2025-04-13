@@ -38,6 +38,7 @@ class RaiseError:
     def OptionNameHasBadType(nameType: type):
         assert nameType is not None
         assert type(nameType) == type
+
         errMsg = "Option name has nad type [{0}]".format(nameType.__name__)
         raise Exception(errMsg)
 
@@ -55,6 +56,7 @@ class RaiseError:
     def NoneOptionValueItemIsNotSupported(optionName: str):
         assert type(optionName) == str
         assert optionName != ""
+
         errMsg = "None value item of option [{0}] is not supported.".format(optionName)
         raise Exception(errMsg)
 
@@ -92,7 +94,6 @@ class RaiseError:
         errMsg = "Bad option [{0}] value type [{1}]. Expected type is [{2}].".format(
             optionName, optionValueType.__name__, expectedType.__name__
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -106,7 +107,6 @@ class RaiseError:
                 optionName, sourceType.__name__, targetType.__name__
             )
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -122,7 +122,6 @@ class RaiseError:
                 optionName, optionValueItemType.__name__, expectedType.__name__
             )
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -145,7 +144,6 @@ class RaiseError:
         errMsg = "Option [{0}] already exist in this file [{1}].".format(
             optionName, filePath
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -158,7 +156,6 @@ class RaiseError:
         errMsg = "Option [{0}] already exist in another file [{1}].".format(
             optionName, filePath
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -171,7 +168,6 @@ class RaiseError:
         errMsg = "Option [{0}] already exist in the file [{1}].".format(
             optionName, filePath
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -182,7 +178,6 @@ class RaiseError:
         errMsg = "Another definition of option [{1}] value item [{2}] is found in the file [{0}].".format(
             filePath, optName, valueItem
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -195,7 +190,6 @@ class RaiseError:
         errMsg = "Definition of option [{1}] value item [{2}] is found in another file [{0}].".format(
             filePath, optName, valueItem
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -233,13 +227,11 @@ class RaiseError:
         errMsg = "File [{0}] was modified externally. Our timestamp is [{1}]. The current file timestamp is [{2}].".format(
             filePath, ourLastMDate, curLastMDate
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     def FileLineAlreadyHasComment():
         errMsg = "File line already has a comment."
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -247,7 +239,6 @@ class RaiseError:
         assert type(optionName) == str
 
         errMsg = "File line already has the option [{0}].".format(optionName)
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -265,7 +256,6 @@ class RaiseError:
         errMsg = "Unexpected symbol in line {0}, column {1}: [{2}]".format(
             lineNum, colNum, ch
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -274,7 +264,6 @@ class RaiseError:
         assert lineNum >= 0
 
         errMsg = "Include directive in line {0} does not have a path.".format(lineNum)
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -283,7 +272,6 @@ class RaiseError:
         assert lineNum >= 0
 
         errMsg = "The end of an include path is not found. Line {0}.".format(lineNum)
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -292,7 +280,6 @@ class RaiseError:
         assert lineNum >= 0
 
         errMsg = "Escape in an include path is not completed. Line {0}.".format(lineNum)
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -307,7 +294,6 @@ class RaiseError:
         errMsg = "Unknown escape symbol [{2}] in an include path. Line {0}. Column {1}.".format(
             lineNum, colNum, ch
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -316,7 +302,6 @@ class RaiseError:
         assert lineNum >= 0
 
         errMsg = "Include in line {0} has an empty path.".format(lineNum)
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -329,7 +314,6 @@ class RaiseError:
         errMsg = "Option [{0}] in line {1} does not have a value.".format(
             optionName, lineNum
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -342,7 +326,6 @@ class RaiseError:
         errMsg = "Value of quoted option [{0}] is not completed. Line {1}.".format(
             optionName, lineNum
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -355,7 +338,6 @@ class RaiseError:
         errMsg = "Escape in a value of quoted option [{0}] is not completed. Line {1}.".format(
             optionName, lineNum
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -372,13 +354,11 @@ class RaiseError:
         errMsg = "Unknown escape symbol [{3}] in a value of quoted option [{0}]. Line {1}. Column {2}.".format(
             optionName, lineNum, colNum, ch
         )
-
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     def BadFormatOfCommaSeparatedList():
         errMsg = "Bad format of comma separated list."
-
         raise Exception(errMsg)
 
 
