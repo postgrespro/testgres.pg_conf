@@ -11,9 +11,9 @@ from .implementation.v00.configuration_std import PostgresConfigurationWriter_St
 
 
 __all__ = [
-    'PostgresConfiguration',
-    'PostgresConfigurationReader',
-    'PostgresConfigurationWriter',
+    "PostgresConfiguration",
+    "PostgresConfigurationReader",
+    "PostgresConfigurationWriter",
 ]
 
 
