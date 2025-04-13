@@ -24,6 +24,9 @@ from ...core.option.handlers.prepare_set_value.option_handler_to_prepare_set_val
 from ...core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__str \
     import OptionHandlerToPrepareSetValue__Std__Str
 
+from ...core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__bool \
+    import OptionHandlerToPrepareSetValue__Std__Bool
+
 from ...core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__unique_str_list \
     import OptionHandlerToPrepareSetValue__Std__UniqueStrList
 
@@ -40,6 +43,9 @@ from ...core.option.handlers.prepare_get_value.option_handler_to_prepare_get_val
 
 from ...core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__str \
     import OptionHandlerToPrepareGetValue__Std__Str
+
+from ...core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__bool \
+    import OptionHandlerToPrepareGetValue__Std__Bool
 
 # -------------
 from ...core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__unique_str_list \
@@ -74,6 +80,9 @@ from ...core.option.handlers.write.option_handler_to_write__std__int \
 from ...core.option.handlers.write.option_handler_to_write__std__str \
     import OptionHandlerToWrite__Std__Str
 
+from ...core.option.handlers.write.option_handler_to_write__std__bool \
+    import OptionHandlerToWrite__Std__Bool
+
 from ...core.option.handlers.write.option_handler_to_write__std__unique_str_list \
     import OptionHandlerToWrite__Std__UniqueStrList
 # fmt: on
@@ -99,6 +108,9 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__Str = \
         OptionHandlerToPrepareSetValue__Std__Str()
 
+    sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__Bool = \
+        OptionHandlerToPrepareSetValue__Std__Bool()
+
     sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__UniqueStrList = \
         OptionHandlerToPrepareSetValue__Std__UniqueStrList()
 
@@ -115,6 +127,9 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
     sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__Str = \
         OptionHandlerToPrepareGetValue__Std__Str()
+
+    sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__Bool = \
+        OptionHandlerToPrepareGetValue__Std__Bool()
 
     sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__UniqueStrList = \
         OptionHandlerToPrepareGetValue__Std__UniqueStrList()
@@ -147,6 +162,9 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
     sm_SingleInstance__OptionHandlerToWrite__Std__Str = \
         OptionHandlerToWrite__Std__Str()
+
+    sm_SingleInstance__OptionHandlerToWrite__Std__Bool = \
+        OptionHandlerToWrite__Std__Bool()
 
     sm_SingleInstance__OptionHandlerToWrite__Std__UniqueStrList = \
         OptionHandlerToWrite__Std__UniqueStrList()
@@ -245,6 +263,18 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
             sm_SingleInstance__OptionHandlerToWrite__Std__Str,
         )
 
+    sm_OptionHandlers__Std__Bool = \
+        tagOptionHandlers(
+            sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__Bool,
+            sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__Bool,
+            None,
+            sm_SingleInstance__OptionHandlerToSetValue__Std__Simple,
+            sm_SingleInstance__OptionHandlerToGetValue__Std__Simple,
+            sm_SingleInstance__OptionHandlerToAddOption__Std,
+            None,
+            sm_SingleInstance__OptionHandlerToWrite__Std__Bool,
+        )
+
     sm_OptionHandlers__Std__UniqueStrList = \
         tagOptionHandlers(
             sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__UniqueStrList,
@@ -265,6 +295,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         "port": sm_OptionHandlers__Std__Int,
         "listen_addresses": sm_OptionHandlers__Std__Str,
         "shared_preload_libraries": sm_OptionHandlers__Std__UniqueStrList,
+        "restart_after_crash": sm_OptionHandlers__Std__Bool,
 
         # PROXIMA --------------------------------------------------------
         "proxima.port": sm_OptionHandlers__Std__Int,
