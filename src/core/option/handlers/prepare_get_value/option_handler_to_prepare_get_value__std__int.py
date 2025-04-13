@@ -22,6 +22,9 @@ class OptionHandlerToPrepareGetValue__Std__Int(OptionHandlerToPrepareGetValue):
         assert type(ctx.OptionName) == str
         assert ctx.OptionValue is not None
 
+        # [2025-04-13] Research
+        assert type(ctx.OptionValue) == int
+
         return int(ctx.OptionValue)
 
 

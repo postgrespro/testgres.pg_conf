@@ -204,7 +204,7 @@ class TestSet001__Common:
         assert fileLineData0.m_Items[0].m_Element.m_Value == 234
 
     # --------------------------------------------------------------------
-    def test_203__option__with_assign(self, request: pytest.FixtureRequest):
+    def test_203__option__without_assign(self, request: pytest.FixtureRequest):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
