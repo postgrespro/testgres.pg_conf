@@ -17,7 +17,12 @@ import os
 
 
 class TestSet001__GenericSupportOfOptions:
-    sm_data001: list[tuple[str, any, any]] = [("int", 0, 0), ("str__empty", "", "")]
+    sm_data001: list[tuple[str, any, any]] = [
+        ("int", 0, 0),
+        ("str__empty", "", ""),
+        ("bool_prop_true", True, True),
+        ("bool_prop_false", False, False),
+    ]
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data001, ids=[x[0] for x in sm_data001])
@@ -43,7 +48,12 @@ class TestSet001__GenericSupportOfOptions:
         assert cfg.GetOptionValue("a") == data001[1]
 
     # --------------------------------------------------------------------
-    sm_data002: list[tuple[str, any, any]] = [("int", 0, "0"), ("str__empty", "", "")]
+    sm_data002: list[tuple[str, any, any]] = [
+        ("int", 0, "0"),
+        ("str__empty", "", ""),
+        ("bool_prop_true", True, "on"),
+        ("bool_prop_false", False, "off"),
+    ]
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data002, ids=[x[0] for x in sm_data002])

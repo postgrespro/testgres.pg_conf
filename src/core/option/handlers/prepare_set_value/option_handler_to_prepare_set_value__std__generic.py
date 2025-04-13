@@ -30,6 +30,8 @@ class OptionHandlerToPrepareSetValue__Std__Generic(OptionHandlerToPrepareSetValu
             pass  # OK
         elif typeOfOptionValue == str:
             pass  # OK
+        elif typeOfOptionValue == bool:
+            pass  # OK
         else:
             BugCheckError.UnknownOptionValueType(ctx.OptionName, typeOfOptionValue)
 

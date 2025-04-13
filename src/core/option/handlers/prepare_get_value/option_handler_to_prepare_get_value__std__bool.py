@@ -3,17 +3,15 @@
 
 from __future__ import annotations
 
-from ....bugcheck_error import BugCheckError
-
 from ....handlers import OptionHandlerToPrepareGetValue
 from ....handlers import OptionHandlerCtxToPrepareGetValue
 from ....handlers import ConfigurationDataHandler
 
 # //////////////////////////////////////////////////////////////////////////////
-# OptionHandlerToPrepareGetValue__Std__Generic
+# OptionHandlerToPrepareGetValue__Std__Bool
 
 
-class OptionHandlerToPrepareGetValue__Std__Generic(OptionHandlerToPrepareGetValue):
+class OptionHandlerToPrepareGetValue__Std__Bool(OptionHandlerToPrepareGetValue):
     def __init__(self):
         super().__init__()
 
@@ -24,18 +22,10 @@ class OptionHandlerToPrepareGetValue__Std__Generic(OptionHandlerToPrepareGetValu
         assert type(ctx.OptionName) == str
         assert ctx.OptionValue is not None
 
-        typeOfOptionValue = type(ctx.OptionValue)
+        # [2025-04-13] Research
+        assert type(ctx.OptionValue) == bool
 
-        if typeOfOptionValue == int:
-            pass  # OK
-        elif typeOfOptionValue == str:
-            pass  # OK
-        elif typeOfOptionValue == bool:
-            pass  # OK
-        else:
-            BugCheckError.UnknownOptionValueType(ctx.OptionName, typeOfOptionValue)
-
-        return ctx.OptionValue
+        return bool(ctx.OptionValue)
 
 
 # //////////////////////////////////////////////////////////////////////////////
