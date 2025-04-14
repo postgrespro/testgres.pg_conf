@@ -1,4 +1,5 @@
 # //////////////////////////////////////////////////////////////////////////////
+# Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 from .......src.core.write_utils import WriteUtils
 

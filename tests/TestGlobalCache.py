@@ -1,5 +1,5 @@
 # /////////////////////////////////////////////////////////////////////////////
-# PostgresPro. Proxima tests
+# Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 import logging
 import threading

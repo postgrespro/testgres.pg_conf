@@ -1,4 +1,5 @@
 # //////////////////////////////////////////////////////////////////////////////
+# Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
 from ........src.abstract.v00.configuration import PostgresConfigurationOption
