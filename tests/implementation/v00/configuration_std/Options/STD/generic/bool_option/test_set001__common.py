@@ -379,7 +379,7 @@ class TestSet001__Common:
                             type(fileLineData0.m_Items[0].m_Element)
                             == PgCfgModel__OptionData
                         )
-                        assert fileLineData0.m_Items[0].m_Element.m_Offset == 1
+                        assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
                         assert fileLineData0.m_Items[0].m_Element.m_Name == optionName
                         assert (
                             fileLineData0.m_Items[0].m_Element.m_Value

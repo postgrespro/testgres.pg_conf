@@ -57,6 +57,12 @@ class LineReader:
         return self.m_ColNum
 
     # --------------------------------------------------------------------
+    def GetColOffset(self) -> int:
+        assert type(self.m_ColNum) == int
+        assert self.m_ColNum > 0
+        return self.m_ColNum - 1
+
+    # --------------------------------------------------------------------
     def StepBack(self):
         assert type(self.m_Next) == int
         assert type(self.m_ColNum) == int

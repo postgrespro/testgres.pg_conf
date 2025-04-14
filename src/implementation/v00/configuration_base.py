@@ -3335,7 +3335,7 @@ class PostgresConfigurationReader_Base:
 
             if len(fileLine) == 0 and ReadUtils.IsValidSeqCh1(ch):
                 # Read sequence
-                sequenceOffset = lineReader.GetColNum()
+                sequenceOffset = lineReader.GetColOffset()
                 sequence = ch
 
                 while ch := lineReader.ReadSymbol():
@@ -3377,9 +3377,9 @@ class PostgresConfigurationReader_Base:
         assert type(lineReader) == ReadUtils__LineReader
 
         commentText = ""
-        commentOffset = lineReader.GetColNum()
-        ch: str
+        commentOffset = lineReader.GetColOffset()
 
+        ch: str
         while ch := lineReader.ReadSymbol():
             if ReadUtils.IsEOL(ch):
                 break
@@ -3396,7 +3396,7 @@ class PostgresConfigurationReader_Base:
         assert type(fileLine) == PostgresConfigurationFileLine_Base
         assert type(lineReader) == ReadUtils__LineReader
         assert type(includeOffset) == int
-        assert includeOffset > 0
+        assert includeOffset >= 0
 
         # find first quote
         while True:
