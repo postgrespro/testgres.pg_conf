@@ -114,22 +114,22 @@ class TestSet001__Common:
         tagData002(
             "two_items",
             "biha,proxima",
-            ["biha","proxima"]
+            ["biha", "proxima"]
         ),
         tagData002(
             "mix001",
             "\"biha,\",\" p\nroxima\"",
-            ["biha,"," p\nroxima"]
+            ["biha,", " p\nroxima"]
         ),
         tagData002(
             "mix002",
             "\"\"\"biha,\"\"\",\"\"\" p\nroxima\",\"\",\"   \"",
-            ["\"biha,\"","\" p\nroxima","","   "]
+            ["\"biha,\"", "\" p\nroxima", "", "   "]
         ),
         tagData002(
             "check_unique",
             "a,a,a,b,a,c,d,a",
-            ["a","b","c","d"]
+            ["a", "b", "c", "d"]
         ),
         # fmt: on
     ]

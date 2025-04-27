@@ -77,11 +77,11 @@ class TestSet001__Common:
 
         with open(filePath, "x") as f:
             # fmt: off
-            f.write("#It is a test configuration file\n") # 0
-            f.write("port=123 #It is a port\n")           # 1
-            f.write("\n")                                 # 2
-            f.write("listen_addresses='*' #addresses\n")  # 3
-            f.write("\n")                                 # 4
+            f.write("#It is a test configuration file\n")  # 0
+            f.write("port=123 #It is a port\n")            # 1
+            f.write("\n")                                  # 2
+            f.write("listen_addresses='*' #addresses\n")   # 3
+            f.write("\n")                                  # 4
             f.flush()
             # fmt: on
 
