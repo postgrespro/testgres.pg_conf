@@ -7,8 +7,6 @@ from ........src.implementation.v00.configuration_std import PostgresConfigurati
 from ........src.implementation.v00.configuration_base import PostgresConfigurationWriter_Base as PgCfg_Writer_Base
 from ........src.implementation.v00.configuration_base import PostgresConfigurationWriterCtx_Base as PgCfg_WriterCtx_Base
 
-from ........src.implementation.v00.configuration_base import PgCfgModel__FileData
-
 from .......TestServices import TestServices
 # fmt: on
 

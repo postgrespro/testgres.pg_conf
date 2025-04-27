@@ -4,29 +4,14 @@
 # fmt: off
 from ........src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueResult_Base as PgCfg_SetOptionResult_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueEventID as PgCfg_SetOptionEventID
-from ........src.implementation.v00.configuration_base import PostgresConfigurationFile_Base as PgCfg_File_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationFileLine_Base as PgCfg_FileLine_Base
 from ........src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationComment_Base as PgCfg_Comment_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationFileLines_Base as PgCfg_FileLines_Base
 
-from ........src.implementation.v00.configuration_base import PgCfgModel__FileLineData
-from ........src.implementation.v00.configuration_base import PgCfgModel__CommentData
 from ........src.implementation.v00.configuration_base import PgCfgModel__OptionData
-
-from ........src.abstract.v00.configuration import PostgresConfigurationComment as PgCfg_Comment
-from ........src.abstract.v00.configuration import PostgresConfigurationFileLine as PgCfg_FileLine
-from ........src.abstract.v00.configuration import PostgresConfigurationFileLines as PgCfg_FileLines
-from ........src.abstract.v00.configuration import PostgresConfigurationFile as PgCfg_File
 # fmt: on
 
 from .......TestServices import TestServices
 
 import pytest
-import os
 import re
 import typing
 
