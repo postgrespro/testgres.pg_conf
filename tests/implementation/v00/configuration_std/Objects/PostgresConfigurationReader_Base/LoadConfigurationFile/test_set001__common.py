@@ -82,7 +82,7 @@ class TestSet001__Common:
             f.write("\n")                                 # 2
             f.write("listen_addresses='*' #addresses\n")  # 3
             f.write("\n")                                 # 4
-            f.flush()            
+            f.flush()
             # fmt: on
 
             fd = f.fileno()
@@ -167,7 +167,7 @@ class TestSet001__Common:
         with open(filePath1, "x") as f:
             # fmt: off
             f.write("include 'postgresql.biha.conf'\n")
-            f.flush()            
+            f.flush()
             # fmt: on
 
             fd = f.fileno()
@@ -184,7 +184,7 @@ class TestSet001__Common:
         with open(filePath2, "x") as f:
             # fmt: off
             f.write("port 123\n")
-            f.flush()            
+            f.flush()
             # fmt: on
 
             fd = f.fileno()
@@ -232,7 +232,7 @@ class TestSet001__Common:
             # fmt: off
             f.write("include '{0}'\n".format(C_FILE_NAME2))
             f.write("include '{0}'\n".format(C_FILE_NAME2))
-            f.flush()            
+            f.flush()
             # fmt: on
 
             fd = f.fileno()
@@ -251,7 +251,7 @@ class TestSet001__Common:
             f.write("include '{0}'\n".format(C_FILE_NAME1))
             f.write("include '{0}'\n".format(C_FILE_NAME2))
             f.write("port 123\n")
-            f.flush()            
+            f.flush()
             # fmt: on
 
             fd = f.fileno()
