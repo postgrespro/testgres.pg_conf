@@ -91,7 +91,8 @@ class TestSet001__Common:
                 )
             )
 
-            optValueWillBeAdded = not optValue in index
+            optValueWillBeAdded = not (optValue in index)
+            assert type(optValueWillBeAdded) == bool
 
             if optValueWillBeAdded:
                 expectedValue.append(optValue)
