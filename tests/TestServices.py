@@ -32,11 +32,11 @@ class TestServices:
     # --------------------------------------------------------------------
     def GetCurTestTmpDir(request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
-        return __class__.Helper__GetCurTestTmpDir(request)
+        return __class__.Helper__GetCurTestTmpDir(request.node)
 
     # --------------------------------------------------------------------
-    def Helper__GetCurTestTmpDir(request: pytest.FixtureRequest) -> str:
-        assert isinstance(request, pytest.FixtureRequest)
+    def Helper__GetCurTestTmpDir(function: pytest.Function) -> str:
+        assert isinstance(function, pytest.Function)
 
         rootDir = TestServices.GetRootDir()
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -44,7 +44,7 @@ class TestServices:
         # [2024-12-18] It is not a fact now.
         # assert rootTmpDir.startswith(rootDir)
 
-        testPath = str(request.path)
+        testPath = str(function.path)
 
         if not testPath.startswith(rootDir):
             raise Exception(
@@ -55,23 +55,23 @@ class TestServices:
 
         result = os.path.join(rootTmpDir, testPath2)
 
-        if request.node.cls is not None:
-            clsName = request.node.cls.__name__
+        if function.cls is not None:
+            clsName = function.cls.__name__
             result = os.path.join(result, clsName)
 
-        result = os.path.join(result, request.node.name)
+        result = os.path.join(result, function.name)
 
         return result
 
     # --------------------------------------------------------------------
-    def CleanTestTmpDirBeforeExit(request: pytest.FixtureRequest):
-        assert isinstance(request, pytest.FixtureRequest)
+    def CleanTestTmpDirBeforeExit(function: pytest.Function):
+        assert isinstance(function, pytest.Function)
 
         if TestConfigHelper.NoCleanup():
             logging.info("A final data cleanup is disabled.")
             return
 
-        tmpDir = __class__.GetCurTestTmpDir(request)
+        tmpDir = __class__.Helper__GetCurTestTmpDir(function)
         assert type(tmpDir) == str
 
         if not os.path.exists(tmpDir):

@@ -44,6 +44,17 @@ class TestStartupData__Helper:
         return resultPath
 
     # --------------------------------------------------------------------
+    def CalcRootLogDir() -> str:
+        if TestConfigPropNames.TEST_CFG__LOG_DIR in os.environ:
+            resultPath = os.environ[TestConfigPropNames.TEST_CFG__LOG_DIR]
+        else:
+            rootDir = __class__.CalcRootDir()
+            resultPath = os.path.join(rootDir, "logs")
+
+        assert type(resultPath) == str
+        return resultPath
+
+    # --------------------------------------------------------------------
     def CalcCurrentTestWorkerSignature() -> str:
         currentPID = os.getpid()
         assert type(currentPID)
@@ -84,10 +95,17 @@ class TestStartupData:
         sm_RootTmpDataDir, sm_CurrentTestWorkerSignature
     )
 
+    sm_RootLogDir: str = TestStartupData__Helper.CalcRootLogDir()
+
     # --------------------------------------------------------------------
     def GetRootDir() -> str:
         assert type(__class__.sm_RootDir) == str
         return __class__.sm_RootDir
+
+    # --------------------------------------------------------------------
+    def GetRootLogDir() -> str:
+        assert type(__class__.sm_RootLogDir) == str
+        return __class__.sm_RootLogDir
 
     # --------------------------------------------------------------------
     def GetCurrentTestWorkerSignature() -> str:

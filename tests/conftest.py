@@ -4,6 +4,7 @@
 from .TestConfigProp import TestConfigPropNames
 from .TestStartupData import TestStartupData
 from .TestGlobalCache import TestGlobalCache
+from .TestServices import TestServices
 
 import pluggy
 import pytest
@@ -17,6 +18,10 @@ import typing
 import _pytest.outcomes
 import _pytest.unittest
 import _pytest.logging
+
+# /////////////////////////////////////////////////////////////////////////////
+
+T_TUPLE__str_int = typing.Tuple[str, int]
 
 # /////////////////////////////////////////////////////////////////////////////
 # TEST_PROCESS_STATS
@@ -35,11 +40,11 @@ class TEST_PROCESS_STATS:
     cUnexpectedTests: int = 0
     cAchtungTests: int = 0
 
-    FailedTests = list[str, int]()
-    XFailedTests = list[str, int]()
-    NotXFailedTests = list[str]()
-    WarningTests = list[str, int]()
-    AchtungTests = list[str]()
+    FailedTests: typing.List[T_TUPLE__str_int] = list()
+    XFailedTests: typing.List[T_TUPLE__str_int] = list()
+    NotXFailedTests: typing.List[str] = list()
+    WarningTests: typing.List[T_TUPLE__str_int] = list()
+    AchtungTests: typing.List[str] = list()
 
     cTotalDuration: datetime.timedelta = datetime.timedelta()
 
@@ -304,6 +309,15 @@ def helper__makereport__setup(
 
 
 # ------------------------------------------------------------------------
+class ExitStatusNames:
+    FAILED = "FAILED"
+    PASSED = "PASSED"
+    XFAILED = "XFAILED"
+    SKIPPED = "SKIPPED"
+    UNEXPECTED = "UNEXPECTED"
+
+
+# ------------------------------------------------------------------------
 def helper__makereport__call(
     item: pytest.Function, call: pytest.CallInfo, outcome: pluggy.Result
 ):
@@ -345,6 +359,7 @@ def helper__makereport__call(
 
     # --------
     exitStatus = None
+    exitStatusInfo = None
     if rep.outcome == "skipped":
         assert call.excinfo is not None  # research
         assert call.excinfo.value is not None  # research
@@ -352,21 +367,21 @@ def helper__makereport__call(
         if type(call.excinfo.value) == _pytest.outcomes.Skipped:  # noqa: E721
             assert not hasattr(rep, "wasxfail")
 
-            exitStatus = "SKIPPED"
+            exitStatus = ExitStatusNames.SKIPPED
             reasonText = str(call.excinfo.value)
             reasonMsgTempl = "SKIP REASON: {0}"
 
             TEST_PROCESS_STATS.incrementSkippedTestCount()
 
         elif type(call.excinfo.value) == _pytest.outcomes.XFailed:  # noqa: E721
-            exitStatus = "XFAILED"
+            exitStatus = ExitStatusNames.XFAILED
             reasonText = str(call.excinfo.value)
             reasonMsgTempl = "XFAIL REASON: {0}"
 
             TEST_PROCESS_STATS.incrementXFailedTestCount(testID, item_error_msg_count)
 
         else:
-            exitStatus = "XFAILED"
+            exitStatus = ExitStatusNames.XFAILED
             assert hasattr(rep, "wasxfail")
             assert rep.wasxfail is not None
             assert type(rep.wasxfail) == str  # noqa: E721
@@ -403,7 +418,7 @@ def helper__makereport__call(
         assert item_error_msg_count > 0
         TEST_PROCESS_STATS.incrementFailedTestCount(testID, item_error_msg_count)
 
-        exitStatus = "FAILED"
+        exitStatus = ExitStatusNames.FAILED
     elif rep.outcome == "passed":
         assert call.excinfo is None
 
@@ -423,16 +438,24 @@ def helper__makereport__call(
             assert not hasattr(rep, "wasxfail")
 
             TEST_PROCESS_STATS.incrementPassedTestCount()
-            exitStatus = "PASSED"
+            exitStatus = ExitStatusNames.PASSED
     else:
         TEST_PROCESS_STATS.incrementUnexpectedTests()
-        exitStatus = "UNEXPECTED [{0}]".format(rep.outcome)
+        exitStatus = ExitStatusNames.UNEXPECTED
+        exitStatusInfo = rep.outcome
         # [2025-03-28] It may create a useless problem in new environment.
         # assert False
 
     # --------
     if item_warning_msg_count > 0:
         TEST_PROCESS_STATS.incrementWarningTestCount(testID, item_warning_msg_count)
+
+    # --------
+    if exitStatus == ExitStatusNames.FAILED:
+        assert item_error_msg_count > 0
+        pass
+    else:
+        TestServices.CleanTestTmpDirBeforeExit(item)
 
     # --------
     assert type(TEST_PROCESS_STATS.cTotalDuration) == datetime.timedelta  # noqa: E721
@@ -443,10 +466,16 @@ def helper__makereport__call(
     assert testDurration <= TEST_PROCESS_STATS.cTotalDuration
 
     # --------
+    exitStatusLineData = exitStatus
+
+    if exitStatusInfo is not None:
+        exitStatusLineData += " [{}]".format(exitStatusInfo)
+
+    # --------
     logging.info("*")
     logging.info("* DURATION     : {0}".format(timedelta_to_human_text(testDurration)))
     logging.info("*")
-    logging.info("* EXIT STATUS  : {0}".format(exitStatus))
+    logging.info("* EXIT STATUS  : {0}".format(exitStatusLineData))
     logging.info("* ERROR COUNT  : {0}".format(item_error_msg_count))
     logging.info("* WARNING COUNT: {0}".format(item_warning_msg_count))
     logging.info("*")
@@ -694,7 +723,7 @@ def helper__calc_W(n: int) -> int:
 
 
 # ------------------------------------------------------------------------
-def helper__print_test_list(tests: list[str]) -> None:
+def helper__print_test_list(tests: typing.List[str]) -> None:
     assert type(tests) == list  # noqa: E721
 
     assert helper__calc_W(9) == 1
@@ -721,7 +750,7 @@ def helper__print_test_list(tests: list[str]) -> None:
 
 
 # ------------------------------------------------------------------------
-def helper__print_test_list2(tests: list[str, int]) -> None:
+def helper__print_test_list2(tests: typing.List[T_TUPLE__str_int]) -> None:
     assert type(tests) == list  # noqa: E721
 
     assert helper__calc_W(9) == 1
@@ -773,7 +802,9 @@ def run_after_tests(request: pytest.FixtureRequest):
         assert header != ""
         logging.info(C_LINE1 + " [" + header + "]")
 
-    def LOCAL__print_test_list(header: str, test_count: int, test_list: list[str]):
+    def LOCAL__print_test_list(
+        header: str, test_count: int, test_list: typing.List[str]
+    ):
         assert type(header) == str  # noqa: E721
         assert type(test_count) == int  # noqa: E721
         assert type(test_list) == list  # noqa: E721
@@ -788,7 +819,7 @@ def run_after_tests(request: pytest.FixtureRequest):
             logging.info("")
 
     def LOCAL__print_test_list2(
-        header: str, test_count: int, test_list: list[str, int]
+        header: str, test_count: int, test_list: typing.List[T_TUPLE__str_int]
     ):
         assert type(header) == str  # noqa: E721
         assert type(test_count) == int  # noqa: E721
@@ -880,13 +911,9 @@ def pytest_configure(config: pytest.Config) -> None:
     log_name = TestStartupData.GetCurrentTestWorkerSignature()
     log_name += ".log"
 
-    if TestConfigPropNames.TEST_CFG__LOG_DIR in os.environ:
-        log_path_v = os.environ[TestConfigPropNames.TEST_CFG__LOG_DIR]
-        log_path = pathlib.Path(log_path_v)
-    else:
-        log_path = config.rootpath.joinpath("logs")
+    log_dir = TestStartupData.GetRootLogDir()
 
-    log_path.mkdir(exist_ok=True)
+    pathlib.Path(log_dir).mkdir(exist_ok=True)
 
     logging_plugin: _pytest.logging.LoggingPlugin = config.pluginmanager.get_plugin(
         "logging-plugin"
@@ -895,7 +922,7 @@ def pytest_configure(config: pytest.Config) -> None:
     assert logging_plugin is not None
     assert isinstance(logging_plugin, _pytest.logging.LoggingPlugin)
 
-    logging_plugin.set_log_path(str(log_path / log_name))
+    logging_plugin.set_log_path(os.path.join(log_dir, log_name))
 
 
 # /////////////////////////////////////////////////////////////////////////////
