@@ -32,7 +32,7 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_OptionNames, ids=[x for x in sm_OptionNames])
     def optionName(self, request: pytest.fixture) -> str:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == str
+        assert type(request.param) == str  # noqa: E721
         return request.param
 
     # --------------------------------------------------------------------
@@ -97,7 +97,7 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_001__ok(self, optionName: str):
-        assert type(optionName) == str
+        assert type(optionName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
 
@@ -107,7 +107,7 @@ class TestSet001__Common:
             cfg = PgCfg_Std(rootTmpDir)
 
             data = __class__.sm_Data001[iData]
-            assert type(data) == __class__.tagData001
+            assert type(data) == __class__.tagData001  # noqa: E721
 
             try:
                 logging.info(
@@ -133,7 +133,7 @@ class TestSet001__Common:
                     )
                 )
 
-                assert type(actualValue) == type(data.get_value)
+                assert type(actualValue) == type(data.get_value)  # noqa: E721
                 assert actualValue == data.get_value
             except Exception as e:
                 logging.error(str(e))
@@ -159,7 +159,7 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_002__cant_convert_value(self, optionName: str):
-        assert type(optionName) == str
+        assert type(optionName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
 
@@ -169,7 +169,7 @@ class TestSet001__Common:
             cfg = PgCfg_Std(rootTmpDir)
 
             data = __class__.sm_Data002[iData]
-            assert type(data) == __class__.tagData002
+            assert type(data) == __class__.tagData002  # noqa: E721
 
             logging.info(
                 "Set value [{}]: [{}]".format(
@@ -204,7 +204,7 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_003__bad_option_value_type(self, optionName: str):
-        assert type(optionName) == str
+        assert type(optionName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
 
@@ -214,7 +214,7 @@ class TestSet001__Common:
             cfg = PgCfg_Std(rootTmpDir)
 
             data = __class__.sm_Data003[iData]
-            assert type(data) == __class__.tagData003
+            assert type(data) == __class__.tagData003  # noqa: E721
 
             logging.info(
                 "Set value [{}]: [{}]".format(
@@ -240,8 +240,8 @@ class TestSet001__Common:
         text: str
 
         def __init__(self, sign: str, text: str):
-            assert type(sign) == str
-            assert type(text) == str
+            assert type(sign) == str  # noqa: E721
+            assert type(text) == str  # noqa: E721
             self.sign = sign
             self.text = text
 
@@ -265,9 +265,9 @@ class TestSet001__Common:
         quote2: str
 
         def __init__(self, sign: str, quote1: str, quote2: str):
-            assert type(sign) == str
-            assert type(quote1) == str
-            assert type(quote2) == str
+            assert type(sign) == str  # noqa: E721
+            assert type(quote1) == str  # noqa: E721
+            assert type(quote2) == str  # noqa: E721
             self.sign = sign
             self.quote1 = quote1
             self.quote2 = quote2
@@ -337,10 +337,10 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_101__parse_file_line(self, optionName: str):
-        assert type(optionName) == str
+        assert type(optionName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         for iAssign in range(len(__class__.sm_Data101_assigns)):
             for iQuote in range(len(__class__.sm_Data101_quotes)):
