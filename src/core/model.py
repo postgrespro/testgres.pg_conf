@@ -5,8 +5,9 @@ from __future__ import annotations
 
 from .raise_error import RaiseError
 
+from ..os.abstract.configuration_os_ops import ConfigurationOsOps
+
 import typing
-import os
 import enum
 import datetime
 
@@ -213,9 +214,9 @@ class FileData(ObjectData):
     def __init__(self, parent: ConfigurationData, path: str):
         assert type(parent) == ConfigurationData
         assert type(path) == str
-        assert os.path.isabs(path)
-        assert os.path.normpath(path) == path
-        assert os.path.normcase(path) == path
+        assert parent.OsOps.Path_IsAbs(path)
+        assert parent.OsOps.Path_NormPath(path) == path
+        assert parent.OsOps.Path_NormCase(path) == path
 
         super().__init__()
 
@@ -251,23 +252,34 @@ class FileData(ObjectData):
 
 class ConfigurationData(ObjectData):
     m_DataDir: str
+    m_OsOps: ConfigurationOsOps
+
     m_Files: list[FileData]
 
     m_AllOptionsByName: dict[str, typing.Union[OptionData, list[OptionData]]]
     m_AllFilesByName: dict[str, typing.Union[FileData, list[FileData]]]
 
     # --------------------------------------------------------------------
-    def __init__(self, data_dir: str):
+    def __init__(self, data_dir: str, osOps: ConfigurationOsOps):
         assert type(data_dir) == str
+        assert isinstance(osOps, ConfigurationOsOps)
 
         super().__init__()
 
         self.m_DataDir = data_dir
+        self.m_OsOps = osOps
+
         self.m_Files = list[FileData]()
         self.m_AllOptionsByName = dict[
             str, typing.Union[OptionData, list[OptionData]]
         ]()
         self.m_AllFilesByName = dict[str, typing.Union[FileData, list[FileData]]]()
+
+    # Own interface ------------------------------------------------------
+    @property
+    def OsOps(self) -> ConfigurationOsOps:
+        assert isinstance(self.m_OsOps, ConfigurationOsOps)
+        return self.m_OsOps
 
     # Object interface ---------------------------------------------------
     def get_Parent(self) -> FileData:

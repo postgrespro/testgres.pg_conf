@@ -14,6 +14,8 @@ from .configuration_base import PgCfgModel__OptionHandlerToAddOption
 from .configuration_base import PgCfgModel__OptionHandlerToSetValueItem
 from .configuration_base import PgCfgModel__OptionHandlerToWrite
 
+from ...os.local.configuration_os_ops import SingleInstance as LocalCfgOsOps
+
 # fmt: off
 from ...core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__generic \
     import OptionHandlerToPrepareSetValue__Std__Generic
@@ -306,7 +308,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def __init__(self, data_dir: str):
         assert type(data_dir) == str
 
-        super().__init__(data_dir)
+        super().__init__(data_dir, LocalCfgOsOps)
 
     # PostgresConfiguration_Base interface -------------------------------
     def Internal__GetAutoConfFileName(self):

@@ -58,6 +58,8 @@ from ...core.raise_error import RaiseError
 from ...core.bugcheck_error import BugCheckError
 # fmt: on
 
+from ...os.abstract.configuration_os_ops import ConfigurationOsOps
+
 import typing
 import os
 import io
@@ -470,7 +472,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         # Add/Get file
         # Add include element
 
-        baseFolder = os.path.dirname(self.m_FileLineData.m_Parent.m_Path)
+        baseFolder = cfg.m_Data.OsOps.Path_DirName(self.m_FileLineData.m_Parent.m_Path)
         assert type(baseFolder) == str
 
         fileData = PgCfgModel__DataControllerUtils.Cfg__GetOrCreateFile__USER(
@@ -828,7 +830,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         # Add empty line
         # Add include element
 
-        baseFolder = os.path.dirname(self.m_FileData.m_Path)
+        baseFolder = self.m_Cfg.m_Data.OsOps.Path_DirName(self.m_FileData.m_Path)
         assert type(baseFolder) == str
 
         fileData = PgCfgModel__DataControllerUtils.Cfg__GetOrCreateFile__USER(
@@ -1264,7 +1266,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
         assert type(self.m_Cfg.m_Data) == PgCfgModel__ConfigurationData
         assert type(self.m_Cfg.m_Data.m_AllFilesByName) == dict
 
-        file_name2 = os.path.normcase(file_name)
+        file_name2 = self.m_Cfg.m_Data.OsOps.Path_NormCase(file_name)
 
         if not (file_name2 in self.m_Cfg.m_Data.m_AllFilesByName.keys()):
             RaiseError.UnknownFileName(file_name)
@@ -1276,7 +1278,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
         typeOfIndexData = type(indexData)
 
         if typeOfIndexData == PgCfgModel__FileData:
-            assert os.path.basename(indexData.m_Path) == file_name2
+            assert self.m_Cfg.m_Data.OsOps.Path_BaseName(indexData.m_Path) == file_name2
             file = PostgresConfigurationFactory_Base.GetObject(self.m_Cfg, indexData)
             assert file is not None
             assert isinstance(file, PostgresConfigurationFile_Base)
@@ -1395,11 +1397,14 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     m_AllOptions: PostgresConfiguration_Base__AllOptions
 
     # --------------------------------------------------------------------
-    def __init__(self, data_dir: str):
+    def __init__(self, data_dir: str, osOps: ConfigurationOsOps):
+        assert type(data_dir) == str  # noqa: E721
+        assert isinstance(osOps, ConfigurationOsOps)
+
         super(PostgresConfiguration, self).__init__()
         super(PgCfgModel__DataHandler, self).__init__()
 
-        self.m_Data = PgCfgModel__ConfigurationData(data_dir)
+        self.m_Data = PgCfgModel__ConfigurationData(data_dir, osOps)
         self.m_AllFiles = None
         self.m_AllOptions = None
 
@@ -1415,7 +1420,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def AddTopLevelFile(self, path: str) -> PostgresConfigurationTopLevelFile_Base:
         assert type(path) == str
         assert path != ""
-        assert os.path.basename(path) != ""
+        assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert isinstance(self.m_Data.OsOps, ConfigurationOsOps)
+        assert self.m_Data.OsOps.Path_BaseName(path) != ""
 
         fileData = PgCfgModel__DataControllerUtils.Cfg__CreateAndAddTopLevelFile__USER(
             self.m_Data, path
@@ -2066,12 +2073,14 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Helper__FindFile(self, file_name: str) -> PgCfgModel__FileData:
         assert type(file_name) == str
         assert file_name != ""
-        assert os.path.basename(file_name) == file_name
+        assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert isinstance(self.m_Data.OsOps, ConfigurationOsOps)
+        assert self.m_Data.OsOps.Path_BaseName(file_name) == file_name
 
         assert type(self.m_Data) == PgCfgModel__ConfigurationData
         assert type(self.m_Data.m_AllFilesByName) == dict
 
-        file_name_n = os.path.normcase(file_name)
+        file_name_n = self.m_Data.OsOps.Path_NormCase(file_name)
 
         if not (file_name_n in self.m_Data.m_AllFilesByName.keys()):
             return None
@@ -3150,6 +3159,8 @@ class PostgresConfigurationReader_Base:
     def LoadConfigurationFile(
         cfg: PostgresConfiguration_Base, filePath: str
     ) -> PostgresConfigurationTopLevelFile_Base:
+        assert cfg is not None
+
         assert isinstance(cfg, PostgresConfiguration_Base)
         assert type(filePath) == str
         assert filePath != ""
@@ -3184,7 +3195,7 @@ class PostgresConfigurationReader_Base:
             BugCheckError.UnkFileObjectDataType(fileName, typeOfIndexData)
 
         # ----------------------------------------------------------------
-        filePath_n = Helpers.NormalizeFilePath(cfg.m_Data.m_DataDir, filePath)
+        filePath_n = Helpers.NormalizeFilePath(cfg.m_Data.OsOps, cfg.m_Data.m_DataDir, filePath)
         assert type(filePath_n) == str
 
         if filePath_n in existFileDatas:
@@ -3959,7 +3970,7 @@ class PostgresConfigurationWriter_Base:
 
                 fileCtx.File.close()  # raise
 
-                os.remove(filePath)  # raise
+                ctx.Cfg.m_Data.OsOps.Remove(filePath)  # raise
                 continue
 
             raise
