@@ -58,11 +58,11 @@ from ...core.raise_error import RaiseError
 from ...core.bugcheck_error import BugCheckError
 # fmt: on
 
+from ...os.abstract.configuration_os_ops import ConfigurationFileReader
+from ...os.abstract.configuration_os_ops import ConfigurationOsFile
 from ...os.abstract.configuration_os_ops import ConfigurationOsOps
 
 import typing
-import os
-import io
 import datetime
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -3223,17 +3223,14 @@ class PostgresConfigurationReader_Base:
             # load content
             # process content
 
-            with open(currentFileData.m_Path) as f:
-                assert isinstance(f, io.TextIOBase)
+            with cfg.m_Data.OsOps.OpenFileToRead(currentFileData.m_Path) as f:
+                assert isinstance(f, ConfigurationOsFile)
                 currentFile = PostgresConfigurationFactory_Base.GetObject(
                     cfg, currentFileData
                 )
                 __class__.Helper__LoadFileContent(currentFile, f)  # raise
 
-                fd = f.fileno()
-                assert type(fd) == int
-
-                lastMDate = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
+                lastMDate = f.GetModificationTS()
                 assert type(lastMDate) == datetime.datetime
 
                 currentFileData.m_LastModifiedTimestamp = lastMDate
@@ -3289,23 +3286,23 @@ class PostgresConfigurationReader_Base:
 
     # --------------------------------------------------------------------
     def LoadFileContent(
-        file: PostgresConfigurationFile_Base, fileContent: io.TextIOBase
+        file: PostgresConfigurationFile_Base, fileContent: ConfigurationFileReader
     ) -> None:
         assert isinstance(file, PostgresConfigurationFile_Base)
-        assert isinstance(fileContent, io.TextIOBase)
+        assert isinstance(fileContent, ConfigurationFileReader)
 
         return __class__.Helper__LoadFileContent(file, fileContent)
 
     # Helper methods -----------------------------------------------------
     def Helper__LoadFileContent(
-        file: PostgresConfigurationFile_Base, fileContent: io.TextIOBase
+        file: PostgresConfigurationFile_Base, fileContent: ConfigurationFileReader
     ) -> None:
         assert isinstance(file, PostgresConfigurationFile_Base)
-        assert isinstance(fileContent, io.TextIOBase)
+        assert isinstance(fileContent, ConfigurationFileReader)
 
         lineReader = ReadUtils__LineReader()
 
-        while lineData := fileContent.readline():
+        while lineData := fileContent.ReadLine():
             assert type(lineData) == str
 
             lineReader.SetData(lineData)
@@ -3727,7 +3724,7 @@ class PostgresConfigurationReader_Base:
 class PostgresConfigurationWriterFileCtx_Base:
     FileData: PgCfgModel__FileData
     Content: typing.Optional[str]
-    File: typing.Optional[io.TextIOWrapper]
+    File: typing.Optional[ConfigurationOsFile]
 
     # TODO: We can use filelock (it is a separated lock file)
     # to provide an exclusive access to our File
@@ -3891,15 +3888,12 @@ class PostgresConfigurationWriter_Base:
             assert fileCtx.File is None
 
             # Let's open an exist file to read and write without truncation
-            fileCtx.File = open(fileCtx.FileData.m_Path, "r+")  # raise
+            fileCtx.File = ctx.Cfg.m_Data.OsOps.OpenFileToWrite(fileCtx.FileData.m_Path)  # raise
 
             assert fileCtx.File is not None
-            assert isinstance(fileCtx.File, io.TextIOWrapper)
+            assert isinstance(fileCtx.File, ConfigurationOsFile)
 
-            fd = fileCtx.File.fileno()
-            assert type(fd) == int
-
-            lastMDate = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
+            lastMDate = fileCtx.File.GetModificationTS()
             assert type(lastMDate) == datetime.datetime
 
             if fileCtx.FileData.m_LastModifiedTimestamp != lastMDate:
@@ -3937,10 +3931,10 @@ class PostgresConfigurationWriter_Base:
                 assert fileCtx.FileData.m_Status == PgCfgModel__FileStatus.IS_NEW
                 assert fileCtx.File is None
 
-                fileCtx.File = open(fileCtx.FileData.m_Path, "x")  # raise
+                fileCtx.File = ctx.Cfg.m_Data.OsOps.CreateFile(fileCtx.FileData.m_Path)  # raise                
 
                 assert fileCtx.File is not None
-                assert isinstance(fileCtx.File, io.TextIOWrapper)
+                assert isinstance(fileCtx.File, ConfigurationOsFile)
 
                 # OK
                 continue
@@ -3959,16 +3953,16 @@ class PostgresConfigurationWriter_Base:
 
                 assert fileCtx.FileData.m_Status == PgCfgModel__FileStatus.IS_NEW
                 assert fileCtx.File is not None
-                assert isinstance(fileCtx.File, io.TextIOWrapper)
+                assert isinstance(fileCtx.File, ConfigurationOsFile)
 
-                assert not fileCtx.File.closed
+                assert not fileCtx.File.IsClosed
 
-                filePath = fileCtx.File.name
+                filePath = fileCtx.File.Name
                 assert filePath is not None
                 assert type(filePath) == str
                 assert filePath == fileCtx.FileData.m_Path
 
-                fileCtx.File.close()  # raise
+                fileCtx.File.Close()  # raise
 
                 ctx.Cfg.m_Data.OsOps.Remove(filePath)  # raise
                 continue
@@ -3992,22 +3986,17 @@ class PostgresConfigurationWriter_Base:
             assert type(fileCtx.FileData) == PgCfgModel__FileData
 
             assert fileCtx.File is not None
-            assert isinstance(fileCtx.File, io.TextIOWrapper)
+            assert isinstance(fileCtx.File, ConfigurationOsFile)
 
             assert fileCtx.Content is not None
             assert type(fileCtx.Content) == str
 
-            fileCtx.File.write(fileCtx.Content)
-            fileCtx.File.truncate()
-            fileCtx.File.flush()
+            fileCtx.File.Overwrite(fileCtx.Content)
 
-            fd = fileCtx.File.fileno()
-            assert type(fd) == int
-
-            lastMDate = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
+            lastMDate = fileCtx.File.GetModificationTS()
             assert type(lastMDate) == datetime.datetime
 
-            fileCtx.File.close()
+            fileCtx.File.Close()
 
             fileCtx.FileData.m_LastModifiedTimestamp = lastMDate
             fileCtx.FileData.m_Status = PgCfgModel__FileStatus.EXISTS
