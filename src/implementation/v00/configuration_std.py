@@ -1,6 +1,8 @@
 # //////////////////////////////////////////////////////////////////////////////
 # Postgres Pro. PostgreSQL Configuration Python Library.
 
+from __future__ import annotations
+
 from .configuration_base import PostgresConfiguration_Base
 from .configuration_base import PostgresConfigurationReader_Base
 from .configuration_base import PostgresConfigurationWriter_Base
@@ -13,6 +15,9 @@ from .configuration_base import PgCfgModel__OptionHandlerToGetValue
 from .configuration_base import PgCfgModel__OptionHandlerToAddOption
 from .configuration_base import PgCfgModel__OptionHandlerToSetValueItem
 from .configuration_base import PgCfgModel__OptionHandlerToWrite
+
+from ...os.abstract.configuration_os_ops import ConfigurationOsOps
+from ...os.local.configuration_os_ops import SingleInstance as LocalCfgOsOps
 
 # fmt: off
 from ...core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__generic \
@@ -303,10 +308,33 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     }
 
     # --------------------------------------------------------------------
-    def __init__(self, data_dir: str):
+    def __init__(self, data_dir: str, cfgOsOps: ConfigurationOsOps = None):
         assert type(data_dir) == str
+        assert cfgOsOps is None or isinstance(cfgOsOps, ConfigurationOsOps)
 
-        super().__init__(data_dir)
+        if cfgOsOps is None:
+            cfgOsOps = LocalCfgOsOps
+
+        assert isinstance(cfgOsOps, ConfigurationOsOps)
+
+        super().__init__(data_dir, LocalCfgOsOps)
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def Create(data_dir: str) -> PostgresConfiguration_Std:
+        assert type(data_dir) == str
+        assert isinstance(LocalCfgOsOps, ConfigurationOsOps)
+        return __class__(data_dir, LocalCfgOsOps)
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def CreateWithCfgOsOps(
+        data_dir: str,
+        cfgOsOps: ConfigurationOsOps
+    ) -> PostgresConfiguration_Std:
+        assert type(data_dir) == str
+        assert isinstance(cfgOsOps, ConfigurationOsOps)
+        return __class__(data_dir, cfgOsOps)
 
     # PostgresConfiguration_Base interface -------------------------------
     def Internal__GetAutoConfFileName(self):

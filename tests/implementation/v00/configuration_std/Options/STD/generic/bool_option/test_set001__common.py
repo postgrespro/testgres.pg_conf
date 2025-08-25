@@ -9,6 +9,7 @@ from .........src.implementation.v00.configuration_base import PostgresConfigura
 from .........src.implementation.v00.configuration_base import PgCfgModel__OptionData
 
 from ........TestServices import TestServices
+from ........CfgFileReader import CfgFileReader
 from ........ErrorMessageBuilder import ErrorMessageBuilder
 # fmt: on
 
@@ -17,7 +18,6 @@ import re
 import typing
 import logging
 import datetime
-import io
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -365,7 +365,7 @@ class TestSet001__Common:
 
                     logging.info("source: {}".format(line))
 
-                    src = io.StringIO(line)
+                    src = CfgFileReader(line)
 
                     try:
                         PgCfg_Reader_Base.LoadFileContent(file1, src)

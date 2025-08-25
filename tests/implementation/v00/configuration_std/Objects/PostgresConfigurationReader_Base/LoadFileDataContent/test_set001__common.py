@@ -12,9 +12,9 @@ from ........src.implementation.v00.configuration_base import PgCfgModel__Includ
 # fmt: on
 
 from .......TestServices import TestServices
+from .......CfgFileReader import CfgFileReader
 
 import pytest
-import io
 import re
 import os
 
@@ -33,7 +33,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("")
+        src = CfgFileReader("")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -50,7 +50,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO(" ")
+        src = CfgFileReader(" ")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -69,7 +69,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("\n")
+        src = CfgFileReader("\n")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -88,7 +88,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO(" #  comment   \n")
+        src = CfgFileReader(" #  comment   \n")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -112,7 +112,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("#comment1\n\t#comment2")
+        src = CfgFileReader("#comment1\n\t#comment2")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -165,7 +165,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("port" + data201__assign + "123\n")
+        src = CfgFileReader("port" + data201__assign + "123\n")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -190,7 +190,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("port=234")
+        src = CfgFileReader("port=234")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -215,7 +215,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("port 234")
+        src = CfgFileReader("port 234")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -270,7 +270,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("port" + data204_tail)
+        src = CfgFileReader("port" + data204_tail)
 
         with pytest.raises(
             Exception, match=re.escape("Option [port] in line 1 does not have a value.")
@@ -288,7 +288,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("port=123 #comment\n")
+        src = CfgFileReader("port=123 #comment\n")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -317,7 +317,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("port=123#comment \n")
+        src = CfgFileReader("port=123#comment \n")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -346,7 +346,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("port='123'\n")
+        src = CfgFileReader("port='123'\n")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -374,7 +374,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("listen_addresses" + data201__assign + "''\n")
+        src = CfgFileReader("listen_addresses" + data201__assign + "''\n")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -399,7 +399,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("listen_addresses=''''\n")
+        src = CfgFileReader("listen_addresses=''''\n")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -450,7 +450,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("listen_addresses='" + endData304[1] + "'")
+        src = CfgFileReader("listen_addresses='" + endData304[1] + "'")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -496,7 +496,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("listen_addresses='" + endData3E01)
+        src = CfgFileReader("listen_addresses='" + endData3E01)
 
         with pytest.raises(
             Exception,
@@ -534,7 +534,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("listen_addresses='\\" + endData3E02)
+        src = CfgFileReader("listen_addresses='\\" + endData3E02)
 
         with pytest.raises(
             Exception,
@@ -555,7 +555,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("listen_addresses='\\a")
+        src = CfgFileReader("listen_addresses='\\a")
 
         with pytest.raises(
             Exception,
@@ -576,7 +576,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("include 'a.conf'\n")
+        src = CfgFileReader("include 'a.conf'\n")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
@@ -603,7 +603,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("include ''\n")
+        src = CfgFileReader("include ''\n")
 
         with pytest.raises(
             Exception, match=re.escape("Include in line 1 has an empty path.")
@@ -635,7 +635,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("include '" + data4E02)
+        src = CfgFileReader("include '" + data4E02)
 
         with pytest.raises(
             Exception,
@@ -654,7 +654,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("include '\\a")
+        src = CfgFileReader("include '\\a")
 
         with pytest.raises(
             Exception,
@@ -687,7 +687,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("include '\\" + data4E04)
+        src = CfgFileReader("include '\\" + data4E04)
 
         with pytest.raises(
             Exception,
@@ -730,7 +730,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        src = io.StringIO("include" + data4E05)
+        src = CfgFileReader("include" + data4E05)
 
         with pytest.raises(
             Exception,

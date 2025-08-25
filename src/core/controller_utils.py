@@ -14,11 +14,12 @@ from .model import FileLineData as PgCfgModel__FileLineData
 from .model import FileData as PgCfgModel__FileData
 # fmt: on
 
+from ..os.abstract.configuration_os_ops import ConfigurationOsOps
+
 from .raise_error import RaiseError
 from .bugcheck_error import BugCheckError
 from .helpers import Helpers
 
-import os
 import typing
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -350,12 +351,13 @@ class DataControllerUtils:
         assert type(cfgData) == PgCfgModel__ConfigurationData
         assert type(cfgData.m_Files) == list
         assert type(cfgData.m_AllFilesByName) == dict
+        assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert type(file_name) == str
         assert file_name != ""
-        assert os.path.basename(file_name) == file_name
+        assert cfgData.OsOps.Path_BaseName(file_name) == file_name
 
-        newFilePath = os.path.join(cfgData.m_DataDir, file_name)
-        newFilePath = os.path.normpath(newFilePath)
+        newFilePath = cfgData.OsOps.Path_Join(cfgData.m_DataDir, file_name)
+        newFilePath = cfgData.OsOps.Path_NormPath(newFilePath)
 
         assert type(newFilePath) == str
         assert newFilePath != ""
@@ -370,9 +372,10 @@ class DataControllerUtils:
         assert type(cfgData.m_Files) == list
         assert type(cfgData.m_AllFilesByName) == dict
         assert type(path) == str
+        assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert path != ""
 
-        newFilePath = Helpers.NormalizeFilePath(cfgData.m_DataDir, path)
+        newFilePath = Helpers.NormalizeFilePath(cfgData.OsOps, cfgData.m_DataDir, path)
 
         assert type(newFilePath) == str
         assert newFilePath != ""
@@ -395,11 +398,12 @@ class DataControllerUtils:
         assert type(cfgData) == PgCfgModel__ConfigurationData
         assert type(cfgData.m_Files) == list
         assert type(cfgData.m_AllFilesByName) == dict
+        assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert type(baseFolder) == str
         assert type(path) == str
         assert path != ""
 
-        newFilePath = Helpers.NormalizeFilePath(baseFolder, path)
+        newFilePath = Helpers.NormalizeFilePath(cfgData.OsOps, baseFolder, path)
 
         assert type(newFilePath) == str
         assert newFilePath != ""
@@ -492,13 +496,14 @@ class DataControllerUtils:
         assert cfgData is not None
         assert fileData is not None
         assert type(cfgData) == PgCfgModel__ConfigurationData
+        assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert type(fileData) == PgCfgModel__FileData
         assert type(fileData.m_Path) == str
         assert fileData.m_Path != ""
 
         assert fileData.IsAlive()
 
-        fileName = os.path.basename(fileData.m_Path)
+        fileName = cfgData.OsOps.Path_BaseName(fileData.m_Path)
         assert type(fileName) == str
         assert fileName != ""
 
@@ -513,12 +518,13 @@ class DataControllerUtils:
         assert cfgData is not None
         assert fileData is not None
         assert type(cfgData) == PgCfgModel__ConfigurationData
+        assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert type(fileData) == PgCfgModel__FileData
         assert fileData.m_Path != ""
 
         assert fileData.IsAlive()
 
-        fileName = os.path.basename(fileData.m_Path)
+        fileName = cfgData.OsOps.Path_BaseName(fileData.m_Path)
         assert type(fileName) == str
         assert fileName != ""
 

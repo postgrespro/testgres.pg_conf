@@ -4,8 +4,9 @@
 from .model import OptionData
 from .bugcheck_error import BugCheckError
 
+from ..os.abstract.configuration_os_ops import ConfigurationOsOps
+
 import typing
-import os
 
 # //////////////////////////////////////////////////////////////////////////////
 
@@ -63,24 +64,30 @@ class Helpers:
         return False
 
     # --------------------------------------------------------------------
-    def NormalizeFilePath(baseFolder: str, filePath: str) -> str:
+    def NormalizeFilePath(
+        cfgOsOps: ConfigurationOsOps,
+        baseFolder: str,
+        filePath: str
+    ) -> str:
+        assert cfgOsOps is not None
+        assert isinstance(cfgOsOps, ConfigurationOsOps)
         assert type(baseFolder) == str
         assert type(filePath) == str
         assert filePath != ""
 
         newFilePath = None
 
-        if os.path.isabs(filePath):
-            newFilePath = os.path.normpath(filePath)
+        if cfgOsOps.Path_IsAbs(filePath):
+            newFilePath = cfgOsOps.Path_NormPath(filePath)
         else:
-            newFilePath = os.path.join(baseFolder, filePath)
-            newFilePath = os.path.normpath(newFilePath)
+            newFilePath = cfgOsOps.Path_Join(baseFolder, filePath)
+            newFilePath = cfgOsOps.Path_NormPath(newFilePath)
 
         assert type(newFilePath) == str
         assert newFilePath != ""
 
-        newFilePath = os.path.abspath(newFilePath)
-        newFilePath = os.path.normcase(newFilePath)
+        newFilePath = cfgOsOps.Path_AbsPath(newFilePath)
+        newFilePath = cfgOsOps.Path_NormCase(newFilePath)
 
         return newFilePath
 
