@@ -372,18 +372,18 @@ class TestSet001__Common:
             assert fileContent_n == "port = 123\nlisten_addresses = '*'\n"
 
         mdate1 = file.m_FileData.m_LastModifiedTimestamp
+        assert type(mdate1) == datetime.datetime
         logging.info("Last1 modification date is [{0}]".format(mdate1))
 
-        time.sleep(0.001)
+        mdate2 = mdate1 + datetime.timedelta(seconds=1)
+        assert mdate2 != mdate1
+        mdate2_ts = mdate2.timestamp()
+        os.utime(file.get_Path(), (mdate2_ts, mdate2_ts))
 
-        with open(file.get_Path(), "w") as f:
-            f.write("BLA_BLA-BLA")
-            f.flush()
-            f.close()
-
-        mdate2 = datetime.datetime.fromtimestamp(os.path.getmtime(file.get_Path()))
-        logging.info("Last2 modification date is [{0}]".format(mdate2))
-        assert mdate1 != mdate2
+        mdate2c = datetime.datetime.fromtimestamp(os.path.getmtime(file.get_Path()))
+        logging.info("Last2 modification date is [{0}]".format(mdate2c))
+        assert mdate2 == mdate2c
+        assert mdate1 != mdate2c
 
         cfg.SetOptionValue("port", 321)
 
