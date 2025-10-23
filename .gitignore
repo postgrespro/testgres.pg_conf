@@ -5,3 +5,4 @@ tmp
 logs
 build
 testgres.postgres_configuration.egg-info
+.vscode
