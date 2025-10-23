@@ -2,15 +2,15 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
-from ........src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ........src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllOptions as PgCfg_Base__AllOptions
-from ........src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllOptionsIterator as PgCfg_Base__AllOptionsIterator
-from ........src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
+from src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllOptions as PgCfg_Base__AllOptions
+from src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllOptionsIterator as PgCfg_Base__AllOptionsIterator
+from src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
 
-from ........src.abstract.v00.configuration import PostgresConfigurationOption as PgCfg_Option
-from ........src.abstract.v00.configuration import PostgresConfigurationOptions as PgCfg_Options
-from ........src.abstract.v00.configuration import PostgresConfigurationOptionsIterator as PgCfg_OptionsIterator
+from src.abstract.v00.configuration import PostgresConfigurationOption as PgCfg_Option
+from src.abstract.v00.configuration import PostgresConfigurationOptions as PgCfg_Options
+from src.abstract.v00.configuration import PostgresConfigurationOptionsIterator as PgCfg_OptionsIterator
 # fmt: on
 
 from .......TestServices import TestServices
