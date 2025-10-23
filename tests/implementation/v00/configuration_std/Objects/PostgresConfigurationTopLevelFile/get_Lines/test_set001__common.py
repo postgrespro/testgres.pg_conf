@@ -2,19 +2,19 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
-from ........src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueResult_Base as PgCfg_SetOptionResult_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationFileLine_Base as PgCfg_FileLine_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationFileLines_Base as PgCfg_FileLines_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationFileLinesIterator_Base as PgCfg_FileLinesIterator_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueResult_Base as PgCfg_SetOptionResult_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationFileLine_Base as PgCfg_FileLine_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationFileLines_Base as PgCfg_FileLines_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationFileLinesIterator_Base as PgCfg_FileLinesIterator_Base
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueResult as PgCfg_SetOptionResult
+from src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueResult as PgCfg_SetOptionResult
 
-from ........src.abstract.v00.configuration import PostgresConfigurationFileLine as PgCfg_FileLine
-from ........src.abstract.v00.configuration import PostgresConfigurationFileLines as PgCfg_FileLines
-from ........src.abstract.v00.configuration import PostgresConfigurationFileLinesIterator as PgCfg_FileLinesIterator
+from src.abstract.v00.configuration import PostgresConfigurationFileLine as PgCfg_FileLine
+from src.abstract.v00.configuration import PostgresConfigurationFileLines as PgCfg_FileLines
+from src.abstract.v00.configuration import PostgresConfigurationFileLinesIterator as PgCfg_FileLinesIterator
 # fmt: on
 
 from .......TestServices import TestServices

@@ -2,17 +2,17 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
-from ........src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationFile_Base as PgCfg_File_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationWriter_Base as PgCfg_Writer_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationWriterCtx_Base as PgCfg_WriterCtx_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationFile_Base as PgCfg_File_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationWriter_Base as PgCfg_Writer_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationWriterCtx_Base as PgCfg_WriterCtx_Base
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationFile as PgCfg_File
+from src.implementation.v00.configuration_base import PostgresConfigurationFile as PgCfg_File
 
-from ........src.implementation.v00.configuration_base import PgCfgModel__FileData
-from ........src.implementation.v00.configuration_base import PgCfgModel__FileStatus
+from src.implementation.v00.configuration_base import PgCfgModel__FileData
+from src.implementation.v00.configuration_base import PgCfgModel__FileStatus
 
 from .......TestServices import TestServices
 # fmt: on

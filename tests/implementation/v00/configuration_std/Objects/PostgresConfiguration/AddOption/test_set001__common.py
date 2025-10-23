@@ -2,19 +2,19 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
-from ........src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationFileLine_Base as PgCfg_FileLine_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationFile_Base as PgCfg_File_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationFileLine_Base as PgCfg_FileLine_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationFile_Base as PgCfg_File_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationOption as PgCfg_Option
+from src.implementation.v00.configuration_base import PostgresConfigurationOption as PgCfg_Option
 
-from ........src.implementation.v00.configuration_base import PgCfgModel__OptionData
-from ........src.implementation.v00.configuration_base import PgCfgModel__FileLineData
-from ........src.implementation.v00.configuration_base import PgCfgModel__FileData
-from ........src.implementation.v00.configuration_base import PgCfgModel__ConfigurationData
+from src.implementation.v00.configuration_base import PgCfgModel__OptionData
+from src.implementation.v00.configuration_base import PgCfgModel__FileLineData
+from src.implementation.v00.configuration_base import PgCfgModel__FileData
+from src.implementation.v00.configuration_base import PgCfgModel__ConfigurationData
 
 from .......TestServices import TestServices
 # fmt: on
