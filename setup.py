@@ -16,7 +16,7 @@ with open("README.md", "r") as f:
     readme = f.read()
 
 setup(
-    version="0.0.1",
+    version="0.0.2",
     name="testgres.postgres_configuration",
     packages=[
         "testgres.postgres_configuration",
