@@ -46,7 +46,7 @@ setup(
     long_description_content_type="text/markdown",
     license="PostgreSQL",
     author="Postgres Professional",
-    author_email="d.kovalenko@postgrespro.ru",
+    author_email="testgres@postgrespro.ru",
     keywords=["postgresql", "postgres", "test"],
     install_requires=install_requires,
     classifiers=[],
