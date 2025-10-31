@@ -41,7 +41,7 @@ setup(
     ],
     package_dir={"testgres.postgres_configuration": "src"},
     description="PostgreSQL Configuration Python Library",
-    url="https://github.com/postgrespro/testgres.pg_conf",
+    url="https://git.postgrespro.ru/d.kovalenko/testgres.postgres_configuration",
     long_description=readme,
     long_description_content_type="text/markdown",
     license="PostgreSQL",
