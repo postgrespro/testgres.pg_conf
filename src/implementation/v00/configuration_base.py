@@ -3033,7 +3033,6 @@ class PostgresConfigurationFactory_Base:
         # Build stack
         stack: typing.List[PostgresConfigurationObject] = []
 
-
         while True:
             stack.append(objectData)
 
