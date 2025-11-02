@@ -3,4 +3,3 @@ pytest-xdist
 regex
 black
 flake8
-
