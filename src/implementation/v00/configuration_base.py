@@ -3308,7 +3308,7 @@ class PostgresConfigurationReader_Base:
             lineData = fileContent.ReadLine()
 
             if not lineData:
-                # assert lineData is None
+                assert lineData is None
                 break
 
             assert type(lineData) == str

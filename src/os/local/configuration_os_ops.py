@@ -8,6 +8,7 @@ from ..abstract import configuration_os_ops as abstract
 import os
 import io
 import datetime
+import typing
 
 # //////////////////////////////////////////////////////////////////////////////
 # class ConfigurationOsFile
@@ -49,9 +50,16 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
         return self.m_file is None
 
     # --------------------------------------------------------------------
-    def ReadLine(self) -> str:
+    def ReadLine(self) -> typing.Optional[str]:
         assert isinstance(self.m_file, io.TextIOWrapper)
-        return self.m_file.readline()
+        r = self.m_file.readline()
+        assert type(r) == str  # noqa: E721
+        if not r:
+            assert r == ""
+            return None
+
+        assert r != ""
+        return r
 
     # --------------------------------------------------------------------
     def Overwrite(self, text: str) -> None:
