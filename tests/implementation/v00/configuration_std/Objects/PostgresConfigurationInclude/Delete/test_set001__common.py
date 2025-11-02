@@ -2,9 +2,9 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
-from ........src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationInclude_Base as PgCfg_Include_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationInclude_Base as PgCfg_Include_Base
 # fmt: on
 
 from .......TestServices import TestServices
