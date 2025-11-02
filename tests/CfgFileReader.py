@@ -4,6 +4,7 @@
 from src.os.abstract.configuration_os_ops import ConfigurationFileReader
 
 import io
+import typing
 
 # //////////////////////////////////////////////////////////////////////////////
 # class CfgFileReader
@@ -19,9 +20,17 @@ class CfgFileReader(ConfigurationFileReader):
         self.m_file = io.StringIO(text)
 
     # --------------------------------------------------------------------
-    def ReadLine(self) -> str:
+    def ReadLine(self) -> typing.Optional[str]:
         assert type(self.m_file) == io.StringIO
-        return self.m_file.readline()
+
+        r = self.m_file.readline()
+        assert type(r) == str  # noqa: E721
+        if not r:
+            assert r == ""
+            return None
+
+        assert r != ""
+        return r
 
 
 # //////////////////////////////////////////////////////////////////////////////

@@ -6,6 +6,7 @@ from __future__ import annotations
 from ...core.raise_error import RaiseError
 
 import datetime
+import typing
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -13,7 +14,7 @@ import datetime
 
 
 class ConfigurationFileReader:
-    def ReadLine(self) -> str:
+    def ReadLine(self) -> typing.Optional[str]:
         RaiseError.MethodIsNotImplemented(__class__, "ReadLine")
 
 
