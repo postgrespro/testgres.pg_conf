@@ -13,7 +13,7 @@ from .TestGlobalResource import TestGlobalResource
 
 class TestGlobalCache:
     sm_Guard = threading.Lock()
-    sm_Dict: typing.Dict[str, any] = dict
+    sm_Dict: typing.Dict[str, any] = dict()
 
     # --------------------------------------------------------------------
     def __init__(self):
