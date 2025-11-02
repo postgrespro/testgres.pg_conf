@@ -3304,7 +3304,13 @@ class PostgresConfigurationReader_Base:
 
         lineReader = ReadUtils__LineReader()
 
-        while lineData := fileContent.ReadLine():
+        while True:
+            lineData = fileContent.ReadLine()
+
+            if not lineData:
+                # assert lineData is None
+                break
+
             assert type(lineData) == str
 
             lineReader.SetData(lineData)
@@ -3348,7 +3354,15 @@ class PostgresConfigurationReader_Base:
                 sequenceOffset = lineReader.GetColOffset()
                 sequence = ch
 
-                while ch := lineReader.ReadSymbol():
+                while True:
+                    ch = lineReader.ReadSymbol()
+
+                    if not ch:
+                        assert ch is None
+                        break
+
+                    assert type(ch) == str
+
                     if ReadUtils.IsValidSeqCh2(ch):
                         sequence += ch
                         continue
@@ -3389,8 +3403,15 @@ class PostgresConfigurationReader_Base:
         commentText = ""
         commentOffset = lineReader.GetColOffset()
 
-        ch: str
-        while ch := lineReader.ReadSymbol():
+        while True:
+            ch = lineReader.ReadSymbol()
+
+            if not ch:
+                assert ch is None
+                break
+
+            assert type(ch) == str
+
             if ReadUtils.IsEOL(ch):
                 break
             commentText += ch
@@ -3701,9 +3722,15 @@ class PostgresConfigurationReader_Base:
 
         optionValue = ""
 
-        ch: str
+        while True:
+            ch = lineReader.ReadSymbol()
 
-        while ch := lineReader.ReadSymbol():
+            if not ch:
+                assert ch is None
+                break
+
+            assert type(ch) == str
+
             if ch == "#" or ReadUtils.IsEOL(ch):
                 lineReader.StepBack()
                 break
