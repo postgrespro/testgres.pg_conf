@@ -271,8 +271,8 @@ class ConfigurationData(ObjectData):
         self.m_OsOps = osOps
 
         self.m_Files = list()
-        self.m_AllOptionsByName = dict
-        self.m_AllFilesByName = dict
+        self.m_AllOptionsByName = dict()
+        self.m_AllFilesByName = dict()
 
         assert type(self.m_Files) == list
         assert type(self.m_AllOptionsByName) == dict
