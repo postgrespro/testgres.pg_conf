@@ -24,6 +24,7 @@ class TestGlobalCache:
         assert resourceFactory is not None
         assert isinstance(globalResourceID, str)
         assert __class__.sm_Guard is not None
+        assert __class__.sm_Dict is not None
         assert isinstance(__class__.sm_Dict, dict)
 
         with __class__.sm_Guard:
@@ -40,6 +41,7 @@ class TestGlobalCache:
     # --------------------------------------------------------------------
     def ReleaseAllResources():
         assert __class__.sm_Guard is not None
+        assert __class__.sm_Dict is not None
         assert isinstance(__class__.sm_Dict, dict)
 
         with __class__.sm_Guard:
