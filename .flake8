@@ -1,4 +1,0 @@
-[flake8]
-exclude = .git,.venv,allure-results,.pytest_cache,testdata
-max-line-length = 140
-extend-ignore = E721
