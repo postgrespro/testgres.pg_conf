@@ -3964,7 +3964,7 @@ class PostgresConfigurationWriter_Base:
                 assert fileCtx.FileData.m_Status == PgCfgModel__FileStatus.IS_NEW
                 assert fileCtx.File is None
 
-                fileCtx.File = ctx.Cfg.m_Data.OsOps.CreateFile(fileCtx.FileData.m_Path)  # raise                
+                fileCtx.File = ctx.Cfg.m_Data.OsOps.CreateFile(fileCtx.FileData.m_Path)  # raise
 
                 assert fileCtx.File is not None
                 assert isinstance(fileCtx.File, ConfigurationOsFile)

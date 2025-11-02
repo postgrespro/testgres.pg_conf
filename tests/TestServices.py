@@ -51,7 +51,7 @@ class TestServices:
                 "Root dir {0} is not found in testPath {1}.".format(rootDir, testPath)
             )
 
-        testPath2 = testPath[len(rootDir) + 1 :]
+        testPath2 = testPath[len(rootDir) + 1:]
 
         result = os.path.join(rootTmpDir, testPath2)
 
