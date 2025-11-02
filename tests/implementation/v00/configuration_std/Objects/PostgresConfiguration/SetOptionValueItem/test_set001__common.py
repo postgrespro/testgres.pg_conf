@@ -13,6 +13,7 @@ from src.implementation.v00.configuration_base import PostgresConfigurationSetOp
 from .......TestServices import TestServices
 
 import pytest
+import typing
 import logging
 import re
 
@@ -78,9 +79,9 @@ class TestSet001__Common:
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
-        expectedValue = list[str]()
+        expectedValue: typing.List[str] = list()
 
-        index = set[str]()
+        index: typing.Set[str] = set()
 
         for iOptValue in range(len(optValues)):
             optValue = optValues[iOptValue]

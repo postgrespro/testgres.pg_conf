@@ -15,6 +15,7 @@ from src.abstract.v00.configuration import PostgresConfigurationFilesIterator as
 from .......TestServices import TestServices
 
 import pytest
+import typing
 import os
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -40,7 +41,7 @@ class TestSet001__Common:
         assert allFiles2 is allFiles1  # check cache
 
     # --------------------------------------------------------------------
-    sm_OPTS001: list[str] = ["port", "proxima.port"]
+    sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_001(self, request: pytest.FixtureRequest, optName: str):

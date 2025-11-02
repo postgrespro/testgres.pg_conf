@@ -15,6 +15,7 @@ from src.implementation.v00.configuration_base import PostgresConfigurationSetOp
 from .......TestServices import TestServices
 
 import pytest
+import typing
 import re
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -22,7 +23,7 @@ import re
 
 
 class TestSet001__Common:
-    sm_OPTS001: list[str] = ["port", "proxima.port"]
+    sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_001__port(self, request: pytest.FixtureRequest, optName: str):

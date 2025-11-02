@@ -4,6 +4,7 @@
 from src.core.read_utils import ReadUtils
 
 import pytest
+import typing
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -17,9 +18,9 @@ class TestSet001__Common:
     class tagData002:
         descr: str
         source: str
-        result: list[str]
+        result: typing.List[str]
 
-        def __init__(self, d: str, s: str, r: list[str]):
+        def __init__(self, d: str, s: str, r: typing.List[str]):
             assert type(d) == str
             assert type(s) == str
             assert type(r) == list

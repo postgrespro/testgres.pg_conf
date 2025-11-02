@@ -1,6 +1,7 @@
 # //////////////////////////////////////////////////////////////////////////////
 # Postgres Pro. PostgreSQL Configuration Python Library.
 
+import typing
 
 # //////////////////////////////////////////////////////////////////////////////
 # class WriteUtils
@@ -14,7 +15,8 @@ class WriteUtils:
         result = ""
         sep = ""
 
-        index = set[str]()
+        index: typing.Set[str] = set()
+        assert type(index) == set
 
         for x in strList:
             assert x is not None

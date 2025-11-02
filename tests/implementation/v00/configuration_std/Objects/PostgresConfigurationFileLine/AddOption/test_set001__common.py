@@ -20,7 +20,7 @@ import typing
 
 
 class TestSet001__Common:
-    sm_data001__offsets: list[typing.Optional[int]] = [None, 1, 2, 3, 10]
+    sm_data001__offsets: typing.List[typing.Optional[int]] = [None, 1, 2, 3, 10]
 
     # --------------------------------------------------------------------
     @pytest.fixture(

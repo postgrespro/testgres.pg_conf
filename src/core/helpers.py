@@ -27,7 +27,7 @@ class Helpers:
 
     # --------------------------------------------------------------------
     def ExtractFirstOptionFromIndexItem(
-        optionName: str, indexItem: typing.Union[OptionData, list[OptionData]]
+        optionName: str, indexItem: typing.Union[OptionData, typing.List[OptionData]]
     ) -> OptionData:
         assert type(optionName) == str
 

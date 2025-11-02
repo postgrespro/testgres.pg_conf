@@ -54,7 +54,7 @@ class TestSet001__Common:
 
         assert len(fileLines) == 2
         assert (
-            list[PgCfg_FileLine_Base](fileLines)[-1].m_FileLineData
+            list(fileLines)[-1].m_FileLineData
             is fileLine2.m_FileLineData
         )
 

@@ -5,6 +5,7 @@ from .TestConfigProp import TestConfigPropNames
 from .ThrowError import ThrowError
 
 import os
+import typing
 
 # /////////////////////////////////////////////////////////////////////////////
 # TestConfigHelper
@@ -20,9 +21,9 @@ class TestConfigHelper:
         return __class__.Helper__ToBoolean(v, TestConfigPropNames.TEST_CFG__NO_CLEANUP)
 
     # Helper methods -----------------------------------------------------
-    sm_YES: list[str] = ["1", "TRUE", "YES"]
+    sm_YES: typing.List[str] = ["1", "TRUE", "YES"]
 
-    sm_NO: list[str] = ["0", "FALSE", "NO"]
+    sm_NO: typing.List[str] = ["0", "FALSE", "NO"]
 
     # --------------------------------------------------------------------
     def Helper__ToBoolean(v, envVarName: str) -> bool:

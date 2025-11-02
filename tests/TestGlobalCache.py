@@ -3,6 +3,7 @@
 
 import logging
 import threading
+import typing
 
 from .TestGlobalResource import TestGlobalResource
 
@@ -12,7 +13,7 @@ from .TestGlobalResource import TestGlobalResource
 
 class TestGlobalCache:
     sm_Guard = threading.Lock()
-    sm_Dict: dict[str, any] = dict[str, any]()
+    sm_Dict: typing.Dict[str, any] = dict
 
     # --------------------------------------------------------------------
     def __init__(self):
@@ -42,7 +43,8 @@ class TestGlobalCache:
         assert isinstance(__class__.sm_Dict, dict)
 
         with __class__.sm_Guard:
-            emptyDict = dict[str, any]()
+            emptyDict: typing.Dict[str, any] = dict()
+            assert type(emptyDict) == dict
 
             curDict = __class__.sm_Dict
 

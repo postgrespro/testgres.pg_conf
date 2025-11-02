@@ -165,7 +165,7 @@ class ReadUtils:
         return __class__.IsValidSeqCh1(ch)
 
     # --------------------------------------------------------------------
-    def Unpack_StrList2(source: str) -> list[str]:
+    def Unpack_StrList2(source: str) -> typing.List[str]:
         assert source is not None
         assert type(source) == str
 
@@ -184,8 +184,8 @@ class ReadUtils:
         ctx.mode = C_MODE__NONE
         ctx.curValueItem = None
         ctx.dataLength = 0
-        ctx.result = list[str]()
-        ctx.index = set[str]()
+        ctx.result = list()
+        ctx.index = set()
 
         i = 0
         length = len(source)

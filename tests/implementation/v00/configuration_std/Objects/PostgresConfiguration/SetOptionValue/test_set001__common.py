@@ -25,6 +25,7 @@ from .......TestServices import TestServices
 # fmt: on
 
 import pytest
+import typing
 import os
 import re
 
@@ -33,7 +34,7 @@ import re
 
 
 class TestSet001__Common:
-    sm_OPTS001: list[str] = ["port", "proxima.port"]
+    sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -405,14 +406,14 @@ class TestSet001__Common:
             cfg.SetOptionValue("", 123)
 
     # --------------------------------------------------------------------
-    sm_data012__values: list[tuple[str, str, any, any]] = [
+    sm_data012__values: typing.List[typing.Tuple[str, str, any, any]] = [
         ("port-int_int", "port", 123, 123),
         ("port-str_int", "port", "321", 321),
     ]
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data012__values, ids=[x[0] for x in sm_data012__values])
-    def data012(self, request: pytest.FixtureRequest) -> tuple[str, any, any]:
+    def data012(self, request: pytest.FixtureRequest) -> typing.Tuple[str, any, any]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) == tuple
         assert len(request.param) == 4
@@ -421,7 +422,7 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_012__one_opt(
-        self, request: pytest.FixtureRequest, data012: tuple[str, any, any]
+        self, request: pytest.FixtureRequest, data012: typing.Tuple[str, any, any]
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data012) == tuple

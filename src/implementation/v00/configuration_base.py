@@ -3005,7 +3005,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert data is not None
         assert isinstance(data, PgCfgModel__ObjectData)
 
-        stack = set[PgCfgModel__ObjectData]()
+        stack: typing.Set[PgCfgModel__ObjectData] = set()
+        assert type(stack) == set
 
         ptr = data
         while ptr is not self.m_Data:
@@ -3030,7 +3031,8 @@ class PostgresConfigurationFactory_Base:
         assert isinstance(objectData, PgCfgModel__ObjectData)
 
         # Build stack
-        stack = list[PostgresConfigurationObject]()
+        stack: typing.List[PostgresConfigurationObject] = []
+
 
         while True:
             stack.append(objectData)
@@ -3165,7 +3167,7 @@ class PostgresConfigurationReader_Base:
         assert type(filePath) == str
         assert filePath != ""
 
-        existFileDatas = dict[str, PgCfgModel__FileData]()
+        existFileDatas: typing.Dict[str, PgCfgModel__FileData] = dict()
 
         for fileName in cfg.m_Data.m_AllFilesByName.keys():
             assert type(fileName) == str
@@ -3212,7 +3214,7 @@ class PostgresConfigurationReader_Base:
         assert rootFile.m_FileData.m_LastModifiedTimestamp is None
         assert len(rootFile.m_FileData.m_Lines) == 0
 
-        queuedFileDatas = set[PgCfgModel__FileData]()
+        queuedFileDatas: typing.Set[PgCfgModel__FileData] = set()
 
         queuedFileDatas.add(rootFile.m_FileData)
 
@@ -3757,9 +3759,13 @@ class PostgresConfigurationWriterCtx_Base:
 
         self.Cfg = cfg
 
-        self.AllFiles = list[PostgresConfigurationWriterFileCtx_Base]()
-        self.NewFiles = list[PostgresConfigurationWriterFileCtx_Base]()
-        self.UpdFiles = list[PostgresConfigurationWriterFileCtx_Base]()
+        self.AllFiles = list()
+        self.NewFiles = list()
+        self.UpdFiles = list()
+
+        assert type(self.AllFiles) == list
+        assert type(self.NewFiles) == list
+        assert type(self.UpdFiles) == list
 
     # --------------------------------------------------------------------
     def Init(self):

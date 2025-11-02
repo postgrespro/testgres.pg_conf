@@ -16,6 +16,7 @@ from src.abstract.v00.configuration import PostgresConfigurationOptionsIterator 
 from .......TestServices import TestServices
 
 import pytest
+import typing
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -40,7 +41,7 @@ class TestSet001__Common:
         assert allOptions2 is allOptions1  # check cache
 
     # --------------------------------------------------------------------
-    sm_OPTS001: list[str] = ["port", "proxima.port"]
+    sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_001(self, request: pytest.FixtureRequest, optName: str):
@@ -135,7 +136,7 @@ class TestSet001__Common:
 
         assert len(cfg.get_AllOptions()) == 2
 
-        names = set[str]()
+        names: typing.Set[str] = set()
 
         for opt in cfg.get_AllOptions():
             assert opt is not None
