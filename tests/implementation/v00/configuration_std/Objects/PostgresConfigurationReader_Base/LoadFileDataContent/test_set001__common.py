@@ -4,8 +4,11 @@
 # fmt: off
 from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
+from src.implementation.v00.configuration_base import PostgresConfigurationFile_Base as PgCfg_File_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
 from src.implementation.v00.configuration_base import PostgresConfigurationReader_Base as PgCfg_Reader_Base
 
+from src.implementation.v00.configuration_base import PgCfgModel__FileData
 from src.implementation.v00.configuration_base import PgCfgModel__CommentData
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
 from src.implementation.v00.configuration_base import PgCfgModel__IncludeData
@@ -30,15 +33,32 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) == str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
+        assert file1 is not None
+        assert isinstance(file1, PgCfg_File_Base)
+        assert isinstance(file1, PgCfg_TopLevelFile_Base)
+        assert file1.m_FileData is not None
+        assert type(file1.m_FileData) == PgCfgModel__FileData
+        assert file1.m_FileData.m_Lines is not None
+        assert type(file1.m_FileData.m_Lines) == list
+        assert type(file1.m_FileData.m_Path) == str
+        assert file1.m_FileData.m_Path == os.path.join(
+            rootTmpDir,
+            cfg.C_POSTGRESQL_CONF,
+        )
 
         src = CfgFileReader("")
 
         PgCfg_Reader_Base.LoadFileContent(file1, src)
 
         assert len(file1) == 0
+        assert file1.m_FileData is not None
+        assert type(file1.m_FileData) == PgCfgModel__FileData
+        assert file1.m_FileData.m_Lines is not None
+        assert type(file1.m_FileData.m_Lines) == list
+        assert len(file1.m_FileData.m_Lines) == 0
 
     # --------------------------------------------------------------------
     def test_002__space(self, request: pytest.FixtureRequest):
