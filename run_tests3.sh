@@ -12,11 +12,6 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 source "${VENV_PATH}/bin/activate"
 pip install pytest pytest-xdist
 
-# install testgres' dependencies
-export PYTHONPATH=$(pwd)
-# $PIP install .
-
-pytest -l -v -n 4
+python -m pytest -l -v -n 4
 
 set +eux
-
