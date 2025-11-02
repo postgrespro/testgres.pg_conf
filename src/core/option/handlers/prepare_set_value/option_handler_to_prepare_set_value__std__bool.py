@@ -9,6 +9,8 @@ from ....handlers import OptionHandlerToPrepareSetValue
 from ....handlers import OptionHandlerCtxToPrepareSetValue
 from ....handlers import ConfigurationDataHandler
 
+import typing
+
 # //////////////////////////////////////////////////////////////////////////////
 # OptionHandlerToPrepareSetValue__Std__Bool
 
@@ -84,7 +86,7 @@ class OptionHandlerToPrepareSetValue__Std__Bool(OptionHandlerToPrepareSetValue):
     C_MIN_STR_VALUE_LENGTH = 1
     C_MAX_STR_VALUE_LENGTH = 5
 
-    sm_Str_False: list[str] = [
+    sm_Str_False: typing.List[str] = [
         "of",
         "off",
         "f",
@@ -97,7 +99,7 @@ class OptionHandlerToPrepareSetValue__Std__Bool(OptionHandlerToPrepareSetValue):
         "0",
     ]
 
-    sm_Str_True: list[str] = [
+    sm_Str_True: typing.List[str] = [
         "on",
         "t",
         "tr",

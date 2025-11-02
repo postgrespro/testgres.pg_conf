@@ -19,6 +19,8 @@ notifications:
         on_failure: always
 
 env:
+    - TEST_PLATFORM=std3-all PYTHON_VERSION=3.7
+    - TEST_PLATFORM=std3-all PYTHON_VERSION=3.8
     - TEST_PLATFORM=std3-all PYTHON_VERSION=3.9
     - TEST_PLATFORM=std3-all PYTHON_VERSION=3.10
     - TEST_PLATFORM=std3-all PYTHON_VERSION=3.11

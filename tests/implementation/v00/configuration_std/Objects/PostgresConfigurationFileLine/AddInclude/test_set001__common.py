@@ -2,14 +2,14 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
-from ........src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationIncludedFile_Base as PgCfg_IncludedFile_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationInclude_Base as PgCfg_Include_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationIncludedFile_Base as PgCfg_IncludedFile_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationInclude_Base as PgCfg_Include_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
 
-from ........src.implementation.v00.configuration_base import PgCfgModel__OptionData
-from ........src.implementation.v00.configuration_base import PgCfgModel__IncludeData
+from src.implementation.v00.configuration_base import PgCfgModel__OptionData
+from src.implementation.v00.configuration_base import PgCfgModel__IncludeData
 # fmt: on
 
 from .......TestServices import TestServices
@@ -24,7 +24,7 @@ import typing
 
 
 class TestSet001__Common:
-    sm_data001__offsets: list[typing.Optional[int]] = [None, 1, 2, 3, 10]
+    sm_data001__offsets: typing.List[typing.Optional[int]] = [None, 1, 2, 3, 10]
 
     # --------------------------------------------------------------------
     @pytest.fixture(

@@ -7,6 +7,8 @@ from ....handlers import OptionHandlerToPrepareGetValue
 from ....handlers import OptionHandlerCtxToPrepareGetValue
 from ....handlers import ConfigurationDataHandler
 
+import typing
+
 # //////////////////////////////////////////////////////////////////////////////
 # OptionHandlerToPrepareGetValue__Std__UniqueStrList
 
@@ -25,9 +27,8 @@ class OptionHandlerToPrepareGetValue__Std__UniqueStrList(
         assert ctx.OptionValue is not None
         assert type(ctx.OptionValue) == list
 
-        result = list[str]()
-
-        index = set[str]()
+        result: typing.List[str] = list()
+        index: set[str] = set()
 
         for x in ctx.OptionValue:
             assert x is not None

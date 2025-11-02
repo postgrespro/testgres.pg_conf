@@ -11,6 +11,8 @@ from ....handlers import ConfigurationDataHandler
 
 from ....read_utils import ReadUtils
 
+import typing
+
 # //////////////////////////////////////////////////////////////////////////////
 # OptionHandlerToPrepareSetValue__Std__UniqueStrList
 
@@ -36,9 +38,8 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
             assert type(result) == list
             return result
         elif typeOfOptionValue == list:
-            result = list[str]()
-
-            index = set[str]()
+            result: typing.List[str] = list()
+            index: typing.Set[str] = set()
 
             for x in ctx.OptionValue:
                 if x is None:

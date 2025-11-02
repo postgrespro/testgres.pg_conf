@@ -2,15 +2,16 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
-from ......src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
-from ......src.implementation.v00.configuration_std import PostgresConfigurationWriter_Base as PgCfg_Writer_Base
-from ......src.implementation.v00.configuration_std import PostgresConfigurationWriterCtx_Base as PgCfg_WriterCtx_Base
-from ......src.implementation.v00.configuration_std import PostgresConfigurationReader_Base as PgCfg_Reader_Base
+from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from src.implementation.v00.configuration_std import PostgresConfigurationWriter_Base as PgCfg_Writer_Base
+from src.implementation.v00.configuration_std import PostgresConfigurationWriterCtx_Base as PgCfg_WriterCtx_Base
+from src.implementation.v00.configuration_std import PostgresConfigurationReader_Base as PgCfg_Reader_Base
 
 from .....TestServices import TestServices
 # fmt: on
 
 import pytest
+import typing
 import os
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -18,7 +19,7 @@ import os
 
 
 class TestSet001__GenericSupportOfOptions:
-    sm_data001: list[tuple[str, any, any]] = [
+    sm_data001: typing.List[typing.Tuple[str, any, any]] = [
         ("int", 0, 0),
         ("str__empty", "", ""),
         ("bool_prop_true", True, True),
@@ -27,7 +28,7 @@ class TestSet001__GenericSupportOfOptions:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data001, ids=[x[0] for x in sm_data001])
-    def data001(self, request: pytest.FixtureRequest) -> tuple[any, any]:
+    def data001(self, request: pytest.FixtureRequest) -> typing.Tuple[any, any]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) == tuple
         assert len(request.param) == 3
@@ -35,7 +36,7 @@ class TestSet001__GenericSupportOfOptions:
 
     # --------------------------------------------------------------------
     def test_001__set_get(
-        self, request: pytest.FixtureRequest, data001: tuple[any, any]
+        self, request: pytest.FixtureRequest, data001: typing.Tuple[any, any]
     ):
         assert isinstance(request, pytest.FixtureRequest)
 
@@ -49,7 +50,7 @@ class TestSet001__GenericSupportOfOptions:
         assert cfg.GetOptionValue("a") == data001[1]
 
     # --------------------------------------------------------------------
-    sm_data002: list[tuple[str, any, any]] = [
+    sm_data002: typing.List[typing.Tuple[str, any, any]] = [
         ("int", 0, "0"),
         ("str__empty", "", ""),
         ("bool_prop_true", True, "on"),
@@ -58,7 +59,7 @@ class TestSet001__GenericSupportOfOptions:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data002, ids=[x[0] for x in sm_data002])
-    def data002(self, request: pytest.FixtureRequest) -> tuple[any, any]:
+    def data002(self, request: pytest.FixtureRequest) -> typing.Tuple[any, any]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) == tuple
         assert len(request.param) == 3
@@ -66,7 +67,7 @@ class TestSet001__GenericSupportOfOptions:
 
     # --------------------------------------------------------------------
     def test_002__write_and_read(
-        self, request: pytest.FixtureRequest, data002: tuple[any, any]
+        self, request: pytest.FixtureRequest, data002: typing.Tuple[any, any]
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data002) == tuple

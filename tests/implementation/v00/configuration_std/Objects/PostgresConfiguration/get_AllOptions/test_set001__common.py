@@ -2,20 +2,21 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
-from ........src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ........src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllOptions as PgCfg_Base__AllOptions
-from ........src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllOptionsIterator as PgCfg_Base__AllOptionsIterator
-from ........src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
+from src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllOptions as PgCfg_Base__AllOptions
+from src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllOptionsIterator as PgCfg_Base__AllOptionsIterator
+from src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
 
-from ........src.abstract.v00.configuration import PostgresConfigurationOption as PgCfg_Option
-from ........src.abstract.v00.configuration import PostgresConfigurationOptions as PgCfg_Options
-from ........src.abstract.v00.configuration import PostgresConfigurationOptionsIterator as PgCfg_OptionsIterator
+from src.abstract.v00.configuration import PostgresConfigurationOption as PgCfg_Option
+from src.abstract.v00.configuration import PostgresConfigurationOptions as PgCfg_Options
+from src.abstract.v00.configuration import PostgresConfigurationOptionsIterator as PgCfg_OptionsIterator
 # fmt: on
 
 from .......TestServices import TestServices
 
 import pytest
+import typing
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -40,7 +41,7 @@ class TestSet001__Common:
         assert allOptions2 is allOptions1  # check cache
 
     # --------------------------------------------------------------------
-    sm_OPTS001: list[str] = ["port", "proxima.port"]
+    sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_001(self, request: pytest.FixtureRequest, optName: str):
@@ -135,7 +136,7 @@ class TestSet001__Common:
 
         assert len(cfg.get_AllOptions()) == 2
 
-        names = set[str]()
+        names: typing.Set[str] = set()
 
         for opt in cfg.get_AllOptions():
             assert opt is not None

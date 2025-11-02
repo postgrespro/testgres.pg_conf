@@ -1,7 +1,7 @@
 # /////////////////////////////////////////////////////////////////////////////
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
-from ..src.os.abstract.configuration_os_ops import ConfigurationFileReader
+from src.os.abstract.configuration_os_ops import ConfigurationFileReader
 
 import io
 

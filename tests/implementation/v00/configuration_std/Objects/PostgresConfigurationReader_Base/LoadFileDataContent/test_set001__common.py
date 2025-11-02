@@ -2,19 +2,20 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
-from ........src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationReader_Base as PgCfg_Reader_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationReader_Base as PgCfg_Reader_Base
 
-from ........src.implementation.v00.configuration_base import PgCfgModel__CommentData
-from ........src.implementation.v00.configuration_base import PgCfgModel__OptionData
-from ........src.implementation.v00.configuration_base import PgCfgModel__IncludeData
+from src.implementation.v00.configuration_base import PgCfgModel__CommentData
+from src.implementation.v00.configuration_base import PgCfgModel__OptionData
+from src.implementation.v00.configuration_base import PgCfgModel__IncludeData
 # fmt: on
 
 from .......TestServices import TestServices
 from .......CfgFileReader import CfgFileReader
 
 import pytest
+import typing
 import re
 import os
 
@@ -132,7 +133,7 @@ class TestSet001__Common:
         assert fileLineData1.m_Items[0].m_Element.m_Text == "comment2"
 
     # --------------------------------------------------------------------
-    sm_data201__assign: list[tuple[str, str]] = [
+    sm_data201__assign: typing.List[typing.Tuple[str, str]] = [
         ("assign", "="),
         ("space", " "),
         ("tab", "\t"),
@@ -230,7 +231,7 @@ class TestSet001__Common:
         assert fileLineData0.m_Items[0].m_Element.m_Value == 234
 
     # --------------------------------------------------------------------
-    sm_data204: list[tuple[str, str]] = [
+    sm_data204: typing.List[typing.Tuple[str, str]] = [
         ("EOF", ""),
         ("EOL", "\n"),
         ("space_and_EOF", " "),
@@ -414,7 +415,7 @@ class TestSet001__Common:
         assert fileLineData0.m_Items[0].m_Element.m_Value == "'"
 
     # --------------------------------------------------------------------
-    sm_endData304: list[tuple[str, str, str]] = [
+    sm_endData304: typing.List[typing.Tuple[str, str, str]] = [
         ("b", "\\b", "\b"),
         ("f", "\\f", "\f"),
         ("n", "\\n", "\n"),
@@ -430,7 +431,7 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_endData304, ids=[x[0] for x in sm_endData304])
-    def endData304(self, request: pytest.FixtureRequest) -> tuple[str, str, str]:
+    def endData304(self, request: pytest.FixtureRequest) -> typing.Tuple[str, str, str]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) == tuple
         assert len(request.param) == 3
@@ -465,7 +466,7 @@ class TestSet001__Common:
         assert fileLineData0.m_Items[0].m_Element.m_Value == endData304[2]
 
     # --------------------------------------------------------------------
-    sm_data3E01: list[tuple[str, str]] = [
+    sm_data3E01: typing.List[typing.Tuple[str, str]] = [
         ("EOF", ""),
         ("EOL", "\n"),
         ("space_EOF", " "),
@@ -507,7 +508,7 @@ class TestSet001__Common:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
 
     # --------------------------------------------------------------------
-    sm_data3E02: list[tuple[str, str]] = [
+    sm_data3E02: typing.List[typing.Tuple[str, str]] = [
         ("EOF", ""),
         ("EOL", "\n"),
     ]
@@ -611,7 +612,7 @@ class TestSet001__Common:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
 
     # --------------------------------------------------------------------
-    sm_dataE4E02: list[tuple[str, str]] = [
+    sm_dataE4E02: typing.List[typing.Tuple[str, str]] = [
         ("EOF", ""),
         ("EOL", "\n"),
         ("a_EOF", "a"),
@@ -665,7 +666,7 @@ class TestSet001__Common:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
 
     # --------------------------------------------------------------------
-    sm_dataE4E04: list[tuple[str, str]] = [
+    sm_dataE4E04: typing.List[typing.Tuple[str, str]] = [
         ("EOF", ""),
         ("EOL", "\n"),
     ]
@@ -696,7 +697,7 @@ class TestSet001__Common:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
 
     # --------------------------------------------------------------------
-    sm_dataE4E05: list[tuple[str, str]] = [
+    sm_dataE4E05: typing.List[typing.Tuple[str, str]] = [
         ("EOF", ""),
         ("EOL", "\n"),
         ("space_EOF", " "),

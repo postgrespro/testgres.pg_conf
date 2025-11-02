@@ -3005,7 +3005,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert data is not None
         assert isinstance(data, PgCfgModel__ObjectData)
 
-        stack = set[PgCfgModel__ObjectData]()
+        stack: typing.Set[PgCfgModel__ObjectData] = set()
+        assert type(stack) == set
 
         ptr = data
         while ptr is not self.m_Data:
@@ -3030,7 +3031,8 @@ class PostgresConfigurationFactory_Base:
         assert isinstance(objectData, PgCfgModel__ObjectData)
 
         # Build stack
-        stack = list[PostgresConfigurationObject]()
+        stack: typing.List[PostgresConfigurationObject] = []
+
 
         while True:
             stack.append(objectData)
@@ -3165,7 +3167,7 @@ class PostgresConfigurationReader_Base:
         assert type(filePath) == str
         assert filePath != ""
 
-        existFileDatas = dict[str, PgCfgModel__FileData]()
+        existFileDatas: typing.Dict[str, PgCfgModel__FileData] = dict()
 
         for fileName in cfg.m_Data.m_AllFilesByName.keys():
             assert type(fileName) == str
@@ -3212,7 +3214,7 @@ class PostgresConfigurationReader_Base:
         assert rootFile.m_FileData.m_LastModifiedTimestamp is None
         assert len(rootFile.m_FileData.m_Lines) == 0
 
-        queuedFileDatas = set[PgCfgModel__FileData]()
+        queuedFileDatas: typing.Set[PgCfgModel__FileData] = set()
 
         queuedFileDatas.add(rootFile.m_FileData)
 
@@ -3302,7 +3304,13 @@ class PostgresConfigurationReader_Base:
 
         lineReader = ReadUtils__LineReader()
 
-        while lineData := fileContent.ReadLine():
+        while True:
+            lineData = fileContent.ReadLine()
+
+            if not lineData:
+                # assert lineData is None
+                break
+
             assert type(lineData) == str
 
             lineReader.SetData(lineData)
@@ -3346,7 +3354,15 @@ class PostgresConfigurationReader_Base:
                 sequenceOffset = lineReader.GetColOffset()
                 sequence = ch
 
-                while ch := lineReader.ReadSymbol():
+                while True:
+                    ch = lineReader.ReadSymbol()
+
+                    if not ch:
+                        assert ch is None
+                        break
+
+                    assert type(ch) == str
+
                     if ReadUtils.IsValidSeqCh2(ch):
                         sequence += ch
                         continue
@@ -3387,8 +3403,15 @@ class PostgresConfigurationReader_Base:
         commentText = ""
         commentOffset = lineReader.GetColOffset()
 
-        ch: str
-        while ch := lineReader.ReadSymbol():
+        while True:
+            ch = lineReader.ReadSymbol()
+
+            if not ch:
+                assert ch is None
+                break
+
+            assert type(ch) == str
+
             if ReadUtils.IsEOL(ch):
                 break
             commentText += ch
@@ -3699,9 +3722,15 @@ class PostgresConfigurationReader_Base:
 
         optionValue = ""
 
-        ch: str
+        while True:
+            ch = lineReader.ReadSymbol()
 
-        while ch := lineReader.ReadSymbol():
+            if not ch:
+                assert ch is None
+                break
+
+            assert type(ch) == str
+
             if ch == "#" or ReadUtils.IsEOL(ch):
                 lineReader.StepBack()
                 break
@@ -3757,9 +3786,13 @@ class PostgresConfigurationWriterCtx_Base:
 
         self.Cfg = cfg
 
-        self.AllFiles = list[PostgresConfigurationWriterFileCtx_Base]()
-        self.NewFiles = list[PostgresConfigurationWriterFileCtx_Base]()
-        self.UpdFiles = list[PostgresConfigurationWriterFileCtx_Base]()
+        self.AllFiles = list()
+        self.NewFiles = list()
+        self.UpdFiles = list()
+
+        assert type(self.AllFiles) == list
+        assert type(self.NewFiles) == list
+        assert type(self.UpdFiles) == list
 
     # --------------------------------------------------------------------
     def Init(self):

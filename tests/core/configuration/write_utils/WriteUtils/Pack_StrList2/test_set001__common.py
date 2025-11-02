@@ -1,9 +1,10 @@
 # //////////////////////////////////////////////////////////////////////////////
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
-from .......src.core.write_utils import WriteUtils
+from src.core.write_utils import WriteUtils
 
 import pytest
+import typing
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -11,15 +12,15 @@ import pytest
 
 class TestSet001__Common:
     def test_001__empty(self):
-        assert WriteUtils.Pack_StrList2(list[str]()) == ""
+        assert WriteUtils.Pack_StrList2([]) == ""
 
     # --------------------------------------------------------------------
     class tagData002:
         descr: str
-        source: list[str]
+        source: typing.List[str]
         result: str
 
-        def __init__(self, d: str, s: list[str], r: str):
+        def __init__(self, d: str, s: typing.List[str], r: str):
             assert type(d) == str
             assert type(s) == list
             assert type(r) == str

@@ -2,19 +2,20 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
-from ........src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ........src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllFiles as PgCfg_Base__AllFiles
-from ........src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllFilesIterator as PgCfg_Base__AllFilesIterator
-from ........src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
+from src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllFiles as PgCfg_Base__AllFiles
+from src.implementation.v00.configuration_base import PostgresConfiguration_Base__AllFilesIterator as PgCfg_Base__AllFilesIterator
+from src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
 
-from ........src.abstract.v00.configuration import PostgresConfigurationFiles as PgCfg_Files
-from ........src.abstract.v00.configuration import PostgresConfigurationFilesIterator as PgCfg_FilesIterator
+from src.abstract.v00.configuration import PostgresConfigurationFiles as PgCfg_Files
+from src.abstract.v00.configuration import PostgresConfigurationFilesIterator as PgCfg_FilesIterator
 # fmt: on
 
 from .......TestServices import TestServices
 
 import pytest
+import typing
 import os
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -40,7 +41,7 @@ class TestSet001__Common:
         assert allFiles2 is allFiles1  # check cache
 
     # --------------------------------------------------------------------
-    sm_OPTS001: list[str] = ["port", "proxima.port"]
+    sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_001(self, request: pytest.FixtureRequest, optName: str):

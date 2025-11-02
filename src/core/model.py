@@ -155,7 +155,7 @@ class FileLineData(ObjectData):
 
     # --------------------------------------------------------------------
     m_Parent: FileData
-    m_Items: list[tagItem]
+    m_Items: typing.List[tagItem]
 
     # --------------------------------------------------------------------
     def __init__(self, parent: FileData):
@@ -164,7 +164,7 @@ class FileLineData(ObjectData):
         super().__init__()
 
         self.m_Parent = parent
-        self.m_Items = list[__class__.tagItem]()
+        self.m_Items = list()
 
     # own interface ------------------------------------------------------
     def MarkAsDeletedFrom(self, fileData: FileData) -> None:
@@ -206,9 +206,9 @@ class FileData(ObjectData):
     m_LastModifiedTimestamp: typing.Optional[datetime.datetime]
 
     m_Path: str
-    m_Lines: list[FileLineData]
+    m_Lines: typing.List[FileLineData]
 
-    m_OptionsByName: dict[str, OptionData]
+    m_OptionsByName: typing.Dict[str, OptionData]
 
     # --------------------------------------------------------------------
     def __init__(self, parent: ConfigurationData, path: str):
@@ -226,9 +226,10 @@ class FileData(ObjectData):
         self.m_LastModifiedTimestamp = None
 
         self.m_Path = path
-        self.m_Lines = list[FileLineData]()
+        self.m_Lines = list()
 
-        self.m_OptionsByName = dict[str, OptionData]()
+        self.m_OptionsByName = dict()
+        assert type(self.m_OptionsByName) == dict
 
         assert type(self.m_Path) == str
         assert self.m_Path != ""
@@ -254,10 +255,10 @@ class ConfigurationData(ObjectData):
     m_DataDir: str
     m_OsOps: ConfigurationOsOps
 
-    m_Files: list[FileData]
+    m_Files: typing.List[FileData]
 
-    m_AllOptionsByName: dict[str, typing.Union[OptionData, list[OptionData]]]
-    m_AllFilesByName: dict[str, typing.Union[FileData, list[FileData]]]
+    m_AllOptionsByName: typing.Dict[str, typing.Union[OptionData, typing.List[OptionData]]]
+    m_AllFilesByName: typing.Dict[str, typing.Union[FileData, typing.List[FileData]]]
 
     # --------------------------------------------------------------------
     def __init__(self, data_dir: str, osOps: ConfigurationOsOps):
@@ -269,11 +270,13 @@ class ConfigurationData(ObjectData):
         self.m_DataDir = data_dir
         self.m_OsOps = osOps
 
-        self.m_Files = list[FileData]()
-        self.m_AllOptionsByName = dict[
-            str, typing.Union[OptionData, list[OptionData]]
-        ]()
-        self.m_AllFilesByName = dict[str, typing.Union[FileData, list[FileData]]]()
+        self.m_Files = list()
+        self.m_AllOptionsByName = dict()
+        self.m_AllFilesByName = dict()
+
+        assert type(self.m_Files) == list
+        assert type(self.m_AllOptionsByName) == dict
+        assert type(self.m_AllFilesByName) == dict
 
     # Own interface ------------------------------------------------------
     @property

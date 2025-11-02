@@ -2,17 +2,18 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests.
 
 # fmt: off
-from ........src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
+from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueResult_Base as PgCfg_SetOptionResult_Base
-from ........src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueResult_Base as PgCfg_SetOptionResult_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
 
-from ........src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueEventID as PgCfg_SetOptionEventID
+from src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueEventID as PgCfg_SetOptionEventID
 # fmt: on
 
 from .......TestServices import TestServices
 
 import pytest
+import typing
 import logging
 import re
 
@@ -78,9 +79,9 @@ class TestSet001__Common:
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
-        expectedValue = list[str]()
+        expectedValue: typing.List[str] = list()
 
-        index = set[str]()
+        index: typing.Set[str] = set()
 
         for iOptValue in range(len(optValues)):
             optValue = optValues[iOptValue]
