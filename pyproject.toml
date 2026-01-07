@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-dir]
+"testgres.postgres_configuration" = "src"
+
+[tool.flake8]
+extend-ignore = ["E501", "E721", "E722", "W503"]
+exclude = [".git", "__pycache__", "env", "venv"]
+
+[project]
+name = "testgres.postgres_configuration"
+version = "0.1.0"
+
+description = "PostgreSQL Configuration Python Library"
+readme = "README.md"
+
+# [2026-01-05]
+#  This old format is used to ensure compatibility with Python 3.7.
+license = {text = "PostgreSQL"}
+
+authors = [
+    {name = "Postgres Professional", email = "testgres@postgrespro.ru"},
+]
+
+keywords = [
+    "postgresql",
+    "postgres",
+    "test",
+]
+
+requires-python = ">=3.7.17"
+
+classifiers = [
+    "Intended Audience :: Developers",
+    "Operating System :: Unix",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Testing",
+]
+
+dependencies = [
+]
+
+[project.urls]
+"HomePage" = "https://github.com/postgrespro/testgres.pg_conf"
