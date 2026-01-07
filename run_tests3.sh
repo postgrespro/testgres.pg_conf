@@ -10,12 +10,14 @@ rm -rf $VENV_PATH
 python -m venv "${VENV_PATH}"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 source "${VENV_PATH}/bin/activate"
-pip install flake8 pytest pytest-xdist
 
 # Codestyle is checked
+pip install flake8 flake8-pyproject
 flake8
+pip uninstall -y flake8 flake8-pyproject
 
 # Functional is tested
+pip install pytest pytest-xdist
 python -m pytest -l -v -n 4
 
 set +eux
