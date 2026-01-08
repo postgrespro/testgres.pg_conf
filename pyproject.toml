@@ -11,7 +11,7 @@ exclude = [".git", "__pycache__", "env", "venv"]
 
 [project]
 name = "testgres.postgres_configuration"
-version = "0.1.0"
+version = "0.2.0"
 
 description = "PostgreSQL Configuration Python Library"
 readme = "README.md"
