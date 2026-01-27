@@ -1,10 +1,10 @@
 ARG PYTHON_VERSION 
 
 # --------------------------------------------- base1
-FROM python:${PYTHON_VERSION}-alpine as base1
+FROM python:${PYTHON_VERSION}-alpine AS base1
 
 # --------------------------------------------- final
-FROM base1 as final
+FROM base1 AS final
 
 RUN apk add mc
 RUN apk add bash
