@@ -9,7 +9,7 @@
 class BugCheckError:
     def UnkObjectDataType(objectType: type):
         assert objectType is not None
-        assert type(objectType) == type  # noqa: E721
+        assert type(objectType) is type
 
         errMsg = "[BUG CHECK] Unknown object data type [{0}].".format(objectType)
         raise Exception(errMsg)
@@ -29,7 +29,7 @@ class BugCheckError:
     # --------------------------------------------------------------------
     def UnkOptObjectDataType(optName: str, optDataType: type):
         assert type(optName) is str
-        assert type(optDataType) == type  # noqa: E721
+        assert type(optDataType) is type
 
         errMsg = (
             "[BUG CHECK] Unknown type of the option object data [{0}] - {1}.".format(
@@ -53,7 +53,7 @@ class BugCheckError:
     # --------------------------------------------------------------------
     def UnkFileObjectDataType(fileName: str, fileDataType: type):
         assert type(fileName) is str
-        assert type(fileDataType) == type  # noqa: E721
+        assert type(fileDataType) is type
 
         errMsg = "[BUG CHECK] Unknown type of the file object data [{0}] - {1}.".format(
             fileName, fileDataType.__name__
@@ -207,7 +207,7 @@ class BugCheckError:
     def UnknownOptionValueType(optionName: str, typeOfOptionValue: type):
         assert type(optionName) is str
         assert optionName != ""
-        assert type(typeOfOptionValue) == type  # noqa: E721
+        assert type(typeOfOptionValue) is type
 
         errMsg = "[BUG CHECK] Unknown value type [{1}] of option [{0}].".format(
             optionName, typeOfOptionValue.__name__

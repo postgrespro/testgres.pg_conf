@@ -9,7 +9,7 @@ import datetime
 
 class RaiseError:
     def MethodIsNotImplemented(classType: type, methodName: str):
-        assert type(classType) == type  # noqa: E721
+        assert type(classType) is type
         assert type(methodName) is str
         assert methodName != ""
 
@@ -20,7 +20,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def GetPropertyIsNotImplemented(classType: type, methodName: str):
-        assert type(classType) == type  # noqa: E721
+        assert type(classType) is type
         assert type(methodName) is str
         assert methodName != ""
 
@@ -37,7 +37,7 @@ class RaiseError:
     # --------------------------------------------------------------------
     def OptionNameHasBadType(nameType: type):
         assert nameType is not None
-        assert type(nameType) == type  # noqa: E721
+        assert type(nameType) is type
 
         errMsg = "Option name has nad type [{0}]".format(nameType.__name__)
         raise Exception(errMsg)
@@ -88,8 +88,8 @@ class RaiseError:
     # --------------------------------------------------------------------
     def BadOptionValueType(optionName: str, optionValueType: type, expectedType: type):
         assert type(optionName) is str
-        assert type(optionValueType) == type  # noqa: E721
-        assert type(expectedType) == type  # noqa: E721
+        assert type(optionValueType) is type
+        assert type(expectedType) is type
 
         errMsg = "Bad option [{0}] value type [{1}]. Expected type is [{2}].".format(
             optionName, optionValueType.__name__, expectedType.__name__
@@ -99,8 +99,8 @@ class RaiseError:
     # --------------------------------------------------------------------
     def CantConvertOptionValue(optionName: str, sourceType: type, targetType: type):
         assert type(optionName) is str
-        assert type(sourceType) == type  # noqa: E721
-        assert type(targetType) == type  # noqa: E721
+        assert type(sourceType) is type
+        assert type(targetType) is type
 
         errMsg = (
             "Can't convert option [{0}] value from type [{1}] to type [{2}].".format(
@@ -114,8 +114,8 @@ class RaiseError:
         optionName: str, optionValueItemType: type, expectedType: type
     ):
         assert type(optionName) is str
-        assert type(optionValueItemType) == type  # noqa: E721
-        assert type(expectedType) == type  # noqa: E721
+        assert type(optionValueItemType) is type
+        assert type(expectedType) is type
 
         errMsg = (
             "Bad option [{0}] value item type [{1}]. Expected type is [{2}].".format(
