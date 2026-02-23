@@ -64,7 +64,7 @@ class TestSet001__Common:
 
         assert set_r1 is not None
         assert type(set_r1) is PgCfg_SetOptionResult_Base
-        assert type(set_r1.m_EventID) == PgCfg_SetOptionEventID  # noqa: E721
+        assert type(set_r1.m_EventID) is PgCfg_SetOptionEventID
         assert type(set_r1.m_OptData) is PgCfgModel__OptionData
         assert type(set_r1.m_Cfg) == PgCfg_Std  # noqa: E721
         assert isinstance(set_r1.m_Cfg, PgCfg_Base)
@@ -158,7 +158,7 @@ class TestSet001__Common:
 
         assert set_r2 is not None
         assert type(set_r2) is PgCfg_SetOptionResult_Base
-        assert type(set_r2.m_EventID) == PgCfg_SetOptionEventID  # noqa: E721
+        assert type(set_r2.m_EventID) is PgCfg_SetOptionEventID
         assert set_r2.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_DELETED
         assert set_r2.m_Cfg is None
         assert set_r2.m_OptData is None
@@ -172,7 +172,7 @@ class TestSet001__Common:
 
         assert set_r3 is not None
         assert type(set_r3) is PgCfg_SetOptionResult_Base
-        assert type(set_r3.m_EventID) == PgCfg_SetOptionEventID  # noqa: E721
+        assert type(set_r3.m_EventID) is PgCfg_SetOptionEventID
         assert set_r3.m_EventID == PgCfg_SetOptionEventID.NONE
         assert set_r3.m_Cfg is None
         assert set_r3.m_OptData is None

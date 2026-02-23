@@ -39,7 +39,7 @@ class TestSet001__Common:
 
             assert r1 is not None
             assert type(r1) is PgCfg_SetOptionResult_Base
-            assert type(r1.EventID) == PgCfg_SetOptionEventID  # noqa: E721
+            assert type(r1.EventID) is PgCfg_SetOptionEventID
 
             if nPass == 0:
                 assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
@@ -103,7 +103,7 @@ class TestSet001__Common:
 
             assert r1 is not None
             assert type(r1) is PgCfg_SetOptionResult_Base
-            assert type(r1.EventID) == PgCfg_SetOptionEventID  # noqa: E721
+            assert type(r1.EventID) is PgCfg_SetOptionEventID
 
             if len(expectedValue) == 1:
                 assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
