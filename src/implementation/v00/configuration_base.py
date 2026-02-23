@@ -431,7 +431,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
             raise
 
         assert fileLineComment
-        assert type(fileLineComment) == PostgresConfigurationComment_Base  # noqa: E721
+        assert type(fileLineComment) is PostgresConfigurationComment_Base
         return fileLineComment
 
     # --------------------------------------------------------------------
@@ -797,7 +797,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
             raise
 
         assert fileLineComment
-        assert type(fileLineComment) == PostgresConfigurationComment_Base  # noqa: E721
+        assert type(fileLineComment) is PostgresConfigurationComment_Base
         return fileLineComment
 
     # --------------------------------------------------------------------
