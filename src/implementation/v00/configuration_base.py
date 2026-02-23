@@ -114,15 +114,15 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
 
         self.Helper__CheckAlive()
         assert type(self.m_CommentData) == PgCfgModel__CommentData  # noqa: E721
-        assert (
+        assert (  # noqa: E721
             type(self.m_CommentData.m_Parent) == PgCfgModel__FileLineData
-        )  # noqa: E721
-        assert (
+        )
+        assert (  # noqa: E721
             type(self.m_CommentData.m_Parent.m_Parent) == PgCfgModel__FileData
-        )  # noqa: E721
-        assert (
+        )
+        assert (  # noqa: E721
             type(self.m_CommentData.m_Parent.m_Parent.m_Parent)
-            == PgCfgModel__ConfigurationData  # noqa: E721
+            == PgCfgModel__ConfigurationData
         )
 
         cfgData = self.m_CommentData.m_Parent.m_Parent.m_Parent
@@ -311,15 +311,15 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
 
         self.Helper__CheckAlive()
         assert type(self.m_IncludeData) == PgCfgModel__IncludeData  # noqa: E721
-        assert (
+        assert (  # noqa: E721
             type(self.m_IncludeData.m_Parent) == PgCfgModel__FileLineData
-        )  # noqa: E721
-        assert (
+        )
+        assert (  # noqa: E721
             type(self.m_IncludeData.m_Parent.m_Parent) == PgCfgModel__FileData
-        )  # noqa: E721
-        assert (
+        )
+        assert (  # noqa: E721
             type(self.m_IncludeData.m_Parent.m_Parent.m_Parent)
-            == PgCfgModel__ConfigurationData  # noqa: E721
+            == PgCfgModel__ConfigurationData
         )
 
         cfgData = self.m_IncludeData.m_Parent.m_Parent.m_Parent
@@ -415,9 +415,9 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
             fileLineComment = PostgresConfigurationComment_Base(self, commentData)
 
             assert fileLineComment is not None
-            assert (
+            assert (  # noqa: E721
                 type(fileLineComment) == PostgresConfigurationComment_Base
-            )  # noqa: E721
+            )
         except:  # rollback
             cfg = self.m_Parent.get_Configuration()
             assert cfg is not None
@@ -787,9 +787,9 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
             fileLineComment = PostgresConfigurationComment_Base(fileLine, commentData)
 
             assert fileLineComment is not None
-            assert (
+            assert (  # noqa: E721
                 type(fileLineComment) == PostgresConfigurationComment_Base
-            )  # noqa: E721
+            )
         except:  # rollback
             PgCfgModel__DataControllerUtils.FileLine__delete(
                 self.m_Cfg.m_Data, fileLineData
@@ -877,9 +877,9 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
                 # -----------
                 fileLine = PostgresConfigurationFileLine_Base(self, fileLineData)
                 assert fileLine is not None
-                assert (
+                assert (  # noqa: E721
                     type(fileLine) == PostgresConfigurationFileLine_Base
-                )  # noqa: E721
+                )
                 assert fileLine.m_FileLineData is fileLineData
                 assert fileLine.m_Parent is self
 
@@ -924,9 +924,9 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         )
 
         assert result is not None
-        assert (
+        assert (  # noqa: E721
             type(result) == PostgresConfigurationSetOptionValueResult_Base
-        )  # noqa: E721
+        )
         assert isinstance(result, PostgresConfigurationSetOptionValueResult)
         return result
 
@@ -962,9 +962,9 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         )
 
         assert result is not None
-        assert (
+        assert (  # noqa: E721
             type(result) == PostgresConfigurationSetOptionValueResult_Base
-        )  # noqa: E721
+        )
         assert isinstance(result, PostgresConfigurationSetOptionValueResult)
         assert result.m_Cfg is self.m_Cfg
         assert result.m_OptData is not None
@@ -1145,12 +1145,13 @@ class PostgresConfigurationSetOptionValueResult_Base(
     def Option(self) -> PostgresConfigurationOption_Base:
         assert self.m_Cfg is None or isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert (
-            self.m_OptData is None or type(self.m_OptData) == PgCfgModel__OptionData
-        )  # noqa: E721
+            self.m_OptData is None
+            or type(self.m_OptData) == PgCfgModel__OptionData  # noqa: E721
+        )
         assert (self.m_Cfg is None) == (self.m_OptData is None)
-        assert (
+        assert (  # noqa: E721
             type(self.m_EventID) == PostgresConfigurationSetOptionValueEventID
-        )  # noqa: E721
+        )
 
         if self.m_OptData is None:
             assert (
@@ -1185,9 +1186,9 @@ class PostgresConfigurationSetOptionValueResult_Base(
     # ---------------------------------------------------------------------
     @property
     def EventID(self) -> PostgresConfigurationSetOptionValueEventID:
-        assert (
+        assert (  # noqa: E721
             type(self.m_EventID) == PostgresConfigurationSetOptionValueEventID
-        )  # noqa: E721
+        )
         return self.m_EventID
 
 
@@ -1499,9 +1500,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
 
         assert result is not None
-        assert (
+        assert (  # noqa: E721
             type(result) == PostgresConfigurationSetOptionValueResult_Base
-        )  # noqa: E721
+        )
         assert isinstance(result, PostgresConfigurationSetOptionValueResult)
         return result
 
@@ -1524,9 +1525,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
 
         assert result is not None
-        assert (
+        assert (  # noqa: E721
             type(result) == PostgresConfigurationSetOptionValueResult_Base
-        )  # noqa: E721
+        )
         assert isinstance(result, PostgresConfigurationSetOptionValueResult_Base)
 
         return result
@@ -1540,9 +1541,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             self.m_AllFiles = PostgresConfiguration_Base__AllFiles(self)
 
         assert self.m_AllFiles is not None
-        assert (
+        assert (  # noqa: E721
             type(self.m_AllFiles) == PostgresConfiguration_Base__AllFiles
-        )  # noqa: E721
+        )
         assert self.m_AllFiles.m_Cfg is self
         return self.m_AllFiles
 
@@ -1555,9 +1556,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             self.m_AllOptions = PostgresConfiguration_Base__AllOptions(self)
 
         assert self.m_AllOptions is not None
-        assert (
+        assert (  # noqa: E721
             type(self.m_AllOptions) == PostgresConfiguration_Base__AllOptions
-        )  # noqa: E721
+        )
         assert self.m_AllOptions.m_Cfg is self
         return self.m_AllOptions
 
@@ -2454,9 +2455,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         result = self.Helper__FinalRegSimpleOptionValue__Common(optionName, optionValue)
 
         assert result is not None
-        assert (
+        assert (  # noqa: E721
             type(result) == PostgresConfigurationSetOptionValueResult_Base
-        )  # noqa: E721
+        )
         assert isinstance(result, PostgresConfigurationSetOptionValueResult)
         assert (
             result.m_EventID
@@ -2508,9 +2509,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert optionData.m_Name == optionName
             assert type(optionData.m_Parent) == PgCfgModel__FileLineData  # noqa: E721
             assert optionData.m_Parent.IsAlive()
-            assert (
+            assert (  # noqa: E721
                 type(optionData.m_Parent.m_Parent) == PgCfgModel__FileData
-            )  # noqa: E721
+            )
             assert optionData.m_Parent.m_Parent.IsAlive()
 
             RaiseError.OptionIsAlreadyExistInAnotherFile(
@@ -2522,9 +2523,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
 
         assert result is not None
-        assert (
+        assert (  # noqa: E721
             type(result) == PostgresConfigurationSetOptionValueResult_Base
-        )  # noqa: E721
+        )
         assert (
             result.m_EventID
             == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
@@ -2632,9 +2633,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
 
         assert result is not None
-        assert (
+        assert (  # noqa: E721
             type(result) == PostgresConfigurationSetOptionValueResult_Base
-        )  # noqa: E721
+        )
         assert isinstance(result, PostgresConfigurationSetOptionValueResult)
         assert (
             result.m_EventID
@@ -2900,9 +2901,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
 
         assert result is not None
-        assert (
+        assert (  # noqa: E721
             type(result) == PostgresConfigurationSetOptionValueResult_Base
-        )  # noqa: E721
+        )
         assert (
             result.m_EventID
             == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
@@ -2957,9 +2958,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             raise
 
         assert result is not None
-        assert (
+        assert (  # noqa: E721
             type(result) == PostgresConfigurationSetOptionValueResult_Base
-        )  # noqa: E721
+        )
         assert (
             result.m_EventID
             == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
@@ -3006,9 +3007,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 self, optionData
             )
             assert result is not None
-            assert (
+            assert (  # noqa: E721
                 type(result) == PostgresConfigurationSetOptionValueResult_Base
-            )  # noqa: E721
+            )
             assert (
                 result.m_EventID
                 == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
@@ -3028,9 +3029,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             raise
 
         assert result is not None
-        assert (
+        assert (  # noqa: E721
             type(result) == PostgresConfigurationSetOptionValueResult_Base
-        )  # noqa: E721
+        )
         assert (
             result.m_EventID
             == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
@@ -3302,9 +3303,9 @@ class PostgresConfigurationReader_Base:
                 assert type(fileLineData.m_Items) == list  # noqa: E721
 
                 for fileLineItem in fileLineData.m_Items:
-                    assert (
+                    assert (  # noqa: E721
                         type(fileLineItem) == PgCfgModel__FileLineData.tagItem
-                    )  # noqa: E721
+                    )
 
                     fileLineElementData = fileLineItem.m_Element
 
@@ -3319,9 +3320,9 @@ class PostgresConfigurationReader_Base:
                     if typeOfFileLineElementData == PgCfgModel__IncludeData:
                         # look at existFileDatas
                         includeData: PgCfgModel__IncludeData = fileLineElementData
-                        assert (
+                        assert (  # noqa: E721
                             type(includeData.m_File) == PgCfgModel__FileData
-                        )  # noqa: E721
+                        )
                         assert type(includeData.m_File.m_Path) == str  # noqa: E721
 
                         if includeData.m_File.m_Path in existFileDatas:
@@ -3953,9 +3954,9 @@ class PostgresConfigurationWriter_Base:
 
         for fileCtx in ctx.AllFiles:
             assert fileCtx is not None
-            assert (
+            assert (  # noqa: E721
                 type(fileCtx) == PostgresConfigurationWriterFileCtx_Base
-            )  # noqa: E721
+            )
             assert type(fileCtx.FileData) == PgCfgModel__FileData  # noqa: E721
             assert fileCtx.Content is None
 
@@ -3973,16 +3974,16 @@ class PostgresConfigurationWriter_Base:
 
         for fileCtx in ctx.UpdFiles:
             assert fileCtx is not None
-            assert (
+            assert (  # noqa: E721
                 type(fileCtx) == PostgresConfigurationWriterFileCtx_Base
-            )  # noqa: E721
+            )
             assert type(fileCtx.FileData) == PgCfgModel__FileData  # noqa: E721
 
             assert fileCtx.FileData.m_Status == PgCfgModel__FileStatus.EXISTS
             assert fileCtx.FileData.m_LastModifiedTimestamp is not None
-            assert (
+            assert (  # noqa: E721
                 type(fileCtx.FileData.m_LastModifiedTimestamp) == datetime.datetime
-            )  # noqa: E721
+            )
             assert fileCtx.File is None
 
             # Let's open an exist file to read and write without truncation
@@ -4025,9 +4026,9 @@ class PostgresConfigurationWriter_Base:
                 fileCtx = ctx.NewFiles[iFile]
 
                 assert fileCtx is not None
-                assert (
+                assert (  # noqa: E721
                     type(fileCtx) == PostgresConfigurationWriterFileCtx_Base
-                )  # noqa: E721
+                )
                 assert type(fileCtx.FileData) == PgCfgModel__FileData  # noqa: E721
 
                 assert fileCtx.FileData.m_Status == PgCfgModel__FileStatus.IS_NEW
@@ -4052,9 +4053,9 @@ class PostgresConfigurationWriter_Base:
                 fileCtx = ctx.NewFiles[iFile2]
 
                 assert fileCtx is not None
-                assert (
+                assert (  # noqa: E721
                     type(fileCtx) == PostgresConfigurationWriterFileCtx_Base
-                )  # noqa: E721
+                )
                 assert type(fileCtx.FileData) == PgCfgModel__FileData  # noqa: E721
 
                 assert fileCtx.FileData.m_Status == PgCfgModel__FileStatus.IS_NEW
@@ -4088,9 +4089,9 @@ class PostgresConfigurationWriter_Base:
             fileCtx = ctx.AllFiles[iFile]
 
             assert fileCtx is not None
-            assert (
+            assert (  # noqa: E721
                 type(fileCtx) == PostgresConfigurationWriterFileCtx_Base
-            )  # noqa: E721
+            )
             assert type(fileCtx.FileData) == PgCfgModel__FileData  # noqa: E721
 
             assert fileCtx.File is not None
