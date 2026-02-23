@@ -97,7 +97,7 @@ class OptionData(FileLineElementData):
     ):
         assert type(parent) == FileLineData
         assert offset is None or type(offset) == int
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
         assert value is not None
         assert name != ""
 

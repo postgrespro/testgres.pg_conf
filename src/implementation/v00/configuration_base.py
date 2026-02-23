@@ -1836,7 +1836,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Internal__GetOptionHandlerToPrepareSetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareSetValue:
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
         RaiseError.MethodIsNotImplemented(
             __class__, "Internal__GetOptionHandlerToPrepareSetValue"
         )
@@ -1845,7 +1845,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Internal__GetOptionHandlerToPrepareSetValueItem(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareSetValueItem:
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
         RaiseError.MethodIsNotImplemented(
             __class__, "Internal__GetOptionHandlerToPrepareSetValueItem"
         )
@@ -1854,7 +1854,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Internal__GetOptionHandlerToPrepareGetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareGetValue:
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
         RaiseError.MethodIsNotImplemented(
             __class__, "Internal__GetOptionHandlerToPrepareGetValue"
         )
@@ -1863,7 +1863,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Internal__GetOptionHandlerToSetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToSetValue:
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
         RaiseError.MethodIsNotImplemented(
             __class__, "Internal__GetOptionHandlerToSetValue"
         )
@@ -1872,7 +1872,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Internal__GetOptionHandlerToGetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToGetValue:
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
         RaiseError.MethodIsNotImplemented(
             __class__, "Internal__GetOptionHandlerToGetValue"
         )
@@ -1881,7 +1881,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Internal__GetOptionHandlerToAddOption(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToAddOption:
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
         RaiseError.MethodIsNotImplemented(
             __class__, "Internal__GetOptionHandlerToAddOption"
         )
@@ -1890,7 +1890,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Internal__GetOptionHandlerToSetValueItem(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToSetValueItem:
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
         RaiseError.MethodIsNotImplemented(
             __class__, "Internal__GetOptionHandlerToSetValueItem"
         )
@@ -1899,7 +1899,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Internal__GetOptionHandlerToWrite(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToWrite:
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
         RaiseError.MethodIsNotImplemented(
             __class__, "Internal__GetOptionHandlerToWrite"
         )

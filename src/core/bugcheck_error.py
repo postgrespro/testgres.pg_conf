@@ -111,7 +111,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToPrepareSetValueIsNotDefined(name: str):
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
 
         errMsg = "[BUG CHECK] OptionHandlerToPrepareSetValue for [{0}] is not defined.".format(
             name
@@ -120,7 +120,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToPrepareGetValueIsNotDefined(name: str):
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
 
         errMsg = "[BUG CHECK] OptionHandlerToPrepareGetValue for [{0}] is not defined.".format(
             name
@@ -129,7 +129,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToPrepareSetValueItemIsNotDefined(name: str):
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
 
         errMsg = "[BUG CHECK] OptionHandlerToPrepareSetValueItem for [{0}] is not defined.".format(
             name
@@ -138,7 +138,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToSetValueIsNotDefined(name: str):
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
 
         errMsg = "[BUG CHECK] OptionHandlerToSetValue for [{0}] is not defined.".format(
             name
@@ -147,7 +147,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToGetValueIsNotDefined(name: str):
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
 
         errMsg = "[BUG CHECK] OptionHandlerToGetValue for [{0}] is not defined.".format(
             name
@@ -156,7 +156,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToAddOptionIsNotDefined(name: str):
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
 
         errMsg = (
             "[BUG CHECK] OptionHandlerToAddOption for [{0}] is not defined.".format(
@@ -167,7 +167,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToSetValueItemIsNotDefined(name: str):
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
 
         errMsg = (
             "[BUG CHECK] OptionHandlerToSetValueItem for [{0}] is not defined.".format(
@@ -178,7 +178,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToWriteIsNotDefined(name: str):
-        assert type(name) == str
+        assert type(name) == str  # noqa: E721
 
         errMsg = "[BUG CHECK] OptionHandlerToWrite for [{0}] is not defined.".format(
             name
