@@ -28,15 +28,15 @@ import typing
 
 class DataControllerUtils:
     def Option__set_Value(optionData: PgCfgModel__OptionData, value: any):
-        assert type(optionData) == PgCfgModel__OptionData
+        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
         assert value is not None
 
         optionData.m_Value = value
 
     # --------------------------------------------------------------------
     def Option__add_ValueItem(optionData: PgCfgModel__OptionData, valueItem: any):
-        assert type(optionData) == PgCfgModel__OptionData
-        assert type(optionData.m_Value) == list
+        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(optionData.m_Value) == list  # noqa: E721
         assert valueItem is not None
 
         optionData.m_Value.append(valueItem)
@@ -47,13 +47,13 @@ class DataControllerUtils:
         optionData: PgCfgModel__OptionData,
         withLine: bool,
     ):
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(optionData) == PgCfgModel__OptionData
-        assert type(withLine) == bool
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(withLine) == bool  # noqa: E721
 
         fileLineData = optionData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
 
         __class__.Helper__DeleteOption(cfgData, optionData)
 
@@ -70,13 +70,13 @@ class DataControllerUtils:
         includeData: PgCfgModel__IncludeData,
         withLine: bool,
     ):
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(includeData) == PgCfgModel__IncludeData
-        assert type(withLine) == bool
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(includeData) == PgCfgModel__IncludeData  # noqa: E721
+        assert type(withLine) == bool  # noqa: E721
 
         fileLineData = includeData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
 
         __class__.Helper__DeleteInclude(includeData)
 
@@ -93,9 +93,9 @@ class DataControllerUtils:
         commentData: PgCfgModel__CommentData,
         withLineIfLast: bool,
     ):
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(commentData) == PgCfgModel__CommentData
-        assert type(withLineIfLast) == bool
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(commentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(withLineIfLast) == bool  # noqa: E721
 
         commentData.IsAlive()
 
@@ -103,7 +103,7 @@ class DataControllerUtils:
 
         fileLineData = commentData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
 
         __class__.Helper__DeleteComment(commentData)
 
@@ -119,10 +119,10 @@ class DataControllerUtils:
     def FileLine__add_Comment(
         fileLineData: PgCfgModel__FileLineData, offset: typing.Optional[int], text: str
     ) -> PgCfgModel__CommentData:
-        assert type(fileLineData) == PgCfgModel__FileLineData
-        assert (offset is None) or (type(offset) == int)
-        assert type(text) == str
-        assert type(fileLineData.m_Items) == list
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert (offset is None) or (type(offset) == int)  # noqa: E721
+        assert type(text) == str  # noqa: E721
+        assert type(fileLineData.m_Items) == list  # noqa: E721
 
         assert fileLineData.IsAlive()
 
@@ -137,8 +137,8 @@ class DataControllerUtils:
     def Helper__CheckThatWeCanAddCommentToFileLine(
         fileLineData: PgCfgModel__FileLineData,
     ):
-        assert type(fileLineData) == PgCfgModel__FileLineData
-        assert type(fileLineData.m_Items) == list
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData.m_Items) == list  # noqa: E721
 
         assert fileLineData.IsAlive()
 
@@ -148,7 +148,7 @@ class DataControllerUtils:
         lastItem = fileLineData.m_Items[-1]
 
         assert lastItem is not None
-        assert type(lastItem) == PgCfgModel__FileLineData.tagItem
+        assert type(lastItem) == PgCfgModel__FileLineData.tagItem  # noqa: E721
         assert lastItem.m_Element is not None
         assert isinstance(lastItem.m_Element, PgCfgModel__FileLineElementData)
 
@@ -172,11 +172,11 @@ class DataControllerUtils:
         fileData: PgCfgModel__FileData,
         offset: typing.Optional[int],
     ) -> PgCfgModel__IncludeData:
-        assert type(fileLineData) == PgCfgModel__FileLineData
-        assert type(filePath) == str
-        assert type(fileData) == PgCfgModel__FileData
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(filePath) == str  # noqa: E721
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
         assert filePath != ""
-        assert offset is None or type(offset) == int
+        assert offset is None or type(offset) == int  # noqa: E721
 
         assert fileLineData.IsAlive()
         assert fileData.IsAlive()
@@ -199,21 +199,21 @@ class DataControllerUtils:
         optValue: any,
         optOffset: typing.Optional[int],
     ) -> PgCfgModel__OptionData:
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(fileLineData) == PgCfgModel__FileLineData
-        assert type(optName) == str
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(optName) == str  # noqa: E721
         assert optValue is not None
         assert optName != ""
-        assert type(fileLineData.m_Items) == list
-        assert optOffset is None or type(optOffset) == int
+        assert type(fileLineData.m_Items) == list  # noqa: E721
+        assert optOffset is None or type(optOffset) == int  # noqa: E721
 
         __class__.Helper__CheckThatWeCanAddWorkDataToFileLine(fileLineData)
 
         fileData = fileLineData.m_Parent
         assert fileData is not None
-        assert type(fileData) == PgCfgModel__FileData
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
         assert fileData.m_OptionsByName is not None
-        assert type(fileData.m_OptionsByName) == dict
+        assert type(fileData.m_OptionsByName) == dict  # noqa: E721
 
         optionData = PgCfgModel__OptionData(fileLineData, optOffset, optName, optValue)
         fileLineDataItem = PgCfgModel__FileLineData.tagItem(optionData)
@@ -234,7 +234,7 @@ class DataControllerUtils:
                 )
                 raise
         except:  # rollback
-            assert type(fileLineData.m_Items) == list
+            assert type(fileLineData.m_Items) == list  # noqa: E721
             assert len(fileLineData.m_Items) > 0
             assert fileLineData.m_Items[-1] is fileLineDataItem
             assert fileLineData.m_Items[-1].m_Element is optionData
@@ -247,8 +247,8 @@ class DataControllerUtils:
     def Helper__CheckThatWeCanAddWorkDataToFileLine(
         fileLineData: PgCfgModel__FileLineData,
     ):
-        assert type(fileLineData) == PgCfgModel__FileLineData
-        assert type(fileLineData.m_Items) == list
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData.m_Items) == list  # noqa: E721
 
         assert fileLineData.IsAlive()
 
@@ -258,7 +258,7 @@ class DataControllerUtils:
         lastItem = fileLineData.m_Items[-1]
 
         assert lastItem is not None
-        assert type(lastItem) == PgCfgModel__FileLineData.tagItem
+        assert type(lastItem) == PgCfgModel__FileLineData.tagItem  # noqa: E721
         assert lastItem.m_Element is not None
         assert isinstance(lastItem.m_Element, PgCfgModel__FileLineElementData)
 
@@ -281,8 +281,8 @@ class DataControllerUtils:
     ):
         assert cfgData is not None
         assert fileLineData is not None
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert fileLineData.IsAlive()
 
         __class__.Helper__DeleteFileLine(cfgData, fileLineData)
@@ -295,11 +295,11 @@ class DataControllerUtils:
     ):
         assert cfgData is not None
         assert fileLineData is not None
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert fileLineData.IsAlive()
         assert fileLineData.m_Items is not None
-        assert type(fileLineData.m_Items) == list
+        assert type(fileLineData.m_Items) == list  # noqa: E721
 
         return __class__.Helper__ClearFileLine(cfgData, fileLineData)
 
@@ -310,35 +310,35 @@ class DataControllerUtils:
         optName: str,
         optValue: any,
     ) -> PgCfgModel__OptionData:
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(fileData) == PgCfgModel__FileData
-        assert type(optName) == str
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(optName) == str  # noqa: E721
         assert optValue is not None
 
         newLineData = DataControllerUtils.File__add_Line(fileData)  # raise
 
-        assert type(newLineData) == PgCfgModel__FileLineData
+        assert type(newLineData) == PgCfgModel__FileLineData  # noqa: E721
 
         try:
             optionData = __class__.FileLine__add_Option(
                 cfgData, newLineData, optName, optValue, None
             )  # raise
 
-            assert type(optionData) == PgCfgModel__OptionData
+            assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
             assert optionData.m_Name == optName
         except:
             DataControllerUtils.FileLine__delete(cfgData, newLineData)
             raise
 
         assert optionData is not None
-        assert type(optionData) == PgCfgModel__OptionData
+        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
         assert optionData.IsAlive()
         return optionData
 
     # --------------------------------------------------------------------
     def File__add_Line(fileData: PgCfgModel__FileData) -> PgCfgModel__FileLineData:
-        assert type(fileData) == PgCfgModel__FileData
-        assert type(fileData.m_Lines) == list
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData.m_Lines) == list  # noqa: E721
 
         lineData = PgCfgModel__FileLineData(fileData)
         fileData.m_Lines.append(lineData)
@@ -348,18 +348,18 @@ class DataControllerUtils:
     def Cfg__CreateAndAddTopLevelFile__AUTO(
         cfgData: PgCfgModel__ConfigurationData, file_name: str
     ) -> PgCfgModel__FileData:
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(cfgData.m_Files) == list
-        assert type(cfgData.m_AllFilesByName) == dict
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfgData.m_Files) == list  # noqa: E721
+        assert type(cfgData.m_AllFilesByName) == dict  # noqa: E721
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
-        assert type(file_name) == str
+        assert type(file_name) == str  # noqa: E721
         assert file_name != ""
         assert cfgData.OsOps.Path_BaseName(file_name) == file_name
 
         newFilePath = cfgData.OsOps.Path_Join(cfgData.m_DataDir, file_name)
         newFilePath = cfgData.OsOps.Path_NormPath(newFilePath)
 
-        assert type(newFilePath) == str
+        assert type(newFilePath) == str  # noqa: E721
         assert newFilePath != ""
 
         return __class__.Helper__FinishCreateTopLevelFile(cfgData, newFilePath)
@@ -368,22 +368,22 @@ class DataControllerUtils:
     def Cfg__CreateAndAddTopLevelFile__USER(
         cfgData: PgCfgModel__ConfigurationData, path: str
     ) -> PgCfgModel__FileData:
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(cfgData.m_Files) == list
-        assert type(cfgData.m_AllFilesByName) == dict
-        assert type(path) == str
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfgData.m_Files) == list  # noqa: E721
+        assert type(cfgData.m_AllFilesByName) == dict  # noqa: E721
+        assert type(path) == str  # noqa: E721
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert path != ""
 
         newFilePath = Helpers.NormalizeFilePath(cfgData.OsOps, cfgData.m_DataDir, path)
 
-        assert type(newFilePath) == str
+        assert type(newFilePath) == str  # noqa: E721
         assert newFilePath != ""
 
         # TODO: use index
         for fileData in cfgData.m_AllFilesByName.values():
             assert fileData is not None
-            assert type(fileData) == PgCfgModel__FileData
+            assert type(fileData) == PgCfgModel__FileData  # noqa: E721
             assert fileData.IsAlive()
 
             if fileData.m_Path == newFilePath:
@@ -395,23 +395,23 @@ class DataControllerUtils:
     def Cfg__GetOrCreateFile__USER(
         cfgData: PgCfgModel__ConfigurationData, baseFolder: str, path: str
     ) -> PgCfgModel__FileData:
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(cfgData.m_Files) == list
-        assert type(cfgData.m_AllFilesByName) == dict
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfgData.m_Files) == list  # noqa: E721
+        assert type(cfgData.m_AllFilesByName) == dict  # noqa: E721
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
-        assert type(baseFolder) == str
-        assert type(path) == str
+        assert type(baseFolder) == str  # noqa: E721
+        assert type(path) == str  # noqa: E721
         assert path != ""
 
         newFilePath = Helpers.NormalizeFilePath(cfgData.OsOps, baseFolder, path)
 
-        assert type(newFilePath) == str
+        assert type(newFilePath) == str  # noqa: E721
         assert newFilePath != ""
 
         # TODO: use index
         for fileData in cfgData.m_AllFilesByName.values():
             assert fileData is not None
-            assert type(fileData) == PgCfgModel__FileData
+            assert type(fileData) == PgCfgModel__FileData  # noqa: E721
             assert fileData.IsAlive()
 
             if fileData.m_Path == newFilePath:
@@ -446,16 +446,16 @@ class DataControllerUtils:
     ) -> int:
         assert fileData is not None
         assert fileLineData is not None
-        assert type(fileData) == PgCfgModel__FileData
-        assert type(fileData.m_Lines) == list
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData.m_Lines) == list  # noqa: E721
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
 
         cFileLines = len(fileData.m_Lines)
 
         for iFileLine in range(cFileLines):
             ptr = fileData.m_Lines[iFileLine]
             assert ptr is not None
-            assert type(ptr) == PgCfgModel__FileLineData
+            assert type(ptr) == PgCfgModel__FileLineData  # noqa: E721
             assert ptr.m_Parent is fileData
 
             if ptr is fileLineData:
@@ -471,8 +471,8 @@ class DataControllerUtils:
     ) -> int:
         assert fileLineData is not None
         assert elementData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData
-        assert type(fileLineData.m_Items) == list
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData.m_Items) == list  # noqa: E721
         assert isinstance(elementData, PgCfgModel__FileLineElementData)
 
         cItems = len(fileLineData.m_Items)
@@ -480,7 +480,7 @@ class DataControllerUtils:
         for iItem in range(cItems):
             ptr = fileLineData.m_Items[iItem]
             assert ptr is not None
-            assert type(ptr) == PgCfgModel__FileLineData.tagItem
+            assert type(ptr) == PgCfgModel__FileLineData.tagItem  # noqa: E721
             assert ptr.m_Element is not None
 
             if ptr.m_Element is elementData:
@@ -495,16 +495,16 @@ class DataControllerUtils:
     ):
         assert cfgData is not None
         assert fileData is not None
-        assert type(cfgData) == PgCfgModel__ConfigurationData
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
-        assert type(fileData) == PgCfgModel__FileData
-        assert type(fileData.m_Path) == str
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData.m_Path) == str  # noqa: E721
         assert fileData.m_Path != ""
 
         assert fileData.IsAlive()
 
         fileName = cfgData.OsOps.Path_BaseName(fileData.m_Path)
-        assert type(fileName) == str
+        assert type(fileName) == str  # noqa: E721
         assert fileName != ""
 
         __class__.Helper__InsertFileIntoIndex(
@@ -517,15 +517,15 @@ class DataControllerUtils:
     ):
         assert cfgData is not None
         assert fileData is not None
-        assert type(cfgData) == PgCfgModel__ConfigurationData
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
-        assert type(fileData) == PgCfgModel__FileData
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
         assert fileData.m_Path != ""
 
         assert fileData.IsAlive()
 
         fileName = cfgData.OsOps.Path_BaseName(fileData.m_Path)
-        assert type(fileName) == str
+        assert type(fileName) == str  # noqa: E721
         assert fileName != ""
 
         __class__.Helper__DeleteFileIntoIndex(
@@ -538,9 +538,9 @@ class DataControllerUtils:
         fileKey: str,
         fileData: PgCfgModel__FileData,
     ):
-        assert type(filesByStrKeyDictionary) == dict
-        assert type(fileKey) == str
-        assert type(fileData) == PgCfgModel__FileData
+        assert type(filesByStrKeyDictionary) == dict  # noqa: E721
+        assert type(fileKey) == str  # noqa: E721
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
 
         assert fileKey != ""
         assert fileData.IsAlive()
@@ -553,11 +553,11 @@ class DataControllerUtils:
             if indexItemData is PgCfgModel__FileData:
                 filesByStrKeyDictionary[fileKey] = [indexItemData, fileData]  # throw
             else:
-                assert type(indexItemData) == list
+                assert type(indexItemData) == list  # noqa: E721
                 assert len(indexItemData) > 0
                 indexItemData.append(fileData)  # throw
 
-            assert type(filesByStrKeyDictionary[fileKey]) == list
+            assert type(filesByStrKeyDictionary[fileKey]) == list  # noqa: E721
             assert len(filesByStrKeyDictionary[fileKey]) > 1
             assert filesByStrKeyDictionary[fileKey][-1] is fileData
 
@@ -567,9 +567,9 @@ class DataControllerUtils:
         fileKey: str,
         fileData: PgCfgModel__FileData,
     ):
-        assert type(filesByStrKeyDictionary) == dict
-        assert type(fileKey) == str
-        assert type(fileData) == PgCfgModel__FileData
+        assert type(filesByStrKeyDictionary) == dict  # noqa: E721
+        assert type(fileKey) == str  # noqa: E721
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
 
         assert fileKey != ""
         assert fileData.IsAlive()
@@ -594,13 +594,13 @@ class DataControllerUtils:
             return
 
         if typeOfIndexItemData == list:
-            assert type(indexItemData) == list
+            assert type(indexItemData) == list  # noqa: E721
             assert len(indexItemData) > 1
 
             for i in range(len(indexItemData)):
                 ptr = indexItemData[i]
                 assert ptr is not None
-                assert type(ptr) == PgCfgModel__FileData
+                assert type(ptr) == PgCfgModel__FileData  # noqa: E721
 
                 if ptr is fileData:
                     break
@@ -611,7 +611,7 @@ class DataControllerUtils:
             if i == len(indexItemData):
                 BugCheckError.FileIsNotFoundInIndex(fileKey, fileData.m_Path)
 
-            assert type(indexItemData) == list
+            assert type(indexItemData) == list  # noqa: E721
             assert i < len(indexItemData)
             indexItemData.pop(i)
             assert len(indexItemData) > 0
@@ -632,8 +632,8 @@ class DataControllerUtils:
     ):
         assert optionsByNameDictionary is not None
         assert optionData is not None
-        assert type(optionsByNameDictionary) == dict
-        assert type(optionData) == PgCfgModel__OptionData
+        assert type(optionsByNameDictionary) == dict  # noqa: E721
+        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
 
         if not (optionData.m_Name in optionsByNameDictionary.keys()):
             optionsByNameDictionary[optionData.m_Name] = optionData
@@ -643,13 +643,13 @@ class DataControllerUtils:
 
         typeOfData = type(data)
 
-        if typeOfData == PgCfgModel__OptionData:
+        if typeOfData == PgCfgModel__OptionData:  # noqa: E721
             assert data is not optionData
             optionsByNameDictionary[optionData.m_Name] = [data, optionData]
             return
 
         if typeOfData == list:
-            assert type(data) == list
+            assert type(data) == list  # noqa: E721
             assert len(data) > 1
             data.append(optionData)
             return
@@ -663,8 +663,8 @@ class DataControllerUtils:
     ):
         assert optionsByNameDictionary is not None
         assert optionData is not None
-        assert type(optionsByNameDictionary) == dict
-        assert type(optionData) == PgCfgModel__OptionData
+        assert type(optionsByNameDictionary) == dict  # noqa: E721
+        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
 
         if not (optionData.m_Name in optionsByNameDictionary.keys()):
             BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
@@ -686,14 +686,14 @@ class DataControllerUtils:
             return
 
         if typeOfData == list:
-            assert type(data) == list
+            assert type(data) == list  # noqa: E721
             assert len(data) > 1
 
             for i in range(len(data)):
                 ptr = data[i]
                 assert ptr is not None
-                assert type(ptr) == PgCfgModel__OptionData
-                assert type(ptr.m_Name) == str
+                assert type(ptr) == PgCfgModel__OptionData  # noqa: E721
+                assert type(ptr.m_Name) == str  # noqa: E721
                 assert ptr.m_Name == optionData.m_Name
 
                 if ptr is optionData:
@@ -705,7 +705,7 @@ class DataControllerUtils:
             if i == len(data):
                 BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
 
-            assert type(data) == list
+            assert type(data) == list  # noqa: E721
             data.pop(i)
             assert len(data) > 0
 
@@ -724,11 +724,11 @@ class DataControllerUtils:
     ):
         assert cfgData is not None
         assert fileLineData is not None
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert fileLineData.IsAlive()
         assert fileLineData.m_Items is not None
-        assert type(fileLineData.m_Items) == list
+        assert type(fileLineData.m_Items) == list  # noqa: E721
 
         cItems = len(fileLineData.m_Items)
 
@@ -744,7 +744,7 @@ class DataControllerUtils:
             __class__.Helper__DeleteElement(cfgData, lastItem.m_Element)
 
             assert fileLineData.m_Items is not None
-            assert type(fileLineData.m_Items) == list
+            assert type(fileLineData.m_Items) == list  # noqa: E721
 
             cItems__new = len(fileLineData.m_Items)
 
@@ -754,14 +754,14 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     def Helper__FileLineHasWorkData(fileLineData: PgCfgModel__FileLineData):
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert fileLineData.IsAlive()
         assert fileLineData.m_Items is not None
-        assert type(fileLineData.m_Items) == list
+        assert type(fileLineData.m_Items) == list  # noqa: E721
 
         for item in fileLineData.m_Items:
             assert item is not None
-            assert type(item) == PgCfgModel__FileLineData.tagItem
+            assert type(item) == PgCfgModel__FileLineData.tagItem  # noqa: E721
             assert item.m_Element is not None
             assert isinstance(item.m_Element, PgCfgModel__FileLineElementData)
 
@@ -786,7 +786,7 @@ class DataControllerUtils:
     ):
         assert cfgData is not None
         assert objectData is not None
-        assert type(cfgData) == PgCfgModel__ConfigurationData
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert isinstance(objectData, PgCfgModel__ObjectData)
 
         typeOfObjectData = type(objectData)
@@ -804,7 +804,7 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     def Helper__DeleteComment(commentData: PgCfgModel__CommentData):
-        assert type(commentData) == PgCfgModel__CommentData
+        assert type(commentData) == PgCfgModel__CommentData  # noqa: E721
         assert commentData.IsAlive()
 
         # 0.
@@ -814,7 +814,7 @@ class DataControllerUtils:
         # 1.1 Set fileLineData
         fileLineData = commentData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert fileLineData.IsAlive()
 
         # 1.2 Set iFileLineItem
@@ -842,9 +842,9 @@ class DataControllerUtils:
     def Helper__DeleteOption(
         cfgData: PgCfgModel__ConfigurationData, optionData: PgCfgModel__OptionData
     ):
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(optionData) == PgCfgModel__OptionData
-        assert type(optionData.m_Name) == str
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(optionData.m_Name) == str  # noqa: E721
         assert optionData.IsAlive()
 
         # 0.
@@ -855,7 +855,7 @@ class DataControllerUtils:
         # 1.1 Set fileLineData
         fileLineData = optionData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert fileLineData.IsAlive()
 
         # 1.2 Set iFileLineItem
@@ -875,15 +875,15 @@ class DataControllerUtils:
         # 1.3 Set fileData
         fileData = fileLineData.m_Parent
         assert fileData is not None
-        assert type(fileData) == PgCfgModel__FileData
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
         assert fileData.IsAlive()
 
         # 1.3
-        assert type(fileData.m_OptionsByName) == dict
+        assert type(fileData.m_OptionsByName) == dict  # noqa: E721
         assert optionData.m_Name in fileData.m_OptionsByName.keys()
 
         # 1.4
-        assert type(cfgData.m_AllOptionsByName) == dict
+        assert type(cfgData.m_AllOptionsByName) == dict  # noqa: E721
         assert optionData.m_Name in cfgData.m_AllOptionsByName.keys()
 
         # 2. Perform delete operations
@@ -901,7 +901,7 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     def Helper__DeleteInclude(includeData: PgCfgModel__IncludeData):
-        assert type(includeData) == PgCfgModel__IncludeData
+        assert type(includeData) == PgCfgModel__IncludeData  # noqa: E721
         assert includeData.IsAlive()
 
         # 0.
@@ -911,7 +911,7 @@ class DataControllerUtils:
         # 1.1 Set fileLineData
         fileLineData = includeData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert fileLineData.IsAlive()
 
         # 1.2 Set iFileLineItem
@@ -939,8 +939,8 @@ class DataControllerUtils:
     def Helper__DeleteFileLine(
         cfgData: PgCfgModel__ConfigurationData, fileLineData: PgCfgModel__FileLineData
     ):
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert fileLineData.IsAlive()
 
         # 0.
@@ -950,7 +950,7 @@ class DataControllerUtils:
         # 1.1 Set fileData
         fileData = fileLineData.m_Parent
         assert fileData is not None
-        assert type(fileData) == PgCfgModel__FileData
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
         assert fileData.IsAlive()
 
         # 1.2 Set iFileLine
@@ -970,7 +970,7 @@ class DataControllerUtils:
 
         assert fileLineData.IsAlive()
         assert fileLineData.m_Items is not None
-        assert type(fileLineData.m_Items) == list
+        assert type(fileLineData.m_Items) == list  # noqa: E721
         assert len(fileLineData.m_Items) == 0
 
         # delete from file

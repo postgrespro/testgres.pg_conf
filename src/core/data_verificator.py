@@ -12,7 +12,7 @@ class DataVerificator:
         if name is None:
             RaiseError.OptionNameIsNone()
 
-        if type(name) != str:
+        if type(name) != str:  # noqa: E721
             RaiseError.OptionNameHasBadType(type(name))
 
         if name == "":
@@ -26,9 +26,9 @@ class DataVerificator:
     # --------------------------------------------------------------------
     def IsValidCommentText(text: str) -> bool:
         assert text is not None
-        assert type(text) == str
+        assert type(text) == str  # noqa: E721
 
-        assert type(__class__.sm_InvalidCommentSymbols) == str
+        assert type(__class__.sm_InvalidCommentSymbols) == str  # noqa: E721
 
         for ch in text:
             if ch in __class__.sm_InvalidCommentSymbols:
@@ -39,9 +39,9 @@ class DataVerificator:
     # --------------------------------------------------------------------
     def CheckCommentText(text: str):
         assert text is not None
-        assert type(text) == str
+        assert type(text) == str  # noqa: E721
 
-        assert type(__class__.sm_InvalidCommentSymbols) == str
+        assert type(__class__.sm_InvalidCommentSymbols) == str  # noqa: E721
 
         if not __class__.IsValidCommentText(text):
             RaiseError.CommentTextContainsInvalidSymbols()
@@ -51,7 +51,7 @@ class DataVerificator:
     # --------------------------------------------------------------------
     def CheckStringOfFilePath(text: str):
         assert text is not None
-        assert type(text) == str
+        assert type(text) == str  # noqa: E721
 
         if text == "":
             RaiseError.FilePathIsEmpty()

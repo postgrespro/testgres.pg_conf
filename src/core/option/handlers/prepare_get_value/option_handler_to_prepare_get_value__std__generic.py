@@ -19,18 +19,18 @@ class OptionHandlerToPrepareGetValue__Std__Generic(OptionHandlerToPrepareGetValu
 
     # interface ----------------------------------------------------------
     def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToPrepareGetValue
+        assert type(ctx) == OptionHandlerCtxToPrepareGetValue  # noqa: E721
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
-        assert type(ctx.OptionName) == str
+        assert type(ctx.OptionName) == str  # noqa: E721
         assert ctx.OptionValue is not None
 
         typeOfOptionValue = type(ctx.OptionValue)
 
-        if typeOfOptionValue == int:
+        if typeOfOptionValue == int:  # noqa: E721
             pass  # OK
-        elif typeOfOptionValue == str:
+        elif typeOfOptionValue == str:  # noqa: E721
             pass  # OK
-        elif typeOfOptionValue == bool:
+        elif typeOfOptionValue == bool:  # noqa: E721
             pass  # OK
         else:
             BugCheckError.UnknownOptionValueType(ctx.OptionName, typeOfOptionValue)

@@ -309,7 +309,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
     # --------------------------------------------------------------------
     def __init__(self, data_dir: str, cfgOsOps: ConfigurationOsOps = None):
-        assert type(data_dir) == str
+        assert type(data_dir) == str  # noqa: E721
         assert cfgOsOps is None or isinstance(cfgOsOps, ConfigurationOsOps)
 
         if cfgOsOps is None:
@@ -322,23 +322,22 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     # --------------------------------------------------------------------
     @staticmethod
     def Create(data_dir: str) -> PostgresConfiguration_Std:
-        assert type(data_dir) == str
+        assert type(data_dir) == str  # noqa: E721
         assert isinstance(LocalCfgOsOps, ConfigurationOsOps)
         return __class__(data_dir, LocalCfgOsOps)
 
     # --------------------------------------------------------------------
     @staticmethod
     def CreateWithCfgOsOps(
-        data_dir: str,
-        cfgOsOps: ConfigurationOsOps
+        data_dir: str, cfgOsOps: ConfigurationOsOps
     ) -> PostgresConfiguration_Std:
-        assert type(data_dir) == str
+        assert type(data_dir) == str  # noqa: E721
         assert isinstance(cfgOsOps, ConfigurationOsOps)
         return __class__(data_dir, cfgOsOps)
 
     # PostgresConfiguration_Base interface -------------------------------
     def Internal__GetAutoConfFileName(self):
-        assert type(__class__.C_POSTGRESQL_AUTO_CONF) == str
+        assert type(__class__.C_POSTGRESQL_AUTO_CONF) == str  # noqa: E721
         assert __class__.C_POSTGRESQL_AUTO_CONF != ""
         return __class__.C_POSTGRESQL_AUTO_CONF
 
@@ -346,11 +345,11 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToPrepareSetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareSetValue:
-        assert type(name) == str
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(name) == str  # noqa: E721
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.PrepareSetValue is None:
             BugCheckError.OptionHandlerToPrepareSetValueIsNotDefined(name)
@@ -365,11 +364,11 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToPrepareGetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareSetValue:
-        assert type(name) == str
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(name) == str  # noqa: E721
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.PrepareGetValue is None:
             BugCheckError.OptionHandlerToPrepareGetValueIsNotDefined(name)
@@ -384,11 +383,11 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToPrepareSetValueItem(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareSetValueItem:
-        assert type(name) == str
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(name) == str  # noqa: E721
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.PrepareSetValueItem is None:
             BugCheckError.OptionHandlerToPrepareSetValueItemIsNotDefined(name)
@@ -404,11 +403,11 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToSetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToSetValue:
-        assert type(name) == str
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(name) == str  # noqa: E721
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.SetValue is None:
             BugCheckError.OptionHandlerToSetValueIsNotDefined(name)
@@ -421,11 +420,11 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToGetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToGetValue:
-        assert type(name) == str
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(name) == str  # noqa: E721
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.GetValue is None:
             BugCheckError.OptionHandlerToGetValueIsNotDefined(name)
@@ -438,11 +437,11 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToAddOption(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToAddOption:
-        assert type(name) == str
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(name) == str  # noqa: E721
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.AddOption is None:
             BugCheckError.OptionHandlerToAddOptionIsNotDefined(name)
@@ -457,11 +456,11 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToSetValueItem(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToSetValueItem:
-        assert type(name) == str
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(name) == str  # noqa: E721
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.SetValueItem is None:
             BugCheckError.OptionHandlerToSetValueIsNotDefined(name)
@@ -476,11 +475,11 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToWrite(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToWrite:
-        assert type(name) == str
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(name) == str  # noqa: E721
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.Write is None:
             BugCheckError.OptionHandlerToWriteIsNotDefined(name)
@@ -491,8 +490,8 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
     # Helper methods -----------------------------------------------------
     def Helper__GetOptionHandlers(self, name: str) -> tagOptionHandlers:
-        assert type(name) == str
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(name) == str  # noqa: E721
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         if not (name in self.sm_OptionHandlers.keys()):
             return __class__.sm_OptionHandlers__Std__Generic
@@ -500,7 +499,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         optionHandlers = self.sm_OptionHandlers[name]
 
         assert optionHandlers is not None
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         return self.sm_OptionHandlers[name]
 

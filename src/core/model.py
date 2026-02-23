@@ -37,8 +37,8 @@ class FileLineElementData(ObjectData):
 
     # --------------------------------------------------------------------
     def __init__(self, parent: FileLineData, offset: typing.Optional[int]):
-        assert type(parent) == FileLineData
-        assert offset is None or type(offset) == int
+        assert type(parent) == FileLineData  # noqa: E721
+        assert offset is None or type(offset) == int  # noqa: E721
 
         super().__init__()
 
@@ -54,7 +54,7 @@ class FileLineElementData(ObjectData):
 
     # Object interface ---------------------------------------------------
     def get_Parent(self) -> FileLineData:
-        assert type(self.m_Parent) == FileLineData
+        assert type(self.m_Parent) == FileLineData  # noqa: E721
         return self.m_Parent
 
     # --------------------------------------------------------------------
@@ -74,9 +74,9 @@ class CommentData(FileLineElementData):
 
     # --------------------------------------------------------------------
     def __init__(self, parent: FileLineData, offset: typing.Optional[int], text: str):
-        assert type(parent) == FileLineData
-        assert offset is None or type(offset) == int
-        assert type(text) == str
+        assert type(parent) == FileLineData  # noqa: E721
+        assert offset is None or type(offset) == int  # noqa: E721
+        assert type(text) == str  # noqa: E721
 
         super().__init__(parent, offset)
 
@@ -95,9 +95,9 @@ class OptionData(FileLineElementData):
     def __init__(
         self, parent: FileLineData, offset: typing.Offset[int], name: str, value: any
     ):
-        assert type(parent) == FileLineData
-        assert offset is None or type(offset) == int
-        assert type(name) == str
+        assert type(parent) == FileLineData  # noqa: E721
+        assert offset is None or type(offset) == int  # noqa: E721
+        assert type(name) == str  # noqa: E721
         assert value is not None
         assert name != ""
 
@@ -123,10 +123,10 @@ class IncludeData(FileLineElementData):
         path: str,
         fileData: FileData,
     ):
-        assert type(parent) == FileLineData
-        assert type(path) == str
-        assert type(fileData) == FileData
-        assert offset is None or type(offset) == int
+        assert type(parent) == FileLineData  # noqa: E721
+        assert type(path) == str  # noqa: E721
+        assert type(fileData) == FileData  # noqa: E721
+        assert offset is None or type(offset) == int  # noqa: E721
 
         assert parent.IsAlive()
         assert fileData.IsAlive()
@@ -159,7 +159,7 @@ class FileLineData(ObjectData):
 
     # --------------------------------------------------------------------
     def __init__(self, parent: FileData):
-        assert type(parent) == FileData
+        assert type(parent) == FileData  # noqa: E721
 
         super().__init__()
 
@@ -175,7 +175,7 @@ class FileLineData(ObjectData):
 
     # Object interface ---------------------------------------------------
     def get_Parent(self) -> FileData:
-        assert type(self.m_Parent) == FileData
+        assert type(self.m_Parent) == FileData  # noqa: E721
         return self.m_Parent
 
     # --------------------------------------------------------------------
@@ -212,8 +212,8 @@ class FileData(ObjectData):
 
     # --------------------------------------------------------------------
     def __init__(self, parent: ConfigurationData, path: str):
-        assert type(parent) == ConfigurationData
-        assert type(path) == str
+        assert type(parent) == ConfigurationData  # noqa: E721
+        assert type(path) == str  # noqa: E721
         assert parent.OsOps.Path_IsAbs(path)
         assert parent.OsOps.Path_NormPath(path) == path
         assert parent.OsOps.Path_NormCase(path) == path
@@ -229,14 +229,14 @@ class FileData(ObjectData):
         self.m_Lines = list()
 
         self.m_OptionsByName = dict()
-        assert type(self.m_OptionsByName) == dict
+        assert type(self.m_OptionsByName) == dict  # noqa: E721
 
-        assert type(self.m_Path) == str
+        assert type(self.m_Path) == str  # noqa: E721
         assert self.m_Path != ""
 
     # Object interface ---------------------------------------------------
     def get_Parent(self) -> ConfigurationData:
-        assert type(self.m_Parent) == ConfigurationData
+        assert type(self.m_Parent) == ConfigurationData  # noqa: E721
         return self.m_Parent
 
     # --------------------------------------------------------------------
@@ -257,12 +257,14 @@ class ConfigurationData(ObjectData):
 
     m_Files: typing.List[FileData]
 
-    m_AllOptionsByName: typing.Dict[str, typing.Union[OptionData, typing.List[OptionData]]]
+    m_AllOptionsByName: typing.Dict[
+        str, typing.Union[OptionData, typing.List[OptionData]]
+    ]
     m_AllFilesByName: typing.Dict[str, typing.Union[FileData, typing.List[FileData]]]
 
     # --------------------------------------------------------------------
     def __init__(self, data_dir: str, osOps: ConfigurationOsOps):
-        assert type(data_dir) == str
+        assert type(data_dir) == str  # noqa: E721
         assert isinstance(osOps, ConfigurationOsOps)
 
         super().__init__()
@@ -274,9 +276,9 @@ class ConfigurationData(ObjectData):
         self.m_AllOptionsByName = dict()
         self.m_AllFilesByName = dict()
 
-        assert type(self.m_Files) == list
-        assert type(self.m_AllOptionsByName) == dict
-        assert type(self.m_AllFilesByName) == dict
+        assert type(self.m_Files) == list  # noqa: E721
+        assert type(self.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_AllFilesByName) == dict  # noqa: E721
 
     # Own interface ------------------------------------------------------
     @property

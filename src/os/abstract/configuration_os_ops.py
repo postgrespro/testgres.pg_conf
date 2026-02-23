@@ -95,4 +95,5 @@ class ConfigurationOsOps:
         assert type(filePath) == str  # noqa: E721
         RaiseError.MethodIsNotImplemented(__class__, "CreateFile")
 
+
 # //////////////////////////////////////////////////////////////////////////////

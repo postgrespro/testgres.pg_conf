@@ -19,14 +19,14 @@ class OptionHandlerToGetValue__Std__UnionList(OptionHandlerToGetValue):
 
     # interface ----------------------------------------------------------
     def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToGetValue
+        assert type(ctx) == OptionHandlerCtxToGetValue  # noqa: E721
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (
             ctx.SourceData is None
-            or type(ctx.SourceData) == FileData
-            or type(ctx.SourceData) == OptionData
+            or type(ctx.SourceData) == FileData  # noqa: E721
+            or type(ctx.SourceData) == OptionData  # noqa: E721
         )
-        assert type(ctx.OptionName) == str
+        assert type(ctx.OptionName) == str  # noqa: E721
 
         return ctx.DataHandler.DataHandler__GetOptionValue__UnionList(
             ctx.SourceData, ctx.OptionName
