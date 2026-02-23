@@ -57,7 +57,7 @@ class TestSet001__Common:
         assert comment is not None
         assert type(comment) == PgCfg_Comment_Base  # noqa: E721
         assert comment.m_FileLine is fileLine
-        assert type(comment.m_CommentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(comment.m_CommentData) is PgCfgModel__CommentData
         assert comment.m_CommentData.m_Offset == offset001
 
         assert comment.m_CommentData.IsAlive()
@@ -93,7 +93,7 @@ class TestSet001__Common:
         assert comment is not None
         assert type(comment) == PgCfg_Comment_Base  # noqa: E721
         assert comment.m_FileLine is fileLine
-        assert type(comment.m_CommentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(comment.m_CommentData) is PgCfgModel__CommentData
         assert comment.m_CommentData.m_Offset == 3
 
         assert comment.m_CommentData.IsAlive()

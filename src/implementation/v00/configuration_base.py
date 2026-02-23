@@ -82,7 +82,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
         assert fileLine is not None
         assert commentData is not None
         assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
-        assert type(commentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(commentData) is PgCfgModel__CommentData
 
         assert commentData.m_Parent is fileLine.m_FileLineData
 
@@ -104,7 +104,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
     # Comment interface --------------------------------------------------
     def get_Text(self) -> str:
         self.Helper__CheckAlive()
-        assert type(self.m_CommentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(self.m_CommentData) is PgCfgModel__CommentData
         assert type(self.m_CommentData.m_Text) is str
         return self.m_CommentData.m_Text
 
@@ -113,7 +113,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
         assert type(withLineIfLast) is bool
 
         self.Helper__CheckAlive()
-        assert type(self.m_CommentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(self.m_CommentData) is PgCfgModel__CommentData
         assert (  # noqa: E721
             type(self.m_CommentData.m_Parent) is PgCfgModel__FileLineData
         )
@@ -135,7 +135,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
     # Helper interface ---------------------------------------------------
     def Helper__CheckAlive(self):
         assert self.m_CommentData is not None
-        assert type(self.m_CommentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(self.m_CommentData) is PgCfgModel__CommentData
 
         if not self.m_CommentData.IsAlive():
             RaiseError.CommentObjectWasDeleted()
@@ -404,7 +404,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
             self.m_FileLineData, offset, text
         )
         assert commentData is not None
-        assert type(commentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(commentData) is PgCfgModel__CommentData
         assert commentData.m_Parent is self.m_FileLineData
         assert type(commentData.m_Parent) is PgCfgModel__FileLineData
         assert type(commentData.m_Parent.m_Items) is list
@@ -769,7 +769,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
                 fileLineData, None, text
             )
             assert commentData is not None
-            assert type(commentData) == PgCfgModel__CommentData  # noqa: E721
+            assert type(commentData) is PgCfgModel__CommentData
             assert commentData.m_Parent is fileLineData
             assert type(commentData.m_Parent) is PgCfgModel__FileLineData
             assert type(commentData.m_Parent.m_Items) is list
@@ -2187,7 +2187,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         # Let's select the file to append this new option
         getFileData_r = self.Helper__GetFileForSimpleOption(optionName)
 
-        assert type(getFileData_r) is tuple
+        assert type(getFileData_r) == tuple  # noqa: E721
         assert len(getFileData_r) == 2
 
         assert type(getFileData_r[0]) is PgCfgModel__FileData
@@ -2228,7 +2228,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert not (optionName in fileData.m_OptionsByName.keys())
                 raise
         except:  # rollback file
-            assert type(getFileData_r) is tuple
+            assert type(getFileData_r) == tuple  # noqa: E721
             assert len(getFileData_r) == 2
 
             assert type(getFileData_r[0]) is PgCfgModel__FileData
@@ -2933,7 +2933,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         getFileData_r = self.Helper__GetFileForSimpleOption(optionName)
 
         assert getFileData_r is not None
-        assert type(getFileData_r) is tuple
+        assert type(getFileData_r) == tuple  # noqa: E721
         assert len(getFileData_r) == 2
         assert type(getFileData_r[0]) is PgCfgModel__FileData
         assert type(getFileData_r[1]) is bool
@@ -2946,7 +2946,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 fileData, optionName, preparedOptionValue
             )
         except:  # rollback file
-            assert type(getFileData_r) is tuple
+            assert type(getFileData_r) == tuple  # noqa: E721
             assert len(getFileData_r) == 2
 
             assert type(getFileData_r[0]) is PgCfgModel__FileData
@@ -4247,7 +4247,7 @@ class PostgresConfigurationWriter_Base:
         assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
         assert ctx.Cfg is not None
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
-        assert type(commentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(commentData) is PgCfgModel__CommentData
         assert commentData.m_Text is not None
         assert type(commentData.m_Text) is str
 

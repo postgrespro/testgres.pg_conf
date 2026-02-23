@@ -94,7 +94,7 @@ class DataControllerUtils:
         withLineIfLast: bool,
     ):
         assert type(cfgData) is PgCfgModel__ConfigurationData
-        assert type(commentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(commentData) is PgCfgModel__CommentData
         assert type(withLineIfLast) is bool
 
         commentData.IsAlive()
@@ -804,7 +804,7 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     def Helper__DeleteComment(commentData: PgCfgModel__CommentData):
-        assert type(commentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(commentData) is PgCfgModel__CommentData
         assert commentData.IsAlive()
 
         # 0.

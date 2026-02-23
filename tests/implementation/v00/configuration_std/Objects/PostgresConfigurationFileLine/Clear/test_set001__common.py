@@ -142,7 +142,7 @@ class TestSet001__Common:
 
         assert len(fileLine) == 0
         assert comment1.m_CommentData is not None
-        assert type(comment1.m_CommentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(comment1.m_CommentData) is PgCfgModel__CommentData
 
         assert comment1.m_CommentData.m_Parent is None
 
