@@ -116,8 +116,8 @@ class TestSet001__Common:
         assert type(fileLineData) is PgCfgModel__FileLineData
         assert type(fileLineData.m_Items) is list
         assert len(fileLineData.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData.m_Items[0]) == PgCfgModel__FileLineData.tagItem
+        assert (
+            type(fileLineData.m_Items[0]) is PgCfgModel__FileLineData.tagItem
         )
         assert fileLineData.m_Items[0].m_Element is opt.m_OptionData
         assert fileLineData.m_Items[0].m_Element.m_Offset is None
@@ -363,9 +363,9 @@ class TestSet001__Common:
             assert len(file1.get_Lines()) == 1
             assert len(file1.m_FileData.m_OptionsByName) == 1
             assert C_OPT_NAME in file1.m_FileData.m_OptionsByName.keys()
-            assert (  # noqa: E721
+            assert (
                 type(file1.m_FileData.m_OptionsByName[C_OPT_NAME])
-                == PgCfgModel__OptionData
+                is PgCfgModel__OptionData
             )
             assert file1.m_FileData.m_OptionsByName[C_OPT_NAME] is rs1.m_OptData
 
@@ -373,9 +373,9 @@ class TestSet001__Common:
             assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
             assert type(cfg.m_Data.m_AllOptionsByName) is dict
             assert C_OPT_NAME in cfg.m_Data.m_AllOptionsByName.keys()
-            assert (  # noqa: E721
+            assert (
                 type(cfg.m_Data.m_AllOptionsByName[C_OPT_NAME])
-                == PgCfgModel__OptionData
+                is PgCfgModel__OptionData
             )
             assert cfg.m_Data.m_AllOptionsByName[C_OPT_NAME] is rs1.m_OptData
 

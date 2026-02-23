@@ -66,7 +66,7 @@ class TestSet001__Common:
         assert type(set_r1) is PgCfg_SetOptionResult_Base
         assert type(set_r1.m_EventID) is PgCfg_SetOptionEventID
         assert type(set_r1.m_OptData) is PgCfgModel__OptionData
-        assert type(set_r1.m_Cfg) == PgCfg_Std  # noqa: E721
+        assert type(set_r1.m_Cfg) is PgCfg_Std
         assert isinstance(set_r1.m_Cfg, PgCfg_Base)
         assert isinstance(set_r1.m_Cfg, PgCfg)
         assert set_r1.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED

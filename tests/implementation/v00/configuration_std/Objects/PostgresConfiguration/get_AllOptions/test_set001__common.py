@@ -90,14 +90,14 @@ class TestSet001__Common:
 
         it1 = allOptions1.__iter__()
         assert it1 is not None
-        assert type(it1) == PgCfg_Base__AllOptionsIterator  # noqa: E721
+        assert type(it1) is PgCfg_Base__AllOptionsIterator
         assert isinstance(it1, PgCfg_OptionsIterator)
         assert it1.m_Cfg is cfg
         assert it1.m_OptionDataIterator is not None
 
         it1a = it1.__iter__()
         assert it1a is not None
-        assert type(it1a) == PgCfg_Base__AllOptionsIterator  # noqa: E721
+        assert type(it1a) is PgCfg_Base__AllOptionsIterator
         assert isinstance(it1a, PgCfg_OptionsIterator)
         assert it1a.m_Cfg is cfg
 

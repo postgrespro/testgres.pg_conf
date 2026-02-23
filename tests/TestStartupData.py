@@ -114,8 +114,8 @@ class TestStartupData:
 
     # --------------------------------------------------------------------
     def GetRootTmpDataDirForCurrentTestWorker() -> str:
-        assert (  # noqa: E721
-            type(__class__.sm_RootTmpDataDirForCurrentTestWorker) == str
+        assert (
+            type(__class__.sm_RootTmpDataDirForCurrentTestWorker) is str
         )
         return __class__.sm_RootTmpDataDirForCurrentTestWorker
 

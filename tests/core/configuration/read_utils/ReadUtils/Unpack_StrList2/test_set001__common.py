@@ -139,12 +139,12 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_Data002, ids=[x.descr for x in sm_Data002])
     def data002(self, request: pytest.FixtureRequest) -> tagData002:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == __class__.tagData002  # noqa: E721
+        assert type(request.param) is __class__.tagData002
         return request.param
 
     # --------------------------------------------------------------------
     def test_002__generic(self, data002: tagData002):
-        assert type(data002) == __class__.tagData002  # noqa: E721
+        assert type(data002) is __class__.tagData002
 
         assert ReadUtils.Unpack_StrList2(data002.source) == data002.result
 

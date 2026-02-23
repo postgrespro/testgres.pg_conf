@@ -107,7 +107,7 @@ class TestSet001__Common:
             cfg = PgCfg_Std(rootTmpDir)
 
             data = __class__.sm_Data001[iData]
-            assert type(data) == __class__.tagData001  # noqa: E721
+            assert type(data) is __class__.tagData001
 
             try:
                 logging.info(
@@ -133,7 +133,7 @@ class TestSet001__Common:
                     )
                 )
 
-                assert type(actualValue) == type(data.get_value)  # noqa: E721
+                assert type(actualValue) is type(data.get_value)
                 assert actualValue == data.get_value
             except Exception as e:
                 logging.error(str(e))
@@ -169,7 +169,7 @@ class TestSet001__Common:
             cfg = PgCfg_Std(rootTmpDir)
 
             data = __class__.sm_Data002[iData]
-            assert type(data) == __class__.tagData002  # noqa: E721
+            assert type(data) is __class__.tagData002
 
             logging.info(
                 "Set value [{}]: [{}]".format(
@@ -214,7 +214,7 @@ class TestSet001__Common:
             cfg = PgCfg_Std(rootTmpDir)
 
             data = __class__.sm_Data003[iData]
-            assert type(data) == __class__.tagData003  # noqa: E721
+            assert type(data) is __class__.tagData003
 
             logging.info(
                 "Set value [{}]: [{}]".format(

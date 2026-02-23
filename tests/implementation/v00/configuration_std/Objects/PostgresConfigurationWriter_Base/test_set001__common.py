@@ -263,7 +263,7 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_Data009, ids=[x.descr for x in sm_Data009])
     def data009(self, request: pytest.FixtureRequest) -> tagData009:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == __class__.tagData009  # noqa: E721
+        assert type(request.param) is __class__.tagData009
         return request.param
 
     # --------------------------------------------------------------------
@@ -271,7 +271,7 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data009: tagData009
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data009) == __class__.tagData009  # noqa: E721
+        assert type(data009) is __class__.tagData009
 
         rootTmpDir = TestServices.GetRootTmpDir()
         cfg = PgCfg_Std(rootTmpDir)

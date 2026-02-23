@@ -76,7 +76,7 @@ class TestSet001__Common:
         assert include.get_Parent() is fileLine
 
         includedFile = include.get_File()
-        assert type(includedFile) == PgCfg_IncludedFile_Base  # noqa: E721
+        assert type(includedFile) is PgCfg_IncludedFile_Base
         # assert include.get_File() is includedFile
         assert includedFile.get_Path() == os.path.join(rootTmpDir, C_FILE_NAME)
         assert includedFile.get_Parent() is include
