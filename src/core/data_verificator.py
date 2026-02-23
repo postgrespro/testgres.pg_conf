@@ -12,7 +12,7 @@ class DataVerificator:
         if name is None:
             RaiseError.OptionNameIsNone()
 
-        if type(name) != str:  # noqa: E721
+        if type(name) is not str:
             RaiseError.OptionNameHasBadType(type(name))
 
         if name == "":
