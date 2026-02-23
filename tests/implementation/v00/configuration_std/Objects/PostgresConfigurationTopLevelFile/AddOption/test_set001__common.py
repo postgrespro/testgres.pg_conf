@@ -53,7 +53,7 @@ class TestSet001__Common:
         assert option.get_Name() == C_OPT_NAME
         assert option.get_Value() == 123
         assert option.m_OptionData is not None
-        assert type(option.m_OptionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(option.m_OptionData) is PgCfgModel__OptionData
 
         assert C_OPT_NAME in file.m_FileData.m_OptionsByName.keys()
         assert file.m_FileData.m_OptionsByName[C_OPT_NAME] is option.m_OptionData

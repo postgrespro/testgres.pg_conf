@@ -89,7 +89,7 @@ class TestSet001__Common:
                 )
 
             assert r1.m_OptData is not None
-            assert type(r1.m_OptData) == PgCfgModel__OptionData  # noqa: E721
+            assert type(r1.m_OptData) is PgCfgModel__OptionData
             assert type(r1.m_OptData.m_Name) is str
             assert r1.m_OptData.m_Name == C_OPT_NAME
             assert r1.m_OptData.m_Value is not None

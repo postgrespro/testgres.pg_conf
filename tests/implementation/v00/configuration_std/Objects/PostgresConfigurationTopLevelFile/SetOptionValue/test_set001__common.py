@@ -65,7 +65,7 @@ class TestSet001__Common:
         assert set_r1 is not None
         assert type(set_r1) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert type(set_r1.m_EventID) == PgCfg_SetOptionEventID  # noqa: E721
-        assert type(set_r1.m_OptData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(set_r1.m_OptData) is PgCfgModel__OptionData
         assert type(set_r1.m_Cfg) == PgCfg_Std  # noqa: E721
         assert isinstance(set_r1.m_Cfg, PgCfg_Base)
         assert isinstance(set_r1.m_Cfg, PgCfg)
@@ -113,7 +113,7 @@ class TestSet001__Common:
         assert optionFile.m_FileData == optionFile.m_FileData
 
         assert option.m_OptionData is not None
-        assert type(option.m_OptionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(option.m_OptionData) is PgCfgModel__OptionData
 
         assert optName in optionFile.m_FileData.m_OptionsByName.keys()
         assert optionFile.m_FileData.m_OptionsByName[optName] is option.m_OptionData

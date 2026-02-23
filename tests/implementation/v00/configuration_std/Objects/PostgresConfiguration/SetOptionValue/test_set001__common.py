@@ -100,7 +100,7 @@ class TestSet001__Common:
         assert opt.get_Value() == optValue
 
         assert type(opt) == PgCfg_Option_Base  # noqa: E721
-        assert type(opt.m_OptionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(opt.m_OptionData) is PgCfgModel__OptionData
         assert opt.m_OptionData.m_Name == optName
         assert opt.m_OptionData.m_Value == optValue
         assert opt.m_OptionData.m_Parent is not None
@@ -353,7 +353,7 @@ class TestSet001__Common:
 
             rs1 = cfg.SetOptionValue(C_OPT_NAME, optValue)
             assert type(rs1) == PgCfg_SetOptionResult_Base  # noqa: E721
-            assert type(rs1.m_OptData) == PgCfgModel__OptionData  # noqa: E721
+            assert type(rs1.m_OptData) is PgCfgModel__OptionData
             assert rs1.m_OptData.m_Value == optValue
             assert rs1.m_OptData.m_Name == C_OPT_NAME
             assert rs1.Option.get_Name() == C_OPT_NAME

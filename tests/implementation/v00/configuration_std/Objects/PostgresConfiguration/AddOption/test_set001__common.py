@@ -64,7 +64,7 @@ class TestSet001__Common:
         assert opt.get_Value() == optValue
 
         assert type(opt) == PgCfg_Option_Base  # noqa: E721
-        assert type(opt.m_OptionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(opt.m_OptionData) is PgCfgModel__OptionData
         assert opt.m_OptionData.m_Name == optName
         assert opt.m_OptionData.m_Value == optValue
         assert opt.m_OptionData.m_Parent is not None

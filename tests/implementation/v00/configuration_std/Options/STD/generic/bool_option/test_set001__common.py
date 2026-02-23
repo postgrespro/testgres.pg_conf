@@ -377,7 +377,7 @@ class TestSet001__Common:
                         assert len(fileLineData0.m_Items) == 1
                         assert (  # noqa: E721
                             type(fileLineData0.m_Items[0].m_Element)
-                            == PgCfgModel__OptionData  # noqa: E721
+                            is PgCfgModel__OptionData
                         )
                         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
                         assert fileLineData0.m_Items[0].m_Element.m_Name == optionName

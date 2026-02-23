@@ -28,14 +28,14 @@ import typing
 
 class DataControllerUtils:
     def Option__set_Value(optionData: PgCfgModel__OptionData, value: any):
-        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(optionData) is PgCfgModel__OptionData
         assert value is not None
 
         optionData.m_Value = value
 
     # --------------------------------------------------------------------
     def Option__add_ValueItem(optionData: PgCfgModel__OptionData, valueItem: any):
-        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(optionData) is PgCfgModel__OptionData
         assert type(optionData.m_Value) is list
         assert valueItem is not None
 
@@ -48,7 +48,7 @@ class DataControllerUtils:
         withLine: bool,
     ):
         assert type(cfgData) is PgCfgModel__ConfigurationData
-        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(optionData) is PgCfgModel__OptionData
         assert type(withLine) is bool
 
         fileLineData = optionData.m_Parent
@@ -324,14 +324,14 @@ class DataControllerUtils:
                 cfgData, newLineData, optName, optValue, None
             )  # raise
 
-            assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+            assert type(optionData) is PgCfgModel__OptionData
             assert optionData.m_Name == optName
         except:
             DataControllerUtils.FileLine__delete(cfgData, newLineData)
             raise
 
         assert optionData is not None
-        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(optionData) is PgCfgModel__OptionData
         assert optionData.IsAlive()
         return optionData
 
@@ -633,7 +633,7 @@ class DataControllerUtils:
         assert optionsByNameDictionary is not None
         assert optionData is not None
         assert type(optionsByNameDictionary) is dict
-        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(optionData) is PgCfgModel__OptionData
 
         if not (optionData.m_Name in optionsByNameDictionary.keys()):
             optionsByNameDictionary[optionData.m_Name] = optionData
@@ -664,7 +664,7 @@ class DataControllerUtils:
         assert optionsByNameDictionary is not None
         assert optionData is not None
         assert type(optionsByNameDictionary) is dict
-        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(optionData) is PgCfgModel__OptionData
 
         if not (optionData.m_Name in optionsByNameDictionary.keys()):
             BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
@@ -692,7 +692,7 @@ class DataControllerUtils:
             for i in range(len(data)):
                 ptr = data[i]
                 assert ptr is not None
-                assert type(ptr) == PgCfgModel__OptionData  # noqa: E721
+                assert type(ptr) is PgCfgModel__OptionData
                 assert type(ptr.m_Name) is str
                 assert ptr.m_Name == optionData.m_Name
 
@@ -843,7 +843,7 @@ class DataControllerUtils:
         cfgData: PgCfgModel__ConfigurationData, optionData: PgCfgModel__OptionData
     ):
         assert type(cfgData) is PgCfgModel__ConfigurationData
-        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(optionData) is PgCfgModel__OptionData
         assert type(optionData.m_Name) is str
         assert optionData.IsAlive()
 

@@ -73,7 +73,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert set_r.m_OptData is not None
-        assert type(set_r.m_OptData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(set_r.m_OptData) is PgCfgModel__OptionData
         assert type(set_r.m_OptData.m_Parent) is PgCfgModel__FileLineData
 
         fileLine.Clear()
@@ -99,7 +99,7 @@ class TestSet001__Common:
             set_r.Option.get_Configuration()
 
         assert set_r.m_OptData is not None
-        assert type(set_r.m_OptData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(set_r.m_OptData) is PgCfgModel__OptionData
         assert set_r.m_OptData.m_Parent is None
 
     # --------------------------------------------------------------------
