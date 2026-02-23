@@ -221,8 +221,8 @@ class RaiseError:
         curLastMDate: datetime.datetime,
     ):
         assert type(filePath) is str
-        assert type(ourLastMDate) == datetime.datetime  # noqa: E721
-        assert type(curLastMDate) == datetime.datetime  # noqa: E721
+        assert type(ourLastMDate) is datetime.datetime
+        assert type(curLastMDate) is datetime.datetime
 
         errMsg = "File [{0}] was modified externally. Our timestamp is [{1}]. The current file timestamp is [{2}].".format(
             filePath, ourLastMDate, curLastMDate

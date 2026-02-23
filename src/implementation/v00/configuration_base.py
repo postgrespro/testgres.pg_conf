@@ -3289,7 +3289,7 @@ class PostgresConfigurationReader_Base:
                 __class__.Helper__LoadFileContent(currentFile, f)  # raise
 
                 lastMDate = f.GetModificationTS()
-                assert type(lastMDate) == datetime.datetime  # noqa: E721
+                assert type(lastMDate) is datetime.datetime
 
                 currentFileData.m_LastModifiedTimestamp = lastMDate
                 currentFileData.m_Status = PgCfgModel__FileStatus.EXISTS
@@ -3982,7 +3982,7 @@ class PostgresConfigurationWriter_Base:
             assert fileCtx.FileData.m_Status == PgCfgModel__FileStatus.EXISTS
             assert fileCtx.FileData.m_LastModifiedTimestamp is not None
             assert (  # noqa: E721
-                type(fileCtx.FileData.m_LastModifiedTimestamp) == datetime.datetime  # noqa: E721
+                type(fileCtx.FileData.m_LastModifiedTimestamp) is datetime.datetime
             )
             assert fileCtx.File is None
 
@@ -3995,7 +3995,7 @@ class PostgresConfigurationWriter_Base:
             assert isinstance(fileCtx.File, ConfigurationOsFile)
 
             lastMDate = fileCtx.File.GetModificationTS()
-            assert type(lastMDate) == datetime.datetime  # noqa: E721
+            assert type(lastMDate) is datetime.datetime
 
             if fileCtx.FileData.m_LastModifiedTimestamp != lastMDate:
                 RaiseError.FileWasModifiedExternally(
@@ -4103,7 +4103,7 @@ class PostgresConfigurationWriter_Base:
             fileCtx.File.Overwrite(fileCtx.Content)
 
             lastMDate = fileCtx.File.GetModificationTS()
-            assert type(lastMDate) == datetime.datetime  # noqa: E721
+            assert type(lastMDate) is datetime.datetime
 
             fileCtx.File.Close()
 

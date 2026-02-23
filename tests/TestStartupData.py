@@ -21,7 +21,7 @@ class TestStartupData__Helper:
 
     # --------------------------------------------------------------------
     def GetStartTS() -> datetime.datetime:
-        assert type(__class__.sm_StartTS) == datetime.datetime  # noqa: E721
+        assert type(__class__.sm_StartTS) is datetime.datetime
         return __class__.sm_StartTS
 
     # --------------------------------------------------------------------

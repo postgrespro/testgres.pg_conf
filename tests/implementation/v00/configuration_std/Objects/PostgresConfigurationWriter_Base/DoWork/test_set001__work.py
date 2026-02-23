@@ -371,7 +371,7 @@ class TestSet001__Common:
             assert fileContent_n == "port = 123\nlisten_addresses = '*'\n"
 
         mdate1 = file.m_FileData.m_LastModifiedTimestamp
-        assert type(mdate1) == datetime.datetime  # noqa: E721
+        assert type(mdate1) is datetime.datetime
         logging.info("Last1 modification date is [{0}]".format(mdate1))
 
         mdate2 = mdate1 + datetime.timedelta(seconds=1)

@@ -42,7 +42,7 @@ class TestSet001__Common:
             fd = f.fileno()
             assert type(fd) is int
             lastMDate = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate) == datetime.datetime  # noqa: E721
+            assert type(lastMDate) is datetime.datetime
             f.close()
 
         # ---------------
@@ -88,7 +88,7 @@ class TestSet001__Common:
             fd = f.fileno()
             assert type(fd) is int
             lastMDate = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate) == datetime.datetime  # noqa: E721
+            assert type(lastMDate) is datetime.datetime
             f.close()
 
         # ---------------
@@ -183,7 +183,7 @@ class TestSet001__Common:
             fd = f.fileno()
             assert type(fd) is int
             lastMDate1 = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate1) == datetime.datetime  # noqa: E721
+            assert type(lastMDate1) is datetime.datetime
             f.close()
 
         # ---------------
@@ -200,7 +200,7 @@ class TestSet001__Common:
             fd = f.fileno()
             assert type(fd) is int
             lastMDate2 = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate2) == datetime.datetime  # noqa: E721
+            assert type(lastMDate2) is datetime.datetime
             f.close()
 
         # ---------------
@@ -248,7 +248,7 @@ class TestSet001__Common:
             fd = f.fileno()
             assert type(fd) is int
             lastMDate1 = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate1) == datetime.datetime  # noqa: E721
+            assert type(lastMDate1) is datetime.datetime
             f.close()
 
         # ---------------
@@ -267,7 +267,7 @@ class TestSet001__Common:
             fd = f.fileno()
             assert type(fd) is int
             lastMDate2 = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate2) == datetime.datetime  # noqa: E721
+            assert type(lastMDate2) is datetime.datetime
             f.close()
 
         # ---------------

@@ -393,9 +393,9 @@ def helper__makereport__call(
     assert call.start <= call.stop
 
     startDT = datetime.datetime.fromtimestamp(call.start)
-    assert type(startDT) == datetime.datetime  # noqa: E721
+    assert type(startDT) is datetime.datetime
     stopDT = datetime.datetime.fromtimestamp(call.stop)
-    assert type(stopDT) == datetime.datetime  # noqa: E721
+    assert type(stopDT) is datetime.datetime
 
     testDurration = stopDT - startDT
     assert type(testDurration) == datetime.timedelta  # noqa: E721

@@ -87,7 +87,7 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
         assert type(fd) is int
 
         lastMDate = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-        assert type(lastMDate) == datetime.datetime  # noqa: E721
+        assert type(lastMDate) is datetime.datetime
         return lastMDate
 
 
