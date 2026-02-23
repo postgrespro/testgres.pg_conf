@@ -480,7 +480,7 @@ class OptionHandlerToWrite(OptionHandler):
 
     # interface ----------------------------------------------------------
     def OptionValueToString(self, ctx: OptionHandlerCtxToWrite) -> str:
-        assert type(ctx) == OptionHandlerCtxToWrite  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToWrite
         RaiseError.MethodIsNotImplemented(__class__, "OptionValueToString")
 
 

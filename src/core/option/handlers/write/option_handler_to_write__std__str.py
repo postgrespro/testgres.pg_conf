@@ -18,7 +18,7 @@ class OptionHandlerToWrite__Std__Str(OptionHandlerToWrite):
 
     # interface ----------------------------------------------------------
     def OptionValueToString(self, ctx: OptionHandlerCtxToWrite) -> str:
-        assert type(ctx) == OptionHandlerCtxToWrite  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToWrite
         assert ctx.OptionValue is not None
 
         typedValue = str(ctx.OptionValue)

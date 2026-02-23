@@ -18,7 +18,7 @@ class OptionHandlerToWrite__Std__UniqueStrList(OptionHandlerToWrite):
 
     # interface ----------------------------------------------------------
     def OptionValueToString(self, ctx: OptionHandlerCtxToWrite) -> str:
-        assert type(ctx) == OptionHandlerCtxToWrite  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToWrite
         assert ctx.OptionValue is not None
         assert type(ctx.OptionValue) is list
 
