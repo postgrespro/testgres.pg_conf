@@ -43,8 +43,8 @@ class TestSet001__Common:
         assert r1.Option.get_Value() == 234
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
         assert (
-            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
-        )  # noqa: E721
+            type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
+        )
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
     # --------------------------------------------------------------------
@@ -67,8 +67,8 @@ class TestSet001__Common:
         assert r1.Option.get_Value() == 234
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
         assert (
-            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
-        )  # noqa: E721
+            type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
+        )
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         r2 = r1.Option.set_Value(432)
@@ -78,8 +78,8 @@ class TestSet001__Common:
         assert r2.Option.get_Value() == 432
         assert type(r2.Option.get_Parent()) is PgCfg_FileLine_Base
         assert (
-            type(r2.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
-        )  # noqa: E721
+            type(r2.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
+        )
         assert r2.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
@@ -87,8 +87,8 @@ class TestSet001__Common:
         assert r1.Option.get_Value() == 432
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
         assert (
-            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
-        )  # noqa: E721
+            type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
+        )
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
     # --------------------------------------------------------------------
@@ -111,8 +111,8 @@ class TestSet001__Common:
         assert r1.Option.get_Value() == 234
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
         assert (
-            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
-        )  # noqa: E721
+            type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
+        )
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         r2 = r1.Option.set_Value(None)
@@ -157,8 +157,8 @@ class TestSet001__Common:
         assert r1.Option.get_Value() == 234
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
         assert (
-            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
-        )  # noqa: E721
+            type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
+        )
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         invalidValues = [True, False]
