@@ -197,10 +197,10 @@ class TestSet001__Common:
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 234
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
         assert (
-            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
-        )  # noqa: E721
+            type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
+        )
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         invalidValues = ["qwe", "123."]

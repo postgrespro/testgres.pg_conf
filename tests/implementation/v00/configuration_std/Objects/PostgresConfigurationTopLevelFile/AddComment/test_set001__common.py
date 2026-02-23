@@ -63,18 +63,18 @@ class TestSet001__Common:
         fileLines_v: list[PgCfg_FileLine_Base] = list(fileLines)
         assert len(fileLines_v) == 2
         assert type(fileLines_v[-1]) == PgCfg_FileLine_Base  # noqa: E721
-        assert (  # noqa: E721
-            type(fileLines_v[-1].m_FileLineData) == PgCfgModel__FileLineData
+        assert (
+            type(fileLines_v[-1].m_FileLineData) is PgCfgModel__FileLineData
         )
         assert type(fileLines_v[-1].m_FileLineData.m_Items) is list
         assert len(fileLines_v[-1].m_FileLineData.m_Items) == 1
-        assert (  # noqa: E721
+        assert (
             type(fileLines_v[-1].m_FileLineData.m_Items[0])
-            == PgCfgModel__FileLineData.tagItem
+            is PgCfgModel__FileLineData.tagItem
         )
-        assert (  # noqa: E721
+        assert (
             type(fileLines_v[-1].m_FileLineData.m_Items[0].m_Element)
-            == PgCfgModel__CommentData
+            is PgCfgModel__CommentData
         )
         assert fileLines_v[-1].m_FileLineData.m_Items[0].m_Element.m_Offset is None
         assert fileLines_v[-1].m_FileLineData.m_Items[0].m_Element.m_Text == "HELLO!"

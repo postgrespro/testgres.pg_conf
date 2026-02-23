@@ -91,8 +91,8 @@ class TestSet001__Common:
         assert r1.Option.get_Value() == ["biha"]
         assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
         assert (
-            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
-        )  # noqa: E721
+            type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
+        )
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         with pytest.raises(Exception, match=re.escape("None value is not supported.")):
@@ -119,8 +119,8 @@ class TestSet001__Common:
         assert r1.Option.get_Value() == ["biha"]
         assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
         assert (
-            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
-        )  # noqa: E721
+            type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
+        )
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         errMsg = (

@@ -160,7 +160,7 @@ class DataControllerUtils:
         if typeOfLastElement == PgCfgModel__IncludeData:
             return
 
-        if typeOfLastElement == PgCfgModel__CommentData:
+        if typeOfLastElement is PgCfgModel__CommentData:
             RaiseError.FileLineAlreadyHasComment()
 
         BugCheckError.UnkObjectDataType(typeOfLastElement)
@@ -270,7 +270,7 @@ class DataControllerUtils:
         if typeOfLastElement == PgCfgModel__IncludeData:
             RaiseError.FileLineAlreadyHasIncludeDirective()
 
-        if typeOfLastElement == PgCfgModel__CommentData:
+        if typeOfLastElement is PgCfgModel__CommentData:
             RaiseError.FileLineAlreadyHasComment()
 
         BugCheckError.UnkObjectDataType(typeOfLastElement)
@@ -770,7 +770,7 @@ class DataControllerUtils:
             if typeOfElementData == PgCfgModel__OptionData:
                 return True
 
-            if typeOfElementData == PgCfgModel__CommentData:
+            if typeOfElementData is PgCfgModel__CommentData:
                 continue
 
             if typeOfElementData == PgCfgModel__IncludeData:
@@ -791,7 +791,7 @@ class DataControllerUtils:
 
         typeOfObjectData = type(objectData)
 
-        if typeOfObjectData == PgCfgModel__CommentData:
+        if typeOfObjectData is PgCfgModel__CommentData:
             return __class__.Helper__DeleteComment(objectData)
 
         if typeOfObjectData == PgCfgModel__OptionData:
