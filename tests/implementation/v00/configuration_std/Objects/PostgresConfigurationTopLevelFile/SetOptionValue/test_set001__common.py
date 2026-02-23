@@ -103,7 +103,7 @@ class TestSet001__Common:
 
         optionFileLine = option.get_Parent()
         assert optionFileLine is not None
-        assert type(optionFileLine) == PgCfg_FileLine_Base  # noqa: E721
+        assert type(optionFileLine) is PgCfg_FileLine_Base
         assert optionFileLine.m_FileLineData.m_Items[0].m_Element is set_r1.m_OptData
 
         optionFile = optionFileLine.get_Parent()

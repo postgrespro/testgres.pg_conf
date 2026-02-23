@@ -39,7 +39,7 @@ class TestSet001__Common:
         assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
         assert (
             type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
         )  # noqa: E721
@@ -89,7 +89,7 @@ class TestSet001__Common:
         assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
         assert (
             type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
         )
@@ -117,7 +117,7 @@ class TestSet001__Common:
         assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
         assert (
             type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
         )

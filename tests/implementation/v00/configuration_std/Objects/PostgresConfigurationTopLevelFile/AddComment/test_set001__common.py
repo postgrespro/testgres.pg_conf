@@ -62,7 +62,7 @@ class TestSet001__Common:
         assert len(fileLines) == 2
         fileLines_v: list[PgCfg_FileLine_Base] = list(fileLines)
         assert len(fileLines_v) == 2
-        assert type(fileLines_v[-1]) == PgCfg_FileLine_Base  # noqa: E721
+        assert type(fileLines_v[-1]) is PgCfg_FileLine_Base
         assert (
             type(fileLines_v[-1].m_FileLineData) is PgCfgModel__FileLineData
         )

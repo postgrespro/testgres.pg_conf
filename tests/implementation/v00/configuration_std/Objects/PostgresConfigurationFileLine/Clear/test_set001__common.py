@@ -67,7 +67,7 @@ class TestSet001__Common:
 
         fileLine = fileLines.__iter__().__next__()
         assert fileLine is not None
-        assert type(fileLine) == PgCfg_FileLine_Base  # noqa: E721
+        assert type(fileLine) is PgCfg_FileLine_Base
         assert isinstance(fileLine, PgCfg_FileLine)
 
         assert len(fileLine) == 1
@@ -131,7 +131,7 @@ class TestSet001__Common:
 
         fileLine = comment1.get_Parent()
         assert fileLine is not None
-        assert type(fileLine) == PgCfg_FileLine_Base  # noqa: E721
+        assert type(fileLine) is PgCfg_FileLine_Base
         assert len(fileLine) == 1
 
         assert (

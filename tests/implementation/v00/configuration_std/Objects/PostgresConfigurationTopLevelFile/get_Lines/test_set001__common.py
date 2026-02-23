@@ -62,7 +62,7 @@ class TestSet001__Common:
 
         fileLine = fileLines_it.__next__()
         assert fileLine is not None
-        assert type(fileLine) == PgCfg_FileLine_Base  # noqa: E721
+        assert type(fileLine) is PgCfg_FileLine_Base
         assert isinstance(fileLine, PgCfg_FileLine)
 
         cfg.SetOptionValue("port", None)

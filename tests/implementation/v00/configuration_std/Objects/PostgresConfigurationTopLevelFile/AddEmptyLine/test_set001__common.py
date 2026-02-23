@@ -49,7 +49,7 @@ class TestSet001__Common:
 
         fileLine2 = file.AddEmptyLine()
         assert fileLine2 is not None
-        assert type(fileLine2) == PgCfg_FileLine_Base  # noqa: E721
+        assert type(fileLine2) is PgCfg_FileLine_Base
         assert isinstance(fileLine2, PgCfg_FileLine)
 
         assert len(fileLines) == 2

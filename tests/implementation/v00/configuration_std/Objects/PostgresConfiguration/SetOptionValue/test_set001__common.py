@@ -108,7 +108,7 @@ class TestSet001__Common:
 
         fileLine = opt.get_Parent()
         assert fileLine is opt.get_Parent()
-        assert type(fileLine) == PgCfg_FileLine_Base  # noqa: E721
+        assert type(fileLine) is PgCfg_FileLine_Base
         assert len(fileLine) == 1
 
         fileLineData: PgCfgModel__FileLineData = opt.m_OptionData.m_Parent
