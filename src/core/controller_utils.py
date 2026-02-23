@@ -148,7 +148,7 @@ class DataControllerUtils:
         lastItem = fileLineData.m_Items[-1]
 
         assert lastItem is not None
-        assert type(lastItem) == PgCfgModel__FileLineData.tagItem  # noqa: E721
+        assert type(lastItem) is PgCfgModel__FileLineData.tagItem
         assert lastItem.m_Element is not None
         assert isinstance(lastItem.m_Element, PgCfgModel__FileLineElementData)
 
@@ -258,7 +258,7 @@ class DataControllerUtils:
         lastItem = fileLineData.m_Items[-1]
 
         assert lastItem is not None
-        assert type(lastItem) == PgCfgModel__FileLineData.tagItem  # noqa: E721
+        assert type(lastItem) is PgCfgModel__FileLineData.tagItem
         assert lastItem.m_Element is not None
         assert isinstance(lastItem.m_Element, PgCfgModel__FileLineElementData)
 
@@ -480,7 +480,7 @@ class DataControllerUtils:
         for iItem in range(cItems):
             ptr = fileLineData.m_Items[iItem]
             assert ptr is not None
-            assert type(ptr) == PgCfgModel__FileLineData.tagItem  # noqa: E721
+            assert type(ptr) is PgCfgModel__FileLineData.tagItem
             assert ptr.m_Element is not None
 
             if ptr.m_Element is elementData:
@@ -761,7 +761,7 @@ class DataControllerUtils:
 
         for item in fileLineData.m_Items:
             assert item is not None
-            assert type(item) == PgCfgModel__FileLineData.tagItem  # noqa: E721
+            assert type(item) is PgCfgModel__FileLineData.tagItem
             assert item.m_Element is not None
             assert isinstance(item.m_Element, PgCfgModel__FileLineElementData)
 

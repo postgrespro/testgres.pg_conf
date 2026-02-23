@@ -3189,7 +3189,7 @@ class PostgresConfigurationFactory_Base:
     ) -> PostgresConfigurationFile_Base:
         assert fileLineDataItem is not None
         assert fileLine is not None
-        assert type(fileLineDataItem) == PgCfgModel__FileLineData.tagItem  # noqa: E721
+        assert type(fileLineDataItem) is PgCfgModel__FileLineData.tagItem
         assert isinstance(fileLine, PostgresConfigurationFileLine_Base)
 
         return PostgresConfigurationComment_Base(fileLine, fileLineDataItem)
@@ -3304,7 +3304,7 @@ class PostgresConfigurationReader_Base:
 
                 for fileLineItem in fileLineData.m_Items:
                     assert (  # noqa: E721
-                        type(fileLineItem) == PgCfgModel__FileLineData.tagItem  # noqa: E721
+                        type(fileLineItem) is PgCfgModel__FileLineData.tagItem
                     )
 
                     fileLineElementData = fileLineItem.m_Element
@@ -4144,7 +4144,7 @@ class PostgresConfigurationWriter_Base:
         lineContent = ""
 
         for lineItem in fileLineData.m_Items:
-            assert type(lineItem) == PgCfgModel__FileLineData.tagItem  # noqa: E721
+            assert type(lineItem) is PgCfgModel__FileLineData.tagItem
             assert lineItem.m_Element is not None
             assert isinstance(lineItem.m_Element, PgCfgModel__FileLineElementData)
             assert (
