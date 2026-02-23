@@ -17,7 +17,7 @@ class BugCheckError:
     # --------------------------------------------------------------------
     def MultipleDefOfOptionIsFound(optName: str, count: int):
         assert type(optName) is str
-        assert type(count) == int  # noqa: E721
+        assert type(count) is int
 
         errMsg = (
             "[BUG CHECK] Multiple definitition of option [{0}] is found - {1}.".format(
@@ -41,7 +41,7 @@ class BugCheckError:
     # --------------------------------------------------------------------
     def MultipleDefOfFileIsFound(fileName: str, count: int):
         assert type(fileName) is str
-        assert type(count) == int  # noqa: E721
+        assert type(count) is int
 
         errMsg = (
             "[BUG CHECK] Multiple definitition of file [{0}] is found - {1}.".format(

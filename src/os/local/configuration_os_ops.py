@@ -84,7 +84,7 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
         assert isinstance(self.m_file, io.TextIOWrapper)
 
         fd = self.m_file.fileno()
-        assert type(fd) == int  # noqa: E721
+        assert type(fd) is int
 
         lastMDate = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
         assert type(lastMDate) == datetime.datetime  # noqa: E721

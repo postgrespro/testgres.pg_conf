@@ -95,7 +95,7 @@ class ConfigurationDataHandler:
             or type(target) == FileData  # noqa: E721
             or type(target) == FileLineData  # noqa: E721 E501
         )
-        assert optionOffset is None or type(optionOffset) == int  # noqa: E721
+        assert optionOffset is None or type(optionOffset) is int
         assert type(optionName) is str
         assert optionValue is not None
         RaiseError.MethodIsNotImplemented(__class__, "DataHandler__AddSimpleOption")

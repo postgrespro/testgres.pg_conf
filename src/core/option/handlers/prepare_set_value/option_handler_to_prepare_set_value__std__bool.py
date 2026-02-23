@@ -52,7 +52,7 @@ class OptionHandlerToPrepareSetValue__Std__Bool(OptionHandlerToPrepareSetValue):
             return optionValue
 
         if optionValueType == int:  # noqa: E721
-            assert type(optionValue) == int  # noqa: E721
+            assert type(optionValue) is int
 
             if optionValue == 0:
                 return False

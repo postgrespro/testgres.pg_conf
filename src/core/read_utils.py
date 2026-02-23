@@ -23,7 +23,7 @@ class LineReader:
 
     # --------------------------------------------------------------------
     def __init__(self, tabSize=C_DEFAULT_TAB_SIZE):
-        assert type(tabSize) == int  # noqa: E721
+        assert type(tabSize) is int
         assert tabSize > 0
 
         self.m_TabSize = tabSize
@@ -36,7 +36,7 @@ class LineReader:
     # --------------------------------------------------------------------
     def SetData(self, lineData: str):
         assert type(lineData) is str
-        assert type(self.m_LineNum) == int  # noqa: E721
+        assert type(self.m_LineNum) is int
         assert self.m_LineNum >= 0
 
         self.m_Data = lineData
@@ -46,26 +46,26 @@ class LineReader:
 
     # --------------------------------------------------------------------
     def GetLineNum(self) -> int:
-        assert type(self.m_LineNum) == int  # noqa: E721
+        assert type(self.m_LineNum) is int
         assert self.m_LineNum >= 0
         return self.m_LineNum
 
     # --------------------------------------------------------------------
     def GetColNum(self) -> int:
-        assert type(self.m_ColNum) == int  # noqa: E721
+        assert type(self.m_ColNum) is int
         assert self.m_ColNum >= 0
         return self.m_ColNum
 
     # --------------------------------------------------------------------
     def GetColOffset(self) -> int:
-        assert type(self.m_ColNum) == int  # noqa: E721
+        assert type(self.m_ColNum) is int
         assert self.m_ColNum > 0
         return self.m_ColNum - 1
 
     # --------------------------------------------------------------------
     def StepBack(self):
-        assert type(self.m_Next) == int  # noqa: E721
-        assert type(self.m_ColNum) == int  # noqa: E721
+        assert type(self.m_Next) is int
+        assert type(self.m_ColNum) is int
         assert type(self.m_Data) is str
         assert self.m_Next > 0
         assert self.m_Next <= len(self.m_Data)
@@ -85,8 +85,8 @@ class LineReader:
 
     # --------------------------------------------------------------------
     def ReadSymbol(self) -> typing.Optional[str]:
-        assert type(self.m_Next) == int  # noqa: E721
-        assert type(self.m_ColNum) == int  # noqa: E721
+        assert type(self.m_Next) is int
+        assert type(self.m_ColNum) is int
         assert type(self.m_Data) is str
         assert self.m_Next >= 0
         assert self.m_Next <= len(self.m_Data)
@@ -109,7 +109,7 @@ class LineReader:
     def Helper__GetStepSize(self, ch: str) -> int:
         assert type(ch) is str
         assert ch != ""
-        assert type(self.m_TabSize) == int  # noqa: E721
+        assert type(self.m_TabSize) is int
         assert self.m_TabSize > 0
 
         if ch == "\t":

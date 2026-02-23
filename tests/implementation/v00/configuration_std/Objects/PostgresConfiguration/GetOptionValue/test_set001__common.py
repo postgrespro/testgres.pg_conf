@@ -50,7 +50,7 @@ class TestSet001__Common:
         assert set_r_option.get_Value() == 123
 
         get_r = cfg.GetOptionValue(optName)
-        assert type(get_r) == int  # noqa: E721
+        assert type(get_r) is int
         assert get_r == 123
 
     # --------------------------------------------------------------------

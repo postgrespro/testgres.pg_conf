@@ -176,7 +176,7 @@ class DataControllerUtils:
         assert type(filePath) is str
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
         assert filePath != ""
-        assert offset is None or type(offset) == int  # noqa: E721
+        assert offset is None or type(offset) is int
 
         assert fileLineData.IsAlive()
         assert fileData.IsAlive()
@@ -205,7 +205,7 @@ class DataControllerUtils:
         assert optValue is not None
         assert optName != ""
         assert type(fileLineData.m_Items) == list  # noqa: E721
-        assert optOffset is None or type(optOffset) == int  # noqa: E721
+        assert optOffset is None or type(optOffset) is int
 
         __class__.Helper__CheckThatWeCanAddWorkDataToFileLine(fileLineData)
 

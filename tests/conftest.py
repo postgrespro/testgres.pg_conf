@@ -94,7 +94,7 @@ class TEST_PROCESS_STATS:
 
     # --------------------------------------------------------------------
     def incrementTotalTestCount() -> None:
-        assert type(__class__.cTotalTests) == int  # noqa: E721
+        assert type(__class__.cTotalTests) is int
         assert __class__.cTotalTests >= 0
 
         __class__.cTotalTests += 1
@@ -103,7 +103,7 @@ class TEST_PROCESS_STATS:
 
     # --------------------------------------------------------------------
     def incrementNotExecutedTestCount() -> None:
-        assert type(__class__.cNotExecutedTests) == int  # noqa: E721
+        assert type(__class__.cNotExecutedTests) is int
         assert __class__.cNotExecutedTests >= 0
 
         __class__.cNotExecutedTests += 1
@@ -112,7 +112,7 @@ class TEST_PROCESS_STATS:
 
     # --------------------------------------------------------------------
     def incrementExecutedTestCount() -> int:
-        assert type(__class__.cExecutedTests) == int  # noqa: E721
+        assert type(__class__.cExecutedTests) is int
         assert __class__.cExecutedTests >= 0
 
         __class__.cExecutedTests += 1
@@ -122,7 +122,7 @@ class TEST_PROCESS_STATS:
 
     # --------------------------------------------------------------------
     def incrementPassedTestCount() -> None:
-        assert type(__class__.cPassedTests) == int  # noqa: E721
+        assert type(__class__.cPassedTests) is int
         assert __class__.cPassedTests >= 0
 
         __class__.cPassedTests += 1
@@ -132,10 +132,10 @@ class TEST_PROCESS_STATS:
     # --------------------------------------------------------------------
     def incrementFailedTestCount(testID: str, errCount: int) -> None:
         assert type(testID) is str
-        assert type(errCount) == int  # noqa: E721
+        assert type(errCount) is int
         assert errCount > 0
         assert type(__class__.FailedTests) == list  # noqa: E721
-        assert type(__class__.cFailedTests) == int  # noqa: E721
+        assert type(__class__.cFailedTests) is int
         assert __class__.cFailedTests >= 0
 
         __class__.FailedTests.append((testID, errCount))  # raise?
@@ -146,7 +146,7 @@ class TEST_PROCESS_STATS:
         assert len(__class__.FailedTests) == __class__.cFailedTests
 
         # --------
-        assert type(__class__.cTotalErrors) == int  # noqa: E721
+        assert type(__class__.cTotalErrors) is int
         assert __class__.cTotalErrors >= 0
 
         __class__.cTotalErrors += errCount
@@ -156,10 +156,10 @@ class TEST_PROCESS_STATS:
     # --------------------------------------------------------------------
     def incrementXFailedTestCount(testID: str, errCount: int) -> None:
         assert type(testID) is str
-        assert type(errCount) == int  # noqa: E721
+        assert type(errCount) is int
         assert errCount >= 0
         assert type(__class__.XFailedTests) == list  # noqa: E721
-        assert type(__class__.cXFailedTests) == int  # noqa: E721
+        assert type(__class__.cXFailedTests) is int
         assert __class__.cXFailedTests >= 0
 
         __class__.XFailedTests.append((testID, errCount))  # raise?
@@ -171,7 +171,7 @@ class TEST_PROCESS_STATS:
 
     # --------------------------------------------------------------------
     def incrementSkippedTestCount() -> None:
-        assert type(__class__.cSkippedTests) == int  # noqa: E721
+        assert type(__class__.cSkippedTests) is int
         assert __class__.cSkippedTests >= 0
 
         __class__.cSkippedTests += 1
@@ -182,7 +182,7 @@ class TEST_PROCESS_STATS:
     def incrementNotXFailedTests(testID: str) -> None:
         assert type(testID) is str
         assert type(__class__.NotXFailedTests) == list  # noqa: E721
-        assert type(__class__.cNotXFailedTests) == int  # noqa: E721
+        assert type(__class__.cNotXFailedTests) is int
         assert __class__.cNotXFailedTests >= 0
 
         __class__.NotXFailedTests.append(testID)  # raise?
@@ -195,11 +195,11 @@ class TEST_PROCESS_STATS:
     # --------------------------------------------------------------------
     def incrementWarningTestCount(testID: str, warningCount: int) -> None:
         assert type(testID) is str
-        assert type(warningCount) == int  # noqa: E721
+        assert type(warningCount) is int
         assert testID != ""
         assert warningCount > 0
         assert type(__class__.WarningTests) == list  # noqa: E721
-        assert type(__class__.cWarningTests) == int  # noqa: E721
+        assert type(__class__.cWarningTests) is int
         assert __class__.cWarningTests >= 0
 
         __class__.WarningTests.append((testID, warningCount))  # raise?
@@ -210,7 +210,7 @@ class TEST_PROCESS_STATS:
         assert len(__class__.WarningTests) == __class__.cWarningTests
 
         # --------
-        assert type(__class__.cTotalWarnings) == int  # noqa: E721
+        assert type(__class__.cTotalWarnings) is int
         assert __class__.cTotalWarnings >= 0
 
         __class__.cTotalWarnings += warningCount
@@ -219,7 +219,7 @@ class TEST_PROCESS_STATS:
 
     # --------------------------------------------------------------------
     def incrementUnexpectedTests() -> None:
-        assert type(__class__.cUnexpectedTests) == int  # noqa: E721
+        assert type(__class__.cUnexpectedTests) is int
         assert __class__.cUnexpectedTests >= 0
 
         __class__.cUnexpectedTests += 1
@@ -230,7 +230,7 @@ class TEST_PROCESS_STATS:
     def incrementAchtungTestCount(testID: str) -> None:
         assert type(testID) is str
         assert type(__class__.AchtungTests) == list  # noqa: E721
-        assert type(__class__.cAchtungTests) == int  # noqa: E721
+        assert type(__class__.cAchtungTests) is int
         assert __class__.cAchtungTests >= 0
 
         __class__.AchtungTests.append(testID)  # raise?
@@ -367,18 +367,18 @@ def helper__makereport__call(
 
     # --------
     item_error_msg_count1 = item.stash.get(g_error_msg_count_key, 0)
-    assert type(item_error_msg_count1) == int  # noqa: E721
+    assert type(item_error_msg_count1) is int
     assert item_error_msg_count1 >= 0
 
     item_error_msg_count2 = item.stash.get(g_critical_msg_count_key, 0)
-    assert type(item_error_msg_count2) == int  # noqa: E721
+    assert type(item_error_msg_count2) is int
     assert item_error_msg_count2 >= 0
 
     item_error_msg_count = item_error_msg_count1 + item_error_msg_count2
 
     # --------
     item_warning_msg_count = item.stash.get(g_warning_msg_count_key, 0)
-    assert type(item_warning_msg_count) == int  # noqa: E721
+    assert type(item_warning_msg_count) is int
     assert item_warning_msg_count >= 0
 
     # --------
@@ -638,11 +638,11 @@ class LogWrapper2:
         assert self._warn_counter is not None
         assert self._critical_counter is not None
 
-        assert type(self._err_counter) == int  # noqa: E721
+        assert type(self._err_counter) is int
         assert self._err_counter >= 0
-        assert type(self._warn_counter) == int  # noqa: E721
+        assert type(self._warn_counter) is int
         assert self._warn_counter >= 0
-        assert type(self._critical_counter) == int  # noqa: E721
+        assert type(self._critical_counter) is int
         assert self._critical_counter >= 0
 
         r = self._old_method(record)
@@ -697,11 +697,11 @@ def pytest_pyfunc_call(pyfuncitem: pytest.Function):
         with LogWrapper2() as logWrapper:
             assert type(logWrapper) == LogWrapper2  # noqa: E721
             assert logWrapper._old_method is not None
-            assert type(logWrapper._err_counter) == int  # noqa: E721
+            assert type(logWrapper._err_counter) is int
             assert logWrapper._err_counter == 0
-            assert type(logWrapper._warn_counter) == int  # noqa: E721
+            assert type(logWrapper._warn_counter) is int
             assert logWrapper._warn_counter == 0
-            assert type(logWrapper._critical_counter) == int  # noqa: E721
+            assert type(logWrapper._critical_counter) is int
             assert logWrapper._critical_counter == 0
             assert logging.root.handle is logWrapper
 
@@ -711,11 +711,11 @@ def pytest_pyfunc_call(pyfuncitem: pytest.Function):
             assert type(r) == T_PLUGGY_RESULT  # noqa: E721
 
             assert logWrapper._old_method is not None
-            assert type(logWrapper._err_counter) == int  # noqa: E721
+            assert type(logWrapper._err_counter) is int
             assert logWrapper._err_counter >= 0
-            assert type(logWrapper._warn_counter) == int  # noqa: E721
+            assert type(logWrapper._warn_counter) is int
             assert logWrapper._warn_counter >= 0
-            assert type(logWrapper._critical_counter) == int  # noqa: E721
+            assert type(logWrapper._critical_counter) is int
             assert logWrapper._critical_counter >= 0
             assert logging.root.handle is logWrapper
 
@@ -751,7 +751,7 @@ def helper__calc_W(n: int) -> int:
     assert n > 0
 
     x = int(math.log10(n))
-    assert type(x) == int  # noqa: E721
+    assert type(x) is int
     assert x >= 0
     x += 1
     return x
@@ -808,7 +808,7 @@ def helper__print_test_list2(tests: typing.List[T_TUPLE__str_int]) -> None:
         assert type(t) == tuple  # noqa: E721
         assert len(t) == 2
         assert type(t[0]) is str
-        assert type(t[1]) == int  # noqa: E721
+        assert type(t[1]) is int
         assert t[0] != ""
         assert t[1] >= 0
         nTest += 1
@@ -865,7 +865,7 @@ def pytest_sessionfinish():
         header: str, test_count: int, test_list: typing.List[str]
     ):
         assert type(header) is str
-        assert type(test_count) == int  # noqa: E721
+        assert type(test_count) is int
         assert type(test_list) == list  # noqa: E721
         assert header != ""
         assert test_count >= 0
@@ -881,7 +881,7 @@ def pytest_sessionfinish():
         header: str, test_count: int, test_list: typing.List[T_TUPLE__str_int]
     ):
         assert type(header) is str
-        assert type(test_count) == int  # noqa: E721
+        assert type(test_count) is int
         assert type(test_list) == list  # noqa: E721
         assert header != ""
         assert test_count >= 0

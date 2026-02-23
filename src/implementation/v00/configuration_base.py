@@ -394,7 +394,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         self, text: str, offset: typing.Optional[int] = None
     ) -> PostgresConfigurationComment_Base:
         assert type(text) is str
-        assert offset is None or type(offset) == int  # noqa: E721
+        assert offset is None or type(offset) is int
 
         self.Helper__CheckAlive()
 
@@ -1795,7 +1795,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             or type(target) == PgCfgModel__FileData  # noqa: E721
             or type(target) == PgCfgModel__FileLineData  # noqa: E721
         )
-        assert optionOffset is None or type(optionOffset) == int  # noqa: E721
+        assert optionOffset is None or type(optionOffset) is int
         assert type(optionName) is str
         assert optionValue is not None
 
@@ -2255,7 +2255,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     ):
         assert fileLineData is not None
         assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
-        assert optionOffset is None or type(optionOffset) == int  # noqa: E721
+        assert optionOffset is None or type(optionOffset) is int
         assert type(optionName) is str
         assert optionValue is not None
 
@@ -3486,7 +3486,7 @@ class PostgresConfigurationReader_Base:
     ):
         assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
         assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
-        assert type(includeOffset) == int  # noqa: E721
+        assert type(includeOffset) is int
         assert includeOffset >= 0
 
         # find first quote
@@ -3611,7 +3611,7 @@ class PostgresConfigurationReader_Base:
     ):
         assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
         assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
-        assert type(optionOffset) == int  # noqa: E721
+        assert type(optionOffset) is int
         assert type(optionName) is str
         assert optionName != ""
 
@@ -3673,7 +3673,7 @@ class PostgresConfigurationReader_Base:
     ):
         assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
         assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
-        assert type(optionOffset) == int  # noqa: E721
+        assert type(optionOffset) is int
         assert type(optionName) is str
         assert optionName != ""
 
@@ -3776,7 +3776,7 @@ class PostgresConfigurationReader_Base:
     ):
         assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
         assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
-        assert type(optionOffset) == int  # noqa: E721
+        assert type(optionOffset) is int
         assert type(optionName) is str
         assert optionName != ""
 
@@ -4045,7 +4045,7 @@ class PostgresConfigurationWriter_Base:
                 continue
 
         except:  # Rollback new files
-            assert type(iFile) == int  # noqa: E721
+            assert type(iFile) is int
             assert iFile >= 0
             assert iFile <= len(ctx.NewFiles)
 
@@ -4149,7 +4149,7 @@ class PostgresConfigurationWriter_Base:
             assert isinstance(lineItem.m_Element, PgCfgModel__FileLineElementData)
             assert (
                 lineItem.m_Element.m_Offset is None
-                or type(lineItem.m_Element.m_Offset) == int  # noqa: E721
+                or type(lineItem.m_Element.m_Offset) is int
             )
             assert (
                 lineItem.m_Element.m_Offset is None or lineItem.m_Element.m_Offset >= 0
@@ -4169,7 +4169,7 @@ class PostgresConfigurationWriter_Base:
     # --------------------------------------------------------------------
     def Helper__AppendItemToLine(lineContent: str, offset: int, text: str) -> str:
         assert type(lineContent) is str
-        assert offset is None or type(offset) == int  # noqa: E721
+        assert offset is None or type(offset) is int
         assert type(text) is str
         assert offset is None or offset >= 0
 
@@ -4178,7 +4178,7 @@ class PostgresConfigurationWriter_Base:
 
         lineContentLen = len(lineContent)
 
-        assert type(lineContentLen) == int  # noqa: E721
+        assert type(lineContentLen) is int
         assert lineContentLen >= 0
 
         if offset is not None and lineContentLen < offset:
@@ -4295,7 +4295,7 @@ class PostgresConfigurationController__Base:
         )
         assert type(optionName) is str
         assert optionValue is not None
-        assert optionOffset is None or type(optionOffset) == int  # noqa: E721
+        assert optionOffset is None or type(optionOffset) is int
 
         # ----------------------
         preparedOptionValue = __class__.Helper__PrepareSetValue(
@@ -4337,7 +4337,7 @@ class PostgresConfigurationController__Base:
             or type(targetData) == PgCfgModel__OptionData  # noqa: E721
         )
         assert type(optionName) is str
-        assert optionOffset is None or type(optionOffset) == int  # noqa: E721
+        assert optionOffset is None or type(optionOffset) is int
 
         # ----------------------
         if optionValue is None:

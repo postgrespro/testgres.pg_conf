@@ -203,7 +203,7 @@ class ErrorMessageBuilder:
     # --------------------------------------------------------------------
     def MultipleDefOfFileIsFound(fileName: str, count: int):
         assert type(fileName) is str
-        assert type(count) == int  # noqa: E721
+        assert type(count) is int
 
         errMsg = "Multiple definitition of file [{0}] is found - {1}.".format(
             fileName, count
@@ -249,8 +249,8 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def CfgReader__UnexpectedSymbol(lineNum: int, colNum: int, ch: str):
-        assert type(lineNum) == int  # noqa: E721
-        assert type(colNum) == int  # noqa: E721
+        assert type(lineNum) is int
+        assert type(colNum) is int
         assert type(ch) is str
 
         errMsg = "Unexpected symbol in line {0}, column {1}: [{2}]".format(
@@ -260,7 +260,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def CfgReader__IncludeWithoutPath(lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert lineNum >= 0
 
         errMsg = "Include directive in line {0} does not have a path.".format(lineNum)
@@ -268,7 +268,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def CfgReader__EndOfIncludePathIsNotFound(lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert lineNum >= 0
 
         errMsg = "The end of an include path is not found. Line {0}.".format(lineNum)
@@ -276,7 +276,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def CfgReader__IncompletedEscapeInInclude(lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert lineNum >= 0
 
         errMsg = "Escape in an include path is not completed. Line {0}.".format(lineNum)
@@ -284,8 +284,8 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def CfgReader__UnknownEscapedSymbolInInclude(lineNum: int, colNum: int, ch: str):
-        assert type(lineNum) == int  # noqa: E721
-        assert type(colNum) == int  # noqa: E721
+        assert type(lineNum) is int
+        assert type(colNum) is int
         assert type(ch) is str
         assert lineNum >= 0
         assert colNum >= 0
@@ -298,7 +298,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def CfgReader__IncludeHasEmptyPath(lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert lineNum >= 0
 
         errMsg = "Include in line {0} has an empty path.".format(lineNum)
@@ -306,7 +306,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def CfgReader__OptionWithoutValue(optionName: str, lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert type(optionName) is str
         assert lineNum >= 0
         assert optionName != ""
@@ -318,7 +318,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def CfgReader__EndQuotedOptionValueIsNotFound(optionName: str, lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert type(optionName) is str
         assert lineNum >= 0
         assert optionName != ""
@@ -330,7 +330,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def CfgReader__IncompletedEscapeInQuotedOptionValue(optionName: str, lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert type(optionName) is str
         assert lineNum >= 0
         assert optionName != ""
@@ -344,7 +344,7 @@ class ErrorMessageBuilder:
     def CfgReader__UnknownEscapedSymbolInQuotedOptionValue(
         optionName: str, lineNum: int, colNum: int, ch: str
     ):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert type(optionName) is str
         assert type(ch) is str
         assert lineNum >= 0

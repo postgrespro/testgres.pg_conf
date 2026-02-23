@@ -36,13 +36,13 @@ class TestSet001__Common:
     )
     def offset001(self, request: pytest.FixtureRequest) -> typing.Optional[int]:
         assert isinstance(request, pytest.FixtureRequest)
-        assert request.param is None or type(request.param) == int  # noqa: E721
+        assert request.param is None or type(request.param) is int
         return request.param
 
     # --------------------------------------------------------------------
     def test_001(self, request: pytest.FixtureRequest, offset001: typing.Optional[int]):
         assert isinstance(request, pytest.FixtureRequest)
-        assert offset001 is None or type(offset001) == int  # noqa: E721
+        assert offset001 is None or type(offset001) is int
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
