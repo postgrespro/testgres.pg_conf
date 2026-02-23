@@ -133,7 +133,8 @@ class TestSet001__Common:
                     )
                 )
 
-                assert type(actualValue) is type(data.get_value)
+                assert type(actualValue) is bool
+                assert type(data.get_value) is bool
                 assert actualValue == data.get_value
             except Exception as e:
                 logging.error(str(e))
