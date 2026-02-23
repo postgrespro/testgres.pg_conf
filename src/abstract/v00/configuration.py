@@ -81,7 +81,7 @@ class PostgresConfigurationComment(PostgresConfigurationElement):
 
     # --------------------------------------------------------------------
     def Delete(self, withLineIfLast: bool):
-        assert type(withLineIfLast) == bool  # noqa: E721
+        assert type(withLineIfLast) is bool
         RaiseError.MethodIsNotImplemented(__class__, "Delete")
 
 
@@ -162,7 +162,7 @@ class PostgresConfigurationInclude(PostgresConfigurationElement):
 
     # --------------------------------------------------------------------
     def Delete(self, withLine: bool):
-        assert type(withLine) == bool  # noqa: E721
+        assert type(withLine) is bool
         RaiseError.MethodIsNotImplemented(__class__, "Delete")
 
 

@@ -195,7 +195,7 @@ class ReadUtils:
             assert type(ctx) == tagCtx  # noqa: E721
             assert type(ch) is str
             assert len(ch) == 1
-            assert type(isData) == bool  # noqa: E721
+            assert type(isData) is bool
 
             if ctx.curValueItem is None:
                 ctx.curValueItem = ch

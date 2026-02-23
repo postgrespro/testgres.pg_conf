@@ -23,7 +23,7 @@ class OptionHandlerToPrepareGetValue__Std__Bool(OptionHandlerToPrepareGetValue):
         assert ctx.OptionValue is not None
 
         # [2025-04-13] Research
-        assert type(ctx.OptionValue) == bool  # noqa: E721
+        assert type(ctx.OptionValue) is bool
 
         return bool(ctx.OptionValue)
 

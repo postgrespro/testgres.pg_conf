@@ -845,7 +845,7 @@ def pytest_sessionfinish():
 
     assert g_test_process_mode == T_TEST_PROCESS_MODE.ExecTests
 
-    assert type(g_worker_log_is_created) == bool  # noqa: E721
+    assert type(g_worker_log_is_created) is bool
     assert g_worker_log_is_created
 
     logging.info("")

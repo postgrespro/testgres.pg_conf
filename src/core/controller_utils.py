@@ -49,7 +49,7 @@ class DataControllerUtils:
     ):
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
-        assert type(withLine) == bool  # noqa: E721
+        assert type(withLine) is bool
 
         fileLineData = optionData.m_Parent
         assert fileLineData is not None
@@ -72,7 +72,7 @@ class DataControllerUtils:
     ):
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert type(includeData) == PgCfgModel__IncludeData  # noqa: E721
-        assert type(withLine) == bool  # noqa: E721
+        assert type(withLine) is bool
 
         fileLineData = includeData.m_Parent
         assert fileLineData is not None
@@ -95,7 +95,7 @@ class DataControllerUtils:
     ):
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert type(commentData) == PgCfgModel__CommentData  # noqa: E721
-        assert type(withLineIfLast) == bool  # noqa: E721
+        assert type(withLineIfLast) is bool
 
         commentData.IsAlive()
 

@@ -110,7 +110,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
 
     # --------------------------------------------------------------------
     def Delete(self, withLineIfLast: bool):
-        assert type(withLineIfLast) == bool  # noqa: E721
+        assert type(withLineIfLast) is bool
 
         self.Helper__CheckAlive()
         assert type(self.m_CommentData) == PgCfgModel__CommentData  # noqa: E721
@@ -307,7 +307,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
 
     # --------------------------------------------------------------------
     def Delete(self, withLine: bool):
-        assert type(withLine) == bool  # noqa: E721
+        assert type(withLine) is bool
 
         self.Helper__CheckAlive()
         assert type(self.m_IncludeData) == PgCfgModel__IncludeData  # noqa: E721
@@ -2191,7 +2191,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert len(getFileData_r) == 2
 
         assert type(getFileData_r[0]) == PgCfgModel__FileData  # noqa: E721
-        assert type(getFileData_r[1]) == bool  # noqa: E721
+        assert type(getFileData_r[1]) is bool
 
         fileData = getFileData_r[0]
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
@@ -2232,7 +2232,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert len(getFileData_r) == 2
 
             assert type(getFileData_r[0]) == PgCfgModel__FileData  # noqa: E721
-            assert type(getFileData_r[1]) == bool  # noqa: E721
+            assert type(getFileData_r[1]) is bool
 
             if getFileData_r[1]:
                 pass  # TODO: delete file
@@ -2936,7 +2936,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert type(getFileData_r) == tuple  # noqa: E721
         assert len(getFileData_r) == 2
         assert type(getFileData_r[0]) == PgCfgModel__FileData  # noqa: E721
-        assert type(getFileData_r[1]) == bool  # noqa: E721
+        assert type(getFileData_r[1]) is bool
 
         fileData = getFileData_r[0]
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
@@ -2950,7 +2950,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert len(getFileData_r) == 2
 
             assert type(getFileData_r[0]) == PgCfgModel__FileData  # noqa: E721
-            assert type(getFileData_r[1]) == bool  # noqa: E721
+            assert type(getFileData_r[1]) is bool
 
             if getFileData_r[1]:
                 pass  # TODO: delete file

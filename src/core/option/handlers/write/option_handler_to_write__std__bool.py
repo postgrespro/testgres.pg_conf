@@ -29,7 +29,7 @@ class OptionHandlerToWrite__Std__Bool(OptionHandlerToWrite):
         else:
             RaiseError.BadOptionValueItemType(ctx.OptionName, typeOfValue, bool)
 
-        assert type(typedValue) == bool  # noqa: E721
+        assert type(typedValue) is bool
 
         if typedValue:
             result = "on"
