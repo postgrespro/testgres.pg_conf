@@ -122,9 +122,7 @@ class TestSet001__Common:
         assert len(fileDataLines[4].m_Items) == 0
 
         # LINE 0
-        assert (
-            type(fileDataLines[0].m_Items[0].m_Element) is PgCfgModel__CommentData
-        )
+        assert type(fileDataLines[0].m_Items[0].m_Element) is PgCfgModel__CommentData
         assert (
             fileDataLines[0].m_Items[0].m_Element.m_Text
             == "It is a test configuration file"
@@ -132,30 +130,22 @@ class TestSet001__Common:
         assert fileDataLines[0].m_Items[0].m_Element.m_Offset == 0
 
         # LINE 1
-        assert (
-            type(fileDataLines[1].m_Items[0].m_Element) is PgCfgModel__OptionData
-        )
+        assert type(fileDataLines[1].m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileDataLines[1].m_Items[0].m_Element.m_Name == "port"
         assert fileDataLines[1].m_Items[0].m_Element.m_Value == 123
         assert fileDataLines[1].m_Items[0].m_Element.m_Offset == 0
 
-        assert (
-            type(fileDataLines[1].m_Items[1].m_Element) is PgCfgModel__CommentData
-        )
+        assert type(fileDataLines[1].m_Items[1].m_Element) is PgCfgModel__CommentData
         assert fileDataLines[1].m_Items[1].m_Element.m_Text == "It is a port"
         assert fileDataLines[1].m_Items[1].m_Element.m_Offset == 9
 
         # LINE 3
-        assert (
-            type(fileDataLines[3].m_Items[0].m_Element) is PgCfgModel__OptionData
-        )
+        assert type(fileDataLines[3].m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileDataLines[3].m_Items[0].m_Element.m_Name == "listen_addresses"
         assert fileDataLines[3].m_Items[0].m_Element.m_Value == "*"
         assert fileDataLines[3].m_Items[0].m_Element.m_Offset == 0
 
-        assert (
-            type(fileDataLines[3].m_Items[1].m_Element) is PgCfgModel__CommentData
-        )
+        assert type(fileDataLines[3].m_Items[1].m_Element) is PgCfgModel__CommentData
         assert fileDataLines[3].m_Items[1].m_Element.m_Text == "addresses"
         assert fileDataLines[3].m_Items[1].m_Element.m_Offset == 21
 

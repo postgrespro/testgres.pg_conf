@@ -116,9 +116,7 @@ class TestSet001__Common:
         assert type(fileLineData) is PgCfgModel__FileLineData
         assert type(fileLineData.m_Items) is list
         assert len(fileLineData.m_Items) == 1
-        assert (
-            type(fileLineData.m_Items[0]) is PgCfgModel__FileLineData.tagItem
-        )
+        assert type(fileLineData.m_Items[0]) is PgCfgModel__FileLineData.tagItem
         assert fileLineData.m_Items[0].m_Element is opt.m_OptionData
         assert fileLineData.m_Items[0].m_Element.m_Offset is None
         assert type(fileLineData.m_Parent) is PgCfgModel__FileData

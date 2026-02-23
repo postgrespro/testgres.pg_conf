@@ -40,9 +40,7 @@ class TestSet001__Common:
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
-        assert (
-            type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
-        )
+        assert type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         assert r1.Option.get_Value() == ["biha"]
@@ -90,9 +88,7 @@ class TestSet001__Common:
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
-        assert (
-            type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
-        )
+        assert type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         with pytest.raises(Exception, match=re.escape("None value is not supported.")):
@@ -118,9 +114,7 @@ class TestSet001__Common:
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
-        assert (
-            type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
-        )
+        assert type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         errMsg = (

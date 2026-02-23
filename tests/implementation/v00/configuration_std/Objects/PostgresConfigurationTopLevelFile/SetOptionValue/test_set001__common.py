@@ -77,9 +77,7 @@ class TestSet001__Common:
 
         assert type(file.m_FileData.m_Lines) is list
         assert len(file.m_FileData.m_Lines) == 1
-        assert (
-            type(file.m_FileData.m_Lines[0]) is PgCfgModel__FileLineData
-        )
+        assert type(file.m_FileData.m_Lines[0]) is PgCfgModel__FileLineData
         assert type(file.m_FileData.m_Lines[0].m_Items) is list
         assert len(file.m_FileData.m_Lines[0].m_Items) == 1
         assert file.m_FileData.m_Lines[0].m_Items[0].m_Element is not None

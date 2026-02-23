@@ -114,9 +114,7 @@ class TestStartupData:
 
     # --------------------------------------------------------------------
     def GetRootTmpDataDirForCurrentTestWorker() -> str:
-        assert (
-            type(__class__.sm_RootTmpDataDirForCurrentTestWorker) is str
-        )
+        assert type(__class__.sm_RootTmpDataDirForCurrentTestWorker) is str
         return __class__.sm_RootTmpDataDirForCurrentTestWorker
 
 

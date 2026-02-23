@@ -118,9 +118,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__CommentData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__CommentData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 1
         assert fileLineData0.m_Items[0].m_Element.m_Text == "  comment   "
 
@@ -144,17 +142,13 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__CommentData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__CommentData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Text == "comment1"
 
         fileLineData1 = file1.m_FileData.m_Lines[1]
         assert len(fileLineData1.m_Items) == 1
-        assert (
-            type(fileLineData1.m_Items[0].m_Element) is PgCfgModel__CommentData
-        )
+        assert type(fileLineData1.m_Items[0].m_Element) is PgCfgModel__CommentData
         assert fileLineData1.m_Items[0].m_Element.m_Offset == 4
         assert fileLineData1.m_Items[0].m_Element.m_Text == "comment2"
 
@@ -201,9 +195,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 123
@@ -228,9 +220,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 234
@@ -255,9 +245,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 234
@@ -330,16 +318,12 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 2
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 123
 
-        assert (
-            type(fileLineData0.m_Items[1].m_Element) is PgCfgModel__CommentData
-        )
+        assert type(fileLineData0.m_Items[1].m_Element) is PgCfgModel__CommentData
         assert fileLineData0.m_Items[1].m_Element.m_Offset == 9
         assert fileLineData0.m_Items[1].m_Element.m_Text == "comment"
 
@@ -363,16 +347,12 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 2
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 123
 
-        assert (
-            type(fileLineData0.m_Items[1].m_Element) is PgCfgModel__CommentData
-        )
+        assert type(fileLineData0.m_Items[1].m_Element) is PgCfgModel__CommentData
         assert fileLineData0.m_Items[1].m_Element.m_Offset == 8
         assert fileLineData0.m_Items[1].m_Element.m_Text == "comment "
 
@@ -396,9 +376,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 123
@@ -426,9 +404,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "listen_addresses"
         assert fileLineData0.m_Items[0].m_Element.m_Value == ""
@@ -453,9 +429,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "listen_addresses"
         assert fileLineData0.m_Items[0].m_Element.m_Value == "'"
@@ -506,9 +480,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "listen_addresses"
         assert fileLineData0.m_Items[0].m_Element.m_Value == endData304[2]
@@ -634,9 +606,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (
-            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__IncludeData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__IncludeData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Path == "a.conf"
 
