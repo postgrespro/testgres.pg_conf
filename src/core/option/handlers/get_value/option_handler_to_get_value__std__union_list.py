@@ -24,7 +24,7 @@ class OptionHandlerToGetValue__Std__UnionList(OptionHandlerToGetValue):
         assert (
             ctx.SourceData is None
             or type(ctx.SourceData) is FileData
-            or type(ctx.SourceData) == OptionData  # noqa: E721
+            or type(ctx.SourceData) is OptionData
         )
         assert type(ctx.OptionName) is str
 

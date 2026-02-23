@@ -25,7 +25,7 @@ class OptionHandlerToSetValue__Std__Simple(OptionHandlerToSetValue):
         assert (
             ctx.TargetData is None
             or type(ctx.TargetData) is FileData
-            or type(ctx.TargetData) == OptionData  # noqa: E721
+            or type(ctx.TargetData) is OptionData
         )
         assert ctx.OptionName is not None
         assert ctx.OptionValue is not None

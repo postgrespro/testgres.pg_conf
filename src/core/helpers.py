@@ -13,14 +13,14 @@ import typing
 
 class Helpers:
     def ExtractOptionDataName(option: typing.Union[str, OptionData]) -> str:
-        assert type(option) == str or type(option) == OptionData  # noqa: E721
+        assert type(option) is str or type(option) is OptionData
 
         typeOption = type(option)
 
-        if typeOption == str:  # noqa: E721
+        if typeOption is str:  # noqa: E721
             return option
 
-        if typeOption == OptionData:  # noqa: E721
+        if typeOption is OptionData:  # noqa: E721
             return option.m_Name
 
         BugCheckError.UnkObjectDataType(typeOption)
@@ -40,7 +40,7 @@ class Helpers:
         if typeOfIndexItem == list:
             assert len(indexItem) > 1
             assert indexItem[0] is not None
-            assert type(indexItem[0]) == OptionData  # noqa: E721
+            assert type(indexItem[0]) is OptionData
             assert indexItem[0].m_Name == optionName
             return indexItem[0]
 
