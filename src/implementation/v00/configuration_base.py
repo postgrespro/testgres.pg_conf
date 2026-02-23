@@ -81,7 +81,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
     ):
         assert fileLine is not None
         assert commentData is not None
-        assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(commentData) is PgCfgModel__CommentData
 
         assert commentData.m_Parent is fileLine.m_FileLineData
@@ -140,7 +140,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
         if not self.m_CommentData.IsAlive():
             RaiseError.CommentObjectWasDeleted()
 
-        assert type(self.m_FileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(self.m_FileLine) is PostgresConfigurationFileLine_Base
         assert isinstance(self.m_FileLine, PostgresConfigurationFileLine)
 
 
@@ -158,7 +158,7 @@ class PostgresConfigurationOption_Base(PostgresConfigurationOption):
         fileLine: PostgresConfigurationFileLine_Base,
         optionData: PgCfgModel__OptionData,
     ):
-        assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(optionData) is PgCfgModel__OptionData
 
         super().__init__()
@@ -263,7 +263,7 @@ class PostgresConfigurationOption_Base(PostgresConfigurationOption):
         if not self.m_OptionData.IsAlive():
             RaiseError.OptionObjectWasDeleted()
 
-        assert type(self.m_FileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(self.m_FileLine) is PostgresConfigurationFileLine_Base
         assert isinstance(self.m_FileLine, PostgresConfigurationFileLine)
 
 
@@ -281,7 +281,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
         fileLine: PostgresConfigurationFileLine_Base,
         includeData: PgCfgModel__IncludeData,
     ):
-        assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(includeData) is PgCfgModel__IncludeData
 
         super().__init__()
@@ -341,7 +341,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
         if not self.m_IncludeData.IsAlive():
             RaiseError.IncludeObjectWasDeleted()
 
-        assert type(self.m_FileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(self.m_FileLine) is PostgresConfigurationFileLine_Base
         assert isinstance(self.m_FileLine, PostgresConfigurationFileLine)
 
 
@@ -734,7 +734,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
             fileLine = PostgresConfigurationFileLine_Base(self, fileLineData)
 
             assert fileLine is not None
-            assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+            assert type(fileLine) is PostgresConfigurationFileLine_Base
             assert fileLine.m_FileLineData is fileLineData
             assert fileLine.m_Parent is self
         except:  # rollback
@@ -744,7 +744,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
             raise
 
         assert fileLine is not None
-        assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
         return fileLine
 
     # --------------------------------------------------------------------
@@ -780,7 +780,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
             fileLine = PostgresConfigurationFileLine_Base(self, fileLineData)
 
             assert fileLine is not None
-            assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+            assert type(fileLine) is PostgresConfigurationFileLine_Base
             assert fileLine.m_FileLineData is fileLineData
             assert fileLine.m_Parent is self
 
@@ -3385,7 +3385,7 @@ class PostgresConfigurationReader_Base:
         assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
 
         fileLine = file.AddEmptyLine()
-        assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
 
         ch: typing.Optional[str]
 
@@ -3457,7 +3457,7 @@ class PostgresConfigurationReader_Base:
     def Helper__ProcessLineData__Comment(
         fileLine: PostgresConfigurationFileLine_Base, lineReader: ReadUtils__LineReader
     ):
-        assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
 
         commentText = ""
@@ -3484,7 +3484,7 @@ class PostgresConfigurationReader_Base:
         lineReader: ReadUtils__LineReader,
         includeOffset: int,
     ):
-        assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
         assert type(includeOffset) is int
         assert includeOffset >= 0
@@ -3609,7 +3609,7 @@ class PostgresConfigurationReader_Base:
         optionOffset: int,
         optionName: str,
     ):
-        assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
         assert type(optionOffset) is int
         assert type(optionName) is str
@@ -3671,7 +3671,7 @@ class PostgresConfigurationReader_Base:
         optionOffset: int,
         optionName: str,
     ):
-        assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
         assert type(optionOffset) is int
         assert type(optionName) is str
@@ -3774,7 +3774,7 @@ class PostgresConfigurationReader_Base:
         optionOffset: int,
         optionName: str,
     ):
-        assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
         assert type(optionOffset) is int
         assert type(optionName) is str
