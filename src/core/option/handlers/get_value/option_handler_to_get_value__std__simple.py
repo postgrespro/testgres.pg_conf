@@ -19,7 +19,7 @@ class OptionHandlerToGetValue__Std__Simple(OptionHandlerToGetValue):
 
     # interface ----------------------------------------------------------
     def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToGetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToGetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (
             ctx.SourceData is None

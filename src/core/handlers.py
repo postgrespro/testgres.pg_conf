@@ -215,7 +215,7 @@ class OptionHandlerToGetValue(OptionHandler):
 
     # interface ----------------------------------------------------------
     def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToGetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToGetValue
         assert (
             ctx.SourceData is None
             or type(ctx.SourceData) is FileData
