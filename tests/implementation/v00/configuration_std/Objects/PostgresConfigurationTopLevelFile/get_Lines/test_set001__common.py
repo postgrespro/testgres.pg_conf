@@ -31,7 +31,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -41,13 +41,13 @@ class TestSet001__Common:
 
         file = cfg.get_AllFiles().__iter__().__next__()
         assert file is not None
-        assert type(file) == PgCfg_TopLevelFile_Base
+        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
 
         assert file.get_Path() == os.path.join(rootTmpDir, "postgresql.auto.conf")
 
         fileLines = file.get_Lines()
         assert fileLines is not None
-        assert type(fileLines) == PgCfg_FileLines_Base
+        assert type(fileLines) == PgCfg_FileLines_Base  # noqa: E721
         assert isinstance(fileLines, PgCfg_FileLines)
 
         assert len(fileLines) == 1
@@ -57,12 +57,12 @@ class TestSet001__Common:
 
         fileLines_it = fileLines.__iter__()
         assert fileLines_it is not None
-        assert type(fileLines_it) == PgCfg_FileLinesIterator_Base
+        assert type(fileLines_it) == PgCfg_FileLinesIterator_Base  # noqa: E721
         assert isinstance(fileLines_it, PgCfg_FileLinesIterator)
 
         fileLine = fileLines_it.__next__()
         assert fileLine is not None
-        assert type(fileLine) == PgCfg_FileLine_Base
+        assert type(fileLine) == PgCfg_FileLine_Base  # noqa: E721
         assert isinstance(fileLine, PgCfg_FileLine)
 
         cfg.SetOptionValue("port", None)
@@ -77,20 +77,20 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         set_r = cfg.SetOptionValue("port", 123)
-        assert type(set_r) == PgCfg_SetOptionResult_Base
+        assert type(set_r) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert isinstance(set_r, PgCfg_SetOptionResult)
 
         file = set_r.Option.get_Parent().get_Parent()
 
-        assert type(file) == PgCfg_TopLevelFile_Base
+        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
 
         it1 = file.get_Lines().__iter__()
-        assert type(it1) == PgCfg_FileLinesIterator_Base
+        assert type(it1) == PgCfg_FileLinesIterator_Base  # noqa: E721
         assert isinstance(it1, PgCfg_FileLinesIterator)
 
         it1a = it1.__iter__()

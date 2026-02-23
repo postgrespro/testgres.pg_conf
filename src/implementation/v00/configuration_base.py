@@ -115,14 +115,14 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
         self.Helper__CheckAlive()
         assert type(self.m_CommentData) == PgCfgModel__CommentData  # noqa: E721
         assert (  # noqa: E721
-            type(self.m_CommentData.m_Parent) == PgCfgModel__FileLineData
+            type(self.m_CommentData.m_Parent) == PgCfgModel__FileLineData  # noqa: E721
         )
         assert (  # noqa: E721
-            type(self.m_CommentData.m_Parent.m_Parent) == PgCfgModel__FileData
+            type(self.m_CommentData.m_Parent.m_Parent) == PgCfgModel__FileData  # noqa: E721
         )
         assert (  # noqa: E721
             type(self.m_CommentData.m_Parent.m_Parent.m_Parent)
-            == PgCfgModel__ConfigurationData
+            == PgCfgModel__ConfigurationData  # noqa: E721
         )
 
         cfgData = self.m_CommentData.m_Parent.m_Parent.m_Parent
@@ -312,14 +312,14 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
         self.Helper__CheckAlive()
         assert type(self.m_IncludeData) == PgCfgModel__IncludeData  # noqa: E721
         assert (  # noqa: E721
-            type(self.m_IncludeData.m_Parent) == PgCfgModel__FileLineData
+            type(self.m_IncludeData.m_Parent) == PgCfgModel__FileLineData  # noqa: E721
         )
         assert (  # noqa: E721
-            type(self.m_IncludeData.m_Parent.m_Parent) == PgCfgModel__FileData
+            type(self.m_IncludeData.m_Parent.m_Parent) == PgCfgModel__FileData  # noqa: E721
         )
         assert (  # noqa: E721
             type(self.m_IncludeData.m_Parent.m_Parent.m_Parent)
-            == PgCfgModel__ConfigurationData
+            == PgCfgModel__ConfigurationData  # noqa: E721
         )
 
         cfgData = self.m_IncludeData.m_Parent.m_Parent.m_Parent
@@ -2171,7 +2171,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert optionData.IsAlive()
             assert optionData.get_Parent() is not None
             assert (
-                type(optionData.get_Parent()) == PgCfgModel__FileLineData
+                type(optionData.get_Parent()) == PgCfgModel__FileLineData  # noqa: E721
             )  # noqa: E721
 
             anotherFileData = optionData.get_Parent().get_Parent()
@@ -2286,7 +2286,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert optionData.m_Name == optionName
             assert optionData.get_Parent() is not None
             assert (
-                type(optionData.get_Parent()) == PgCfgModel__FileLineData
+                type(optionData.get_Parent()) == PgCfgModel__FileLineData  # noqa: E721
             )  # noqa: E721
 
             anotherFileData = optionData.get_Parent().get_Parent()
@@ -2370,7 +2370,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert optionData.m_Name == optionName
             assert optionData.get_Parent() is not None
             assert (
-                type(optionData.get_Parent()) == PgCfgModel__FileLineData
+                type(optionData.get_Parent()) == PgCfgModel__FileLineData  # noqa: E721
             )  # noqa: E721
 
             anotherFileData = optionData.get_Parent().get_Parent()
@@ -2510,7 +2510,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert type(optionData.m_Parent) == PgCfgModel__FileLineData  # noqa: E721
             assert optionData.m_Parent.IsAlive()
             assert (  # noqa: E721
-                type(optionData.m_Parent.m_Parent) == PgCfgModel__FileData
+                type(optionData.m_Parent.m_Parent) == PgCfgModel__FileData  # noqa: E721
             )
             assert optionData.m_Parent.m_Parent.IsAlive()
 
@@ -3304,7 +3304,7 @@ class PostgresConfigurationReader_Base:
 
                 for fileLineItem in fileLineData.m_Items:
                     assert (  # noqa: E721
-                        type(fileLineItem) == PgCfgModel__FileLineData.tagItem
+                        type(fileLineItem) == PgCfgModel__FileLineData.tagItem  # noqa: E721
                     )
 
                     fileLineElementData = fileLineItem.m_Element
@@ -3321,7 +3321,7 @@ class PostgresConfigurationReader_Base:
                         # look at existFileDatas
                         includeData: PgCfgModel__IncludeData = fileLineElementData
                         assert (  # noqa: E721
-                            type(includeData.m_File) == PgCfgModel__FileData
+                            type(includeData.m_File) == PgCfgModel__FileData  # noqa: E721
                         )
                         assert type(includeData.m_File.m_Path) == str  # noqa: E721
 
@@ -3982,7 +3982,7 @@ class PostgresConfigurationWriter_Base:
             assert fileCtx.FileData.m_Status == PgCfgModel__FileStatus.EXISTS
             assert fileCtx.FileData.m_LastModifiedTimestamp is not None
             assert (  # noqa: E721
-                type(fileCtx.FileData.m_LastModifiedTimestamp) == datetime.datetime
+                type(fileCtx.FileData.m_LastModifiedTimestamp) == datetime.datetime  # noqa: E721
             )
             assert fileCtx.File is None
 

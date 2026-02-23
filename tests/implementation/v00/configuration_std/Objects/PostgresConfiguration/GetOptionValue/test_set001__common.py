@@ -28,20 +28,20 @@ class TestSet001__Common:
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_001__port(self, request: pytest.FixtureRequest, optName: str):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(optName) == str
+        assert type(optName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         set_r = cfg.SetOptionValue(optName, 123)
-        assert type(set_r) == PgCfg_SetOptionResult_Base
+        assert type(set_r) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert isinstance(set_r, PgCfg_SetOptionResult)
         assert set_r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         set_r_option: PgCfg_Option_Base = set_r.Option
         assert set_r_option is not None
-        assert type(set_r_option) == PgCfg_Option_Base
+        assert type(set_r_option) == PgCfg_Option_Base  # noqa: E721
         assert isinstance(set_r_option, PostgresConfigurationOption)
         assert set_r.Option is set_r_option  # check a cache
 
@@ -50,7 +50,7 @@ class TestSet001__Common:
         assert set_r_option.get_Value() == 123
 
         get_r = cfg.GetOptionValue(optName)
-        assert type(get_r) == int
+        assert type(get_r) == int  # noqa: E721
         assert get_r == 123
 
     # --------------------------------------------------------------------
@@ -58,7 +58,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -70,7 +70,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -84,7 +84,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 

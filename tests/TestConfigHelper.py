@@ -27,7 +27,7 @@ class TestConfigHelper:
 
     # --------------------------------------------------------------------
     def Helper__ToBoolean(v, envVarName: str) -> bool:
-        assert type(envVarName) == str
+        assert type(envVarName) == str  # noqa: E721
 
         typeV = type(v)
 

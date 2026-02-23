@@ -27,13 +27,13 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         allOptions1 = cfg.get_AllOptions()
         assert allOptions1 is not None
-        assert type(allOptions1) == PgCfg_Base__AllOptions
+        assert type(allOptions1) == PgCfg_Base__AllOptions  # noqa: E721
         assert isinstance(allOptions1, PgCfg_Options)
         assert len(allOptions1) == 0
 
@@ -46,10 +46,10 @@ class TestSet001__Common:
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_001(self, request: pytest.FixtureRequest, optName: str):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(optName) == str
+        assert type(optName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -57,14 +57,14 @@ class TestSet001__Common:
 
         allOptions1 = cfg.get_AllOptions()
         assert allOptions1 is not None
-        assert type(allOptions1) == PgCfg_Base__AllOptions
+        assert type(allOptions1) == PgCfg_Base__AllOptions  # noqa: E721
         assert isinstance(allOptions1, PgCfg_Options)
         assert len(allOptions1) == 1
 
         allOptions1_list: list[PgCfg_Option_Base] = []
         for option in allOptions1:
             assert option is not None
-            assert type(option) == PgCfg_Option_Base
+            assert type(option) == PgCfg_Option_Base  # noqa: E721
             assert isinstance(option, PgCfg_Option)
             allOptions1_list.append(option)
 
@@ -81,23 +81,23 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         allOptions1 = cfg.get_AllOptions()
-        assert type(allOptions1) == PgCfg_Base__AllOptions
+        assert type(allOptions1) == PgCfg_Base__AllOptions  # noqa: E721
 
         it1 = allOptions1.__iter__()
         assert it1 is not None
-        assert type(it1) == PgCfg_Base__AllOptionsIterator
+        assert type(it1) == PgCfg_Base__AllOptionsIterator  # noqa: E721
         assert isinstance(it1, PgCfg_OptionsIterator)
         assert it1.m_Cfg is cfg
         assert it1.m_OptionDataIterator is not None
 
         it1a = it1.__iter__()
         assert it1a is not None
-        assert type(it1a) == PgCfg_Base__AllOptionsIterator
+        assert type(it1a) == PgCfg_Base__AllOptionsIterator  # noqa: E721
         assert isinstance(it1a, PgCfg_OptionsIterator)
         assert it1a.m_Cfg is cfg
 
@@ -110,7 +110,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -127,7 +127,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -140,9 +140,9 @@ class TestSet001__Common:
 
         for opt in cfg.get_AllOptions():
             assert opt is not None
-            assert type(opt) == PgCfg_Option_Base
+            assert type(opt) == PgCfg_Option_Base  # noqa: E721
             assert isinstance(opt, PgCfg_Option)
-            assert type(opt) == PgCfg_Option_Base
+            assert type(opt) == PgCfg_Option_Base  # noqa: E721
 
             assert not opt.get_Name() in names
 

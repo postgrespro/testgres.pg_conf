@@ -46,7 +46,7 @@ class TestGlobalCache:
 
         with __class__.sm_Guard:
             emptyDict: typing.Dict[str, any] = dict()
-            assert type(emptyDict) == dict
+            assert type(emptyDict) == dict  # noqa: E721
 
             curDict = __class__.sm_Dict
 

@@ -25,7 +25,7 @@ class TestSet001__Common:
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_001(self, request: pytest.FixtureRequest, optName: str):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(optName) == str
+        assert type(optName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
         cfg = PgCfg_Std(rootTmpDir)
@@ -33,7 +33,7 @@ class TestSet001__Common:
 
         assert len(cfg.m_Data.m_Files) == 1
         fileData = cfg.m_Data.m_Files[0]
-        assert type(fileData) == PgCfgModel__FileData
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
@@ -52,7 +52,7 @@ class TestSet001__Common:
 
         assert len(cfg.m_Data.m_Files) == 1
         fileData = cfg.m_Data.m_Files[0]
-        assert type(fileData) == PgCfgModel__FileData
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
@@ -79,7 +79,7 @@ class TestSet001__Common:
 
         assert len(cfg.m_Data.m_Files) == 1
         fileData = cfg.m_Data.m_Files[0]
-        assert type(fileData) == PgCfgModel__FileData
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
@@ -106,7 +106,7 @@ class TestSet001__Common:
 
         assert len(cfg.m_Data.m_Files) == 1
         fileData = cfg.m_Data.m_Files[0]
-        assert type(fileData) == PgCfgModel__FileData
+        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
@@ -152,7 +152,7 @@ class TestSet001__Common:
 
         r = file.SetOptionValueItem(C_OPT_NAME, "a")
 
-        assert type(r.Option.m_OptionData.m_Value) == list
+        assert type(r.Option.m_OptionData.m_Value) == list  # noqa: E721
         r.Option.m_OptionData.m_Value.clear()
 
         assert len(r.Option.m_OptionData.m_Value) == 0
@@ -231,9 +231,9 @@ class TestSet001__Common:
         result: str
 
         def __init__(self, d: str, f: str, r: str):
-            assert type(d) == str
-            assert type(f) == str
-            assert type(r) == str
+            assert type(d) == str  # noqa: E721
+            assert type(f) == str  # noqa: E721
+            assert type(r) == str  # noqa: E721
 
             self.descr = d
             self.fileName = f
@@ -263,7 +263,7 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_Data009, ids=[x.descr for x in sm_Data009])
     def data009(self, request: pytest.FixtureRequest) -> tagData009:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == __class__.tagData009
+        assert type(request.param) == __class__.tagData009  # noqa: E721
         return request.param
 
     # --------------------------------------------------------------------
@@ -271,7 +271,7 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data009: tagData009
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data009) == __class__.tagData009
+        assert type(data009) == __class__.tagData009  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
         cfg = PgCfg_Std(rootTmpDir)

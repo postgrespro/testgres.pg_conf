@@ -26,7 +26,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -36,27 +36,24 @@ class TestSet001__Common:
 
         file = cfg.get_AllFiles().__iter__().__next__()
         assert file is not None
-        assert type(file) == PgCfg_TopLevelFile_Base
+        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
 
         assert file.get_Path() == os.path.join(rootTmpDir, "postgresql.auto.conf")
 
         fileLines = file.get_Lines()
         assert fileLines is not None
-        assert type(fileLines) == PgCfg_FileLines_Base
+        assert type(fileLines) == PgCfg_FileLines_Base  # noqa: E721
         assert isinstance(fileLines, PgCfg_FileLines)
 
         assert len(fileLines) == 1
 
         fileLine2 = file.AddEmptyLine()
         assert fileLine2 is not None
-        assert type(fileLine2) == PgCfg_FileLine_Base
+        assert type(fileLine2) == PgCfg_FileLine_Base  # noqa: E721
         assert isinstance(fileLine2, PgCfg_FileLine)
 
         assert len(fileLines) == 2
-        assert (
-            list(fileLines)[-1].m_FileLineData
-            is fileLine2.m_FileLineData
-        )
+        assert list(fileLines)[-1].m_FileLineData is fileLine2.m_FileLineData
 
         assert len(fileLine2.m_FileLineData.m_Items) == 0
 
