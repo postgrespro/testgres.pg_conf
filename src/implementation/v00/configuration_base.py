@@ -3382,7 +3382,7 @@ class PostgresConfigurationReader_Base:
         file: PostgresConfigurationFile_Base, lineReader: ReadUtils__LineReader
     ):
         assert isinstance(file, PostgresConfigurationFile_Base)
-        assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
+        assert type(lineReader) is ReadUtils__LineReader
 
         fileLine = file.AddEmptyLine()
         assert type(fileLine) is PostgresConfigurationFileLine_Base
@@ -3458,7 +3458,7 @@ class PostgresConfigurationReader_Base:
         fileLine: PostgresConfigurationFileLine_Base, lineReader: ReadUtils__LineReader
     ):
         assert type(fileLine) is PostgresConfigurationFileLine_Base
-        assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
+        assert type(lineReader) is ReadUtils__LineReader
 
         commentText = ""
         commentOffset = lineReader.GetColOffset()
@@ -3485,7 +3485,7 @@ class PostgresConfigurationReader_Base:
         includeOffset: int,
     ):
         assert type(fileLine) is PostgresConfigurationFileLine_Base
-        assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
+        assert type(lineReader) is ReadUtils__LineReader
         assert type(includeOffset) is int
         assert includeOffset >= 0
 
@@ -3610,7 +3610,7 @@ class PostgresConfigurationReader_Base:
         optionName: str,
     ):
         assert type(fileLine) is PostgresConfigurationFileLine_Base
-        assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
+        assert type(lineReader) is ReadUtils__LineReader
         assert type(optionOffset) is int
         assert type(optionName) is str
         assert optionName != ""
@@ -3672,7 +3672,7 @@ class PostgresConfigurationReader_Base:
         optionName: str,
     ):
         assert type(fileLine) is PostgresConfigurationFileLine_Base
-        assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
+        assert type(lineReader) is ReadUtils__LineReader
         assert type(optionOffset) is int
         assert type(optionName) is str
         assert optionName != ""
@@ -3775,7 +3775,7 @@ class PostgresConfigurationReader_Base:
         optionName: str,
     ):
         assert type(fileLine) is PostgresConfigurationFileLine_Base
-        assert type(lineReader) == ReadUtils__LineReader  # noqa: E721
+        assert type(lineReader) is ReadUtils__LineReader
         assert type(optionOffset) is int
         assert type(optionName) is str
         assert optionName != ""
