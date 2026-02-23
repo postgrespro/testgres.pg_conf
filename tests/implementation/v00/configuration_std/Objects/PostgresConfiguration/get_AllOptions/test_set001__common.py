@@ -33,7 +33,7 @@ class TestSet001__Common:
 
         allOptions1 = cfg.get_AllOptions()
         assert allOptions1 is not None
-        assert type(allOptions1) == PgCfg_Base__AllOptions  # noqa: E721
+        assert type(allOptions1) is PgCfg_Base__AllOptions
         assert isinstance(allOptions1, PgCfg_Options)
         assert len(allOptions1) == 0
 
@@ -57,7 +57,7 @@ class TestSet001__Common:
 
         allOptions1 = cfg.get_AllOptions()
         assert allOptions1 is not None
-        assert type(allOptions1) == PgCfg_Base__AllOptions  # noqa: E721
+        assert type(allOptions1) is PgCfg_Base__AllOptions
         assert isinstance(allOptions1, PgCfg_Options)
         assert len(allOptions1) == 1
 
@@ -86,7 +86,7 @@ class TestSet001__Common:
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         allOptions1 = cfg.get_AllOptions()
-        assert type(allOptions1) == PgCfg_Base__AllOptions  # noqa: E721
+        assert type(allOptions1) is PgCfg_Base__AllOptions
 
         it1 = allOptions1.__iter__()
         assert it1 is not None
