@@ -21,11 +21,11 @@ class OptionHandlerToPrepareGetValue__Std__UniqueStrList(
 
     # interface ----------------------------------------------------------
     def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToPrepareGetValue
+        assert type(ctx) == OptionHandlerCtxToPrepareGetValue  # noqa: E721
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
-        assert type(ctx.OptionName) == str
+        assert type(ctx.OptionName) == str  # noqa: E721
         assert ctx.OptionValue is not None
-        assert type(ctx.OptionValue) == list
+        assert type(ctx.OptionValue) == list  # noqa: E721
 
         result: typing.List[str] = list()
         index: set[str] = set()

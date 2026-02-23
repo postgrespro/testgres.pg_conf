@@ -18,15 +18,15 @@ class OptionHandlerToWrite__Std__UniqueStrList(OptionHandlerToWrite):
 
     # interface ----------------------------------------------------------
     def OptionValueToString(self, ctx: OptionHandlerCtxToWrite) -> str:
-        assert type(ctx) == OptionHandlerCtxToWrite
+        assert type(ctx) == OptionHandlerCtxToWrite  # noqa: E721
         assert ctx.OptionValue is not None
-        assert type(ctx.OptionValue) == list
+        assert type(ctx.OptionValue) == list  # noqa: E721
 
         result = WriteUtils.Pack_StrList2(ctx.OptionValue)
-        assert type(result) == str
+        assert type(result) == str  # noqa: E721
 
         result = WriteUtils.Pack_Str(result)
-        assert type(result) == str
+        assert type(result) == str  # noqa: E721
         assert len(result) >= 2
         assert result[0] == "'"
         assert result[-1] == "'"

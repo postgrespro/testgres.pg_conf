@@ -81,7 +81,7 @@ class PostgresConfigurationComment(PostgresConfigurationElement):
 
     # --------------------------------------------------------------------
     def Delete(self, withLineIfLast: bool):
-        assert type(withLineIfLast) == bool
+        assert type(withLineIfLast) == bool  # noqa: E721
         RaiseError.MethodIsNotImplemented(__class__, "Delete")
 
 
@@ -162,7 +162,7 @@ class PostgresConfigurationInclude(PostgresConfigurationElement):
 
     # --------------------------------------------------------------------
     def Delete(self, withLine: bool):
-        assert type(withLine) == bool
+        assert type(withLine) == bool  # noqa: E721
         RaiseError.MethodIsNotImplemented(__class__, "Delete")
 
 
@@ -182,8 +182,8 @@ class PostgresConfigurationFileLine(PostgresConfigurationObject):
     def AddComment(
         self, text: str, offset: typing.Optional[int]
     ) -> PostgresConfigurationComment:
-        assert type(text) == str
-        assert (offset is None) or (type(offset) == int)
+        assert type(text) == str  # noqa: E721
+        assert (offset is None) or (type(offset) == int)  # noqa: E721
         RaiseError.MethodIsNotImplemented(__class__, "AddComment")
 
     # --------------------------------------------------------------------
@@ -193,16 +193,16 @@ class PostgresConfigurationFileLine(PostgresConfigurationObject):
         assert type(name) == str  # noqa: E721
         assert name != ""
         assert value is not None
-        assert (offset is None) or (type(offset) == int)
+        assert (offset is None) or (type(offset) == int)  # noqa: E721
         RaiseError.MethodIsNotImplemented(__class__, "AddOption")
 
     # --------------------------------------------------------------------
     def AddInclude(
         self, path: str, offset: typing.Optional[int]
     ) -> PostgresConfigurationInclude:
-        assert type(path) == str
+        assert type(path) == str  # noqa: E721
         assert path != ""
-        assert (offset is None) or (type(offset) == int)
+        assert (offset is None) or (type(offset) == int)  # noqa: E721
         RaiseError.MethodIsNotImplemented(__class__, "AddInclude")
 
     # --------------------------------------------------------------------
@@ -271,7 +271,7 @@ class PostgresConfigurationFile(PostgresConfigurationObject):
 
     # --------------------------------------------------------------------
     def AddComment(self, text: str) -> PostgresConfigurationComment:
-        assert type(text) == str
+        assert type(text) == str  # noqa: E721
         RaiseError.MethodIsNotImplemented(__class__, "AddComment")
 
     # --------------------------------------------------------------------
@@ -283,7 +283,7 @@ class PostgresConfigurationFile(PostgresConfigurationObject):
 
     # --------------------------------------------------------------------
     def AddInclude(self, path: str) -> PostgresConfigurationInclude:
-        assert type(path) == str
+        assert type(path) == str  # noqa: E721
         assert path != ""
         RaiseError.MethodIsNotImplemented(__class__, "AddInclude")
 
@@ -375,7 +375,7 @@ class PostgresConfiguration(PostgresConfigurationObject):
 
     # interface ----------------------------------------------------------
     def AddTopLevelFile(self, path: str) -> PostgresConfigurationFile:
-        assert type(path) == str
+        assert type(path) == str  # noqa: E721
         assert path != ""
         RaiseError.MethodIsNotImplemented(__class__, "AddTopLevelFile")
 

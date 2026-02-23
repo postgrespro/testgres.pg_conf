@@ -13,14 +13,14 @@ import typing
 
 class Helpers:
     def ExtractOptionDataName(option: typing.Union[str, OptionData]) -> str:
-        assert type(option) == str or type(option) == OptionData
+        assert type(option) == str or type(option) == OptionData  # noqa: E721
 
         typeOption = type(option)
 
-        if typeOption == str:
+        if typeOption == str:  # noqa: E721
             return option
 
-        if typeOption == OptionData:
+        if typeOption == OptionData:  # noqa: E721
             return option.m_Name
 
         BugCheckError.UnkObjectDataType(typeOption)
@@ -40,7 +40,7 @@ class Helpers:
         if typeOfIndexItem == list:
             assert len(indexItem) > 1
             assert indexItem[0] is not None
-            assert type(indexItem[0]) == OptionData
+            assert type(indexItem[0]) == OptionData  # noqa: E721
             assert indexItem[0].m_Name == optionName
             return indexItem[0]
 
@@ -56,7 +56,7 @@ class Helpers:
 
         for x in container:
             assert x is not None
-            assert type(x) == type(value)
+            assert type(x) == type(value)  # noqa: E721
 
             if x == value:
                 return True
@@ -71,8 +71,8 @@ class Helpers:
     ) -> str:
         assert cfgOsOps is not None
         assert isinstance(cfgOsOps, ConfigurationOsOps)
-        assert type(baseFolder) == str
-        assert type(filePath) == str
+        assert type(baseFolder) == str  # noqa: E721
+        assert type(filePath) == str  # noqa: E721
         assert filePath != ""
 
         newFilePath = None
@@ -83,7 +83,7 @@ class Helpers:
             newFilePath = cfgOsOps.Path_Join(baseFolder, filePath)
             newFilePath = cfgOsOps.Path_NormPath(newFilePath)
 
-        assert type(newFilePath) == str
+        assert type(newFilePath) == str  # noqa: E721
         assert newFilePath != ""
 
         newFilePath = cfgOsOps.Path_AbsPath(newFilePath)

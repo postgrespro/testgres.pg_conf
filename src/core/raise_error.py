@@ -9,8 +9,8 @@ import datetime
 
 class RaiseError:
     def MethodIsNotImplemented(classType: type, methodName: str):
-        assert type(classType) == type
-        assert type(methodName) == str
+        assert type(classType) == type  # noqa: E721
+        assert type(methodName) == str  # noqa: E721
         assert methodName != ""
 
         errMsg = "Method {0}::{1} is not implemented.".format(
@@ -20,8 +20,8 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def GetPropertyIsNotImplemented(classType: type, methodName: str):
-        assert type(classType) == type
-        assert type(methodName) == str
+        assert type(classType) == type  # noqa: E721
+        assert type(methodName) == str  # noqa: E721
         assert methodName != ""
 
         errMsg = "Get property {0}::{1} is not implemented.".format(
@@ -37,7 +37,7 @@ class RaiseError:
     # --------------------------------------------------------------------
     def OptionNameHasBadType(nameType: type):
         assert nameType is not None
-        assert type(nameType) == type
+        assert type(nameType) == type  # noqa: E721
 
         errMsg = "Option name has nad type [{0}]".format(nameType.__name__)
         raise Exception(errMsg)
@@ -172,8 +172,8 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def OptionValueItemIsAlreadyDefined(filePath: str, optName: str, valueItem: any):
-        assert type(filePath) == str
-        assert type(optName) == str
+        assert type(filePath) == str  # noqa: E721
+        assert type(optName) == str  # noqa: E721
 
         errMsg = "Another definition of option [{1}] value item [{2}] is found in the file [{0}].".format(
             filePath, optName, valueItem
@@ -249,9 +249,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__UnexpectedSymbol(lineNum: int, colNum: int, ch: str):
-        assert type(lineNum) == int
-        assert type(colNum) == int
-        assert type(ch) == str
+        assert type(lineNum) == int  # noqa: E721
+        assert type(colNum) == int  # noqa: E721
+        assert type(ch) == str  # noqa: E721
 
         errMsg = "Unexpected symbol in line {0}, column {1}: [{2}]".format(
             lineNum, colNum, ch
@@ -260,7 +260,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__IncludeWithoutPath(lineNum: int):
-        assert type(lineNum) == int
+        assert type(lineNum) == int  # noqa: E721
         assert lineNum >= 0
 
         errMsg = "Include directive in line {0} does not have a path.".format(lineNum)
@@ -268,7 +268,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__EndOfIncludePathIsNotFound(lineNum: int):
-        assert type(lineNum) == int
+        assert type(lineNum) == int  # noqa: E721
         assert lineNum >= 0
 
         errMsg = "The end of an include path is not found. Line {0}.".format(lineNum)
@@ -276,7 +276,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__IncompletedEscapeInInclude(lineNum: int):
-        assert type(lineNum) == int
+        assert type(lineNum) == int  # noqa: E721
         assert lineNum >= 0
 
         errMsg = "Escape in an include path is not completed. Line {0}.".format(lineNum)
@@ -284,9 +284,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__UnknownEscapedSymbolInInclude(lineNum: int, colNum: int, ch: str):
-        assert type(lineNum) == int
-        assert type(colNum) == int
-        assert type(ch) == str
+        assert type(lineNum) == int  # noqa: E721
+        assert type(colNum) == int  # noqa: E721
+        assert type(ch) == str  # noqa: E721
         assert lineNum >= 0
         assert colNum >= 0
         assert ch != ""
@@ -330,7 +330,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__IncompletedEscapeInQuotedOptionValue(optionName: str, lineNum: int):
-        assert type(lineNum) == int
+        assert type(lineNum) == int  # noqa: E721
         assert type(optionName) == str  # noqa: E721
         assert lineNum >= 0
         assert optionName != ""
@@ -344,9 +344,9 @@ class RaiseError:
     def CfgReader__UnknownEscapedSymbolInQuotedOptionValue(
         optionName: str, lineNum: int, colNum: int, ch: str
     ):
-        assert type(lineNum) == int
+        assert type(lineNum) == int  # noqa: E721
         assert type(optionName) == str  # noqa: E721
-        assert type(ch) == str
+        assert type(ch) == str  # noqa: E721
         assert lineNum >= 0
         assert optionName != ""
         assert ch != ""

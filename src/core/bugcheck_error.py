@@ -9,15 +9,15 @@
 class BugCheckError:
     def UnkObjectDataType(objectType: type):
         assert objectType is not None
-        assert type(objectType) == type
+        assert type(objectType) == type  # noqa: E721
 
         errMsg = "[BUG CHECK] Unknown object data type [{0}].".format(objectType)
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     def MultipleDefOfOptionIsFound(optName: str, count: int):
-        assert type(optName) == str
-        assert type(count) == int
+        assert type(optName) == str  # noqa: E721
+        assert type(count) == int  # noqa: E721
 
         errMsg = (
             "[BUG CHECK] Multiple definitition of option [{0}] is found - {1}.".format(
@@ -28,8 +28,8 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def UnkOptObjectDataType(optName: str, optDataType: type):
-        assert type(optName) == str
-        assert type(optDataType) == type
+        assert type(optName) == str  # noqa: E721
+        assert type(optDataType) == type  # noqa: E721
 
         errMsg = (
             "[BUG CHECK] Unknown type of the option object data [{0}] - {1}.".format(
@@ -40,8 +40,8 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def MultipleDefOfFileIsFound(fileName: str, count: int):
-        assert type(fileName) == str
-        assert type(count) == int
+        assert type(fileName) == str  # noqa: E721
+        assert type(count) == int  # noqa: E721
 
         errMsg = (
             "[BUG CHECK] Multiple definitition of file [{0}] is found - {1}.".format(
@@ -52,8 +52,8 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def UnkFileObjectDataType(fileName: str, fileDataType: type):
-        assert type(fileName) == str
-        assert type(fileDataType) == type
+        assert type(fileName) == str  # noqa: E721
+        assert type(fileDataType) == type  # noqa: E721
 
         errMsg = "[BUG CHECK] Unknown type of the file object data [{0}] - {1}.".format(
             fileName, fileDataType.__name__
@@ -62,7 +62,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def UnkFileDataStatus(filePath: str, fileStatus: any):
-        assert type(filePath) == str
+        assert type(filePath) == str  # noqa: E721
         assert fileStatus is not None
 
         errMsg = "[BUG CHECK] Unknown file data status [{0}] - {1}.".format(
@@ -72,8 +72,8 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def FileIsNotFoundInIndex(fileKey: str, filePath: str):
-        assert type(fileKey) == str
-        assert type(filePath) == str
+        assert type(fileKey) == str  # noqa: E721
+        assert type(filePath) == str  # noqa: E721
 
         errMsg = "[BUG CHECK] File [{0}][{1}] is not found in index.".format(
             fileKey, filePath
@@ -82,14 +82,14 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionIsNotFoundInIndex(optName: str):
-        assert type(optName) == str
+        assert type(optName) == str  # noqa: E721
 
         errMsg = "[BUG CHECK] Option [{0}] is not found in index.".format(optName)
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     def OptionIsNotFoundInFileLine(optName: str):
-        assert type(optName) == str
+        assert type(optName) == str  # noqa: E721
 
         errMsg = "[BUG CHECK] Option [{0}] is not found in file line.".format(optName)
         raise Exception(errMsg)

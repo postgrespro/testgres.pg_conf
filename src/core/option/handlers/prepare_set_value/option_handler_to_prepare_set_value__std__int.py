@@ -19,9 +19,9 @@ class OptionHandlerToPrepareSetValue__Std__Int(OptionHandlerToPrepareSetValue):
 
     # interface ----------------------------------------------------------
     def PrepareSetValue(self, ctx: OptionHandlerCtxToPrepareSetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToPrepareSetValue
+        assert type(ctx) == OptionHandlerCtxToPrepareSetValue  # noqa: E721
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
-        assert type(ctx.OptionName) == str
+        assert type(ctx.OptionName) == str  # noqa: E721
         assert ctx.OptionValue is not None
 
         typeOfOptionValue = type(ctx.OptionValue)
