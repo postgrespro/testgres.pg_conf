@@ -174,7 +174,7 @@ class DataControllerUtils:
     ) -> PgCfgModel__IncludeData:
         assert type(fileLineData) is PgCfgModel__FileLineData
         assert type(filePath) is str
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
         assert filePath != ""
         assert offset is None or type(offset) is int
 
@@ -211,7 +211,7 @@ class DataControllerUtils:
 
         fileData = fileLineData.m_Parent
         assert fileData is not None
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
         assert fileData.m_OptionsByName is not None
         assert type(fileData.m_OptionsByName) is dict
 
@@ -311,7 +311,7 @@ class DataControllerUtils:
         optValue: any,
     ) -> PgCfgModel__OptionData:
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
         assert type(optName) is str
         assert optValue is not None
 
@@ -337,7 +337,7 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     def File__add_Line(fileData: PgCfgModel__FileData) -> PgCfgModel__FileLineData:
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
         assert type(fileData.m_Lines) is list
 
         lineData = PgCfgModel__FileLineData(fileData)
@@ -383,7 +383,7 @@ class DataControllerUtils:
         # TODO: use index
         for fileData in cfgData.m_AllFilesByName.values():
             assert fileData is not None
-            assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+            assert type(fileData) is PgCfgModel__FileData
             assert fileData.IsAlive()
 
             if fileData.m_Path == newFilePath:
@@ -411,7 +411,7 @@ class DataControllerUtils:
         # TODO: use index
         for fileData in cfgData.m_AllFilesByName.values():
             assert fileData is not None
-            assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+            assert type(fileData) is PgCfgModel__FileData
             assert fileData.IsAlive()
 
             if fileData.m_Path == newFilePath:
@@ -446,7 +446,7 @@ class DataControllerUtils:
     ) -> int:
         assert fileData is not None
         assert fileLineData is not None
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
         assert type(fileData.m_Lines) is list
         assert type(fileLineData) is PgCfgModel__FileLineData
 
@@ -497,7 +497,7 @@ class DataControllerUtils:
         assert fileData is not None
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
         assert type(fileData.m_Path) is str
         assert fileData.m_Path != ""
 
@@ -519,7 +519,7 @@ class DataControllerUtils:
         assert fileData is not None
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
         assert fileData.m_Path != ""
 
         assert fileData.IsAlive()
@@ -540,7 +540,7 @@ class DataControllerUtils:
     ):
         assert type(filesByStrKeyDictionary) is dict
         assert type(fileKey) is str
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
 
         assert fileKey != ""
         assert fileData.IsAlive()
@@ -569,7 +569,7 @@ class DataControllerUtils:
     ):
         assert type(filesByStrKeyDictionary) is dict
         assert type(fileKey) is str
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
 
         assert fileKey != ""
         assert fileData.IsAlive()
@@ -600,7 +600,7 @@ class DataControllerUtils:
             for i in range(len(indexItemData)):
                 ptr = indexItemData[i]
                 assert ptr is not None
-                assert type(ptr) == PgCfgModel__FileData  # noqa: E721
+                assert type(ptr) is PgCfgModel__FileData
 
                 if ptr is fileData:
                     break
@@ -875,7 +875,7 @@ class DataControllerUtils:
         # 1.3 Set fileData
         fileData = fileLineData.m_Parent
         assert fileData is not None
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
         assert fileData.IsAlive()
 
         # 1.3
@@ -950,7 +950,7 @@ class DataControllerUtils:
         # 1.1 Set fileData
         fileData = fileLineData.m_Parent
         assert fileData is not None
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
         assert fileData.IsAlive()
 
         # 1.2 Set iFileLine

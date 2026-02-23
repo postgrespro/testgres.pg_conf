@@ -33,7 +33,7 @@ class TestSet001__Common:
 
         assert len(cfg.m_Data.m_Files) == 1
         fileData = cfg.m_Data.m_Files[0]
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
@@ -52,7 +52,7 @@ class TestSet001__Common:
 
         assert len(cfg.m_Data.m_Files) == 1
         fileData = cfg.m_Data.m_Files[0]
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
@@ -79,7 +79,7 @@ class TestSet001__Common:
 
         assert len(cfg.m_Data.m_Files) == 1
         fileData = cfg.m_Data.m_Files[0]
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
@@ -106,7 +106,7 @@ class TestSet001__Common:
 
         assert len(cfg.m_Data.m_Files) == 1
         fileData = cfg.m_Data.m_Files[0]
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 

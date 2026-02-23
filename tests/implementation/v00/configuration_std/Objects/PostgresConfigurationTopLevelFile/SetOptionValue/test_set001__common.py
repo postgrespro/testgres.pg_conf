@@ -52,7 +52,7 @@ class TestSet001__Common:
         assert isinstance(file, PgCfg_File)
         assert file.get_Path() == os.path.join(rootTmpDir, cfg.C_POSTGRESQL_CONF)
         assert file.m_FileData is not None
-        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file.m_FileData) is PgCfgModel__FileData
 
         assert len(file.get_Lines()) == 0
         assert len(list(file.get_Lines())) == 0
@@ -60,7 +60,7 @@ class TestSet001__Common:
         set_r1 = file.SetOptionValue(optName, 123)
 
         assert file.m_FileData is not None
-        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file.m_FileData) is PgCfgModel__FileData
 
         assert set_r1 is not None
         assert type(set_r1) == PgCfg_SetOptionResult_Base  # noqa: E721
@@ -154,7 +154,7 @@ class TestSet001__Common:
         set_r2 = file.SetOptionValue(optName, None)
 
         assert file.m_FileData is not None
-        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file.m_FileData) is PgCfgModel__FileData
 
         assert set_r2 is not None
         assert type(set_r2) == PgCfg_SetOptionResult_Base  # noqa: E721
@@ -168,7 +168,7 @@ class TestSet001__Common:
         set_r3 = file.SetOptionValue(optName, None)
 
         assert file.m_FileData is not None
-        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file.m_FileData) is PgCfgModel__FileData
 
         assert set_r3 is not None
         assert type(set_r3) == PgCfg_SetOptionResult_Base  # noqa: E721

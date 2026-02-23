@@ -59,7 +59,7 @@ class TestSet001__Common:
         assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
-        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file.m_FileData) is PgCfgModel__FileData
         assert file.m_FileData.m_Status == PgCfgModel__FileStatus.EXISTS
         assert file.m_FileData.m_LastModifiedTimestamp == lastMDate
         assert len(file.m_FileData.m_Lines) == 0
@@ -105,7 +105,7 @@ class TestSet001__Common:
         assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
-        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file.m_FileData) is PgCfgModel__FileData
         assert file.m_FileData.m_Status == PgCfgModel__FileStatus.EXISTS
         assert file.m_FileData.m_LastModifiedTimestamp == lastMDate
 

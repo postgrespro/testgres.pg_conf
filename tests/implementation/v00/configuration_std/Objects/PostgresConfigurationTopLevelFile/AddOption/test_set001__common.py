@@ -36,14 +36,14 @@ class TestSet001__Common:
         assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
         assert file.get_Path() == os.path.join(rootTmpDir, cfg.C_POSTGRESQL_CONF)
         assert file.m_FileData is not None
-        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file.m_FileData) is PgCfgModel__FileData
 
         C_OPT_NAME = "port"
 
         option = file.AddOption(C_OPT_NAME, 123)
 
         assert file.m_FileData is not None
-        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file.m_FileData) is PgCfgModel__FileData
 
         assert option is not None
         assert option.get_Configuration() is cfg

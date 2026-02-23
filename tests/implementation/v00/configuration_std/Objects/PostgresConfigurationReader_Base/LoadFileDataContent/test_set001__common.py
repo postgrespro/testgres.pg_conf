@@ -40,7 +40,7 @@ class TestSet001__Common:
         assert isinstance(file1, PgCfg_File_Base)
         assert isinstance(file1, PgCfg_TopLevelFile_Base)
         assert file1.m_FileData is not None
-        assert type(file1.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file1.m_FileData) is PgCfgModel__FileData
         assert file1.m_FileData.m_Lines is not None
         assert type(file1.m_FileData.m_Lines) is list
         assert type(file1.m_FileData.m_Path) is str
@@ -55,7 +55,7 @@ class TestSet001__Common:
 
         assert len(file1) == 0
         assert file1.m_FileData is not None
-        assert type(file1.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file1.m_FileData) is PgCfgModel__FileData
         assert file1.m_FileData.m_Lines is not None
         assert type(file1.m_FileData.m_Lines) is list
         assert len(file1.m_FileData.m_Lines) == 0

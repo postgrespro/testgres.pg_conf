@@ -121,8 +121,8 @@ class TestSet001__Common:
         )
         assert fileLineData.m_Items[0].m_Element is opt.m_OptionData
         assert fileLineData.m_Items[0].m_Element.m_Offset is None
-        assert type(fileLineData.m_Parent) == PgCfgModel__FileData  # noqa: E721
-        assert type(fileLineData.get_Parent()) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileLineData.m_Parent) is PgCfgModel__FileData
+        assert type(fileLineData.get_Parent()) is PgCfgModel__FileData
         assert fileLineData.get_Parent() is fileLineData.m_Parent
 
         file = fileLine.get_Parent()
@@ -133,7 +133,7 @@ class TestSet001__Common:
         fileData = fileLineData.m_Parent
         assert fileData is not None
         assert fileData is file.m_FileData
-        assert type(fileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(fileData) is PgCfgModel__FileData
         assert fileData.m_Path == os.path.join(
             cfg.m_Data.m_DataDir, "postgresql.auto.conf"
         )
@@ -144,7 +144,7 @@ class TestSet001__Common:
 
         assert type(cfg.m_Data.m_Files) is list
         assert len(cfg.m_Data.m_Files) == 1
-        assert type(cfg.m_Data.m_Files[0]) == PgCfgModel__FileData  # noqa: E721
+        assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
         assert cfg.m_Data.m_Files[0] is fileData
         assert type(cfg.m_Data.m_AllFilesByName) is dict
         assert len(cfg.m_Data.m_AllFilesByName) == 1
@@ -275,7 +275,7 @@ class TestSet001__Common:
         assert r1.Option is r1.m_Opt
 
         assert len(cfg.m_Data.m_Files) == 1
-        assert type(cfg.m_Data.m_Files[0]) == PgCfgModel__FileData  # noqa: E721
+        assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
         assert len(cfg.m_Data.m_Files[0].m_Lines) == 1
         assert len(cfg.m_Data.m_AllOptionsByName) == 1
 
@@ -288,7 +288,7 @@ class TestSet001__Common:
         assert r2.Option is None
 
         assert len(cfg.m_Data.m_Files) == 1
-        assert type(cfg.m_Data.m_Files[0]) == PgCfgModel__FileData  # noqa: E721
+        assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
         assert len(cfg.m_Data.m_Files[0].m_Lines) == 0
         assert len(cfg.m_Data.m_AllOptionsByName) == 0
 
@@ -333,7 +333,7 @@ class TestSet001__Common:
         file1 = cfg.AddTopLevelFile("postgresql.proxima.conf")
         assert file1 is not None
         assert type(file1) == PgCfg_TopLevelFile_Base  # noqa: E721
-        assert type(file1.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file1.m_FileData) is PgCfgModel__FileData
         assert type(file1.m_FileData.m_OptionsByName) is dict
         assert len(file1.m_FileData.m_OptionsByName) == 0
 
