@@ -56,7 +56,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert option is not None
-        assert type(option) == PgCfg_Option_Base  # noqa: E721
+        assert type(option) is PgCfg_Option_Base
         assert option.m_FileLine.m_FileLineData is fileLine.m_FileLineData
         assert type(option.m_OptionData) is PgCfgModel__OptionData
         assert option.m_OptionData.m_Offset == offset001
@@ -99,7 +99,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert option is not None
-        assert type(option) == PgCfg_Option_Base  # noqa: E721
+        assert type(option) is PgCfg_Option_Base
         assert option.m_FileLine.m_FileLineData is fileLine.m_FileLineData
         assert type(option.m_OptionData) is PgCfgModel__OptionData
         assert option.m_OptionData.m_Offset == offset001
@@ -142,7 +142,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert option is not None
-        assert type(option) == PgCfg_Option_Base  # noqa: E721
+        assert type(option) is PgCfg_Option_Base
         assert option.m_FileLine.m_FileLineData is fileLine.m_FileLineData
         assert type(option.m_OptionData) is PgCfgModel__OptionData
         assert option.m_OptionData.m_Offset == offset001
@@ -213,7 +213,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert option is not None
-        assert type(option) == PgCfg_Option_Base  # noqa: E721
+        assert type(option) is PgCfg_Option_Base
         assert option.m_FileLine.m_FileLineData is fileLine.m_FileLineData
         assert type(option.m_OptionData) is PgCfgModel__OptionData
         assert option.m_OptionData.m_Offset == 2
@@ -311,7 +311,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert option is not None
-        assert type(option) == PgCfg_Option_Base  # noqa: E721
+        assert type(option) is PgCfg_Option_Base
         assert option.m_FileLine.m_FileLineData is fileLine.m_FileLineData
         assert type(option.m_OptionData) is PgCfgModel__OptionData
         assert option.m_OptionData.m_Offset == 2
@@ -357,7 +357,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert option is not None
-        assert type(option) == PgCfg_Option_Base  # noqa: E721
+        assert type(option) is PgCfg_Option_Base
         assert option.m_FileLine.m_FileLineData is fileLine.m_FileLineData
         assert type(option.m_OptionData) is PgCfgModel__OptionData
         assert option.m_OptionData.m_Offset == 2

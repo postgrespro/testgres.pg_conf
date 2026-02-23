@@ -45,7 +45,7 @@ class TestSet001__Common:
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         option = cfg.AddOption(optName, 123)
-        assert type(option) == PgCfg_Option_Base  # noqa: E721
+        assert type(option) is PgCfg_Option_Base
         assert isinstance(option, PgCfg_Option)
 
         __class__.Helper__CheckStateOfCfgWithOneIntOpt(cfg, option, optName, 123)
@@ -57,13 +57,13 @@ class TestSet001__Common:
         cfg: PgCfg_Std, opt: PgCfg_Option_Base, optName: str, optValue: int
     ):
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
-        assert type(opt) == PgCfg_Option_Base  # noqa: E721
+        assert type(opt) is PgCfg_Option_Base
 
         assert opt.get_Configuration() is cfg
         assert opt.get_Name() == optName
         assert opt.get_Value() == optValue
 
-        assert type(opt) == PgCfg_Option_Base  # noqa: E721
+        assert type(opt) is PgCfg_Option_Base
         assert type(opt.m_OptionData) is PgCfgModel__OptionData
         assert opt.m_OptionData.m_Name == optName
         assert opt.m_OptionData.m_Value == optValue

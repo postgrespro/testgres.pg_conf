@@ -55,7 +55,7 @@ class TestSet001__Common:
         assert r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         r_option: PgCfg_Option_Base = r.Option
         assert r_option is not None
-        assert type(r_option) == PgCfg_Option_Base  # noqa: E721
+        assert type(r_option) is PgCfg_Option_Base
         assert isinstance(r_option, PostgresConfigurationOption)
         assert r.Option is r_option  # check a cache
 
@@ -82,7 +82,7 @@ class TestSet001__Common:
         assert r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_UPDATED
         r_option: PgCfg_Option_Base = r.Option
         assert r_option is not None
-        assert type(r_option) == PgCfg_Option_Base  # noqa: E721
+        assert type(r_option) is PgCfg_Option_Base
         assert isinstance(r_option, PostgresConfigurationOption)
         assert r.Option is r_option  # check a cache
 
@@ -93,13 +93,13 @@ class TestSet001__Common:
         cfg: PgCfg_Std, opt: PgCfg_Option_Base, optName: str, optValue: any
     ):
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
-        assert type(opt) == PgCfg_Option_Base  # noqa: E721
+        assert type(opt) is PgCfg_Option_Base
 
         assert opt.get_Configuration() is cfg
         assert opt.get_Name() == optName
         assert opt.get_Value() == optValue
 
-        assert type(opt) == PgCfg_Option_Base  # noqa: E721
+        assert type(opt) is PgCfg_Option_Base
         assert type(opt.m_OptionData) is PgCfgModel__OptionData
         assert opt.m_OptionData.m_Name == optName
         assert opt.m_OptionData.m_Value == optValue
@@ -292,7 +292,7 @@ class TestSet001__Common:
         assert len(cfg.m_Data.m_Files[0].m_Lines) == 0
         assert len(cfg.m_Data.m_AllOptionsByName) == 0
 
-        assert type(r1.Option) == PgCfg_Option_Base  # noqa: E721
+        assert type(r1.Option) is PgCfg_Option_Base
         assert isinstance(r1.Option, PgCfg_Option)
 
         with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
@@ -443,7 +443,7 @@ class TestSet001__Common:
         assert r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         r_option: PgCfg_Option_Base = r.Option
         assert r_option is not None
-        assert type(r_option) == PgCfg_Option_Base  # noqa: E721
+        assert type(r_option) is PgCfg_Option_Base
         assert isinstance(r_option, PostgresConfigurationOption)
         assert r.Option is r_option  # check a cache
 

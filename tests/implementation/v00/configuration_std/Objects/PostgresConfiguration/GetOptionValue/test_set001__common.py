@@ -41,7 +41,7 @@ class TestSet001__Common:
         assert set_r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         set_r_option: PgCfg_Option_Base = set_r.Option
         assert set_r_option is not None
-        assert type(set_r_option) == PgCfg_Option_Base  # noqa: E721
+        assert type(set_r_option) is PgCfg_Option_Base
         assert isinstance(set_r_option, PostgresConfigurationOption)
         assert set_r.Option is set_r_option  # check a cache
 

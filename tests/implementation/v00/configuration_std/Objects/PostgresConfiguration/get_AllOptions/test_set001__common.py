@@ -64,7 +64,7 @@ class TestSet001__Common:
         allOptions1_list: list[PgCfg_Option_Base] = []
         for option in allOptions1:
             assert option is not None
-            assert type(option) == PgCfg_Option_Base  # noqa: E721
+            assert type(option) is PgCfg_Option_Base
             assert isinstance(option, PgCfg_Option)
             allOptions1_list.append(option)
 
@@ -140,9 +140,9 @@ class TestSet001__Common:
 
         for opt in cfg.get_AllOptions():
             assert opt is not None
-            assert type(opt) == PgCfg_Option_Base  # noqa: E721
+            assert type(opt) is PgCfg_Option_Base
             assert isinstance(opt, PgCfg_Option)
-            assert type(opt) == PgCfg_Option_Base  # noqa: E721
+            assert type(opt) is PgCfg_Option_Base
 
             assert not opt.get_Name() in names
 

@@ -58,7 +58,7 @@ class TestSet001__Common:
             assert r1.m_OptData.m_Value[0] == "biha"
             assert r1.m_OptData.m_Value == ["biha"]
 
-            assert type(r1.Option) == PgCfg_Option_Base  # noqa: E721
+            assert type(r1.Option) is PgCfg_Option_Base
             assert r1.Option is r1.m_Opt  # check cache
             assert r1.Option.m_OptionData is r1.m_OptData
             assert r1.Option.get_Name() == C_OPT_NAME
@@ -127,7 +127,7 @@ class TestSet001__Common:
 
             assert r1.m_OptData.m_Value == expectedValue
 
-            assert type(r1.Option) == PgCfg_Option_Base  # noqa: E721
+            assert type(r1.Option) is PgCfg_Option_Base
             assert r1.Option is r1.m_Opt  # check cache
             assert r1.Option.m_OptionData is r1.m_OptData
             assert r1.Option.get_Name() == C_OPT_NAME

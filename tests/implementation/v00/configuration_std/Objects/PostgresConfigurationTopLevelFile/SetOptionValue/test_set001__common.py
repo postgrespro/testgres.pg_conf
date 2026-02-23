@@ -91,7 +91,7 @@ class TestSet001__Common:
 
         option = set_r1.Option
         assert option is not None
-        assert type(option) == PgCfg_Option_Base  # noqa: E721
+        assert type(option) is PgCfg_Option_Base
         assert option.get_Configuration() is cfg
         assert set_r1.Option is option  # check cache
 
@@ -194,7 +194,7 @@ class TestSet001__Common:
         file2 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
 
         option1 = file1.SetOptionValue(optName, 123).Option
-        assert type(option1) == PgCfg_Option_Base  # noqa: E721
+        assert type(option1) is PgCfg_Option_Base
 
         assert option1.get_Name() == optName
         assert option1.get_Value() == 123
