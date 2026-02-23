@@ -30,7 +30,7 @@ class OptionHandlerToPrepareSetValue__Std__Int(OptionHandlerToPrepareSetValue):
             return ctx.OptionValue
 
         optionName = ctx.OptionName
-        assert type(optionName) == str
+        assert type(optionName) == str  # noqa: E721
 
         if typeOfOptionValue == str:
             if not str(ctx.OptionValue).isnumeric():

@@ -19,16 +19,16 @@ class OptionHandlerToPrepareSetValueItem__Std__Str(OptionHandlerToPrepareSetValu
 
     # interface ----------------------------------------------------------
     def PrepareSetValueItem(self, ctx: OptionHandlerCtxToPrepareSetValueItem) -> any:
-        assert type(ctx) == OptionHandlerCtxToPrepareSetValueItem
+        assert type(ctx) == OptionHandlerCtxToPrepareSetValueItem  # noqa: E721
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
-        assert type(ctx.OptionName) == str
+        assert type(ctx.OptionName) == str  # noqa: E721
         assert ctx.OptionValueItem is not None
 
         typeOfOptionValue = type(ctx.OptionValueItem)
 
         if typeOfOptionValue != str:
             optionName = ctx.OptionName
-            assert type(optionName) == str
+            assert type(optionName) == str  # noqa: E721
             RaiseError.BadOptionValueItemType(optionName, typeOfOptionValue, str)
 
         return ctx.OptionValueItem

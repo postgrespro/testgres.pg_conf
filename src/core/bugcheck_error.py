@@ -187,9 +187,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def UnexpectedSituation(bugcheckSrc: str, bugcheckPoint: str, explain: str):
-        assert type(bugcheckSrc) == str
-        assert type(bugcheckPoint) == str
-        assert explain is None or type(explain) == str
+        assert type(bugcheckSrc) == str  # noqa: E721
+        assert type(bugcheckPoint) == str  # noqa: E721
+        assert explain is None or type(explain) == str  # noqa: E721
 
         errMsg = "[BUG CHECK] Unexpected situation in [{0}][{1}].".format(
             bugcheckSrc, bugcheckPoint
@@ -205,9 +205,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def UnknownOptionValueType(optionName: str, typeOfOptionValue: type):
-        assert type(optionName) == str
+        assert type(optionName) == str  # noqa: E721
         assert optionName != ""
-        assert type(typeOfOptionValue) == type
+        assert type(typeOfOptionValue) == type  # noqa: E721
 
         errMsg = "[BUG CHECK] Unknown value type [{1}] of option [{0}].".format(
             optionName, typeOfOptionValue.__name__

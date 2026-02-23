@@ -29,7 +29,7 @@ class Helpers:
     def ExtractFirstOptionFromIndexItem(
         optionName: str, indexItem: typing.Union[OptionData, typing.List[OptionData]]
     ) -> OptionData:
-        assert type(optionName) == str
+        assert type(optionName) == str  # noqa: E721
 
         typeOfIndexItem = type(indexItem)
 

@@ -56,7 +56,7 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
             return result
 
         optionName = ctx.OptionName
-        assert type(optionName) == str
+        assert type(optionName) == str  # noqa: E721
         RaiseError.BadOptionValueType(optionName, typeOfOptionValue, list)
 
 
