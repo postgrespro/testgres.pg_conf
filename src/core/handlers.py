@@ -170,7 +170,7 @@ class OptionHandlerToSetValue(OptionHandler):
 
     # interface ----------------------------------------------------------
     def SetOptionValue(self, ctx: OptionHandlerCtxToSetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToSetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToSetValue
         assert ctx.OptionName is not None
         assert ctx.OptionValue is not None
         RaiseError.MethodIsNotImplemented(__class__, "SetOptionValue")
@@ -271,7 +271,7 @@ class OptionHandlerToAddOption(OptionHandler):
 
     # interface ----------------------------------------------------------
     def AddOption(self, ctx: OptionHandlerCtxToSetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToSetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToSetValue
         RaiseError.MethodIsNotImplemented(__class__, "AddOption")
 
 

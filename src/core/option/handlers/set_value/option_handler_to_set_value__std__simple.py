@@ -20,7 +20,7 @@ class OptionHandlerToSetValue__Std__Simple(OptionHandlerToSetValue):
 
     # interface ----------------------------------------------------------
     def SetOptionValue(self, ctx: OptionHandlerCtxToSetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToSetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToSetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (
             ctx.TargetData is None
