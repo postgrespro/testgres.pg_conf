@@ -215,7 +215,7 @@ class PostgresConfigurationOption_Base(PostgresConfigurationOption):
             None,  # offset
         )
 
-        assert type(r) == PostgresConfigurationSetOptionValueResult_Base  # noqa: E721
+        assert type(r) is PostgresConfigurationSetOptionValueResult_Base
 
         assert r.m_OptData is None or r.m_OptData is self.m_OptionData
         assert r.m_Opt is None
@@ -244,7 +244,7 @@ class PostgresConfigurationOption_Base(PostgresConfigurationOption):
             value_item,
         )
 
-        assert type(r) == PostgresConfigurationSetOptionValueResult_Base  # noqa: E721
+        assert type(r) is PostgresConfigurationSetOptionValueResult_Base
 
         assert r.m_OptData is not None
         assert r.m_OptData is self.m_OptionData
@@ -4366,7 +4366,7 @@ class PostgresConfigurationController__Base:
 
         r = setHandler.SetOptionValue(ctx)
 
-        assert type(r) == PostgresConfigurationSetOptionValueResult_Base  # noqa: E721
+        assert type(r) is PostgresConfigurationSetOptionValueResult_Base
 
         return r
 
@@ -4412,7 +4412,7 @@ class PostgresConfigurationController__Base:
 
         r = setHandler.SetOptionValueItem(ctx)
 
-        assert type(r) == PostgresConfigurationSetOptionValueResult_Base  # noqa: E721
+        assert type(r) is PostgresConfigurationSetOptionValueResult_Base
 
         return r
 
