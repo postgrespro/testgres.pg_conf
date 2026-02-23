@@ -402,7 +402,7 @@ class OptionHandlerToPrepareSetValueItem(OptionHandler):
 
     # interface ----------------------------------------------------------
     def PrepareSetValueItem(self, ctx: OptionHandlerCtxToPrepareSetValueItem) -> str:
-        assert type(ctx) == OptionHandlerCtxToPrepareSetValueItem  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToPrepareSetValueItem
         RaiseError.MethodIsNotImplemented(__class__, "PrepareSetValueItem")
 
 
