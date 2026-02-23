@@ -459,7 +459,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         )
 
         assert option is not None
-        assert type(option) == PostgresConfigurationOption_Base  # noqa: E721
+        assert type(option) is PostgresConfigurationOption_Base
         return option
 
     # --------------------------------------------------------------------
@@ -822,7 +822,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         )
 
         assert option is not None
-        assert type(option) == PostgresConfigurationOption_Base  # noqa: E721
+        assert type(option) is PostgresConfigurationOption_Base
         return option
 
     # --------------------------------------------------------------------
@@ -1180,7 +1180,7 @@ class PostgresConfigurationSetOptionValueResult_Base(
             )
 
         assert self.m_Opt is not None
-        assert type(self.m_Opt) == PostgresConfigurationOption_Base  # noqa: E721
+        assert type(self.m_Opt) is PostgresConfigurationOption_Base
         return self.m_Opt
 
     # ---------------------------------------------------------------------
@@ -1480,7 +1480,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
 
         assert option is not None
-        assert type(option) == PostgresConfigurationOption_Base  # noqa: E721
+        assert type(option) is PostgresConfigurationOption_Base
         assert isinstance(option, PostgresConfigurationOption_Base)
         assert isinstance(option, PostgresConfigurationOption)
         return option
@@ -2213,7 +2213,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 option = PostgresConfigurationFactory_Base.GetObject(self, optionData)
 
                 assert option is not None
-                assert type(option) == PostgresConfigurationOption_Base  # noqa: E721
+                assert type(option) is PostgresConfigurationOption_Base
                 assert option.m_OptionData is optionData
             except:  # rollback line with option
                 assert optionData.IsAlive()
@@ -2240,7 +2240,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             raise
 
         assert option is not None
-        assert type(option) == PostgresConfigurationOption_Base  # noqa: E721
+        assert type(option) is PostgresConfigurationOption_Base
         assert option.m_OptionData is optionData
         assert option.m_OptionData.IsAlive()
         return option
@@ -2319,7 +2319,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             option = PostgresConfigurationFactory_Base.GetObject(self, optionData)
 
             assert option is not None
-            assert type(option) == PostgresConfigurationOption_Base  # noqa: E721
+            assert type(option) is PostgresConfigurationOption_Base
             assert option.m_OptionData is optionData
         except:
             PgCfgModel__DataControllerUtils.Option__delete(self.m_Data, optionData())
@@ -2330,7 +2330,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             raise
 
         assert option is not None
-        assert type(option) == PostgresConfigurationOption_Base  # noqa: E721
+        assert type(option) is PostgresConfigurationOption_Base
         assert option.m_OptionData is optionData
         assert option.m_OptionData.IsAlive()
         return option
@@ -2403,7 +2403,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             option = PostgresConfigurationFactory_Base.GetObject(self, optionData)
 
             assert option is not None
-            assert type(option) == PostgresConfigurationOption_Base  # noqa: E721
+            assert type(option) is PostgresConfigurationOption_Base
             assert option.m_OptionData is optionData
         except:
             PgCfgModel__DataControllerUtils.FileLine__delete(
@@ -2416,7 +2416,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             raise
 
         assert option is not None
-        assert type(option) == PostgresConfigurationOption_Base  # noqa: E721
+        assert type(option) is PostgresConfigurationOption_Base
         assert option.m_OptionData is optionData
         assert option.m_OptionData.IsAlive()
         return option
@@ -4319,7 +4319,7 @@ class PostgresConfigurationController__Base:
 
         option = addHandler.AddOption(ctx)
         assert option is not None
-        assert type(option) == PostgresConfigurationOption_Base  # noqa: E721
+        assert type(option) is PostgresConfigurationOption_Base
         return option
 
     # --------------------------------------------------------------------
