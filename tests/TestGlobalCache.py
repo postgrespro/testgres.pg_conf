@@ -25,7 +25,7 @@ class TestGlobalCache:
         assert isinstance(globalResourceID, str)
         assert __class__.sm_Guard is not None
         assert __class__.sm_Dict is not None
-        assert type(__class__.sm_Dict) == dict  # noqa: E721
+        assert type(__class__.sm_Dict) is dict
 
         with __class__.sm_Guard:
             if globalResourceID in __class__.sm_Dict.keys():
@@ -42,11 +42,11 @@ class TestGlobalCache:
     def ReleaseAllResources():
         assert __class__.sm_Guard is not None
         assert __class__.sm_Dict is not None
-        assert type(__class__.sm_Dict) == dict  # noqa: E721
+        assert type(__class__.sm_Dict) is dict
 
         with __class__.sm_Guard:
             emptyDict: typing.Dict[str, any] = dict()
-            assert type(emptyDict) == dict  # noqa: E721
+            assert type(emptyDict) is dict
 
             curDict = __class__.sm_Dict
 

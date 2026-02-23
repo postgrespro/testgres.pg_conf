@@ -21,10 +21,10 @@ class CfgFileReader(ConfigurationFileReader):
 
     # --------------------------------------------------------------------
     def ReadLine(self) -> typing.Optional[str]:
-        assert type(self.m_file) == io.StringIO  # noqa: E721
+        assert type(self.m_file) is io.StringIO
 
         r = self.m_file.readline()
-        assert type(r) == str  # noqa: E721
+        assert type(r) is str
         if not r:
             assert r == ""
             return None

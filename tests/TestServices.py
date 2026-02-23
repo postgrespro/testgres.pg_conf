@@ -72,7 +72,7 @@ class TestServices:
             return
 
         tmpDir = __class__.Helper__GetCurTestTmpDir(function)
-        assert type(tmpDir) == str  # noqa: E721
+        assert type(tmpDir) is str
 
         if not os.path.exists(tmpDir):
             return

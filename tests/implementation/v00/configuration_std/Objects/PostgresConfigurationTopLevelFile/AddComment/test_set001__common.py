@@ -33,7 +33,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -43,38 +43,36 @@ class TestSet001__Common:
 
         file = cfg.get_AllFiles().__iter__().__next__()
         assert file is not None
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
 
         assert file.get_Path() == os.path.join(rootTmpDir, "postgresql.auto.conf")
 
         fileLines = file.get_Lines()
         assert fileLines is not None
-        assert type(fileLines) == PgCfg_FileLines_Base  # noqa: E721
+        assert type(fileLines) is PgCfg_FileLines_Base
         assert isinstance(fileLines, PgCfg_FileLines)
 
         assert len(fileLines) == 1
 
         comment2 = file.AddComment("HELLO!")
         assert comment2 is not None
-        assert type(comment2) == PgCfg_Comment_Base  # noqa: E721
+        assert type(comment2) is PgCfg_Comment_Base
         assert isinstance(comment2, PgCfg_Comment)
 
         assert len(fileLines) == 2
         fileLines_v: list[PgCfg_FileLine_Base] = list(fileLines)
         assert len(fileLines_v) == 2
-        assert type(fileLines_v[-1]) == PgCfg_FileLine_Base  # noqa: E721
-        assert (  # noqa: E721
-            type(fileLines_v[-1].m_FileLineData) == PgCfgModel__FileLineData
-        )
-        assert type(fileLines_v[-1].m_FileLineData.m_Items) == list  # noqa: E721
+        assert type(fileLines_v[-1]) is PgCfg_FileLine_Base
+        assert type(fileLines_v[-1].m_FileLineData) is PgCfgModel__FileLineData
+        assert type(fileLines_v[-1].m_FileLineData.m_Items) is list
         assert len(fileLines_v[-1].m_FileLineData.m_Items) == 1
-        assert (  # noqa: E721
+        assert (
             type(fileLines_v[-1].m_FileLineData.m_Items[0])
-            == PgCfgModel__FileLineData.tagItem
+            is PgCfgModel__FileLineData.tagItem
         )
-        assert (  # noqa: E721
+        assert (
             type(fileLines_v[-1].m_FileLineData.m_Items[0].m_Element)
-            == PgCfgModel__CommentData
+            is PgCfgModel__CommentData
         )
         assert fileLines_v[-1].m_FileLineData.m_Items[0].m_Element.m_Offset is None
         assert fileLines_v[-1].m_FileLineData.m_Items[0].m_Element.m_Text == "HELLO!"
@@ -100,7 +98,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -110,21 +108,21 @@ class TestSet001__Common:
 
         file = cfg.get_AllFiles().__iter__().__next__()
         assert file is not None
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
         assert len(file) == 1
 
         comment1 = file.AddComment("1")
         assert comment1 is not None
-        assert type(comment1) == PgCfg_Comment_Base  # noqa: E721
+        assert type(comment1) is PgCfg_Comment_Base
         assert isinstance(comment1, PgCfg_Comment)
         assert comment1.get_Text() == "1"
         assert len(file) == 2
 
         comment2 = file.AddComment("")
         assert comment2 is not None
-        assert type(comment2) == PgCfg_Comment_Base  # noqa: E721
+        assert type(comment2) is PgCfg_Comment_Base
         assert isinstance(comment2, PgCfg_Comment)
         assert comment2.get_Text() == ""
         assert len(file) == 3

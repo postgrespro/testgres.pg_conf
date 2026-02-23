@@ -27,23 +27,23 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert file.get_Path() == os.path.join(rootTmpDir, cfg.C_POSTGRESQL_CONF)
         assert file.m_FileData is not None
-        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file.m_FileData) is PgCfgModel__FileData
 
         C_OPT_NAME = "port"
 
         option = file.AddOption(C_OPT_NAME, 123)
 
         assert file.m_FileData is not None
-        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file.m_FileData) is PgCfgModel__FileData
 
         assert option is not None
         assert option.get_Configuration() is cfg
@@ -53,7 +53,7 @@ class TestSet001__Common:
         assert option.get_Name() == C_OPT_NAME
         assert option.get_Value() == 123
         assert option.m_OptionData is not None
-        assert type(option.m_OptionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(option.m_OptionData) is PgCfgModel__OptionData
 
         assert C_OPT_NAME in file.m_FileData.m_OptionsByName.keys()
         assert file.m_FileData.m_OptionsByName[C_OPT_NAME] is option.m_OptionData
@@ -68,7 +68,7 @@ class TestSet001__Common:
         C_OPT_NAME = "port"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -101,7 +101,7 @@ class TestSet001__Common:
         C_OPT_NAME = "proxima.port"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -138,7 +138,7 @@ class TestSet001__Common:
         C_OPT_NAME = "proxima.port"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -161,7 +161,7 @@ class TestSet001__Common:
         C_OPT_NAME = "proxima.port"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -184,7 +184,7 @@ class TestSet001__Common:
         C_OPT_NAME = "proxima.port"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -201,7 +201,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -218,7 +218,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 

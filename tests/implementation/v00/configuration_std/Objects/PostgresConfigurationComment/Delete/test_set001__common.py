@@ -20,7 +20,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -34,7 +34,7 @@ class TestSet001__Common:
 
         assert len(fileLine) == 1
 
-        assert type(comment) == PgCfg_Comment_Base  # noqa: E721
+        assert type(comment) is PgCfg_Comment_Base
 
         comment.Delete(True)
 
@@ -64,7 +64,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -78,7 +78,7 @@ class TestSet001__Common:
 
         assert len(fileLine) == 1
 
-        assert type(comment) == PgCfg_Comment_Base  # noqa: E721
+        assert type(comment) is PgCfg_Comment_Base
 
         comment.Delete(False)
 

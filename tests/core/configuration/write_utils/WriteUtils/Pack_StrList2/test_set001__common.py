@@ -21,9 +21,9 @@ class TestSet001__Common:
         result: str
 
         def __init__(self, d: str, s: typing.List[str], r: str):
-            assert type(d) == str  # noqa: E721
-            assert type(s) == list  # noqa: E721
-            assert type(r) == str  # noqa: E721
+            assert type(d) is str
+            assert type(s) is list
+            assert type(r) is str
 
             self.descr = d
             self.source = s
@@ -129,12 +129,12 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_Data002, ids=[x.descr for x in sm_Data002])
     def data002(self, request: pytest.FixtureRequest) -> tagData002:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == __class__.tagData002  # noqa: E721
+        assert type(request.param) is __class__.tagData002
         return request.param
 
     # --------------------------------------------------------------------
     def test_002__generic(self, data002: tagData002):
-        assert type(data002) == __class__.tagData002  # noqa: E721
+        assert type(data002) is __class__.tagData002
 
         assert WriteUtils.Pack_StrList2(data002.source) == data002.result
 

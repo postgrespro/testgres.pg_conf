@@ -25,9 +25,9 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
 
     # interface ----------------------------------------------------------
     def PrepareSetValue(self, ctx: OptionHandlerCtxToPrepareSetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToPrepareSetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToPrepareSetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
-        assert type(ctx.OptionName) == str  # noqa: E721
+        assert type(ctx.OptionName) is str
         assert ctx.OptionValue is not None
 
         typeOfOptionValue = type(ctx.OptionValue)
@@ -35,7 +35,7 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
         if typeOfOptionValue == str:
             result = ReadUtils.Unpack_StrList2(ctx.OptionValue)
             assert result is not None
-            assert type(result) == list  # noqa: E721
+            assert type(result) is list
             return result
         elif typeOfOptionValue == list:
             result: typing.List[str] = list()
@@ -56,7 +56,7 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
             return result
 
         optionName = ctx.OptionName
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         RaiseError.BadOptionValueType(optionName, typeOfOptionValue, list)
 
 

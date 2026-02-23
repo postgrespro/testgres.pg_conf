@@ -36,16 +36,16 @@ class TestSet001__Common:
     )
     def offset001(self, request: pytest.FixtureRequest) -> typing.Optional[int]:
         assert isinstance(request, pytest.FixtureRequest)
-        assert request.param is None or type(request.param) == int  # noqa: E721
+        assert request.param is None or type(request.param) is int
         return request.param
 
     # --------------------------------------------------------------------
     def test_001(self, request: pytest.FixtureRequest, offset001: typing.Optional[int]):
         assert isinstance(request, pytest.FixtureRequest)
-        assert offset001 is None or type(offset001) == int  # noqa: E721
+        assert offset001 is None or type(offset001) is int
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -62,10 +62,10 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert include is not None
-        assert type(include) == PgCfg_Include_Base  # noqa: E721
+        assert type(include) is PgCfg_Include_Base
         assert include.m_FileLine.m_FileLineData is fileLine.m_FileLineData
         assert include.m_FileLine is fileLine
-        assert type(include.m_IncludeData) == PgCfgModel__IncludeData  # noqa: E721
+        assert type(include.m_IncludeData) is PgCfgModel__IncludeData
         assert include.m_IncludeData.m_Offset == offset001
 
         assert include.m_IncludeData.IsAlive()
@@ -76,7 +76,7 @@ class TestSet001__Common:
         assert include.get_Parent() is fileLine
 
         includedFile = include.get_File()
-        assert type(includedFile) == PgCfg_IncludedFile_Base  # noqa: E721
+        assert type(includedFile) is PgCfg_IncludedFile_Base
         # assert include.get_File() is includedFile
         assert includedFile.get_Path() == os.path.join(rootTmpDir, C_FILE_NAME)
         assert includedFile.get_Parent() is include
@@ -86,7 +86,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -106,9 +106,9 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert option is not None
-        assert type(option) == PgCfg_Option_Base  # noqa: E721
+        assert type(option) is PgCfg_Option_Base
         assert option.m_FileLine.m_FileLineData is fileLine.m_FileLineData
-        assert type(option.m_OptionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(option.m_OptionData) is PgCfgModel__OptionData
         assert option.m_OptionData.m_Offset == 2
 
         assert option.m_OptionData.IsAlive()
@@ -126,7 +126,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -152,7 +152,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 

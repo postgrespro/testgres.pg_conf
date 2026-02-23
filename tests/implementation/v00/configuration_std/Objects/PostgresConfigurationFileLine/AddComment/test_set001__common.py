@@ -31,16 +31,16 @@ class TestSet001__Common:
     )
     def offset001(self, request: pytest.FixtureRequest) -> typing.Optional[int]:
         assert isinstance(request, pytest.FixtureRequest)
-        assert request.param is None or type(request.param) == int  # noqa: E721
+        assert request.param is None or type(request.param) is int
         return request.param
 
     # --------------------------------------------------------------------
     def test_001(self, request: pytest.FixtureRequest, offset001: typing.Optional[int]):
         assert isinstance(request, pytest.FixtureRequest)
-        assert offset001 is None or type(offset001) == int  # noqa: E721
+        assert offset001 is None or type(offset001) is int
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -55,9 +55,9 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert comment is not None
-        assert type(comment) == PgCfg_Comment_Base  # noqa: E721
+        assert type(comment) is PgCfg_Comment_Base
         assert comment.m_FileLine is fileLine
-        assert type(comment.m_CommentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(comment.m_CommentData) is PgCfgModel__CommentData
         assert comment.m_CommentData.m_Offset == offset001
 
         assert comment.m_CommentData.IsAlive()
@@ -73,7 +73,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -91,9 +91,9 @@ class TestSet001__Common:
             fileLine.AddComment("comment2", 4)
 
         assert comment is not None
-        assert type(comment) == PgCfg_Comment_Base  # noqa: E721
+        assert type(comment) is PgCfg_Comment_Base
         assert comment.m_FileLine is fileLine
-        assert type(comment.m_CommentData) == PgCfgModel__CommentData  # noqa: E721
+        assert type(comment.m_CommentData) is PgCfgModel__CommentData
         assert comment.m_CommentData.m_Offset == 3
 
         assert comment.m_CommentData.IsAlive()
@@ -109,7 +109,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 

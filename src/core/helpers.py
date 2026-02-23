@@ -13,14 +13,14 @@ import typing
 
 class Helpers:
     def ExtractOptionDataName(option: typing.Union[str, OptionData]) -> str:
-        assert type(option) == str or type(option) == OptionData  # noqa: E721
+        assert type(option) is str or type(option) is OptionData
 
         typeOption = type(option)
 
-        if typeOption == str:  # noqa: E721
+        if typeOption is str:
             return option
 
-        if typeOption == OptionData:  # noqa: E721
+        if typeOption is OptionData:
             return option.m_Name
 
         BugCheckError.UnkObjectDataType(typeOption)
@@ -29,7 +29,7 @@ class Helpers:
     def ExtractFirstOptionFromIndexItem(
         optionName: str, indexItem: typing.Union[OptionData, typing.List[OptionData]]
     ) -> OptionData:
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         typeOfIndexItem = type(indexItem)
 
@@ -40,7 +40,7 @@ class Helpers:
         if typeOfIndexItem == list:
             assert len(indexItem) > 1
             assert indexItem[0] is not None
-            assert type(indexItem[0]) == OptionData  # noqa: E721
+            assert type(indexItem[0]) is OptionData
             assert indexItem[0].m_Name == optionName
             return indexItem[0]
 
@@ -56,7 +56,7 @@ class Helpers:
 
         for x in container:
             assert x is not None
-            assert type(x) == type(value)  # noqa: E721
+            assert type(x) is type(value)
 
             if x == value:
                 return True
@@ -69,8 +69,8 @@ class Helpers:
     ) -> str:
         assert cfgOsOps is not None
         assert isinstance(cfgOsOps, ConfigurationOsOps)
-        assert type(baseFolder) == str  # noqa: E721
-        assert type(filePath) == str  # noqa: E721
+        assert type(baseFolder) is str
+        assert type(filePath) is str
         assert filePath != ""
 
         newFilePath = None
@@ -81,7 +81,7 @@ class Helpers:
             newFilePath = cfgOsOps.Path_Join(baseFolder, filePath)
             newFilePath = cfgOsOps.Path_NormPath(newFilePath)
 
-        assert type(newFilePath) == str  # noqa: E721
+        assert type(newFilePath) is str
         assert newFilePath != ""
 
         newFilePath = cfgOsOps.Path_AbsPath(newFilePath)

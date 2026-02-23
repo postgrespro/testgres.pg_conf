@@ -19,15 +19,15 @@ class OptionHandlerToAddOption__Std(OptionHandlerToAddOption):
 
     # interface ----------------------------------------------------------
     def AddOption(self, ctx: OptionHandlerCtxToAddOption) -> any:
-        assert type(ctx) == OptionHandlerCtxToAddOption  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToAddOption
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (
             ctx.Target is None
-            or type(ctx.Target) == FileData  # noqa: E721
-            or type(ctx.Target) == FileLineData  # noqa: E721
+            or type(ctx.Target) is FileData
+            or type(ctx.Target) is FileLineData
         )
-        assert ctx.OptionOffset is None or type(ctx.OptionOffset) == int  # noqa: E721
-        assert type(ctx.OptionName) == str  # noqa: E721
+        assert ctx.OptionOffset is None or type(ctx.OptionOffset) is int
+        assert type(ctx.OptionName) is str
         assert ctx.OptionName is not None
 
         return ctx.DataHandler.DataHandler__AddSimpleOption(

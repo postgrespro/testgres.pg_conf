@@ -20,14 +20,14 @@ class OptionHandlerToSetValueItem__Std__Unique(OptionHandlerToSetValueItem):
 
     # interface ----------------------------------------------------------
     def SetOptionValueItem(self, ctx: OptionHandlerCtxToSetValueItem) -> any:
-        assert type(ctx) == OptionHandlerCtxToSetValueItem  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToSetValueItem
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (
             ctx.TargetData is None
-            or type(ctx.TargetData) == FileData  # noqa: E721
-            or type(ctx.TargetData) == OptionData  # noqa: E721
+            or type(ctx.TargetData) is FileData
+            or type(ctx.TargetData) is OptionData
         )
-        assert type(ctx.OptionName) == str  # noqa: E721
+        assert type(ctx.OptionName) is str
         assert ctx.OptionValueItem is not None
 
         return ctx.DataHandler.DataHandler__SetUniqueOptionValueItem(

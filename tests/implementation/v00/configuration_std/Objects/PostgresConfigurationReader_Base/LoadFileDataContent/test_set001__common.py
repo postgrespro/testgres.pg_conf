@@ -31,7 +31,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
 
@@ -40,10 +40,10 @@ class TestSet001__Common:
         assert isinstance(file1, PgCfg_File_Base)
         assert isinstance(file1, PgCfg_TopLevelFile_Base)
         assert file1.m_FileData is not None
-        assert type(file1.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file1.m_FileData) is PgCfgModel__FileData
         assert file1.m_FileData.m_Lines is not None
-        assert type(file1.m_FileData.m_Lines) == list  # noqa: E721
-        assert type(file1.m_FileData.m_Path) == str  # noqa: E721
+        assert type(file1.m_FileData.m_Lines) is list
+        assert type(file1.m_FileData.m_Path) is str
         assert file1.m_FileData.m_Path == os.path.join(
             rootTmpDir,
             cfg.C_POSTGRESQL_CONF,
@@ -55,9 +55,9 @@ class TestSet001__Common:
 
         assert len(file1) == 0
         assert file1.m_FileData is not None
-        assert type(file1.m_FileData) == PgCfgModel__FileData  # noqa: E721
+        assert type(file1.m_FileData) is PgCfgModel__FileData
         assert file1.m_FileData.m_Lines is not None
-        assert type(file1.m_FileData.m_Lines) == list  # noqa: E721
+        assert type(file1.m_FileData.m_Lines) is list
         assert len(file1.m_FileData.m_Lines) == 0
 
     # --------------------------------------------------------------------
@@ -65,7 +65,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -84,7 +84,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -103,7 +103,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -118,9 +118,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__CommentData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__CommentData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 1
         assert fileLineData0.m_Items[0].m_Element.m_Text == "  comment   "
 
@@ -129,7 +127,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -144,17 +142,13 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__CommentData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__CommentData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Text == "comment1"
 
         fileLineData1 = file1.m_FileData.m_Lines[1]
         assert len(fileLineData1.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData1.m_Items[0].m_Element) == PgCfgModel__CommentData
-        )
+        assert type(fileLineData1.m_Items[0].m_Element) is PgCfgModel__CommentData
         assert fileLineData1.m_Items[0].m_Element.m_Offset == 4
         assert fileLineData1.m_Items[0].m_Element.m_Text == "comment2"
 
@@ -175,18 +169,18 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_data201__assign, ids=[x[0] for x in sm_data201__assign])
     def data201__assign(self, request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
+        assert type(request.param) is tuple
         assert len(request.param) == 2
-        assert type(request.param[1]) == str  # noqa: E721
+        assert type(request.param[1]) is str
         return request.param[1]
 
     # --------------------------------------------------------------------
     def test_201__option(self, request: pytest.FixtureRequest, data201__assign: str):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data201__assign) == str  # noqa: E721
+        assert type(data201__assign) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -201,9 +195,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 123
@@ -213,7 +205,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -228,9 +220,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 234
@@ -240,7 +230,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -255,9 +245,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 234
@@ -284,9 +272,9 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_data204, ids=[x[0] for x in sm_data204])
     def data204_tail(self, request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
+        assert type(request.param) is tuple
         assert len(request.param) == 2
-        assert type(request.param[1]) == str  # noqa: E721
+        assert type(request.param[1]) is str
         return request.param[1]
 
     # --------------------------------------------------------------------
@@ -294,10 +282,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data204_tail: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data204_tail) == str  # noqa: E721
+        assert type(data204_tail) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -315,7 +303,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -330,16 +318,12 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 2
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 123
 
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[1].m_Element) == PgCfgModel__CommentData
-        )
+        assert type(fileLineData0.m_Items[1].m_Element) is PgCfgModel__CommentData
         assert fileLineData0.m_Items[1].m_Element.m_Offset == 9
         assert fileLineData0.m_Items[1].m_Element.m_Text == "comment"
 
@@ -348,7 +332,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -363,16 +347,12 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 2
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 123
 
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[1].m_Element) == PgCfgModel__CommentData
-        )
+        assert type(fileLineData0.m_Items[1].m_Element) is PgCfgModel__CommentData
         assert fileLineData0.m_Items[1].m_Element.m_Offset == 8
         assert fileLineData0.m_Items[1].m_Element.m_Text == "comment "
 
@@ -381,7 +361,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -396,9 +376,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 123
@@ -408,10 +386,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data201__assign: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data201__assign) == str  # noqa: E721
+        assert type(data201__assign) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -426,9 +404,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "listen_addresses"
         assert fileLineData0.m_Items[0].m_Element.m_Value == ""
@@ -438,7 +414,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -453,9 +429,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "listen_addresses"
         assert fileLineData0.m_Items[0].m_Element.m_Value == "'"
@@ -479,7 +453,7 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_endData304, ids=[x[0] for x in sm_endData304])
     def endData304(self, request: pytest.FixtureRequest) -> typing.Tuple[str, str, str]:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
+        assert type(request.param) is tuple
         assert len(request.param) == 3
         return request.param
 
@@ -488,10 +462,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, endData304: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(endData304) == tuple  # noqa: E721
+        assert type(endData304) is tuple
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -506,9 +480,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__OptionData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__OptionData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "listen_addresses"
         assert fileLineData0.m_Items[0].m_Element.m_Value == endData304[2]
@@ -527,8 +499,8 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_data3E01, ids=[x[0] for x in sm_data3E01])
     def endData3E01(self, request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
-        assert type(request.param[1]) == str  # noqa: E721
+        assert type(request.param) is tuple
+        assert type(request.param[1]) is str
         return request.param[1]
 
     # --------------------------------------------------------------------
@@ -536,10 +508,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, endData3E01: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(endData3E01) == str  # noqa: E721
+        assert type(endData3E01) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -565,8 +537,8 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_data3E02, ids=[x[0] for x in sm_data3E02])
     def endData3E02(self, request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
-        assert type(request.param[1]) == str  # noqa: E721
+        assert type(request.param) is tuple
+        assert type(request.param[1]) is str
         return request.param[1]
 
     # --------------------------------------------------------------------
@@ -574,10 +546,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, endData3E02: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(endData3E02) == str  # noqa: E721
+        assert type(endData3E02) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -598,7 +570,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -619,7 +591,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -634,9 +606,7 @@ class TestSet001__Common:
 
         fileLineData0 = file1.m_FileData.m_Lines[0]
         assert len(fileLineData0.m_Items) == 1
-        assert (  # noqa: E721
-            type(fileLineData0.m_Items[0].m_Element) == PgCfgModel__IncludeData
-        )
+        assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__IncludeData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Path == "a.conf"
 
@@ -648,7 +618,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -677,10 +647,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data4E02: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data4E02) == str  # noqa: E721
+        assert type(data4E02) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -699,7 +669,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -729,10 +699,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data4E04: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data4E04) == str  # noqa: E721
+        assert type(data4E04) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -772,10 +742,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data4E05: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data4E05) == str  # noqa: E721
+        assert type(data4E05) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 

@@ -53,7 +53,7 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
     def ReadLine(self) -> typing.Optional[str]:
         assert isinstance(self.m_file, io.TextIOWrapper)
         r = self.m_file.readline()
-        assert type(r) == str  # noqa: E721
+        assert type(r) is str
         if not r:
             assert r == ""
             return None
@@ -63,7 +63,7 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
 
     # --------------------------------------------------------------------
     def Overwrite(self, text: str) -> None:
-        assert type(text) == str  # noqa: E721
+        assert type(text) is str
         assert isinstance(self.m_file, io.TextIOWrapper)
         self.m_file.seek(0)
         self.m_file.write(text)
@@ -84,10 +84,10 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
         assert isinstance(self.m_file, io.TextIOWrapper)
 
         fd = self.m_file.fileno()
-        assert type(fd) == int  # noqa: E721
+        assert type(fd) is int
 
         lastMDate = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-        assert type(lastMDate) == datetime.datetime  # noqa: E721
+        assert type(lastMDate) is datetime.datetime
         return lastMDate
 
 
@@ -97,50 +97,50 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
 
 class ConfigurationOsOps(abstract.ConfigurationOsOps):
     def Path_IsAbs(self, a: str) -> bool:
-        assert type(a) == str  # noqa: E721
+        assert type(a) is str
         return os.path.isabs(a)
 
     def Path_Join(self, a: str, *p: tuple) -> str:
-        assert type(a) == str  # noqa: E721
-        assert type(p) == tuple  # noqa: E721
+        assert type(a) is str
+        assert type(p) is tuple
         return os.path.join(a, *p)
 
     def Path_NormPath(self, a: str) -> str:
-        assert type(a) == str  # noqa: E721
+        assert type(a) is str
         return os.path.normpath(a)
 
     def Path_AbsPath(self, a: str) -> str:
-        assert type(a) == str  # noqa: E721
+        assert type(a) is str
         return os.path.abspath(a)
 
     def Path_NormCase(self, a: str) -> str:
-        assert type(a) == str  # noqa: E721
+        assert type(a) is str
         return os.path.normcase(a)
 
     def Path_DirName(self, a: str) -> str:
-        assert type(a) == str  # noqa: E721
+        assert type(a) is str
         return os.path.dirname(a)
 
     def Path_BaseName(self, a: str) -> str:
-        assert type(a) == str  # noqa: E721
+        assert type(a) is str
         return os.path.basename(a)
 
     def Remove(self, a: str) -> str:
-        assert type(a) == str  # noqa: E721
+        assert type(a) is str
         os.remove(a)
 
     def OpenFileToRead(self, filePath: str) -> ConfigurationOsFile:
-        assert type(filePath) == str  # noqa: E721
+        assert type(filePath) is str
         f = open(filePath)
         return ConfigurationOsFile(f)
 
     def OpenFileToWrite(self, filePath: str) -> ConfigurationOsFile:
-        assert type(filePath) == str  # noqa: E721
+        assert type(filePath) is str
         f = open(filePath, mode="r+")
         return ConfigurationOsFile(f)
 
     def CreateFile(self, filePath: str) -> ConfigurationOsFile:
-        assert type(filePath) == str  # noqa: E721
+        assert type(filePath) is str
         f = open(filePath, mode="x")
         return ConfigurationOsFile(f)
 

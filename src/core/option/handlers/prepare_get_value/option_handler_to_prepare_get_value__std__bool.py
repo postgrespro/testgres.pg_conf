@@ -17,13 +17,13 @@ class OptionHandlerToPrepareGetValue__Std__Bool(OptionHandlerToPrepareGetValue):
 
     # interface ----------------------------------------------------------
     def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToPrepareGetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToPrepareGetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
-        assert type(ctx.OptionName) == str  # noqa: E721
+        assert type(ctx.OptionName) is str
         assert ctx.OptionValue is not None
 
         # [2025-04-13] Research
-        assert type(ctx.OptionValue) == bool  # noqa: E721
+        assert type(ctx.OptionValue) is bool
 
         return bool(ctx.OptionValue)
 

@@ -9,8 +9,8 @@ import datetime
 
 class RaiseError:
     def MethodIsNotImplemented(classType: type, methodName: str):
-        assert type(classType) == type  # noqa: E721
-        assert type(methodName) == str  # noqa: E721
+        assert type(classType) is type
+        assert type(methodName) is str
         assert methodName != ""
 
         errMsg = "Method {0}::{1} is not implemented.".format(
@@ -20,8 +20,8 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def GetPropertyIsNotImplemented(classType: type, methodName: str):
-        assert type(classType) == type  # noqa: E721
-        assert type(methodName) == str  # noqa: E721
+        assert type(classType) is type
+        assert type(methodName) is str
         assert methodName != ""
 
         errMsg = "Get property {0}::{1} is not implemented.".format(
@@ -37,7 +37,7 @@ class RaiseError:
     # --------------------------------------------------------------------
     def OptionNameHasBadType(nameType: type):
         assert nameType is not None
-        assert type(nameType) == type  # noqa: E721
+        assert type(nameType) is type
 
         errMsg = "Option name has nad type [{0}]".format(nameType.__name__)
         raise Exception(errMsg)
@@ -54,7 +54,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def NoneOptionValueItemIsNotSupported(optionName: str):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert optionName != ""
 
         errMsg = "None value item of option [{0}] is not supported.".format(optionName)
@@ -87,9 +87,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def BadOptionValueType(optionName: str, optionValueType: type, expectedType: type):
-        assert type(optionName) == str  # noqa: E721
-        assert type(optionValueType) == type  # noqa: E721
-        assert type(expectedType) == type  # noqa: E721
+        assert type(optionName) is str
+        assert type(optionValueType) is type
+        assert type(expectedType) is type
 
         errMsg = "Bad option [{0}] value type [{1}]. Expected type is [{2}].".format(
             optionName, optionValueType.__name__, expectedType.__name__
@@ -98,9 +98,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CantConvertOptionValue(optionName: str, sourceType: type, targetType: type):
-        assert type(optionName) == str  # noqa: E721
-        assert type(sourceType) == type  # noqa: E721
-        assert type(targetType) == type  # noqa: E721
+        assert type(optionName) is str
+        assert type(sourceType) is type
+        assert type(targetType) is type
 
         errMsg = (
             "Can't convert option [{0}] value from type [{1}] to type [{2}].".format(
@@ -113,9 +113,9 @@ class RaiseError:
     def BadOptionValueItemType(
         optionName: str, optionValueItemType: type, expectedType: type
     ):
-        assert type(optionName) == str  # noqa: E721
-        assert type(optionValueItemType) == type  # noqa: E721
-        assert type(expectedType) == type  # noqa: E721
+        assert type(optionName) is str
+        assert type(optionValueItemType) is type
+        assert type(expectedType) is type
 
         errMsg = (
             "Bad option [{0}] value item type [{1}]. Expected type is [{2}].".format(
@@ -136,8 +136,8 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def OptionIsAlreadyExistInThisFile(filePath: str, optionName: str):
-        assert type(filePath) == str  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(filePath) is str
+        assert type(optionName) is str
         assert filePath != ""
         assert optionName != ""
 
@@ -148,8 +148,8 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def OptionIsAlreadyExistInAnotherFile(filePath: str, optionName: str):
-        assert type(filePath) == str  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(filePath) is str
+        assert type(optionName) is str
         assert filePath != ""
         assert optionName != ""
 
@@ -160,8 +160,8 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def OptionIsAlreadyExistInFile(filePath: str, optionName: str):
-        assert type(filePath) == str  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(filePath) is str
+        assert type(optionName) is str
         assert filePath != ""
         assert optionName != ""
 
@@ -172,8 +172,8 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def OptionValueItemIsAlreadyDefined(filePath: str, optName: str, valueItem: any):
-        assert type(filePath) == str  # noqa: E721
-        assert type(optName) == str  # noqa: E721
+        assert type(filePath) is str
+        assert type(optName) is str
 
         errMsg = "Another definition of option [{1}] value item [{2}] is found in the file [{0}].".format(
             filePath, optName, valueItem
@@ -184,8 +184,8 @@ class RaiseError:
     def OptionValueItemIsAlreadyDefinedInAnotherFile(
         filePath: str, optName: str, valueItem: any
     ):
-        assert type(filePath) == str  # noqa: E721
-        assert type(optName) == str  # noqa: E721
+        assert type(filePath) is str
+        assert type(optName) is str
 
         errMsg = "Definition of option [{1}] value item [{2}] is found in another file [{0}].".format(
             filePath, optName, valueItem
@@ -194,15 +194,15 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def UnknownFileName(fileName: str):
-        assert type(fileName) == str  # noqa: E721
+        assert type(fileName) is str
 
         errMsg = "Unknown file name [{0}].".format(fileName)
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     def MultipleDefOfFileIsFound(fileName: str, count: int):
-        assert type(fileName) == str  # noqa: E721
-        assert type(count) == int  # noqa: E721
+        assert type(fileName) is str
+        assert type(count) is int
 
         errMsg = "Multiple definitition of file [{0}] is found - {1}.".format(
             fileName, count
@@ -220,9 +220,9 @@ class RaiseError:
         ourLastMDate: datetime.datetime,
         curLastMDate: datetime.datetime,
     ):
-        assert type(filePath) == str  # noqa: E721
-        assert type(ourLastMDate) == datetime.datetime  # noqa: E721
-        assert type(curLastMDate) == datetime.datetime  # noqa: E721
+        assert type(filePath) is str
+        assert type(ourLastMDate) is datetime.datetime
+        assert type(curLastMDate) is datetime.datetime
 
         errMsg = "File [{0}] was modified externally. Our timestamp is [{1}]. The current file timestamp is [{2}].".format(
             filePath, ourLastMDate, curLastMDate
@@ -236,7 +236,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def FileLineAlreadyHasOption(optionName: str):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         errMsg = "File line already has the option [{0}].".format(optionName)
         raise Exception(errMsg)
@@ -249,9 +249,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__UnexpectedSymbol(lineNum: int, colNum: int, ch: str):
-        assert type(lineNum) == int  # noqa: E721
-        assert type(colNum) == int  # noqa: E721
-        assert type(ch) == str  # noqa: E721
+        assert type(lineNum) is int
+        assert type(colNum) is int
+        assert type(ch) is str
 
         errMsg = "Unexpected symbol in line {0}, column {1}: [{2}]".format(
             lineNum, colNum, ch
@@ -260,7 +260,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__IncludeWithoutPath(lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert lineNum >= 0
 
         errMsg = "Include directive in line {0} does not have a path.".format(lineNum)
@@ -268,7 +268,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__EndOfIncludePathIsNotFound(lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert lineNum >= 0
 
         errMsg = "The end of an include path is not found. Line {0}.".format(lineNum)
@@ -276,7 +276,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__IncompletedEscapeInInclude(lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert lineNum >= 0
 
         errMsg = "Escape in an include path is not completed. Line {0}.".format(lineNum)
@@ -284,9 +284,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__UnknownEscapedSymbolInInclude(lineNum: int, colNum: int, ch: str):
-        assert type(lineNum) == int  # noqa: E721
-        assert type(colNum) == int  # noqa: E721
-        assert type(ch) == str  # noqa: E721
+        assert type(lineNum) is int
+        assert type(colNum) is int
+        assert type(ch) is str
         assert lineNum >= 0
         assert colNum >= 0
         assert ch != ""
@@ -298,7 +298,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__IncludeHasEmptyPath(lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
+        assert type(lineNum) is int
         assert lineNum >= 0
 
         errMsg = "Include in line {0} has an empty path.".format(lineNum)
@@ -306,8 +306,8 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__OptionWithoutValue(optionName: str, lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(lineNum) is int
+        assert type(optionName) is str
         assert lineNum >= 0
         assert optionName != ""
 
@@ -318,8 +318,8 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__EndQuotedOptionValueIsNotFound(optionName: str, lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(lineNum) is int
+        assert type(optionName) is str
         assert lineNum >= 0
         assert optionName != ""
 
@@ -330,8 +330,8 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     def CfgReader__IncompletedEscapeInQuotedOptionValue(optionName: str, lineNum: int):
-        assert type(lineNum) == int  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(lineNum) is int
+        assert type(optionName) is str
         assert lineNum >= 0
         assert optionName != ""
 
@@ -344,9 +344,9 @@ class RaiseError:
     def CfgReader__UnknownEscapedSymbolInQuotedOptionValue(
         optionName: str, lineNum: int, colNum: int, ch: str
     ):
-        assert type(lineNum) == int  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
-        assert type(ch) == str  # noqa: E721
+        assert type(lineNum) is int
+        assert type(optionName) is str
+        assert type(ch) is str
         assert lineNum >= 0
         assert optionName != ""
         assert ch != ""

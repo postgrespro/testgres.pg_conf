@@ -21,7 +21,7 @@ class TestStartupData__Helper:
 
     # --------------------------------------------------------------------
     def GetStartTS() -> datetime.datetime:
-        assert type(__class__.sm_StartTS) == datetime.datetime  # noqa: E721
+        assert type(__class__.sm_StartTS) is datetime.datetime
         return __class__.sm_StartTS
 
     # --------------------------------------------------------------------
@@ -40,7 +40,7 @@ class TestStartupData__Helper:
             rootDir = __class__.CalcRootDir()
             resultPath = os.path.join(rootDir, "tmp")
 
-        assert type(resultPath) == str  # noqa: E721
+        assert type(resultPath) is str
         return resultPath
 
     # --------------------------------------------------------------------
@@ -51,7 +51,7 @@ class TestStartupData__Helper:
             rootDir = __class__.CalcRootDir()
             resultPath = os.path.join(rootDir, "logs")
 
-        assert type(resultPath) == str  # noqa: E721
+        assert type(resultPath) is str
         return resultPath
 
     # --------------------------------------------------------------------
@@ -99,24 +99,22 @@ class TestStartupData:
 
     # --------------------------------------------------------------------
     def GetRootDir() -> str:
-        assert type(__class__.sm_RootDir) == str  # noqa: E721
+        assert type(__class__.sm_RootDir) is str
         return __class__.sm_RootDir
 
     # --------------------------------------------------------------------
     def GetRootLogDir() -> str:
-        assert type(__class__.sm_RootLogDir) == str  # noqa: E721
+        assert type(__class__.sm_RootLogDir) is str
         return __class__.sm_RootLogDir
 
     # --------------------------------------------------------------------
     def GetCurrentTestWorkerSignature() -> str:
-        assert type(__class__.sm_CurrentTestWorkerSignature) == str  # noqa: E721
+        assert type(__class__.sm_CurrentTestWorkerSignature) is str
         return __class__.sm_CurrentTestWorkerSignature
 
     # --------------------------------------------------------------------
     def GetRootTmpDataDirForCurrentTestWorker() -> str:
-        assert (  # noqa: E721
-            type(__class__.sm_RootTmpDataDirForCurrentTestWorker) == str
-        )
+        assert type(__class__.sm_RootTmpDataDirForCurrentTestWorker) is str
         return __class__.sm_RootTmpDataDirForCurrentTestWorker
 
 

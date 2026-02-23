@@ -27,10 +27,10 @@ class ConfigurationDataHandler:
     ) -> any:
         assert (
             targetData is None
-            or type(targetData) == FileData  # noqa: E721
-            or type(targetData) == FileLineData  # noqa: E721
+            or type(targetData) is FileData
+            or type(targetData) is FileLineData
         )
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert optionValue is not None
         RaiseError.MethodIsNotImplemented(
             __class__, "DataHandler__SetOptionValue__Simple"
@@ -44,10 +44,10 @@ class ConfigurationDataHandler:
     ) -> any:
         assert (
             sourceData is None
-            or type(sourceData) == FileData  # noqa: E721
-            or type(sourceData) == OptionData  # noqa: E721
+            or type(sourceData) is FileData
+            or type(sourceData) is OptionData
         )
-        assert type(optionName) == str or type(optionName) == OptionData  # noqa: E721
+        assert type(optionName) is str or type(optionName) is OptionData
         RaiseError.MethodIsNotImplemented(
             __class__, "DataHandler__GetOptionValue__Simple"
         )
@@ -60,10 +60,10 @@ class ConfigurationDataHandler:
     ) -> any:
         assert (
             sourceData is None
-            or type(sourceData) == FileData  # noqa: E721
-            or type(sourceData) == OptionData  # noqa: E721
+            or type(sourceData) is FileData
+            or type(sourceData) is OptionData
         )
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         RaiseError.MethodIsNotImplemented(
             __class__, "DataHandler__GetOptionValue__UnionList"
         )
@@ -76,10 +76,10 @@ class ConfigurationDataHandler:
     ) -> any:
         assert (
             targetData is None
-            or type(targetData) == FileData  # noqa: E721
-            or type(targetData) == OptionData  # noqa: E721
+            or type(targetData) is FileData
+            or type(targetData) is OptionData
         )
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         RaiseError.MethodIsNotImplemented(__class__, "DataHandler__ResetOption")
 
     # --------------------------------------------------------------------
@@ -91,12 +91,10 @@ class ConfigurationDataHandler:
         optionValue: any,
     ) -> any:
         assert (
-            target is None
-            or type(target) == FileData  # noqa: E721
-            or type(target) == FileLineData  # noqa: E721 E501
+            target is None or type(target) is FileData or type(target) is FileLineData
         )
-        assert optionOffset is None or type(optionOffset) == int  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert optionOffset is None or type(optionOffset) is int
+        assert type(optionName) is str
         assert optionValue is not None
         RaiseError.MethodIsNotImplemented(__class__, "DataHandler__AddSimpleOption")
 
@@ -109,10 +107,10 @@ class ConfigurationDataHandler:
     ) -> any:
         assert (
             targetData is None
-            or type(targetData) == FileData  # noqa: E721
-            or type(optionName) == OptionData  # noqa: E721
+            or type(targetData) is FileData
+            or type(optionName) is OptionData
         )
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert optionValueItem is not None
         RaiseError.MethodIsNotImplemented(
             __class__, "DataHandler__SetUniqueOptionValueItem"
@@ -149,10 +147,10 @@ class OptionHandlerCtxToSetValue:
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
             targetData is None
-            or type(targetData) == FileData  # noqa: E721
-            or type(targetData) == OptionData  # noqa: E721
+            or type(targetData) is FileData
+            or type(targetData) is OptionData
         )
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         self.DataHandler = dataHandler
         self.TargetData = targetData
@@ -170,7 +168,7 @@ class OptionHandlerToSetValue(OptionHandler):
 
     # interface ----------------------------------------------------------
     def SetOptionValue(self, ctx: OptionHandlerCtxToSetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToSetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToSetValue
         assert ctx.OptionName is not None
         assert ctx.OptionValue is not None
         RaiseError.MethodIsNotImplemented(__class__, "SetOptionValue")
@@ -195,10 +193,10 @@ class OptionHandlerCtxToGetValue:
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
             sourceData is None
-            or type(sourceData) == FileData  # noqa: E721
-            or type(sourceData) == OptionData  # noqa: E721
+            or type(sourceData) is FileData
+            or type(sourceData) is OptionData
         )
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         self.DataHandler = dataHandler
         self.SourceData = sourceData
@@ -215,13 +213,13 @@ class OptionHandlerToGetValue(OptionHandler):
 
     # interface ----------------------------------------------------------
     def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToGetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToGetValue
         assert (
             ctx.SourceData is None
-            or type(ctx.SourceData) == FileData  # noqa: E721
-            or type(ctx.SourceData) == OptionData  # noqa: E721
+            or type(ctx.SourceData) is FileData
+            or type(ctx.SourceData) is OptionData
         )
-        assert type(ctx.OptionName) == str  # noqa: E721
+        assert type(ctx.OptionName) is str
         RaiseError.MethodIsNotImplemented(__class__, "GetOptionValue")
 
 
@@ -247,11 +245,9 @@ class OptionHandlerCtxToAddOption:
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
-            target is None
-            or type(target) == FileData  # noqa: E721
-            or type(target) == FileLineData  # noqa: E721
+            target is None or type(target) is FileData or type(target) is FileLineData
         )
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert optionValue is not None
 
         self.DataHandler = dataHandler
@@ -271,7 +267,7 @@ class OptionHandlerToAddOption(OptionHandler):
 
     # interface ----------------------------------------------------------
     def AddOption(self, ctx: OptionHandlerCtxToSetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToSetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToSetValue
         RaiseError.MethodIsNotImplemented(__class__, "AddOption")
 
 
@@ -296,10 +292,10 @@ class OptionHandlerCtxToSetValueItem:
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
             targetData is None
-            or type(targetData) == FileData  # noqa: E721
-            or type(targetData) == OptionData  # noqa: E721
+            or type(targetData) is FileData
+            or type(targetData) is OptionData
         )
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         self.DataHandler = dataHandler
         self.TargetData = targetData
@@ -317,13 +313,13 @@ class OptionHandlerToSetValueItem(OptionHandler):
 
     # interface ----------------------------------------------------------
     def SetOptionValueItem(self, ctx: OptionHandlerCtxToSetValueItem) -> any:
-        assert type(ctx) == OptionHandlerCtxToSetValueItem  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToSetValueItem
         assert (
             ctx.TargetData is None
-            or type(ctx.TargetData) == FileData  # noqa: E721
-            or type(ctx.TargetData) == OptionData  # noqa: E721
+            or type(ctx.TargetData) is FileData
+            or type(ctx.TargetData) is OptionData
         )
-        assert type(ctx.OptionName) == str  # noqa: E721
+        assert type(ctx.OptionName) is str
         assert ctx.OptionValueItem is not None
         RaiseError.MethodIsNotImplemented(__class__, "SetOptionValueItem")
 
@@ -345,7 +341,7 @@ class OptionHandlerCtxToPrepareSetValue:
         optionValue: any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert optionValue is not None
 
         self.DataHandler = dataHandler
@@ -363,7 +359,7 @@ class OptionHandlerToPrepareSetValue(OptionHandler):
 
     # interface ----------------------------------------------------------
     def PrepareSetValue(self, ctx: OptionHandlerCtxToPrepareSetValue) -> str:
-        assert type(ctx) == OptionHandlerCtxToPrepareSetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToPrepareSetValue
         RaiseError.MethodIsNotImplemented(__class__, "PrepareSetValue")
 
 
@@ -384,7 +380,7 @@ class OptionHandlerCtxToPrepareSetValueItem:
         optionValueItem: any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert optionValueItem is not None
 
         self.DataHandler = dataHandler
@@ -402,7 +398,7 @@ class OptionHandlerToPrepareSetValueItem(OptionHandler):
 
     # interface ----------------------------------------------------------
     def PrepareSetValueItem(self, ctx: OptionHandlerCtxToPrepareSetValueItem) -> str:
-        assert type(ctx) == OptionHandlerCtxToPrepareSetValueItem  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToPrepareSetValueItem
         RaiseError.MethodIsNotImplemented(__class__, "PrepareSetValueItem")
 
 
@@ -423,7 +419,7 @@ class OptionHandlerCtxToPrepareGetValue:
         optionValue: any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert optionValue is not None
 
         self.DataHandler = dataHandler
@@ -441,7 +437,7 @@ class OptionHandlerToPrepareGetValue(OptionHandler):
 
     # interface ----------------------------------------------------------
     def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> str:
-        assert type(ctx) == OptionHandlerCtxToPrepareGetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToPrepareGetValue
         RaiseError.MethodIsNotImplemented(__class__, "PrepareGetValue")
 
 
@@ -462,7 +458,7 @@ class OptionHandlerCtxToWrite:
         optionValue: any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert optionValue is not None
 
         self.DataHandler = dataHandler
@@ -480,7 +476,7 @@ class OptionHandlerToWrite(OptionHandler):
 
     # interface ----------------------------------------------------------
     def OptionValueToString(self, ctx: OptionHandlerCtxToWrite) -> str:
-        assert type(ctx) == OptionHandlerCtxToWrite  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToWrite
         RaiseError.MethodIsNotImplemented(__class__, "OptionValueToString")
 
 

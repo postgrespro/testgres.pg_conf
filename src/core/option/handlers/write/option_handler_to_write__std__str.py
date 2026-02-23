@@ -18,14 +18,14 @@ class OptionHandlerToWrite__Std__Str(OptionHandlerToWrite):
 
     # interface ----------------------------------------------------------
     def OptionValueToString(self, ctx: OptionHandlerCtxToWrite) -> str:
-        assert type(ctx) == OptionHandlerCtxToWrite  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToWrite
         assert ctx.OptionValue is not None
 
         typedValue = str(ctx.OptionValue)
 
         result = WriteUtils.Pack_Str(typedValue)
 
-        assert type(result) == str  # noqa: E721
+        assert type(result) is str
         assert len(result) >= 2
         assert result[0] == "'"
         assert result[-1] == "'"

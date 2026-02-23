@@ -27,7 +27,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -44,7 +44,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -66,7 +66,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -78,7 +78,7 @@ class TestSet001__Common:
 
             r1 = file.SetOptionValueItem(C_OPT_NAME, "biha")
             assert r1 is not None
-            assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
+            assert type(r1) is PgCfg_SetOptionResult_Base
 
             if nPass == 0:
                 assert r1.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
@@ -89,13 +89,13 @@ class TestSet001__Common:
                 )
 
             assert r1.m_OptData is not None
-            assert type(r1.m_OptData) == PgCfgModel__OptionData  # noqa: E721
-            assert type(r1.m_OptData.m_Name) == str  # noqa: E721
+            assert type(r1.m_OptData) is PgCfgModel__OptionData
+            assert type(r1.m_OptData.m_Name) is str
             assert r1.m_OptData.m_Name == C_OPT_NAME
             assert r1.m_OptData.m_Value is not None
-            assert type(r1.m_OptData.m_Value) == list  # noqa: E721
+            assert type(r1.m_OptData.m_Value) is list
             assert len(r1.m_OptData.m_Value) == 1
-            assert type(r1.m_OptData.m_Value[0]) == str  # noqa: E721
+            assert type(r1.m_OptData.m_Value[0]) is str
             assert r1.m_OptData.m_Value[0] == "biha"
             assert r1.m_OptData.m_Value == ["biha"]
 
@@ -122,7 +122,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -153,7 +153,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -184,7 +184,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -193,12 +193,12 @@ class TestSet001__Common:
 
         r1 = file.SetOptionValueItem(C_OPT_NAME, "biha")
         assert r1 is not None
-        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.Option.get_Value() == ["biha"]
 
         r2 = file.SetOptionValueItem(C_OPT_NAME, "proxima")
         assert r2 is not None
-        assert type(r2) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r2) is PgCfg_SetOptionResult_Base
         assert r2.EventID == PgCfg_SetOptionEventID.VALUE_ITEM_WAS_ADDED
         assert r2.Option.get_Value() == ["biha", "proxima"]
 
