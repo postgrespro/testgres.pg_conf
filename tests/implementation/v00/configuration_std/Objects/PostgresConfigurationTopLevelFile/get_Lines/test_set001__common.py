@@ -57,7 +57,7 @@ class TestSet001__Common:
 
         fileLines_it = fileLines.__iter__()
         assert fileLines_it is not None
-        assert type(fileLines_it) == PgCfg_FileLinesIterator_Base  # noqa: E721
+        assert type(fileLines_it) is PgCfg_FileLinesIterator_Base
         assert isinstance(fileLines_it, PgCfg_FileLinesIterator)
 
         fileLine = fileLines_it.__next__()
@@ -90,7 +90,7 @@ class TestSet001__Common:
         assert type(file) is PgCfg_TopLevelFile_Base
 
         it1 = file.get_Lines().__iter__()
-        assert type(it1) == PgCfg_FileLinesIterator_Base  # noqa: E721
+        assert type(it1) is PgCfg_FileLinesIterator_Base
         assert isinstance(it1, PgCfg_FileLinesIterator)
 
         it1a = it1.__iter__()
