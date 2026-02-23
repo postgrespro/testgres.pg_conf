@@ -257,7 +257,9 @@ class ConfigurationData(ObjectData):
 
     m_Files: typing.List[FileData]
 
-    m_AllOptionsByName: typing.Dict[str, typing.Union[OptionData, typing.List[OptionData]]]
+    m_AllOptionsByName: typing.Dict[
+        str, typing.Union[OptionData, typing.List[OptionData]]
+    ]
     m_AllFilesByName: typing.Dict[str, typing.Union[FileData, typing.List[FileData]]]
 
     # --------------------------------------------------------------------

@@ -329,8 +329,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     # --------------------------------------------------------------------
     @staticmethod
     def CreateWithCfgOsOps(
-        data_dir: str,
-        cfgOsOps: ConfigurationOsOps
+        data_dir: str, cfgOsOps: ConfigurationOsOps
     ) -> PostgresConfiguration_Std:
         assert type(data_dir) == str  # noqa: E721
         assert isinstance(cfgOsOps, ConfigurationOsOps)

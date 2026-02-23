@@ -65,9 +65,7 @@ class Helpers:
 
     # --------------------------------------------------------------------
     def NormalizeFilePath(
-        cfgOsOps: ConfigurationOsOps,
-        baseFolder: str,
-        filePath: str
+        cfgOsOps: ConfigurationOsOps, baseFolder: str, filePath: str
     ) -> str:
         assert cfgOsOps is not None
         assert isinstance(cfgOsOps, ConfigurationOsOps)
