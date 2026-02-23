@@ -350,7 +350,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.PrepareSetValue is None:
             BugCheckError.OptionHandlerToPrepareSetValueIsNotDefined(name)
@@ -369,7 +369,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.PrepareGetValue is None:
             BugCheckError.OptionHandlerToPrepareGetValueIsNotDefined(name)
@@ -388,7 +388,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.PrepareSetValueItem is None:
             BugCheckError.OptionHandlerToPrepareSetValueItemIsNotDefined(name)
@@ -408,7 +408,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.SetValue is None:
             BugCheckError.OptionHandlerToSetValueIsNotDefined(name)
@@ -425,7 +425,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.GetValue is None:
             BugCheckError.OptionHandlerToGetValueIsNotDefined(name)
@@ -442,7 +442,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.AddOption is None:
             BugCheckError.OptionHandlerToAddOptionIsNotDefined(name)
@@ -461,7 +461,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.SetValueItem is None:
             BugCheckError.OptionHandlerToSetValueIsNotDefined(name)
@@ -480,7 +480,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         if optionHandlers.Write is None:
             BugCheckError.OptionHandlerToWriteIsNotDefined(name)
@@ -500,7 +500,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         optionHandlers = self.sm_OptionHandlers[name]
 
         assert optionHandlers is not None
-        assert type(optionHandlers) == __class__.tagOptionHandlers
+        assert type(optionHandlers) == __class__.tagOptionHandlers  # noqa: E721
 
         return self.sm_OptionHandlers[name]
 
