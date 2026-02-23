@@ -65,7 +65,7 @@ class TestSet001__Common:
         assert type(include) == PgCfg_Include_Base  # noqa: E721
         assert include.m_FileLine.m_FileLineData is fileLine.m_FileLineData
         assert include.m_FileLine is fileLine
-        assert type(include.m_IncludeData) == PgCfgModel__IncludeData  # noqa: E721
+        assert type(include.m_IncludeData) is PgCfgModel__IncludeData
         assert include.m_IncludeData.m_Offset == offset001
 
         assert include.m_IncludeData.IsAlive()

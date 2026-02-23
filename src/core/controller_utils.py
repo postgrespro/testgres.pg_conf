@@ -71,7 +71,7 @@ class DataControllerUtils:
         withLine: bool,
     ):
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(includeData) == PgCfgModel__IncludeData  # noqa: E721
+        assert type(includeData) is PgCfgModel__IncludeData
         assert type(withLine) is bool
 
         fileLineData = includeData.m_Parent
@@ -901,7 +901,7 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     def Helper__DeleteInclude(includeData: PgCfgModel__IncludeData):
-        assert type(includeData) == PgCfgModel__IncludeData  # noqa: E721
+        assert type(includeData) is PgCfgModel__IncludeData
         assert includeData.IsAlive()
 
         # 0.

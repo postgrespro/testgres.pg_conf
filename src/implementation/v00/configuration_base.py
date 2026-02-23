@@ -282,7 +282,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
         includeData: PgCfgModel__IncludeData,
     ):
         assert type(fileLine) == PostgresConfigurationFileLine_Base  # noqa: E721
-        assert type(includeData) == PgCfgModel__IncludeData  # noqa: E721
+        assert type(includeData) is PgCfgModel__IncludeData
 
         super().__init__()
 
@@ -310,7 +310,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
         assert type(withLine) is bool
 
         self.Helper__CheckAlive()
-        assert type(self.m_IncludeData) == PgCfgModel__IncludeData  # noqa: E721
+        assert type(self.m_IncludeData) is PgCfgModel__IncludeData
         assert (  # noqa: E721
             type(self.m_IncludeData.m_Parent) is PgCfgModel__FileLineData
         )
@@ -336,7 +336,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
     # Helper methods -----------------------------------------------------
     def Helper__CheckAlive(self):
         assert self.m_IncludeData is not None
-        assert type(self.m_IncludeData) == PgCfgModel__IncludeData  # noqa: E721
+        assert type(self.m_IncludeData) is PgCfgModel__IncludeData
 
         if not self.m_IncludeData.IsAlive():
             RaiseError.IncludeObjectWasDeleted()
@@ -497,7 +497,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
                 self.m_FileLineData, path, fileData, offset
             )
             assert includeData is not None
-            assert type(includeData) == PgCfgModel__IncludeData  # noqa: E721
+            assert type(includeData) is PgCfgModel__IncludeData
             assert includeData.m_Path == path
             assert includeData.m_File is fileData
             assert includeData.m_Parent == self.m_FileLineData
@@ -869,7 +869,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
                     fileLineData, path, fileData, None
                 )
                 assert includeData is not None
-                assert type(includeData) == PgCfgModel__IncludeData  # noqa: E721
+                assert type(includeData) is PgCfgModel__IncludeData
                 assert includeData.m_Path == path
                 assert includeData.m_File is fileData
                 assert includeData.m_Parent == fileLineData
@@ -4263,7 +4263,7 @@ class PostgresConfigurationWriter_Base:
         assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
         assert ctx.Cfg is not None
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
-        assert type(includeData) == PgCfgModel__IncludeData  # noqa: E721
+        assert type(includeData) is PgCfgModel__IncludeData
         assert includeData.m_Path is not None
         assert type(includeData.m_Path) is str
         assert includeData.m_Path != ""
