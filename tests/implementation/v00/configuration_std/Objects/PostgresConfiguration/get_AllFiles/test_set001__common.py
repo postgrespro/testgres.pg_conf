@@ -33,7 +33,7 @@ class TestSet001__Common:
 
         allFiles1 = cfg.get_AllFiles()
         assert allFiles1 is not None
-        assert type(allFiles1) == PgCfg_Base__AllFiles  # noqa: E721
+        assert type(allFiles1) is PgCfg_Base__AllFiles
         assert isinstance(allFiles1, PgCfg_Files)
         assert len(allFiles1) == 0
 
@@ -57,7 +57,7 @@ class TestSet001__Common:
 
         allFiles1 = cfg.get_AllFiles()
         assert allFiles1 is not None
-        assert type(allFiles1) == PgCfg_Base__AllFiles  # noqa: E721
+        assert type(allFiles1) is PgCfg_Base__AllFiles
         assert isinstance(allFiles1, PgCfg_Files)
         assert len(allFiles1) == 1
 
@@ -84,7 +84,7 @@ class TestSet001__Common:
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         allFiles1 = cfg.get_AllFiles()
-        assert type(allFiles1) == PgCfg_Base__AllFiles  # noqa: E721
+        assert type(allFiles1) is PgCfg_Base__AllFiles
 
         it1 = allFiles1.__iter__()
         assert it1 is not None
