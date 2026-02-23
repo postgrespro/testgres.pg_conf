@@ -146,14 +146,14 @@ class TestSet001__Common:
         assert len(cfg.m_Data.m_Files) == 1
         assert type(cfg.m_Data.m_Files[0]) == PgCfgModel__FileData  # noqa: E721
         assert cfg.m_Data.m_Files[0] is fileData
-        assert type(cfg.m_Data.m_AllFilesByName) == dict  # noqa: E721
+        assert type(cfg.m_Data.m_AllFilesByName) is dict
         assert len(cfg.m_Data.m_AllFilesByName) == 1
         assert len(cfg.m_Data.m_AllFilesByName.keys()) == 1
         assert "postgresql.auto.conf" in cfg.m_Data.m_AllFilesByName.keys()
         assert len(cfg.m_Data.m_AllFilesByName.values()) == 1
         assert fileData in cfg.m_Data.m_AllFilesByName.values()
 
-        assert type(cfg.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(cfg.m_Data.m_AllOptionsByName) is dict
         assert len(cfg.m_Data.m_AllOptionsByName) == 1
         assert optName in cfg.m_Data.m_AllOptionsByName.keys()
         assert len(cfg.m_Data.m_AllOptionsByName.values()) == 1
@@ -334,7 +334,7 @@ class TestSet001__Common:
         assert file1 is not None
         assert type(file1) == PgCfg_TopLevelFile_Base  # noqa: E721
         assert type(file1.m_FileData) == PgCfgModel__FileData  # noqa: E721
-        assert type(file1.m_FileData.m_OptionsByName) == dict  # noqa: E721
+        assert type(file1.m_FileData.m_OptionsByName) is dict
         assert len(file1.m_FileData.m_OptionsByName) == 0
 
         assert len(cfg.get_AllFiles()) == 1
@@ -371,7 +371,7 @@ class TestSet001__Common:
 
             assert cfg.m_Data is not None
             assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-            assert type(cfg.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+            assert type(cfg.m_Data.m_AllOptionsByName) is dict
             assert C_OPT_NAME in cfg.m_Data.m_AllOptionsByName.keys()
             assert (  # noqa: E721
                 type(cfg.m_Data.m_AllOptionsByName[C_OPT_NAME])

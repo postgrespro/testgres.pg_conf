@@ -213,7 +213,7 @@ class DataControllerUtils:
         assert fileData is not None
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
         assert fileData.m_OptionsByName is not None
-        assert type(fileData.m_OptionsByName) == dict  # noqa: E721
+        assert type(fileData.m_OptionsByName) is dict
 
         optionData = PgCfgModel__OptionData(fileLineData, optOffset, optName, optValue)
         fileLineDataItem = PgCfgModel__FileLineData.tagItem(optionData)
@@ -350,7 +350,7 @@ class DataControllerUtils:
     ) -> PgCfgModel__FileData:
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert type(cfgData.m_Files) == list  # noqa: E721
-        assert type(cfgData.m_AllFilesByName) == dict  # noqa: E721
+        assert type(cfgData.m_AllFilesByName) is dict
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert type(file_name) == str  # noqa: E721
         assert file_name != ""
@@ -370,7 +370,7 @@ class DataControllerUtils:
     ) -> PgCfgModel__FileData:
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert type(cfgData.m_Files) == list  # noqa: E721
-        assert type(cfgData.m_AllFilesByName) == dict  # noqa: E721
+        assert type(cfgData.m_AllFilesByName) is dict
         assert type(path) == str  # noqa: E721
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert path != ""
@@ -397,7 +397,7 @@ class DataControllerUtils:
     ) -> PgCfgModel__FileData:
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert type(cfgData.m_Files) == list  # noqa: E721
-        assert type(cfgData.m_AllFilesByName) == dict  # noqa: E721
+        assert type(cfgData.m_AllFilesByName) is dict
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert type(baseFolder) == str  # noqa: E721
         assert type(path) == str  # noqa: E721
@@ -538,7 +538,7 @@ class DataControllerUtils:
         fileKey: str,
         fileData: PgCfgModel__FileData,
     ):
-        assert type(filesByStrKeyDictionary) == dict  # noqa: E721
+        assert type(filesByStrKeyDictionary) is dict
         assert type(fileKey) == str  # noqa: E721
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
 
@@ -567,7 +567,7 @@ class DataControllerUtils:
         fileKey: str,
         fileData: PgCfgModel__FileData,
     ):
-        assert type(filesByStrKeyDictionary) == dict  # noqa: E721
+        assert type(filesByStrKeyDictionary) is dict
         assert type(fileKey) == str  # noqa: E721
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
 
@@ -632,7 +632,7 @@ class DataControllerUtils:
     ):
         assert optionsByNameDictionary is not None
         assert optionData is not None
-        assert type(optionsByNameDictionary) == dict  # noqa: E721
+        assert type(optionsByNameDictionary) is dict
         assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
 
         if not (optionData.m_Name in optionsByNameDictionary.keys()):
@@ -663,7 +663,7 @@ class DataControllerUtils:
     ):
         assert optionsByNameDictionary is not None
         assert optionData is not None
-        assert type(optionsByNameDictionary) == dict  # noqa: E721
+        assert type(optionsByNameDictionary) is dict
         assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
 
         if not (optionData.m_Name in optionsByNameDictionary.keys()):
@@ -879,11 +879,11 @@ class DataControllerUtils:
         assert fileData.IsAlive()
 
         # 1.3
-        assert type(fileData.m_OptionsByName) == dict  # noqa: E721
+        assert type(fileData.m_OptionsByName) is dict
         assert optionData.m_Name in fileData.m_OptionsByName.keys()
 
         # 1.4
-        assert type(cfgData.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(cfgData.m_AllOptionsByName) is dict
         assert optionData.m_Name in cfgData.m_AllOptionsByName.keys()
 
         # 2. Perform delete operations

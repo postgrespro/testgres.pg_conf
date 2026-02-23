@@ -229,7 +229,7 @@ class FileData(ObjectData):
         self.m_Lines = list()
 
         self.m_OptionsByName = dict()
-        assert type(self.m_OptionsByName) == dict  # noqa: E721
+        assert type(self.m_OptionsByName) is dict
 
         assert type(self.m_Path) == str  # noqa: E721
         assert self.m_Path != ""
@@ -277,8 +277,8 @@ class ConfigurationData(ObjectData):
         self.m_AllFilesByName = dict()
 
         assert type(self.m_Files) == list  # noqa: E721
-        assert type(self.m_AllOptionsByName) == dict  # noqa: E721
-        assert type(self.m_AllFilesByName) == dict  # noqa: E721
+        assert type(self.m_AllOptionsByName) is dict
+        assert type(self.m_AllFilesByName) is dict
 
     # Own interface ------------------------------------------------------
     @property

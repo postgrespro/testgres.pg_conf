@@ -110,14 +110,14 @@ class TestSet001__Common:
         assert len(cfg.m_Data.m_Files) == 1
         assert type(cfg.m_Data.m_Files[0]) == PgCfgModel__FileData  # noqa: E721
         assert cfg.m_Data.m_Files[0] is fileData
-        assert type(cfg.m_Data.m_AllFilesByName) == dict  # noqa: E721
+        assert type(cfg.m_Data.m_AllFilesByName) is dict
         assert len(cfg.m_Data.m_AllFilesByName) == 1
         assert len(cfg.m_Data.m_AllFilesByName.keys()) == 1
         assert cfg.C_POSTGRESQL_AUTO_CONF in cfg.m_Data.m_AllFilesByName.keys()
         assert len(cfg.m_Data.m_AllFilesByName.values()) == 1
         assert fileData in cfg.m_Data.m_AllFilesByName.values()
 
-        assert type(cfg.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(cfg.m_Data.m_AllOptionsByName) is dict
         assert len(cfg.m_Data.m_AllOptionsByName) == 1
         assert optName in cfg.m_Data.m_AllOptionsByName.keys()
         assert len(cfg.m_Data.m_AllOptionsByName.values()) == 1

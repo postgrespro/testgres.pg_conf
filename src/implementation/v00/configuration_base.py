@@ -1266,7 +1266,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(self.m_Cfg.m_Data.m_AllFilesByName) == dict  # noqa: E721
+        assert type(self.m_Cfg.m_Data.m_AllFilesByName) is dict
         return len(self.m_Cfg.m_Data.m_AllFilesByName.values())
 
     # --------------------------------------------------------------------
@@ -1274,7 +1274,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(self.m_Cfg.m_Data.m_AllFilesByName) == dict  # noqa: E721
+        assert type(self.m_Cfg.m_Data.m_AllFilesByName) is dict
 
         fileDataIterator = self.m_Cfg.m_Data.m_AllFilesByName.values().__iter__()
         assert fileDataIterator is not None
@@ -1289,7 +1289,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(self.m_Cfg.m_Data.m_AllFilesByName) == dict  # noqa: E721
+        assert type(self.m_Cfg.m_Data.m_AllFilesByName) is dict
 
         file_name2 = self.m_Cfg.m_Data.OsOps.Path_NormCase(file_name)
 
@@ -1392,7 +1392,7 @@ class PostgresConfiguration_Base__AllOptions(PostgresConfigurationOptions):
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(self.m_Cfg.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_Cfg.m_Data.m_AllOptionsByName) is dict
         return len(self.m_Cfg.m_Data.m_AllOptionsByName.values())
 
     # --------------------------------------------------------------------
@@ -1400,7 +1400,7 @@ class PostgresConfiguration_Base__AllOptions(PostgresConfigurationOptions):
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(self.m_Cfg.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_Cfg.m_Data.m_AllOptionsByName) is dict
 
         optionDataIterator = self.m_Cfg.m_Data.m_AllOptionsByName.values().__iter__()
         assert optionDataIterator is not None
@@ -1643,7 +1643,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
             assert fileData.IsAlive()
             assert fileData.m_OptionsByName is not None
-            assert type(fileData.m_OptionsByName) == dict  # noqa: E721
+            assert type(fileData.m_OptionsByName) is dict
 
             optionData = self.Helper__FindSimpleOption(
                 fileData.m_OptionsByName, optionName
@@ -1707,7 +1707,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert type(sourceFileData) == PgCfgModel__FileData  # noqa: E721
             assert sourceFileData.IsAlive()
             assert sourceFileData.m_OptionsByName is not None
-            assert type(sourceFileData.m_OptionsByName) == dict  # noqa: E721
+            assert type(sourceFileData.m_OptionsByName) is dict
 
             typeOfOption = type(optionName)
 
@@ -1802,7 +1802,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert self.m_Data is not None
         assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert self.m_Data.m_AllOptionsByName is not None
-        assert type(self.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_Data.m_AllOptionsByName) is dict
 
         typeOfTarget = type(target)
 
@@ -1941,7 +1941,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Helper__FindSimpleOption(
         self, allOptionsByName: dict[str, PgCfgModel__OptionData], optionName: str
     ) -> typing.Optional[PgCfgModel__OptionData]:
-        assert type(allOptionsByName) == dict  # noqa: E721
+        assert type(allOptionsByName) is dict
         assert type(optionName) == str  # noqa: E721
 
         if not (optionName in allOptionsByName.keys()):
@@ -1967,7 +1967,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Helper__AggregateAllOptionValues(
         self, allOptionsByName: dict[str, PgCfgModel__OptionData], optionName: str
     ) -> list:
-        assert type(allOptionsByName) == dict  # noqa: E721
+        assert type(allOptionsByName) is dict
         assert type(optionName) == str  # noqa: E721
 
         if not (optionName in allOptionsByName.keys()):
@@ -2016,7 +2016,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     def Helper__FindAndDeleteOption(
         self, allOptionsByName: dict[str, PgCfgModel__OptionData], optionName: str
     ) -> PostgresConfigurationSetOptionValueEventID:
-        assert type(allOptionsByName) == dict  # noqa: E721
+        assert type(allOptionsByName) is dict
         assert type(optionName) == str  # noqa: E721
 
         if not (optionName in allOptionsByName.keys()):
@@ -2111,7 +2111,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert self.m_Data.OsOps.Path_BaseName(file_name) == file_name
 
         assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(self.m_Data.m_AllFilesByName) == dict  # noqa: E721
+        assert type(self.m_Data.m_AllFilesByName) is dict
 
         file_name_n = self.m_Data.OsOps.Path_NormCase(file_name)
 
@@ -2159,7 +2159,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert self.m_Data is not None
         assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert self.m_Data.m_AllOptionsByName is not None
-        assert type(self.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_Data.m_AllOptionsByName) is dict
 
         if optionName in self.m_Data.m_AllOptionsByName.keys():
             assert self.m_Data.m_AllOptionsByName[optionName] is not None
@@ -2262,14 +2262,14 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert self.m_Data is not None
         assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert self.m_Data.m_AllOptionsByName is not None
-        assert type(self.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_Data.m_AllOptionsByName) is dict
 
         fileData = fileLineData.m_Parent
         assert fileData is not None
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
 
         assert fileData.m_OptionsByName is not None
-        assert type(fileData.m_OptionsByName) == dict  # noqa: E721
+        assert type(fileData.m_OptionsByName) is dict
 
         if optionName in fileData.m_OptionsByName.keys():
             assert fileData.m_OptionsByName[optionName] is not None
@@ -2350,10 +2350,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert self.m_Data is not None
         assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert self.m_Data.m_AllOptionsByName is not None
-        assert type(self.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_Data.m_AllOptionsByName) is dict
 
         assert fileData.m_OptionsByName is not None
-        assert type(fileData.m_OptionsByName) == dict  # noqa: E721
+        assert type(fileData.m_OptionsByName) is dict
 
         if optionName in fileData.m_OptionsByName.keys():
             assert fileData.m_OptionsByName[optionName] is not None
@@ -2432,7 +2432,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert self.m_Data is not None
         assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(self.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_Data.m_AllOptionsByName) is dict
 
         # ------------------------------------------------
         optionData = self.Helper__FindSimpleOption(
@@ -2477,7 +2477,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         optionValue: any,
     ) -> PostgresConfigurationSetOptionValueResult_Base:
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
-        assert type(fileData.m_OptionsByName) == dict  # noqa: E721
+        assert type(fileData.m_OptionsByName) is dict
         assert type(optionName) == str  # noqa: E721
         assert optionValue is not None
 
@@ -2567,7 +2567,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert self.m_Data is not None
         assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(self.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_Data.m_AllOptionsByName) is dict
 
         # ------------------------------------------------
         while True:
@@ -2755,10 +2755,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert self.m_Data is not None
         assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(self.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_Data.m_AllOptionsByName) is dict
 
         assert fileData.m_OptionsByName is not None
-        assert type(fileData.m_OptionsByName) == dict  # noqa: E721
+        assert type(fileData.m_OptionsByName) is dict
 
         # ------------------------------------------------
         C_BUGCHECK_SRC = __class__.__name__ + "::Helper__SetUniqueOptionValueItem__File"
@@ -2925,7 +2925,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert self.m_Data is not None
         assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(self.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_Data.m_AllOptionsByName) is dict
 
         assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
 
@@ -2984,7 +2984,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert self.m_Data is not None
         assert type(self.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(self.m_Data.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_Data.m_AllOptionsByName) is dict
 
         assert not (optionName in fileData.m_OptionsByName.keys())
         assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
