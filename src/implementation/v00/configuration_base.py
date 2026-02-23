@@ -3061,7 +3061,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert isinstance(data, PgCfgModel__ObjectData)
 
         stack: typing.Set[PgCfgModel__ObjectData] = set()
-        assert type(stack) == set  # noqa: E721
+        assert type(stack) is set
 
         ptr = data
         while ptr is not self.m_Data:

@@ -16,7 +16,7 @@ class WriteUtils:
         sep = ""
 
         index: typing.Set[str] = set()
-        assert type(index) == set  # noqa: E721
+        assert type(index) is set
 
         for x in strList:
             assert x is not None
