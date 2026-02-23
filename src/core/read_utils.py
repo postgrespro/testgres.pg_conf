@@ -192,7 +192,7 @@ class ReadUtils:
 
         # ----------------------------------------------
         def LOCAL__append_to_curValueItem(ctx: tagCtx, ch: str, isData: bool):
-            assert type(ctx) == tagCtx  # noqa: E721
+            assert type(ctx) is tagCtx
             assert type(ch) is str
             assert len(ch) == 1
             assert type(isData) is bool
@@ -210,7 +210,7 @@ class ReadUtils:
 
         # ----------------------------------------------
         def LOCAL__append_curValueItem_to_result(ctx: tagCtx, isLast: bool):
-            assert type(ctx) == tagCtx  # noqa: E721
+            assert type(ctx) is tagCtx
 
             if ctx.mode == C_MODE__QSTART:
                 # quoted item is not completed
