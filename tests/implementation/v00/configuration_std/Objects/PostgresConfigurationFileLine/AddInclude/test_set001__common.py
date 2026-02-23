@@ -62,7 +62,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert include is not None
-        assert type(include) == PgCfg_Include_Base  # noqa: E721
+        assert type(include) is PgCfg_Include_Base
         assert include.m_FileLine.m_FileLineData is fileLine.m_FileLineData
         assert include.m_FileLine is fileLine
         assert type(include.m_IncludeData) is PgCfgModel__IncludeData

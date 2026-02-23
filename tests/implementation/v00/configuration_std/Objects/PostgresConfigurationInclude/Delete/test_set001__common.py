@@ -35,7 +35,7 @@ class TestSet001__Common:
 
         assert len(fileLine) == 1
 
-        assert type(include) == PgCfg_Include_Base  # noqa: E721
+        assert type(include) is PgCfg_Include_Base
 
         include.Delete(True)
 
@@ -79,7 +79,7 @@ class TestSet001__Common:
 
         assert len(fileLine) == 1
 
-        assert type(include) == PgCfg_Include_Base  # noqa: E721
+        assert type(include) is PgCfg_Include_Base
 
         include.Delete(False)
 
@@ -126,7 +126,7 @@ class TestSet001__Common:
 
         assert len(fileLine) == 2
 
-        assert type(include) == PgCfg_Include_Base  # noqa: E721
+        assert type(include) is PgCfg_Include_Base
 
         include.Delete(True)
 
