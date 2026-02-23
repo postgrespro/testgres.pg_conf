@@ -49,7 +49,7 @@ class TestSet001__Common:
 
         fileLines = file.get_Lines()
         assert fileLines is not None
-        assert type(fileLines) == PgCfg_FileLines_Base  # noqa: E721
+        assert type(fileLines) is PgCfg_FileLines_Base
         assert isinstance(fileLines, PgCfg_FileLines)
 
         assert len(fileLines) == 1
