@@ -3873,14 +3873,14 @@ class PostgresConfigurationWriter_Base:
     def MakeFileDataContent(
         ctx: PostgresConfigurationWriterCtx_Base, fileData: PgCfgModel__FileData
     ) -> str:
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert type(fileData) is PgCfgModel__FileData
 
         return __class__.Helper__MakeFileDataContent(ctx, fileData)
 
     # --------------------------------------------------------------------
     def DoWork(ctx: PostgresConfigurationWriterCtx_Base):
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
 
@@ -3888,7 +3888,7 @@ class PostgresConfigurationWriter_Base:
 
     # Helper Methods -----------------------------------------------------
     def Helper__DoWork(ctx: PostgresConfigurationWriterCtx_Base):
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
 
@@ -3917,7 +3917,7 @@ class PostgresConfigurationWriter_Base:
     def Helper__DoWork__Stage01__CreateFileContexts(
         ctx: PostgresConfigurationWriterCtx_Base,
     ):
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
 
@@ -3948,7 +3948,7 @@ class PostgresConfigurationWriter_Base:
     def Helper__DoWork__Stage02__MakeFileDataContents(
         ctx: PostgresConfigurationWriterCtx_Base,
     ):
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
 
@@ -3968,7 +3968,7 @@ class PostgresConfigurationWriter_Base:
     def Helper__DoWork__Stage03__OpenUpdFilesToWrite(
         ctx: PostgresConfigurationWriterCtx_Base,
     ):
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
 
@@ -4014,7 +4014,7 @@ class PostgresConfigurationWriter_Base:
     def Helper__DoWork__Stage04__OpenNewFilesToWrite(
         ctx: PostgresConfigurationWriterCtx_Base,
     ):
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
         assert type(ctx.NewFiles) is list
@@ -4083,7 +4083,7 @@ class PostgresConfigurationWriter_Base:
     def Helper__DoWork__Stage05__WriteContents(
         ctx: PostgresConfigurationWriterCtx_Base,
     ):
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
 
         for iFile in range(len(ctx.AllFiles)):
             fileCtx = ctx.AllFiles[iFile]
@@ -4114,7 +4114,7 @@ class PostgresConfigurationWriter_Base:
     def Helper__MakeFileDataContent(
         ctx: PostgresConfigurationWriterCtx_Base, fileData: PgCfgModel__FileData
     ) -> str:
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert type(fileData) is PgCfgModel__FileData
 
         fileContent = ""
@@ -4133,7 +4133,7 @@ class PostgresConfigurationWriter_Base:
         ctx: PostgresConfigurationWriterCtx_Base,
         fileLineData: PgCfgModel__FileLineData,
     ) -> str:
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert type(fileLineData) is PgCfgModel__FileLineData
 
         fileLineItemCount = len(fileLineData.m_Items)
@@ -4194,7 +4194,7 @@ class PostgresConfigurationWriter_Base:
         ctx: PostgresConfigurationWriterCtx_Base,
         elementData: PgCfgModel__FileLineElementData,
     ) -> str:
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert elementData is not None
         assert isinstance(elementData, PgCfgModel__FileLineElementData)
 
@@ -4215,7 +4215,7 @@ class PostgresConfigurationWriter_Base:
     def Helper__OptionToString(
         ctx: PostgresConfigurationWriterCtx_Base, optionData: PgCfgModel__OptionData
     ) -> str:
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert ctx.Cfg is not None
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(optionData) is PgCfgModel__OptionData
@@ -4244,7 +4244,7 @@ class PostgresConfigurationWriter_Base:
     def Helper__CommentToString(
         ctx: PostgresConfigurationWriterCtx_Base, commentData: PgCfgModel__CommentData
     ) -> str:
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert ctx.Cfg is not None
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(commentData) is PgCfgModel__CommentData
@@ -4260,7 +4260,7 @@ class PostgresConfigurationWriter_Base:
     def Helper__IncludeToString(
         ctx: PostgresConfigurationWriterCtx_Base, includeData: PgCfgModel__IncludeData
     ) -> str:
-        assert type(ctx) == PostgresConfigurationWriterCtx_Base  # noqa: E721
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert ctx.Cfg is not None
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(includeData) is PgCfgModel__IncludeData
