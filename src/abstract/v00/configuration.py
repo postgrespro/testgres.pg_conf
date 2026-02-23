@@ -183,7 +183,7 @@ class PostgresConfigurationFileLine(PostgresConfigurationObject):
         self, text: str, offset: typing.Optional[int]
     ) -> PostgresConfigurationComment:
         assert type(text) is str
-        assert (offset is None) or (type(offset) == int)  # noqa: E721
+        assert (offset is None) or (type(offset) is int)
         RaiseError.MethodIsNotImplemented(__class__, "AddComment")
 
     # --------------------------------------------------------------------
@@ -193,7 +193,7 @@ class PostgresConfigurationFileLine(PostgresConfigurationObject):
         assert type(name) is str
         assert name != ""
         assert value is not None
-        assert (offset is None) or (type(offset) == int)  # noqa: E721
+        assert (offset is None) or (type(offset) is int)
         RaiseError.MethodIsNotImplemented(__class__, "AddOption")
 
     # --------------------------------------------------------------------
@@ -202,7 +202,7 @@ class PostgresConfigurationFileLine(PostgresConfigurationObject):
     ) -> PostgresConfigurationInclude:
         assert type(path) is str
         assert path != ""
-        assert (offset is None) or (type(offset) == int)  # noqa: E721
+        assert (offset is None) or (type(offset) is int)
         RaiseError.MethodIsNotImplemented(__class__, "AddInclude")
 
     # --------------------------------------------------------------------

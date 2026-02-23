@@ -120,7 +120,7 @@ class DataControllerUtils:
         fileLineData: PgCfgModel__FileLineData, offset: typing.Optional[int], text: str
     ) -> PgCfgModel__CommentData:
         assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
-        assert (offset is None) or (type(offset) == int)  # noqa: E721
+        assert (offset is None) or (type(offset) is int)
         assert type(text) is str
         assert type(fileLineData.m_Items) == list  # noqa: E721
 
