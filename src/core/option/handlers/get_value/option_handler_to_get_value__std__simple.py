@@ -23,7 +23,7 @@ class OptionHandlerToGetValue__Std__Simple(OptionHandlerToGetValue):
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (
             ctx.SourceData is None
-            or type(ctx.SourceData) == FileData  # noqa: E721
+            or type(ctx.SourceData) is FileData
             or type(ctx.SourceData) == OptionData  # noqa: E721
         )
         assert type(ctx.OptionName) is str

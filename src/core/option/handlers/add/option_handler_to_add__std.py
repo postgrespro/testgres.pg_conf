@@ -23,7 +23,7 @@ class OptionHandlerToAddOption__Std(OptionHandlerToAddOption):
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (
             ctx.Target is None
-            or type(ctx.Target) == FileData  # noqa: E721
+            or type(ctx.Target) is FileData
             or type(ctx.Target) == FileLineData  # noqa: E721
         )
         assert ctx.OptionOffset is None or type(ctx.OptionOffset) is int

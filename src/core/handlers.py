@@ -27,7 +27,7 @@ class ConfigurationDataHandler:
     ) -> any:
         assert (
             targetData is None
-            or type(targetData) == FileData  # noqa: E721
+            or type(targetData) is FileData
             or type(targetData) == FileLineData  # noqa: E721
         )
         assert type(optionName) is str
@@ -44,7 +44,7 @@ class ConfigurationDataHandler:
     ) -> any:
         assert (
             sourceData is None
-            or type(sourceData) == FileData  # noqa: E721
+            or type(sourceData) is FileData
             or type(sourceData) == OptionData  # noqa: E721
         )
         assert type(optionName) == str or type(optionName) == OptionData  # noqa: E721
@@ -60,7 +60,7 @@ class ConfigurationDataHandler:
     ) -> any:
         assert (
             sourceData is None
-            or type(sourceData) == FileData  # noqa: E721
+            or type(sourceData) is FileData
             or type(sourceData) == OptionData  # noqa: E721
         )
         assert type(optionName) is str
@@ -76,7 +76,7 @@ class ConfigurationDataHandler:
     ) -> any:
         assert (
             targetData is None
-            or type(targetData) == FileData  # noqa: E721
+            or type(targetData) is FileData
             or type(targetData) == OptionData  # noqa: E721
         )
         assert type(optionName) is str
@@ -92,7 +92,7 @@ class ConfigurationDataHandler:
     ) -> any:
         assert (
             target is None
-            or type(target) == FileData  # noqa: E721
+            or type(target) is FileData
             or type(target) == FileLineData  # noqa: E721 E501
         )
         assert optionOffset is None or type(optionOffset) is int
@@ -109,7 +109,7 @@ class ConfigurationDataHandler:
     ) -> any:
         assert (
             targetData is None
-            or type(targetData) == FileData  # noqa: E721
+            or type(targetData) is FileData
             or type(optionName) == OptionData  # noqa: E721
         )
         assert type(optionName) is str
@@ -149,7 +149,7 @@ class OptionHandlerCtxToSetValue:
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
             targetData is None
-            or type(targetData) == FileData  # noqa: E721
+            or type(targetData) is FileData
             or type(targetData) == OptionData  # noqa: E721
         )
         assert type(optionName) is str
@@ -195,7 +195,7 @@ class OptionHandlerCtxToGetValue:
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
             sourceData is None
-            or type(sourceData) == FileData  # noqa: E721
+            or type(sourceData) is FileData
             or type(sourceData) == OptionData  # noqa: E721
         )
         assert type(optionName) is str
@@ -218,7 +218,7 @@ class OptionHandlerToGetValue(OptionHandler):
         assert type(ctx) == OptionHandlerCtxToGetValue  # noqa: E721
         assert (
             ctx.SourceData is None
-            or type(ctx.SourceData) == FileData  # noqa: E721
+            or type(ctx.SourceData) is FileData
             or type(ctx.SourceData) == OptionData  # noqa: E721
         )
         assert type(ctx.OptionName) is str
@@ -248,7 +248,7 @@ class OptionHandlerCtxToAddOption:
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
             target is None
-            or type(target) == FileData  # noqa: E721
+            or type(target) is FileData
             or type(target) == FileLineData  # noqa: E721
         )
         assert type(optionName) is str
@@ -296,7 +296,7 @@ class OptionHandlerCtxToSetValueItem:
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
             targetData is None
-            or type(targetData) == FileData  # noqa: E721
+            or type(targetData) is FileData
             or type(targetData) == OptionData  # noqa: E721
         )
         assert type(optionName) is str
@@ -320,7 +320,7 @@ class OptionHandlerToSetValueItem(OptionHandler):
         assert type(ctx) == OptionHandlerCtxToSetValueItem  # noqa: E721
         assert (
             ctx.TargetData is None
-            or type(ctx.TargetData) == FileData  # noqa: E721
+            or type(ctx.TargetData) is FileData
             or type(ctx.TargetData) == OptionData  # noqa: E721
         )
         assert type(ctx.OptionName) is str

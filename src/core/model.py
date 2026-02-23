@@ -125,7 +125,7 @@ class IncludeData(FileLineElementData):
     ):
         assert type(parent) == FileLineData  # noqa: E721
         assert type(path) is str
-        assert type(fileData) == FileData  # noqa: E721
+        assert type(fileData) is FileData
         assert offset is None or type(offset) is int
 
         assert parent.IsAlive()
@@ -159,7 +159,7 @@ class FileLineData(ObjectData):
 
     # --------------------------------------------------------------------
     def __init__(self, parent: FileData):
-        assert type(parent) == FileData  # noqa: E721
+        assert type(parent) is FileData
 
         super().__init__()
 
@@ -175,7 +175,7 @@ class FileLineData(ObjectData):
 
     # Object interface ---------------------------------------------------
     def get_Parent(self) -> FileData:
-        assert type(self.m_Parent) == FileData  # noqa: E721
+        assert type(self.m_Parent) is FileData
         return self.m_Parent
 
     # --------------------------------------------------------------------
