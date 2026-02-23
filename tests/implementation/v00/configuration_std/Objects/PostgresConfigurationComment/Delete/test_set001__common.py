@@ -34,7 +34,7 @@ class TestSet001__Common:
 
         assert len(fileLine) == 1
 
-        assert type(comment) == PgCfg_Comment_Base  # noqa: E721
+        assert type(comment) is PgCfg_Comment_Base
 
         comment.Delete(True)
 
@@ -78,7 +78,7 @@ class TestSet001__Common:
 
         assert len(fileLine) == 1
 
-        assert type(comment) == PgCfg_Comment_Base  # noqa: E721
+        assert type(comment) is PgCfg_Comment_Base
 
         comment.Delete(False)
 

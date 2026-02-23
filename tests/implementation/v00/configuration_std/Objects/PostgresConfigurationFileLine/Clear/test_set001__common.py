@@ -124,7 +124,7 @@ class TestSet001__Common:
 
         comment1 = file.AddComment("1")
         assert comment1 is not None
-        assert type(comment1) == PgCfg_Comment_Base  # noqa: E721
+        assert type(comment1) is PgCfg_Comment_Base
         assert isinstance(comment1, PgCfg_Comment)
         assert comment1.get_Text() == "1"
         assert len(file) == 2
