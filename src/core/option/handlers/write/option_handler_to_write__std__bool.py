@@ -24,7 +24,7 @@ class OptionHandlerToWrite__Std__Bool(OptionHandlerToWrite):
 
         typeOfValue = type(ctx.OptionValue)
 
-        if typeOfValue == bool:  # noqa: E721
+        if typeOfValue is bool:
             typedValue = bool(ctx.OptionValue)
         else:
             RaiseError.BadOptionValueItemType(ctx.OptionName, typeOfValue, bool)

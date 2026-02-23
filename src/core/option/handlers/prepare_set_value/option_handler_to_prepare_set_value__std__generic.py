@@ -26,11 +26,11 @@ class OptionHandlerToPrepareSetValue__Std__Generic(OptionHandlerToPrepareSetValu
 
         typeOfOptionValue = type(ctx.OptionValue)
 
-        if typeOfOptionValue == int:  # noqa: E721
+        if typeOfOptionValue is int:
             pass  # OK
-        elif typeOfOptionValue == str:  # noqa: E721
+        elif typeOfOptionValue is str:
             pass  # OK
-        elif typeOfOptionValue == bool:  # noqa: E721
+        elif typeOfOptionValue is bool:
             pass  # OK
         else:
             BugCheckError.UnknownOptionValueType(ctx.OptionName, typeOfOptionValue)

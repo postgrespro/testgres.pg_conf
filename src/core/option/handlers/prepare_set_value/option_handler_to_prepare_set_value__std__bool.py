@@ -48,10 +48,10 @@ class OptionHandlerToPrepareSetValue__Std__Bool(OptionHandlerToPrepareSetValue):
         optionValue = ctx.OptionValue
         optionValueType = type(optionValue)
 
-        if optionValueType == bool:  # noqa: E721
+        if optionValueType is bool:
             return optionValue
 
-        if optionValueType == int:  # noqa: E721
+        if optionValueType is int:
             assert type(optionValue) is int
 
             if optionValue == 0:
@@ -62,7 +62,7 @@ class OptionHandlerToPrepareSetValue__Std__Bool(OptionHandlerToPrepareSetValue):
 
             RaiseError.CantConvertOptionValue(ctx.OptionName, optionValueType, bool)
 
-        if optionValueType == str:  # noqa: E721
+        if optionValueType is str:
             assert type(optionValue) is str
 
             if len(optionValue) < __class__.C_MIN_STR_VALUE_LENGTH:

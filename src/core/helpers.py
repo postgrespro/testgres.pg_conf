@@ -17,10 +17,10 @@ class Helpers:
 
         typeOption = type(option)
 
-        if typeOption is str:  # noqa: E721
+        if typeOption is str:
             return option
 
-        if typeOption is OptionData:  # noqa: E721
+        if typeOption is OptionData:
             return option.m_Name
 
         BugCheckError.UnkObjectDataType(typeOption)
@@ -56,7 +56,7 @@ class Helpers:
 
         for x in container:
             assert x is not None
-            assert type(x) == type(value)  # noqa: E721
+            assert type(x) is type(value)
 
             if x == value:
                 return True
