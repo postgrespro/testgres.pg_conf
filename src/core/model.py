@@ -262,7 +262,7 @@ class ConfigurationData(ObjectData):
 
     # --------------------------------------------------------------------
     def __init__(self, data_dir: str, osOps: ConfigurationOsOps):
-        assert type(data_dir) == str
+        assert type(data_dir) == str  # noqa: E721
         assert isinstance(osOps, ConfigurationOsOps)
 
         super().__init__()
@@ -274,9 +274,9 @@ class ConfigurationData(ObjectData):
         self.m_AllOptionsByName = dict()
         self.m_AllFilesByName = dict()
 
-        assert type(self.m_Files) == list
-        assert type(self.m_AllOptionsByName) == dict
-        assert type(self.m_AllFilesByName) == dict
+        assert type(self.m_Files) == list  # noqa: E721
+        assert type(self.m_AllOptionsByName) == dict  # noqa: E721
+        assert type(self.m_AllFilesByName) == dict  # noqa: E721
 
     # Own interface ------------------------------------------------------
     @property

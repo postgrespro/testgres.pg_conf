@@ -309,7 +309,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
     # --------------------------------------------------------------------
     def __init__(self, data_dir: str, cfgOsOps: ConfigurationOsOps = None):
-        assert type(data_dir) == str
+        assert type(data_dir) == str  # noqa: E721
         assert cfgOsOps is None or isinstance(cfgOsOps, ConfigurationOsOps)
 
         if cfgOsOps is None:
@@ -322,7 +322,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     # --------------------------------------------------------------------
     @staticmethod
     def Create(data_dir: str) -> PostgresConfiguration_Std:
-        assert type(data_dir) == str
+        assert type(data_dir) == str  # noqa: E721
         assert isinstance(LocalCfgOsOps, ConfigurationOsOps)
         return __class__(data_dir, LocalCfgOsOps)
 
@@ -332,13 +332,13 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         data_dir: str,
         cfgOsOps: ConfigurationOsOps
     ) -> PostgresConfiguration_Std:
-        assert type(data_dir) == str
+        assert type(data_dir) == str  # noqa: E721
         assert isinstance(cfgOsOps, ConfigurationOsOps)
         return __class__(data_dir, cfgOsOps)
 
     # PostgresConfiguration_Base interface -------------------------------
     def Internal__GetAutoConfFileName(self):
-        assert type(__class__.C_POSTGRESQL_AUTO_CONF) == str
+        assert type(__class__.C_POSTGRESQL_AUTO_CONF) == str  # noqa: E721
         assert __class__.C_POSTGRESQL_AUTO_CONF != ""
         return __class__.C_POSTGRESQL_AUTO_CONF
 
