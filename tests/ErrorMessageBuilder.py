@@ -11,7 +11,7 @@ import datetime
 class ErrorMessageBuilder:
     def MethodIsNotImplemented(classType: type, methodName: str):
         assert type(classType) == type  # noqa: E721
-        assert type(methodName) == str  # noqa: E721
+        assert type(methodName) is str
         assert methodName != ""
 
         errMsg = "Method {0}::{1} is not implemented.".format(
@@ -22,7 +22,7 @@ class ErrorMessageBuilder:
     # --------------------------------------------------------------------
     def GetPropertyIsNotImplemented(classType: type, methodName: str):
         assert type(classType) == type  # noqa: E721
-        assert type(methodName) == str  # noqa: E721
+        assert type(methodName) is str
         assert methodName != ""
 
         errMsg = "Get property {0}::{1} is not implemented.".format(
@@ -55,7 +55,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def NoneOptionValueItemIsNotSupported(optionName: str):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert optionName != ""
 
         errMsg = "None value item of option [{0}] is not supported.".format(optionName)
@@ -88,7 +88,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def BadOptionValueType(optionName: str, optionValueType: type, expectedType: type):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert type(optionValueType) == type  # noqa: E721
         assert type(expectedType) == type  # noqa: E721
 
@@ -99,7 +99,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def CantConvertOptionValue(optionName: str, sourceType: type, targetType: type):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert type(sourceType) == type  # noqa: E721
         assert type(targetType) == type  # noqa: E721
 
@@ -114,7 +114,7 @@ class ErrorMessageBuilder:
     def BadOptionValueItemType(
         optionName: str, optionValueItemType: type, expectedType: type
     ):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert type(optionValueItemType) == type  # noqa: E721
         assert type(expectedType) == type  # noqa: E721
 
@@ -137,8 +137,8 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def OptionIsAlreadyExistInThisFile(filePath: str, optionName: str):
-        assert type(filePath) == str  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(filePath) is str
+        assert type(optionName) is str
         assert filePath != ""
         assert optionName != ""
 
@@ -149,8 +149,8 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def OptionIsAlreadyExistInAnotherFile(filePath: str, optionName: str):
-        assert type(filePath) == str  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(filePath) is str
+        assert type(optionName) is str
         assert filePath != ""
         assert optionName != ""
 
@@ -161,8 +161,8 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def OptionIsAlreadyExistInFile(filePath: str, optionName: str):
-        assert type(filePath) == str  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(filePath) is str
+        assert type(optionName) is str
         assert filePath != ""
         assert optionName != ""
 
@@ -173,8 +173,8 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def OptionValueItemIsAlreadyDefined(filePath: str, optName: str, valueItem: any):
-        assert type(filePath) == str  # noqa: E721
-        assert type(optName) == str  # noqa: E721
+        assert type(filePath) is str
+        assert type(optName) is str
 
         errMsg = "Another definition of option [{1}] value item [{2}] is found in the file [{0}].".format(
             filePath, optName, valueItem
@@ -185,8 +185,8 @@ class ErrorMessageBuilder:
     def OptionValueItemIsAlreadyDefinedInAnotherFile(
         filePath: str, optName: str, valueItem: any
     ):
-        assert type(filePath) == str  # noqa: E721
-        assert type(optName) == str  # noqa: E721
+        assert type(filePath) is str
+        assert type(optName) is str
 
         errMsg = "Definition of option [{1}] value item [{2}] is found in another file [{0}].".format(
             filePath, optName, valueItem
@@ -195,14 +195,14 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def UnknownFileName(fileName: str):
-        assert type(fileName) == str  # noqa: E721
+        assert type(fileName) is str
 
         errMsg = "Unknown file name [{0}].".format(fileName)
         return errMsg
 
     # --------------------------------------------------------------------
     def MultipleDefOfFileIsFound(fileName: str, count: int):
-        assert type(fileName) == str  # noqa: E721
+        assert type(fileName) is str
         assert type(count) == int  # noqa: E721
 
         errMsg = "Multiple definitition of file [{0}] is found - {1}.".format(
@@ -221,7 +221,7 @@ class ErrorMessageBuilder:
         ourLastMDate: datetime.datetime,
         curLastMDate: datetime.datetime,
     ):
-        assert type(filePath) == str  # noqa: E721
+        assert type(filePath) is str
         assert type(ourLastMDate) == datetime.datetime  # noqa: E721
         assert type(curLastMDate) == datetime.datetime  # noqa: E721
 
@@ -237,7 +237,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     def FileLineAlreadyHasOption(optionName: str):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         errMsg = "File line already has the option [{0}].".format(optionName)
         return errMsg
@@ -251,7 +251,7 @@ class ErrorMessageBuilder:
     def CfgReader__UnexpectedSymbol(lineNum: int, colNum: int, ch: str):
         assert type(lineNum) == int  # noqa: E721
         assert type(colNum) == int  # noqa: E721
-        assert type(ch) == str  # noqa: E721
+        assert type(ch) is str
 
         errMsg = "Unexpected symbol in line {0}, column {1}: [{2}]".format(
             lineNum, colNum, ch
@@ -286,7 +286,7 @@ class ErrorMessageBuilder:
     def CfgReader__UnknownEscapedSymbolInInclude(lineNum: int, colNum: int, ch: str):
         assert type(lineNum) == int  # noqa: E721
         assert type(colNum) == int  # noqa: E721
-        assert type(ch) == str  # noqa: E721
+        assert type(ch) is str
         assert lineNum >= 0
         assert colNum >= 0
         assert ch != ""
@@ -307,7 +307,7 @@ class ErrorMessageBuilder:
     # --------------------------------------------------------------------
     def CfgReader__OptionWithoutValue(optionName: str, lineNum: int):
         assert type(lineNum) == int  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert lineNum >= 0
         assert optionName != ""
 
@@ -319,7 +319,7 @@ class ErrorMessageBuilder:
     # --------------------------------------------------------------------
     def CfgReader__EndQuotedOptionValueIsNotFound(optionName: str, lineNum: int):
         assert type(lineNum) == int  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert lineNum >= 0
         assert optionName != ""
 
@@ -331,7 +331,7 @@ class ErrorMessageBuilder:
     # --------------------------------------------------------------------
     def CfgReader__IncompletedEscapeInQuotedOptionValue(optionName: str, lineNum: int):
         assert type(lineNum) == int  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert lineNum >= 0
         assert optionName != ""
 
@@ -345,8 +345,8 @@ class ErrorMessageBuilder:
         optionName: str, lineNum: int, colNum: int, ch: str
     ):
         assert type(lineNum) == int  # noqa: E721
-        assert type(optionName) == str  # noqa: E721
-        assert type(ch) == str  # noqa: E721
+        assert type(optionName) is str
+        assert type(ch) is str
         assert lineNum >= 0
         assert optionName != ""
         assert ch != ""

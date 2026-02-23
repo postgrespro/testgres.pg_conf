@@ -31,7 +31,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
 
@@ -43,7 +43,7 @@ class TestSet001__Common:
         assert type(file1.m_FileData) == PgCfgModel__FileData  # noqa: E721
         assert file1.m_FileData.m_Lines is not None
         assert type(file1.m_FileData.m_Lines) == list  # noqa: E721
-        assert type(file1.m_FileData.m_Path) == str  # noqa: E721
+        assert type(file1.m_FileData.m_Path) is str
         assert file1.m_FileData.m_Path == os.path.join(
             rootTmpDir,
             cfg.C_POSTGRESQL_CONF,
@@ -65,7 +65,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -84,7 +84,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -103,7 +103,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -129,7 +129,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -177,16 +177,16 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) == tuple  # noqa: E721
         assert len(request.param) == 2
-        assert type(request.param[1]) == str  # noqa: E721
+        assert type(request.param[1]) is str
         return request.param[1]
 
     # --------------------------------------------------------------------
     def test_201__option(self, request: pytest.FixtureRequest, data201__assign: str):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data201__assign) == str  # noqa: E721
+        assert type(data201__assign) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -213,7 +213,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -240,7 +240,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -286,7 +286,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) == tuple  # noqa: E721
         assert len(request.param) == 2
-        assert type(request.param[1]) == str  # noqa: E721
+        assert type(request.param[1]) is str
         return request.param[1]
 
     # --------------------------------------------------------------------
@@ -294,10 +294,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data204_tail: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data204_tail) == str  # noqa: E721
+        assert type(data204_tail) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -315,7 +315,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -348,7 +348,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -381,7 +381,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -408,10 +408,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data201__assign: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data201__assign) == str  # noqa: E721
+        assert type(data201__assign) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -438,7 +438,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -491,7 +491,7 @@ class TestSet001__Common:
         assert type(endData304) == tuple  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -528,7 +528,7 @@ class TestSet001__Common:
     def endData3E01(self, request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) == tuple  # noqa: E721
-        assert type(request.param[1]) == str  # noqa: E721
+        assert type(request.param[1]) is str
         return request.param[1]
 
     # --------------------------------------------------------------------
@@ -536,10 +536,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, endData3E01: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(endData3E01) == str  # noqa: E721
+        assert type(endData3E01) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -566,7 +566,7 @@ class TestSet001__Common:
     def endData3E02(self, request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) == tuple  # noqa: E721
-        assert type(request.param[1]) == str  # noqa: E721
+        assert type(request.param[1]) is str
         return request.param[1]
 
     # --------------------------------------------------------------------
@@ -574,10 +574,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, endData3E02: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(endData3E02) == str  # noqa: E721
+        assert type(endData3E02) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -598,7 +598,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -619,7 +619,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -648,7 +648,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -677,10 +677,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data4E02: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data4E02) == str  # noqa: E721
+        assert type(data4E02) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -699,7 +699,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -729,10 +729,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data4E04: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data4E04) == str  # noqa: E721
+        assert type(data4E04) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -772,10 +772,10 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data4E05: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data4E05) == str  # noqa: E721
+        assert type(data4E05) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 

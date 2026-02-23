@@ -32,7 +32,7 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_OptionNames, ids=[x for x in sm_OptionNames])
     def optionName(self, request: pytest.fixture) -> str:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == str  # noqa: E721
+        assert type(request.param) is str
         return request.param
 
     # --------------------------------------------------------------------
@@ -97,7 +97,7 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_001__ok(self, optionName: str):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
 
@@ -159,7 +159,7 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_002__cant_convert_value(self, optionName: str):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
 
@@ -204,7 +204,7 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_003__bad_option_value_type(self, optionName: str):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
 
@@ -240,8 +240,8 @@ class TestSet001__Common:
         text: str
 
         def __init__(self, sign: str, text: str):
-            assert type(sign) == str  # noqa: E721
-            assert type(text) == str  # noqa: E721
+            assert type(sign) is str
+            assert type(text) is str
             self.sign = sign
             self.text = text
 
@@ -265,9 +265,9 @@ class TestSet001__Common:
         quote2: str
 
         def __init__(self, sign: str, quote1: str, quote2: str):
-            assert type(sign) == str  # noqa: E721
-            assert type(quote1) == str  # noqa: E721
-            assert type(quote2) == str  # noqa: E721
+            assert type(sign) is str
+            assert type(quote1) is str
+            assert type(quote2) is str
             self.sign = sign
             self.quote1 = quote1
             self.quote2 = quote2
@@ -337,10 +337,10 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_101__parse_file_line(self, optionName: str):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         for iAssign in range(len(__class__.sm_Data101_assigns)):
             for iQuote in range(len(__class__.sm_Data101_quotes)):

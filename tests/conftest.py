@@ -131,7 +131,7 @@ class TEST_PROCESS_STATS:
 
     # --------------------------------------------------------------------
     def incrementFailedTestCount(testID: str, errCount: int) -> None:
-        assert type(testID) == str  # noqa: E721
+        assert type(testID) is str
         assert type(errCount) == int  # noqa: E721
         assert errCount > 0
         assert type(__class__.FailedTests) == list  # noqa: E721
@@ -155,7 +155,7 @@ class TEST_PROCESS_STATS:
 
     # --------------------------------------------------------------------
     def incrementXFailedTestCount(testID: str, errCount: int) -> None:
-        assert type(testID) == str  # noqa: E721
+        assert type(testID) is str
         assert type(errCount) == int  # noqa: E721
         assert errCount >= 0
         assert type(__class__.XFailedTests) == list  # noqa: E721
@@ -180,7 +180,7 @@ class TEST_PROCESS_STATS:
 
     # --------------------------------------------------------------------
     def incrementNotXFailedTests(testID: str) -> None:
-        assert type(testID) == str  # noqa: E721
+        assert type(testID) is str
         assert type(__class__.NotXFailedTests) == list  # noqa: E721
         assert type(__class__.cNotXFailedTests) == int  # noqa: E721
         assert __class__.cNotXFailedTests >= 0
@@ -194,7 +194,7 @@ class TEST_PROCESS_STATS:
 
     # --------------------------------------------------------------------
     def incrementWarningTestCount(testID: str, warningCount: int) -> None:
-        assert type(testID) == str  # noqa: E721
+        assert type(testID) is str
         assert type(warningCount) == int  # noqa: E721
         assert testID != ""
         assert warningCount > 0
@@ -228,7 +228,7 @@ class TEST_PROCESS_STATS:
 
     # --------------------------------------------------------------------
     def incrementAchtungTestCount(testID: str) -> None:
-        assert type(testID) == str  # noqa: E721
+        assert type(testID) is str
         assert type(__class__.AchtungTests) == list  # noqa: E721
         assert type(__class__.cAchtungTests) == int  # noqa: E721
         assert __class__.cAchtungTests >= 0
@@ -427,7 +427,7 @@ def helper__makereport__call(
             exitStatus = ExitStatusNames.XFAILED
             assert hasattr(rep, "wasxfail")
             assert rep.wasxfail is not None
-            assert type(rep.wasxfail) == str  # noqa: E721
+            assert type(rep.wasxfail) is str
 
             reasonText = rep.wasxfail
             reasonMsgTempl = "XFAIL REASON: {0}"
@@ -440,10 +440,10 @@ def helper__makereport__call(
 
             TEST_PROCESS_STATS.incrementXFailedTestCount(testID, item_error_msg_count)
 
-        assert type(reasonText) == str  # noqa: E721
+        assert type(reasonText) is str
 
         if reasonText != "":
-            assert type(reasonMsgTempl) == str  # noqa: E721
+            assert type(reasonMsgTempl) is str
             logging.info("*")
             logging.info("* " + reasonMsgTempl.format(reasonText))
 
@@ -466,7 +466,7 @@ def helper__makereport__call(
         assert call.excinfo is None
 
         if hasattr(rep, "wasxfail"):
-            assert type(rep.wasxfail) == str  # noqa: E721
+            assert type(rep.wasxfail) is str
 
             TEST_PROCESS_STATS.incrementNotXFailedTests(testID)
 
@@ -549,7 +549,7 @@ def pytest_runtest_makereport(item: pytest.Function, call: pytest.CallInfo):
     assert outcome is not None
     assert type(outcome) == T_PLUGGY_RESULT  # noqa: E721
 
-    assert type(call.when) == str  # noqa: E721
+    assert type(call.when) is str
 
     if call.when == "collect":
         return
@@ -778,7 +778,7 @@ def helper__print_test_list(tests: typing.List[str]) -> None:
     nTest = 0
 
     for t in tests:
-        assert type(t) == str  # noqa: E721
+        assert type(t) is str
         assert t != ""
         nTest += 1
         logging.info(templateLine.format(nTest, t))
@@ -807,7 +807,7 @@ def helper__print_test_list2(tests: typing.List[T_TUPLE__str_int]) -> None:
     for t in tests:
         assert type(t) == tuple  # noqa: E721
         assert len(t) == 2
-        assert type(t[0]) == str  # noqa: E721
+        assert type(t[0]) is str
         assert type(t[1]) == int  # noqa: E721
         assert t[0] != ""
         assert t[1] >= 0
@@ -856,15 +856,15 @@ def pytest_sessionfinish():
     C_LINE1 = "---------------------------"
 
     def LOCAL__print_line1_with_header(header: str):
-        assert type(C_LINE1) == str  # noqa: E721
-        assert type(header) == str  # noqa: E721
+        assert type(C_LINE1) is str
+        assert type(header) is str
         assert header != ""
         logging.info(C_LINE1 + " [" + header + "]")
 
     def LOCAL__print_test_list(
         header: str, test_count: int, test_list: typing.List[str]
     ):
-        assert type(header) == str  # noqa: E721
+        assert type(header) is str
         assert type(test_count) == int  # noqa: E721
         assert type(test_list) == list  # noqa: E721
         assert header != ""
@@ -880,7 +880,7 @@ def pytest_sessionfinish():
     def LOCAL__print_test_list2(
         header: str, test_count: int, test_list: typing.List[T_TUPLE__str_int]
     ):
-        assert type(header) == str  # noqa: E721
+        assert type(header) is str
         assert type(test_count) == int  # noqa: E721
         assert type(test_list) == list  # noqa: E721
         assert header != ""
@@ -1008,7 +1008,7 @@ def helper__pytest_configure__logging(config: pytest.Config) -> None:
 
     log_file_path = os.path.join(log_dir, log_name)
     assert log_file_path is not None
-    assert type(log_file_path) == str  # noqa: E721
+    assert type(log_file_path) is str
 
     logging_plugin.set_log_path(log_file_path)
     return

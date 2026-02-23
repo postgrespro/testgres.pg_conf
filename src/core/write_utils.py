@@ -20,7 +20,7 @@ class WriteUtils:
 
         for x in strList:
             assert x is not None
-            assert type(x) == str  # noqa: E721
+            assert type(x) is str
 
             v = str(x)
 
@@ -38,7 +38,7 @@ class WriteUtils:
     # --------------------------------------------------------------------
     def Pack_Str(text: str) -> str:
         assert text is not None
-        assert type(text) == str  # noqa: E721
+        assert type(text) is str
 
         result = "'"
 
@@ -69,7 +69,7 @@ class WriteUtils:
     # Helper Methods -----------------------------------------------------
     def Helper__PackStrListItem2(itemText: str) -> str:
         assert itemText is not None
-        assert type(itemText) == str  # noqa: E721
+        assert type(itemText) is str
 
         needQuote = __class__.Helper__StrList__DoesItemNeedToQuote(itemText)
 
@@ -93,7 +93,7 @@ class WriteUtils:
     # --------------------------------------------------------------------
     def Helper__StrList__DoesItemNeedToQuote(itemText: str) -> bool:
         assert itemText is not None
-        assert type(itemText) == str  # noqa: E721
+        assert type(itemText) is str
 
         if itemText == "":
             return True

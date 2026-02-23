@@ -21,7 +21,7 @@ class OptionHandlerToPrepareSetValue__Std__Int(OptionHandlerToPrepareSetValue):
     def PrepareSetValue(self, ctx: OptionHandlerCtxToPrepareSetValue) -> any:
         assert type(ctx) == OptionHandlerCtxToPrepareSetValue  # noqa: E721
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
-        assert type(ctx.OptionName) == str  # noqa: E721
+        assert type(ctx.OptionName) is str
         assert ctx.OptionValue is not None
 
         typeOfOptionValue = type(ctx.OptionValue)
@@ -30,7 +30,7 @@ class OptionHandlerToPrepareSetValue__Std__Int(OptionHandlerToPrepareSetValue):
             return ctx.OptionValue
 
         optionName = ctx.OptionName
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         if typeOfOptionValue == str:
             if not str(ctx.OptionValue).isnumeric():

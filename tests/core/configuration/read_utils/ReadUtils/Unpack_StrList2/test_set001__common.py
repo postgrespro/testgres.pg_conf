@@ -21,8 +21,8 @@ class TestSet001__Common:
         result: typing.List[str]
 
         def __init__(self, d: str, s: str, r: typing.List[str]):
-            assert type(d) == str  # noqa: E721
-            assert type(s) == str  # noqa: E721
+            assert type(d) is str
+            assert type(s) is str
             assert type(r) == list  # noqa: E721
 
             self.descr = d

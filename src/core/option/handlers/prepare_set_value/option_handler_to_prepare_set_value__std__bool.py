@@ -42,7 +42,7 @@ class OptionHandlerToPrepareSetValue__Std__Bool(OptionHandlerToPrepareSetValue):
     def PrepareSetValue(self, ctx: OptionHandlerCtxToPrepareSetValue) -> any:
         assert type(ctx) == OptionHandlerCtxToPrepareSetValue  # noqa: E721
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
-        assert type(ctx.OptionName) == str  # noqa: E721
+        assert type(ctx.OptionName) is str
         assert ctx.OptionValue is not None
 
         optionValue = ctx.OptionValue
@@ -63,7 +63,7 @@ class OptionHandlerToPrepareSetValue__Std__Bool(OptionHandlerToPrepareSetValue):
             RaiseError.CantConvertOptionValue(ctx.OptionName, optionValueType, bool)
 
         if optionValueType == str:  # noqa: E721
-            assert type(optionValue) == str  # noqa: E721
+            assert type(optionValue) is str
 
             if len(optionValue) < __class__.C_MIN_STR_VALUE_LENGTH:
                 pass

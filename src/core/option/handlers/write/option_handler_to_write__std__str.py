@@ -25,7 +25,7 @@ class OptionHandlerToWrite__Std__Str(OptionHandlerToWrite):
 
         result = WriteUtils.Pack_Str(typedValue)
 
-        assert type(result) == str  # noqa: E721
+        assert type(result) is str
         assert len(result) >= 2
         assert result[0] == "'"
         assert result[-1] == "'"

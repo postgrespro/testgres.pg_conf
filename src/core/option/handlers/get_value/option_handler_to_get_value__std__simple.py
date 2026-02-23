@@ -26,7 +26,7 @@ class OptionHandlerToGetValue__Std__Simple(OptionHandlerToGetValue):
             or type(ctx.SourceData) == FileData  # noqa: E721
             or type(ctx.SourceData) == OptionData  # noqa: E721
         )
-        assert type(ctx.OptionName) == str  # noqa: E721
+        assert type(ctx.OptionName) is str
 
         return ctx.DataHandler.DataHandler__GetOptionValue__Simple(
             ctx.SourceData, ctx.OptionName

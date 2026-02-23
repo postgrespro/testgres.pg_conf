@@ -35,7 +35,7 @@ class LineReader:
 
     # --------------------------------------------------------------------
     def SetData(self, lineData: str):
-        assert type(lineData) == str  # noqa: E721
+        assert type(lineData) is str
         assert type(self.m_LineNum) == int  # noqa: E721
         assert self.m_LineNum >= 0
 
@@ -66,7 +66,7 @@ class LineReader:
     def StepBack(self):
         assert type(self.m_Next) == int  # noqa: E721
         assert type(self.m_ColNum) == int  # noqa: E721
-        assert type(self.m_Data) == str  # noqa: E721
+        assert type(self.m_Data) is str
         assert self.m_Next > 0
         assert self.m_Next <= len(self.m_Data)
         assert self.m_ColNum > 0
@@ -87,7 +87,7 @@ class LineReader:
     def ReadSymbol(self) -> typing.Optional[str]:
         assert type(self.m_Next) == int  # noqa: E721
         assert type(self.m_ColNum) == int  # noqa: E721
-        assert type(self.m_Data) == str  # noqa: E721
+        assert type(self.m_Data) is str
         assert self.m_Next >= 0
         assert self.m_Next <= len(self.m_Data)
 
@@ -107,7 +107,7 @@ class LineReader:
 
     # --------------------------------------------------------------------
     def Helper__GetStepSize(self, ch: str) -> int:
-        assert type(ch) == str  # noqa: E721
+        assert type(ch) is str
         assert ch != ""
         assert type(self.m_TabSize) == int  # noqa: E721
         assert self.m_TabSize > 0
@@ -124,7 +124,7 @@ class LineReader:
 
 class ReadUtils:
     def IsSpace(ch: str) -> bool:
-        assert type(ch) == str  # noqa: E721
+        assert type(ch) is str
 
         if ch == " ":
             return True
@@ -136,7 +136,7 @@ class ReadUtils:
 
     # --------------------------------------------------------------------
     def IsEOL(ch: str) -> bool:
-        assert type(ch) == str  # noqa: E721
+        assert type(ch) is str
 
         if ch == "\n":
             return True
@@ -145,7 +145,7 @@ class ReadUtils:
 
     # --------------------------------------------------------------------
     def IsValidSeqCh1(ch: str) -> bool:
-        assert type(ch) == str  # noqa: E721
+        assert type(ch) is str
 
         if ch.isalpha():
             return True
@@ -157,7 +157,7 @@ class ReadUtils:
 
     # --------------------------------------------------------------------
     def IsValidSeqCh2(ch: str) -> bool:
-        assert type(ch) == str  # noqa: E721
+        assert type(ch) is str
 
         if ch.isdigit():
             return True
@@ -167,7 +167,7 @@ class ReadUtils:
     # --------------------------------------------------------------------
     def Unpack_StrList2(source: str) -> typing.List[str]:
         assert source is not None
-        assert type(source) == str  # noqa: E721
+        assert type(source) is str
 
         C_MODE__NONE = 0
         C_MODE__QSTART = 1
@@ -193,14 +193,14 @@ class ReadUtils:
         # ----------------------------------------------
         def LOCAL__append_to_curValueItem(ctx: tagCtx, ch: str, isData: bool):
             assert type(ctx) == tagCtx  # noqa: E721
-            assert type(ch) == str  # noqa: E721
+            assert type(ch) is str
             assert len(ch) == 1
             assert type(isData) == bool  # noqa: E721
 
             if ctx.curValueItem is None:
                 ctx.curValueItem = ch
             else:
-                assert type(ctx.curValueItem) == str  # noqa: E721
+                assert type(ctx.curValueItem) is str
                 ctx.curValueItem += ch
 
             if isData:

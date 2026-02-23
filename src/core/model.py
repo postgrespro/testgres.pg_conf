@@ -76,7 +76,7 @@ class CommentData(FileLineElementData):
     def __init__(self, parent: FileLineData, offset: typing.Optional[int], text: str):
         assert type(parent) == FileLineData  # noqa: E721
         assert offset is None or type(offset) == int  # noqa: E721
-        assert type(text) == str  # noqa: E721
+        assert type(text) is str
 
         super().__init__(parent, offset)
 
@@ -97,7 +97,7 @@ class OptionData(FileLineElementData):
     ):
         assert type(parent) == FileLineData  # noqa: E721
         assert offset is None or type(offset) == int  # noqa: E721
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
         assert value is not None
         assert name != ""
 
@@ -124,7 +124,7 @@ class IncludeData(FileLineElementData):
         fileData: FileData,
     ):
         assert type(parent) == FileLineData  # noqa: E721
-        assert type(path) == str  # noqa: E721
+        assert type(path) is str
         assert type(fileData) == FileData  # noqa: E721
         assert offset is None or type(offset) == int  # noqa: E721
 
@@ -213,7 +213,7 @@ class FileData(ObjectData):
     # --------------------------------------------------------------------
     def __init__(self, parent: ConfigurationData, path: str):
         assert type(parent) == ConfigurationData  # noqa: E721
-        assert type(path) == str  # noqa: E721
+        assert type(path) is str
         assert parent.OsOps.Path_IsAbs(path)
         assert parent.OsOps.Path_NormPath(path) == path
         assert parent.OsOps.Path_NormCase(path) == path
@@ -231,7 +231,7 @@ class FileData(ObjectData):
         self.m_OptionsByName = dict()
         assert type(self.m_OptionsByName) is dict
 
-        assert type(self.m_Path) == str  # noqa: E721
+        assert type(self.m_Path) is str
         assert self.m_Path != ""
 
     # Object interface ---------------------------------------------------
@@ -264,7 +264,7 @@ class ConfigurationData(ObjectData):
 
     # --------------------------------------------------------------------
     def __init__(self, data_dir: str, osOps: ConfigurationOsOps):
-        assert type(data_dir) == str  # noqa: E721
+        assert type(data_dir) is str
         assert isinstance(osOps, ConfigurationOsOps)
 
         super().__init__()

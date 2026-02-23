@@ -27,7 +27,7 @@ class OptionHandlerToSetValueItem__Std__Unique(OptionHandlerToSetValueItem):
             or type(ctx.TargetData) == FileData  # noqa: E721
             or type(ctx.TargetData) == OptionData  # noqa: E721
         )
-        assert type(ctx.OptionName) == str  # noqa: E721
+        assert type(ctx.OptionName) is str
         assert ctx.OptionValueItem is not None
 
         return ctx.DataHandler.DataHandler__SetUniqueOptionValueItem(

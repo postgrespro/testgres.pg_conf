@@ -24,7 +24,7 @@ class CfgFileReader(ConfigurationFileReader):
         assert type(self.m_file) == io.StringIO  # noqa: E721
 
         r = self.m_file.readline()
-        assert type(r) == str  # noqa: E721
+        assert type(r) is str
         if not r:
             assert r == ""
             return None

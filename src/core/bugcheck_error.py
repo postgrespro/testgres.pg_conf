@@ -16,7 +16,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def MultipleDefOfOptionIsFound(optName: str, count: int):
-        assert type(optName) == str  # noqa: E721
+        assert type(optName) is str
         assert type(count) == int  # noqa: E721
 
         errMsg = (
@@ -28,7 +28,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def UnkOptObjectDataType(optName: str, optDataType: type):
-        assert type(optName) == str  # noqa: E721
+        assert type(optName) is str
         assert type(optDataType) == type  # noqa: E721
 
         errMsg = (
@@ -40,7 +40,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def MultipleDefOfFileIsFound(fileName: str, count: int):
-        assert type(fileName) == str  # noqa: E721
+        assert type(fileName) is str
         assert type(count) == int  # noqa: E721
 
         errMsg = (
@@ -52,7 +52,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def UnkFileObjectDataType(fileName: str, fileDataType: type):
-        assert type(fileName) == str  # noqa: E721
+        assert type(fileName) is str
         assert type(fileDataType) == type  # noqa: E721
 
         errMsg = "[BUG CHECK] Unknown type of the file object data [{0}] - {1}.".format(
@@ -62,7 +62,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def UnkFileDataStatus(filePath: str, fileStatus: any):
-        assert type(filePath) == str  # noqa: E721
+        assert type(filePath) is str
         assert fileStatus is not None
 
         errMsg = "[BUG CHECK] Unknown file data status [{0}] - {1}.".format(
@@ -72,8 +72,8 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def FileIsNotFoundInIndex(fileKey: str, filePath: str):
-        assert type(fileKey) == str  # noqa: E721
-        assert type(filePath) == str  # noqa: E721
+        assert type(fileKey) is str
+        assert type(filePath) is str
 
         errMsg = "[BUG CHECK] File [{0}][{1}] is not found in index.".format(
             fileKey, filePath
@@ -82,14 +82,14 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionIsNotFoundInIndex(optName: str):
-        assert type(optName) == str  # noqa: E721
+        assert type(optName) is str
 
         errMsg = "[BUG CHECK] Option [{0}] is not found in index.".format(optName)
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     def OptionIsNotFoundInFileLine(optName: str):
-        assert type(optName) == str  # noqa: E721
+        assert type(optName) is str
 
         errMsg = "[BUG CHECK] Option [{0}] is not found in file line.".format(optName)
         raise Exception(errMsg)
@@ -111,7 +111,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToPrepareSetValueIsNotDefined(name: str):
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToPrepareSetValue for [{0}] is not defined.".format(
             name
@@ -120,7 +120,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToPrepareGetValueIsNotDefined(name: str):
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToPrepareGetValue for [{0}] is not defined.".format(
             name
@@ -129,7 +129,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToPrepareSetValueItemIsNotDefined(name: str):
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToPrepareSetValueItem for [{0}] is not defined.".format(
             name
@@ -138,7 +138,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToSetValueIsNotDefined(name: str):
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToSetValue for [{0}] is not defined.".format(
             name
@@ -147,7 +147,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToGetValueIsNotDefined(name: str):
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToGetValue for [{0}] is not defined.".format(
             name
@@ -156,7 +156,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToAddOptionIsNotDefined(name: str):
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
 
         errMsg = (
             "[BUG CHECK] OptionHandlerToAddOption for [{0}] is not defined.".format(
@@ -167,7 +167,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToSetValueItemIsNotDefined(name: str):
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
 
         errMsg = (
             "[BUG CHECK] OptionHandlerToSetValueItem for [{0}] is not defined.".format(
@@ -178,7 +178,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def OptionHandlerToWriteIsNotDefined(name: str):
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToWrite for [{0}] is not defined.".format(
             name
@@ -187,9 +187,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def UnexpectedSituation(bugcheckSrc: str, bugcheckPoint: str, explain: str):
-        assert type(bugcheckSrc) == str  # noqa: E721
-        assert type(bugcheckPoint) == str  # noqa: E721
-        assert explain is None or type(explain) == str  # noqa: E721
+        assert type(bugcheckSrc) is str
+        assert type(bugcheckPoint) is str
+        assert explain is None or type(explain) is str
 
         errMsg = "[BUG CHECK] Unexpected situation in [{0}][{1}].".format(
             bugcheckSrc, bugcheckPoint
@@ -205,7 +205,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     def UnknownOptionValueType(optionName: str, typeOfOptionValue: type):
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
         assert optionName != ""
         assert type(typeOfOptionValue) == type  # noqa: E721
 

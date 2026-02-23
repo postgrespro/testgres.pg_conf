@@ -29,7 +29,7 @@ class Helpers:
     def ExtractFirstOptionFromIndexItem(
         optionName: str, indexItem: typing.Union[OptionData, typing.List[OptionData]]
     ) -> OptionData:
-        assert type(optionName) == str  # noqa: E721
+        assert type(optionName) is str
 
         typeOfIndexItem = type(indexItem)
 
@@ -69,8 +69,8 @@ class Helpers:
     ) -> str:
         assert cfgOsOps is not None
         assert isinstance(cfgOsOps, ConfigurationOsOps)
-        assert type(baseFolder) == str  # noqa: E721
-        assert type(filePath) == str  # noqa: E721
+        assert type(baseFolder) is str
+        assert type(filePath) is str
         assert filePath != ""
 
         newFilePath = None
@@ -81,7 +81,7 @@ class Helpers:
             newFilePath = cfgOsOps.Path_Join(baseFolder, filePath)
             newFilePath = cfgOsOps.Path_NormPath(newFilePath)
 
-        assert type(newFilePath) == str  # noqa: E721
+        assert type(newFilePath) is str
         assert newFilePath != ""
 
         newFilePath = cfgOsOps.Path_AbsPath(newFilePath)

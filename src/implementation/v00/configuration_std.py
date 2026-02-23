@@ -309,7 +309,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
     # --------------------------------------------------------------------
     def __init__(self, data_dir: str, cfgOsOps: ConfigurationOsOps = None):
-        assert type(data_dir) == str  # noqa: E721
+        assert type(data_dir) is str
         assert cfgOsOps is None or isinstance(cfgOsOps, ConfigurationOsOps)
 
         if cfgOsOps is None:
@@ -322,7 +322,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     # --------------------------------------------------------------------
     @staticmethod
     def Create(data_dir: str) -> PostgresConfiguration_Std:
-        assert type(data_dir) == str  # noqa: E721
+        assert type(data_dir) is str
         assert isinstance(LocalCfgOsOps, ConfigurationOsOps)
         return __class__(data_dir, LocalCfgOsOps)
 
@@ -331,13 +331,13 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def CreateWithCfgOsOps(
         data_dir: str, cfgOsOps: ConfigurationOsOps
     ) -> PostgresConfiguration_Std:
-        assert type(data_dir) == str  # noqa: E721
+        assert type(data_dir) is str
         assert isinstance(cfgOsOps, ConfigurationOsOps)
         return __class__(data_dir, cfgOsOps)
 
     # PostgresConfiguration_Base interface -------------------------------
     def Internal__GetAutoConfFileName(self):
-        assert type(__class__.C_POSTGRESQL_AUTO_CONF) == str  # noqa: E721
+        assert type(__class__.C_POSTGRESQL_AUTO_CONF) is str
         assert __class__.C_POSTGRESQL_AUTO_CONF != ""
         return __class__.C_POSTGRESQL_AUTO_CONF
 
@@ -345,7 +345,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToPrepareSetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareSetValue:
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
@@ -364,7 +364,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToPrepareGetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareSetValue:
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
@@ -383,7 +383,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToPrepareSetValueItem(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareSetValueItem:
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
@@ -403,7 +403,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToSetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToSetValue:
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
@@ -420,7 +420,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToGetValue(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToGetValue:
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
@@ -437,7 +437,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToAddOption(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToAddOption:
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
@@ -456,7 +456,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToSetValueItem(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToSetValueItem:
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
@@ -475,7 +475,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Internal__GetOptionHandlerToWrite(
         self, name: str
     ) -> PgCfgModel__OptionHandlerToWrite:
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
@@ -490,7 +490,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
     # Helper methods -----------------------------------------------------
     def Helper__GetOptionHandlers(self, name: str) -> tagOptionHandlers:
-        assert type(name) == str  # noqa: E721
+        assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 
         if not (name in self.sm_OptionHandlers.keys()):

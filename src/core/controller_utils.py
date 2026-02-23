@@ -121,7 +121,7 @@ class DataControllerUtils:
     ) -> PgCfgModel__CommentData:
         assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert (offset is None) or (type(offset) == int)  # noqa: E721
-        assert type(text) == str  # noqa: E721
+        assert type(text) is str
         assert type(fileLineData.m_Items) == list  # noqa: E721
 
         assert fileLineData.IsAlive()
@@ -173,7 +173,7 @@ class DataControllerUtils:
         offset: typing.Optional[int],
     ) -> PgCfgModel__IncludeData:
         assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
-        assert type(filePath) == str  # noqa: E721
+        assert type(filePath) is str
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
         assert filePath != ""
         assert offset is None or type(offset) == int  # noqa: E721
@@ -201,7 +201,7 @@ class DataControllerUtils:
     ) -> PgCfgModel__OptionData:
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
-        assert type(optName) == str  # noqa: E721
+        assert type(optName) is str
         assert optValue is not None
         assert optName != ""
         assert type(fileLineData.m_Items) == list  # noqa: E721
@@ -312,7 +312,7 @@ class DataControllerUtils:
     ) -> PgCfgModel__OptionData:
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
-        assert type(optName) == str  # noqa: E721
+        assert type(optName) is str
         assert optValue is not None
 
         newLineData = DataControllerUtils.File__add_Line(fileData)  # raise
@@ -352,14 +352,14 @@ class DataControllerUtils:
         assert type(cfgData.m_Files) == list  # noqa: E721
         assert type(cfgData.m_AllFilesByName) is dict
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
-        assert type(file_name) == str  # noqa: E721
+        assert type(file_name) is str
         assert file_name != ""
         assert cfgData.OsOps.Path_BaseName(file_name) == file_name
 
         newFilePath = cfgData.OsOps.Path_Join(cfgData.m_DataDir, file_name)
         newFilePath = cfgData.OsOps.Path_NormPath(newFilePath)
 
-        assert type(newFilePath) == str  # noqa: E721
+        assert type(newFilePath) is str
         assert newFilePath != ""
 
         return __class__.Helper__FinishCreateTopLevelFile(cfgData, newFilePath)
@@ -371,13 +371,13 @@ class DataControllerUtils:
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert type(cfgData.m_Files) == list  # noqa: E721
         assert type(cfgData.m_AllFilesByName) is dict
-        assert type(path) == str  # noqa: E721
+        assert type(path) is str
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert path != ""
 
         newFilePath = Helpers.NormalizeFilePath(cfgData.OsOps, cfgData.m_DataDir, path)
 
-        assert type(newFilePath) == str  # noqa: E721
+        assert type(newFilePath) is str
         assert newFilePath != ""
 
         # TODO: use index
@@ -399,13 +399,13 @@ class DataControllerUtils:
         assert type(cfgData.m_Files) == list  # noqa: E721
         assert type(cfgData.m_AllFilesByName) is dict
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
-        assert type(baseFolder) == str  # noqa: E721
-        assert type(path) == str  # noqa: E721
+        assert type(baseFolder) is str
+        assert type(path) is str
         assert path != ""
 
         newFilePath = Helpers.NormalizeFilePath(cfgData.OsOps, baseFolder, path)
 
-        assert type(newFilePath) == str  # noqa: E721
+        assert type(newFilePath) is str
         assert newFilePath != ""
 
         # TODO: use index
@@ -498,13 +498,13 @@ class DataControllerUtils:
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
-        assert type(fileData.m_Path) == str  # noqa: E721
+        assert type(fileData.m_Path) is str
         assert fileData.m_Path != ""
 
         assert fileData.IsAlive()
 
         fileName = cfgData.OsOps.Path_BaseName(fileData.m_Path)
-        assert type(fileName) == str  # noqa: E721
+        assert type(fileName) is str
         assert fileName != ""
 
         __class__.Helper__InsertFileIntoIndex(
@@ -525,7 +525,7 @@ class DataControllerUtils:
         assert fileData.IsAlive()
 
         fileName = cfgData.OsOps.Path_BaseName(fileData.m_Path)
-        assert type(fileName) == str  # noqa: E721
+        assert type(fileName) is str
         assert fileName != ""
 
         __class__.Helper__DeleteFileIntoIndex(
@@ -539,7 +539,7 @@ class DataControllerUtils:
         fileData: PgCfgModel__FileData,
     ):
         assert type(filesByStrKeyDictionary) is dict
-        assert type(fileKey) == str  # noqa: E721
+        assert type(fileKey) is str
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
 
         assert fileKey != ""
@@ -568,7 +568,7 @@ class DataControllerUtils:
         fileData: PgCfgModel__FileData,
     ):
         assert type(filesByStrKeyDictionary) is dict
-        assert type(fileKey) == str  # noqa: E721
+        assert type(fileKey) is str
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
 
         assert fileKey != ""
@@ -693,7 +693,7 @@ class DataControllerUtils:
                 ptr = data[i]
                 assert ptr is not None
                 assert type(ptr) == PgCfgModel__OptionData  # noqa: E721
-                assert type(ptr.m_Name) == str  # noqa: E721
+                assert type(ptr.m_Name) is str
                 assert ptr.m_Name == optionData.m_Name
 
                 if ptr is optionData:
@@ -844,7 +844,7 @@ class DataControllerUtils:
     ):
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
-        assert type(optionData.m_Name) == str  # noqa: E721
+        assert type(optionData.m_Name) is str
         assert optionData.IsAlive()
 
         # 0.

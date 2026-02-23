@@ -74,7 +74,7 @@ class TestSet001__Common:
             with open(file.get_Path(), "r") as f:
                 fileContent = f.read()
                 assert fileContent is not None
-                assert type(fileContent) == str  # noqa: E721
+                assert type(fileContent) is str
 
                 fileContent_n = __class__.Helper__norm_content(fileContent)
 
@@ -141,7 +141,7 @@ class TestSet001__Common:
             with open(file.get_Path(), "r") as f:
                 fileContent = f.read()
                 assert fileContent is not None
-                assert type(fileContent) == str  # noqa: E721
+                assert type(fileContent) is str
 
                 fileContent_n = __class__.Helper__norm_content(fileContent)
 
@@ -225,7 +225,7 @@ class TestSet001__Common:
                 with open(file.get_Path(), "r") as f:
                     fileContent = f.read()
                     assert fileContent is not None
-                    assert type(fileContent) == str  # noqa: E721
+                    assert type(fileContent) is str
 
                     fileContent_n = __class__.Helper__norm_content(fileContent)
 
@@ -256,7 +256,7 @@ class TestSet001__Common:
         with open(file.get_Path(), "r") as f:
             fileContent = f.read()
             assert fileContent is not None
-            assert type(fileContent) == str  # noqa: E721
+            assert type(fileContent) is str
             fileContent_n = __class__.Helper__norm_content(fileContent)
             assert fileContent_n == "port = 123\nlisten_addresses = '*'\n"
 
@@ -277,7 +277,7 @@ class TestSet001__Common:
         with open(file.get_Path(), "r") as f:
             fileContent = f.read()
             assert fileContent is not None
-            assert type(fileContent) == str  # noqa: E721
+            assert type(fileContent) is str
             fileContent_n = __class__.Helper__norm_content(fileContent)
             assert fileContent_n == "listen_addresses = '*'\n"
 
@@ -366,7 +366,7 @@ class TestSet001__Common:
         with open(file.get_Path(), "r") as f:
             fileContent = f.read()
             assert fileContent is not None
-            assert type(fileContent) == str  # noqa: E721
+            assert type(fileContent) is str
             fileContent_n = __class__.Helper__norm_content(fileContent)
             assert fileContent_n == "port = 123\nlisten_addresses = '*'\n"
 
@@ -402,10 +402,10 @@ class TestSet001__Common:
     # --------------------------------------------------------------------
     def Helper__norm_content(text: str) -> str:
         assert text is not None
-        assert type(text) == str  # noqa: E721
+        assert type(text) is str
 
         r = text.replace("\r\n", "\r")
 
         assert r is not None
-        assert type(r) == str  # noqa: E721
+        assert type(r) is str
         return r

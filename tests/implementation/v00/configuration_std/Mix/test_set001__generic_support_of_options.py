@@ -41,7 +41,7 @@ class TestSet001__GenericSupportOfOptions:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
 
@@ -74,7 +74,7 @@ class TestSet001__GenericSupportOfOptions:
         assert len(data002) == 2
 
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         os.makedirs(rootTmpDir, exist_ok=True)
 

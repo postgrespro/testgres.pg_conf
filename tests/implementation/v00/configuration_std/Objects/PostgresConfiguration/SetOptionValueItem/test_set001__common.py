@@ -28,7 +28,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -49,12 +49,12 @@ class TestSet001__Common:
                 )
 
             assert r1.m_OptData is not None
-            assert type(r1.m_OptData.m_Name) == str  # noqa: E721
+            assert type(r1.m_OptData.m_Name) is str
             assert r1.m_OptData.m_Name == C_OPT_NAME
             assert type(r1.m_OptData.m_Value) == list  # noqa: E721
             assert len(r1.m_OptData.m_Value) == 1
             assert r1.m_OptData.m_Value[0] is not None
-            assert type(r1.m_OptData.m_Value[0]) == str  # noqa: E721
+            assert type(r1.m_OptData.m_Value[0]) is str
             assert r1.m_OptData.m_Value[0] == "biha"
             assert r1.m_OptData.m_Value == ["biha"]
 
@@ -75,7 +75,7 @@ class TestSet001__Common:
         optValues = ["biha", "proxima", "biha", "proxima"]
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -115,14 +115,14 @@ class TestSet001__Common:
                 )
 
             assert r1.m_OptData is not None
-            assert type(r1.m_OptData.m_Name) == str  # noqa: E721
+            assert type(r1.m_OptData.m_Name) is str
             assert r1.m_OptData.m_Name == C_OPT_NAME
             assert type(r1.m_OptData.m_Value) == list  # noqa: E721
             assert len(r1.m_OptData.m_Value) == len(expectedValue)
 
             for i in range(len(expectedValue)):
                 assert r1.m_OptData.m_Value[i] is not None
-                assert type(r1.m_OptData.m_Value[i]) == str  # noqa: E721
+                assert type(r1.m_OptData.m_Value[i]) is str
                 assert r1.m_OptData.m_Value[i] == expectedValue[i]
 
             assert r1.m_OptData.m_Value == expectedValue
@@ -142,7 +142,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -163,7 +163,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -186,7 +186,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -209,7 +209,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -237,7 +237,7 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str  # noqa: E721
+        assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 

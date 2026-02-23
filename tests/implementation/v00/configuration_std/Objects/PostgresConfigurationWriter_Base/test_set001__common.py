@@ -25,7 +25,7 @@ class TestSet001__Common:
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_001(self, request: pytest.FixtureRequest, optName: str):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(optName) == str  # noqa: E721
+        assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         cfg = PgCfg_Std(rootTmpDir)
@@ -231,9 +231,9 @@ class TestSet001__Common:
         result: str
 
         def __init__(self, d: str, f: str, r: str):
-            assert type(d) == str  # noqa: E721
-            assert type(f) == str  # noqa: E721
-            assert type(r) == str  # noqa: E721
+            assert type(d) is str
+            assert type(f) is str
+            assert type(r) is str
 
             self.descr = d
             self.fileName = f
