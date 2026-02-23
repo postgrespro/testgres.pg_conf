@@ -38,7 +38,7 @@ class TestSet001__Common:
             r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
             assert r1 is not None
-            assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
+            assert type(r1) is PgCfg_SetOptionResult_Base
             assert type(r1.EventID) == PgCfg_SetOptionEventID  # noqa: E721
 
             if nPass == 0:
@@ -102,7 +102,7 @@ class TestSet001__Common:
             r1 = cfg.SetOptionValueItem(C_OPT_NAME, optValue)
 
             assert r1 is not None
-            assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
+            assert type(r1) is PgCfg_SetOptionResult_Base
             assert type(r1.EventID) == PgCfg_SetOptionEventID  # noqa: E721
 
             if len(expectedValue) == 1:

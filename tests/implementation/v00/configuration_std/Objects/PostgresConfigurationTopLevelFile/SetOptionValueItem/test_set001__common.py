@@ -78,7 +78,7 @@ class TestSet001__Common:
 
             r1 = file.SetOptionValueItem(C_OPT_NAME, "biha")
             assert r1 is not None
-            assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
+            assert type(r1) is PgCfg_SetOptionResult_Base
 
             if nPass == 0:
                 assert r1.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
@@ -193,12 +193,12 @@ class TestSet001__Common:
 
         r1 = file.SetOptionValueItem(C_OPT_NAME, "biha")
         assert r1 is not None
-        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.Option.get_Value() == ["biha"]
 
         r2 = file.SetOptionValueItem(C_OPT_NAME, "proxima")
         assert r2 is not None
-        assert type(r2) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r2) is PgCfg_SetOptionResult_Base
         assert r2.EventID == PgCfg_SetOptionEventID.VALUE_ITEM_WAS_ADDED
         assert r2.Option.get_Value() == ["biha", "proxima"]
 

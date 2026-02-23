@@ -82,7 +82,7 @@ class TestSet001__Common:
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         set_r = cfg.SetOptionValue("port", 123)
-        assert type(set_r) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(set_r) is PgCfg_SetOptionResult_Base
         assert isinstance(set_r, PgCfg_SetOptionResult)
 
         file = set_r.Option.get_Parent().get_Parent()

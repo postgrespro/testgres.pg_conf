@@ -36,7 +36,7 @@ class TestSet001__Common:
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         set_r = cfg.SetOptionValue(optName, 123)
-        assert type(set_r) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(set_r) is PgCfg_SetOptionResult_Base
         assert isinstance(set_r, PgCfg_SetOptionResult)
         assert set_r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         set_r_option: PgCfg_Option_Base = set_r.Option

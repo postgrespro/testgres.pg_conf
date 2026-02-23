@@ -50,7 +50,7 @@ class TestSet001__Common:
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r = cfg.SetOptionValue(optName, 123)
-        assert type(r) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r) is PgCfg_SetOptionResult_Base
         assert isinstance(r, PgCfg_SetOptionResult)
         assert r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         r_option: PgCfg_Option_Base = r.Option
@@ -78,7 +78,7 @@ class TestSet001__Common:
 
         r = cfg.SetOptionValue(optName, 123)
         r = cfg.SetOptionValue(optName, 321)
-        assert type(r) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r) is PgCfg_SetOptionResult_Base
         assert r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_UPDATED
         r_option: PgCfg_Option_Base = r.Option
         assert r_option is not None
@@ -207,13 +207,13 @@ class TestSet001__Common:
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 123)
-        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 123
 
         r2 = cfg.SetOptionValue(optName, 321)
-        assert type(r2) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r2) is PgCfg_SetOptionResult_Base
         assert r2.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_UPDATED
         assert r2.Option.get_Name() == optName
         assert r2.Option.get_Value() == 321
@@ -222,7 +222,7 @@ class TestSet001__Common:
 
         # -------------- DIRECT ASSIGN
         r3 = r1.Option.set_Value(555)
-        assert type(r3) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r3) is PgCfg_SetOptionResult_Base
         assert r3.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_UPDATED
         assert r3.Option is r1.Option
         assert r3.Option.get_Name() == optName
@@ -245,7 +245,7 @@ class TestSet001__Common:
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r = cfg.SetOptionValue(optName, None)
-        assert type(r) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r) is PgCfg_SetOptionResult_Base
         assert r.m_EventID == PgCfg_SetOptionEventID.NONE
         assert r.m_Cfg is None
         assert r.m_Opt is None
@@ -266,7 +266,7 @@ class TestSet001__Common:
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 123)
-        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         assert r1.m_Cfg is cfg
         assert r1.m_OptData is not None
@@ -280,7 +280,7 @@ class TestSet001__Common:
         assert len(cfg.m_Data.m_AllOptionsByName) == 1
 
         r2 = cfg.SetOptionValue(optName, None)
-        assert type(r2) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r2) is PgCfg_SetOptionResult_Base
         assert r2.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_DELETED
         assert r2.m_Cfg is None
         assert r2.m_Opt is None
@@ -314,7 +314,7 @@ class TestSet001__Common:
             r1.Option.get_Configuration()
 
         r3 = cfg.SetOptionValue(optName, None)
-        assert type(r3) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r3) is PgCfg_SetOptionResult_Base
         assert r3.m_EventID == PgCfg_SetOptionEventID.NONE
         assert r3.m_Cfg is None
         assert r3.m_Opt is None
@@ -352,7 +352,7 @@ class TestSet001__Common:
             assert len(file1.m_FileData.m_OptionsByName) == 0
 
             rs1 = cfg.SetOptionValue(C_OPT_NAME, optValue)
-            assert type(rs1) == PgCfg_SetOptionResult_Base  # noqa: E721
+            assert type(rs1) is PgCfg_SetOptionResult_Base
             assert type(rs1.m_OptData) is PgCfgModel__OptionData
             assert rs1.m_OptData.m_Value == optValue
             assert rs1.m_OptData.m_Name == C_OPT_NAME
@@ -438,7 +438,7 @@ class TestSet001__Common:
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r = cfg.SetOptionValue(data012[0], data012[1])
-        assert type(r) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(r) is PgCfg_SetOptionResult_Base
         assert isinstance(r, PgCfg_SetOptionResult)
         assert r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         r_option: PgCfg_Option_Base = r.Option

@@ -43,7 +43,7 @@ class TestSet001__Common:
 
         set_r = cfg.SetOptionValue("port", 123)
         assert set_r is not None
-        assert type(set_r) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(set_r) is PgCfg_SetOptionResult_Base
         assert set_r.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         assert set_r.Option.get_Configuration() is cfg
         assert set_r.Option.get_Parent().get_Parent().get_Parent() is cfg

@@ -63,7 +63,7 @@ class TestSet001__Common:
         assert type(file.m_FileData) is PgCfgModel__FileData
 
         assert set_r1 is not None
-        assert type(set_r1) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(set_r1) is PgCfg_SetOptionResult_Base
         assert type(set_r1.m_EventID) == PgCfg_SetOptionEventID  # noqa: E721
         assert type(set_r1.m_OptData) is PgCfgModel__OptionData
         assert type(set_r1.m_Cfg) == PgCfg_Std  # noqa: E721
@@ -124,7 +124,7 @@ class TestSet001__Common:
         assert cfg.GetOptionValue(optName) == 123
 
         set_r2 = cfg.SetOptionValue(optName, 321)
-        assert type(set_r2) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(set_r2) is PgCfg_SetOptionResult_Base
 
         assert set_r2.m_OptData is option.m_OptionData
         assert set_r2.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_UPDATED
@@ -157,7 +157,7 @@ class TestSet001__Common:
         assert type(file.m_FileData) is PgCfgModel__FileData
 
         assert set_r2 is not None
-        assert type(set_r2) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(set_r2) is PgCfg_SetOptionResult_Base
         assert type(set_r2.m_EventID) == PgCfg_SetOptionEventID  # noqa: E721
         assert set_r2.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_DELETED
         assert set_r2.m_Cfg is None
@@ -171,7 +171,7 @@ class TestSet001__Common:
         assert type(file.m_FileData) is PgCfgModel__FileData
 
         assert set_r3 is not None
-        assert type(set_r3) == PgCfg_SetOptionResult_Base  # noqa: E721
+        assert type(set_r3) is PgCfg_SetOptionResult_Base
         assert type(set_r3.m_EventID) == PgCfg_SetOptionEventID  # noqa: E721
         assert set_r3.m_EventID == PgCfg_SetOptionEventID.NONE
         assert set_r3.m_Cfg is None
