@@ -40,9 +40,9 @@ class TestSet001__Common:
 
         with open(filePath, "x") as f:
             fd = f.fileno()
-            assert type(fd) == int
+            assert type(fd) == int  # noqa: E721
             lastMDate = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate) == datetime.datetime
+            assert type(lastMDate) == datetime.datetime  # noqa: E721
             f.close()
 
         # ---------------
@@ -56,10 +56,10 @@ class TestSet001__Common:
         assert len(cfg.get_AllFiles()) == 1
 
         file = cfg.get_AllFiles().GetFileByName(cfg.C_POSTGRESQL_CONF)
-        assert type(file) == PgCfg_TopLevelFile_Base
+        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
-        assert type(file.m_FileData) == PgCfgModel__FileData
+        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
         assert file.m_FileData.m_Status == PgCfgModel__FileStatus.EXISTS
         assert file.m_FileData.m_LastModifiedTimestamp == lastMDate
         assert len(file.m_FileData.m_Lines) == 0
@@ -86,9 +86,9 @@ class TestSet001__Common:
             # fmt: on
 
             fd = f.fileno()
-            assert type(fd) == int
+            assert type(fd) == int  # noqa: E721
             lastMDate = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate) == datetime.datetime
+            assert type(lastMDate) == datetime.datetime  # noqa: E721
             f.close()
 
         # ---------------
@@ -102,10 +102,10 @@ class TestSet001__Common:
         assert len(cfg.get_AllFiles()) == 1
 
         file = cfg.get_AllFiles().GetFileByName(cfg.C_POSTGRESQL_CONF)
-        assert type(file) == PgCfg_TopLevelFile_Base
+        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
-        assert type(file.m_FileData) == PgCfgModel__FileData
+        assert type(file.m_FileData) == PgCfgModel__FileData  # noqa: E721
         assert file.m_FileData.m_Status == PgCfgModel__FileStatus.EXISTS
         assert file.m_FileData.m_LastModifiedTimestamp == lastMDate
 
@@ -122,7 +122,9 @@ class TestSet001__Common:
         assert len(fileDataLines[4].m_Items) == 0
 
         # LINE 0
-        assert type(fileDataLines[0].m_Items[0].m_Element) == PgCfgModel__CommentData
+        assert (  # noqa: E721
+            type(fileDataLines[0].m_Items[0].m_Element) == PgCfgModel__CommentData
+        )
         assert (
             fileDataLines[0].m_Items[0].m_Element.m_Text
             == "It is a test configuration file"
@@ -130,22 +132,30 @@ class TestSet001__Common:
         assert fileDataLines[0].m_Items[0].m_Element.m_Offset == 0
 
         # LINE 1
-        assert type(fileDataLines[1].m_Items[0].m_Element) == PgCfgModel__OptionData
+        assert (  # noqa: E721
+            type(fileDataLines[1].m_Items[0].m_Element) == PgCfgModel__OptionData
+        )
         assert fileDataLines[1].m_Items[0].m_Element.m_Name == "port"
         assert fileDataLines[1].m_Items[0].m_Element.m_Value == 123
         assert fileDataLines[1].m_Items[0].m_Element.m_Offset == 0
 
-        assert type(fileDataLines[1].m_Items[1].m_Element) == PgCfgModel__CommentData
+        assert (  # noqa: E721
+            type(fileDataLines[1].m_Items[1].m_Element) == PgCfgModel__CommentData
+        )
         assert fileDataLines[1].m_Items[1].m_Element.m_Text == "It is a port"
         assert fileDataLines[1].m_Items[1].m_Element.m_Offset == 9
 
         # LINE 3
-        assert type(fileDataLines[3].m_Items[0].m_Element) == PgCfgModel__OptionData
+        assert (  # noqa: E721
+            type(fileDataLines[3].m_Items[0].m_Element) == PgCfgModel__OptionData
+        )
         assert fileDataLines[3].m_Items[0].m_Element.m_Name == "listen_addresses"
         assert fileDataLines[3].m_Items[0].m_Element.m_Value == "*"
         assert fileDataLines[3].m_Items[0].m_Element.m_Offset == 0
 
-        assert type(fileDataLines[3].m_Items[1].m_Element) == PgCfgModel__CommentData
+        assert (  # noqa: E721
+            type(fileDataLines[3].m_Items[1].m_Element) == PgCfgModel__CommentData
+        )
         assert fileDataLines[3].m_Items[1].m_Element.m_Text == "addresses"
         assert fileDataLines[3].m_Items[1].m_Element.m_Offset == 21
 
@@ -171,9 +181,9 @@ class TestSet001__Common:
             # fmt: on
 
             fd = f.fileno()
-            assert type(fd) == int
+            assert type(fd) == int  # noqa: E721
             lastMDate1 = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate1) == datetime.datetime
+            assert type(lastMDate1) == datetime.datetime  # noqa: E721
             f.close()
 
         # ---------------
@@ -188,9 +198,9 @@ class TestSet001__Common:
             # fmt: on
 
             fd = f.fileno()
-            assert type(fd) == int
+            assert type(fd) == int  # noqa: E721
             lastMDate2 = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate2) == datetime.datetime
+            assert type(lastMDate2) == datetime.datetime  # noqa: E721
             f.close()
 
         # ---------------
@@ -236,9 +246,9 @@ class TestSet001__Common:
             # fmt: on
 
             fd = f.fileno()
-            assert type(fd) == int
+            assert type(fd) == int  # noqa: E721
             lastMDate1 = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate1) == datetime.datetime
+            assert type(lastMDate1) == datetime.datetime  # noqa: E721
             f.close()
 
         # ---------------
@@ -255,9 +265,9 @@ class TestSet001__Common:
             # fmt: on
 
             fd = f.fileno()
-            assert type(fd) == int
+            assert type(fd) == int  # noqa: E721
             lastMDate2 = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
-            assert type(lastMDate2) == datetime.datetime
+            assert type(lastMDate2) == datetime.datetime  # noqa: E721
             f.close()
 
         # ---------------

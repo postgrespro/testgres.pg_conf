@@ -28,85 +28,95 @@ class TestSet001__Common:
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_001(self, request: pytest.FixtureRequest, optName: str):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(optName) == str
+        assert type(optName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData
+        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 234)
-        assert type(r1) == PgCfg_SetOptionResult_Base
+        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 234
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base
-        assert type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert (
+            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        )  # noqa: E721
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_002__set_Value__int(self, request: pytest.FixtureRequest, optName: str):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(optName) == str
+        assert type(optName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData
+        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 234)
-        assert type(r1) == PgCfg_SetOptionResult_Base
+        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 234
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base
-        assert type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert (
+            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        )  # noqa: E721
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         r2 = r1.Option.set_Value(432)
-        assert type(r2) == PgCfg_SetOptionResult_Base
+        assert type(r2) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert r2.EventID == PgCfg_SetOptionEventID.OPTION_WAS_UPDATED
         assert r2.Option.get_Name() == optName
         assert r2.Option.get_Value() == 432
-        assert type(r2.Option.get_Parent()) == PgCfg_FileLine_Base
-        assert type(r2.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        assert type(r2.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert (
+            type(r2.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        )  # noqa: E721
         assert r2.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 432
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base
-        assert type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert (
+            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        )  # noqa: E721
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_003__set_Value__None(self, request: pytest.FixtureRequest, optName: str):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(optName) == str
+        assert type(optName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData
+        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 234)
-        assert type(r1) == PgCfg_SetOptionResult_Base
+        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 234
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base
-        assert type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert (
+            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        )  # noqa: E721
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         r2 = r1.Option.set_Value(None)
-        assert type(r2) == PgCfg_SetOptionResult_Base
+        assert type(r2) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert r2.EventID == PgCfg_SetOptionEventID.OPTION_WAS_DELETED
         assert r2.Option is None
 
@@ -131,22 +141,24 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, optName: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(optName) == str
+        assert type(optName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData
+        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 234)
-        assert type(r1) == PgCfg_SetOptionResult_Base
+        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 234
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base
-        assert type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert (
+            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        )  # noqa: E721
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         invalidValues = [True, False]
@@ -171,22 +183,24 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, optName: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(optName) == str
+        assert type(optName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData
+        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 234)
-        assert type(r1) == PgCfg_SetOptionResult_Base
+        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 234
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base
-        assert type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert (
+            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        )  # noqa: E721
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         invalidValues = ["qwe", "123."]

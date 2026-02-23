@@ -29,18 +29,20 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData
+        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
-        assert type(r1) == PgCfg_SetOptionResult_Base
+        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base
-        assert type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert (
+            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        )  # noqa: E721
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         assert r1.Option.get_Value() == ["biha"]
@@ -51,7 +53,7 @@ class TestSet001__Common:
             r2 = r1.Option.set_ValueItem("proxima")
 
             assert r2 is not None
-            assert type(r2) == PgCfg_SetOptionResult_Base
+            assert type(r2) == PgCfg_SetOptionResult_Base  # noqa: E721
 
             if nPass == 0:
                 assert r2.EventID == PgCfg_SetOptionEventID.VALUE_ITEM_WAS_ADDED
@@ -63,7 +65,7 @@ class TestSet001__Common:
             assert r2.m_OptData is not None
             assert r2.m_OptData is r1.m_OptData
             assert r2.m_OptData.m_Value is not None
-            assert type(r2.m_OptData.m_Value) == list
+            assert type(r2.m_OptData.m_Value) == list  # noqa: E721
             assert len(r2.m_OptData.m_Value) == 2
             assert r2.m_OptData.m_Value[0] == "biha"
             assert r2.m_OptData.m_Value[1] == "proxima"
@@ -77,18 +79,20 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData
+        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
-        assert type(r1) == PgCfg_SetOptionResult_Base
+        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base
-        assert type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert (
+            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        )  # noqa: E721
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         with pytest.raises(Exception, match=re.escape("None value is not supported.")):
@@ -103,18 +107,20 @@ class TestSet001__Common:
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData
+        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
-        assert type(r1) == PgCfg_SetOptionResult_Base
+        assert type(r1) == PgCfg_SetOptionResult_Base  # noqa: E721
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
-        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base
-        assert type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        assert type(r1.Option.get_Parent()) == PgCfg_FileLine_Base  # noqa: E721
+        assert (
+            type(r1.Option.get_Parent().get_Parent()) == PgCfg_TopLevelFile_Base
+        )  # noqa: E721
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         errMsg = (

@@ -27,13 +27,13 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file1 is not None
-        assert type(file1) == PgCfg_TopLevelFile_Base
+        assert type(file1) == PgCfg_TopLevelFile_Base  # noqa: E721
 
         C_BIHA_CONF_FILE_NAME = "postgresql.biha.conf"
 
@@ -114,13 +114,13 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file1 is not None
-        assert type(file1) == PgCfg_TopLevelFile_Base
+        assert type(file1) == PgCfg_TopLevelFile_Base  # noqa: E721
 
         C_BIHA_CONF_FILE_NAME = "postgresql.biha.conf"
 
@@ -151,13 +151,13 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file1 is not None
-        assert type(file1) == PgCfg_TopLevelFile_Base
+        assert type(file1) == PgCfg_TopLevelFile_Base  # noqa: E721
 
         with pytest.raises(Exception, match=re.escape("File path is empty.")):
             file1.AddInclude("")

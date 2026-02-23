@@ -20,10 +20,10 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData
+        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         assert cfg.get_Configuration() is cfg
@@ -33,10 +33,10 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData
+        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         assert cfg.get_Parent() is None

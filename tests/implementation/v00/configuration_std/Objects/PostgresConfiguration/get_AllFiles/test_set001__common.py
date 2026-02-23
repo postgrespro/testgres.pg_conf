@@ -27,13 +27,13 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         allFiles1 = cfg.get_AllFiles()
         assert allFiles1 is not None
-        assert type(allFiles1) == PgCfg_Base__AllFiles
+        assert type(allFiles1) == PgCfg_Base__AllFiles  # noqa: E721
         assert isinstance(allFiles1, PgCfg_Files)
         assert len(allFiles1) == 0
 
@@ -46,10 +46,10 @@ class TestSet001__Common:
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_001(self, request: pytest.FixtureRequest, optName: str):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(optName) == str
+        assert type(optName) == str  # noqa: E721
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
@@ -57,14 +57,14 @@ class TestSet001__Common:
 
         allFiles1 = cfg.get_AllFiles()
         assert allFiles1 is not None
-        assert type(allFiles1) == PgCfg_Base__AllFiles
+        assert type(allFiles1) == PgCfg_Base__AllFiles  # noqa: E721
         assert isinstance(allFiles1, PgCfg_Files)
         assert len(allFiles1) == 1
 
         allFiles1_list: list[PgCfg_TopLevelFile_Base] = []
         for file in allFiles1:
             assert file is not None
-            assert type(file) == PgCfg_TopLevelFile_Base
+            assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
             allFiles1_list.append(file)
 
         assert allFiles1_list is not None
@@ -79,23 +79,23 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
         allFiles1 = cfg.get_AllFiles()
-        assert type(allFiles1) == PgCfg_Base__AllFiles
+        assert type(allFiles1) == PgCfg_Base__AllFiles  # noqa: E721
 
         it1 = allFiles1.__iter__()
         assert it1 is not None
-        assert type(it1) == PgCfg_Base__AllFilesIterator
+        assert type(it1) == PgCfg_Base__AllFilesIterator  # noqa: E721
         assert isinstance(it1, PgCfg_FilesIterator)
         assert it1.m_Cfg is cfg
         assert it1.m_FileDataIterator is not None
 
         it1a = it1.__iter__()
         assert it1a is not None
-        assert type(it1a) == PgCfg_Base__AllFilesIterator
+        assert type(it1a) == PgCfg_Base__AllFilesIterator  # noqa: E721
         assert isinstance(it1a, PgCfg_FilesIterator)
         assert it1a.m_Cfg is cfg
 
@@ -108,7 +108,7 @@ class TestSet001__Common:
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        assert type(rootTmpDir) == str
+        assert type(rootTmpDir) == str  # noqa: E721
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 

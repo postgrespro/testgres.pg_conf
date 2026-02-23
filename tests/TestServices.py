@@ -51,7 +51,7 @@ class TestServices:
                 "Root dir {0} is not found in testPath {1}.".format(rootDir, testPath)
             )
 
-        testPath2 = testPath[len(rootDir) + 1:]
+        testPath2 = testPath[len(rootDir) + 1 :]  # noqa: E203
 
         result = os.path.join(rootTmpDir, testPath2)
 
@@ -72,7 +72,7 @@ class TestServices:
             return
 
         tmpDir = __class__.Helper__GetCurTestTmpDir(function)
-        assert type(tmpDir) == str
+        assert type(tmpDir) == str  # noqa: E721
 
         if not os.path.exists(tmpDir):
             return

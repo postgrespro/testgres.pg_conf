@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 "testgres.postgres_configuration" = "src"
 
 [tool.flake8]
-extend-ignore = ["E501", "E721", "E722", "W503"]
+extend-ignore = ["E501", "E722", "W503"]
 exclude = [".git", "__pycache__", "env", "venv"]
 
 # Pytest settings
