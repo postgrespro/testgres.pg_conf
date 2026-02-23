@@ -347,7 +347,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareSetValue:
         assert type(name) == str  # noqa: E721
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
         assert type(optionHandlers) == __class__.tagOptionHandlers
@@ -366,7 +366,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareSetValue:
         assert type(name) == str  # noqa: E721
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
         assert type(optionHandlers) == __class__.tagOptionHandlers
@@ -385,7 +385,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         self, name: str
     ) -> PgCfgModel__OptionHandlerToPrepareSetValueItem:
         assert type(name) == str  # noqa: E721
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
         assert type(optionHandlers) == __class__.tagOptionHandlers
@@ -405,7 +405,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         self, name: str
     ) -> PgCfgModel__OptionHandlerToSetValue:
         assert type(name) == str  # noqa: E721
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
         assert type(optionHandlers) == __class__.tagOptionHandlers
@@ -422,7 +422,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         self, name: str
     ) -> PgCfgModel__OptionHandlerToGetValue:
         assert type(name) == str  # noqa: E721
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
         assert type(optionHandlers) == __class__.tagOptionHandlers
@@ -439,7 +439,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         self, name: str
     ) -> PgCfgModel__OptionHandlerToAddOption:
         assert type(name) == str  # noqa: E721
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
         assert type(optionHandlers) == __class__.tagOptionHandlers
@@ -458,7 +458,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         self, name: str
     ) -> PgCfgModel__OptionHandlerToSetValueItem:
         assert type(name) == str  # noqa: E721
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
         assert type(optionHandlers) == __class__.tagOptionHandlers
@@ -477,7 +477,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         self, name: str
     ) -> PgCfgModel__OptionHandlerToWrite:
         assert type(name) == str  # noqa: E721
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
         assert type(optionHandlers) == __class__.tagOptionHandlers
@@ -492,7 +492,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     # Helper methods -----------------------------------------------------
     def Helper__GetOptionHandlers(self, name: str) -> tagOptionHandlers:
         assert type(name) == str  # noqa: E721
-        assert type(self.sm_OptionHandlers) == dict
+        assert type(self.sm_OptionHandlers) == dict  # noqa: E721
 
         if not (name in self.sm_OptionHandlers.keys()):
             return __class__.sm_OptionHandlers__Std__Generic
