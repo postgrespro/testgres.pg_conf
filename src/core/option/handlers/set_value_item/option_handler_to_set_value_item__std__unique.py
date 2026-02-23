@@ -20,7 +20,7 @@ class OptionHandlerToSetValueItem__Std__Unique(OptionHandlerToSetValueItem):
 
     # interface ----------------------------------------------------------
     def SetOptionValueItem(self, ctx: OptionHandlerCtxToSetValueItem) -> any:
-        assert type(ctx) == OptionHandlerCtxToSetValueItem  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToSetValueItem
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (
             ctx.TargetData is None

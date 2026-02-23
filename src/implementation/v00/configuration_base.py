@@ -1023,7 +1023,7 @@ class PostgresConfigurationIncludedFile_Base(PostgresConfigurationFile_Base):
     def __init__(
         self, include: PostgresConfigurationInclude_Base, fileData: PgCfgModel__FileData
     ):
-        assert type(include) == PostgresConfigurationInclude_Base  # noqa: E721
+        assert type(include) is PostgresConfigurationInclude_Base
         assert type(fileData) is PgCfgModel__FileData
 
         super().__init__(include.get_Configuration(), fileData)
@@ -1042,7 +1042,7 @@ class PostgresConfigurationIncludedFile_Base(PostgresConfigurationFile_Base):
         assert self.m_FileData is not None
         assert self.m_Include is not None
         assert type(self.m_FileData) is PgCfgModel__FileData
-        assert type(self.m_Include) == PostgresConfigurationInclude_Base  # noqa: E721
+        assert type(self.m_Include) is PostgresConfigurationInclude_Base
 
         if not self.m_FileData.IsAlive():
             RaiseError.FileObjectWasDeleted()
@@ -1075,7 +1075,7 @@ class PostgresConfigurationSetOptionValueResult_Base(
         assert cfg is None or isinstance(cfg, PostgresConfiguration_Base)
         assert optData is None or type(optData) is PgCfgModel__OptionData
         assert (cfg is None) == (optData is None)
-        assert type(eventID) == PostgresConfigurationSetOptionValueEventID  # noqa: E721
+        assert type(eventID) is PostgresConfigurationSetOptionValueEventID
 
         self.m_Cfg = cfg
         self.m_Opt = None
@@ -1457,12 +1457,12 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             file = PostgresConfigurationFactory_Base.GetObject(self, fileData)
 
             assert file is not None
-            assert type(file) == PostgresConfigurationTopLevelFile_Base  # noqa: E721
+            assert type(file) is PostgresConfigurationTopLevelFile_Base
         except:  # rollback
             raise
 
         assert file is not None
-        assert type(file) == PostgresConfigurationTopLevelFile_Base  # noqa: E721
+        assert type(file) is PostgresConfigurationTopLevelFile_Base
         return file
 
     # --------------------------------------------------------------------
@@ -1951,13 +1951,13 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert data is not None
 
-        if type(data) == PgCfgModel__OptionData:  # noqa: E721
+        if type(data) is PgCfgModel__OptionData:
             assert data.IsAlive()
             assert data.m_Name == optionName
             self.Debug__CheckOurObjectData(data)
             return data
 
-        if type(data) == list:  # noqa: E721
+        if type(data) is list:
             assert len(data) > 1
             BugCheckError.MultipleDefOfOptionIsFound(optionName, len(data))
 
@@ -2122,10 +2122,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert data is not None
 
-        if type(data) == PgCfgModel__FileData:  # noqa: E721
+        if type(data) is PgCfgModel__FileData:
             return data
 
-        if type(data) == list:  # noqa: E721
+        if type(data) is list:
             assert len(data) > 1
             BugCheckError.MultipleDefOfFileIsFound(file_name_n, len(data))
 
@@ -2187,7 +2187,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         # Let's select the file to append this new option
         getFileData_r = self.Helper__GetFileForSimpleOption(optionName)
 
-        assert type(getFileData_r) == tuple  # noqa: E721
+        assert type(getFileData_r) is tuple
         assert len(getFileData_r) == 2
 
         assert type(getFileData_r[0]) is PgCfgModel__FileData
@@ -2228,7 +2228,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert not (optionName in fileData.m_OptionsByName.keys())
                 raise
         except:  # rollback file
-            assert type(getFileData_r) == tuple  # noqa: E721
+            assert type(getFileData_r) is tuple
             assert len(getFileData_r) == 2
 
             assert type(getFileData_r[0]) is PgCfgModel__FileData
@@ -2820,7 +2820,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                     # Postgres does not support a concatention of option lists
                     BugCheckError.MultipleDefOfOptionIsFound(optionName, len(data))
 
-                assert typeOfData != list  # noqa: E721
+                assert typeOfData is not list
 
                 BugCheckError.UnkOptObjectDataType(optionName, typeOfData)
 
@@ -2933,7 +2933,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         getFileData_r = self.Helper__GetFileForSimpleOption(optionName)
 
         assert getFileData_r is not None
-        assert type(getFileData_r) == tuple  # noqa: E721
+        assert type(getFileData_r) is tuple
         assert len(getFileData_r) == 2
         assert type(getFileData_r[0]) is PgCfgModel__FileData
         assert type(getFileData_r[1]) is bool
@@ -2946,7 +2946,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 fileData, optionName, preparedOptionValue
             )
         except:  # rollback file
-            assert type(getFileData_r) == tuple  # noqa: E721
+            assert type(getFileData_r) is tuple
             assert len(getFileData_r) == 2
 
             assert type(getFileData_r[0]) is PgCfgModel__FileData
@@ -3263,7 +3263,7 @@ class PostgresConfigurationReader_Base:
 
         # ----------------------------------------------------------------
         rootFile = cfg.AddTopLevelFile(filePath)
-        assert type(rootFile) == PostgresConfigurationTopLevelFile_Base  # noqa: E721
+        assert type(rootFile) is PostgresConfigurationTopLevelFile_Base
         assert type(rootFile.m_FileData) is PgCfgModel__FileData
         assert type(rootFile.m_FileData.m_Lines) is list
         assert rootFile.m_FileData.m_Status == PgCfgModel__FileStatus.IS_NEW

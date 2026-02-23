@@ -19,7 +19,7 @@ class OptionHandlerToAddOption__Std(OptionHandlerToAddOption):
 
     # interface ----------------------------------------------------------
     def AddOption(self, ctx: OptionHandlerCtxToAddOption) -> any:
-        assert type(ctx) == OptionHandlerCtxToAddOption  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToAddOption
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (
             ctx.Target is None

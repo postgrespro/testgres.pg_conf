@@ -643,12 +643,12 @@ class DataControllerUtils:
 
         typeOfData = type(data)
 
-        if typeOfData == PgCfgModel__OptionData:  # noqa: E721
+        if typeOfData is PgCfgModel__OptionData:
             assert data is not optionData
             optionsByNameDictionary[optionData.m_Name] = [data, optionData]
             return
 
-        if typeOfData == list:
+        if typeOfData is list:
             assert type(data) is list
             assert len(data) > 1
             data.append(optionData)

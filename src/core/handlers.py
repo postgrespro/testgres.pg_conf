@@ -317,7 +317,7 @@ class OptionHandlerToSetValueItem(OptionHandler):
 
     # interface ----------------------------------------------------------
     def SetOptionValueItem(self, ctx: OptionHandlerCtxToSetValueItem) -> any:
-        assert type(ctx) == OptionHandlerCtxToSetValueItem  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToSetValueItem
         assert (
             ctx.TargetData is None
             or type(ctx.TargetData) is FileData
