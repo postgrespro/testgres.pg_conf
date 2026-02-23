@@ -704,7 +704,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
             self.m_Lines = PostgresConfigurationFileLines_Base(self.m_Cfg, self)
 
         assert self.m_Lines is not None
-        assert type(self.m_Lines) == PostgresConfigurationFileLines_Base  # noqa: E721
+        assert type(self.m_Lines) is PostgresConfigurationFileLines_Base
         assert self.m_Lines.m_Cfg is self.m_Cfg
         assert self.m_FileData is self.m_FileData
 
