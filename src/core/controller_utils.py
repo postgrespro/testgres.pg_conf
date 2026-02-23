@@ -754,10 +754,10 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     def Helper__FileLineHasWorkData(fileLineData: PgCfgModel__FileLineData):
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert fileLineData.IsAlive()
         assert fileLineData.m_Items is not None
-        assert type(fileLineData.m_Items) == list
+        assert type(fileLineData.m_Items) == list  # noqa: E721
 
         for item in fileLineData.m_Items:
             assert item is not None
@@ -786,7 +786,7 @@ class DataControllerUtils:
     ):
         assert cfgData is not None
         assert objectData is not None
-        assert type(cfgData) == PgCfgModel__ConfigurationData
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
         assert isinstance(objectData, PgCfgModel__ObjectData)
 
         typeOfObjectData = type(objectData)
@@ -804,7 +804,7 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     def Helper__DeleteComment(commentData: PgCfgModel__CommentData):
-        assert type(commentData) == PgCfgModel__CommentData
+        assert type(commentData) == PgCfgModel__CommentData  # noqa: E721
         assert commentData.IsAlive()
 
         # 0.
@@ -814,7 +814,7 @@ class DataControllerUtils:
         # 1.1 Set fileLineData
         fileLineData = commentData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert fileLineData.IsAlive()
 
         # 1.2 Set iFileLineItem
@@ -842,9 +842,9 @@ class DataControllerUtils:
     def Helper__DeleteOption(
         cfgData: PgCfgModel__ConfigurationData, optionData: PgCfgModel__OptionData
     ):
-        assert type(cfgData) == PgCfgModel__ConfigurationData
-        assert type(optionData) == PgCfgModel__OptionData
-        assert type(optionData.m_Name) == str
+        assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(optionData) == PgCfgModel__OptionData  # noqa: E721
+        assert type(optionData.m_Name) == str  # noqa: E721
         assert optionData.IsAlive()
 
         # 0.
@@ -855,7 +855,7 @@ class DataControllerUtils:
         # 1.1 Set fileLineData
         fileLineData = optionData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData
+        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
         assert fileLineData.IsAlive()
 
         # 1.2 Set iFileLineItem
