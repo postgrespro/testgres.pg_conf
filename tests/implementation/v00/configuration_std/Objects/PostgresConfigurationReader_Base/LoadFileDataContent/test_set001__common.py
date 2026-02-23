@@ -175,7 +175,7 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_data201__assign, ids=[x[0] for x in sm_data201__assign])
     def data201__assign(self, request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
+        assert type(request.param) is tuple
         assert len(request.param) == 2
         assert type(request.param[1]) is str
         return request.param[1]
@@ -284,7 +284,7 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_data204, ids=[x[0] for x in sm_data204])
     def data204_tail(self, request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
+        assert type(request.param) is tuple
         assert len(request.param) == 2
         assert type(request.param[1]) is str
         return request.param[1]
@@ -479,7 +479,7 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_endData304, ids=[x[0] for x in sm_endData304])
     def endData304(self, request: pytest.FixtureRequest) -> typing.Tuple[str, str, str]:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
+        assert type(request.param) is tuple
         assert len(request.param) == 3
         return request.param
 
@@ -488,7 +488,7 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, endData304: str
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(endData304) == tuple  # noqa: E721
+        assert type(endData304) is tuple
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
@@ -527,7 +527,7 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_data3E01, ids=[x[0] for x in sm_data3E01])
     def endData3E01(self, request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
+        assert type(request.param) is tuple
         assert type(request.param[1]) is str
         return request.param[1]
 
@@ -565,7 +565,7 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_data3E02, ids=[x[0] for x in sm_data3E02])
     def endData3E02(self, request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
+        assert type(request.param) is tuple
         assert type(request.param[1]) is str
         return request.param[1]
 

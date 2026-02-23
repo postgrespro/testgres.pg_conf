@@ -2187,7 +2187,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         # Let's select the file to append this new option
         getFileData_r = self.Helper__GetFileForSimpleOption(optionName)
 
-        assert type(getFileData_r) == tuple  # noqa: E721
+        assert type(getFileData_r) is tuple
         assert len(getFileData_r) == 2
 
         assert type(getFileData_r[0]) is PgCfgModel__FileData
@@ -2228,7 +2228,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert not (optionName in fileData.m_OptionsByName.keys())
                 raise
         except:  # rollback file
-            assert type(getFileData_r) == tuple  # noqa: E721
+            assert type(getFileData_r) is tuple
             assert len(getFileData_r) == 2
 
             assert type(getFileData_r[0]) is PgCfgModel__FileData
@@ -2933,7 +2933,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         getFileData_r = self.Helper__GetFileForSimpleOption(optionName)
 
         assert getFileData_r is not None
-        assert type(getFileData_r) == tuple  # noqa: E721
+        assert type(getFileData_r) is tuple
         assert len(getFileData_r) == 2
         assert type(getFileData_r[0]) is PgCfgModel__FileData
         assert type(getFileData_r[1]) is bool
@@ -2946,7 +2946,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 fileData, optionName, preparedOptionValue
             )
         except:  # rollback file
-            assert type(getFileData_r) == tuple  # noqa: E721
+            assert type(getFileData_r) is tuple
             assert len(getFileData_r) == 2
 
             assert type(getFileData_r[0]) is PgCfgModel__FileData

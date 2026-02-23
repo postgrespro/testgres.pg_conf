@@ -417,7 +417,7 @@ class TestSet001__Common:
     @pytest.fixture(params=sm_data012__values, ids=[x[0] for x in sm_data012__values])
     def data012(self, request: pytest.FixtureRequest) -> typing.Tuple[str, any, any]:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
+        assert type(request.param) is tuple
         assert len(request.param) == 4
         assert type(request.param[0]) is str
         return request.param[1:]
@@ -427,7 +427,7 @@ class TestSet001__Common:
         self, request: pytest.FixtureRequest, data012: typing.Tuple[str, any, any]
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data012) == tuple  # noqa: E721
+        assert type(data012) is tuple
         assert len(data012) == 3
 
         rootTmpDir = TestServices.GetRootTmpDir()

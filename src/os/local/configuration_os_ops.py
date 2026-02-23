@@ -102,7 +102,7 @@ class ConfigurationOsOps(abstract.ConfigurationOsOps):
 
     def Path_Join(self, a: str, *p: tuple) -> str:
         assert type(a) is str
-        assert type(p) == tuple  # noqa: E721
+        assert type(p) is tuple
         return os.path.join(a, *p)
 
     def Path_NormPath(self, a: str) -> str:

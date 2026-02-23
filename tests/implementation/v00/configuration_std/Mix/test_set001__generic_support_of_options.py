@@ -30,7 +30,7 @@ class TestSet001__GenericSupportOfOptions:
     @pytest.fixture(params=sm_data001, ids=[x[0] for x in sm_data001])
     def data001(self, request: pytest.FixtureRequest) -> typing.Tuple[any, any]:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
+        assert type(request.param) is tuple
         assert len(request.param) == 3
         return request.param[1:]
 
@@ -61,7 +61,7 @@ class TestSet001__GenericSupportOfOptions:
     @pytest.fixture(params=sm_data002, ids=[x[0] for x in sm_data002])
     def data002(self, request: pytest.FixtureRequest) -> typing.Tuple[any, any]:
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(request.param) == tuple  # noqa: E721
+        assert type(request.param) is tuple
         assert len(request.param) == 3
         return request.param[1:]
 
@@ -70,7 +70,7 @@ class TestSet001__GenericSupportOfOptions:
         self, request: pytest.FixtureRequest, data002: typing.Tuple[any, any]
     ):
         assert isinstance(request, pytest.FixtureRequest)
-        assert type(data002) == tuple  # noqa: E721
+        assert type(data002) is tuple
         assert len(data002) == 2
 
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
