@@ -212,7 +212,7 @@ class FileData(ObjectData):
 
     # --------------------------------------------------------------------
     def __init__(self, parent: ConfigurationData, path: str):
-        assert type(parent) == ConfigurationData  # noqa: E721
+        assert type(parent) is ConfigurationData
         assert type(path) is str
         assert parent.OsOps.Path_IsAbs(path)
         assert parent.OsOps.Path_NormPath(path) == path
@@ -236,7 +236,7 @@ class FileData(ObjectData):
 
     # Object interface ---------------------------------------------------
     def get_Parent(self) -> ConfigurationData:
-        assert type(self.m_Parent) == ConfigurationData  # noqa: E721
+        assert type(self.m_Parent) is ConfigurationData
         return self.m_Parent
 
     # --------------------------------------------------------------------
