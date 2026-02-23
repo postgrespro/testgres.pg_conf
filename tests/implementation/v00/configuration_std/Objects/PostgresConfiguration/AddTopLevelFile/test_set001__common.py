@@ -28,7 +28,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(C_FILE_NAME)
         assert file1 is not None
-        assert type(file1) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file1) is PgCfg_TopLevelFile_Base
 
         assert len(cfg.get_AllFiles()) == 1
         assert (

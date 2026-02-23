@@ -47,7 +47,7 @@ class TestSet001__Common:
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
         assert file.get_Path() == os.path.join(rootTmpDir, cfg.C_POSTGRESQL_CONF)
@@ -107,7 +107,7 @@ class TestSet001__Common:
         assert optionFileLine.m_FileLineData.m_Items[0].m_Element is set_r1.m_OptData
 
         optionFile = optionFileLine.get_Parent()
-        assert type(optionFile) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(optionFile) is PgCfg_TopLevelFile_Base
         assert isinstance(optionFile, PgCfg_File_Base)
         assert isinstance(optionFile, PgCfg_File)
         assert optionFile.m_FileData == optionFile.m_FileData

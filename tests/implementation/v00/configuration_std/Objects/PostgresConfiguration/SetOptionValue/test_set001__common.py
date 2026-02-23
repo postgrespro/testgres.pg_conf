@@ -126,7 +126,7 @@ class TestSet001__Common:
         assert fileLineData.get_Parent() is fileLineData.m_Parent
 
         file = fileLine.get_Parent()
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert len(file) == 1
 
@@ -332,7 +332,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile("postgresql.proxima.conf")
         assert file1 is not None
-        assert type(file1) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file1) is PgCfg_TopLevelFile_Base
         assert type(file1.m_FileData) is PgCfgModel__FileData
         assert type(file1.m_FileData.m_OptionsByName) is dict
         assert len(file1.m_FileData.m_OptionsByName) == 0

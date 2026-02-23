@@ -39,7 +39,7 @@ class TestSet001__Common:
         cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
         assert type(file.m_FileData) is PgCfgModel__FileData
@@ -95,7 +95,7 @@ class TestSet001__Common:
         cfg.SetOptionValue("port", portNumber)
 
         file = cfg.get_AllFiles().GetFileByName(cfg.C_POSTGRESQL_AUTO_CONF)
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
         assert type(file.m_FileData) is PgCfgModel__FileData
@@ -243,7 +243,7 @@ class TestSet001__Common:
         cfg.SetOptionValue("listen_addresses", "*")
 
         file = cfg.get_AllFiles().GetFileByName(cfg.C_POSTGRESQL_AUTO_CONF)
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
         assert type(file.m_FileData) is PgCfgModel__FileData
@@ -264,7 +264,7 @@ class TestSet001__Common:
         cfg.SetOptionValue("port", None)
 
         file = cfg.get_AllFiles().GetFileByName(cfg.C_POSTGRESQL_AUTO_CONF)
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
         assert type(file.m_FileData) is PgCfgModel__FileData
@@ -353,7 +353,7 @@ class TestSet001__Common:
         cfg.SetOptionValue("listen_addresses", "*")
 
         file = cfg.get_AllFiles().GetFileByName(cfg.C_POSTGRESQL_AUTO_CONF)
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
         assert type(file.m_FileData) is PgCfgModel__FileData

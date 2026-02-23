@@ -56,7 +56,7 @@ class TestSet001__Common:
         assert len(cfg.get_AllFiles()) == 1
 
         file = cfg.get_AllFiles().GetFileByName(cfg.C_POSTGRESQL_CONF)
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
         assert type(file.m_FileData) is PgCfgModel__FileData
@@ -102,7 +102,7 @@ class TestSet001__Common:
         assert len(cfg.get_AllFiles()) == 1
 
         file = cfg.get_AllFiles().GetFileByName(cfg.C_POSTGRESQL_CONF)
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
         assert type(file.m_FileData) is PgCfgModel__FileData

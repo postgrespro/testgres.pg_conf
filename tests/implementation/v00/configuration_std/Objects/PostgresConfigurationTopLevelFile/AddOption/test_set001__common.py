@@ -33,7 +33,7 @@ class TestSet001__Common:
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert file.get_Path() == os.path.join(rootTmpDir, cfg.C_POSTGRESQL_CONF)
         assert file.m_FileData is not None
         assert type(file.m_FileData) is PgCfgModel__FileData

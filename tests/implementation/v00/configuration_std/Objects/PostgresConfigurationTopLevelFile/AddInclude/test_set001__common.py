@@ -33,7 +33,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file1 is not None
-        assert type(file1) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file1) is PgCfg_TopLevelFile_Base
 
         C_BIHA_CONF_FILE_NAME = "postgresql.biha.conf"
 
@@ -120,7 +120,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file1 is not None
-        assert type(file1) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file1) is PgCfg_TopLevelFile_Base
 
         C_BIHA_CONF_FILE_NAME = "postgresql.biha.conf"
 
@@ -157,7 +157,7 @@ class TestSet001__Common:
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file1 is not None
-        assert type(file1) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file1) is PgCfg_TopLevelFile_Base
 
         with pytest.raises(Exception, match=re.escape("File path is empty.")):
             file1.AddInclude("")

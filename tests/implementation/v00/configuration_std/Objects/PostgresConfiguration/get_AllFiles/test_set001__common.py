@@ -64,7 +64,7 @@ class TestSet001__Common:
         allFiles1_list: list[PgCfg_TopLevelFile_Base] = []
         for file in allFiles1:
             assert file is not None
-            assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+            assert type(file) is PgCfg_TopLevelFile_Base
             allFiles1_list.append(file)
 
         assert allFiles1_list is not None

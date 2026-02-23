@@ -90,7 +90,7 @@ class TestSet001__Common:
         assert fileLineData.get_Parent() is fileLineData.m_Parent
 
         file = fileLine.get_Parent()
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert len(file) == 1
 

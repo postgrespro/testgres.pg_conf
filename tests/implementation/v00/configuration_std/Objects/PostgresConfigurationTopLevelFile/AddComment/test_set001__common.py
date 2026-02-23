@@ -43,7 +43,7 @@ class TestSet001__Common:
 
         file = cfg.get_AllFiles().__iter__().__next__()
         assert file is not None
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
 
         assert file.get_Path() == os.path.join(rootTmpDir, "postgresql.auto.conf")
 
@@ -110,7 +110,7 @@ class TestSet001__Common:
 
         file = cfg.get_AllFiles().__iter__().__next__()
         assert file is not None
-        assert type(file) == PgCfg_TopLevelFile_Base  # noqa: E721
+        assert type(file) is PgCfg_TopLevelFile_Base
         assert isinstance(file, PgCfg_File_Base)
         assert isinstance(file, PgCfg_File)
         assert len(file) == 1
