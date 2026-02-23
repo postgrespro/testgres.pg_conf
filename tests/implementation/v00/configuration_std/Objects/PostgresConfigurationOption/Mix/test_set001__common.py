@@ -34,7 +34,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 234)
@@ -57,7 +57,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 234)
@@ -101,7 +101,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 234)
@@ -147,7 +147,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 234)
@@ -189,7 +189,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 234)

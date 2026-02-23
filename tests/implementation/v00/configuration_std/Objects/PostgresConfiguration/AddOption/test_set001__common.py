@@ -41,7 +41,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         option = cfg.AddOption(optName, 123)
@@ -56,7 +56,7 @@ class TestSet001__Common:
     def Helper__CheckStateOfCfgWithOneIntOpt(
         cfg: PgCfg_Std, opt: PgCfg_Option_Base, optName: str, optValue: int
     ):
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert type(opt) == PgCfg_Option_Base  # noqa: E721
 
         assert opt.get_Configuration() is cfg
@@ -133,7 +133,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         with pytest.raises(Exception, match=re.escape("None value is not supported.")):
@@ -147,7 +147,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         with pytest.raises(Exception, match=re.escape("Option name is empty.")):
@@ -161,7 +161,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         with pytest.raises(Exception, match=re.escape("Option name is None.")):
@@ -177,7 +177,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         option = cfg.AddOption(optName, 123)

@@ -46,7 +46,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r = cfg.SetOptionValue(optName, 123)
@@ -73,7 +73,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r = cfg.SetOptionValue(optName, 123)
@@ -92,7 +92,7 @@ class TestSet001__Common:
     def Helper__CheckStateOfCfgWithOneOpt(
         cfg: PgCfg_Std, opt: PgCfg_Option_Base, optName: str, optValue: any
     ):
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert type(opt) == PgCfg_Option_Base  # noqa: E721
 
         assert opt.get_Configuration() is cfg
@@ -203,7 +203,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 123)
@@ -241,7 +241,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r = cfg.SetOptionValue(optName, None)
@@ -262,7 +262,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r1 = cfg.SetOptionValue(optName, 123)
@@ -370,7 +370,7 @@ class TestSet001__Common:
             assert file1.m_FileData.m_OptionsByName[C_OPT_NAME] is rs1.m_OptData
 
             assert cfg.m_Data is not None
-            assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+            assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
             assert type(cfg.m_Data.m_AllOptionsByName) is dict
             assert C_OPT_NAME in cfg.m_Data.m_AllOptionsByName.keys()
             assert (  # noqa: E721
@@ -434,7 +434,7 @@ class TestSet001__Common:
         assert type(rootTmpDir) is str
 
         cfg = PgCfg_Std(rootTmpDir)
-        assert type(cfg.m_Data) == PgCfgModel__ConfigurationData  # noqa: E721
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         r = cfg.SetOptionValue(data012[0], data012[1])
