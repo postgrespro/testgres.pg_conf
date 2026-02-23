@@ -17,7 +17,7 @@ class OptionHandlerToPrepareGetValue__Std__Str(OptionHandlerToPrepareGetValue):
 
     # interface ----------------------------------------------------------
     def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> any:
-        assert type(ctx) == OptionHandlerCtxToPrepareGetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToPrepareGetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert type(ctx.OptionName) is str
         assert ctx.OptionValue is not None

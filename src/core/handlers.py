@@ -441,7 +441,7 @@ class OptionHandlerToPrepareGetValue(OptionHandler):
 
     # interface ----------------------------------------------------------
     def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> str:
-        assert type(ctx) == OptionHandlerCtxToPrepareGetValue  # noqa: E721
+        assert type(ctx) is OptionHandlerCtxToPrepareGetValue
         RaiseError.MethodIsNotImplemented(__class__, "PrepareGetValue")
 
 
