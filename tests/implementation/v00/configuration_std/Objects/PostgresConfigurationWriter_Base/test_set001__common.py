@@ -152,7 +152,7 @@ class TestSet001__Common:
 
         r = file.SetOptionValueItem(C_OPT_NAME, "a")
 
-        assert type(r.Option.m_OptionData.m_Value) == list  # noqa: E721
+        assert type(r.Option.m_OptionData.m_Value) is list
         r.Option.m_OptionData.m_Value.clear()
 
         assert len(r.Option.m_OptionData.m_Value) == 0

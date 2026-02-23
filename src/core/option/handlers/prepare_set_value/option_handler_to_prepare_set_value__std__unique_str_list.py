@@ -35,7 +35,7 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
         if typeOfOptionValue == str:
             result = ReadUtils.Unpack_StrList2(ctx.OptionValue)
             assert result is not None
-            assert type(result) == list  # noqa: E721
+            assert type(result) is list
             return result
         elif typeOfOptionValue == list:
             result: typing.List[str] = list()

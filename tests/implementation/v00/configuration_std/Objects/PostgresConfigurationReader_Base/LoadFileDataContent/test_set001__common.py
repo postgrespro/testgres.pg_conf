@@ -42,7 +42,7 @@ class TestSet001__Common:
         assert file1.m_FileData is not None
         assert type(file1.m_FileData) == PgCfgModel__FileData  # noqa: E721
         assert file1.m_FileData.m_Lines is not None
-        assert type(file1.m_FileData.m_Lines) == list  # noqa: E721
+        assert type(file1.m_FileData.m_Lines) is list
         assert type(file1.m_FileData.m_Path) is str
         assert file1.m_FileData.m_Path == os.path.join(
             rootTmpDir,
@@ -57,7 +57,7 @@ class TestSet001__Common:
         assert file1.m_FileData is not None
         assert type(file1.m_FileData) == PgCfgModel__FileData  # noqa: E721
         assert file1.m_FileData.m_Lines is not None
-        assert type(file1.m_FileData.m_Lines) == list  # noqa: E721
+        assert type(file1.m_FileData.m_Lines) is list
         assert len(file1.m_FileData.m_Lines) == 0
 
     # --------------------------------------------------------------------

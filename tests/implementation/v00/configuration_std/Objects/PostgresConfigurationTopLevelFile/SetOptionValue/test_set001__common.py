@@ -75,12 +75,12 @@ class TestSet001__Common:
         assert set_r1.m_OptData.m_Value == 123
         assert set_r1.m_OptData.get_Parent().get_Parent() is file.m_FileData
 
-        assert type(file.m_FileData.m_Lines) == list  # noqa: E721
+        assert type(file.m_FileData.m_Lines) is list
         assert len(file.m_FileData.m_Lines) == 1
         assert (  # noqa: E721
             type(file.m_FileData.m_Lines[0]) == PgCfgModel__FileLineData
         )
-        assert type(file.m_FileData.m_Lines[0].m_Items) == list  # noqa: E721
+        assert type(file.m_FileData.m_Lines[0].m_Items) is list
         assert len(file.m_FileData.m_Lines[0].m_Items) == 1
         assert file.m_FileData.m_Lines[0].m_Items[0].m_Element is not None
         assert (  # noqa: E721

@@ -134,7 +134,7 @@ class TEST_PROCESS_STATS:
         assert type(testID) is str
         assert type(errCount) is int
         assert errCount > 0
-        assert type(__class__.FailedTests) == list  # noqa: E721
+        assert type(__class__.FailedTests) is list
         assert type(__class__.cFailedTests) is int
         assert __class__.cFailedTests >= 0
 
@@ -158,7 +158,7 @@ class TEST_PROCESS_STATS:
         assert type(testID) is str
         assert type(errCount) is int
         assert errCount >= 0
-        assert type(__class__.XFailedTests) == list  # noqa: E721
+        assert type(__class__.XFailedTests) is list
         assert type(__class__.cXFailedTests) is int
         assert __class__.cXFailedTests >= 0
 
@@ -181,7 +181,7 @@ class TEST_PROCESS_STATS:
     # --------------------------------------------------------------------
     def incrementNotXFailedTests(testID: str) -> None:
         assert type(testID) is str
-        assert type(__class__.NotXFailedTests) == list  # noqa: E721
+        assert type(__class__.NotXFailedTests) is list
         assert type(__class__.cNotXFailedTests) is int
         assert __class__.cNotXFailedTests >= 0
 
@@ -198,7 +198,7 @@ class TEST_PROCESS_STATS:
         assert type(warningCount) is int
         assert testID != ""
         assert warningCount > 0
-        assert type(__class__.WarningTests) == list  # noqa: E721
+        assert type(__class__.WarningTests) is list
         assert type(__class__.cWarningTests) is int
         assert __class__.cWarningTests >= 0
 
@@ -229,7 +229,7 @@ class TEST_PROCESS_STATS:
     # --------------------------------------------------------------------
     def incrementAchtungTestCount(testID: str) -> None:
         assert type(testID) is str
-        assert type(__class__.AchtungTests) == list  # noqa: E721
+        assert type(__class__.AchtungTests) is list
         assert type(__class__.cAchtungTests) is int
         assert __class__.cAchtungTests >= 0
 
@@ -759,7 +759,7 @@ def helper__calc_W(n: int) -> int:
 
 # ------------------------------------------------------------------------
 def helper__print_test_list(tests: typing.List[str]) -> None:
-    assert type(tests) == list  # noqa: E721
+    assert type(tests) is list
 
     assert helper__calc_W(9) == 1
     assert helper__calc_W(10) == 2
@@ -786,7 +786,7 @@ def helper__print_test_list(tests: typing.List[str]) -> None:
 
 # ------------------------------------------------------------------------
 def helper__print_test_list2(tests: typing.List[T_TUPLE__str_int]) -> None:
-    assert type(tests) == list  # noqa: E721
+    assert type(tests) is list
 
     assert helper__calc_W(9) == 1
     assert helper__calc_W(10) == 2
@@ -866,7 +866,7 @@ def pytest_sessionfinish():
     ):
         assert type(header) is str
         assert type(test_count) is int
-        assert type(test_list) == list  # noqa: E721
+        assert type(test_list) is list
         assert header != ""
         assert test_count >= 0
         assert len(test_list) == test_count
@@ -882,7 +882,7 @@ def pytest_sessionfinish():
     ):
         assert type(header) is str
         assert type(test_count) is int
-        assert type(test_list) == list  # noqa: E721
+        assert type(test_list) is list
         assert header != ""
         assert test_count >= 0
         assert len(test_list) == test_count

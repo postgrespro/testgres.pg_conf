@@ -20,7 +20,7 @@ class OptionHandlerToWrite__Std__UniqueStrList(OptionHandlerToWrite):
     def OptionValueToString(self, ctx: OptionHandlerCtxToWrite) -> str:
         assert type(ctx) == OptionHandlerCtxToWrite  # noqa: E721
         assert ctx.OptionValue is not None
-        assert type(ctx.OptionValue) == list  # noqa: E721
+        assert type(ctx.OptionValue) is list
 
         result = WriteUtils.Pack_StrList2(ctx.OptionValue)
         assert type(result) is str

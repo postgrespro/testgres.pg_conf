@@ -92,7 +92,7 @@ class TestSet001__Common:
             logging.info("----------- nPass: {0}".format(nPass))
             v = file.GetOptionValue(C_OPT_NAME)
 
-            assert type(v) == list  # noqa: E721
+            assert type(v) is list
             assert v == ["xxx"]
 
             v.append("yyy")

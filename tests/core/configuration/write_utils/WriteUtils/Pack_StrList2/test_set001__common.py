@@ -22,7 +22,7 @@ class TestSet001__Common:
 
         def __init__(self, d: str, s: typing.List[str], r: str):
             assert type(d) is str
-            assert type(s) == list  # noqa: E721
+            assert type(s) is list
             assert type(r) is str
 
             self.descr = d

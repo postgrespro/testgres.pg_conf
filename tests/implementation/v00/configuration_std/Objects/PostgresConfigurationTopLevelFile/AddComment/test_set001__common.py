@@ -66,7 +66,7 @@ class TestSet001__Common:
         assert (  # noqa: E721
             type(fileLines_v[-1].m_FileLineData) == PgCfgModel__FileLineData
         )
-        assert type(fileLines_v[-1].m_FileLineData.m_Items) == list  # noqa: E721
+        assert type(fileLines_v[-1].m_FileLineData.m_Items) is list
         assert len(fileLines_v[-1].m_FileLineData.m_Items) == 1
         assert (  # noqa: E721
             type(fileLines_v[-1].m_FileLineData.m_Items[0])

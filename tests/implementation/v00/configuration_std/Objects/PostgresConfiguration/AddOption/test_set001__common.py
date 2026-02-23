@@ -78,7 +78,7 @@ class TestSet001__Common:
         fileLineData: PgCfgModel__FileLineData = opt.m_OptionData.m_Parent
         assert fileLineData is fileLine.m_FileLineData
         assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
-        assert type(fileLineData.m_Items) == list  # noqa: E721
+        assert type(fileLineData.m_Items) is list
         assert len(fileLineData.m_Items) == 1
         assert (  # noqa: E721
             type(fileLineData.m_Items[0]) == PgCfgModel__FileLineData.tagItem
@@ -102,11 +102,11 @@ class TestSet001__Common:
             cfg.m_Data.m_DataDir, cfg.C_POSTGRESQL_AUTO_CONF
         )
         assert fileData.m_Parent is cfg.m_Data
-        assert type(fileData.m_Lines) == list  # noqa: E721
+        assert type(fileData.m_Lines) is list
         assert len(fileData.m_Lines) == 1
         assert fileData.m_Lines[0] is fileLineData
 
-        assert type(cfg.m_Data.m_Files) == list  # noqa: E721
+        assert type(cfg.m_Data.m_Files) is list
         assert len(cfg.m_Data.m_Files) == 1
         assert type(cfg.m_Data.m_Files[0]) == PgCfgModel__FileData  # noqa: E721
         assert cfg.m_Data.m_Files[0] is fileData

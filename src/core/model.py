@@ -276,7 +276,7 @@ class ConfigurationData(ObjectData):
         self.m_AllOptionsByName = dict()
         self.m_AllFilesByName = dict()
 
-        assert type(self.m_Files) == list  # noqa: E721
+        assert type(self.m_Files) is list
         assert type(self.m_AllOptionsByName) is dict
         assert type(self.m_AllFilesByName) is dict
 

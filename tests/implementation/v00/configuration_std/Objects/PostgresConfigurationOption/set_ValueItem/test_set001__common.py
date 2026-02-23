@@ -65,7 +65,7 @@ class TestSet001__Common:
             assert r2.m_OptData is not None
             assert r2.m_OptData is r1.m_OptData
             assert r2.m_OptData.m_Value is not None
-            assert type(r2.m_OptData.m_Value) == list  # noqa: E721
+            assert type(r2.m_OptData.m_Value) is list
             assert len(r2.m_OptData.m_Value) == 2
             assert r2.m_OptData.m_Value[0] == "biha"
             assert r2.m_OptData.m_Value[1] == "proxima"

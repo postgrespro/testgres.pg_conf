@@ -10,7 +10,7 @@ import typing
 class WriteUtils:
     def Pack_StrList2(strList: list) -> str:
         assert strList is not None
-        assert type(strList) == list  # noqa: E721
+        assert type(strList) is list
 
         result = ""
         sep = ""

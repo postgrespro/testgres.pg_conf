@@ -25,7 +25,7 @@ class OptionHandlerToPrepareGetValue__Std__UniqueStrList(
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert type(ctx.OptionName) is str
         assert ctx.OptionValue is not None
-        assert type(ctx.OptionValue) == list  # noqa: E721
+        assert type(ctx.OptionValue) is list
 
         result: typing.List[str] = list()
         index: set[str] = set()
