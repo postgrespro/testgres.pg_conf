@@ -68,7 +68,7 @@ class TestSet001__Common:
         assert opt.m_OptionData.m_Name == optName
         assert opt.m_OptionData.m_Value == optValue
         assert opt.m_OptionData.m_Parent is not None
-        assert type(opt.m_OptionData.m_Parent) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(opt.m_OptionData.m_Parent) is PgCfgModel__FileLineData
 
         fileLine = opt.get_Parent()
         assert fileLine is opt.get_Parent()
@@ -77,7 +77,7 @@ class TestSet001__Common:
 
         fileLineData: PgCfgModel__FileLineData = opt.m_OptionData.m_Parent
         assert fileLineData is fileLine.m_FileLineData
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert type(fileLineData.m_Items) is list
         assert len(fileLineData.m_Items) == 1
         assert (  # noqa: E721

@@ -53,7 +53,7 @@ class DataControllerUtils:
 
         fileLineData = optionData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
 
         __class__.Helper__DeleteOption(cfgData, optionData)
 
@@ -76,7 +76,7 @@ class DataControllerUtils:
 
         fileLineData = includeData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
 
         __class__.Helper__DeleteInclude(includeData)
 
@@ -103,7 +103,7 @@ class DataControllerUtils:
 
         fileLineData = commentData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
 
         __class__.Helper__DeleteComment(commentData)
 
@@ -119,7 +119,7 @@ class DataControllerUtils:
     def FileLine__add_Comment(
         fileLineData: PgCfgModel__FileLineData, offset: typing.Optional[int], text: str
     ) -> PgCfgModel__CommentData:
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert (offset is None) or (type(offset) is int)
         assert type(text) is str
         assert type(fileLineData.m_Items) is list
@@ -137,7 +137,7 @@ class DataControllerUtils:
     def Helper__CheckThatWeCanAddCommentToFileLine(
         fileLineData: PgCfgModel__FileLineData,
     ):
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert type(fileLineData.m_Items) is list
 
         assert fileLineData.IsAlive()
@@ -172,7 +172,7 @@ class DataControllerUtils:
         fileData: PgCfgModel__FileData,
         offset: typing.Optional[int],
     ) -> PgCfgModel__IncludeData:
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert type(filePath) is str
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
         assert filePath != ""
@@ -200,7 +200,7 @@ class DataControllerUtils:
         optOffset: typing.Optional[int],
     ) -> PgCfgModel__OptionData:
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert type(optName) is str
         assert optValue is not None
         assert optName != ""
@@ -247,7 +247,7 @@ class DataControllerUtils:
     def Helper__CheckThatWeCanAddWorkDataToFileLine(
         fileLineData: PgCfgModel__FileLineData,
     ):
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert type(fileLineData.m_Items) is list
 
         assert fileLineData.IsAlive()
@@ -282,7 +282,7 @@ class DataControllerUtils:
         assert cfgData is not None
         assert fileLineData is not None
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
 
         __class__.Helper__DeleteFileLine(cfgData, fileLineData)
@@ -296,7 +296,7 @@ class DataControllerUtils:
         assert cfgData is not None
         assert fileLineData is not None
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
         assert fileLineData.m_Items is not None
         assert type(fileLineData.m_Items) is list
@@ -317,7 +317,7 @@ class DataControllerUtils:
 
         newLineData = DataControllerUtils.File__add_Line(fileData)  # raise
 
-        assert type(newLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(newLineData) is PgCfgModel__FileLineData
 
         try:
             optionData = __class__.FileLine__add_Option(
@@ -448,14 +448,14 @@ class DataControllerUtils:
         assert fileLineData is not None
         assert type(fileData) == PgCfgModel__FileData  # noqa: E721
         assert type(fileData.m_Lines) is list
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
 
         cFileLines = len(fileData.m_Lines)
 
         for iFileLine in range(cFileLines):
             ptr = fileData.m_Lines[iFileLine]
             assert ptr is not None
-            assert type(ptr) == PgCfgModel__FileLineData  # noqa: E721
+            assert type(ptr) is PgCfgModel__FileLineData
             assert ptr.m_Parent is fileData
 
             if ptr is fileLineData:
@@ -471,7 +471,7 @@ class DataControllerUtils:
     ) -> int:
         assert fileLineData is not None
         assert elementData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert type(fileLineData.m_Items) is list
         assert isinstance(elementData, PgCfgModel__FileLineElementData)
 
@@ -725,7 +725,7 @@ class DataControllerUtils:
         assert cfgData is not None
         assert fileLineData is not None
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
         assert fileLineData.m_Items is not None
         assert type(fileLineData.m_Items) is list
@@ -754,7 +754,7 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     def Helper__FileLineHasWorkData(fileLineData: PgCfgModel__FileLineData):
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
         assert fileLineData.m_Items is not None
         assert type(fileLineData.m_Items) is list
@@ -814,7 +814,7 @@ class DataControllerUtils:
         # 1.1 Set fileLineData
         fileLineData = commentData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
 
         # 1.2 Set iFileLineItem
@@ -855,7 +855,7 @@ class DataControllerUtils:
         # 1.1 Set fileLineData
         fileLineData = optionData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
 
         # 1.2 Set iFileLineItem
@@ -911,7 +911,7 @@ class DataControllerUtils:
         # 1.1 Set fileLineData
         fileLineData = includeData.m_Parent
         assert fileLineData is not None
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
 
         # 1.2 Set iFileLineItem
@@ -940,7 +940,7 @@ class DataControllerUtils:
         cfgData: PgCfgModel__ConfigurationData, fileLineData: PgCfgModel__FileLineData
     ):
         assert type(cfgData) == PgCfgModel__ConfigurationData  # noqa: E721
-        assert type(fileLineData) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
 
         # 0.

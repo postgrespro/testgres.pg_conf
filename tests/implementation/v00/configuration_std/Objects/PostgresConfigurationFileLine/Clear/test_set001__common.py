@@ -74,7 +74,7 @@ class TestSet001__Common:
 
         assert set_r.m_OptData is not None
         assert type(set_r.m_OptData) == PgCfgModel__OptionData  # noqa: E721
-        assert type(set_r.m_OptData.m_Parent) == PgCfgModel__FileLineData  # noqa: E721
+        assert type(set_r.m_OptData.m_Parent) is PgCfgModel__FileLineData
 
         fileLine.Clear()
 
