@@ -37,7 +37,7 @@ class FileLineElementData(ObjectData):
 
     # --------------------------------------------------------------------
     def __init__(self, parent: FileLineData, offset: typing.Optional[int]):
-        assert type(parent) == FileLineData  # noqa: E721
+        assert type(parent) is FileLineData
         assert offset is None or type(offset) is int
 
         super().__init__()
@@ -54,7 +54,7 @@ class FileLineElementData(ObjectData):
 
     # Object interface ---------------------------------------------------
     def get_Parent(self) -> FileLineData:
-        assert type(self.m_Parent) == FileLineData  # noqa: E721
+        assert type(self.m_Parent) is FileLineData
         return self.m_Parent
 
     # --------------------------------------------------------------------
@@ -74,7 +74,7 @@ class CommentData(FileLineElementData):
 
     # --------------------------------------------------------------------
     def __init__(self, parent: FileLineData, offset: typing.Optional[int], text: str):
-        assert type(parent) == FileLineData  # noqa: E721
+        assert type(parent) is FileLineData
         assert offset is None or type(offset) is int
         assert type(text) is str
 
@@ -95,7 +95,7 @@ class OptionData(FileLineElementData):
     def __init__(
         self, parent: FileLineData, offset: typing.Offset[int], name: str, value: any
     ):
-        assert type(parent) == FileLineData  # noqa: E721
+        assert type(parent) is FileLineData
         assert offset is None or type(offset) is int
         assert type(name) is str
         assert value is not None
@@ -123,7 +123,7 @@ class IncludeData(FileLineElementData):
         path: str,
         fileData: FileData,
     ):
-        assert type(parent) == FileLineData  # noqa: E721
+        assert type(parent) is FileLineData
         assert type(path) is str
         assert type(fileData) is FileData
         assert offset is None or type(offset) is int

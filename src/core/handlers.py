@@ -28,7 +28,7 @@ class ConfigurationDataHandler:
         assert (
             targetData is None
             or type(targetData) is FileData
-            or type(targetData) == FileLineData  # noqa: E721
+            or type(targetData) is FileLineData
         )
         assert type(optionName) is str
         assert optionValue is not None
@@ -93,7 +93,7 @@ class ConfigurationDataHandler:
         assert (
             target is None
             or type(target) is FileData
-            or type(target) == FileLineData  # noqa: E721 E501
+            or type(target) is FileLineData
         )
         assert optionOffset is None or type(optionOffset) is int
         assert type(optionName) is str
@@ -249,7 +249,7 @@ class OptionHandlerCtxToAddOption:
         assert (
             target is None
             or type(target) is FileData
-            or type(target) == FileLineData  # noqa: E721
+            or type(target) is FileLineData
         )
         assert type(optionName) is str
         assert optionValue is not None

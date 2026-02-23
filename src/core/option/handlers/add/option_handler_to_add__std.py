@@ -24,7 +24,7 @@ class OptionHandlerToAddOption__Std(OptionHandlerToAddOption):
         assert (
             ctx.Target is None
             or type(ctx.Target) is FileData
-            or type(ctx.Target) == FileLineData  # noqa: E721
+            or type(ctx.Target) is FileLineData
         )
         assert ctx.OptionOffset is None or type(ctx.OptionOffset) is int
         assert type(ctx.OptionName) is str
