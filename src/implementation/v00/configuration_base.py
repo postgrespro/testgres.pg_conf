@@ -1069,6 +1069,7 @@ class PostgresConfigurationSetOptionValueResult_Base(
         self.m_EventID = eventID
 
     # ---------------------------------------------------------------------
+    @staticmethod
     def Create__OptWasUpdated(
         cfg: PostgresConfiguration_Base, optData: PgCfgModel__OptionData
     ) -> PostgresConfigurationSetOptionValueResult_Base:
@@ -1081,6 +1082,7 @@ class PostgresConfigurationSetOptionValueResult_Base(
         )
 
     # ---------------------------------------------------------------------
+    @staticmethod
     def Create__OptWasAdded(
         cfg: PostgresConfiguration_Base, optData: PgCfgModel__OptionData
     ) -> PostgresConfigurationSetOptionValueResult_Base:
@@ -1093,12 +1095,14 @@ class PostgresConfigurationSetOptionValueResult_Base(
         )
 
     # ---------------------------------------------------------------------
+    @staticmethod
     def Create__OptWasDeleted() -> PostgresConfigurationSetOptionValueResult_Base:
         return __class__(
             None, None, PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED
         )
 
     # ---------------------------------------------------------------------
+    @staticmethod
     def Create__OptValueItemWasAlreadyDefined(
         cfg: PostgresConfiguration_Base, optData: PgCfgModel__OptionData
     ) -> PostgresConfigurationSetOptionValueResult_Base:
@@ -1113,6 +1117,7 @@ class PostgresConfigurationSetOptionValueResult_Base(
         )
 
     # ---------------------------------------------------------------------
+    @staticmethod
     def Create__OptValueItemWasAdded(
         cfg: PostgresConfiguration_Base, optData: PgCfgModel__OptionData
     ) -> PostgresConfigurationSetOptionValueResult_Base:
@@ -2994,6 +2999,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         return result
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
         optionData: PgCfgModel__OptionData, optionValueItem: typing.Any
     ) -> bool:
@@ -3030,6 +3036,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
 
 class PostgresConfigurationFactory_Base:
+    @staticmethod
     def GetObject(
         cfg: PostgresConfiguration_Base, objectData: PgCfgModel__ObjectData
     ) -> PostgresConfigurationObject:
@@ -3075,6 +3082,7 @@ class PostgresConfigurationFactory_Base:
         return cfgObject
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__CreateObject(
         cfg: PostgresConfiguration_Base,
         objectData: PgCfgModel__ObjectData,
@@ -3107,6 +3115,7 @@ class PostgresConfigurationFactory_Base:
         BugCheckError.UnkObjectDataType(typeOfObjectData)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__CreateFile(
         objectData: PgCfgModel__FileData,
         objectParent: PostgresConfigurationObject,
@@ -3124,6 +3133,7 @@ class PostgresConfigurationFactory_Base:
         RaiseError.MethodIsNotImplemented(__class__, "Helper__CreateFile")
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__CreateFileLine(
         objectData: PgCfgModel__FileLineData,
         objectParent: PostgresConfigurationObject,
@@ -3136,6 +3146,7 @@ class PostgresConfigurationFactory_Base:
         return PostgresConfigurationFileLine_Base(objectParent, objectData)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__CreateFileLineComment(
         fileLineDataItem: PgCfgModel__FileLineData.tagItem,
         fileLine: PostgresConfigurationObject,
@@ -3148,6 +3159,7 @@ class PostgresConfigurationFactory_Base:
         return PostgresConfigurationComment_Base(fileLine, fileLineDataItem)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__CreateOption(
         objectData: PgCfgModel__OptionData,
         objectParent: PostgresConfigurationObject,
@@ -3165,6 +3177,7 @@ class PostgresConfigurationFactory_Base:
 
 
 class PostgresConfigurationReader_Base:
+    @staticmethod
     def LoadConfigurationFile(
         cfg: PostgresConfiguration_Base, filePath: str
     ) -> PostgresConfigurationTopLevelFile_Base:
@@ -3329,6 +3342,7 @@ class PostgresConfigurationReader_Base:
             __class__.Helper__ProcessLineData(file, lineReader)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__ProcessLineData(
         file: PostgresConfigurationFile_Base, lineReader: ReadUtils__LineReader
     ):
@@ -3405,6 +3419,7 @@ class PostgresConfigurationReader_Base:
             )
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__ProcessLineData__Comment(
         fileLine: PostgresConfigurationFileLine_Base, lineReader: ReadUtils__LineReader
     ):
@@ -3430,6 +3445,7 @@ class PostgresConfigurationReader_Base:
         fileLine.AddComment(commentText, commentOffset)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__ProcessLineData__Include(
         fileLine: PostgresConfigurationFileLine_Base,
         lineReader: ReadUtils__LineReader,
@@ -3554,6 +3570,7 @@ class PostgresConfigurationReader_Base:
         fileLine.AddInclude(filePath, includeOffset)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__ProcessLineData__Option(
         fileLine: PostgresConfigurationFileLine_Base,
         lineReader: ReadUtils__LineReader,
@@ -3616,6 +3633,7 @@ class PostgresConfigurationReader_Base:
             )
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__ProcessLineData__Option__Quoted(
         fileLine: PostgresConfigurationFileLine_Base,
         lineReader: ReadUtils__LineReader,
@@ -3719,6 +3737,7 @@ class PostgresConfigurationReader_Base:
         fileLine.AddOption(optionName, optionValue, optionOffset)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__ProcessLineData__Option__Generic(
         fileLine: PostgresConfigurationFileLine_Base,
         lineReader: ReadUtils__LineReader,
@@ -4234,6 +4253,7 @@ class PostgresConfigurationWriter_Base:
 
 
 class PostgresConfigurationController__Base:
+    @staticmethod
     def AddOption(
         cfg: PostgresConfiguration_Base,
         target: typing.Union[None, PgCfgModel__FileData, PgCfgModel__FileLineData],
@@ -4277,6 +4297,7 @@ class PostgresConfigurationController__Base:
         return option
 
     # --------------------------------------------------------------------
+    @staticmethod
     def SetOptionValue(
         cfg: PostgresConfiguration_Base,
         targetData: typing.Union[None, PgCfgModel__FileData, PgCfgModel__OptionData],
@@ -4325,6 +4346,7 @@ class PostgresConfigurationController__Base:
         return r
 
     # --------------------------------------------------------------------
+    @staticmethod
     def SetOptionValueItem(
         cfg: PostgresConfiguration_Base,
         targetData: typing.Union[None, PgCfgModel__FileData, PgCfgModel__OptionData],
@@ -4371,6 +4393,7 @@ class PostgresConfigurationController__Base:
         return r
 
     # --------------------------------------------------------------------
+    @staticmethod
     def GetOptionValue(
         cfg: PostgresConfiguration_Base,
         sourceData: typing.Union[None, PgCfgModel__FileData, PgCfgModel__OptionData],
@@ -4394,6 +4417,7 @@ class PostgresConfigurationController__Base:
         return r
 
     # Helper methods -----------------------------------------------------
+    @staticmethod
     def Helper__PrepareSetValue(
         cfg: PostgresConfiguration_Base, optionName: str, optionValue: typing.Any
     ) -> typing.Any:
@@ -4412,6 +4436,7 @@ class PostgresConfigurationController__Base:
         return prepareHandler.PrepareSetValue(prepareCtx)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__PrepareSetValueItem(
         cfg: PostgresConfiguration_Base, optionName: str, optionValueItem: typing.Any
     ) -> typing.Any:

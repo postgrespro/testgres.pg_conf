@@ -509,6 +509,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
 
 class PostgresConfigurationReader_Std:
+    @staticmethod
     def LoadConfiguration(cfg: PostgresConfiguration_Std) -> None:
         assert isinstance(cfg, PostgresConfiguration_Std)
 
@@ -526,6 +527,7 @@ class PostgresConfigurationReader_Std:
 
 
 class PostgresConfigurationWriter_Std:
+    @staticmethod
     def WriteConfiguration(cfg: PostgresConfiguration_Std) -> None:
         assert isinstance(cfg, PostgresConfiguration_Std)
 
