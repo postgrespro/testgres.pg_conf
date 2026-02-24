@@ -30,7 +30,7 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_OptionNames, ids=[x for x in sm_OptionNames])
-    def optionName(self, request: pytest.fixture) -> str:
+    def optionName(self, request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is str
         return request.param
