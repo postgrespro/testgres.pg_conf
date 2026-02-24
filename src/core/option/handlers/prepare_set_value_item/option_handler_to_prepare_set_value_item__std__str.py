@@ -26,7 +26,7 @@ class OptionHandlerToPrepareSetValueItem__Std__Str(OptionHandlerToPrepareSetValu
 
         typeOfOptionValue = type(ctx.OptionValueItem)
 
-        if typeOfOptionValue != str:
+        if typeOfOptionValue is not str:
             optionName = ctx.OptionName
             assert type(optionName) is str
             RaiseError.BadOptionValueItemType(optionName, typeOfOptionValue, str)

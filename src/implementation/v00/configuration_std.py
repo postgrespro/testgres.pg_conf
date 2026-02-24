@@ -493,7 +493,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 
-        if not (name in self.sm_OptionHandlers.keys()):
+        if name not in self.sm_OptionHandlers.keys():
             return __class__.sm_OptionHandlers__Std__Generic
 
         optionHandlers = self.sm_OptionHandlers[name]

@@ -26,13 +26,13 @@ class OptionHandlerToPrepareSetValue__Std__Int(OptionHandlerToPrepareSetValue):
 
         typeOfOptionValue = type(ctx.OptionValue)
 
-        if typeOfOptionValue == int:
+        if typeOfOptionValue is int:
             return ctx.OptionValue
 
         optionName = ctx.OptionName
         assert type(optionName) is str
 
-        if typeOfOptionValue == str:
+        if typeOfOptionValue is str:
             if not str(ctx.OptionValue).isnumeric():
                 RaiseError.CantConvertOptionValue(optionName, typeOfOptionValue, int)
 

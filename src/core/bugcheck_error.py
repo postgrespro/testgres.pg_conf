@@ -195,7 +195,7 @@ class BugCheckError:
             bugcheckSrc, bugcheckPoint
         )
 
-        if not (explain is None) and explain != "":
+        if explain is not None and explain != "":
             errMsg += " "
             errMsg += explain
 

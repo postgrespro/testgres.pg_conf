@@ -13,7 +13,7 @@ import typing
 
 class TestConfigHelper:
     def NoCleanup() -> bool:
-        if not (TestConfigPropNames.TEST_CFG__NO_CLEANUP in os.environ.keys()):
+        if TestConfigPropNames.TEST_CFG__NO_CLEANUP not in os.environ.keys():
             return False
 
         v = os.environ[TestConfigPropNames.TEST_CFG__NO_CLEANUP]
@@ -31,10 +31,10 @@ class TestConfigHelper:
 
         typeV = type(v)
 
-        if typeV == bool:
+        if typeV is bool:
             return v
 
-        if typeV == str:
+        if typeV is str:
             vv = str(v).upper()
 
             if vv in __class__.sm_YES:
@@ -45,7 +45,7 @@ class TestConfigHelper:
 
             ThrowError.EnvVarHasBadValue(envVarName)
 
-        if typeV == int:
+        if typeV is int:
             if v == 0:
                 return False
 
