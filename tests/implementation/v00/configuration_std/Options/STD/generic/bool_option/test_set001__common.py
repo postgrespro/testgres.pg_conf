@@ -37,10 +37,10 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     class tagData001:
-        set_value: any
+        set_value: typing.Any
         get_value: bool
 
-        def __init__(self, set_value: any, get_value: bool):
+        def __init__(self, set_value: typing.Any, get_value: bool):
             self.set_value = set_value
             self.get_value = get_value
 
@@ -141,9 +141,9 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     class tagData002:
-        set_value: any
+        set_value: typing.Any
 
-        def __init__(self, set_value: any):
+        def __init__(self, set_value: typing.Any):
             self.set_value = set_value
 
     # --------------------------------------------------------------------
@@ -192,9 +192,9 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     class tagData003:
-        set_value: any
+        set_value: typing.Any
 
-        def __init__(self, set_value: any):
+        def __init__(self, set_value: typing.Any):
             self.set_value = set_value
 
     # --------------------------------------------------------------------
@@ -282,10 +282,10 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     class tagData101_Value:
-        source: any
+        source: typing.Any
         result: bool
 
-        def __init__(self, source: any, result: bool):
+        def __init__(self, source: typing.Any, result: bool):
             self.source = source
             self.result = result
 

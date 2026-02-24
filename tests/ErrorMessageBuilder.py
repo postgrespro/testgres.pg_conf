@@ -2,6 +2,7 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests
 
 import datetime
+import typing
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -193,7 +194,7 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionValueItemIsAlreadyDefined(filePath: str, optName: str, valueItem: any):
+    def OptionValueItemIsAlreadyDefined(filePath: str, optName: str, valueItem: typing.Any):
         assert type(filePath) is str
         assert type(optName) is str
 
@@ -205,7 +206,7 @@ class ErrorMessageBuilder:
     # --------------------------------------------------------------------
     @staticmethod
     def OptionValueItemIsAlreadyDefinedInAnotherFile(
-        filePath: str, optName: str, valueItem: any
+        filePath: str, optName: str, valueItem: typing.Any
     ):
         assert type(filePath) is str
         assert type(optName) is str

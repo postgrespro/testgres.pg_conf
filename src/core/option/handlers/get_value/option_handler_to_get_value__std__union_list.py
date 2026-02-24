@@ -9,6 +9,8 @@ from ....handlers import ConfigurationDataHandler
 from ....handlers import FileData
 from ....handlers import OptionData
 
+import typing
+
 # //////////////////////////////////////////////////////////////////////////////
 # OptionHandlerToGetValue__Std__UnionList
 
@@ -18,7 +20,7 @@ class OptionHandlerToGetValue__Std__UnionList(OptionHandlerToGetValue):
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> any:
+    def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToGetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (

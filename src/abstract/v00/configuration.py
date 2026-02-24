@@ -98,16 +98,16 @@ class PostgresConfigurationOption(PostgresConfigurationElement):
         RaiseError.MethodIsNotImplemented(__class__, "get_Name")
 
     # --------------------------------------------------------------------
-    def get_Value(self) -> any:
+    def get_Value(self) -> typing.Any:
         RaiseError.MethodIsNotImplemented(__class__, "get_Value")
 
     # --------------------------------------------------------------------
-    def set_Value(self, value: any) -> PostgresConfigurationSetOptionValueResult:
+    def set_Value(self, value: typing.Any) -> PostgresConfigurationSetOptionValueResult:
         RaiseError.MethodIsNotImplemented(__class__, "set_Value")
 
     # --------------------------------------------------------------------
     def set_ValueItem(
-        self, value_item: any
+        self, value_item: typing.Any
     ) -> PostgresConfigurationSetOptionValueResult:
         assert value_item is not None
         RaiseError.MethodIsNotImplemented(__class__, "set_ValueItem")
@@ -188,7 +188,7 @@ class PostgresConfigurationFileLine(PostgresConfigurationObject):
 
     # --------------------------------------------------------------------
     def AddOption(
-        self, name: str, value: any, offset: typing.Optional[int]
+        self, name: str, value: typing.Any, offset: typing.Optional[int]
     ) -> PostgresConfigurationOption:
         assert type(name) is str
         assert name != ""
@@ -275,7 +275,7 @@ class PostgresConfigurationFile(PostgresConfigurationObject):
         RaiseError.MethodIsNotImplemented(__class__, "AddComment")
 
     # --------------------------------------------------------------------
-    def AddOption(self, name: str, value: any) -> PostgresConfigurationOption:
+    def AddOption(self, name: str, value: typing.Any) -> PostgresConfigurationOption:
         assert type(name) is str
         assert name != ""
         assert value is not None
@@ -299,7 +299,7 @@ class PostgresConfigurationFile(PostgresConfigurationObject):
     #  PostgresConfigurationSetOptionValueResult object.
     #
     def SetOptionValue(
-        self, name: str, value: any
+        self, name: str, value: typing.Any
     ) -> PostgresConfigurationSetOptionValueResult:
         assert type(name) is str
         assert name != ""
@@ -313,13 +313,13 @@ class PostgresConfigurationFile(PostgresConfigurationObject):
     #  - Value of option.
     #  - None if option is not found in this file.
     #
-    def GetOptionValue(self, name: str) -> any:
+    def GetOptionValue(self, name: str) -> typing.Any:
         assert type(name) is str
         RaiseError.MethodIsNotImplemented(__class__, "GetOptionValue")
 
     # --------------------------------------------------------------------
     def SetOptionValueItem(
-        self, name: str, value_item: any
+        self, name: str, value_item: typing.Any
     ) -> PostgresConfigurationSetOptionValueResult:
         assert type(name) is str
         assert name != ""
@@ -380,7 +380,7 @@ class PostgresConfiguration(PostgresConfigurationObject):
         RaiseError.MethodIsNotImplemented(__class__, "AddTopLevelFile")
 
     # --------------------------------------------------------------------
-    def AddOption(self, name: str, value: any) -> PostgresConfigurationOption:
+    def AddOption(self, name: str, value: typing.Any) -> PostgresConfigurationOption:
         assert type(name) is str
         assert name != ""
         assert value is not None
@@ -398,7 +398,7 @@ class PostgresConfiguration(PostgresConfigurationObject):
     #  PostgresConfigurationSetOptionValueResult object.
     #
     def SetOptionValue(
-        self, name: str, value: any
+        self, name: str, value: typing.Any
     ) -> PostgresConfigurationSetOptionValueResult:
         assert type(name) is str
         RaiseError.MethodIsNotImplemented(__class__, "SetOptionValue")
@@ -411,13 +411,13 @@ class PostgresConfiguration(PostgresConfigurationObject):
     #  - Value of option.
     #  - None if option is not found.
     #
-    def GetOptionValue(self, name: str) -> any:
+    def GetOptionValue(self, name: str) -> typing.Any:
         assert type(name) is str
         RaiseError.MethodIsNotImplemented(__class__, "GetOptionValue")
 
     # --------------------------------------------------------------------
     def SetOptionValueItem(
-        self, name: str, value_item: any
+        self, name: str, value_item: typing.Any
     ) -> PostgresConfigurationSetOptionValueResult:
         assert type(name) is str
         assert value_item is not None

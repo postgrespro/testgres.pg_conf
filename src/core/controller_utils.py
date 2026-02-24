@@ -28,7 +28,7 @@ import typing
 
 class DataControllerUtils:
     @staticmethod
-    def Option__set_Value(optionData: PgCfgModel__OptionData, value: any):
+    def Option__set_Value(optionData: PgCfgModel__OptionData, value: typing.Any):
         assert type(optionData) is PgCfgModel__OptionData
         assert value is not None
 
@@ -36,7 +36,7 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def Option__add_ValueItem(optionData: PgCfgModel__OptionData, valueItem: any):
+    def Option__add_ValueItem(optionData: PgCfgModel__OptionData, valueItem: typing.Any):
         assert type(optionData) is PgCfgModel__OptionData
         assert type(optionData.m_Value) is list
         assert valueItem is not None
@@ -205,7 +205,7 @@ class DataControllerUtils:
         cfgData: PgCfgModel__ConfigurationData,
         fileLineData: PgCfgModel__FileLineData,
         optName: str,
-        optValue: any,
+        optValue: typing.Any,
         optOffset: typing.Optional[int],
     ) -> PgCfgModel__OptionData:
         assert type(cfgData) is PgCfgModel__ConfigurationData
@@ -321,7 +321,7 @@ class DataControllerUtils:
         cfgData: PgCfgModel__ConfigurationData,
         fileData: PgCfgModel__FileData,
         optName: str,
-        optValue: any,
+        optValue: typing.Any,
     ) -> PgCfgModel__OptionData:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(fileData) is PgCfgModel__FileData

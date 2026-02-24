@@ -90,7 +90,7 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def Helper__CheckStateOfCfgWithOneOpt(
-        cfg: PgCfg_Std, opt: PgCfg_Option_Base, optName: str, optValue: any
+        cfg: PgCfg_Std, opt: PgCfg_Option_Base, optName: str, optValue: typing.Any
     ):
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert type(opt) is PgCfg_Option_Base
@@ -406,14 +406,14 @@ class TestSet001__Common:
             cfg.SetOptionValue("", 123)
 
     # --------------------------------------------------------------------
-    sm_data012__values: typing.List[typing.Tuple[str, str, any, any]] = [
+    sm_data012__values: typing.List[typing.Tuple[str, str, typing.Any, typing.Any]] = [
         ("port-int_int", "port", 123, 123),
         ("port-str_int", "port", "321", 321),
     ]
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data012__values, ids=[x[0] for x in sm_data012__values])
-    def data012(self, request: pytest.FixtureRequest) -> typing.Tuple[str, any, any]:
+    def data012(self, request: pytest.FixtureRequest) -> typing.Tuple[str, typing.Any, typing.Any]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple
         assert len(request.param) == 4
@@ -422,7 +422,7 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_012__one_opt(
-        self, request: pytest.FixtureRequest, data012: typing.Tuple[str, any, any]
+        self, request: pytest.FixtureRequest, data012: typing.Tuple[str, typing.Any, typing.Any]
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data012) is tuple

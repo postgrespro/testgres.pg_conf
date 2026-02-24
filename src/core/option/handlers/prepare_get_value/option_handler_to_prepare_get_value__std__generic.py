@@ -9,6 +9,8 @@ from ....handlers import OptionHandlerToPrepareGetValue
 from ....handlers import OptionHandlerCtxToPrepareGetValue
 from ....handlers import ConfigurationDataHandler
 
+import typing
+
 # //////////////////////////////////////////////////////////////////////////////
 # OptionHandlerToPrepareGetValue__Std__Generic
 
@@ -18,7 +20,7 @@ class OptionHandlerToPrepareGetValue__Std__Generic(OptionHandlerToPrepareGetValu
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> any:
+    def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToPrepareGetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert type(ctx.OptionName) is str

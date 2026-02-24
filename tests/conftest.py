@@ -576,7 +576,7 @@ def pytest_runtest_makereport(item: pytest.Function, call: pytest.CallInfo):
 
 
 class LogWrapper2:
-    _old_method: any
+    _old_method: typing.Any
     _err_counter: typing.Optional[int]
     _warn_counter: typing.Optional[int]
 

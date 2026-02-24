@@ -9,6 +9,8 @@ from ....handlers import OptionHandlerToPrepareSetValueItem
 from ....handlers import OptionHandlerCtxToPrepareSetValueItem
 from ....handlers import ConfigurationDataHandler
 
+import typing
+
 # //////////////////////////////////////////////////////////////////////////////
 # OptionHandlerToPrepareSetValueItem__Std__Str
 
@@ -18,7 +20,7 @@ class OptionHandlerToPrepareSetValueItem__Std__Str(OptionHandlerToPrepareSetValu
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def PrepareSetValueItem(self, ctx: OptionHandlerCtxToPrepareSetValueItem) -> any:
+    def PrepareSetValueItem(self, ctx: OptionHandlerCtxToPrepareSetValueItem) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToPrepareSetValueItem
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert type(ctx.OptionName) is str

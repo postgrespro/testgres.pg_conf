@@ -23,8 +23,8 @@ class ConfigurationDataHandler:
         self,
         targetData: typing.Union[None, FileData, OptionData],
         optionName: str,
-        optionValue: any,
-    ) -> any:
+        optionValue: typing.Any,
+    ) -> typing.Any:
         assert (
             targetData is None
             or type(targetData) is FileData
@@ -41,7 +41,7 @@ class ConfigurationDataHandler:
         self,
         sourceData: typing.Union[None, FileData, OptionData],
         optionName: str,
-    ) -> any:
+    ) -> typing.Any:
         assert (
             sourceData is None
             or type(sourceData) is FileData
@@ -57,7 +57,7 @@ class ConfigurationDataHandler:
         self,
         sourceData: typing.Union[None, FileLineData, OptionData],
         optionName: str,
-    ) -> any:
+    ) -> typing.Any:
         assert (
             sourceData is None
             or type(sourceData) is FileData
@@ -73,7 +73,7 @@ class ConfigurationDataHandler:
         self,
         targetData: typing.Union[None, FileData, OptionData],
         optionName: str,
-    ) -> any:
+    ) -> typing.Any:
         assert (
             targetData is None
             or type(targetData) is FileData
@@ -88,8 +88,8 @@ class ConfigurationDataHandler:
         target: typing.Union[None, FileData, FileLineData],
         optionOffset: typing.Optional[int],
         optionName: str,
-        optionValue: any,
-    ) -> any:
+        optionValue: typing.Any,
+    ) -> typing.Any:
         assert (
             target is None or type(target) is FileData or type(target) is FileLineData
         )
@@ -103,8 +103,8 @@ class ConfigurationDataHandler:
         self,
         targetData: typing.Union[None, FileData, OptionData],
         optionName: str,
-        optionValueItem: any,
-    ) -> any:
+        optionValueItem: typing.Any,
+    ) -> typing.Any:
         assert (
             targetData is None
             or type(targetData) is FileData
@@ -134,7 +134,7 @@ class OptionHandlerCtxToSetValue:
     DataHandler: ConfigurationDataHandler
     TargetData: typing.Union[None, FileData, OptionData]
     OptionName: str
-    OptionValue: any
+    OptionValue: typing.Any
 
     # --------------------------------------------------------------------
     def __init__(
@@ -142,7 +142,7 @@ class OptionHandlerCtxToSetValue:
         dataHandler: ConfigurationDataHandler,
         targetData: typing.Union[None, FileData, OptionData],
         optionName: str,
-        optionValue: any,
+        optionValue: typing.Any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
@@ -167,7 +167,7 @@ class OptionHandlerToSetValue(OptionHandler):
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def SetOptionValue(self, ctx: OptionHandlerCtxToSetValue) -> any:
+    def SetOptionValue(self, ctx: OptionHandlerCtxToSetValue) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToSetValue
         assert ctx.OptionName is not None
         assert ctx.OptionValue is not None
@@ -212,7 +212,7 @@ class OptionHandlerToGetValue(OptionHandler):
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> any:
+    def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToGetValue
         assert (
             ctx.SourceData is None
@@ -232,7 +232,7 @@ class OptionHandlerCtxToAddOption:
     Target: typing.Union[None, FileData, FileLineData]
     OptionOffset: typing.Optional[int]
     OptionName: str
-    OptionValue: any
+    OptionValue: typing.Any
 
     # --------------------------------------------------------------------
     def __init__(
@@ -241,7 +241,7 @@ class OptionHandlerCtxToAddOption:
         target: typing.Union[None, FileData, FileLineData],
         optionOffset: typing.Optional[int],
         optionName: str,
-        optionValue: any,
+        optionValue: typing.Any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
@@ -266,7 +266,7 @@ class OptionHandlerToAddOption(OptionHandler):
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def AddOption(self, ctx: OptionHandlerCtxToSetValue) -> any:
+    def AddOption(self, ctx: OptionHandlerCtxToSetValue) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToSetValue
         RaiseError.MethodIsNotImplemented(__class__, "AddOption")
 
@@ -279,7 +279,7 @@ class OptionHandlerCtxToSetValueItem:
     DataHandler: ConfigurationDataHandler
     TargetData: typing.Union[None, FileData, OptionData]
     OptionName: str
-    OptionValueItem: any
+    OptionValueItem: typing.Any
 
     # --------------------------------------------------------------------
     def __init__(
@@ -287,7 +287,7 @@ class OptionHandlerCtxToSetValueItem:
         dataHandler: ConfigurationDataHandler,
         targetData: typing.Union[None, FileData, OptionData],
         optionName: str,
-        optionValueItem: any,
+        optionValueItem: typing.Any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
@@ -312,7 +312,7 @@ class OptionHandlerToSetValueItem(OptionHandler):
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def SetOptionValueItem(self, ctx: OptionHandlerCtxToSetValueItem) -> any:
+    def SetOptionValueItem(self, ctx: OptionHandlerCtxToSetValueItem) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToSetValueItem
         assert (
             ctx.TargetData is None
@@ -331,14 +331,14 @@ class OptionHandlerToSetValueItem(OptionHandler):
 class OptionHandlerCtxToPrepareSetValue:
     DataHandler: ConfigurationDataHandler
     OptionName: str
-    OptionValue: any
+    OptionValue: typing.Any
 
     # --------------------------------------------------------------------
     def __init__(
         self,
         dataHandler: ConfigurationDataHandler,
         optionName: str,
-        optionValue: any,
+        optionValue: typing.Any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert type(optionName) is str
@@ -370,14 +370,14 @@ class OptionHandlerToPrepareSetValue(OptionHandler):
 class OptionHandlerCtxToPrepareSetValueItem:
     DataHandler: ConfigurationDataHandler
     OptionName: str
-    OptionValueItem: any
+    OptionValueItem: typing.Any
 
     # --------------------------------------------------------------------
     def __init__(
         self,
         dataHandler: ConfigurationDataHandler,
         optionName: str,
-        optionValueItem: any,
+        optionValueItem: typing.Any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert type(optionName) is str
@@ -409,14 +409,14 @@ class OptionHandlerToPrepareSetValueItem(OptionHandler):
 class OptionHandlerCtxToPrepareGetValue:
     DataHandler: ConfigurationDataHandler
     OptionName: str
-    OptionValue: any
+    OptionValue: typing.Any
 
     # --------------------------------------------------------------------
     def __init__(
         self,
         dataHandler: ConfigurationDataHandler,
         optionName: str,
-        optionValue: any,
+        optionValue: typing.Any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert type(optionName) is str
@@ -448,14 +448,14 @@ class OptionHandlerToPrepareGetValue(OptionHandler):
 class OptionHandlerCtxToWrite:
     DataHandler: ConfigurationDataHandler
     OptionName: str
-    OptionValue: any
+    OptionValue: typing.Any
 
     # --------------------------------------------------------------------
     def __init__(
         self,
         dataHandler: ConfigurationDataHandler,
         optionName: str,
-        optionValue: any,
+        optionValue: typing.Any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert type(optionName) is str

@@ -1,6 +1,8 @@
 # //////////////////////////////////////////////////////////////////////////////
 # Postgres Pro. PostgreSQL Configuration Python Library.
 
+import typing
+
 
 # //////////////////////////////////////////////////////////////////////////////
 # BugCheckError
@@ -67,7 +69,7 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def UnkFileDataStatus(filePath: str, fileStatus: any):
+    def UnkFileDataStatus(filePath: str, fileStatus: typing.Any):
         assert type(filePath) is str
         assert fileStatus is not None
 
