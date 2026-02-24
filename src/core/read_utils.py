@@ -123,6 +123,7 @@ class LineReader:
 
 
 class ReadUtils:
+    @staticmethod
     def IsSpace(ch: str) -> bool:
         assert type(ch) is str
 
@@ -135,6 +136,7 @@ class ReadUtils:
         return False
 
     # --------------------------------------------------------------------
+    @staticmethod
     def IsEOL(ch: str) -> bool:
         assert type(ch) is str
 
@@ -144,6 +146,7 @@ class ReadUtils:
         return False
 
     # --------------------------------------------------------------------
+    @staticmethod
     def IsValidSeqCh1(ch: str) -> bool:
         assert type(ch) is str
 
@@ -156,6 +159,7 @@ class ReadUtils:
         return False
 
     # --------------------------------------------------------------------
+    @staticmethod
     def IsValidSeqCh2(ch: str) -> bool:
         assert type(ch) is str
 
@@ -165,6 +169,7 @@ class ReadUtils:
         return __class__.IsValidSeqCh1(ch)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Unpack_StrList2(source: str) -> typing.List[str]:
         assert source is not None
         assert type(source) is str

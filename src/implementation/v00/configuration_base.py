@@ -3288,6 +3288,7 @@ class PostgresConfigurationReader_Base:
         return rootFile
 
     # --------------------------------------------------------------------
+    @staticmethod
     def LoadFileContent(
         file: PostgresConfigurationFile_Base, fileContent: ConfigurationFileReader
     ) -> None:
@@ -3297,6 +3298,7 @@ class PostgresConfigurationReader_Base:
         return __class__.Helper__LoadFileContent(file, fileContent)
 
     # Helper methods -----------------------------------------------------
+    @staticmethod
     def Helper__LoadFileContent(
         file: PostgresConfigurationFile_Base, fileContent: ConfigurationFileReader
     ) -> None:
@@ -3811,6 +3813,7 @@ class PostgresConfigurationWriterCtx_Base:
 
 
 class PostgresConfigurationWriter_Base:
+    @staticmethod
     def MakeFileDataContent(
         ctx: PostgresConfigurationWriterCtx_Base, fileData: PgCfgModel__FileData
     ) -> str:
@@ -3820,6 +3823,7 @@ class PostgresConfigurationWriter_Base:
         return __class__.Helper__MakeFileDataContent(ctx, fileData)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def DoWork(ctx: PostgresConfigurationWriterCtx_Base):
         assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
@@ -3828,6 +3832,7 @@ class PostgresConfigurationWriter_Base:
         return __class__.Helper__DoWork(ctx)
 
     # Helper Methods -----------------------------------------------------
+    @staticmethod
     def Helper__DoWork(ctx: PostgresConfigurationWriterCtx_Base):
         assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
@@ -3855,6 +3860,7 @@ class PostgresConfigurationWriter_Base:
         return
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__DoWork__Stage01__CreateFileContexts(
         ctx: PostgresConfigurationWriterCtx_Base,
     ):
@@ -3886,6 +3892,7 @@ class PostgresConfigurationWriter_Base:
                 BugCheckError.UnkFileDataStatus(fileData.m_Path, fileData.m_Status)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__DoWork__Stage02__MakeFileDataContents(
         ctx: PostgresConfigurationWriterCtx_Base,
     ):
@@ -3904,6 +3911,7 @@ class PostgresConfigurationWriter_Base:
             )
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__DoWork__Stage03__OpenUpdFilesToWrite(
         ctx: PostgresConfigurationWriterCtx_Base,
     ):
@@ -3946,6 +3954,7 @@ class PostgresConfigurationWriter_Base:
         return
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__DoWork__Stage04__OpenNewFilesToWrite(
         ctx: PostgresConfigurationWriterCtx_Base,
     ):
@@ -4011,6 +4020,7 @@ class PostgresConfigurationWriter_Base:
         return
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__DoWork__Stage05__WriteContents(
         ctx: PostgresConfigurationWriterCtx_Base,
     ):
@@ -4040,6 +4050,7 @@ class PostgresConfigurationWriter_Base:
             fileCtx.FileData.m_Status = PgCfgModel__FileStatus.EXISTS
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__MakeFileDataContent(
         ctx: PostgresConfigurationWriterCtx_Base, fileData: PgCfgModel__FileData
     ) -> str:
@@ -4058,6 +4069,7 @@ class PostgresConfigurationWriter_Base:
         return fileContent
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__FileLineToString(
         ctx: PostgresConfigurationWriterCtx_Base,
         fileLineData: PgCfgModel__FileLineData,
@@ -4096,6 +4108,7 @@ class PostgresConfigurationWriter_Base:
         return lineContent
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__AppendItemToLine(lineContent: str, offset: int, text: str) -> str:
         assert type(lineContent) is str
         assert offset is None or type(offset) is int
@@ -4119,6 +4132,7 @@ class PostgresConfigurationWriter_Base:
         return lineContent
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__ElementToString(
         ctx: PostgresConfigurationWriterCtx_Base,
         elementData: PgCfgModel__FileLineElementData,
@@ -4141,6 +4155,7 @@ class PostgresConfigurationWriter_Base:
         BugCheckError.UnkObjectDataType(typeOfElementData)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__OptionToString(
         ctx: PostgresConfigurationWriterCtx_Base, optionData: PgCfgModel__OptionData
     ) -> str:
@@ -4170,6 +4185,7 @@ class PostgresConfigurationWriter_Base:
         return result
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__CommentToString(
         ctx: PostgresConfigurationWriterCtx_Base, commentData: PgCfgModel__CommentData
     ) -> str:
@@ -4186,6 +4202,7 @@ class PostgresConfigurationWriter_Base:
         return result
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__IncludeToString(
         ctx: PostgresConfigurationWriterCtx_Base, includeData: PgCfgModel__IncludeData
     ) -> str:

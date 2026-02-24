@@ -12,6 +12,7 @@ import typing
 
 
 class TestConfigHelper:
+    @staticmethod
     def NoCleanup() -> bool:
         if TestConfigPropNames.TEST_CFG__NO_CLEANUP not in os.environ.keys():
             return False
@@ -26,6 +27,7 @@ class TestConfigHelper:
     sm_NO: typing.List[str] = ["0", "FALSE", "NO"]
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__ToBoolean(v, envVarName: str) -> bool:
         assert type(envVarName) is str
 

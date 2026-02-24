@@ -17,24 +17,29 @@ import shutil
 
 
 class TestServices:
+    @staticmethod
     def GetRootDir() -> str:
         return TestStartupData.GetRootDir()
 
     # --------------------------------------------------------------------
+    @staticmethod
     def GetRootTmpDir() -> str:
         return TestStartupData.GetRootTmpDataDirForCurrentTestWorker()
 
     # --------------------------------------------------------------------
+    @staticmethod
     def MakeRootTmpDirForGlobalResources(globalResourceID: str) -> str:
         assert isinstance(globalResourceID, str)
         return os.path.join(__class__.GetRootTmpDir(), ".global", globalResourceID)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def GetCurTestTmpDir(request: pytest.FixtureRequest) -> str:
         assert isinstance(request, pytest.FixtureRequest)
         return __class__.Helper__GetCurTestTmpDir(request.node)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__GetCurTestTmpDir(function: pytest.Function) -> str:
         assert isinstance(function, pytest.Function)
 
@@ -64,6 +69,7 @@ class TestServices:
         return result
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CleanTestTmpDirBeforeExit(function: pytest.Function):
         assert isinstance(function, pytest.Function)
 
@@ -83,6 +89,7 @@ class TestServices:
         return
 
     # --------------------------------------------------------------------
+    @staticmethod
     def PrintExceptionOK(e: Exception):
         assert isinstance(e, Exception)
 
@@ -91,10 +98,12 @@ class TestServices:
         )
 
     # --------------------------------------------------------------------
+    @staticmethod
     def ThrowWeWaitAnException():
         raise Exception("We wait an exception!")
 
     # --------------------------------------------------------------------
+    @staticmethod
     def SleepWithPrint(sleepTimeInSec: float):
         logging.info("Sleep {0} second(s).".format(sleepTimeInSec))
         time.sleep(sleepTimeInSec)

@@ -9,6 +9,7 @@ import datetime
 
 
 class ErrorMessageBuilder:
+    @staticmethod
     def MethodIsNotImplemented(classType: type, methodName: str):
         assert type(classType) is type
         assert type(methodName) is str
@@ -20,6 +21,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def GetPropertyIsNotImplemented(classType: type, methodName: str):
         assert type(classType) is type
         assert type(methodName) is str
@@ -31,11 +33,13 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionNameIsNone():
         errMsg = "Option name is None."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionNameHasBadType(nameType: type):
         assert nameType is not None
         assert type(nameType) is type
@@ -44,16 +48,19 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionNameIsEmpty():
         errMsg = "Option name is empty."
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def NoneValueIsNotSupported():
         errMsg = "None value is not supported."
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def NoneOptionValueItemIsNotSupported(optionName: str):
         assert type(optionName) is str
         assert optionName != ""
@@ -62,31 +69,37 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CommentObjectWasDeleted():
         errMsg = "Comment object was deleted."
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionObjectWasDeleted():
         errMsg = "Option object was deleted."
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def IncludeObjectWasDeleted():
         errMsg = "Include object was deleted."
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def FileLineObjectWasDeleted():
         errMsg = "FileLine object was deleted."
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def FileObjectWasDeleted():
         errMsg = "File object was deleted."
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def BadOptionValueType(optionName: str, optionValueType: type, expectedType: type):
         assert type(optionName) is str
         assert type(optionValueType) is type
@@ -98,6 +111,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CantConvertOptionValue(optionName: str, sourceType: type, targetType: type):
         assert type(optionName) is str
         assert type(sourceType) is type
@@ -111,6 +125,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def BadOptionValueItemType(
         optionName: str, optionValueItemType: type, expectedType: type
     ):
@@ -126,16 +141,19 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CommentTextContainsInvalidSymbols():
         errMsg = "Comment text contains invalid symbols."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def FileIsAlreadyRegistered(file_path: str):
         errMsg = "File [{0}] is already registered.".format(file_path)
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionIsAlreadyExistInThisFile(filePath: str, optionName: str):
         assert type(filePath) is str
         assert type(optionName) is str
@@ -148,6 +166,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionIsAlreadyExistInAnotherFile(filePath: str, optionName: str):
         assert type(filePath) is str
         assert type(optionName) is str
@@ -160,6 +179,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionIsAlreadyExistInFile(filePath: str, optionName: str):
         assert type(filePath) is str
         assert type(optionName) is str
@@ -172,6 +192,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionValueItemIsAlreadyDefined(filePath: str, optName: str, valueItem: any):
         assert type(filePath) is str
         assert type(optName) is str
@@ -182,6 +203,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionValueItemIsAlreadyDefinedInAnotherFile(
         filePath: str, optName: str, valueItem: any
     ):
@@ -194,6 +216,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def UnknownFileName(fileName: str):
         assert type(fileName) is str
 
@@ -201,6 +224,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def MultipleDefOfFileIsFound(fileName: str, count: int):
         assert type(fileName) is str
         assert type(count) is int
@@ -211,11 +235,13 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def FilePathIsEmpty():
         errMsg = "File path is empty."
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def FileWasModifiedExternally(
         filePath: str,
         ourLastMDate: datetime.datetime,
@@ -231,11 +257,13 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def FileLineAlreadyHasComment():
         errMsg = "File line already has a comment."
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def FileLineAlreadyHasOption(optionName: str):
         assert type(optionName) is str
 
@@ -243,11 +271,13 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def FileLineAlreadyHasIncludeDirective():
         errMsg = "File line already has an include directive."
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CfgReader__UnexpectedSymbol(lineNum: int, colNum: int, ch: str):
         assert type(lineNum) is int
         assert type(colNum) is int
@@ -259,6 +289,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CfgReader__IncludeWithoutPath(lineNum: int):
         assert type(lineNum) is int
         assert lineNum >= 0
@@ -267,6 +298,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CfgReader__EndOfIncludePathIsNotFound(lineNum: int):
         assert type(lineNum) is int
         assert lineNum >= 0
@@ -275,6 +307,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CfgReader__IncompletedEscapeInInclude(lineNum: int):
         assert type(lineNum) is int
         assert lineNum >= 0
@@ -283,6 +316,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CfgReader__UnknownEscapedSymbolInInclude(lineNum: int, colNum: int, ch: str):
         assert type(lineNum) is int
         assert type(colNum) is int
@@ -297,6 +331,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CfgReader__IncludeHasEmptyPath(lineNum: int):
         assert type(lineNum) is int
         assert lineNum >= 0
@@ -305,6 +340,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CfgReader__OptionWithoutValue(optionName: str, lineNum: int):
         assert type(lineNum) is int
         assert type(optionName) is str
@@ -317,6 +353,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CfgReader__EndQuotedOptionValueIsNotFound(optionName: str, lineNum: int):
         assert type(lineNum) is int
         assert type(optionName) is str
@@ -329,6 +366,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CfgReader__IncompletedEscapeInQuotedOptionValue(optionName: str, lineNum: int):
         assert type(lineNum) is int
         assert type(optionName) is str
@@ -341,6 +379,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CfgReader__UnknownEscapedSymbolInQuotedOptionValue(
         optionName: str, lineNum: int, colNum: int, ch: str
     ):
@@ -357,6 +396,7 @@ class ErrorMessageBuilder:
         return errMsg
 
     # --------------------------------------------------------------------
+    @staticmethod
     def BadFormatOfCommaSeparatedList():
         errMsg = "Bad format of comma separated list."
         return errMsg
