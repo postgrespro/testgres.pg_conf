@@ -32,12 +32,12 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
 
         typeOfOptionValue = type(ctx.OptionValue)
 
-        if typeOfOptionValue == str:
+        if typeOfOptionValue is str:
             result = ReadUtils.Unpack_StrList2(ctx.OptionValue)
             assert result is not None
             assert type(result) is list
             return result
-        elif typeOfOptionValue == list:
+        elif typeOfOptionValue is list:
             result: typing.List[str] = list()
             index: typing.Set[str] = set()
 

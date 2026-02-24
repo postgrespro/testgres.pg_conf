@@ -1268,7 +1268,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
 
         file_name2 = self.m_Cfg.m_Data.OsOps.Path_NormCase(file_name)
 
-        if not (file_name2 in self.m_Cfg.m_Data.m_AllFilesByName.keys()):
+        if file_name2 not in self.m_Cfg.m_Data.m_AllFilesByName.keys():
             RaiseError.UnknownFileName(file_name)
 
         indexData = self.m_Cfg.m_Data.m_AllFilesByName[file_name2]
@@ -1277,14 +1277,14 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
 
         typeOfIndexData = type(indexData)
 
-        if typeOfIndexData == PgCfgModel__FileData:
+        if typeOfIndexData is PgCfgModel__FileData:
             assert self.m_Cfg.m_Data.OsOps.Path_BaseName(indexData.m_Path) == file_name2
             file = PostgresConfigurationFactory_Base.GetObject(self.m_Cfg, indexData)
             assert file is not None
             assert isinstance(file, PostgresConfigurationFile_Base)
             return file
 
-        if typeOfIndexData == list:
+        if typeOfIndexData is list:
             assert len(typeOfIndexData) > 1
             RaiseError.MultipleDefOfFileIsFound(file_name, len(indexData))
 
@@ -1668,7 +1668,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             return self.Helper__PrepareGetValue(optionData.m_Name, optionData.m_Value)
 
         # -------------------------------------- FILE DATA
-        if typeOfSource == PgCfgModel__FileData:
+        if typeOfSource is PgCfgModel__FileData:
             sourceFileData: PgCfgModel__FileData = sourceData
 
             assert type(sourceFileData) is PgCfgModel__FileData
@@ -1678,7 +1678,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
             typeOfOption = type(optionName)
 
-            if typeOfOption == str:
+            if typeOfOption is str:
                 unionList = self.Helper__AggregateAllOptionValues(
                     sourceFileData.m_OptionsByName, optionName
                 )
@@ -1911,7 +1911,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert type(allOptionsByName) is dict
         assert type(optionName) is str
 
-        if not (optionName in allOptionsByName.keys()):
+        if optionName not in allOptionsByName.keys():
             return None
 
         data = allOptionsByName[optionName]
@@ -1937,7 +1937,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert type(allOptionsByName) is dict
         assert type(optionName) is str
 
-        if not (optionName in allOptionsByName.keys()):
+        if optionName not in allOptionsByName.keys():
             return None
 
         data = allOptionsByName[optionName]
@@ -1945,14 +1945,14 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         typeOfData = type(data)
 
-        if typeOfData == PgCfgModel__OptionData:
+        if typeOfData is PgCfgModel__OptionData:
             assert data.IsAlive()
             assert data.m_Name == optionName
             assert data.m_Value is not None
             assert type(data.m_Value) is list
             return data.m_Value
 
-        if typeOfData == list:
+        if typeOfData is list:
             assert type(data) is list
             data = data.copy()
             assert type(data) is list
@@ -1986,7 +1986,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert type(allOptionsByName) is dict
         assert type(optionName) is str
 
-        if not (optionName in allOptionsByName.keys()):
+        if optionName not in allOptionsByName.keys():
             return PostgresConfigurationSetOptionValueEventID.NONE
 
         data = allOptionsByName[optionName]
@@ -2002,7 +2002,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
             return PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED
 
-        if typeOfData == list:
+        if typeOfData is list:
             assert type(data) is list
             data = data.copy()
             assert type(data) is list
@@ -2018,7 +2018,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 )
 
             # [2025-01-02] It is expected
-            assert not (optionName in allOptionsByName.keys())
+            assert optionName not in allOptionsByName.keys()
 
             return PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED
 
@@ -2082,7 +2082,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         file_name_n = self.m_Data.OsOps.Path_NormCase(file_name)
 
-        if not (file_name_n in self.m_Data.m_AllFilesByName.keys()):
+        if file_name_n not in self.m_Data.m_AllFilesByName.keys():
             return None
 
         data = self.m_Data.m_AllFilesByName[file_name_n]
@@ -2189,8 +2189,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
                 assert not optionData.IsAlive()
 
-                assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
-                assert not (optionName in fileData.m_OptionsByName.keys())
+                assert optionName not in self.m_Data.m_AllOptionsByName.keys()
+                assert optionName not in fileData.m_OptionsByName.keys()
                 raise
         except:  # rollback file
             assert type(getFileData_r) is tuple
@@ -2262,8 +2262,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 anotherFileData.m_Path, optionName
             )
 
-        assert not (optionName in fileData.m_OptionsByName.keys())
-        assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
+        assert optionName not in fileData.m_OptionsByName.keys()
+        assert optionName not in self.m_Data.m_AllOptionsByName.keys()
 
         # OK. Let's add this option
         assert optionValue is not None
@@ -2288,8 +2288,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             PgCfgModel__DataControllerUtils.Option__delete(self.m_Data, optionData())
 
             assert not optionData.IsAlive()
-            assert not (optionName in fileData.m_OptionsByName.keys())
-            assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
+            assert optionName not in fileData.m_OptionsByName.keys()
+            assert optionName not in self.m_Data.m_AllOptionsByName.keys()
             raise
 
         assert option is not None
@@ -2344,8 +2344,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 anotherFileData.m_Path, optionName
             )
 
-        assert not (optionName in fileData.m_OptionsByName.keys())
-        assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
+        assert optionName not in fileData.m_OptionsByName.keys()
+        assert optionName not in self.m_Data.m_AllOptionsByName.keys()
 
         # OK. Let's add this option
         assert optionValue is not None
@@ -2372,8 +2372,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             )
 
             assert not optionData.IsAlive()
-            assert not (optionName in fileData.m_OptionsByName.keys())
-            assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
+            assert optionName not in fileData.m_OptionsByName.keys()
+            assert optionName not in self.m_Data.m_AllOptionsByName.keys()
             raise
 
         assert option is not None
@@ -2526,7 +2526,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         # ------------------------------------------------
         while True:
-            if not (optionName in self.m_Data.m_AllOptionsByName.keys()):
+            if optionName not in self.m_Data.m_AllOptionsByName.keys():
                 break
 
             data = self.m_Data.m_AllOptionsByName[optionName]
@@ -2554,7 +2554,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                     self, data
                 )
 
-            if typeOfData == list:
+            if typeOfData is list:
                 assert type(data) is list
                 assert len(data) > 1
 
@@ -2579,7 +2579,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             BugCheckError.UnkOptObjectDataType(optionName, typeOfData)
 
         # ------------------------------------------------
-        assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
+        assert optionName not in self.m_Data.m_AllOptionsByName.keys()
 
         # OK. Let's add a new option with list that contains our optionValueItem
 
@@ -2644,7 +2644,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         typeOfData = type(data)
 
-        if typeOfData == PgCfgModel__OptionData:
+        if typeOfData is PgCfgModel__OptionData:
             assert type(data) is PgCfgModel__OptionData
             # It is the single property!
             assert data is optionData
@@ -2658,7 +2658,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 self, data
             )
 
-        if typeOfData == list:
+        if typeOfData is list:
             assert type(data) is list
             assert len(data) > 1
 
@@ -2689,8 +2689,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             # TODO: We have to take into account overriding the values of postgresql.conf
             BugCheckError.MultipleDefOfOptionIsFound(optionData.m_Name, len(data))
 
-        assert typeOfData != PgCfgModel__OptionData
-        assert typeOfData != list
+        assert typeOfData is not PgCfgModel__OptionData
+        assert typeOfData is not list
 
         BugCheckError.UnkOptObjectDataType(optionData.m_Name, typeOfData)
 
@@ -2718,9 +2718,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         # ------------------------------------------------
         while True:
-            if not (optionName in self.m_Data.m_AllOptionsByName.keys()):
+            if optionName not in self.m_Data.m_AllOptionsByName.keys():
                 # It is an absolutely new option
-                assert not (optionName in fileData.m_OptionsByName.keys())
+                assert optionName not in fileData.m_OptionsByName.keys()
                 break
 
             if optionName in fileData.m_OptionsByName.keys():
@@ -2750,7 +2750,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
                 assert typeOfData != PgCfgModel__OptionData
 
-                if typeOfData == list:
+                if typeOfData is list:
                     assert type(data) is list
                     assert len(data) > 1
 
@@ -2777,7 +2777,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
                 BugCheckError.UnkOptObjectDataType(optionName, typeOfData)
 
-            assert not (optionName in fileData.m_OptionsByName.keys())
+            assert optionName not in fileData.m_OptionsByName.keys()
 
             assert optionName in self.m_Data.m_AllOptionsByName.keys()
 
@@ -2798,7 +2798,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert fileData2 is not None
                 assert type(fileData2) is PgCfgModel__FileData
                 assert fileData2.IsAlive()
-                assert not (fileData2 is fileData)
+                assert fileData2 is not fileData
 
                 if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
                     data, optionValueItem
@@ -2811,7 +2811,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                     fileData2.m_Path, optionName
                 )
 
-            if typeOfData == list:
+            if typeOfData is list:
                 assert type(data) is list
                 assert len(data) > 1
 
@@ -2827,7 +2827,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                     assert fileData2 is not None
                     assert type(fileData2) is PgCfgModel__FileData
                     assert fileData2.IsAlive()
-                    assert not (fileData2 is fileData)
+                    assert fileData2 is not fileData
 
                     if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
                         optionData2, optionValueItem
@@ -2846,8 +2846,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
             BugCheckError.UnkOptObjectDataType(optionName, typeOfData)
 
-        assert not (optionName is fileData.m_OptionsByName.keys())
-        assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
+        assert optionName not in fileData.m_OptionsByName.keys()
+        assert optionName not in self.m_Data.m_AllOptionsByName.keys()
 
         result = self.Helper__FinalRegSimpleOptionValue__File(
             fileData, optionName, [optionValueItem]
@@ -2878,7 +2878,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
         assert type(self.m_Data.m_AllOptionsByName) is dict
 
-        assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
+        assert optionName not in self.m_Data.m_AllOptionsByName.keys()
 
         # Select the file to append this new option
         getFileData_r = self.Helper__GetFileForSimpleOption(optionName)
@@ -2935,8 +2935,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
         assert type(self.m_Data.m_AllOptionsByName) is dict
 
-        assert not (optionName in fileData.m_OptionsByName.keys())
-        assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
+        assert optionName not in fileData.m_OptionsByName.keys()
+        assert optionName not in self.m_Data.m_AllOptionsByName.keys()
 
         optionData = PgCfgModel__DataControllerUtils.File__add_Option(
             self.m_Data, fileData, optionName, preparedOptionValue
@@ -2971,8 +2971,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
             assert not optionData.IsAlive()
 
-            assert not (optionName in fileData.m_OptionsByName.keys())
-            assert not (optionName in self.m_Data.m_AllOptionsByName.keys())
+            assert optionName not in fileData.m_OptionsByName.keys()
+            assert optionName not in self.m_Data.m_AllOptionsByName.keys()
             raise
 
         assert result is not None
@@ -3012,7 +3012,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         while ptr is not self.m_Data:
             assert ptr is not None
             assert isinstance(ptr, PgCfgModel__ObjectData)
-            assert not (ptr in stack)
+            assert ptr not in stack
             stack.add(ptr)
             ptr = ptr.get_Parent()
 
@@ -3180,15 +3180,15 @@ class PostgresConfigurationReader_Base:
             if typeOfIndexData == PgCfgModel__FileData:
                 fileData: PgCfgModel__FileData = indexData
                 assert type(fileData.m_Path) is str
-                assert not (fileData.m_Path in existFileDatas.keys())
+                assert fileData.m_Path not in existFileDatas.keys()
                 existFileDatas[fileData.m_Path] = fileData
                 continue
 
-            if typeOfIndexData == list:
+            if typeOfIndexData is list:
                 for fileData in indexData:
                     assert type(fileData) is PgCfgModel__FileData
                     assert type(fileData.m_Path) is str
-                    assert not (fileData.m_Path in existFileDatas.keys())
+                    assert fileData.m_Path not in existFileDatas.keys()
                     existFileDatas[fileData.m_Path] = fileData
                     continue
                 continue
@@ -3239,7 +3239,7 @@ class PostgresConfigurationReader_Base:
                 currentFileData.m_LastModifiedTimestamp = lastMDate
                 currentFileData.m_Status = PgCfgModel__FileStatus.EXISTS
 
-            assert not (currentFileData.m_Path in existFileDatas.keys())
+            assert currentFileData.m_Path not in existFileDatas.keys()
             existFileDatas[currentFileData.m_Path] = currentFileData
 
             # enumerate all the includes
@@ -3872,9 +3872,9 @@ class PostgresConfigurationWriter_Base:
             assert fileCtx.Content is None
             assert fileCtx.File is None
 
-            assert not (fileCtx in ctx.AllFiles)
-            assert not (fileCtx in ctx.NewFiles)
-            assert not (fileCtx in ctx.UpdFiles)
+            assert fileCtx not in ctx.AllFiles
+            assert fileCtx not in ctx.NewFiles
+            assert fileCtx not in ctx.UpdFiles
 
             ctx.AllFiles.append(fileCtx)
 

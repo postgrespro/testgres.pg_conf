@@ -33,11 +33,11 @@ class Helpers:
 
         typeOfIndexItem = type(indexItem)
 
-        if typeOfIndexItem == OptionData:
+        if typeOfIndexItem is OptionData:
             assert indexItem.m_Name == optionName
             return indexItem
 
-        if typeOfIndexItem == list:
+        if typeOfIndexItem is list:
             assert len(indexItem) > 1
             assert indexItem[0] is not None
             assert type(indexItem[0]) is OptionData

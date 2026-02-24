@@ -545,7 +545,7 @@ class DataControllerUtils:
         assert fileKey != ""
         assert fileData.IsAlive()
 
-        if not (fileKey in filesByStrKeyDictionary.keys()):
+        if fileKey not in filesByStrKeyDictionary.keys():
             filesByStrKeyDictionary[fileKey] = fileData
         else:
             indexItemData = filesByStrKeyDictionary[fileKey]
@@ -574,7 +574,7 @@ class DataControllerUtils:
         assert fileKey != ""
         assert fileData.IsAlive()
 
-        if not (fileKey in filesByStrKeyDictionary.keys()):
+        if fileKey not in filesByStrKeyDictionary.keys():
             BugCheckError.FileIsNotFoundInIndex(fileKey, fileData.m_Path)
 
         indexItemData = filesByStrKeyDictionary[fileKey]
@@ -586,14 +586,14 @@ class DataControllerUtils:
         if typeOfIndexItemData == fileData:
             assert indexItemData is fileData
 
-            if not (indexItemData is fileData):
+            if indexItemData is not fileData:
                 BugCheckError.FileIsNotFoundInIndex(fileKey, fileData.m_Path)
 
             filesByStrKeyDictionary.pop(fileKey)
-            assert not (fileKey in filesByStrKeyDictionary.keys())
+            assert fileKey not in filesByStrKeyDictionary.keys()
             return
 
-        if typeOfIndexItemData == list:
+        if typeOfIndexItemData is list:
             assert type(indexItemData) is list
             assert len(indexItemData) > 1
 
@@ -635,7 +635,7 @@ class DataControllerUtils:
         assert type(optionsByNameDictionary) is dict
         assert type(optionData) is PgCfgModel__OptionData
 
-        if not (optionData.m_Name in optionsByNameDictionary.keys()):
+        if optionData.m_Name not in optionsByNameDictionary.keys():
             optionsByNameDictionary[optionData.m_Name] = optionData
             return
 
@@ -666,7 +666,7 @@ class DataControllerUtils:
         assert type(optionsByNameDictionary) is dict
         assert type(optionData) is PgCfgModel__OptionData
 
-        if not (optionData.m_Name in optionsByNameDictionary.keys()):
+        if optionData.m_Name not in optionsByNameDictionary.keys():
             BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
 
         data = optionsByNameDictionary[optionData.m_Name]
@@ -675,17 +675,17 @@ class DataControllerUtils:
 
         typeOfData = type(data)
 
-        if typeOfData == PgCfgModel__OptionData:
+        if typeOfData is PgCfgModel__OptionData:
             assert data is optionData
 
-            if not (data is optionData):
+            if data is not optionData:
                 BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
 
             optionsByNameDictionary.pop(optionData.m_Name)
-            assert not (optionData.m_Name in optionsByNameDictionary.keys())
+            assert optionData.m_Name not in optionsByNameDictionary.keys()
             return
 
-        if typeOfData == list:
+        if typeOfData is list:
             assert type(data) is list
             assert len(data) > 1
 

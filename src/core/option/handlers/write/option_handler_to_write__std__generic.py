@@ -36,13 +36,13 @@ class OptionHandlerToWrite__Std__Generic(OptionHandlerToWrite):
 
         typeOfOptionValue = type(ctx.OptionValue)
 
-        if typeOfOptionValue == int:
+        if typeOfOptionValue is int:
             return __class__.sm_Handler_For_Int.OptionValueToString(ctx)
 
-        if typeOfOptionValue == str:
+        if typeOfOptionValue is str:
             return __class__.sm_Handler_For_Str.OptionValueToString(ctx)
 
-        if typeOfOptionValue == bool:
+        if typeOfOptionValue is bool:
             return __class__.sm_Handler_For_Bool.OptionValueToString(ctx)
 
         BugCheckError.UnknownOptionValueType(ctx.OptionName, typeOfOptionValue)
