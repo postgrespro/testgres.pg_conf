@@ -69,7 +69,7 @@ class TestSet001__Common:
         )
 
         assert file1.m_FileData in cfg.m_Data.m_Files
-        assert not (bihaConfFile.m_FileData in cfg.m_Data.m_Files)
+        assert bihaConfFile.m_FileData not in cfg.m_Data.m_Files
 
         assert len(cfg.m_Data.m_Files) == 1
         assert cfg.m_Data.m_Files[0] is file1.m_FileData

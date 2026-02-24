@@ -144,7 +144,7 @@ class TestSet001__Common:
             assert isinstance(opt, PgCfg_Option)
             assert type(opt) is PgCfg_Option_Base
 
-            assert not opt.get_Name() in names
+            assert opt.get_Name() not in names
 
             names.add(opt.get_Name())
 

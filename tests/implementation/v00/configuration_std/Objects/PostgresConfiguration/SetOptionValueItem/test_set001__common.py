@@ -92,7 +92,7 @@ class TestSet001__Common:
                 )
             )
 
-            optValueWillBeAdded = not (optValue in index)
+            optValueWillBeAdded = optValue not in index
             assert type(optValueWillBeAdded) is bool
 
             if optValueWillBeAdded:
