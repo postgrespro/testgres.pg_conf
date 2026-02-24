@@ -3096,23 +3096,20 @@ class PostgresConfigurationFactory_Base:
             objectParent, PostgresConfigurationObject
         )
 
-        typeOfObjectData = type(objectData)
-        assert typeOfObjectData is not None
-
-        if typeOfObjectData == PgCfgModel__ConfigurationData:
+        if type(objectData) is PgCfgModel__ConfigurationData:
             assert objectData is cfg.m_Data
             return cfg
 
-        if typeOfObjectData == PgCfgModel__FileData:
+        if type(objectData) is PgCfgModel__FileData:
             return __class__.Helper__CreateFile(objectData, objectParent)
 
-        if typeOfObjectData == PgCfgModel__FileLineData:
+        if type(objectData) is PgCfgModel__FileLineData:
             return __class__.Helper__CreateFileLine(objectData, objectParent)
 
-        if typeOfObjectData == PgCfgModel__OptionData:
+        if type(objectData) is PgCfgModel__OptionData:
             return __class__.Helper__CreateOption(objectData, objectParent)
 
-        BugCheckError.UnkObjectDataType(typeOfObjectData)
+        BugCheckError.UnkObjectDataType(type(objectData))
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -3137,7 +3134,7 @@ class PostgresConfigurationFactory_Base:
     def Helper__CreateFileLine(
         objectData: PgCfgModel__FileLineData,
         objectParent: PostgresConfigurationObject,
-    ) -> PostgresConfigurationFile_Base:
+    ) -> PostgresConfigurationFileLine_Base:
         assert objectData is not None
         assert objectParent is not None
         assert type(objectData) is PgCfgModel__FileLineData
@@ -3147,23 +3144,10 @@ class PostgresConfigurationFactory_Base:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def Helper__CreateFileLineComment(
-        fileLineDataItem: PgCfgModel__FileLineData.tagItem,
-        fileLine: PostgresConfigurationObject,
-    ) -> PostgresConfigurationFile_Base:
-        assert fileLineDataItem is not None
-        assert fileLine is not None
-        assert type(fileLineDataItem) is PgCfgModel__FileLineData.tagItem
-        assert isinstance(fileLine, PostgresConfigurationFileLine_Base)
-
-        return PostgresConfigurationComment_Base(fileLine, fileLineDataItem)
-
-    # --------------------------------------------------------------------
-    @staticmethod
     def Helper__CreateOption(
         objectData: PgCfgModel__OptionData,
         objectParent: PostgresConfigurationObject,
-    ) -> PostgresConfigurationFile_Base:
+    ) -> PostgresConfigurationOption_Base:
         assert objectData is not None
         assert objectParent is not None
         assert type(objectData) is PgCfgModel__OptionData
