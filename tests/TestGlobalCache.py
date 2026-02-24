@@ -20,6 +20,7 @@ class TestGlobalCache:
         pass
 
     # --------------------------------------------------------------------
+    @staticmethod
     def GetOrCreateResource(globalResourceID: str, resourceFactory) -> any:
         assert resourceFactory is not None
         assert isinstance(globalResourceID, str)
@@ -39,6 +40,7 @@ class TestGlobalCache:
             return r
 
     # --------------------------------------------------------------------
+    @staticmethod
     def ReleaseAllResources():
         assert __class__.sm_Guard is not None
         assert __class__.sm_Dict is not None

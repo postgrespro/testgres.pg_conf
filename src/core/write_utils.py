@@ -8,6 +8,7 @@ import typing
 
 
 class WriteUtils:
+    @staticmethod
     def Pack_StrList2(strList: list) -> str:
         assert strList is not None
         assert type(strList) is list
@@ -36,6 +37,7 @@ class WriteUtils:
         return result
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Pack_Str(text: str) -> str:
         assert text is not None
         assert type(text) is str
@@ -67,6 +69,7 @@ class WriteUtils:
         return result
 
     # Helper Methods -----------------------------------------------------
+    @staticmethod
     def Helper__PackStrListItem2(itemText: str) -> str:
         assert itemText is not None
         assert type(itemText) is str
@@ -91,6 +94,7 @@ class WriteUtils:
         return result
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__StrList__DoesItemNeedToQuote(itemText: str) -> bool:
         assert itemText is not None
         assert type(itemText) is str

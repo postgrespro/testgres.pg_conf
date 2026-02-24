@@ -20,11 +20,13 @@ class TestStartupData__Helper:
     sm_StartTS = datetime.datetime.now()
 
     # --------------------------------------------------------------------
+    @staticmethod
     def GetStartTS() -> datetime.datetime:
         assert type(__class__.sm_StartTS) is datetime.datetime
         return __class__.sm_StartTS
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CalcRootDir() -> str:
         r = os.path.abspath(__file__)
         r = os.path.dirname(r)
@@ -33,6 +35,7 @@ class TestStartupData__Helper:
         return r
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CalcRootTmpDir() -> str:
         if TestConfigPropNames.TEST_CFG__TEMP_DIR in os.environ:
             resultPath = os.environ[TestConfigPropNames.TEST_CFG__TEMP_DIR]
@@ -44,6 +47,7 @@ class TestStartupData__Helper:
         return resultPath
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CalcRootLogDir() -> str:
         if TestConfigPropNames.TEST_CFG__LOG_DIR in os.environ:
             resultPath = os.environ[TestConfigPropNames.TEST_CFG__LOG_DIR]
@@ -55,6 +59,7 @@ class TestStartupData__Helper:
         return resultPath
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CalcCurrentTestWorkerSignature() -> str:
         currentPID = os.getpid()
         assert type(currentPID)
@@ -98,21 +103,25 @@ class TestStartupData:
     sm_RootLogDir: str = TestStartupData__Helper.CalcRootLogDir()
 
     # --------------------------------------------------------------------
+    @staticmethod
     def GetRootDir() -> str:
         assert type(__class__.sm_RootDir) is str
         return __class__.sm_RootDir
 
     # --------------------------------------------------------------------
+    @staticmethod
     def GetRootLogDir() -> str:
         assert type(__class__.sm_RootLogDir) is str
         return __class__.sm_RootLogDir
 
     # --------------------------------------------------------------------
+    @staticmethod
     def GetCurrentTestWorkerSignature() -> str:
         assert type(__class__.sm_CurrentTestWorkerSignature) is str
         return __class__.sm_CurrentTestWorkerSignature
 
     # --------------------------------------------------------------------
+    @staticmethod
     def GetRootTmpDataDirForCurrentTestWorker() -> str:
         assert type(__class__.sm_RootTmpDataDirForCurrentTestWorker) is str
         return __class__.sm_RootTmpDataDirForCurrentTestWorker

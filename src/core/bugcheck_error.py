@@ -7,6 +7,7 @@
 
 
 class BugCheckError:
+    @staticmethod
     def UnkObjectDataType(objectType: type):
         assert objectType is not None
         assert type(objectType) is type
@@ -15,6 +16,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def MultipleDefOfOptionIsFound(optName: str, count: int):
         assert type(optName) is str
         assert type(count) is int
@@ -27,6 +29,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def UnkOptObjectDataType(optName: str, optDataType: type):
         assert type(optName) is str
         assert type(optDataType) is type
@@ -39,6 +42,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def MultipleDefOfFileIsFound(fileName: str, count: int):
         assert type(fileName) is str
         assert type(count) is int
@@ -51,6 +55,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def UnkFileObjectDataType(fileName: str, fileDataType: type):
         assert type(fileName) is str
         assert type(fileDataType) is type
@@ -61,6 +66,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def UnkFileDataStatus(filePath: str, fileStatus: any):
         assert type(filePath) is str
         assert fileStatus is not None
@@ -71,6 +77,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def FileIsNotFoundInIndex(fileKey: str, filePath: str):
         assert type(fileKey) is str
         assert type(filePath) is str
@@ -81,6 +88,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionIsNotFoundInIndex(optName: str):
         assert type(optName) is str
 
@@ -88,6 +96,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionIsNotFoundInFileLine(optName: str):
         assert type(optName) is str
 
@@ -95,21 +104,25 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CommentIsNotFoundInFileLine():
         errMsg = "[BUG CHECK] Comment is not found in file line."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def IncludeIsNotFoundInFileLine():
         errMsg = "[BUG CHECK] Include is not found in file line."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def FileLineIsNotFoundInFile():
         errMsg = "[BUG CHECK] FileLine is not found in file."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionHandlerToPrepareSetValueIsNotDefined(name: str):
         assert type(name) is str
 
@@ -119,6 +132,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionHandlerToPrepareGetValueIsNotDefined(name: str):
         assert type(name) is str
 
@@ -128,6 +142,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionHandlerToPrepareSetValueItemIsNotDefined(name: str):
         assert type(name) is str
 
@@ -137,6 +152,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionHandlerToSetValueIsNotDefined(name: str):
         assert type(name) is str
 
@@ -146,6 +162,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionHandlerToGetValueIsNotDefined(name: str):
         assert type(name) is str
 
@@ -155,6 +172,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionHandlerToAddOptionIsNotDefined(name: str):
         assert type(name) is str
 
@@ -166,6 +184,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionHandlerToSetValueItemIsNotDefined(name: str):
         assert type(name) is str
 
@@ -177,6 +196,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def OptionHandlerToWriteIsNotDefined(name: str):
         assert type(name) is str
 
@@ -186,6 +206,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def UnexpectedSituation(bugcheckSrc: str, bugcheckPoint: str, explain: str):
         assert type(bugcheckSrc) is str
         assert type(bugcheckPoint) is str
@@ -204,6 +225,7 @@ class BugCheckError:
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
+    @staticmethod
     def UnknownOptionValueType(optionName: str, typeOfOptionValue: type):
         assert type(optionName) is str
         assert optionName != ""
