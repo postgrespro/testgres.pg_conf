@@ -36,7 +36,9 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def Option__add_ValueItem(optionData: PgCfgModel__OptionData, valueItem: typing.Any):
+    def Option__add_ValueItem(
+        optionData: PgCfgModel__OptionData, valueItem: typing.Any
+    ):
         assert type(optionData) is PgCfgModel__OptionData
         assert type(optionData.m_Value) is list
         assert valueItem is not None

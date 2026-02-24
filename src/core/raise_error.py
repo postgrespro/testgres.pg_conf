@@ -194,7 +194,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionValueItemIsAlreadyDefined(filePath: str, optName: str, valueItem: typing.Any):
+    def OptionValueItemIsAlreadyDefined(
+        filePath: str, optName: str, valueItem: typing.Any
+    ):
         assert type(filePath) is str
         assert type(optName) is str
 

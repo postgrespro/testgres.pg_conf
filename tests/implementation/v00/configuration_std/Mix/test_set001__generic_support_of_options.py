@@ -28,7 +28,9 @@ class TestSet001__GenericSupportOfOptions:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data001, ids=[x[0] for x in sm_data001])
-    def data001(self, request: pytest.FixtureRequest) -> typing.Tuple[typing.Any, typing.Any]:
+    def data001(
+        self, request: pytest.FixtureRequest
+    ) -> typing.Tuple[typing.Any, typing.Any]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple
         assert len(request.param) == 3
@@ -36,7 +38,9 @@ class TestSet001__GenericSupportOfOptions:
 
     # --------------------------------------------------------------------
     def test_001__set_get(
-        self, request: pytest.FixtureRequest, data001: typing.Tuple[typing.Any, typing.Any]
+        self,
+        request: pytest.FixtureRequest,
+        data001: typing.Tuple[typing.Any, typing.Any],
     ):
         assert isinstance(request, pytest.FixtureRequest)
 
@@ -59,7 +63,9 @@ class TestSet001__GenericSupportOfOptions:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data002, ids=[x[0] for x in sm_data002])
-    def data002(self, request: pytest.FixtureRequest) -> typing.Tuple[typing.Any, typing.Any]:
+    def data002(
+        self, request: pytest.FixtureRequest
+    ) -> typing.Tuple[typing.Any, typing.Any]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple
         assert len(request.param) == 3
@@ -67,7 +73,9 @@ class TestSet001__GenericSupportOfOptions:
 
     # --------------------------------------------------------------------
     def test_002__write_and_read(
-        self, request: pytest.FixtureRequest, data002: typing.Tuple[typing.Any, typing.Any]
+        self,
+        request: pytest.FixtureRequest,
+        data002: typing.Tuple[typing.Any, typing.Any],
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data002) is tuple
