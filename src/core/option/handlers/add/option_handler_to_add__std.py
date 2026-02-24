@@ -9,6 +9,8 @@ from ....handlers import ConfigurationDataHandler
 from ....handlers import FileData
 from ....handlers import FileLineData
 
+import typing
+
 # //////////////////////////////////////////////////////////////////////////////
 # OptionHandlerToAddOption__Std
 
@@ -18,7 +20,7 @@ class OptionHandlerToAddOption__Std(OptionHandlerToAddOption):
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def AddOption(self, ctx: OptionHandlerCtxToAddOption) -> any:
+    def AddOption(self, ctx: OptionHandlerCtxToAddOption) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToAddOption
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (

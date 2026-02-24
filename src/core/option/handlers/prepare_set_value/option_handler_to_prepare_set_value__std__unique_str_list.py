@@ -24,7 +24,7 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def PrepareSetValue(self, ctx: OptionHandlerCtxToPrepareSetValue) -> any:
+    def PrepareSetValue(self, ctx: OptionHandlerCtxToPrepareSetValue) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToPrepareSetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert type(ctx.OptionName) is str

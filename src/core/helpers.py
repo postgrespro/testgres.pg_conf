@@ -48,7 +48,7 @@ class Helpers:
 
     # --------------------------------------------------------------------
     def DoesContainerContainsValue__NotNullAndExact(
-        container: typing.Iterable, value: any
+        container: typing.Iterable, value: typing.Any
     ) -> bool:
         assert container is not None
         assert isinstance(container, typing.Iterable)

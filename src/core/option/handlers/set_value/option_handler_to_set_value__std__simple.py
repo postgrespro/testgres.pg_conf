@@ -10,6 +10,8 @@ from ....handlers import ConfigurationDataHandler
 from ....model import FileData
 from ....model import OptionData
 
+import typing
+
 # //////////////////////////////////////////////////////////////////////////////
 # OptionHandlerToSetValue__Std__Simple
 
@@ -19,7 +21,7 @@ class OptionHandlerToSetValue__Std__Simple(OptionHandlerToSetValue):
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def SetOptionValue(self, ctx: OptionHandlerCtxToSetValue) -> any:
+    def SetOptionValue(self, ctx: OptionHandlerCtxToSetValue) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToSetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (

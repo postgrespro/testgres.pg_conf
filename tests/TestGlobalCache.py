@@ -13,7 +13,7 @@ from .TestGlobalResource import TestGlobalResource
 
 class TestGlobalCache:
     sm_Guard = threading.Lock()
-    sm_Dict: typing.Dict[str, any] = dict()
+    sm_Dict: typing.Dict[str, typing.Any] = dict()
 
     # --------------------------------------------------------------------
     def __init__(self):
@@ -21,7 +21,7 @@ class TestGlobalCache:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def GetOrCreateResource(globalResourceID: str, resourceFactory) -> any:
+    def GetOrCreateResource(globalResourceID: str, resourceFactory) -> typing.Any:
         assert resourceFactory is not None
         assert isinstance(globalResourceID, str)
         assert __class__.sm_Guard is not None
@@ -47,7 +47,7 @@ class TestGlobalCache:
         assert type(__class__.sm_Dict) is dict
 
         with __class__.sm_Guard:
-            emptyDict: typing.Dict[str, any] = dict()
+            emptyDict: typing.Dict[str, typing.Any] = dict()
             assert type(emptyDict) is dict
 
             curDict = __class__.sm_Dict

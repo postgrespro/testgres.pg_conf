@@ -89,11 +89,11 @@ class CommentData(FileLineElementData):
 
 class OptionData(FileLineElementData):
     m_Name: str
-    m_Value: any
+    m_Value: typing.Any
 
     # --------------------------------------------------------------------
     def __init__(
-        self, parent: FileLineData, offset: typing.Optional[int], name: str, value: any
+        self, parent: FileLineData, offset: typing.Optional[int], name: str, value: typing.Any
     ):
         assert type(parent) is FileLineData
         assert offset is None or type(offset) is int
