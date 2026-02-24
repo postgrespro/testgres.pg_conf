@@ -20,7 +20,9 @@ class OptionHandlerToPrepareSetValueItem__Std__Str(OptionHandlerToPrepareSetValu
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def PrepareSetValueItem(self, ctx: OptionHandlerCtxToPrepareSetValueItem) -> typing.Any:
+    def PrepareSetValueItem(
+        self, ctx: OptionHandlerCtxToPrepareSetValueItem
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToPrepareSetValueItem
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert type(ctx.OptionName) is str

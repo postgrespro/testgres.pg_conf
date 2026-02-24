@@ -413,7 +413,9 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data012__values, ids=[x[0] for x in sm_data012__values])
-    def data012(self, request: pytest.FixtureRequest) -> typing.Tuple[str, typing.Any, typing.Any]:
+    def data012(
+        self, request: pytest.FixtureRequest
+    ) -> typing.Tuple[str, typing.Any, typing.Any]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple
         assert len(request.param) == 4
@@ -422,7 +424,9 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_012__one_opt(
-        self, request: pytest.FixtureRequest, data012: typing.Tuple[str, typing.Any, typing.Any]
+        self,
+        request: pytest.FixtureRequest,
+        data012: typing.Tuple[str, typing.Any, typing.Any],
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data012) is tuple

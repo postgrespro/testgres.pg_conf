@@ -4,7 +4,6 @@
 import datetime
 import typing
 
-
 # //////////////////////////////////////////////////////////////////////////////
 # class ErrorMessageBuilder
 
@@ -194,7 +193,9 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionValueItemIsAlreadyDefined(filePath: str, optName: str, valueItem: typing.Any):
+    def OptionValueItemIsAlreadyDefined(
+        filePath: str, optName: str, valueItem: typing.Any
+    ):
         assert type(filePath) is str
         assert type(optName) is str
 

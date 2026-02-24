@@ -194,7 +194,9 @@ class PostgresConfigurationOption_Base(PostgresConfigurationOption):
         return r
 
     # --------------------------------------------------------------------
-    def set_Value(self, value: typing.Any) -> PostgresConfigurationSetOptionValueResult_Base:
+    def set_Value(
+        self, value: typing.Any
+    ) -> PostgresConfigurationSetOptionValueResult_Base:
         self.Helper__CheckAlive()
 
         configuration = self.m_FileLine.get_Configuration()
@@ -789,7 +791,9 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         return fileLineComment
 
     # --------------------------------------------------------------------
-    def AddOption(self, name: str, value: typing.Any) -> PostgresConfigurationOption_Base:
+    def AddOption(
+        self, name: str, value: typing.Any
+    ) -> PostgresConfigurationOption_Base:
         DataVerificator.CheckOptionName(name)
 
         assert name is not None
@@ -1441,7 +1445,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         return file
 
     # --------------------------------------------------------------------
-    def AddOption(self, name: str, value: typing.Any) -> PostgresConfigurationOption_Base:
+    def AddOption(
+        self, name: str, value: typing.Any
+    ) -> PostgresConfigurationOption_Base:
         DataVerificator.CheckOptionName(name)
 
         assert name is not None
@@ -2099,7 +2105,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         BugCheckError.UnkFileObjectDataType(file_name_n, type(data))
 
     # --------------------------------------------------------------------
-    def Helper__PrepareGetValue(self, optionName: str, optionValue: typing.Any) -> typing.Any:
+    def Helper__PrepareGetValue(
+        self, optionName: str, optionValue: typing.Any
+    ) -> typing.Any:
         assert optionName is not None
         assert optionValue is not None
         assert type(optionName) is str

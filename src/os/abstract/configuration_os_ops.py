@@ -8,7 +8,6 @@ from ...core.raise_error import RaiseError
 import datetime
 import typing
 
-
 # //////////////////////////////////////////////////////////////////////////////
 # class ConfigurationFileReader
 
