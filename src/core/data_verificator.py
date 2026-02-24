@@ -8,6 +8,7 @@ from .raise_error import RaiseError
 
 
 class DataVerificator:
+    @staticmethod
     def CheckOptionName(name: str):
         if name is None:
             RaiseError.OptionNameIsNone()
@@ -24,6 +25,7 @@ class DataVerificator:
     sm_InvalidCommentSymbols: str = "\n\r\0"
 
     # --------------------------------------------------------------------
+    @staticmethod
     def IsValidCommentText(text: str) -> bool:
         assert text is not None
         assert type(text) is str
@@ -37,6 +39,7 @@ class DataVerificator:
         return True
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CheckCommentText(text: str):
         assert text is not None
         assert type(text) is str
@@ -49,6 +52,7 @@ class DataVerificator:
         # OK
 
     # --------------------------------------------------------------------
+    @staticmethod
     def CheckStringOfFilePath(text: str):
         assert text is not None
         assert type(text) is str
