@@ -38,7 +38,7 @@ keywords = [
     "test",
 ]
 
-requires-python = ">=3.7.17"
+requires-python = ">=3.7.3"
 
 classifiers = [
     "Intended Audience :: Developers",
