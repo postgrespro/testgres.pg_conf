@@ -10,7 +10,7 @@ import typing
 
 class RaiseError:
     @staticmethod
-    def MethodIsNotImplemented(classType: type, methodName: str):
+    def MethodIsNotImplemented(classType: type, methodName: str) -> typing.NoReturn:
         assert type(classType) is type
         assert type(methodName) is str
         assert methodName != ""
@@ -22,7 +22,10 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def GetPropertyIsNotImplemented(classType: type, methodName: str):
+    def GetPropertyIsNotImplemented(
+        classType: type,
+        methodName: str,
+    ) -> typing.NoReturn:
         assert type(classType) is type
         assert type(methodName) is str
         assert methodName != ""
@@ -34,13 +37,13 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionNameIsNone():
+    def OptionNameIsNone() -> typing.NoReturn:
         errMsg = "Option name is None."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionNameHasBadType(nameType: type):
+    def OptionNameHasBadType(nameType: type) -> typing.NoReturn:
         assert nameType is not None
         assert type(nameType) is type
 
@@ -49,19 +52,19 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionNameIsEmpty():
+    def OptionNameIsEmpty() -> typing.NoReturn:
         errMsg = "Option name is empty."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def NoneValueIsNotSupported():
+    def NoneValueIsNotSupported() -> typing.NoReturn:
         errMsg = "None value is not supported."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def NoneOptionValueItemIsNotSupported(optionName: str):
+    def NoneOptionValueItemIsNotSupported(optionName: str) -> typing.NoReturn:
         assert type(optionName) is str
         assert optionName != ""
 
@@ -70,37 +73,41 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CommentObjectWasDeleted():
+    def CommentObjectWasDeleted() -> typing.NoReturn:
         errMsg = "Comment object was deleted."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionObjectWasDeleted():
+    def OptionObjectWasDeleted() -> typing.NoReturn:
         errMsg = "Option object was deleted."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def IncludeObjectWasDeleted():
+    def IncludeObjectWasDeleted() -> typing.NoReturn:
         errMsg = "Include object was deleted."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def FileLineObjectWasDeleted():
+    def FileLineObjectWasDeleted() -> typing.NoReturn:
         errMsg = "FileLine object was deleted."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def FileObjectWasDeleted():
+    def FileObjectWasDeleted() -> typing.NoReturn:
         errMsg = "File object was deleted."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def BadOptionValueType(optionName: str, optionValueType: type, expectedType: type):
+    def BadOptionValueType(
+        optionName: str,
+        optionValueType: type,
+        expectedType: type,
+    ) -> typing.NoReturn:
         assert type(optionName) is str
         assert type(optionValueType) is type
         assert type(expectedType) is type
@@ -112,7 +119,11 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CantConvertOptionValue(optionName: str, sourceType: type, targetType: type):
+    def CantConvertOptionValue(
+        optionName: str,
+        sourceType: type,
+        targetType: type,
+    ) -> typing.NoReturn:
         assert type(optionName) is str
         assert type(sourceType) is type
         assert type(targetType) is type
@@ -128,7 +139,7 @@ class RaiseError:
     @staticmethod
     def BadOptionValueItemType(
         optionName: str, optionValueItemType: type, expectedType: type
-    ):
+    ) -> typing.NoReturn:
         assert type(optionName) is str
         assert type(optionValueItemType) is type
         assert type(expectedType) is type
@@ -142,19 +153,22 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CommentTextContainsInvalidSymbols():
+    def CommentTextContainsInvalidSymbols() -> typing.NoReturn:
         errMsg = "Comment text contains invalid symbols."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def FileIsAlreadyRegistered(file_path: str):
+    def FileIsAlreadyRegistered(file_path: str) -> typing.NoReturn:
         errMsg = "File [{0}] is already registered.".format(file_path)
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionIsAlreadyExistInThisFile(filePath: str, optionName: str):
+    def OptionIsAlreadyExistInThisFile(
+        filePath: str,
+        optionName: str,
+    ) -> typing.NoReturn:
         assert type(filePath) is str
         assert type(optionName) is str
         assert filePath != ""
@@ -167,7 +181,10 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionIsAlreadyExistInAnotherFile(filePath: str, optionName: str):
+    def OptionIsAlreadyExistInAnotherFile(
+        filePath: str,
+        optionName: str,
+    ) -> typing.NoReturn:
         assert type(filePath) is str
         assert type(optionName) is str
         assert filePath != ""
@@ -180,7 +197,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionIsAlreadyExistInFile(filePath: str, optionName: str):
+    def OptionIsAlreadyExistInFile(filePath: str, optionName: str) -> typing.NoReturn:
         assert type(filePath) is str
         assert type(optionName) is str
         assert filePath != ""
@@ -195,7 +212,7 @@ class RaiseError:
     @staticmethod
     def OptionValueItemIsAlreadyDefined(
         filePath: str, optName: str, valueItem: typing.Any
-    ):
+    ) -> typing.NoReturn:
         assert type(filePath) is str
         assert type(optName) is str
 
@@ -208,7 +225,7 @@ class RaiseError:
     @staticmethod
     def OptionValueItemIsAlreadyDefinedInAnotherFile(
         filePath: str, optName: str, valueItem: typing.Any
-    ):
+    ) -> typing.NoReturn:
         assert type(filePath) is str
         assert type(optName) is str
 
@@ -219,7 +236,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def UnknownFileName(fileName: str):
+    def UnknownFileName(fileName: str) -> typing.NoReturn:
         assert type(fileName) is str
 
         errMsg = "Unknown file name [{0}].".format(fileName)
@@ -227,7 +244,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def MultipleDefOfFileIsFound(fileName: str, count: int):
+    def MultipleDefOfFileIsFound(fileName: str, count: int) -> typing.NoReturn:
         assert type(fileName) is str
         assert type(count) is int
 
@@ -238,7 +255,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def FilePathIsEmpty():
+    def FilePathIsEmpty() -> typing.NoReturn:
         errMsg = "File path is empty."
         raise Exception(errMsg)
 
@@ -248,7 +265,7 @@ class RaiseError:
         filePath: str,
         ourLastMDate: datetime.datetime,
         curLastMDate: datetime.datetime,
-    ):
+    ) -> typing.NoReturn:
         assert type(filePath) is str
         assert type(ourLastMDate) is datetime.datetime
         assert type(curLastMDate) is datetime.datetime
@@ -260,13 +277,13 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def FileLineAlreadyHasComment():
+    def FileLineAlreadyHasComment() -> typing.NoReturn:
         errMsg = "File line already has a comment."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def FileLineAlreadyHasOption(optionName: str):
+    def FileLineAlreadyHasOption(optionName: str) -> typing.NoReturn:
         assert type(optionName) is str
 
         errMsg = "File line already has the option [{0}].".format(optionName)
@@ -274,14 +291,18 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def FileLineAlreadyHasIncludeDirective():
+    def FileLineAlreadyHasIncludeDirective() -> typing.NoReturn:
         errMsg = "File line already has an include directive."
 
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__UnexpectedSymbol(lineNum: int, colNum: int, ch: str):
+    def CfgReader__UnexpectedSymbol(
+        lineNum: int,
+        colNum: int,
+        ch: str,
+    ) -> typing.NoReturn:
         assert type(lineNum) is int
         assert type(colNum) is int
         assert type(ch) is str
@@ -293,7 +314,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__IncludeWithoutPath(lineNum: int):
+    def CfgReader__IncludeWithoutPath(lineNum: int) -> typing.NoReturn:
         assert type(lineNum) is int
         assert lineNum >= 0
 
@@ -302,7 +323,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__EndOfIncludePathIsNotFound(lineNum: int):
+    def CfgReader__EndOfIncludePathIsNotFound(lineNum: int) -> typing.NoReturn:
         assert type(lineNum) is int
         assert lineNum >= 0
 
@@ -311,7 +332,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__IncompletedEscapeInInclude(lineNum: int):
+    def CfgReader__IncompletedEscapeInInclude(lineNum: int) -> typing.NoReturn:
         assert type(lineNum) is int
         assert lineNum >= 0
 
@@ -320,7 +341,11 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__UnknownEscapedSymbolInInclude(lineNum: int, colNum: int, ch: str):
+    def CfgReader__UnknownEscapedSymbolInInclude(
+        lineNum: int,
+        colNum: int,
+        ch: str,
+    ) -> typing.NoReturn:
         assert type(lineNum) is int
         assert type(colNum) is int
         assert type(ch) is str
@@ -335,7 +360,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__IncludeHasEmptyPath(lineNum: int):
+    def CfgReader__IncludeHasEmptyPath(lineNum: int) -> typing.NoReturn:
         assert type(lineNum) is int
         assert lineNum >= 0
 
@@ -344,7 +369,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__OptionWithoutValue(optionName: str, lineNum: int):
+    def CfgReader__OptionWithoutValue(optionName: str, lineNum: int) -> typing.NoReturn:
         assert type(lineNum) is int
         assert type(optionName) is str
         assert lineNum >= 0
@@ -357,7 +382,10 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__EndQuotedOptionValueIsNotFound(optionName: str, lineNum: int):
+    def CfgReader__EndQuotedOptionValueIsNotFound(
+        optionName: str,
+        lineNum: int,
+    ) -> typing.NoReturn:
         assert type(lineNum) is int
         assert type(optionName) is str
         assert lineNum >= 0
@@ -370,7 +398,10 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__IncompletedEscapeInQuotedOptionValue(optionName: str, lineNum: int):
+    def CfgReader__IncompletedEscapeInQuotedOptionValue(
+        optionName: str,
+        lineNum: int,
+    ) -> typing.NoReturn:
         assert type(lineNum) is int
         assert type(optionName) is str
         assert lineNum >= 0
@@ -385,7 +416,7 @@ class RaiseError:
     @staticmethod
     def CfgReader__UnknownEscapedSymbolInQuotedOptionValue(
         optionName: str, lineNum: int, colNum: int, ch: str
-    ):
+    ) -> typing.NoReturn:
         assert type(lineNum) is int
         assert type(optionName) is str
         assert type(ch) is str
@@ -400,7 +431,7 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def BadFormatOfCommaSeparatedList():
+    def BadFormatOfCommaSeparatedList() -> typing.NoReturn:
         errMsg = "Bad format of comma separated list."
         raise Exception(errMsg)
 
