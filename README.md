@@ -1,4 +1,4 @@
-[![CI Status](https://img.shields.io/github/actions/workflow/status/postgrespro/testgres.pg_conf/.github/workflows/package-verification.yml?label=CI)](https://github.com/postgrespro/testgres.pg_conf/actions/workflows/package-verification.yml)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/postgrespro/testgres.pg_conf/.github/workflows/ci.yml?label=CI)](https://github.com/postgrespro/testgres.pg_conf/actions/workflows/ci.yml)
 [![PyPI package version](https://badge.fury.io/py/testgres_postgres-configuration.svg)](https://badge.fury.io/py/testgres.postgres-configuration)
 [![PyPI python versions](https://img.shields.io/pypi/pyversions/testgres_postgres_configuration)](https://pypi.org/project/testgres.postgres-configuration)
 
