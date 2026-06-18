@@ -41,7 +41,7 @@ jobs:
         ruff check .
     - name: Check with black
       run: |
-        black --check .
+        black --check --diff .
 
   build-check:
     runs-on: ubuntu-latest
