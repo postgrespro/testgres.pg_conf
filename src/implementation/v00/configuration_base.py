@@ -1330,14 +1330,18 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
 class PostgresConfiguration_Base__AllOptionsIterator(
     PostgresConfigurationOptionsIterator
 ):
+    T_OPTION_DATA_ITERATOR = typing.Iterator[
+        PgCfgModel__ConfigurationData.T_OPTION_OR_OPTIONS,
+    ]
+
     m_Cfg: PostgresConfiguration_Base
-    m_OptionDataIterator: typing.Iterator[PgCfgModel__OptionData]
+    m_OptionDataIterator: T_OPTION_DATA_ITERATOR
 
     # --------------------------------------------------------------------
     def __init__(
         self,
         cfg: PostgresConfiguration_Base,
-        optionDataIterator: typing.Iterator[PgCfgModel__OptionData],
+        optionDataIterator: T_OPTION_DATA_ITERATOR,
     ):
         assert cfg is not None
         assert isinstance(cfg, PostgresConfiguration_Base)
