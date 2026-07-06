@@ -4152,18 +4152,16 @@ class PostgresConfigurationWriter_Base:
         assert elementData is not None
         assert isinstance(elementData, PgCfgModel__FileLineElementData)
 
-        typeOfElementData = type(elementData)
-
-        if typeOfElementData == PgCfgModel__OptionData:
+        if type(elementData) == PgCfgModel__OptionData:
             return __class__.Helper__OptionToString(ctx, elementData)
 
-        if typeOfElementData is PgCfgModel__CommentData:
+        if type(elementData) is PgCfgModel__CommentData:
             return __class__.Helper__CommentToString(ctx, elementData)
 
-        if typeOfElementData == PgCfgModel__IncludeData:
+        if type(elementData) == PgCfgModel__IncludeData:
             return __class__.Helper__IncludeToString(ctx, elementData)
 
-        BugCheckError.UnkObjectDataType(typeOfElementData)
+        BugCheckError.UnkObjectDataType(type(elementData))
 
     # --------------------------------------------------------------------
     @staticmethod
