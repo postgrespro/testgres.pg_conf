@@ -12,41 +12,40 @@ import typing
 
 
 class Helpers:
+    @staticmethod
     def ExtractOptionDataName(option: typing.Union[str, OptionData]) -> str:
         assert type(option) is str or type(option) is OptionData
 
-        typeOption = type(option)
-
-        if typeOption is str:
+        if type(option) is str:
             return option
 
-        if typeOption is OptionData:
+        if type(option) is OptionData:
             return option.m_Name
 
-        BugCheckError.UnkObjectDataType(typeOption)
+        BugCheckError.UnkObjectDataType(type(option))
 
     # --------------------------------------------------------------------
+    @staticmethod
     def ExtractFirstOptionFromIndexItem(
         optionName: str, indexItem: typing.Union[OptionData, typing.List[OptionData]]
     ) -> OptionData:
         assert type(optionName) is str
 
-        typeOfIndexItem = type(indexItem)
-
-        if typeOfIndexItem is OptionData:
+        if type(indexItem) is OptionData:
             assert indexItem.m_Name == optionName
             return indexItem
 
-        if typeOfIndexItem is list:
+        if type(indexItem) is list:
             assert len(indexItem) > 1
             assert indexItem[0] is not None
             assert type(indexItem[0]) is OptionData
             assert indexItem[0].m_Name == optionName
             return indexItem[0]
 
-        BugCheckError.UnkOptObjectDataType(optionName, typeOfIndexItem)
+        BugCheckError.UnkOptObjectDataType(optionName, type(indexItem))
 
     # --------------------------------------------------------------------
+    @staticmethod
     def DoesContainerContainsValue__NotNullAndExact(
         container: typing.Iterable, value: typing.Any
     ) -> bool:
@@ -64,6 +63,7 @@ class Helpers:
         return False
 
     # --------------------------------------------------------------------
+    @staticmethod
     def NormalizeFilePath(
         cfgOsOps: ConfigurationOsOps, baseFolder: str, filePath: str
     ) -> str:
