@@ -99,7 +99,7 @@ class ConfigurationOsOps(abstract.ConfigurationOsOps):
         assert type(a) is str
         return os.path.isabs(a)
 
-    def Path_Join(self, a: str, *p: tuple) -> str:
+    def Path_Join(self, a: str, *p: str) -> str:
         assert type(a) is str
         assert type(p) is tuple
         return os.path.join(a, *p)

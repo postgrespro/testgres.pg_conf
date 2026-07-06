@@ -53,7 +53,7 @@ class ConfigurationOsOps:
         assert type(a) is str
         RaiseError.MethodIsNotImplemented(__class__, "Path_IsAbs")
 
-    def Path_Join(self, a: str, *p: tuple) -> str:
+    def Path_Join(self, a: str, *p: str) -> str:
         assert type(a) is str
         assert type(p) is tuple
         RaiseError.MethodIsNotImplemented(__class__, "Path_Join")
