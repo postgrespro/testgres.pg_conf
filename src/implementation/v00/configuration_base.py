@@ -3205,9 +3205,12 @@ class PostgresConfigurationReader_Base:
         assert type(filePath_n) is str
 
         if filePath_n in existFileDatas:
-            return PostgresConfigurationFactory_Base.GetObject(
-                cfg, existFileDatas[filePath_n]
+            file = PostgresConfigurationFactory_Base.GetObject(
+                cfg,
+                existFileDatas[filePath_n],
             )
+            assert type(file) is PostgresConfigurationTopLevelFile_Base
+            return file
 
         # ----------------------------------------------------------------
         rootFile = cfg.AddTopLevelFile(filePath)
@@ -3234,6 +3237,7 @@ class PostgresConfigurationReader_Base:
                 currentFile = PostgresConfigurationFactory_Base.GetObject(
                     cfg, currentFileData
                 )
+                assert isinstance(currentFile, PostgresConfigurationFile_Base)
                 __class__.Helper__LoadFileContent(currentFile, f)  # raise
 
                 lastMDate = f.GetModificationTS()
@@ -3255,15 +3259,13 @@ class PostgresConfigurationReader_Base:
 
                     fileLineElementData = fileLineItem.m_Element
 
-                    typeOfFileLineElementData = type(fileLineElementData)
-
-                    if typeOfFileLineElementData is PgCfgModel__CommentData:
+                    if type(fileLineElementData) is PgCfgModel__CommentData:
                         continue
 
-                    if typeOfFileLineElementData == PgCfgModel__OptionData:
+                    if type(fileLineElementData) is PgCfgModel__OptionData:
                         continue
 
-                    if typeOfFileLineElementData == PgCfgModel__IncludeData:
+                    if type(fileLineElementData) is PgCfgModel__IncludeData:
                         # look at existFileDatas
                         includeData: PgCfgModel__IncludeData = fileLineElementData
                         assert type(includeData.m_File) is PgCfgModel__FileData
@@ -3283,7 +3285,7 @@ class PostgresConfigurationReader_Base:
                         queuedFileDatas.add(includeData.m_File)
                         continue
 
-                    BugCheckError.UnkObjectDataType(typeOfFileLineElementData)
+                    BugCheckError.UnkObjectDataType(type(fileLineElementData))
 
         assert len(queuedFileDatas) == 0
         assert isinstance(rootFile, PostgresConfigurationTopLevelFile_Base)
