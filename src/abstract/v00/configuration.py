@@ -21,7 +21,7 @@ class PostgresConfigurationObject:
         RaiseError.MethodIsNotImplemented(__class__, "get_Configuration")
 
     # --------------------------------------------------------------------
-    def get_Parent(self) -> PostgresConfigurationObject:
+    def get_Parent(self) -> typing.Optional[PostgresConfigurationObject]:
         RaiseError.MethodIsNotImplemented(__class__, "get_Parent")
 
 
