@@ -1942,7 +1942,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     # --------------------------------------------------------------------
     def Helper__AggregateAllOptionValues(
         self, allOptionsByName: dict[str, PgCfgModel__OptionData], optionName: str
-    ) -> list:
+    ) -> typing.Optional[list]:
         assert type(allOptionsByName) is dict
         assert type(optionName) is str
 
@@ -1952,17 +1952,14 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         data = allOptionsByName[optionName]
         assert data is not None
 
-        typeOfData = type(data)
-
-        if typeOfData is PgCfgModel__OptionData:
+        if type(data) is PgCfgModel__OptionData:
             assert data.IsAlive()
             assert data.m_Name == optionName
             assert data.m_Value is not None
             assert type(data.m_Value) is list
             return data.m_Value
 
-        if typeOfData is list:
-            assert type(data) is list
+        if type(data) is list:
             data = data.copy()
             assert type(data) is list
 
@@ -1976,6 +1973,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert optionData.m_Value is not None
                 assert type(optionData.m_Value) is list
                 result.extend(optionData.m_Value)
+                continue
 
             assert result is not None
             assert type(result) is list
@@ -1985,7 +1983,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         # Unknown type of option data in dictionary
 
         assert type(optionName) is str
-        BugCheckError.UnkOptObjectDataType(optionName, typeOfData)
+        BugCheckError.UnkOptObjectDataType(optionName, type(data))
 
     # --------------------------------------------------------------------
     def Helper__FindAndDeleteOption(
