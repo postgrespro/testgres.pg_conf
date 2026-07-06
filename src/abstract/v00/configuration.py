@@ -21,7 +21,7 @@ class PostgresConfigurationObject:
         RaiseError.MethodIsNotImplemented(__class__, "get_Configuration")
 
     # --------------------------------------------------------------------
-    def get_Parent(self) -> PostgresConfigurationObject:
+    def get_Parent(self) -> typing.Optional[PostgresConfigurationObject]:
         RaiseError.MethodIsNotImplemented(__class__, "get_Parent")
 
 
@@ -49,7 +49,7 @@ class PostgresConfigurationSetOptionValueResult:
 
     # interface -----------------------------------------------------------
     @property
-    def Option(self) -> PostgresConfigurationOption:
+    def Option(self) -> typing.Optional[PostgresConfigurationOption]:
         RaiseError.GetPropertyIsNotImplemented(__class__, "Option")
 
     # ---------------------------------------------------------------------
@@ -144,7 +144,7 @@ class PostgresConfigurationOptions(typing.Iterable[PostgresConfigurationOption])
         RaiseError.MethodIsNotImplemented(__class__, "__len__")
 
     # --------------------------------------------------------------------
-    def __iter__(self) -> PostgresConfigurationFileLinesIterator:
+    def __iter__(self) -> PostgresConfigurationOptionsIterator:
         RaiseError.MethodIsNotImplemented(__class__, "__iter__")
 
 
@@ -161,7 +161,7 @@ class PostgresConfigurationInclude(PostgresConfigurationElement):
         RaiseError.MethodIsNotImplemented(__class__, "get_File")
 
     # --------------------------------------------------------------------
-    def Delete(self, withLine: bool):
+    def Delete(self, withLine: bool) -> None:
         assert type(withLine) is bool
         RaiseError.MethodIsNotImplemented(__class__, "Delete")
 

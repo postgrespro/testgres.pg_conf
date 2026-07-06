@@ -94,6 +94,8 @@ from ...core.option.handlers.write.option_handler_to_write__std__unique_str_list
 
 from ...core.bugcheck_error import BugCheckError
 
+import typing
+
 # //////////////////////////////////////////////////////////////////////////////
 # class PostgresConfiguration_Std
 
@@ -179,11 +181,13 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     class tagOptionHandlers:
         PrepareSetValue: PgCfgModel__OptionHandlerToPrepareSetValue
         PrepareGetValue: PgCfgModel__OptionHandlerToPrepareGetValue
-        PrepareSetValueItem: PgCfgModel__OptionHandlerToPrepareSetValueItem
-        SetValue: PgCfgModel__OptionHandlerToSetValue
+        PrepareSetValueItem: typing.Optional[
+            PgCfgModel__OptionHandlerToPrepareSetValueItem,
+        ]
+        SetValue: typing.Optional[PgCfgModel__OptionHandlerToSetValue]
         GetValue: PgCfgModel__OptionHandlerToGetValue
         AddOption: PgCfgModel__OptionHandlerToAddOption
-        SetValueItem: PgCfgModel__OptionHandlerToSetValueItem
+        SetValueItem: typing.Optional[PgCfgModel__OptionHandlerToSetValueItem]
         Write: PgCfgModel__OptionHandlerToWrite
 
         # ----------------------------------------------------------------
@@ -191,12 +195,14 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
             self,
             prepareSetValue: PgCfgModel__OptionHandlerToPrepareSetValue,
             prepareGetValue: PgCfgModel__OptionHandlerToPrepareGetValue,
-            prepareSetValueItem: PgCfgModel__OptionHandlerToPrepareSetValueItem,
-            setValue: PgCfgModel__OptionHandlerToSetValue,
+            prepareSetValueItem: typing.Optional[
+                PgCfgModel__OptionHandlerToPrepareSetValueItem
+            ],
+            setValue: typing.Optional[PgCfgModel__OptionHandlerToSetValue],
             getValue: PgCfgModel__OptionHandlerToGetValue,
             addIntoFile: PgCfgModel__OptionHandlerToAddOption,
-            setValueItem: PgCfgModel__OptionHandlerToSetValueItem,
-            write: PgCfgModel__OptionHandlerToGetValue,
+            setValueItem: typing.Optional[PgCfgModel__OptionHandlerToSetValueItem],
+            write: PgCfgModel__OptionHandlerToWrite,
         ):
             assert prepareSetValue is None or isinstance(
                 prepareSetValue, PgCfgModel__OptionHandlerToPrepareSetValue
@@ -229,6 +235,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
             self.GetValue = getValue
             self.SetValueItem = setValueItem
             self.Write = write
+            return
 
     # --------------------------------------------------------------------
     # fmt: off
@@ -308,7 +315,11 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     }
 
     # --------------------------------------------------------------------
-    def __init__(self, data_dir: str, cfgOsOps: ConfigurationOsOps = None):
+    def __init__(
+        self,
+        data_dir: str,
+        cfgOsOps: typing.Optional[ConfigurationOsOps] = None,
+    ):
         assert type(data_dir) is str
         assert cfgOsOps is None or isinstance(cfgOsOps, ConfigurationOsOps)
 
@@ -362,8 +373,9 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
     # --------------------------------------------------------------------
     def Internal__GetOptionHandlerToPrepareGetValue(
-        self, name: str
-    ) -> PgCfgModel__OptionHandlerToPrepareSetValue:
+        self,
+        name: str,
+    ) -> PgCfgModel__OptionHandlerToPrepareGetValue:
         assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 

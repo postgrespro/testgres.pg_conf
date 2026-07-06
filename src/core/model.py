@@ -204,6 +204,8 @@ class FileStatus(enum.Enum):
 
 
 class FileData(ObjectData):
+    T_OPTIONS_BY_NAME = typing.Dict[str, OptionData]
+
     m_Parent: ConfigurationData
 
     m_Status: FileStatus
@@ -212,7 +214,7 @@ class FileData(ObjectData):
     m_Path: str
     m_Lines: typing.List[FileLineData]
 
-    m_OptionsByName: typing.Dict[str, OptionData]
+    m_OptionsByName: T_OPTIONS_BY_NAME
 
     # --------------------------------------------------------------------
     def __init__(self, parent: ConfigurationData, path: str):
@@ -256,15 +258,33 @@ class FileData(ObjectData):
 
 
 class ConfigurationData(ObjectData):
+    T_OPTION_OR_OPTIONS = typing.Union[
+        OptionData,
+        typing.List[OptionData],
+    ]
+
+    T_ALL_OPTIONS_BY_NAME = typing.Dict[
+        str,
+        T_OPTION_OR_OPTIONS,
+    ]
+
+    T_FILE_OR_FILES = typing.Union[
+        FileData,
+        typing.List[FileData],
+    ]
+
+    T_ALL_FILES_BY_NAME = typing.Dict[
+        str,
+        T_FILE_OR_FILES,
+    ]
+
     m_DataDir: str
     m_OsOps: ConfigurationOsOps
 
     m_Files: typing.List[FileData]
 
-    m_AllOptionsByName: typing.Dict[
-        str, typing.Union[OptionData, typing.List[OptionData]]
-    ]
-    m_AllFilesByName: typing.Dict[str, typing.Union[FileData, typing.List[FileData]]]
+    m_AllOptionsByName: T_ALL_OPTIONS_BY_NAME
+    m_AllFilesByName: T_ALL_FILES_BY_NAME
 
     # --------------------------------------------------------------------
     def __init__(self, data_dir: str, osOps: ConfigurationOsOps):
