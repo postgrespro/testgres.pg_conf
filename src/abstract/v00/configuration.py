@@ -144,7 +144,7 @@ class PostgresConfigurationOptions(typing.Iterable[PostgresConfigurationOption])
         RaiseError.MethodIsNotImplemented(__class__, "__len__")
 
     # --------------------------------------------------------------------
-    def __iter__(self) -> PostgresConfigurationFileLinesIterator:
+    def __iter__(self) -> PostgresConfigurationOptionsIterator:
         RaiseError.MethodIsNotImplemented(__class__, "__iter__")
 
 
