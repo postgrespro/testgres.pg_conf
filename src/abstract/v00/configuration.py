@@ -49,7 +49,7 @@ class PostgresConfigurationSetOptionValueResult:
 
     # interface -----------------------------------------------------------
     @property
-    def Option(self) -> PostgresConfigurationOption:
+    def Option(self) -> typing.Optional[PostgresConfigurationOption]:
         RaiseError.GetPropertyIsNotImplemented(__class__, "Option")
 
     # ---------------------------------------------------------------------
