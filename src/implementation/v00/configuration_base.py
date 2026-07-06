@@ -4243,7 +4243,7 @@ class PostgresConfigurationController__Base:
         target: typing.Union[None, PgCfgModel__FileData, PgCfgModel__FileLineData],
         optionName: str,
         optionValue: typing.Any,
-        optionOffset: typing.Union[int],
+        optionOffset: typing.Optional[int],
     ) -> PostgresConfigurationOption_Base:
         assert isinstance(cfg, PostgresConfiguration_Base)
         assert (
@@ -4287,7 +4287,7 @@ class PostgresConfigurationController__Base:
         targetData: typing.Union[None, PgCfgModel__FileData, PgCfgModel__OptionData],
         optionName: str,
         optionValue: typing.Any,
-        optionOffset: typing.Union[int],
+        optionOffset: typing.Optional[int],
     ) -> PostgresConfigurationSetOptionValueResult_Base:
         assert isinstance(cfg, PostgresConfiguration_Base)
         assert (
