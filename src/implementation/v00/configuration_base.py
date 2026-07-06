@@ -1562,18 +1562,16 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         # ------------------------------------------------
         assert targetData is not None
 
-        typeOfTarget = type(targetData)
-
-        if typeOfTarget == PgCfgModel__OptionData:
+        if type(targetData) is PgCfgModel__OptionData:
             return self.Helper__SetSimpleOptionValue__Exact(targetData, optionValue)
 
-        if typeOfTarget == PgCfgModel__FileData:
+        if type(targetData) is PgCfgModel__FileData:
             return self.Helper__SetSimpleOptionValue__File(
                 targetData, optionName, optionValue
             )
 
         # ------------------------------------------------
-        BugCheckError.UnkObjectDataType(typeOfTarget)
+        BugCheckError.UnkObjectDataType(type(targetData))
 
     # --------------------------------------------------------------------
     def DataHandler__GetOptionValue__Simple(
