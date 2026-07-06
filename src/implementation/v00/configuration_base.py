@@ -3019,7 +3019,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-        optionData: PgCfgModel__OptionData, optionValueItem: typing.Any
+        optionData: PgCfgModel__OptionData,
+        optionValueItem: typing.Any,
     ) -> bool:
         assert optionData is not None
         assert optionValueItem is not None
