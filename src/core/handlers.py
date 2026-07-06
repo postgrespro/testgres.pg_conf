@@ -266,8 +266,8 @@ class OptionHandlerToAddOption(OptionHandler):
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def AddOption(self, ctx: OptionHandlerCtxToSetValue) -> typing.Any:
-        assert type(ctx) is OptionHandlerCtxToSetValue
+    def AddOption(self, ctx: OptionHandlerCtxToAddOption) -> typing.Any:
+        assert type(ctx) is OptionHandlerCtxToAddOption
         RaiseError.MethodIsNotImplemented(__class__, "AddOption")
 
 
