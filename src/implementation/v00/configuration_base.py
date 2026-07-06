@@ -1603,10 +1603,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
             return None
 
-        typeOfSource = type(sourceData)
-
         # -------------------------------------- OPTION DATA
-        if typeOfSource == PgCfgModel__OptionData:
+        if type(sourceData) is PgCfgModel__OptionData:
             optionData: PgCfgModel__OptionData = sourceData
 
             assert optionData.IsAlive()
@@ -1615,7 +1613,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             return self.Helper__PrepareGetValue(optionData.m_Name, optionData.m_Value)
 
         # -------------------------------------- FILE DATA
-        if typeOfSource == PgCfgModel__FileData:
+        if type(sourceData) is PgCfgModel__FileData:
             fileData: PgCfgModel__FileData = sourceData
 
             assert fileData.IsAlive()
@@ -1636,7 +1634,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
             return None
 
-        BugCheckError.UnkObjectDataType(typeOfSource)
+        BugCheckError.UnkObjectDataType(type(sourceData))
 
     # --------------------------------------------------------------------
     def DataHandler__GetOptionValue__UnionList(
