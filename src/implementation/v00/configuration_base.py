@@ -1408,7 +1408,7 @@ class PostgresConfiguration_Base__AllOptions(PostgresConfigurationOptions):
         return len(self.m_Cfg.m_Data.m_AllOptionsByName.values())
 
     # --------------------------------------------------------------------
-    def __iter__(self) -> PostgresConfiguration_Base__AllFilesIterator:
+    def __iter__(self) -> PostgresConfiguration_Base__AllOptionsIterator:
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) is PgCfgModel__ConfigurationData
