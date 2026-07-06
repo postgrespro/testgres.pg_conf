@@ -15,7 +15,7 @@ import typing
 
 
 class ConfigurationOsFile(abstract.ConfigurationOsFile):
-    m_file: io.TextIOWrapper
+    m_file: typing.Optional[io.TextIOWrapper]
 
     # --------------------------------------------------------------------
     def __init__(self, file: io.TextIOWrapper):
