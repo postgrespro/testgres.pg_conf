@@ -196,7 +196,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
             getValue: PgCfgModel__OptionHandlerToGetValue,
             addIntoFile: PgCfgModel__OptionHandlerToAddOption,
             setValueItem: PgCfgModel__OptionHandlerToSetValueItem,
-            write: PgCfgModel__OptionHandlerToGetValue,
+            write: PgCfgModel__OptionHandlerToWrite,
         ):
             assert prepareSetValue is None or isinstance(
                 prepareSetValue, PgCfgModel__OptionHandlerToPrepareSetValue
