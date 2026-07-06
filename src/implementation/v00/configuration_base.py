@@ -3046,7 +3046,7 @@ class PostgresConfigurationFactory_Base:
         assert isinstance(objectData, PgCfgModel__ObjectData)
 
         # Build stack
-        stack: typing.List[PostgresConfigurationObject] = []
+        stack: typing.List[PgCfgModel__ObjectData] = []
 
         while True:
             stack.append(objectData)
