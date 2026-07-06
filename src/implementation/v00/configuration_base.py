@@ -109,7 +109,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
         return self.m_CommentData.m_Text
 
     # --------------------------------------------------------------------
-    def Delete(self, withLineIfLast: bool):
+    def Delete(self, withLineIfLast: bool) -> None:
         assert type(withLineIfLast) is bool
 
         self.Helper__CheckAlive()
