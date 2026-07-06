@@ -520,6 +520,7 @@ class PostgresConfigurationReader_Std:
         PostgresConfigurationReader_Base.LoadConfigurationFile(
             cfg, cfg.C_POSTGRESQL_AUTO_CONF
         )
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -534,6 +535,7 @@ class PostgresConfigurationWriter_Std:
         writeCtx = PostgresConfigurationWriterCtx_Base(cfg)
 
         PostgresConfigurationWriter_Base.DoWork(writeCtx)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

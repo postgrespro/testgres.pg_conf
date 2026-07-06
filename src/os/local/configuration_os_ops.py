@@ -24,6 +24,7 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
         super().__init__()
 
         self.m_file = file
+        return
 
     # --------------------------------------------------------------------
     def __enter__(self) -> ConfigurationOsFile:
@@ -69,6 +70,7 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
         self.m_file.write(text)
         self.m_file.truncate()
         self.m_file.flush()
+        return
 
     # --------------------------------------------------------------------
     def Close(self) -> None:
@@ -127,6 +129,7 @@ class ConfigurationOsOps(abstract.ConfigurationOsOps):
     def Remove(self, a: str) -> None:
         assert type(a) is str
         os.remove(a)
+        return
 
     def OpenFileToRead(self, filePath: str) -> ConfigurationOsFile:
         assert type(filePath) is str
