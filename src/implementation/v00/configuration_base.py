@@ -1975,8 +1975,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert optionData.IsAlive()
                 assert optionData.m_Value is not None
                 assert type(optionData.m_Value) is list
-
-                result.extend(self.m_Data)
+                result.extend(optionData.m_Value)
 
             assert result is not None
             assert type(result) is list
