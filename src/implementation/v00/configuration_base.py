@@ -90,6 +90,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
 
         self.m_FileLine = fileLine
         self.m_CommentData = commentData
+        return
 
     # Object interface ---------------------------------------------------
     def get_Configuration(self) -> PostgresConfiguration_Base:
@@ -127,6 +128,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
         PgCfgModel__DataControllerUtils.Comment__delete(
             cfgData, self.m_CommentData, withLineIfLast
         )
+        return
 
     # Helper interface ---------------------------------------------------
     def Helper__CheckAlive(self):
@@ -161,6 +163,7 @@ class PostgresConfigurationOption_Base(PostgresConfigurationOption):
 
         self.m_FileLine = fileLine
         self.m_OptionData = optionData
+        return
 
     # Object interface ---------------------------------------------------
     def get_Configuration(self) -> PostgresConfiguration_Base:
@@ -263,6 +266,7 @@ class PostgresConfigurationOption_Base(PostgresConfigurationOption):
 
         assert type(self.m_FileLine) is PostgresConfigurationFileLine_Base
         assert isinstance(self.m_FileLine, PostgresConfigurationFileLine)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -286,6 +290,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
 
         self.m_FileLine = fileLine
         self.m_IncludeData = includeData
+        return
 
     # Object interface ---------------------------------------------------
     def get_Configuration(self) -> PostgresConfiguration_Base:
@@ -322,6 +327,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
         PgCfgModel__DataControllerUtils.Include__delete(
             cfgData, self.m_IncludeData, withLine
         )
+        return
 
     # Private interface --------------------------------------------------
     def Private__CheckAlive(self):
@@ -1037,6 +1043,7 @@ class PostgresConfigurationIncludedFile_Base(PostgresConfigurationFile_Base):
 
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert isinstance(self.m_Cfg, PostgresConfiguration)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -1197,6 +1204,7 @@ class PostgresConfiguration_Base__AllFilesIterator(PostgresConfigurationFilesIte
 
         self.m_Cfg = cfg
         self.m_FileDataIterator = fileDataIterator
+        return
 
     # interface ----------------------------------------------------------
     def __iter__(self) -> PostgresConfiguration_Base__AllFilesIterator:
@@ -1323,6 +1331,7 @@ class PostgresConfiguration_Base__AllOptionsIterator(
 
         self.m_Cfg = cfg
         self.m_OptionDataIterator = optionDataIterator
+        return
 
     # interface ----------------------------------------------------------
     def __iter__(self) -> PostgresConfiguration_Base__AllOptionsIterator:
@@ -1416,6 +1425,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         self.m_Data = PgCfgModel__ConfigurationData(data_dir, osOps)
         self.m_AllFiles = None
         self.m_AllOptions = None
+        return
 
     # interface ----------------------------------------------------------
     def get_Configuration(self) -> PostgresConfiguration_Base:

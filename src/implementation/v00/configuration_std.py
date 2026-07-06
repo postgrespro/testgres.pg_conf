@@ -229,6 +229,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
             self.GetValue = getValue
             self.SetValueItem = setValueItem
             self.Write = write
+            return
 
     # --------------------------------------------------------------------
     # fmt: off
