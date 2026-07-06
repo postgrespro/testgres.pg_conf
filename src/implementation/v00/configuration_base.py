@@ -1318,7 +1318,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
             return file
 
         if typeOfIndexData is list:
-            assert len(typeOfIndexData) > 1
+            assert len(indexData) > 1
             RaiseError.MultipleDefOfFileIsFound(file_name, len(indexData))
 
         BugCheckError.UnkFileObjectDataType(file_name, typeOfIndexData)
