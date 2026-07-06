@@ -25,6 +25,12 @@ class ConfigurationOsFile(ConfigurationFileReader):
     def __init__(self):
         pass
 
+    def __enter__(self) -> ConfigurationOsFile:
+        RaiseError.MethodIsNotImplemented(__class__, "__enter__")
+
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
+        RaiseError.MethodIsNotImplemented(__class__, "__exit__")
+
     @property
     def Name(self) -> str:
         RaiseError.MethodIsNotImplemented(__class__, "get_Name")

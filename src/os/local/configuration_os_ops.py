@@ -32,12 +32,12 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
         return self
 
     # --------------------------------------------------------------------
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
         if self.m_file is not None:
             self.Close()
 
         assert self.m_file is None
-        return
+        return False
 
     # --------------------------------------------------------------------
     @property
