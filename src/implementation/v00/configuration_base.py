@@ -654,7 +654,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
     m_Cfg: PostgresConfiguration_Base
     m_FileData: PgCfgModel__FileData
 
-    m_Lines: PostgresConfigurationFileLines_Base
+    m_Lines: typing.Optional[PostgresConfigurationFileLines_Base]
 
     # --------------------------------------------------------------------
     def __init__(self, cfg: PostgresConfiguration_Base, fileData: PgCfgModel__FileData):
