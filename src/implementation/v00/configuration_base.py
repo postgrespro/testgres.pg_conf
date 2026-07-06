@@ -4120,7 +4120,11 @@ class PostgresConfigurationWriter_Base:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def Helper__AppendItemToLine(lineContent: str, offset: int, text: str) -> str:
+    def Helper__AppendItemToLine(
+        lineContent: str,
+        offset: typing.Optional[int],
+        text: str,
+    ) -> str:
         assert type(lineContent) is str
         assert offset is None or type(offset) is int
         assert type(text) is str
