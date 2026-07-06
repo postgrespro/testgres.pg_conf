@@ -9,7 +9,9 @@ import typing
 
 class BugCheckError:
     @staticmethod
-    def UnkObjectDataType(objectType: type):
+    def UnkObjectDataType(
+        objectType: type,
+    ) -> typing.NoReturn:
         assert objectType is not None
         assert type(objectType) is type
 
@@ -18,7 +20,10 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def MultipleDefOfOptionIsFound(optName: str, count: int):
+    def MultipleDefOfOptionIsFound(
+        optName: str,
+        count: int,
+    ) -> typing.NoReturn:
         assert type(optName) is str
         assert type(count) is int
 
@@ -31,7 +36,10 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def UnkOptObjectDataType(optName: str, optDataType: type):
+    def UnkOptObjectDataType(
+        optName: str,
+        optDataType: type,
+    ) -> typing.NoReturn:
         assert type(optName) is str
         assert type(optDataType) is type
 
@@ -44,7 +52,10 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def MultipleDefOfFileIsFound(fileName: str, count: int):
+    def MultipleDefOfFileIsFound(
+        fileName: str,
+        count: int,
+    ) -> typing.NoReturn:
         assert type(fileName) is str
         assert type(count) is int
 
@@ -57,7 +68,10 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def UnkFileObjectDataType(fileName: str, fileDataType: type):
+    def UnkFileObjectDataType(
+        fileName: str,
+        fileDataType: type,
+    ) -> typing.NoReturn:
         assert type(fileName) is str
         assert type(fileDataType) is type
 
@@ -68,7 +82,10 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def UnkFileDataStatus(filePath: str, fileStatus: typing.Any):
+    def UnkFileDataStatus(
+        filePath: str,
+        fileStatus: typing.Any,
+    ) -> typing.NoReturn:
         assert type(filePath) is str
         assert fileStatus is not None
 
@@ -79,7 +96,10 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def FileIsNotFoundInIndex(fileKey: str, filePath: str):
+    def FileIsNotFoundInIndex(
+        fileKey: str,
+        filePath: str,
+    ) -> typing.NoReturn:
         assert type(fileKey) is str
         assert type(filePath) is str
 
@@ -90,7 +110,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionIsNotFoundInIndex(optName: str):
+    def OptionIsNotFoundInIndex(
+        optName: str,
+    ) -> typing.NoReturn:
         assert type(optName) is str
 
         errMsg = "[BUG CHECK] Option [{0}] is not found in index.".format(optName)
@@ -98,7 +120,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionIsNotFoundInFileLine(optName: str):
+    def OptionIsNotFoundInFileLine(
+        optName: str,
+    ) -> typing.NoReturn:
         assert type(optName) is str
 
         errMsg = "[BUG CHECK] Option [{0}] is not found in file line.".format(optName)
@@ -106,25 +130,27 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CommentIsNotFoundInFileLine():
+    def CommentIsNotFoundInFileLine() -> typing.NoReturn:
         errMsg = "[BUG CHECK] Comment is not found in file line."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def IncludeIsNotFoundInFileLine():
+    def IncludeIsNotFoundInFileLine() -> typing.NoReturn:
         errMsg = "[BUG CHECK] Include is not found in file line."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def FileLineIsNotFoundInFile():
+    def FileLineIsNotFoundInFile() -> typing.NoReturn:
         errMsg = "[BUG CHECK] FileLine is not found in file."
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionHandlerToPrepareSetValueIsNotDefined(name: str):
+    def OptionHandlerToPrepareSetValueIsNotDefined(
+        name: str,
+    ) -> typing.NoReturn:
         assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToPrepareSetValue for [{0}] is not defined.".format(
@@ -134,7 +160,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionHandlerToPrepareGetValueIsNotDefined(name: str):
+    def OptionHandlerToPrepareGetValueIsNotDefined(
+        name: str,
+    ) -> typing.NoReturn:
         assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToPrepareGetValue for [{0}] is not defined.".format(
@@ -144,7 +172,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionHandlerToPrepareSetValueItemIsNotDefined(name: str):
+    def OptionHandlerToPrepareSetValueItemIsNotDefined(
+        name: str,
+    ) -> typing.NoReturn:
         assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToPrepareSetValueItem for [{0}] is not defined.".format(
@@ -154,7 +184,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionHandlerToSetValueIsNotDefined(name: str):
+    def OptionHandlerToSetValueIsNotDefined(
+        name: str,
+    ) -> typing.NoReturn:
         assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToSetValue for [{0}] is not defined.".format(
@@ -164,7 +196,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionHandlerToGetValueIsNotDefined(name: str):
+    def OptionHandlerToGetValueIsNotDefined(
+        name: str,
+    ) -> typing.NoReturn:
         assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToGetValue for [{0}] is not defined.".format(
@@ -174,7 +208,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionHandlerToAddOptionIsNotDefined(name: str):
+    def OptionHandlerToAddOptionIsNotDefined(
+        name: str,
+    ) -> typing.NoReturn:
         assert type(name) is str
 
         errMsg = (
@@ -186,7 +222,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionHandlerToSetValueItemIsNotDefined(name: str):
+    def OptionHandlerToSetValueItemIsNotDefined(
+        name: str,
+    ) -> typing.NoReturn:
         assert type(name) is str
 
         errMsg = (
@@ -198,7 +236,9 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionHandlerToWriteIsNotDefined(name: str):
+    def OptionHandlerToWriteIsNotDefined(
+        name: str,
+    ) -> typing.NoReturn:
         assert type(name) is str
 
         errMsg = "[BUG CHECK] OptionHandlerToWrite for [{0}] is not defined.".format(
@@ -208,7 +248,11 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def UnexpectedSituation(bugcheckSrc: str, bugcheckPoint: str, explain: str):
+    def UnexpectedSituation(
+        bugcheckSrc: str,
+        bugcheckPoint: str,
+        explain: str,
+    ) -> typing.NoReturn:
         assert type(bugcheckSrc) is str
         assert type(bugcheckPoint) is str
         assert explain is None or type(explain) is str
@@ -227,7 +271,10 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def UnknownOptionValueType(optionName: str, typeOfOptionValue: type):
+    def UnknownOptionValueType(
+        optionName: str,
+        typeOfOptionValue: type,
+    ) -> typing.NoReturn:
         assert type(optionName) is str
         assert optionName != ""
         assert type(typeOfOptionValue) is type
