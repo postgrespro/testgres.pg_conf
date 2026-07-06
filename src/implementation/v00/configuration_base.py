@@ -3180,7 +3180,7 @@ class PostgresConfigurationReader_Base:
             indexData = cfg.m_Data.m_AllFilesByName[fileName]
             assert indexData is not None
 
-            if type(indexData) == PgCfgModel__FileData:
+            if type(indexData) is PgCfgModel__FileData:
                 fileData: PgCfgModel__FileData = indexData
                 assert type(fileData.m_Path) is str
                 assert fileData.m_Path not in existFileDatas.keys()
@@ -4154,13 +4154,13 @@ class PostgresConfigurationWriter_Base:
         assert elementData is not None
         assert isinstance(elementData, PgCfgModel__FileLineElementData)
 
-        if type(elementData) == PgCfgModel__OptionData:
+        if type(elementData) is PgCfgModel__OptionData:
             return __class__.Helper__OptionToString(ctx, elementData)
 
         if type(elementData) is PgCfgModel__CommentData:
             return __class__.Helper__CommentToString(ctx, elementData)
 
-        if type(elementData) == PgCfgModel__IncludeData:
+        if type(elementData) is PgCfgModel__IncludeData:
             return __class__.Helper__IncludeToString(ctx, elementData)
 
         BugCheckError.UnkObjectDataType(type(elementData))
