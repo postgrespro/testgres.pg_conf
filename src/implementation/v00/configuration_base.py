@@ -2785,55 +2785,32 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 data = fileData.m_OptionsByName[optionName]
                 assert data is not None
 
-                typeOfData = type(data)
-
-                if typeOfData == PgCfgModel__OptionData:
+                if type(data) is PgCfgModel__OptionData:
                     assert data.IsAlive()
                     assert data.m_Name == optionName
                     assert data.m_Value is not None
                     assert type(data.m_Value) is list
 
                     if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-                        data, optionValueItem
+                        data,
+                        optionValueItem,
                     ):
                         return PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAlreadyDefined(
-                            self, data
+                            self,
+                            data,
                         )
 
                     # this option value does not have this item
 
                     return self.Helper__SetUniqueOptionPreparedValueItem__Exact(
-                        data, optionValueItem
+                        data,
+                        optionValueItem,
                     )
 
-                assert typeOfData != PgCfgModel__OptionData
+                assert type(data) is not PgCfgModel__OptionData
+                assert type(data) is not list
 
-                if typeOfData is list:
-                    assert type(data) is list
-                    assert len(data) > 1
-
-                    for optionData in data:
-                        assert optionData is not None
-                        assert type(optionData) is PgCfgModel__OptionData
-                        assert optionData.IsAlive()
-                        assert optionData.m_Name == optionName
-                        assert optionData.m_Value is not None
-                        assert type(optionData.m_Value) is list
-
-                        if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-                            optionData, optionValueItem
-                        ):
-                            return PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAlreadyDefined(
-                                self, optionData
-                            )
-
-                    # Our optionValueItem is not found
-                    # Postgres does not support a concatention of option lists
-                    BugCheckError.MultipleDefOfOptionIsFound(optionName, len(data))
-
-                assert typeOfData is not list
-
-                BugCheckError.UnkOptObjectDataType(optionName, typeOfData)
+                BugCheckError.UnkOptObjectDataType(optionName, type(data))
 
             assert optionName not in fileData.m_OptionsByName.keys()
 
@@ -2842,10 +2819,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             data = self.m_Data.m_AllOptionsByName[optionName]
             assert data is not None
 
-            typeOfData = type(data)
-
-            if typeOfData == PgCfgModel__OptionData:
-                assert type(data) is PgCfgModel__OptionData
+            if type(data) is PgCfgModel__OptionData:
                 assert data.IsAlive()
                 assert data.m_Name == optionName
                 assert data.m_Value is not None
