@@ -1598,7 +1598,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert optionData.IsAlive()
                 assert optionData.m_Value is not None
                 return self.Helper__PrepareGetValue(
-                    optionData.m_Name, optionData.m_Value
+                    optionData.m_Name,
+                    optionData.m_Value,
                 )
 
             return None
@@ -1610,7 +1611,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert optionData.IsAlive()
             assert optionData.m_Value is not None
             assert optionData.m_Name == optionName
-            return self.Helper__PrepareGetValue(optionData.m_Name, optionData.m_Value)
+            return self.Helper__PrepareGetValue(
+                optionData.m_Name,
+                optionData.m_Value,
+            )
 
         # -------------------------------------- FILE DATA
         if type(sourceData) is PgCfgModel__FileData:
@@ -1621,7 +1625,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert type(fileData.m_OptionsByName) is dict
 
             optionData = self.Helper__FindSimpleOption(
-                fileData.m_OptionsByName, optionName
+                fileData.m_OptionsByName,
+                optionName,
             )
 
             if optionData is not None:
@@ -1629,7 +1634,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert optionData.IsAlive()
                 assert optionData.m_Value is not None
                 return self.Helper__PrepareGetValue(
-                    optionData.m_Name, optionData.m_Value
+                    optionData.m_Name,
+                    optionData.m_Value,
                 )
 
             return None
