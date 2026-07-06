@@ -584,11 +584,11 @@ class PostgresConfigurationFileLinesIterator_Base(
         assert fileLineData is not None
         assert type(fileLineData) is PgCfgModel__FileLineData
 
-        file = PostgresConfigurationFactory_Base.GetObject(self.m_Cfg, fileLineData)
-        assert file is not None
-        assert isinstance(file, PostgresConfigurationFileLine_Base)
+        fileLine = PostgresConfigurationFactory_Base.GetObject(self.m_Cfg, fileLineData)
+        assert fileLine is not None
+        assert isinstance(fileLine, PostgresConfigurationFileLine_Base)
 
-        return file
+        return fileLine
 
 
 # //////////////////////////////////////////////////////////////////////////////
