@@ -124,7 +124,7 @@ class ConfigurationOsOps(abstract.ConfigurationOsOps):
         assert type(a) is str
         return os.path.basename(a)
 
-    def Remove(self, a: str) -> str:
+    def Remove(self, a: str) -> None:
         assert type(a) is str
         os.remove(a)
 
