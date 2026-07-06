@@ -2734,10 +2734,13 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert fileData2.IsAlive()
 
                 if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-                    optionData2.m_Value, optionPreparedValueItem
+                    optionData2,
+                    optionPreparedValueItem,
                 ):
                     RaiseError.OptionValueItemIsAlreadyDefined(
-                        fileData2.m_Path, optionData2.m_Name, optionPreparedValueItem
+                        fileData2.m_Path,
+                        optionData2.m_Name,
+                        optionPreparedValueItem,
                     )
 
             # [2025-01-07] Postgres does not able to join multiple list
