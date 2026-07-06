@@ -1288,7 +1288,8 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
         assert isinstance(fileDataIterator, typing.Iterator)
 
         return PostgresConfiguration_Base__AllFilesIterator(
-            self.m_Cfg, fileDataIterator
+            self.m_Cfg,
+            fileDataIterator,
         )
 
     # --------------------------------------------------------------------
@@ -1419,7 +1420,8 @@ class PostgresConfiguration_Base__AllOptions(PostgresConfigurationOptions):
         assert isinstance(optionDataIterator, typing.Iterator)
 
         return PostgresConfiguration_Base__AllOptionsIterator(
-            self.m_Cfg, optionDataIterator
+            self.m_Cfg,
+            optionDataIterator,
         )
 
 
@@ -1780,7 +1782,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert type(targetData) is PgCfgModel__FileData
 
             eventID = self.Helper__FindAndDeleteOption(
-                targetData.m_OptionsByName, optionName
+                targetData.m_OptionsByName,
+                optionName,
             )
 
             assert (
@@ -2101,7 +2104,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert fileData is None
 
         fileData = PgCfgModel__DataControllerUtils.Cfg__CreateAndAddTopLevelFile__AUTO(
-            self.m_Data, self.Internal__GetAutoConfFileName()
+            self.m_Data,
+            self.Internal__GetAutoConfFileName(),
         )
 
         assert fileData is not None
@@ -2439,7 +2443,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         # ------------------------------------------------
         optionData = self.Helper__FindSimpleOption(
-            self.m_Data.m_AllOptionsByName, optionName
+            self.m_Data.m_AllOptionsByName,
+            optionName,
         )
 
         if optionData is not None:
@@ -2483,7 +2488,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert optionValue is not None
 
         # ------------------------------------------------
-        optionData = self.Helper__FindSimpleOption(fileData.m_OptionsByName, optionName)
+        optionData = self.Helper__FindSimpleOption(
+            fileData.m_OptionsByName,
+            optionName,
+        )
 
         if optionData is not None:
             assert type(optionData) is PgCfgModel__OptionData
