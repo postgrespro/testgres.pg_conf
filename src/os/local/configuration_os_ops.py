@@ -71,13 +71,12 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
         self.m_file.flush()
 
     # --------------------------------------------------------------------
-    def Close(self):
+    def Close(self) -> None:
         assert isinstance(self.m_file, io.TextIOWrapper)
         f = self.m_file
         self.m_file = None
         f.close()
-        # Returning False (or None) re-raises the exception
-        return False
+        return
 
     # --------------------------------------------------------------------
     def GetModificationTS(self) -> datetime.datetime:
