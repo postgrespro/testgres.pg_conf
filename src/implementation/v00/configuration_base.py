@@ -1635,7 +1635,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         # -------------------------------------- OPTION DATA
         if type(sourceData) is PgCfgModel__OptionData:
-            optionData: PgCfgModel__OptionData = sourceData
+            optionData = sourceData
 
             assert optionData.IsAlive()
             assert optionData.m_Value is not None
@@ -1647,7 +1647,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         # -------------------------------------- FILE DATA
         if type(sourceData) is PgCfgModel__FileData:
-            fileData: PgCfgModel__FileData = sourceData
+            fileData = sourceData
 
             assert fileData.IsAlive()
             assert fileData.m_OptionsByName is not None
@@ -1698,11 +1698,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert type(unionList) is list
             return self.Helper__PrepareGetValue(optionName, unionList)
 
-        typeOfSource = type(sourceData)
-
         # -------------------------------------- OPTION DATA
-        if typeOfSource == PgCfgModel__OptionData:
-            optionData: PgCfgModel__OptionData = sourceData
+        if type(sourceData) is PgCfgModel__OptionData:
+            optionData = sourceData
 
             assert optionData.IsAlive()
             assert optionData.m_Value is not None
@@ -1711,8 +1709,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             return self.Helper__PrepareGetValue(optionData.m_Name, optionData.m_Value)
 
         # -------------------------------------- FILE DATA
-        if typeOfSource is PgCfgModel__FileData:
-            sourceFileData: PgCfgModel__FileData = sourceData
+        if type(sourceData) is PgCfgModel__FileData:
+            sourceFileData = sourceData
 
             assert type(sourceFileData) is PgCfgModel__FileData
             assert sourceFileData.IsAlive()
@@ -1734,7 +1732,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
             BugCheckError.UnkObjectDataType(typeOfOption)
 
-        BugCheckError.UnkObjectDataType(typeOfSource)
+        BugCheckError.UnkObjectDataType(type(sourceData))
 
     # --------------------------------------------------------------------
     def DataHandler__ResetOption(
