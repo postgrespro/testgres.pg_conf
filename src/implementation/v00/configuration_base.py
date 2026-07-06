@@ -2622,7 +2622,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                     if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
                         optionData, optionValueItem
                     ):
-                        return PostgresConfigurationSetOptionValueResult_Base.Create__OptWithThisValueItemAlreadyExist(
+                        # Create__OptWithThisValueItemAlreadyExist
+                        return PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAlreadyDefined(
                             self, optionData
                         )
 
