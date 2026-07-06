@@ -109,7 +109,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
         return self.m_CommentData.m_Text
 
     # --------------------------------------------------------------------
-    def Delete(self, withLineIfLast: bool):
+    def Delete(self, withLineIfLast: bool) -> None:
         assert type(withLineIfLast) is bool
 
         self.Helper__CheckAlive()
@@ -584,11 +584,11 @@ class PostgresConfigurationFileLinesIterator_Base(
         assert fileLineData is not None
         assert type(fileLineData) is PgCfgModel__FileLineData
 
-        file = PostgresConfigurationFactory_Base.GetObject(self.m_Cfg, fileLineData)
-        assert file is not None
-        assert isinstance(file, PostgresConfigurationFileLine_Base)
+        fileLine = PostgresConfigurationFactory_Base.GetObject(self.m_Cfg, fileLineData)
+        assert fileLine is not None
+        assert isinstance(fileLine, PostgresConfigurationFileLine_Base)
 
-        return file
+        return fileLine
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -654,7 +654,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
     m_Cfg: PostgresConfiguration_Base
     m_FileData: PgCfgModel__FileData
 
-    m_Lines: PostgresConfigurationFileLines_Base
+    m_Lines: typing.Optional[PostgresConfigurationFileLines_Base]
 
     # --------------------------------------------------------------------
     def __init__(self, cfg: PostgresConfiguration_Base, fileData: PgCfgModel__FileData):
@@ -3046,7 +3046,7 @@ class PostgresConfigurationFactory_Base:
         assert isinstance(objectData, PgCfgModel__ObjectData)
 
         # Build stack
-        stack: typing.List[PostgresConfigurationObject] = []
+        stack: typing.List[PgCfgModel__ObjectData] = []
 
         while True:
             stack.append(objectData)
@@ -3180,16 +3180,14 @@ class PostgresConfigurationReader_Base:
             indexData = cfg.m_Data.m_AllFilesByName[fileName]
             assert indexData is not None
 
-            typeOfIndexData = type(indexData)
-
-            if typeOfIndexData == PgCfgModel__FileData:
+            if type(indexData) is PgCfgModel__FileData:
                 fileData: PgCfgModel__FileData = indexData
                 assert type(fileData.m_Path) is str
                 assert fileData.m_Path not in existFileDatas.keys()
                 existFileDatas[fileData.m_Path] = fileData
                 continue
 
-            if typeOfIndexData is list:
+            if type(indexData) is list:
                 for fileData in indexData:
                     assert type(fileData) is PgCfgModel__FileData
                     assert type(fileData.m_Path) is str
@@ -3198,7 +3196,7 @@ class PostgresConfigurationReader_Base:
                     continue
                 continue
 
-            BugCheckError.UnkFileObjectDataType(fileName, typeOfIndexData)
+            BugCheckError.UnkFileObjectDataType(fileName, type(indexData))
 
         # ----------------------------------------------------------------
         filePath_n = Helpers.NormalizeFilePath(
@@ -4120,7 +4118,11 @@ class PostgresConfigurationWriter_Base:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def Helper__AppendItemToLine(lineContent: str, offset: int, text: str) -> str:
+    def Helper__AppendItemToLine(
+        lineContent: str,
+        offset: typing.Optional[int],
+        text: str,
+    ) -> str:
         assert type(lineContent) is str
         assert offset is None or type(offset) is int
         assert type(text) is str
@@ -4152,18 +4154,16 @@ class PostgresConfigurationWriter_Base:
         assert elementData is not None
         assert isinstance(elementData, PgCfgModel__FileLineElementData)
 
-        typeOfElementData = type(elementData)
-
-        if typeOfElementData == PgCfgModel__OptionData:
+        if type(elementData) is PgCfgModel__OptionData:
             return __class__.Helper__OptionToString(ctx, elementData)
 
-        if typeOfElementData is PgCfgModel__CommentData:
+        if type(elementData) is PgCfgModel__CommentData:
             return __class__.Helper__CommentToString(ctx, elementData)
 
-        if typeOfElementData == PgCfgModel__IncludeData:
+        if type(elementData) is PgCfgModel__IncludeData:
             return __class__.Helper__IncludeToString(ctx, elementData)
 
-        BugCheckError.UnkObjectDataType(typeOfElementData)
+        BugCheckError.UnkObjectDataType(type(elementData))
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -4243,7 +4243,7 @@ class PostgresConfigurationController__Base:
         target: typing.Union[None, PgCfgModel__FileData, PgCfgModel__FileLineData],
         optionName: str,
         optionValue: typing.Any,
-        optionOffset: typing.Union[int],
+        optionOffset: typing.Optional[int],
     ) -> PostgresConfigurationOption_Base:
         assert isinstance(cfg, PostgresConfiguration_Base)
         assert (
@@ -4287,7 +4287,7 @@ class PostgresConfigurationController__Base:
         targetData: typing.Union[None, PgCfgModel__FileData, PgCfgModel__OptionData],
         optionName: str,
         optionValue: typing.Any,
-        optionOffset: typing.Union[int],
+        optionOffset: typing.Optional[int],
     ) -> PostgresConfigurationSetOptionValueResult_Base:
         assert isinstance(cfg, PostgresConfiguration_Base)
         assert (

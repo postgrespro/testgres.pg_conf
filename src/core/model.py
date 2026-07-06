@@ -195,8 +195,8 @@ class FileLineData(ObjectData):
 
 
 class FileStatus(enum.Enum):
-    IS_NEW: int = 0
-    EXISTS: int = 1
+    IS_NEW = 0
+    EXISTS = 1
 
 
 # //////////////////////////////////////////////////////////////////////////////

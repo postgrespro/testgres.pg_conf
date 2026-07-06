@@ -80,7 +80,7 @@ class PostgresConfigurationComment(PostgresConfigurationElement):
         RaiseError.MethodIsNotImplemented(__class__, "get_Text")
 
     # --------------------------------------------------------------------
-    def Delete(self, withLineIfLast: bool):
+    def Delete(self, withLineIfLast: bool) -> None:
         assert type(withLineIfLast) is bool
         RaiseError.MethodIsNotImplemented(__class__, "Delete")
 
