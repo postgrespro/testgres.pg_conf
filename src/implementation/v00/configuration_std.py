@@ -363,8 +363,9 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
     # --------------------------------------------------------------------
     def Internal__GetOptionHandlerToPrepareGetValue(
-        self, name: str
-    ) -> PgCfgModel__OptionHandlerToPrepareSetValue:
+        self,
+        name: str,
+    ) -> PgCfgModel__OptionHandlerToPrepareGetValue:
         assert type(name) is str
         assert type(self.sm_OptionHandlers) is dict
 
