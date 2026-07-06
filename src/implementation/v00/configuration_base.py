@@ -1589,7 +1589,8 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         # -------------------------------------- ROOT
         if sourceData is None:
             optionData = self.Helper__FindSimpleOption(
-                self.m_Data.m_AllOptionsByName, optionName
+                self.m_Data.m_AllOptionsByName,
+                optionName,
             )
 
             if optionData is not None:
