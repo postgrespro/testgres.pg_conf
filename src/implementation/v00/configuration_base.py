@@ -3180,16 +3180,14 @@ class PostgresConfigurationReader_Base:
             indexData = cfg.m_Data.m_AllFilesByName[fileName]
             assert indexData is not None
 
-            typeOfIndexData = type(indexData)
-
-            if typeOfIndexData == PgCfgModel__FileData:
+            if type(indexData) == PgCfgModel__FileData:
                 fileData: PgCfgModel__FileData = indexData
                 assert type(fileData.m_Path) is str
                 assert fileData.m_Path not in existFileDatas.keys()
                 existFileDatas[fileData.m_Path] = fileData
                 continue
 
-            if typeOfIndexData is list:
+            if type(indexData) is list:
                 for fileData in indexData:
                     assert type(fileData) is PgCfgModel__FileData
                     assert type(fileData.m_Path) is str
@@ -3198,7 +3196,7 @@ class PostgresConfigurationReader_Base:
                     continue
                 continue
 
-            BugCheckError.UnkFileObjectDataType(fileName, typeOfIndexData)
+            BugCheckError.UnkFileObjectDataType(fileName, type(indexData))
 
         # ----------------------------------------------------------------
         filePath_n = Helpers.NormalizeFilePath(
