@@ -161,7 +161,7 @@ class PostgresConfigurationInclude(PostgresConfigurationElement):
         RaiseError.MethodIsNotImplemented(__class__, "get_File")
 
     # --------------------------------------------------------------------
-    def Delete(self, withLine: bool):
+    def Delete(self, withLine: bool) -> None:
         assert type(withLine) is bool
         RaiseError.MethodIsNotImplemented(__class__, "Delete")
 
