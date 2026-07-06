@@ -37,7 +37,7 @@ class ConfigurationOsFile(ConfigurationFileReader):
         assert type(text) is str
         RaiseError.MethodIsNotImplemented(__class__, "Write")
 
-    def Close(self):
+    def Close(self) -> None:
         RaiseError.MethodIsNotImplemented(__class__, "Close")
 
     def GetModificationTS(self) -> datetime.datetime:
