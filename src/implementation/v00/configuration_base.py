@@ -309,7 +309,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
         return PostgresConfigurationIncludedFile_Base(self, self.m_IncludeData.m_File)
 
     # --------------------------------------------------------------------
-    def Delete(self, withLine: bool):
+    def Delete(self, withLine: bool) -> None:
         assert type(withLine) is bool
 
         self.Helper__CheckAlive()
