@@ -1054,16 +1054,16 @@ class PostgresConfigurationIncludedFile_Base(PostgresConfigurationFile_Base):
 class PostgresConfigurationSetOptionValueResult_Base(
     PostgresConfigurationSetOptionValueResult
 ):
-    m_Cfg: PostgresConfiguration_Base
-    m_Opt: PostgresConfigurationOption_Base
-    m_OptData: PgCfgModel__OptionData
+    m_Cfg: typing.Optional[PostgresConfiguration_Base]
+    m_Opt: typing.Optional[PostgresConfigurationOption_Base]
+    m_OptData: typing.Optional[PgCfgModel__OptionData]
     m_EventID: PostgresConfigurationSetOptionValueEventID
 
     # --------------------------------------------------------------------
     def __init__(
         self,
-        cfg: PostgresConfiguration_Base,
-        optData: PgCfgModel__OptionData,
+        cfg: typing.Optional[PostgresConfiguration_Base],
+        optData: typing.Optional[PgCfgModel__OptionData],
         eventID: PostgresConfigurationSetOptionValueEventID,
     ):
         assert cfg is None or isinstance(cfg, PostgresConfiguration_Base)
@@ -1099,14 +1099,18 @@ class PostgresConfigurationSetOptionValueResult_Base(
         assert type(optData) is PgCfgModel__OptionData
 
         return __class__(
-            cfg, optData, PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
+            cfg,
+            optData,
+            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
         )
 
     # ---------------------------------------------------------------------
     @staticmethod
     def Create__OptWasDeleted() -> PostgresConfigurationSetOptionValueResult_Base:
         return __class__(
-            None, None, PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED
+            None,
+            None,
+            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED,
         )
 
     # ---------------------------------------------------------------------
@@ -1141,10 +1145,10 @@ class PostgresConfigurationSetOptionValueResult_Base(
 
     # ---------------------------------------------------------------------
     @property
-    def Option(self) -> PostgresConfigurationOption_Base:
+    def Option(self) -> typing.Optional[PostgresConfigurationOption_Base]:
         assert self.m_Cfg is None or isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert self.m_OptData is None or type(self.m_OptData) is PgCfgModel__OptionData
-        assert (self.m_Cfg is None) == (self.m_OptData is None)
+        assert (self.m_Cfg is None) is (self.m_OptData is None)
         assert type(self.m_EventID) is PostgresConfigurationSetOptionValueEventID
 
         if self.m_OptData is None:
@@ -1155,7 +1159,10 @@ class PostgresConfigurationSetOptionValueResult_Base(
             )
 
             assert self.m_Opt is None
+            assert self.m_Cfg is None
             return None
+
+        assert self.m_Cfg is not None
 
         assert (
             self.m_EventID
@@ -1169,9 +1176,12 @@ class PostgresConfigurationSetOptionValueResult_Base(
         )
 
         if self.m_Opt is None:
-            self.m_Opt = PostgresConfigurationFactory_Base.GetObject(
-                self.m_Cfg, self.m_OptData
+            x = PostgresConfigurationFactory_Base.GetObject(
+                self.m_Cfg,
+                self.m_OptData,
             )
+            assert type(x) is PostgresConfigurationOption_Base
+            self.m_Opt = x
 
         assert self.m_Opt is not None
         assert type(self.m_Opt) is PostgresConfigurationOption_Base
