@@ -204,6 +204,8 @@ class FileStatus(enum.Enum):
 
 
 class FileData(ObjectData):
+    T_OPTIONS_BY_NAME = typing.Dict[str, OptionData]
+
     m_Parent: ConfigurationData
 
     m_Status: FileStatus
@@ -212,7 +214,7 @@ class FileData(ObjectData):
     m_Path: str
     m_Lines: typing.List[FileLineData]
 
-    m_OptionsByName: typing.Dict[str, OptionData]
+    m_OptionsByName: T_OPTIONS_BY_NAME
 
     # --------------------------------------------------------------------
     def __init__(self, parent: ConfigurationData, path: str):
