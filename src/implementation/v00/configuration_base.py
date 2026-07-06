@@ -1308,20 +1308,18 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
 
         assert indexData is not None
 
-        typeOfIndexData = type(indexData)
-
-        if typeOfIndexData is PgCfgModel__FileData:
+        if type(indexData) is PgCfgModel__FileData:
             assert self.m_Cfg.m_Data.OsOps.Path_BaseName(indexData.m_Path) == file_name2
             file = PostgresConfigurationFactory_Base.GetObject(self.m_Cfg, indexData)
             assert file is not None
             assert isinstance(file, PostgresConfigurationFile_Base)
             return file
 
-        if typeOfIndexData is list:
+        if type(indexData) is list:
             assert len(indexData) > 1
             RaiseError.MultipleDefOfFileIsFound(file_name, len(indexData))
 
-        BugCheckError.UnkFileObjectDataType(file_name, typeOfIndexData)
+        BugCheckError.UnkFileObjectDataType(file_name, type(indexData))
 
 
 # //////////////////////////////////////////////////////////////////////////////
