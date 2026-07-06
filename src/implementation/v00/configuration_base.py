@@ -2331,7 +2331,11 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert type(option) is PostgresConfigurationOption_Base
             assert option.m_OptionData is optionData
         except:
-            PgCfgModel__DataControllerUtils.Option__delete(self.m_Data, optionData())
+            PgCfgModel__DataControllerUtils.Option__delete(
+                self.m_Data,
+                optionData,
+                withLine=False,
+            )
 
             assert not optionData.IsAlive()
             assert optionName not in fileData.m_OptionsByName.keys()
