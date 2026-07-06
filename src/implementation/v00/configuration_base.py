@@ -1369,7 +1369,7 @@ class PostgresConfiguration_Base__AllOptionsIterator(
         return __class__(self.m_Cfg, it)
 
     # --------------------------------------------------------------------
-    def __next__(self) -> PostgresConfigurationFile_Base:
+    def __next__(self) -> PostgresConfigurationOption_Base:
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert self.m_OptionDataIterator is not None
