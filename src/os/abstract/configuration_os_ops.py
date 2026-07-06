@@ -78,7 +78,7 @@ class ConfigurationOsOps:
         assert type(a) is str
         RaiseError.MethodIsNotImplemented(__class__, "Path_BaseName")
 
-    def Remove(self, a: str) -> str:
+    def Remove(self, a: str) -> None:
         assert type(a) is str
         RaiseError.MethodIsNotImplemented(__class__, "Remove")
 
