@@ -970,7 +970,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         return self.m_FileData
 
     # Internal interface -------------------------------------------------
-    def Internal__CheckAlive(self):
+    def Internal__CheckAlive(self) -> None:
         RaiseError.MethodIsNotImplemented(__class__, "Internal__CheckAlive")
 
 
@@ -993,7 +993,7 @@ class PostgresConfigurationTopLevelFile_Base(PostgresConfigurationFile_Base):
         return self.m_Cfg
 
     # Internal interface -------------------------------------------------
-    def Internal__CheckAlive(self):
+    def Internal__CheckAlive(self) -> None:
         assert self.m_FileData is not None
         assert type(self.m_FileData) is PgCfgModel__FileData
 
@@ -1002,6 +1002,7 @@ class PostgresConfigurationTopLevelFile_Base(PostgresConfigurationFile_Base):
 
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert isinstance(self.m_Cfg, PostgresConfiguration)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -1030,7 +1031,7 @@ class PostgresConfigurationIncludedFile_Base(PostgresConfigurationFile_Base):
         return self.m_Include
 
     # Internal interface -------------------------------------------------
-    def Internal__CheckAlive(self):
+    def Internal__CheckAlive(self) -> None:
         assert self.m_FileData is not None
         assert self.m_Include is not None
         assert type(self.m_FileData) is PgCfgModel__FileData
