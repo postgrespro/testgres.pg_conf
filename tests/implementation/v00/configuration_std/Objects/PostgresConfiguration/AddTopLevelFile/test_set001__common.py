@@ -50,6 +50,7 @@ class TestSet001__Common:
         cfg.SetOptionValue("port", None)
 
         assert len(file1.get_Lines()) == 0
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

@@ -67,6 +67,7 @@ class TestSet001__Common:
         assert comment.get_Configuration() is cfg
         assert comment.get_Parent() is fileLine
         assert comment.get_Text() == "comment"
+        return
 
     # --------------------------------------------------------------------
     def test_E01__second_comment_in_line(self, request: pytest.FixtureRequest):
@@ -103,6 +104,7 @@ class TestSet001__Common:
         assert comment.get_Configuration() is cfg
         assert comment.get_Parent() is fileLine
         assert comment.get_Text() == "comment"
+        return
 
     # --------------------------------------------------------------------
     def test_E02__bad_symbol(self, request: pytest.FixtureRequest):
@@ -121,6 +123,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match="Comment text contains invalid symbols."):
             fileLine.AddComment("\0", 4)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

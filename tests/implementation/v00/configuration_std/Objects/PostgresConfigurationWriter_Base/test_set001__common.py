@@ -40,6 +40,7 @@ class TestSet001__Common:
         fileContent = PgCfg_Writer_Base.MakeFileDataContent(cfgWriterCtx, fileData)
 
         assert fileContent == optName + " = 234\n"
+        return
 
     # --------------------------------------------------------------------
     def test_002__two_opts(self, request: pytest.FixtureRequest):
@@ -63,6 +64,7 @@ class TestSet001__Common:
         expectedFileContent = "port = 234\nproxima.port = 345\n"
 
         assert actualFileContent == expectedFileContent
+        return
 
     # --------------------------------------------------------------------
     def test_003__opt1_emptyline_opt2(self, request: pytest.FixtureRequest):
@@ -90,6 +92,7 @@ class TestSet001__Common:
         expectedFileContent = "port = 234\n\nproxima.port = 345\n"
 
         assert actualFileContent == expectedFileContent
+        return
 
     # --------------------------------------------------------------------
     def test_004__opt1_comment_opt2(self, request: pytest.FixtureRequest):
@@ -117,6 +120,7 @@ class TestSet001__Common:
         expectedFileContent = "port = 234\n#It is a comment!\nproxima.port = 345\n"
 
         assert actualFileContent == expectedFileContent
+        return
 
     # --------------------------------------------------------------------
     def test_005__opt_with_list(self, request: pytest.FixtureRequest):
@@ -139,6 +143,7 @@ class TestSet001__Common:
         expectedFileContent = "shared_preload_libraries = 'a'\n"
 
         assert actualFileContent == expectedFileContent
+        return
 
     # --------------------------------------------------------------------
     def test_006__opt_with_list__empty(self, request: pytest.FixtureRequest):
@@ -152,6 +157,7 @@ class TestSet001__Common:
 
         r = file.SetOptionValueItem(C_OPT_NAME, "a")
 
+        assert r.Option is not None
         assert type(r.Option.m_OptionData.m_Value) is list
         r.Option.m_OptionData.m_Value.clear()
 
@@ -166,6 +172,7 @@ class TestSet001__Common:
         expectedFileContent = "shared_preload_libraries = ''\n"
 
         assert actualFileContent == expectedFileContent
+        return
 
     # --------------------------------------------------------------------
     def test_007__opt_with_list__mix(self, request: pytest.FixtureRequest):
@@ -197,6 +204,7 @@ class TestSet001__Common:
         expectedFileContent = 'shared_preload_libraries = \'a,"",\\000,",",\\n,\\r,\\f,"\\t",\\\',""""\'\n'
 
         assert actualFileContent == expectedFileContent
+        return
 
     # --------------------------------------------------------------------
     def test_008__include(self, request: pytest.FixtureRequest):
@@ -223,6 +231,7 @@ class TestSet001__Common:
         expectedFileContent = "include '{0}'\n".format(C_INCLUDED_FILE_NAME)
 
         assert actualFileContent == expectedFileContent
+        return
 
     # --------------------------------------------------------------------
     class tagData009:
@@ -238,6 +247,7 @@ class TestSet001__Common:
             self.descr = d
             self.fileName = f
             self.result = r
+            return
 
     # --------------------------------------------------------------------
     sm_Data009 = [
@@ -290,6 +300,7 @@ class TestSet001__Common:
         )
 
         assert actualFileContent == data009.result
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

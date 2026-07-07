@@ -58,6 +58,7 @@ class TestSet001__Common:
         assert len(fileLine2.m_FileLineData.m_Items) == 0
 
         assert cfg.GetOptionValue("port") == 123
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

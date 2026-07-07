@@ -36,6 +36,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("None value is not supported.")):
             file.SetOptionValueItem(C_OPT_NAME, None)
+        return
 
     # --------------------------------------------------------------------
     def test_002__set_value_item_with_bad_type(self, request: pytest.FixtureRequest):
@@ -58,6 +59,7 @@ class TestSet001__Common:
         )
         with pytest.raises(Exception, match=re.escape(errMsg)):
             file.SetOptionValueItem(C_OPT_NAME, 123)
+        return
 
     # --------------------------------------------------------------------
     def test_003(self, request: pytest.FixtureRequest):
@@ -100,6 +102,7 @@ class TestSet001__Common:
             assert r1.m_OptData.m_Value == ["biha"]
 
             assert r1.Option is r1.m_Opt  # check cache
+            assert r1.Option is not None
             assert r1.Option.get_Value() == ["biha"]
             assert r1.Option.get_Name() == C_OPT_NAME
 
@@ -114,6 +117,8 @@ class TestSet001__Common:
 
             assert C_OPT_NAME in cfg.m_Data.m_AllOptionsByName
             assert C_OPT_NAME in file.m_FileData.m_OptionsByName
+            continue
+        return
 
     # --------------------------------------------------------------------
     def test_004__already_defined_in_another_file(self, request: pytest.FixtureRequest):
@@ -133,6 +138,7 @@ class TestSet001__Common:
         assert file2 is not None
 
         r1 = file1.SetOptionValueItem(C_OPT_NAME, "biha")
+        assert r1.Option is not None
         assert (
             r1.Option.get_Parent().get_Parent().Private__GetFileData()
             is file1.m_FileData
@@ -145,6 +151,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape(errMsg)):
             file2.SetOptionValueItem(C_OPT_NAME, "biha")
+        return
 
     # --------------------------------------------------------------------
     def test_005__opt_is_defined_in_another_file(self, request: pytest.FixtureRequest):
@@ -164,6 +171,7 @@ class TestSet001__Common:
         assert file2 is not None
 
         r1 = file1.SetOptionValueItem(C_OPT_NAME, "biha")
+        assert r1.Option is not None
         assert (
             r1.Option.get_Parent().get_Parent().Private__GetFileData()
             is file1.m_FileData
@@ -176,6 +184,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape(errMsg)):
             file2.SetOptionValueItem(C_OPT_NAME, "proxima")
+        return
 
     # --------------------------------------------------------------------
     def test_006__two_items(self, request: pytest.FixtureRequest):
@@ -194,15 +203,18 @@ class TestSet001__Common:
         r1 = file.SetOptionValueItem(C_OPT_NAME, "biha")
         assert r1 is not None
         assert type(r1) is PgCfg_SetOptionResult_Base
+        assert r1.Option is not None
         assert r1.Option.get_Value() == ["biha"]
 
         r2 = file.SetOptionValueItem(C_OPT_NAME, "proxima")
         assert r2 is not None
         assert type(r2) is PgCfg_SetOptionResult_Base
         assert r2.EventID == PgCfg_SetOptionEventID.VALUE_ITEM_WAS_ADDED
+        assert r2.Option is not None
         assert r2.Option.get_Value() == ["biha", "proxima"]
 
         assert r1.Option.get_Value() == ["biha", "proxima"]
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

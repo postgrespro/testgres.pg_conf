@@ -92,6 +92,7 @@ class TestSet001__Common:
         assert comment2.get_Text() == "HELLO!"
 
         assert cfg.GetOptionValue("port") == 123
+        return
 
     # --------------------------------------------------------------------
     def test_002(self, request: pytest.FixtureRequest):
@@ -141,6 +142,8 @@ class TestSet001__Common:
 
             assert comment1.get_Text() == "1"
             assert comment2.get_Text() == ""
+            continue
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

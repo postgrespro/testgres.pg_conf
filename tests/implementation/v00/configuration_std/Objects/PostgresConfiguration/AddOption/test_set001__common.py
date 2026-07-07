@@ -51,8 +51,10 @@ class TestSet001__Common:
         __class__.Helper__CheckStateOfCfgWithOneIntOpt(cfg, option, optName, 123)
 
         # Amen
+        return
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__CheckStateOfCfgWithOneIntOpt(
         cfg: PgCfg_Std, opt: PgCfg_Option_Base, optName: str, optValue: int
     ):
@@ -120,6 +122,7 @@ class TestSet001__Common:
         assert optName in cfg.m_Data.m_AllOptionsByName.keys()
         assert len(cfg.m_Data.m_AllOptionsByName.values()) == 1
         assert opt.m_OptionData in cfg.m_Data.m_AllOptionsByName.values()
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -136,6 +139,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("None value is not supported.")):
             cfg.AddOption(optName, None)
+        return
 
     # --------------------------------------------------------------------
     def test_003__empty_name(self, request: pytest.FixtureRequest):
@@ -150,6 +154,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("Option name is empty.")):
             cfg.AddOption("", 123)
+        return
 
     # --------------------------------------------------------------------
     def test_004__None_name(self, request: pytest.FixtureRequest):
@@ -164,6 +169,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("Option name is None.")):
             cfg.AddOption(None, 123)
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -192,6 +198,7 @@ class TestSet001__Common:
 
         assert option.get_Name() == optName
         assert option.get_Value() == 123
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

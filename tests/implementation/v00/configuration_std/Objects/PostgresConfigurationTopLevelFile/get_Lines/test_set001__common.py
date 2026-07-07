@@ -71,6 +71,7 @@ class TestSet001__Common:
 
         fileLines_v = list(fileLines)
         assert len(fileLines_v) == 0
+        return
 
     # --------------------------------------------------------------------
     def test_001__Lines__iterator(self, request: pytest.FixtureRequest):
@@ -84,6 +85,7 @@ class TestSet001__Common:
         set_r = cfg.SetOptionValue("port", 123)
         assert type(set_r) is PgCfg_SetOptionResult_Base
         assert isinstance(set_r, PgCfg_SetOptionResult)
+        assert set_r.Option is not None
 
         file = set_r.Option.get_Parent().get_Parent()
 
@@ -95,6 +97,7 @@ class TestSet001__Common:
 
         it1a = it1.__iter__()
         assert it1a == it1
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

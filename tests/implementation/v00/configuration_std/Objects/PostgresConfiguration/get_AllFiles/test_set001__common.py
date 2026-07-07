@@ -39,6 +39,7 @@ class TestSet001__Common:
 
         allFiles2 = cfg.get_AllFiles()
         assert allFiles2 is allFiles1  # check cache
+        return
 
     # --------------------------------------------------------------------
     sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
@@ -73,6 +74,7 @@ class TestSet001__Common:
         assert allFiles1_list[0].get_Path() == os.path.join(
             rootTmpDir, "postgresql.auto.conf"
         )
+        return
 
     # --------------------------------------------------------------------
     def test_002__iter(self, request: pytest.FixtureRequest):
@@ -102,6 +104,7 @@ class TestSet001__Common:
         # NOTE: it may change in the future
         assert it1a.m_FileDataIterator is it1.m_FileDataIterator
         assert it1a is it1
+        return
 
     # --------------------------------------------------------------------
     def test_003__transform_to_list(self, request: pytest.FixtureRequest):
@@ -119,6 +122,7 @@ class TestSet001__Common:
         cfg.SetOptionValue("port", 333)
         v = list(allFiles1)
         assert len(v) == 1
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

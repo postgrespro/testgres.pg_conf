@@ -63,6 +63,7 @@ class TestSet001__Common:
         assert file.m_FileData.m_Status == PgCfgModel__FileStatus.EXISTS
         assert file.m_FileData.m_LastModifiedTimestamp == lastMDate
         assert len(file.m_FileData.m_Lines) == 0
+        return
 
     # --------------------------------------------------------------------
     def test_001__comment_and_options(self, request: pytest.FixtureRequest):
@@ -148,6 +149,7 @@ class TestSet001__Common:
         assert type(fileDataLines[3].m_Items[1].m_Element) is PgCfgModel__CommentData
         assert fileDataLines[3].m_Items[1].m_Element.m_Text == "addresses"
         assert fileDataLines[3].m_Items[1].m_Element.m_Offset == 21
+        return
 
     # --------------------------------------------------------------------
     def test_002__two_files(self, request: pytest.FixtureRequest):
@@ -210,6 +212,7 @@ class TestSet001__Common:
 
         assert file1.GetOptionValue("port") is None
         assert file2.GetOptionValue("port") == 123
+        return
 
     # --------------------------------------------------------------------
     def test_003__two_files__duplication_and_cycles(
@@ -277,6 +280,7 @@ class TestSet001__Common:
 
         assert file1.GetOptionValue("port") is None
         assert file2.GetOptionValue("port") == 123
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

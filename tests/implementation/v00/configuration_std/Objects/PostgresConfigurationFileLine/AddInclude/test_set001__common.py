@@ -80,6 +80,7 @@ class TestSet001__Common:
         # assert include.get_File() is includedFile
         assert includedFile.get_Path() == os.path.join(rootTmpDir, C_FILE_NAME)
         assert includedFile.get_Parent() is include
+        return
 
     # --------------------------------------------------------------------
     def test_E01__after_option(self, request: pytest.FixtureRequest):
@@ -120,6 +121,7 @@ class TestSet001__Common:
         assert option.get_Parent().m_FileLineData is fileLine.m_FileLineData
         assert option.get_Name() == "port"
         assert option.get_Value() == 123
+        return
 
     # --------------------------------------------------------------------
     def test_E02__after_include(self, request: pytest.FixtureRequest):
@@ -146,6 +148,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert fileLine.m_FileLineData.m_Items[0].m_Element is include.m_IncludeData
+        return
 
     # --------------------------------------------------------------------
     def test_E03__after_comment(self, request: pytest.FixtureRequest):
@@ -172,6 +175,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert fileLine.m_FileLineData.m_Items[0].m_Element is comment.m_CommentData
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

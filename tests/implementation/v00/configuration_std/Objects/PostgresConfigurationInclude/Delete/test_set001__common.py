@@ -59,6 +59,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("FileLine object was deleted.")):
             len(fileLine)
+        return
 
     # --------------------------------------------------------------------
     def test_002__withoutLine(self, request: pytest.FixtureRequest):
@@ -102,6 +103,7 @@ class TestSet001__Common:
         assert fileLine.get_Parent() is file
 
         assert len(fileLine) == 0
+        return
 
     # --------------------------------------------------------------------
 
@@ -159,6 +161,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("FileLine object was deleted.")):
             len(fileLine)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

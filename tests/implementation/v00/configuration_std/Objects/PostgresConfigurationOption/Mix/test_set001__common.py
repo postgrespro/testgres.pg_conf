@@ -44,6 +44,7 @@ class TestSet001__Common:
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
         assert type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -82,6 +83,7 @@ class TestSet001__Common:
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
         assert type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -124,6 +126,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
             r1.Option.get_Parent()
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -164,6 +167,8 @@ class TestSet001__Common:
 
             assert r1.Option.get_Name() == optName
             assert r1.Option.get_Value() == 234
+            continue
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -204,6 +209,8 @@ class TestSet001__Common:
 
             assert r1.Option.get_Name() == optName
             assert r1.Option.get_Value() == 234
+            continue
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

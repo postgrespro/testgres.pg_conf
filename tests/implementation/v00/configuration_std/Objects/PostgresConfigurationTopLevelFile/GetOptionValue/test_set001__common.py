@@ -31,6 +31,7 @@ class TestSet001__Common:
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
         assert file.GetOptionValue(optName) is None
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -55,6 +56,7 @@ class TestSet001__Common:
         option.set_Value(321)
 
         assert file.GetOptionValue(optName) == 321
+        return
 
     # --------------------------------------------------------------------
     def test_003__opt_with_list__get_None(self, request: pytest.FixtureRequest):
@@ -72,6 +74,7 @@ class TestSet001__Common:
         v = file.GetOptionValue(C_OPT_NAME)
 
         assert v is None
+        return
 
     # --------------------------------------------------------------------
     def test_004__opt_with_list__with_data(self, request: pytest.FixtureRequest):
@@ -96,6 +99,8 @@ class TestSet001__Common:
             assert v == ["xxx"]
 
             v.append("yyy")
+            continue
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
