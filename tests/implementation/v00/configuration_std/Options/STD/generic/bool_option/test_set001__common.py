@@ -43,6 +43,7 @@ class TestSet001__Common:
         def __init__(self, set_value: typing.Any, get_value: bool):
             self.set_value = set_value
             self.get_value = get_value
+            return
 
     # --------------------------------------------------------------------
     sm_Data001: typing.List[tagData001] = [
@@ -138,6 +139,8 @@ class TestSet001__Common:
                 assert actualValue == data.get_value
             except Exception as e:
                 logging.error(str(e))
+            continue
+        return
 
     # --------------------------------------------------------------------
     class tagData002:
@@ -189,6 +192,8 @@ class TestSet001__Common:
                     cfg.SetOptionValue(optionName, data.set_value)
             except Exception as e:
                 logging.error(str(e))
+            continue
+        return
 
     # --------------------------------------------------------------------
     class tagData003:
@@ -234,6 +239,8 @@ class TestSet001__Common:
                     cfg.SetOptionValue(optionName, data.set_value)
             except Exception as e:
                 logging.error(str(e))
+            continue
+        return
 
     # --------------------------------------------------------------------
     class tagData101_Assign:
@@ -245,6 +252,7 @@ class TestSet001__Common:
             assert type(text) is str
             self.sign = sign
             self.text = text
+            return
 
     # --------------------------------------------------------------------
     sm_Data101_assigns: typing.List[tagData101_Assign] = [
@@ -272,6 +280,7 @@ class TestSet001__Common:
             self.sign = sign
             self.quote1 = quote1
             self.quote2 = quote2
+            return
 
     # --------------------------------------------------------------------
     sm_Data101_quotes: typing.List[tagData101_Quote] = [
@@ -288,6 +297,7 @@ class TestSet001__Common:
         def __init__(self, source: typing.Any, result: bool):
             self.source = source
             self.result = result
+            return
 
     # --------------------------------------------------------------------
     sm_Data101_values: typing.List[tagData101_Value] = [
@@ -388,6 +398,10 @@ class TestSet001__Common:
                         )
                     except Exception as e:
                         logging.error(str(e))
+                    continue
+                continue
+            continue
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

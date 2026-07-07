@@ -39,7 +39,7 @@ class TestSet001__Common:
         assert type(set_r) is PgCfg_SetOptionResult_Base
         assert isinstance(set_r, PgCfg_SetOptionResult)
         assert set_r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
-        set_r_option: PgCfg_Option_Base = set_r.Option
+        set_r_option = set_r.Option
         assert set_r_option is not None
         assert type(set_r_option) is PgCfg_Option_Base
         assert isinstance(set_r_option, PostgresConfigurationOption)
@@ -52,6 +52,7 @@ class TestSet001__Common:
         get_r = cfg.GetOptionValue(optName)
         assert type(get_r) is int
         assert get_r == 123
+        return
 
     # --------------------------------------------------------------------
     def test_002__None_name(self, request: pytest.FixtureRequest):
@@ -64,6 +65,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("Option name is None.")):
             cfg.GetOptionValue(None)
+        return
 
     # --------------------------------------------------------------------
     def test_003__empty_name(self, request: pytest.FixtureRequest):
@@ -76,6 +78,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("Option name is empty.")):
             cfg.GetOptionValue("")
+        return
 
     # --------------------------------------------------------------------
     def test_004__opt_with_list__get_None(self, request: pytest.FixtureRequest):
@@ -91,6 +94,7 @@ class TestSet001__Common:
         v = cfg.GetOptionValue(C_OPT_NAME)
 
         assert v is None
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

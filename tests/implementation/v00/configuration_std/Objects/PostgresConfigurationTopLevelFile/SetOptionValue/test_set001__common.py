@@ -132,6 +132,7 @@ class TestSet001__Common:
         assert option.m_OptionData.m_Value == 321
         assert option.get_Name() == optName
         assert option.get_Value() == 321
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -176,6 +177,7 @@ class TestSet001__Common:
         assert set_r3.m_OptData is None
 
         assert cfg.GetOptionValue(optName) is None
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -215,6 +217,7 @@ class TestSet001__Common:
 
         assert len(file1.get_Lines()) == 1
         assert len(file2.get_Lines()) == 0
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -247,6 +250,8 @@ class TestSet001__Common:
 
             assert len(cfg.m_Data.m_AllOptionsByName) == 0
             assert len(file1.m_FileData.m_OptionsByName) == 0
+            continue
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -277,6 +282,8 @@ class TestSet001__Common:
 
             assert len(cfg.m_Data.m_AllOptionsByName) == 0
             assert len(file1.m_FileData.m_OptionsByName) == 0
+            continue
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

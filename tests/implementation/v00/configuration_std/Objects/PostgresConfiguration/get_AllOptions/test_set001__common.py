@@ -39,6 +39,7 @@ class TestSet001__Common:
 
         allOptions2 = cfg.get_AllOptions()
         assert allOptions2 is allOptions1  # check cache
+        return
 
     # --------------------------------------------------------------------
     sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
@@ -67,6 +68,7 @@ class TestSet001__Common:
             assert type(option) is PgCfg_Option_Base
             assert isinstance(option, PgCfg_Option)
             allOptions1_list.append(option)
+            continue
 
         assert allOptions1_list is not None
         assert len(allOptions1_list) == 1
@@ -75,6 +77,7 @@ class TestSet001__Common:
         assert allOptions1_list[0].get_Value() == 123
 
         assert allOptions1_list[0].get_Parent().get_Parent().get_Parent() == cfg
+        return
 
     # --------------------------------------------------------------------
     def test_002__iter(self, request: pytest.FixtureRequest):
@@ -104,6 +107,7 @@ class TestSet001__Common:
         # NOTE: it may change in the future
         assert it1a.m_OptionDataIterator is it1.m_OptionDataIterator
         assert it1a is it1
+        return
 
     # --------------------------------------------------------------------
     def test_003__transform_to_list(self, request: pytest.FixtureRequest):
@@ -121,6 +125,7 @@ class TestSet001__Common:
         cfg.SetOptionValue("port", 333)
         v = list(allOptions1)
         assert len(v) == 1
+        return
 
     # --------------------------------------------------------------------
     def test_004__two_options(self, request: pytest.FixtureRequest):
@@ -147,6 +152,8 @@ class TestSet001__Common:
             assert opt.get_Name() not in names
 
             names.add(opt.get_Name())
+            continue
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

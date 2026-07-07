@@ -108,6 +108,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match="Include object was deleted."):
             bihaConfFileInclude.get_File()
+        return
 
     # --------------------------------------------------------------------
     def test_002__include_twice(self, request: pytest.FixtureRequest):
@@ -145,6 +146,7 @@ class TestSet001__Common:
         assert bihaConfFile2.get_Path() == os.path.join(
             rootTmpDir, C_BIHA_CONF_FILE_NAME
         )
+        return
 
     # --------------------------------------------------------------------
     def test_003__empty_file_path(self, request: pytest.FixtureRequest):
@@ -161,6 +163,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("File path is empty.")):
             file1.AddInclude("")
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

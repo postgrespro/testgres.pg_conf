@@ -37,6 +37,7 @@ class TestSet001__Common:
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
         assert type(r1) is PgCfg_SetOptionResult_Base
+        assert r1.Option is not None
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
@@ -68,7 +69,10 @@ class TestSet001__Common:
             assert r2.m_OptData.m_Value[0] == "biha"
             assert r2.m_OptData.m_Value[1] == "proxima"
             assert r2.m_OptData.m_Value == ["biha", "proxima"]
+            assert r2.Option is not None
             assert r2.Option.get_Value() == ["biha", "proxima"]
+            continue
+        return
 
     # --------------------------------------------------------------------
     def test_002__set_None(self, request: pytest.FixtureRequest):
@@ -85,6 +89,7 @@ class TestSet001__Common:
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
         assert type(r1) is PgCfg_SetOptionResult_Base
+        assert r1.Option is not None
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
@@ -95,6 +100,7 @@ class TestSet001__Common:
             r1.Option.set_ValueItem(None)
 
         assert r1.Option.get_Value() == ["biha"]
+        return
 
     # --------------------------------------------------------------------
     def test_003__set_value_item_with_bad_type(self, request: pytest.FixtureRequest):
@@ -111,6 +117,7 @@ class TestSet001__Common:
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
         assert type(r1) is PgCfg_SetOptionResult_Base
+        assert r1.Option is not None
         assert r1.Option.get_Name() == C_OPT_NAME
         assert r1.Option.get_Value() == ["biha"]
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
@@ -126,6 +133,7 @@ class TestSet001__Common:
             r1.Option.set_ValueItem(1)
 
         assert r1.Option.get_Value() == ["biha"]
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

@@ -79,6 +79,8 @@ class TestSet001__Common:
                 fileContent_n = __class__.Helper__norm_content(fileContent)
 
                 assert fileContent_n == ""
+            continue
+        return
 
     # --------------------------------------------------------------------
     def test_001(self, request: pytest.FixtureRequest):
@@ -146,6 +148,8 @@ class TestSet001__Common:
                 fileContent_n = __class__.Helper__norm_content(fileContent)
 
                 assert fileContent_n == "port = {0}\n".format(portNumber)
+            continue
+        return
 
     # --------------------------------------------------------------------
     def test_003__two_files(self, request: pytest.FixtureRequest):
@@ -230,6 +234,9 @@ class TestSet001__Common:
                     fileContent_n = __class__.Helper__norm_content(fileContent)
 
                     assert fileContent_n == fileData[1]
+                continue
+            continue
+        return
 
     # --------------------------------------------------------------------
     def test_004__check_truncate(self, request: pytest.FixtureRequest):
@@ -280,6 +287,7 @@ class TestSet001__Common:
             assert type(fileContent) is str
             fileContent_n = __class__.Helper__norm_content(fileContent)
             assert fileContent_n == "listen_addresses = '*'\n"
+        return
 
     # --------------------------------------------------------------------
     def test_E01__file_is_exist(self, request: pytest.FixtureRequest):
@@ -338,8 +346,11 @@ class TestSet001__Common:
             for fileX in files:
                 assert fileX.m_FileData.m_Status == PgCfgModel__FileStatus.IS_NEW
                 assert fileX.m_FileData.m_LastModifiedTimestamp is None
+                continue
 
             os.remove(file.get_Path())
+            continue
+        return
 
     # --------------------------------------------------------------------
     def test_E02__external_modification(self, request: pytest.FixtureRequest):
@@ -398,8 +409,10 @@ class TestSet001__Common:
                 file.m_FileData.m_LastModifiedTimestamp
             )
         )
+        return
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__norm_content(text: str) -> str:
         assert text is not None
         assert type(text) is str

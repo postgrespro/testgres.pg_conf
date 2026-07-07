@@ -65,6 +65,8 @@ class TestSet001__Common:
             assert r1.Option.get_Value() == ["biha"]
 
             assert cfg.GetOptionValue(C_OPT_NAME) == ["biha"]
+            continue
+        return
 
     # --------------------------------------------------------------------
     def test_002(self, request: pytest.FixtureRequest):
@@ -124,6 +126,7 @@ class TestSet001__Common:
                 assert r1.m_OptData.m_Value[i] is not None
                 assert type(r1.m_OptData.m_Value[i]) is str
                 assert r1.m_OptData.m_Value[i] == expectedValue[i]
+                continue
 
             assert r1.m_OptData.m_Value == expectedValue
 
@@ -134,6 +137,8 @@ class TestSet001__Common:
             assert r1.Option.get_Value() == expectedValue
 
             assert cfg.GetOptionValue(C_OPT_NAME) == expectedValue
+            continue
+        return
 
     # --------------------------------------------------------------------
     def test_003(self, request: pytest.FixtureRequest):
@@ -152,7 +157,9 @@ class TestSet001__Common:
 
         assert r1.m_OptData is r2.m_OptData
 
+        assert r1.Option is not None
         assert r1.Option.get_Value() == ["biha", "proxima"]
+        return
 
     # --------------------------------------------------------------------
     def test_004__check_get_prepare_filter__unique(
@@ -169,13 +176,16 @@ class TestSet001__Common:
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
+        assert r1.m_OptData is not None
         assert r1.m_OptData.m_Value == ["biha"]
+        assert r1.Option is not None
         assert r1.Option.get_Value() == ["biha"]
 
         r1.m_OptData.m_Value.append("biha")
 
         assert r1.m_OptData.m_Value == ["biha", "biha"]
         assert r1.Option.get_Value() == ["biha"]
+        return
 
     # --------------------------------------------------------------------
     def test_005__check_get_prepare_filter__to_str(
@@ -192,7 +202,9 @@ class TestSet001__Common:
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
+        assert r1.m_OptData is not None
         assert r1.m_OptData.m_Value == ["biha"]
+        assert r1.Option is not None
         assert r1.Option.get_Value() == ["biha"]
 
         r1.m_OptData.m_Value.append(1)
@@ -201,6 +213,7 @@ class TestSet001__Common:
         assert r1.m_OptData.m_Value != ["biha", "1"]
         assert r1.Option.get_Value() == ["biha", "1"]
         assert r1.Option.get_Value() != ["biha", 1]
+        return
 
     # --------------------------------------------------------------------
     def test_006__set_value_item_with_bad_type(self, request: pytest.FixtureRequest):
@@ -215,7 +228,9 @@ class TestSet001__Common:
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
+        assert r1.m_OptData is not None
         assert r1.m_OptData.m_Value == ["biha"]
+        assert r1.Option is not None
         assert r1.Option.get_Value() == ["biha"]
 
         errMsg = (
@@ -229,6 +244,7 @@ class TestSet001__Common:
 
         assert r1.m_OptData.m_Value == ["biha"]
         assert r1.Option.get_Value() == ["biha"]
+        return
 
     # --------------------------------------------------------------------
     def test_007__set_None(self, request: pytest.FixtureRequest):
@@ -243,7 +259,9 @@ class TestSet001__Common:
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
+        assert r1.m_OptData is not None
         assert r1.m_OptData.m_Value == ["biha"]
+        assert r1.Option is not None
         assert r1.Option.get_Value() == ["biha"]
 
         errMsg = "None value is not supported."
@@ -253,6 +271,7 @@ class TestSet001__Common:
 
         assert r1.m_OptData.m_Value == ["biha"]
         assert r1.Option.get_Value() == ["biha"]
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

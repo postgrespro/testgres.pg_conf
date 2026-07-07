@@ -27,6 +27,7 @@ class TestSet001__Common:
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         assert cfg.get_Configuration() is cfg
+        return
 
     # --------------------------------------------------------------------
     def test_002__get_Parent(self, request: pytest.FixtureRequest):
@@ -40,6 +41,7 @@ class TestSet001__Common:
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         assert cfg.get_Parent() is None
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

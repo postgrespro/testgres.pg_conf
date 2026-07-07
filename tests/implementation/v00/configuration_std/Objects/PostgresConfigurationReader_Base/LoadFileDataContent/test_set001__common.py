@@ -59,6 +59,7 @@ class TestSet001__Common:
         assert file1.m_FileData.m_Lines is not None
         assert type(file1.m_FileData.m_Lines) is list
         assert len(file1.m_FileData.m_Lines) == 0
+        return
 
     # --------------------------------------------------------------------
     def test_002__space(self, request: pytest.FixtureRequest):
@@ -78,6 +79,7 @@ class TestSet001__Common:
         assert len(file1) == 1
         assert len(file1.m_FileData.m_Lines) == 1
         assert len(file1.m_FileData.m_Lines[0].m_Items) == 0
+        return
 
     # --------------------------------------------------------------------
     def test_003__empty_line_with_eol(self, request: pytest.FixtureRequest):
@@ -97,6 +99,7 @@ class TestSet001__Common:
         assert len(file1) == 1
         assert len(file1.m_FileData.m_Lines) == 1
         assert len(file1.m_FileData.m_Lines[0].m_Items) == 0
+        return
 
     # --------------------------------------------------------------------
     def test_101__comment(self, request: pytest.FixtureRequest):
@@ -121,6 +124,7 @@ class TestSet001__Common:
         assert type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__CommentData
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 1
         assert fileLineData0.m_Items[0].m_Element.m_Text == "  comment   "
+        return
 
     # --------------------------------------------------------------------
     def test_102__two_comments(self, request: pytest.FixtureRequest):
@@ -151,6 +155,7 @@ class TestSet001__Common:
         assert type(fileLineData1.m_Items[0].m_Element) is PgCfgModel__CommentData
         assert fileLineData1.m_Items[0].m_Element.m_Offset == 4
         assert fileLineData1.m_Items[0].m_Element.m_Text == "comment2"
+        return
 
     # --------------------------------------------------------------------
     sm_data201__assign: typing.List[typing.Tuple[str, str]] = [
@@ -199,6 +204,7 @@ class TestSet001__Common:
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 123
+        return
 
     # --------------------------------------------------------------------
     def test_202__option(self, request: pytest.FixtureRequest):
@@ -224,6 +230,7 @@ class TestSet001__Common:
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 234
+        return
 
     # --------------------------------------------------------------------
     def test_203__option__without_assign(self, request: pytest.FixtureRequest):
@@ -249,6 +256,7 @@ class TestSet001__Common:
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 234
+        return
 
     # --------------------------------------------------------------------
     sm_data204: typing.List[typing.Tuple[str, str]] = [
@@ -297,6 +305,7 @@ class TestSet001__Common:
             Exception, match=re.escape("Option [port] in line 1 does not have a value.")
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+        return
 
     # --------------------------------------------------------------------
     def test_211__option_with_comment(self, request: pytest.FixtureRequest):
@@ -326,6 +335,7 @@ class TestSet001__Common:
         assert type(fileLineData0.m_Items[1].m_Element) is PgCfgModel__CommentData
         assert fileLineData0.m_Items[1].m_Element.m_Offset == 9
         assert fileLineData0.m_Items[1].m_Element.m_Text == "comment"
+        return
 
     # --------------------------------------------------------------------
     def test_212__option_with_comment_immediate(self, request: pytest.FixtureRequest):
@@ -355,6 +365,7 @@ class TestSet001__Common:
         assert type(fileLineData0.m_Items[1].m_Element) is PgCfgModel__CommentData
         assert fileLineData0.m_Items[1].m_Element.m_Offset == 8
         assert fileLineData0.m_Items[1].m_Element.m_Text == "comment "
+        return
 
     # --------------------------------------------------------------------
     def test_301__optionQ(self, request: pytest.FixtureRequest):
@@ -380,6 +391,7 @@ class TestSet001__Common:
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "port"
         assert fileLineData0.m_Items[0].m_Element.m_Value == 123
+        return
 
     # --------------------------------------------------------------------
     def test_302__optionQ__empty(
@@ -408,6 +420,7 @@ class TestSet001__Common:
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "listen_addresses"
         assert fileLineData0.m_Items[0].m_Element.m_Value == ""
+        return
 
     # --------------------------------------------------------------------
     def test_303__optionQ__two_quote(self, request: pytest.FixtureRequest):
@@ -433,6 +446,7 @@ class TestSet001__Common:
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "listen_addresses"
         assert fileLineData0.m_Items[0].m_Element.m_Value == "'"
+        return
 
     # --------------------------------------------------------------------
     sm_endData304: typing.List[typing.Tuple[str, str, str]] = [
@@ -484,6 +498,7 @@ class TestSet001__Common:
         assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
         assert fileLineData0.m_Items[0].m_Element.m_Name == "listen_addresses"
         assert fileLineData0.m_Items[0].m_Element.m_Value == endData304[2]
+        return
 
     # --------------------------------------------------------------------
     sm_data3E01: typing.List[typing.Tuple[str, str]] = [
@@ -526,6 +541,7 @@ class TestSet001__Common:
             ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+        return
 
     # --------------------------------------------------------------------
     sm_data3E02: typing.List[typing.Tuple[str, str]] = [
@@ -564,6 +580,7 @@ class TestSet001__Common:
             ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+        return
 
     # --------------------------------------------------------------------
     def test_3E03__optionQ__unk_escaped_symbol(self, request: pytest.FixtureRequest):
@@ -585,6 +602,7 @@ class TestSet001__Common:
             ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+        return
 
     # --------------------------------------------------------------------
     def test_401__include(self, request: pytest.FixtureRequest):
@@ -612,6 +630,7 @@ class TestSet001__Common:
 
         file_A = cfg.get_AllFiles().GetFileByName("a.conf")
         assert file_A.get_Path() == os.path.join(rootTmpDir, "a.conf")
+        return
 
     # --------------------------------------------------------------------
     def test_4E01__empty_path(self, request: pytest.FixtureRequest):
@@ -630,6 +649,7 @@ class TestSet001__Common:
             Exception, match=re.escape("Include in line 1 has an empty path.")
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+        return
 
     # --------------------------------------------------------------------
     sm_dataE4E02: typing.List[typing.Tuple[str, str]] = [
@@ -663,6 +683,7 @@ class TestSet001__Common:
             match=re.escape("The end of an include path is not found. Line 1."),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+        return
 
     # --------------------------------------------------------------------
     def test_4E03__unknown_escape_symbol(self, request: pytest.FixtureRequest):
@@ -715,6 +736,7 @@ class TestSet001__Common:
             match=re.escape("Escape in an include path is not completed. Line 1."),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+        return
 
     # --------------------------------------------------------------------
     sm_dataE4E05: typing.List[typing.Tuple[str, str]] = [
@@ -758,6 +780,7 @@ class TestSet001__Common:
             match=re.escape("Include directive in line 1 does not have a path."),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

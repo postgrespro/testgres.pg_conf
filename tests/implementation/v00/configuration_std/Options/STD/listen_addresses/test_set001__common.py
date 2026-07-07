@@ -29,6 +29,7 @@ class TestSet001__Common:
 
         set_r = cfg.SetOptionValue(__class__.C_OPTION_NAME, "*")
 
+        assert set_r.Option is not None
         assert set_r.Option.get_Name() == __class__.C_OPTION_NAME
         assert set_r.Option.get_Value() == "*"
 
@@ -58,6 +59,7 @@ class TestSet001__Common:
         writeResult = PgCfg_Writer_Base.MakeFileDataContent(writeCtx, file.m_FileData)
 
         assert writeResult == "listen_addresses = '*'\n"
+        return
 
     # --------------------------------------------------------------------
     def test_E01__bad_value(self, request: pytest.FixtureRequest):
@@ -73,6 +75,7 @@ class TestSet001__Common:
             ),
         ):
             cfg.SetOptionValue(__class__.C_OPTION_NAME, 123)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

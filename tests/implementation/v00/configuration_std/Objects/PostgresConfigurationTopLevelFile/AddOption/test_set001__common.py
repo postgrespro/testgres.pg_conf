@@ -60,6 +60,7 @@ class TestSet001__Common:
 
         assert C_OPT_NAME in cfg.m_Data.m_AllOptionsByName.keys()
         assert cfg.m_Data.m_AllOptionsByName[C_OPT_NAME] is option.m_OptionData
+        return
 
     # --------------------------------------------------------------------
     def test_002__already_in_this(self, request: pytest.FixtureRequest):
@@ -93,6 +94,7 @@ class TestSet001__Common:
 
         assert C_OPT_NAME in cfg.m_Data.m_AllOptionsByName.keys()
         assert cfg.m_Data.m_AllOptionsByName[C_OPT_NAME] is option.m_OptionData
+        return
 
     # --------------------------------------------------------------------
     def test_003__already_in_another(self, request: pytest.FixtureRequest):
@@ -130,6 +132,7 @@ class TestSet001__Common:
 
         assert C_OPT_NAME in cfg.m_Data.m_AllOptionsByName.keys()
         assert cfg.m_Data.m_AllOptionsByName[C_OPT_NAME] is option.m_OptionData
+        return
 
     # --------------------------------------------------------------------
     def test_004__bad_value_type(self, request: pytest.FixtureRequest):
@@ -153,6 +156,7 @@ class TestSet001__Common:
             ),
         ):
             file.AddOption(C_OPT_NAME, False)
+        return
 
     # --------------------------------------------------------------------
     def test_004__cant_convert_value(self, request: pytest.FixtureRequest):
@@ -176,6 +180,7 @@ class TestSet001__Common:
             ),
         ):
             file.AddOption(C_OPT_NAME, "blabla")
+        return
 
     # --------------------------------------------------------------------
     def test_005__None_value(self, request: pytest.FixtureRequest):
@@ -195,6 +200,7 @@ class TestSet001__Common:
             match=re.escape("None value is not supported."),
         ):
             file.AddOption(C_OPT_NAME, None)
+        return
 
     # --------------------------------------------------------------------
     def test_006__None_name(self, request: pytest.FixtureRequest):
@@ -212,6 +218,7 @@ class TestSet001__Common:
             match=re.escape("Option name is None."),
         ):
             file.AddOption(None, 123)
+        return
 
     # --------------------------------------------------------------------
     def test_007__empty_name(self, request: pytest.FixtureRequest):
@@ -229,6 +236,7 @@ class TestSet001__Common:
             match=re.escape("Option name is empty."),
         ):
             file.AddOption("", 123)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

@@ -35,6 +35,7 @@ class TestSet001__Common:
             .Private__GetFileData()
             == file1.m_FileData
         )
+        return
 
     # --------------------------------------------------------------------
     def test_002__unk_file_name(self, request: pytest.FixtureRequest):
@@ -51,6 +52,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape(errMsg)):
             cfg.get_AllFiles().GetFileByName(C_FILE_NAME)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

@@ -53,7 +53,7 @@ class TestSet001__Common:
         assert type(r) is PgCfg_SetOptionResult_Base
         assert isinstance(r, PgCfg_SetOptionResult)
         assert r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
-        r_option: PgCfg_Option_Base = r.Option
+        r_option = r.Option
         assert r_option is not None
         assert type(r_option) is PgCfg_Option_Base
         assert isinstance(r_option, PostgresConfigurationOption)
@@ -62,6 +62,7 @@ class TestSet001__Common:
         __class__.Helper__CheckStateOfCfgWithOneOpt(cfg, r_option, optName, 123)
 
         # Amen
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -80,15 +81,17 @@ class TestSet001__Common:
         r = cfg.SetOptionValue(optName, 321)
         assert type(r) is PgCfg_SetOptionResult_Base
         assert r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_UPDATED
-        r_option: PgCfg_Option_Base = r.Option
+        r_option = r.Option
         assert r_option is not None
         assert type(r_option) is PgCfg_Option_Base
         assert isinstance(r_option, PostgresConfigurationOption)
         assert r.Option is r_option  # check a cache
 
         __class__.Helper__CheckStateOfCfgWithOneOpt(cfg, r_option, optName, 321)
+        return
 
     # --------------------------------------------------------------------
+    @staticmethod
     def Helper__CheckStateOfCfgWithOneOpt(
         cfg: PgCfg_Std, opt: PgCfg_Option_Base, optName: str, optValue: typing.Any
     ):
@@ -156,6 +159,7 @@ class TestSet001__Common:
         assert optName in cfg.m_Data.m_AllOptionsByName.keys()
         assert len(cfg.m_Data.m_AllOptionsByName.values()) == 1
         assert opt.m_OptionData in cfg.m_Data.m_AllOptionsByName.values()
+        return
 
     # --------------------------------------------------------------------
     def test_003__port___bad_type(self, request: pytest.FixtureRequest):
@@ -173,6 +177,7 @@ class TestSet001__Common:
             ),
         ):
             cfg.SetOptionValue("port", True)
+        return
 
     # --------------------------------------------------------------------
     def test_004__port___cont_convert_value(self, request: pytest.FixtureRequest):
@@ -190,6 +195,7 @@ class TestSet001__Common:
             ),
         ):
             cfg.SetOptionValue("port", "123.")
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -207,12 +213,14 @@ class TestSet001__Common:
         r1 = cfg.SetOptionValue(optName, 123)
         assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
+        assert r1.Option is not None
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 123
 
         r2 = cfg.SetOptionValue(optName, 321)
         assert type(r2) is PgCfg_SetOptionResult_Base
         assert r2.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_UPDATED
+        assert r2.Option is not None
         assert r2.Option.get_Name() == optName
         assert r2.Option.get_Value() == 321
 
@@ -223,11 +231,13 @@ class TestSet001__Common:
         assert type(r3) is PgCfg_SetOptionResult_Base
         assert r3.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_UPDATED
         assert r3.Option is r1.Option
+        assert r3.Option is not None
         assert r3.Option.get_Name() == optName
         assert r3.Option.get_Value() == 555
 
         assert r1.Option.get_Value() == 555
         assert r2.Option.get_Value() == 555
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -249,6 +259,7 @@ class TestSet001__Common:
         assert r.m_Opt is None
         assert r.m_OptData is None
         assert r.Option is None
+        return
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
@@ -318,6 +329,7 @@ class TestSet001__Common:
         assert r3.m_Opt is None
         assert r3.m_OptData is None
         assert r3.Option is None
+        return
 
     # --------------------------------------------------------------------
     def test_009__spec_file(self, request: pytest.FixtureRequest):
@@ -354,6 +366,7 @@ class TestSet001__Common:
             assert type(rs1.m_OptData) is PgCfgModel__OptionData
             assert rs1.m_OptData.m_Value == optValue
             assert rs1.m_OptData.m_Name == C_OPT_NAME
+            assert rs1.Option is not None
             assert rs1.Option.get_Name() == C_OPT_NAME
             assert rs1.Option.get_Value() == optValue
             assert rs1.Option.get_Configuration() is cfg
@@ -380,6 +393,8 @@ class TestSet001__Common:
             cfg.SetOptionValue(C_OPT_NAME, None)
 
             assert len(file1.get_Lines()) == 0
+            continue
+        return
 
     # --------------------------------------------------------------------
     def test_010__None_name(self, request: pytest.FixtureRequest):
@@ -392,6 +407,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("Option name is None.")):
             cfg.SetOptionValue(None, 123)
+        return
 
     # --------------------------------------------------------------------
     def test_011__empty_name(self, request: pytest.FixtureRequest):
@@ -404,6 +420,7 @@ class TestSet001__Common:
 
         with pytest.raises(Exception, match=re.escape("Option name is empty.")):
             cfg.SetOptionValue("", 123)
+        return
 
     # --------------------------------------------------------------------
     sm_data012__values: typing.List[typing.Tuple[str, str, typing.Any, typing.Any]] = [
@@ -443,7 +460,7 @@ class TestSet001__Common:
         assert type(r) is PgCfg_SetOptionResult_Base
         assert isinstance(r, PgCfg_SetOptionResult)
         assert r.m_EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
-        r_option: PgCfg_Option_Base = r.Option
+        r_option = r.Option
         assert r_option is not None
         assert type(r_option) is PgCfg_Option_Base
         assert isinstance(r_option, PostgresConfigurationOption)
@@ -452,6 +469,7 @@ class TestSet001__Common:
         __class__.Helper__CheckStateOfCfgWithOneOpt(
             cfg, r_option, data012[0], data012[2]
         )
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
