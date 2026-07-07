@@ -41,7 +41,7 @@ class ConfigurationOsFile(ConfigurationFileReader):
 
     def Overwrite(self, text: str) -> None:
         assert type(text) is str
-        RaiseError.MethodIsNotImplemented(__class__, "Write")
+        RaiseError.MethodIsNotImplemented(__class__, "Overwrite")
 
     def Close(self) -> None:
         RaiseError.MethodIsNotImplemented(__class__, "Close")
