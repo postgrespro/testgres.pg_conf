@@ -328,7 +328,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
         assert isinstance(cfgOsOps, ConfigurationOsOps)
 
-        super().__init__(data_dir, LocalCfgOsOps)
+        super().__init__(data_dir, cfgOsOps)
 
     # --------------------------------------------------------------------
     @staticmethod
