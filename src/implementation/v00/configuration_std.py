@@ -292,7 +292,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
             sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__UniqueStrList,
             sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__UniqueStrList,
             sm_SingleInstance__OptionHandlerToPrepareSetValueItem__Std__Str,
-            None,
+            sm_SingleInstance__OptionHandlerToSetValue__Std__Simple,
             sm_SingleInstance__OptionHandlerToGetValue__Std__UnionList,
             sm_SingleInstance__OptionHandlerToAddOption__Std,
             sm_SingleInstance__OptionHandlerToSetValueItem__Std__Unique,

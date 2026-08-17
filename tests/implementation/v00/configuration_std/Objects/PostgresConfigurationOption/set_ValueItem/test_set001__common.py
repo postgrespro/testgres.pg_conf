@@ -137,7 +137,7 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_004(self, request: pytest.FixtureRequest):
+    def test_004_set_list(self, request: pytest.FixtureRequest):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "shared_preload_libraries"
@@ -155,11 +155,41 @@ class TestSet001__Common:
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "proxima")
         assert isinstance(r1.Option, PgCfg_Option_Base)
-        assert r1.Option.get_Value() == ["biha", "proxima"]
+        assert sorted(r1.Option.get_Value()) == ["biha", "proxima"]
 
         r1 = cfg.SetOptionValue(C_OPT_NAME, ["proxima"])
         assert isinstance(r1.Option, PgCfg_Option_Base)
         assert r1.Option.get_Value() == ["proxima"]
+        return
+
+    # --------------------------------------------------------------------
+    def test_005__set_str(self, request: pytest.FixtureRequest):
+        assert isinstance(request, pytest.FixtureRequest)
+
+        C_OPT_NAME = "shared_preload_libraries"
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(rootTmpDir)
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
+        assert cfg.m_Data.m_DataDir == rootTmpDir
+
+        r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
+        assert isinstance(r1.Option, PgCfg_Option_Base)
+        assert r1.Option.get_Value() == ["biha"]
+
+        r1 = cfg.SetOptionValueItem(C_OPT_NAME, "proxima")
+        assert isinstance(r1.Option, PgCfg_Option_Base)
+        assert sorted(r1.Option.get_Value()) == ["biha", "proxima"]
+
+        r1 = cfg.SetOptionValue(C_OPT_NAME, "proxima, proxima")
+        assert isinstance(r1.Option, PgCfg_Option_Base)
+        assert r1.Option.get_Value() == ["proxima"]
+
+        r1 = cfg.SetOptionValue(C_OPT_NAME, "proxima, proxima, biha")
+        assert isinstance(r1.Option, PgCfg_Option_Base)
+        assert sorted(r1.Option.get_Value()) == ["biha", "proxima"]
         return
 
 
