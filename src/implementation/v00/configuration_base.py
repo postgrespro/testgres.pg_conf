@@ -3630,13 +3630,19 @@ class PostgresConfigurationReader_Base:
 
         if ch == "'":
             __class__.Helper__ProcessLineData__Option__Quoted(
-                fileLine, lineReader, optionOffset, optionName
+                fileLine,
+                lineReader,
+                optionOffset,
+                optionName,
             )
         else:
             lineReader.StepBack()
 
             __class__.Helper__ProcessLineData__Option__Generic(
-                fileLine, lineReader, optionOffset, optionName
+                fileLine,
+                lineReader,
+                optionOffset,
+                optionName,
             )
 
     # --------------------------------------------------------------------
@@ -3660,7 +3666,8 @@ class PostgresConfigurationReader_Base:
 
             if ch is None or ReadUtils.IsEOL(ch):
                 RaiseError.CfgReader__EndQuotedOptionValueIsNotFound(
-                    optionName, lineReader.GetLineNum()
+                    optionName,
+                    lineReader.GetLineNum(),
                 )
                 break
 
@@ -3685,7 +3692,8 @@ class PostgresConfigurationReader_Base:
 
                 if ch is None or ReadUtils.IsEOL(ch):
                     RaiseError.CfgReader__IncompletedEscapeInQuotedOptionValue(
-                        optionName, lineReader.GetLineNum()
+                        optionName,
+                        lineReader.GetLineNum(),
                     )
 
                 if ch == "b":
@@ -3731,7 +3739,10 @@ class PostgresConfigurationReader_Base:
                     optionValue += chr(octVal)
                 else:
                     RaiseError.CfgReader__UnknownEscapedSymbolInQuotedOptionValue(
-                        optionName, lineReader.GetLineNum(), lineReader.GetColNum(), ch
+                        optionName,
+                        lineReader.GetLineNum(),
+                        lineReader.GetColNum(),
+                        ch,
                     )
 
                 continue
