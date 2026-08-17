@@ -8,6 +8,7 @@ from src.implementation.v00.configuration_base import PostgresConfigurationSetOp
 from src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueEventID as PgCfg_SetOptionEventID
 from src.implementation.v00.configuration_base import PostgresConfigurationFileLine_Base as PgCfg_FileLine_Base
 from src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
 
 from src.implementation.v00.configuration_base import PgCfgModel__ConfigurationData
 
@@ -133,6 +134,32 @@ class TestSet001__Common:
             r1.Option.set_ValueItem(1)
 
         assert r1.Option.get_Value() == ["biha"]
+        return
+
+    # --------------------------------------------------------------------
+    def test_004(self, request: pytest.FixtureRequest):
+        assert isinstance(request, pytest.FixtureRequest)
+
+        C_OPT_NAME = "shared_preload_libraries"
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(rootTmpDir)
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
+        assert cfg.m_Data.m_DataDir == rootTmpDir
+
+        r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
+        assert isinstance(r1.Option, PgCfg_Option_Base)
+        assert r1.Option.get_Value() == ["biha"]
+
+        r1 = cfg.SetOptionValueItem(C_OPT_NAME, "proxima")
+        assert isinstance(r1.Option, PgCfg_Option_Base)
+        assert r1.Option.get_Value() == ["biha", "proxima"]
+
+        r1 = cfg.SetOptionValue(C_OPT_NAME, ["proxima"])
+        assert isinstance(r1.Option, PgCfg_Option_Base)
+        assert r1.Option.get_Value() == ["proxima"]
         return
 
 
