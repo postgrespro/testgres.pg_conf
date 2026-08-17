@@ -655,7 +655,7 @@ class DataControllerUtils:
             if len(indexItemData) == 0:  # it is an abnormal situation
                 filesByStrKeyDictionary.pop(fileKey)
             elif len(indexItemData) == 1:
-                filesByStrKeyDictionary[fileKey] == indexItemData[0]
+                filesByStrKeyDictionary[fileKey] = indexItemData[0]
 
             return
 
