@@ -13,6 +13,7 @@ from src.implementation.v00.configuration_base import PostgresConfigurationOptio
 from src.implementation.v00.configuration_base import PgCfgModel__ConfigurationData
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 # fmt: on
 
 import pytest
@@ -190,6 +191,20 @@ class TestSet001__Common:
         r1 = cfg.SetOptionValue(C_OPT_NAME, "proxima, proxima, biha")
         assert isinstance(r1.Option, PgCfg_Option_Base)
         assert sorted(r1.Option.get_Value()) == ["biha", "proxima"]
+
+        r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
+        assert isinstance(r1.Option, PgCfg_Option_Base)
+        assert sorted(r1.Option.get_Value()) == ["biha", "proxima"]
+
+        with pytest.raises(expected_exception=Exception) as x:
+            r1 = cfg.SetOptionValue(C_OPT_NAME, 123)
+
+        assert str(x.value) == ErrorMessageBuilder.BadOptionValueType(
+            C_OPT_NAME,
+            int,
+            list,
+        )
+
         return
 
 
