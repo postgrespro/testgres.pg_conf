@@ -33,6 +33,7 @@ class WriteUtils:
             result += sep
             result += __class__.Helper__PackStrListItem2(str(x))
             sep = ","
+            continue
 
         return result
 
@@ -63,6 +64,7 @@ class WriteUtils:
                 result += "\\\\"
             else:
                 result += ch
+            continue
 
         result += "'"
 
@@ -87,6 +89,7 @@ class WriteUtils:
                 result += '""'
             else:
                 result += ch
+            continue
 
         if needQuote:
             result += '"'
@@ -111,6 +114,7 @@ class WriteUtils:
                 return True
             if ch == ",":
                 return True
+            continue
 
 
 # //////////////////////////////////////////////////////////////////////////////

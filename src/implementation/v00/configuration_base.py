@@ -2056,6 +2056,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 PgCfgModel__DataControllerUtils.Option__delete(
                     self.m_Data, optionData, True
                 )
+                continue
 
             # [2025-01-02] It is expected
             assert optionName not in allOptionsByName.keys()
@@ -2626,6 +2627,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                         return PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAlreadyDefined(
                             self, optionData
                         )
+                    continue
 
                 # [2025-01-07] Postgres does not able to join multiple list
                 # TODO: We have to take into account overriding the values of postgresql.conf
@@ -2742,6 +2744,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                         optionData2.m_Name,
                         optionPreparedValueItem,
                     )
+                continue
 
             # [2025-01-07] Postgres does not able to join multiple list
             # TODO: We have to take into account overriding the values of postgresql.conf
@@ -2870,6 +2873,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                     RaiseError.OptionIsAlreadyExistInAnotherFile(
                         fileData2.m_Path, optionName
                     )
+                    continue
 
                 BugCheckError.UnexpectedSituation(
                     C_BUGCHECK_SRC, "#001", "optionName=[{0}].".format(optionName)
@@ -3920,6 +3924,8 @@ class PostgresConfigurationWriter_Base:
                 ctx.UpdFiles.append(fileCtx)
             else:
                 BugCheckError.UnkFileDataStatus(fileData.m_Path, fileData.m_Status)
+            continue
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -3939,6 +3945,8 @@ class PostgresConfigurationWriter_Base:
             fileCtx.Content = __class__.Helper__MakeFileDataContent(
                 ctx, fileCtx.FileData
             )
+            continue
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -4078,6 +4086,8 @@ class PostgresConfigurationWriter_Base:
 
             fileCtx.FileData.m_LastModifiedTimestamp = lastMDate
             fileCtx.FileData.m_Status = PgCfgModel__FileStatus.EXISTS
+            continue
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -4095,6 +4105,7 @@ class PostgresConfigurationWriter_Base:
             assert type(lineContent) is str
             fileContent += lineContent
             fileContent += "\n"
+            continue
 
         return fileContent
 
@@ -4133,6 +4144,7 @@ class PostgresConfigurationWriter_Base:
                 lineContent, lineItem.m_Element.m_Offset, itemContent
             )
             assert type(lineContent) is str
+            continue
 
         assert type(lineContent) is str
         return lineContent

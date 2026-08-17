@@ -59,6 +59,7 @@ class Helpers:
 
             if x == value:
                 return True
+            continue
 
         return False
 

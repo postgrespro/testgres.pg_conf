@@ -35,6 +35,7 @@ class DataVerificator:
         for ch in text:
             if ch in __class__.sm_InvalidCommentSymbols:
                 return False
+            continue
 
         return True
 
