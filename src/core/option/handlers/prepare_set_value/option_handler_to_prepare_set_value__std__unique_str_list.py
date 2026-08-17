@@ -52,6 +52,7 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
 
                 result.append(v)
                 index.add(v)
+                continue
 
             return result
 
