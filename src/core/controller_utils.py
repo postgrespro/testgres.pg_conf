@@ -407,6 +407,8 @@ class DataControllerUtils:
             if fileData.m_Path == newFilePath:
                 RaiseError.FileIsAlreadyRegistered(newFilePath)
 
+            continue
+
         return __class__.Helper__FinishCreateTopLevelFile(cfgData, newFilePath)
 
     # --------------------------------------------------------------------
@@ -435,6 +437,8 @@ class DataControllerUtils:
 
             if fileData.m_Path == newFilePath:
                 return fileData
+
+            continue
 
         newFileData = PgCfgModel__FileData(cfgData, newFilePath)
 
@@ -482,6 +486,8 @@ class DataControllerUtils:
             if ptr is fileLineData:
                 return iFileLine
 
+            continue
+
         assert iFileLine == cFileLines
         return iFileLine
 
@@ -507,6 +513,8 @@ class DataControllerUtils:
 
             if ptr.m_Element is elementData:
                 return iItem
+
+            continue
 
         assert iItem == cItems
         return iItem
@@ -631,6 +639,8 @@ class DataControllerUtils:
                 if ptr is fileData:
                     break
 
+                continue
+
             assert i >= 0
             assert i <= len(indexItemData)
 
@@ -726,6 +736,8 @@ class DataControllerUtils:
 
                 if ptr is optionData:
                     break
+
+                continue
 
             assert i >= 0
             assert i <= len(data)

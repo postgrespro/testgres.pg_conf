@@ -782,6 +782,9 @@ def helper__print_test_list(tests: typing.List[str]) -> None:
         assert t != ""
         nTest += 1
         logging.info(templateLine.format(nTest, t))
+        continue
+
+    return
 
 
 # ------------------------------------------------------------------------
@@ -813,6 +816,9 @@ def helper__print_test_list2(tests: typing.List[T_TUPLE__str_int]) -> None:
         assert t[1] >= 0
         nTest += 1
         logging.info(templateLine.format(nTest, t[0], t[1]))
+        continue
+
+    return
 
 
 # /////////////////////////////////////////////////////////////////////////////

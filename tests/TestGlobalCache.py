@@ -76,6 +76,8 @@ class TestGlobalCache:
                             resourceID, type(e).__name__, e
                         )
                     )
+                continue
+        return
 
 
 # /////////////////////////////////////////////////////////////////////////////
