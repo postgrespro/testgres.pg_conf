@@ -166,7 +166,7 @@ class ErrorMessageBuilder:
     @staticmethod
     def CommentTextContainsInvalidSymbols():
         errMsg = "Comment text contains invalid symbols."
-        raise Exception(errMsg)
+        return errMsg
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -174,7 +174,7 @@ class ErrorMessageBuilder:
         errMsg = "File [{0}] is already registered.".format(
             file_path,
         )
-        raise Exception(errMsg)
+        return errMsg
 
     # --------------------------------------------------------------------
     @staticmethod
