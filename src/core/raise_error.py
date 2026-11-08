@@ -59,7 +59,7 @@ class RaiseError:
         assert nameType is not None
         assert type(nameType) is type
 
-        errMsg = "Option name has a nad type [{}]".format(
+        errMsg = "Option name has a bad type [{}].".format(
             nameType.__name__,
         )
 
