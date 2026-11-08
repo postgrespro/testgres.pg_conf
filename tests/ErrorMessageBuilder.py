@@ -16,7 +16,8 @@ class ErrorMessageBuilder:
         assert methodName != ""
 
         errMsg = "Method {0}::{1} is not implemented.".format(
-            classType.__name__, methodName
+            classType.__name__,
+            methodName,
         )
         return errMsg
 
@@ -28,7 +29,8 @@ class ErrorMessageBuilder:
         assert methodName != ""
 
         errMsg = "Get property {0}::{1} is not implemented.".format(
-            classType.__name__, methodName
+            classType.__name__,
+            methodName,
         )
         return errMsg
 
@@ -44,7 +46,9 @@ class ErrorMessageBuilder:
         assert nameType is not None
         assert type(nameType) is type
 
-        errMsg = "Option name has nad type [{0}]".format(nameType.__name__)
+        errMsg = "Option name has nad type [{0}]".format(
+            nameType.__name__,
+        )
         return errMsg
 
     # --------------------------------------------------------------------
@@ -65,7 +69,9 @@ class ErrorMessageBuilder:
         assert type(optionName) is str
         assert optionName != ""
 
-        errMsg = "None value item of option [{0}] is not supported.".format(optionName)
+        errMsg = "None value item of option [{0}] is not supported.".format(
+            optionName,
+        )
         return errMsg
 
     # --------------------------------------------------------------------
@@ -100,26 +106,38 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def BadOptionValueType(optionName: str, optionValueType: type, expectedType: type):
+    def BadOptionValueType(
+        optionName: str,
+        optionValueType: type,
+        expectedType: type,
+    ):
         assert type(optionName) is str
         assert type(optionValueType) is type
         assert type(expectedType) is type
 
         errMsg = "Bad option [{0}] value type [{1}]. Expected type is [{2}].".format(
-            optionName, optionValueType.__name__, expectedType.__name__
+            optionName,
+            optionValueType.__name__,
+            expectedType.__name__,
         )
         return errMsg
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CantConvertOptionValue(optionName: str, sourceType: type, targetType: type):
+    def CantConvertOptionValue(
+        optionName: str,
+        sourceType: type,
+        targetType: type,
+    ):
         assert type(optionName) is str
         assert type(sourceType) is type
         assert type(targetType) is type
 
         errMsg = (
             "Can't convert option [{0}] value from type [{1}] to type [{2}].".format(
-                optionName, sourceType.__name__, targetType.__name__
+                optionName,
+                sourceType.__name__,
+                targetType.__name__,
             )
         )
         return errMsg
@@ -127,7 +145,9 @@ class ErrorMessageBuilder:
     # --------------------------------------------------------------------
     @staticmethod
     def BadOptionValueItemType(
-        optionName: str, optionValueItemType: type, expectedType: type
+        optionName: str,
+        optionValueItemType: type,
+        expectedType: type,
     ):
         assert type(optionName) is str
         assert type(optionValueItemType) is type
@@ -135,7 +155,9 @@ class ErrorMessageBuilder:
 
         errMsg = (
             "Bad option [{0}] value item type [{1}]. Expected type is [{2}].".format(
-                optionName, optionValueItemType.__name__, expectedType.__name__
+                optionName,
+                optionValueItemType.__name__,
+                expectedType.__name__,
             )
         )
         return errMsg
@@ -161,7 +183,8 @@ class ErrorMessageBuilder:
         assert optionName != ""
 
         errMsg = "Option [{0}] already exist in this file [{1}].".format(
-            optionName, filePath
+            optionName,
+            filePath,
         )
         return errMsg
 
@@ -174,7 +197,8 @@ class ErrorMessageBuilder:
         assert optionName != ""
 
         errMsg = "Option [{0}] already exist in another file [{1}].".format(
-            optionName, filePath
+            optionName,
+            filePath,
         )
         return errMsg
 
@@ -187,33 +211,42 @@ class ErrorMessageBuilder:
         assert optionName != ""
 
         errMsg = "Option [{0}] already exist in the file [{1}].".format(
-            optionName, filePath
+            optionName,
+            filePath,
         )
         return errMsg
 
     # --------------------------------------------------------------------
     @staticmethod
     def OptionValueItemIsAlreadyDefined(
-        filePath: str, optName: str, valueItem: typing.Any
+        filePath: str,
+        optName: str,
+        valueItem: typing.Any,
     ):
         assert type(filePath) is str
         assert type(optName) is str
 
         errMsg = "Another definition of option [{1}] value item [{2}] is found in the file [{0}].".format(
-            filePath, optName, valueItem
+            filePath,
+            optName,
+            valueItem,
         )
         return errMsg
 
     # --------------------------------------------------------------------
     @staticmethod
     def OptionValueItemIsAlreadyDefinedInAnotherFile(
-        filePath: str, optName: str, valueItem: typing.Any
+        filePath: str,
+        optName: str,
+        valueItem: typing.Any,
     ):
         assert type(filePath) is str
         assert type(optName) is str
 
         errMsg = "Definition of option [{1}] value item [{2}] is found in another file [{0}].".format(
-            filePath, optName, valueItem
+            filePath,
+            optName,
+            valueItem,
         )
         return errMsg
 
@@ -232,7 +265,8 @@ class ErrorMessageBuilder:
         assert type(count) is int
 
         errMsg = "Multiple definitition of file [{0}] is found - {1}.".format(
-            fileName, count
+            fileName,
+            count,
         )
         return errMsg
 
@@ -254,7 +288,9 @@ class ErrorMessageBuilder:
         assert type(curLastMDate) is datetime.datetime
 
         errMsg = "File [{0}] was modified externally. Our timestamp is [{1}]. The current file timestamp is [{2}].".format(
-            filePath, ourLastMDate, curLastMDate
+            filePath,
+            ourLastMDate,
+            curLastMDate,
         )
         return errMsg
 
@@ -269,7 +305,9 @@ class ErrorMessageBuilder:
     def FileLineAlreadyHasOption(optionName: str):
         assert type(optionName) is str
 
-        errMsg = "File line already has the option [{0}].".format(optionName)
+        errMsg = "File line already has the option [{0}].".format(
+            optionName,
+        )
         return errMsg
 
     # --------------------------------------------------------------------
@@ -286,7 +324,9 @@ class ErrorMessageBuilder:
         assert type(ch) is str
 
         errMsg = "Unexpected symbol in line {0}, column {1}: [{2}]".format(
-            lineNum, colNum, ch
+            lineNum,
+            colNum,
+            ch,
         )
         return errMsg
 
@@ -296,7 +336,9 @@ class ErrorMessageBuilder:
         assert type(lineNum) is int
         assert lineNum >= 0
 
-        errMsg = "Include directive in line {0} does not have a path.".format(lineNum)
+        errMsg = "Include directive in line {0} does not have a path.".format(
+            lineNum,
+        )
         return errMsg
 
     # --------------------------------------------------------------------
@@ -305,7 +347,9 @@ class ErrorMessageBuilder:
         assert type(lineNum) is int
         assert lineNum >= 0
 
-        errMsg = "The end of an include path is not found. Line {0}.".format(lineNum)
+        errMsg = "The end of an include path is not found. Line {0}.".format(
+            lineNum,
+        )
         return errMsg
 
     # --------------------------------------------------------------------
@@ -314,12 +358,18 @@ class ErrorMessageBuilder:
         assert type(lineNum) is int
         assert lineNum >= 0
 
-        errMsg = "Escape in an include path is not completed. Line {0}.".format(lineNum)
+        errMsg = "Escape in an include path is not completed. Line {0}.".format(
+            lineNum,
+        )
         return errMsg
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__UnknownEscapedSymbolInInclude(lineNum: int, colNum: int, ch: str):
+    def CfgReader__UnknownEscapedSymbolInInclude(
+        lineNum: int,
+        colNum: int,
+        ch: str,
+    ):
         assert type(lineNum) is int
         assert type(colNum) is int
         assert type(ch) is str
@@ -328,7 +378,9 @@ class ErrorMessageBuilder:
         assert ch != ""
 
         errMsg = "Unknown escape symbol [{2}] in an include path. Line {0}. Column {1}.".format(
-            lineNum, colNum, ch
+            lineNum,
+            colNum,
+            ch,
         )
         return errMsg
 
@@ -338,7 +390,9 @@ class ErrorMessageBuilder:
         assert type(lineNum) is int
         assert lineNum >= 0
 
-        errMsg = "Include in line {0} has an empty path.".format(lineNum)
+        errMsg = "Include in line {0} has an empty path.".format(
+            lineNum,
+        )
         return errMsg
 
     # --------------------------------------------------------------------
@@ -350,7 +404,8 @@ class ErrorMessageBuilder:
         assert optionName != ""
 
         errMsg = "Option [{0}] in line {1} does not have a value.".format(
-            optionName, lineNum
+            optionName,
+            lineNum,
         )
         return errMsg
 
@@ -363,27 +418,35 @@ class ErrorMessageBuilder:
         assert optionName != ""
 
         errMsg = "Value of quoted option [{0}] is not completed. Line {1}.".format(
-            optionName, lineNum
+            optionName,
+            lineNum,
         )
         return errMsg
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__IncompletedEscapeInQuotedOptionValue(optionName: str, lineNum: int):
+    def CfgReader__IncompletedEscapeInQuotedOptionValue(
+        optionName: str,
+        lineNum: int,
+    ):
         assert type(lineNum) is int
         assert type(optionName) is str
         assert lineNum >= 0
         assert optionName != ""
 
         errMsg = "Escape in a value of quoted option [{0}] is not completed. Line {1}.".format(
-            optionName, lineNum
+            optionName,
+            lineNum,
         )
         return errMsg
 
     # --------------------------------------------------------------------
     @staticmethod
     def CfgReader__UnknownEscapedSymbolInQuotedOptionValue(
-        optionName: str, lineNum: int, colNum: int, ch: str
+        optionName: str,
+        lineNum: int,
+        colNum: int,
+        ch: str,
     ):
         assert type(lineNum) is int
         assert type(optionName) is str
@@ -393,7 +456,10 @@ class ErrorMessageBuilder:
         assert ch != ""
 
         errMsg = "Unknown escape symbol [{3}] in a value of quoted option [{0}]. Line {1}. Column {2}.".format(
-            optionName, lineNum, colNum, ch
+            optionName,
+            lineNum,
+            colNum,
+            ch,
         )
         return errMsg
 
