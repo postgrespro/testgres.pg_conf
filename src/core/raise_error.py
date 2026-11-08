@@ -1,6 +1,8 @@
 # //////////////////////////////////////////////////////////////////////////////
 # Postgres Pro. PostgreSQL Configuration Python Library.
 
+from ..exceptions import PostgresConfigException
+
 import datetime
 import typing
 
@@ -44,7 +46,10 @@ class RaiseError:
     @staticmethod
     def OptionNameIsNone() -> typing.NoReturn:
         errMsg = "Option name is None."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -54,22 +59,31 @@ class RaiseError:
         assert nameType is not None
         assert type(nameType) is type
 
-        errMsg = "Option name has nad type [{}]".format(
+        errMsg = "Option name has a nad type [{}]".format(
             nameType.__name__,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def OptionNameIsEmpty() -> typing.NoReturn:
         errMsg = "Option name is empty."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def NoneValueIsNotSupported() -> typing.NoReturn:
         errMsg = "None value is not supported."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -82,37 +96,55 @@ class RaiseError:
         errMsg = "None value item of option [{}] is not supported.".format(
             optionName,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def CommentObjectWasDeleted() -> typing.NoReturn:
         errMsg = "Comment object was deleted."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def OptionObjectWasDeleted() -> typing.NoReturn:
         errMsg = "Option object was deleted."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def IncludeObjectWasDeleted() -> typing.NoReturn:
         errMsg = "Include object was deleted."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def FileLineObjectWasDeleted() -> typing.NoReturn:
         errMsg = "FileLine object was deleted."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def FileObjectWasDeleted() -> typing.NoReturn:
         errMsg = "File object was deleted."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -130,7 +162,10 @@ class RaiseError:
             optionValueType.__name__,
             expectedType.__name__,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -148,7 +183,10 @@ class RaiseError:
             sourceType.__name__,
             targetType.__name__,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -166,13 +204,19 @@ class RaiseError:
             optionValueItemType.__name__,
             expectedType.__name__,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def CommentTextContainsInvalidSymbols() -> typing.NoReturn:
         errMsg = "Comment text contains invalid symbols."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -180,7 +224,10 @@ class RaiseError:
         file_path: str,
     ) -> typing.NoReturn:
         errMsg = "File [{0}] is already registered.".format(file_path)
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -196,7 +243,10 @@ class RaiseError:
         errMsg = "Option [{0}] already exist in this file [{1}].".format(
             optionName, filePath
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -213,7 +263,10 @@ class RaiseError:
             optionName,
             filePath,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -230,7 +283,10 @@ class RaiseError:
             optionName,
             filePath,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -247,7 +303,10 @@ class RaiseError:
             optName,
             valueItem,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -264,7 +323,10 @@ class RaiseError:
             valueItem,
             filePath,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -274,7 +336,10 @@ class RaiseError:
         errMsg = "Unknown file name [{}].".format(
             fileName,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -289,13 +354,19 @@ class RaiseError:
             fileName,
             count,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def FilePathIsEmpty() -> typing.NoReturn:
         errMsg = "File path is empty."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -313,13 +384,19 @@ class RaiseError:
             ourLastMDate,
             curLastMDate,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def FileLineAlreadyHasComment() -> typing.NoReturn:
         errMsg = "File line already has a comment."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -329,14 +406,19 @@ class RaiseError:
         errMsg = "File line already has the option [{}].".format(
             optionName,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def FileLineAlreadyHasIncludeDirective() -> typing.NoReturn:
         errMsg = "File line already has an include directive."
 
-        raise Exception(errMsg)
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -354,7 +436,10 @@ class RaiseError:
             colNum,
             ch,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -365,7 +450,10 @@ class RaiseError:
         errMsg = "Include directive in line {} does not have a path.".format(
             lineNum,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -376,7 +464,10 @@ class RaiseError:
         errMsg = "The end of an include path is not found. Line {}.".format(
             lineNum,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -387,7 +478,10 @@ class RaiseError:
         errMsg = "Escape in an include path is not completed. Line {}.".format(
             lineNum,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -410,7 +504,10 @@ class RaiseError:
                 colNum,
             )
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -423,7 +520,10 @@ class RaiseError:
         errMsg = "Include in line {} has an empty path.".format(
             lineNum,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -440,7 +540,10 @@ class RaiseError:
             optionName,
             lineNum,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -457,7 +560,10 @@ class RaiseError:
             optionName,
             lineNum,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -476,7 +582,10 @@ class RaiseError:
                 lineNum,
             )
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -499,13 +608,28 @@ class RaiseError:
             lineNum,
             colNum,
         )
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def BadFormatOfCommaSeparatedList() -> typing.NoReturn:
         errMsg = "Bad format of comma separated list."
-        raise Exception(errMsg)
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def Helper__RaiseErr__PostgresConfigException(
+        errMsg: str,
+    ) -> typing.NoReturn:
+        assert type(errMsg) is str
+
+        raise PostgresConfigException(errMsg)
 
 
 # //////////////////////////////////////////////////////////////////////////////
