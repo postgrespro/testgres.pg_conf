@@ -13,8 +13,8 @@ RUN apk add bash
 
 RUN adduser -D test
 
-ADD --chown=test:test . /home/test/testgres
-WORKDIR /home/test/testgres
+ADD --chown=test:test . /home/test/project
+WORKDIR /home/test/project
 
 USER test
 
