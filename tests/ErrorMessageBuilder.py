@@ -171,7 +171,9 @@ class ErrorMessageBuilder:
     # --------------------------------------------------------------------
     @staticmethod
     def FileIsAlreadyRegistered(file_path: str):
-        errMsg = "File [{0}] is already registered.".format(file_path)
+        errMsg = "File [{0}] is already registered.".format(
+            file_path,
+        )
         raise Exception(errMsg)
 
     # --------------------------------------------------------------------
@@ -255,7 +257,9 @@ class ErrorMessageBuilder:
     def UnknownFileName(fileName: str):
         assert type(fileName) is str
 
-        errMsg = "Unknown file name [{0}].".format(fileName)
+        errMsg = "Unknown file name [{0}].".format(
+            fileName,
+        )
         return errMsg
 
     # --------------------------------------------------------------------
