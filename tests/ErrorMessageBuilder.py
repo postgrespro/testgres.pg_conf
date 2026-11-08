@@ -46,7 +46,7 @@ class ErrorMessageBuilder:
         assert nameType is not None
         assert type(nameType) is type
 
-        errMsg = "Option name has nad type [{}]".format(
+        errMsg = "Option name has bad type [{}].".format(
             nameType.__name__,
         )
         return errMsg
