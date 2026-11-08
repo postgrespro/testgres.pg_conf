@@ -15,10 +15,10 @@ FROM base2_with_python-${PYTHON_VERSION} AS final
 
 RUN useradd -m test
 
-ADD --chown=test:test . /home/test/testgres
-WORKDIR /home/test/testgres
-RUN mkdir /home/test/testgres/logs
-RUN chown -R test:test /home/test/testgres/logs
+ADD --chown=test:test . /home/test/project
+WORKDIR /home/test/project
+RUN mkdir /home/test/project/logs
+RUN chown -R test:test /home/test/project/logs
 
 ENV LANG=C.UTF-8
 
