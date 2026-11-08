@@ -349,7 +349,7 @@ class RaiseError:
         assert type(colNum) is int
         assert type(ch) is str
 
-        errMsg = "Unexpected symbol in line {}, column {}: [{}]".format(
+        errMsg = "Unexpected symbol in line {}, column {}: {!r}".format(
             lineNum,
             colNum,
             ch,
@@ -404,7 +404,7 @@ class RaiseError:
         assert ch != ""
 
         errMsg = (
-            "Unknown escape symbol [{}] in an include path. Line {}. Column {}.".format(
+            "Unknown escape symbol {!r} in an include path. Line {}. Column {}.".format(
                 ch,
                 lineNum,
                 colNum,
@@ -493,7 +493,7 @@ class RaiseError:
         assert optionName != ""
         assert ch != ""
 
-        errMsg = "Unknown escape symbol [{}] in a value of quoted option [{}]. Line {}. Column {}.".format(
+        errMsg = "Unknown escape symbol {!r} in a value of quoted option [{}]. Line {}. Column {}.".format(
             ch,
             optionName,
             lineNum,
