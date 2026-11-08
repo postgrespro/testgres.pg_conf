@@ -9,7 +9,7 @@ from .raise_error import RaiseError
 
 class DataVerificator:
     @staticmethod
-    def CheckOptionName(name: str):
+    def CheckOptionName(name: str) -> None:
         if name is None:
             RaiseError.OptionNameIsNone()
 
@@ -20,6 +20,7 @@ class DataVerificator:
             RaiseError.OptionNameIsEmpty()
 
         # TODO: Add an extended verification of an option name
+        return
 
     # --------------------------------------------------------------------
     sm_InvalidCommentSymbols: str = "\n\r\0"
@@ -41,7 +42,7 @@ class DataVerificator:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CheckCommentText(text: str):
+    def CheckCommentText(text: str) -> None:
         assert text is not None
         assert type(text) is str
 
@@ -51,15 +52,18 @@ class DataVerificator:
             RaiseError.CommentTextContainsInvalidSymbols()
 
         # OK
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CheckStringOfFilePath(text: str):
+    def CheckStringOfFilePath(text: str) -> None:
         assert text is not None
         assert type(text) is str
 
         if text == "":
             RaiseError.FilePathIsEmpty()
+
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
