@@ -16,6 +16,7 @@ from src.implementation.v00.configuration_base import PgCfgModel__IncludeData
 
 from .......TestServices import TestServices
 from .......CfgFileReader import CfgFileReader
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import typing
@@ -302,7 +303,13 @@ class TestSet001__Common:
         src = CfgFileReader("port" + data204_tail)
 
         with pytest.raises(
-            Exception, match=re.escape("Option [port] in line 1 does not have a value.")
+            Exception,
+            match=re.escape(
+                ErrorMessageBuilder.CfgReader__OptionWithoutValue(
+                    "port",
+                    1,
+                ),
+            ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
         return
@@ -537,7 +544,10 @@ class TestSet001__Common:
         with pytest.raises(
             Exception,
             match=re.escape(
-                "Value of quoted option [listen_addresses] is not completed. Line 1."
+                ErrorMessageBuilder.CfgReader__EndQuotedOptionValueIsNotFound(
+                    "listen_addresses",
+                    1,
+                ),
             ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
@@ -576,7 +586,10 @@ class TestSet001__Common:
         with pytest.raises(
             Exception,
             match=re.escape(
-                "Escape in a value of quoted option [listen_addresses] is not completed. Line 1."
+                ErrorMessageBuilder.CfgReader__IncompletedEscapeInQuotedOptionValue(
+                    "listen_addresses",
+                    1,
+                ),
             ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
@@ -598,7 +611,12 @@ class TestSet001__Common:
         with pytest.raises(
             Exception,
             match=re.escape(
-                "Unknown escape symbol [a] in a value of quoted option [listen_addresses]. Line 1. Column 20."
+                ErrorMessageBuilder.CfgReader__UnknownEscapedSymbolInQuotedOptionValue(
+                    "listen_addresses",
+                    1,
+                    20,
+                    "a",
+                ),
             ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
@@ -646,7 +664,12 @@ class TestSet001__Common:
         src = CfgFileReader("include ''\n")
 
         with pytest.raises(
-            Exception, match=re.escape("Include in line 1 has an empty path.")
+            Exception,
+            match=re.escape(
+                ErrorMessageBuilder.CfgReader__IncludeHasEmptyPath(
+                    1,
+                ),
+            ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
         return
@@ -680,7 +703,11 @@ class TestSet001__Common:
 
         with pytest.raises(
             Exception,
-            match=re.escape("The end of an include path is not found. Line 1."),
+            match=re.escape(
+                ErrorMessageBuilder.CfgReader__EndOfIncludePathIsNotFound(
+                    1,
+                ),
+            ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
         return
@@ -701,7 +728,11 @@ class TestSet001__Common:
         with pytest.raises(
             Exception,
             match=re.escape(
-                "Unknown escape symbol [a] in an include path. Line 1. Column 11."
+                ErrorMessageBuilder.CfgReader__UnknownEscapedSymbolInInclude(
+                    1,
+                    11,
+                    "a",
+                ),
             ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
@@ -733,7 +764,11 @@ class TestSet001__Common:
 
         with pytest.raises(
             Exception,
-            match=re.escape("Escape in an include path is not completed. Line 1."),
+            match=re.escape(
+                ErrorMessageBuilder.CfgReader__IncompletedEscapeInInclude(
+                    1,
+                ),
+            ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
         return
@@ -777,7 +812,11 @@ class TestSet001__Common:
 
         with pytest.raises(
             Exception,
-            match=re.escape("Include directive in line 1 does not have a path."),
+            match=re.escape(
+                ErrorMessageBuilder.CfgReader__IncludeWithoutPath(
+                    1,
+                ),
+            ),
         ):
             PgCfg_Reader_Base.LoadFileContent(file1, src)
         return
