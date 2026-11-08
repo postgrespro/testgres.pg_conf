@@ -15,7 +15,7 @@ class ErrorMessageBuilder:
         assert type(methodName) is str
         assert methodName != ""
 
-        errMsg = "Method {0}::{1} is not implemented.".format(
+        errMsg = "Method {}::{} is not implemented.".format(
             classType.__name__,
             methodName,
         )
@@ -28,7 +28,7 @@ class ErrorMessageBuilder:
         assert type(methodName) is str
         assert methodName != ""
 
-        errMsg = "Get property {0}::{1} is not implemented.".format(
+        errMsg = "Get property {}::{} is not implemented.".format(
             classType.__name__,
             methodName,
         )
@@ -46,7 +46,7 @@ class ErrorMessageBuilder:
         assert nameType is not None
         assert type(nameType) is type
 
-        errMsg = "Option name has nad type [{0}]".format(
+        errMsg = "Option name has nad type [{}]".format(
             nameType.__name__,
         )
         return errMsg
@@ -69,7 +69,7 @@ class ErrorMessageBuilder:
         assert type(optionName) is str
         assert optionName != ""
 
-        errMsg = "None value item of option [{0}] is not supported.".format(
+        errMsg = "None value item of option [{}] is not supported.".format(
             optionName,
         )
         return errMsg
@@ -115,7 +115,7 @@ class ErrorMessageBuilder:
         assert type(optionValueType) is type
         assert type(expectedType) is type
 
-        errMsg = "Bad option [{0}] value type [{1}]. Expected type is [{2}].".format(
+        errMsg = "Bad option [{}] value type [{}]. Expected type is [{}].".format(
             optionName,
             optionValueType.__name__,
             expectedType.__name__,
@@ -133,12 +133,10 @@ class ErrorMessageBuilder:
         assert type(sourceType) is type
         assert type(targetType) is type
 
-        errMsg = (
-            "Can't convert option [{0}] value from type [{1}] to type [{2}].".format(
-                optionName,
-                sourceType.__name__,
-                targetType.__name__,
-            )
+        errMsg = "Can't convert option [{}] value from type [{}] to type [{}].".format(
+            optionName,
+            sourceType.__name__,
+            targetType.__name__,
         )
         return errMsg
 
@@ -153,12 +151,10 @@ class ErrorMessageBuilder:
         assert type(optionValueItemType) is type
         assert type(expectedType) is type
 
-        errMsg = (
-            "Bad option [{0}] value item type [{1}]. Expected type is [{2}].".format(
-                optionName,
-                optionValueItemType.__name__,
-                expectedType.__name__,
-            )
+        errMsg = "Bad option [{}] value item type [{}]. Expected type is [{}].".format(
+            optionName,
+            optionValueItemType.__name__,
+            expectedType.__name__,
         )
         return errMsg
 
@@ -171,7 +167,7 @@ class ErrorMessageBuilder:
     # --------------------------------------------------------------------
     @staticmethod
     def FileIsAlreadyRegistered(file_path: str):
-        errMsg = "File [{0}] is already registered.".format(
+        errMsg = "File [{}] is already registered.".format(
             file_path,
         )
         return errMsg
@@ -184,7 +180,7 @@ class ErrorMessageBuilder:
         assert filePath != ""
         assert optionName != ""
 
-        errMsg = "Option [{0}] already exist in this file [{1}].".format(
+        errMsg = "Option [{}] already exist in this file [{}].".format(
             optionName,
             filePath,
         )
@@ -198,7 +194,7 @@ class ErrorMessageBuilder:
         assert filePath != ""
         assert optionName != ""
 
-        errMsg = "Option [{0}] already exist in another file [{1}].".format(
+        errMsg = "Option [{}] already exist in another file [{}].".format(
             optionName,
             filePath,
         )
@@ -212,7 +208,7 @@ class ErrorMessageBuilder:
         assert filePath != ""
         assert optionName != ""
 
-        errMsg = "Option [{0}] already exist in the file [{1}].".format(
+        errMsg = "Option [{}] already exist in the file [{}].".format(
             optionName,
             filePath,
         )
@@ -228,10 +224,10 @@ class ErrorMessageBuilder:
         assert type(filePath) is str
         assert type(optName) is str
 
-        errMsg = "Another definition of option [{1}] value item [{2}] is found in the file [{0}].".format(
-            filePath,
+        errMsg = "Another definition of option [{}] value item [{}] is found in the file [{}].".format(
             optName,
             valueItem,
+            filePath,
         )
         return errMsg
 
@@ -245,10 +241,10 @@ class ErrorMessageBuilder:
         assert type(filePath) is str
         assert type(optName) is str
 
-        errMsg = "Definition of option [{1}] value item [{2}] is found in another file [{0}].".format(
-            filePath,
+        errMsg = "Definition of option [{}] value item [{}] is found in another file [{}].".format(
             optName,
             valueItem,
+            filePath,
         )
         return errMsg
 
@@ -257,7 +253,7 @@ class ErrorMessageBuilder:
     def UnknownFileName(fileName: str):
         assert type(fileName) is str
 
-        errMsg = "Unknown file name [{0}].".format(
+        errMsg = "Unknown file name [{}].".format(
             fileName,
         )
         return errMsg
@@ -268,7 +264,7 @@ class ErrorMessageBuilder:
         assert type(fileName) is str
         assert type(count) is int
 
-        errMsg = "Multiple definitition of file [{0}] is found - {1}.".format(
+        errMsg = "Multiple definitition of file [{}] is found - {}.".format(
             fileName,
             count,
         )
@@ -291,7 +287,7 @@ class ErrorMessageBuilder:
         assert type(ourLastMDate) is datetime.datetime
         assert type(curLastMDate) is datetime.datetime
 
-        errMsg = "File [{0}] was modified externally. Our timestamp is [{1}]. The current file timestamp is [{2}].".format(
+        errMsg = "File [{}] was modified externally. Our timestamp is [{}]. The current file timestamp is [{}].".format(
             filePath,
             ourLastMDate,
             curLastMDate,
@@ -309,7 +305,7 @@ class ErrorMessageBuilder:
     def FileLineAlreadyHasOption(optionName: str):
         assert type(optionName) is str
 
-        errMsg = "File line already has the option [{0}].".format(
+        errMsg = "File line already has the option [{}].".format(
             optionName,
         )
         return errMsg
@@ -327,7 +323,7 @@ class ErrorMessageBuilder:
         assert type(colNum) is int
         assert type(ch) is str
 
-        errMsg = "Unexpected symbol in line {0}, column {1}: [{2}]".format(
+        errMsg = "Unexpected symbol in line {}, column {}: [{}]".format(
             lineNum,
             colNum,
             ch,
@@ -340,7 +336,7 @@ class ErrorMessageBuilder:
         assert type(lineNum) is int
         assert lineNum >= 0
 
-        errMsg = "Include directive in line {0} does not have a path.".format(
+        errMsg = "Include directive in line {} does not have a path.".format(
             lineNum,
         )
         return errMsg
@@ -351,7 +347,7 @@ class ErrorMessageBuilder:
         assert type(lineNum) is int
         assert lineNum >= 0
 
-        errMsg = "The end of an include path is not found. Line {0}.".format(
+        errMsg = "The end of an include path is not found. Line {}.".format(
             lineNum,
         )
         return errMsg
@@ -362,7 +358,7 @@ class ErrorMessageBuilder:
         assert type(lineNum) is int
         assert lineNum >= 0
 
-        errMsg = "Escape in an include path is not completed. Line {0}.".format(
+        errMsg = "Escape in an include path is not completed. Line {}.".format(
             lineNum,
         )
         return errMsg
@@ -381,10 +377,12 @@ class ErrorMessageBuilder:
         assert colNum >= 0
         assert ch != ""
 
-        errMsg = "Unknown escape symbol [{2}] in an include path. Line {0}. Column {1}.".format(
-            lineNum,
-            colNum,
-            ch,
+        errMsg = (
+            "Unknown escape symbol [{}] in an include path. Line {}. Column {}.".format(
+                ch,
+                lineNum,
+                colNum,
+            )
         )
         return errMsg
 
@@ -394,7 +392,7 @@ class ErrorMessageBuilder:
         assert type(lineNum) is int
         assert lineNum >= 0
 
-        errMsg = "Include in line {0} has an empty path.".format(
+        errMsg = "Include in line {} has an empty path.".format(
             lineNum,
         )
         return errMsg
@@ -407,7 +405,7 @@ class ErrorMessageBuilder:
         assert lineNum >= 0
         assert optionName != ""
 
-        errMsg = "Option [{0}] in line {1} does not have a value.".format(
+        errMsg = "Option [{}] in line {} does not have a value.".format(
             optionName,
             lineNum,
         )
@@ -421,7 +419,7 @@ class ErrorMessageBuilder:
         assert lineNum >= 0
         assert optionName != ""
 
-        errMsg = "Value of quoted option [{0}] is not completed. Line {1}.".format(
+        errMsg = "Value of quoted option [{}] is not completed. Line {}.".format(
             optionName,
             lineNum,
         )
@@ -438,9 +436,11 @@ class ErrorMessageBuilder:
         assert lineNum >= 0
         assert optionName != ""
 
-        errMsg = "Escape in a value of quoted option [{0}] is not completed. Line {1}.".format(
-            optionName,
-            lineNum,
+        errMsg = (
+            "Escape in a value of quoted option [{}] is not completed. Line {}.".format(
+                optionName,
+                lineNum,
+            )
         )
         return errMsg
 
@@ -459,11 +459,11 @@ class ErrorMessageBuilder:
         assert optionName != ""
         assert ch != ""
 
-        errMsg = "Unknown escape symbol [{3}] in a value of quoted option [{0}]. Line {1}. Column {2}.".format(
+        errMsg = "Unknown escape symbol [{}] in a value of quoted option [{}]. Line {}. Column {}.".format(
+            ch,
             optionName,
             lineNum,
             colNum,
-            ch,
         )
         return errMsg
 
