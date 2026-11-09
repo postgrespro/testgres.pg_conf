@@ -484,7 +484,9 @@ class DataControllerUtils:
 
         cFileLines = len(fileData.m_Lines)
 
-        for iFileLine in range(cFileLines):
+        iFileLine = 0
+
+        while iFileLine != cFileLines:
             ptr = fileData.m_Lines[iFileLine]
             assert ptr is not None
             assert type(ptr) is PgCfgModel__FileLineData
@@ -493,6 +495,7 @@ class DataControllerUtils:
             if ptr is fileLineData:
                 return iFileLine
 
+            iFileLine += 1
             continue
 
         assert iFileLine == cFileLines
@@ -512,7 +515,9 @@ class DataControllerUtils:
 
         cItems = len(fileLineData.m_Items)
 
-        for iItem in range(cItems):
+        iItem = 0
+
+        while iItem != cItems:
             ptr = fileLineData.m_Items[iItem]
             assert ptr is not None
             assert type(ptr) is PgCfgModel__FileLineData.tagItem
@@ -521,6 +526,7 @@ class DataControllerUtils:
             if ptr.m_Element is elementData:
                 return iItem
 
+            iItem += 1
             continue
 
         assert iItem == cItems
@@ -646,7 +652,9 @@ class DataControllerUtils:
             assert type(indexItemData) is list
             assert len(indexItemData) > 1
 
-            for i in range(len(indexItemData)):
+            i = 0
+
+            while i != len(indexItemData):
                 ptr = indexItemData[i]
                 assert ptr is not None
                 assert type(ptr) is PgCfgModel__FileData
@@ -654,6 +662,7 @@ class DataControllerUtils:
                 if ptr is fileData:
                     break
 
+                i += 1
                 continue
 
             assert i >= 0
@@ -743,7 +752,8 @@ class DataControllerUtils:
         if type(data) is list:
             assert len(data) > 1
 
-            for i in range(len(data)):
+            i = 0
+            while i != len(data):
                 ptr = data[i]
                 assert ptr is not None
                 assert type(ptr) is PgCfgModel__OptionData
@@ -753,6 +763,7 @@ class DataControllerUtils:
                 if ptr is optionData:
                     break
 
+                i += 1
                 continue
 
             assert i >= 0
