@@ -127,6 +127,7 @@ class PostgresConfigurationOptionsIterator(
     def __iter__(self) -> PostgresConfigurationOptionsIterator:
         RaiseError.MethodIsNotImplemented(__class__, "__iter__")
 
+    # --------------------------------------------------------------------
     def __next__(self) -> PostgresConfigurationOption:
         RaiseError.MethodIsNotImplemented(__class__, "__next__")
 
@@ -224,6 +225,7 @@ class PostgresConfigurationFileLinesIterator(
     def __iter__(self) -> PostgresConfigurationFileLinesIterator:
         RaiseError.MethodIsNotImplemented(__class__, "__iter__")
 
+    # --------------------------------------------------------------------
     def __next__(self) -> PostgresConfigurationFileLine:
         RaiseError.MethodIsNotImplemented(__class__, "__next__")
 
@@ -339,6 +341,7 @@ class PostgresConfigurationFilesIterator(typing.Iterator[PostgresConfigurationFi
     def __iter__(self) -> PostgresConfigurationFilesIterator:
         RaiseError.MethodIsNotImplemented(__class__, "__iter__")
 
+    # --------------------------------------------------------------------
     def __next__(self) -> PostgresConfigurationFile:
         RaiseError.MethodIsNotImplemented(__class__, "__next__")
 
