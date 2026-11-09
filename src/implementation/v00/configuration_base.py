@@ -569,6 +569,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
             cfg.m_Data,
             self.m_FileLineData,
         )
+        return
 
     # Helper methods -----------------------------------------------------
     def Helper__CheckAlive(self) -> None:
