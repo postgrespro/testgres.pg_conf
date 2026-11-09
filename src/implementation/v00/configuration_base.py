@@ -3131,7 +3131,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert type(data) is not PgCfgModel__OptionData
                 assert type(data) is not list
 
-                BugCheckError.UnkOptObjectDataType(optionName, type(data))
+                BugCheckError.UnkOptObjectDataType(
+                    optionName,
+                    type(data),
+                )
 
             assert optionName not in fileData.m_OptionsByName.keys()
 
@@ -3154,14 +3157,18 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert fileData2 is not fileData
 
                 if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-                    data, optionValueItem
+                    data,
+                    optionValueItem,
                 ):
                     RaiseError.OptionValueItemIsAlreadyDefinedInAnotherFile(
-                        fileData2.m_Path, optionName, optionValueItem
+                        fileData2.m_Path,
+                        optionName,
+                        optionValueItem,
                     )
 
                 RaiseError.OptionIsAlreadyExistInAnotherFile(
-                    fileData2.m_Path, optionName
+                    fileData2.m_Path,
+                    optionName,
                 )
 
             if type(data) is list:
@@ -3182,19 +3189,25 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                     assert fileData2 is not fileData
 
                     if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-                        optionData2, optionValueItem
+                        optionData2,
+                        optionValueItem,
                     ):
                         RaiseError.OptionValueItemIsAlreadyDefinedInAnotherFile(
-                            fileData2.m_Path, optionName, optionValueItem
+                            fileData2.m_Path,
+                            optionName,
+                            optionValueItem,
                         )
 
                     RaiseError.OptionIsAlreadyExistInAnotherFile(
-                        fileData2.m_Path, optionName
+                        fileData2.m_Path,
+                        optionName,
                     )
                     continue
 
                 BugCheckError.UnexpectedSituation(
-                    C_BUGCHECK_SRC, "#001", "optionName=[{0}].".format(optionName)
+                    C_BUGCHECK_SRC,
+                    "#001",
+                    "optionName=[{0}].".format(optionName),
                 )
 
             BugCheckError.UnkOptObjectDataType(optionName, type(data))
@@ -3422,7 +3435,11 @@ class PostgresConfigurationFactory_Base:
             assert stack[-1] is not None
             assert isinstance(stack[-1], PgCfgModel__ObjectData)
 
-            cfgObject = __class__.Helper__CreateObject(cfg, stack[-1], cfgObject)
+            cfgObject = __class__.Helper__CreateObject(
+                cfg,
+                stack[-1],
+                cfgObject,
+            )
             assert cfgObject is not None
             assert isinstance(cfgObject, PostgresConfigurationObject)
 
@@ -3453,15 +3470,26 @@ class PostgresConfigurationFactory_Base:
             return cfg
 
         if type(objectData) is PgCfgModel__FileData:
-            return __class__.Helper__CreateFile(objectData, objectParent)
+            return __class__.Helper__CreateFile(
+                objectData,
+                objectParent,
+            )
 
         if type(objectData) is PgCfgModel__FileLineData:
-            return __class__.Helper__CreateFileLine(objectData, objectParent)
+            return __class__.Helper__CreateFileLine(
+                objectData,
+                objectParent,
+            )
 
         if type(objectData) is PgCfgModel__OptionData:
-            return __class__.Helper__CreateOption(objectData, objectParent)
+            return __class__.Helper__CreateOption(
+                objectData,
+                objectParent,
+            )
 
-        BugCheckError.UnkObjectDataType(type(objectData))
+        BugCheckError.UnkObjectDataType(
+            type(objectData),
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -3475,7 +3503,10 @@ class PostgresConfigurationFactory_Base:
         assert isinstance(objectParent, PostgresConfigurationObject)
 
         if isinstance(objectParent, PostgresConfiguration_Base):
-            return PostgresConfigurationTopLevelFile_Base(objectParent, objectData)
+            return PostgresConfigurationTopLevelFile_Base(
+                objectParent,
+                objectData,
+            )
 
         assert not isinstance(objectParent, PostgresConfiguration)
 
