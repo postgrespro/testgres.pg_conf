@@ -551,6 +551,7 @@ class DataControllerUtils:
             fileName,
             fileData,
         )
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -576,6 +577,7 @@ class DataControllerUtils:
             fileName,
             fileData,
         )
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -606,6 +608,8 @@ class DataControllerUtils:
             assert type(filesByStrKeyDictionary[fileKey]) is list
             assert len(filesByStrKeyDictionary[fileKey]) > 1
             assert filesByStrKeyDictionary[fileKey][-1] is fileData
+
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -894,6 +898,7 @@ class DataControllerUtils:
         commentData.MarkAsDeletedFrom(fileLineData)
         assert not commentData.IsAlive()
         fileLineData.m_Items.pop(iFileLineItem)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -956,6 +961,7 @@ class DataControllerUtils:
         optionData.MarkAsDeletedFrom(fileLineData)
         assert not optionData.IsAlive()
         fileLineData.m_Items.pop(iFileLineItem)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -993,6 +999,7 @@ class DataControllerUtils:
         includeData.MarkAsDeletedFrom(fileLineData)
         assert not includeData.IsAlive()
         fileLineData.m_Items.pop(iFileLineItem)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -1037,6 +1044,7 @@ class DataControllerUtils:
         fileLineData.MarkAsDeletedFrom(fileData)
         assert not fileLineData.IsAlive()
         fileData.m_Lines.pop(iFileLine)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
