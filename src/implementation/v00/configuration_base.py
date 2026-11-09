@@ -446,7 +446,9 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
             assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
 
             PgCfgModel__DataControllerUtils.Comment__delete(
-                cfg.m_Data, commentData, False
+                cfg.m_Data,
+                commentData,
+                False,
             )
             raise
 
@@ -640,7 +642,10 @@ class PostgresConfigurationFileLinesIterator_Base(
         assert fileLineData is not None
         assert type(fileLineData) is PgCfgModel__FileLineData
 
-        fileLine = PostgresConfigurationFactory_Base.GetObject(self.m_Cfg, fileLineData)
+        fileLine = PostgresConfigurationFactory_Base.GetObject(
+            self.m_Cfg,
+            fileLineData,
+        )
         assert fileLine is not None
         assert isinstance(fileLine, PostgresConfigurationFileLine_Base)
 
@@ -793,7 +798,10 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         assert self.m_FileData.m_Lines[-1] is fileLineData
 
         try:
-            fileLine = PostgresConfigurationFileLine_Base(self, fileLineData)
+            fileLine = PostgresConfigurationFileLine_Base(
+                self,
+                fileLineData,
+            )
 
             assert fileLine is not None
             assert type(fileLine) is PostgresConfigurationFileLine_Base
@@ -842,14 +850,20 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
             assert commentData.m_Parent.m_Items[0].m_Element is commentData
 
             # -----------------------
-            fileLine = PostgresConfigurationFileLine_Base(self, fileLineData)
+            fileLine = PostgresConfigurationFileLine_Base(
+                self,
+                fileLineData,
+            )
 
             assert fileLine is not None
             assert type(fileLine) is PostgresConfigurationFileLine_Base
             assert fileLine.m_FileLineData is fileLineData
             assert fileLine.m_Parent is self
 
-            fileLineComment = PostgresConfigurationComment_Base(fileLine, commentData)
+            fileLineComment = PostgresConfigurationComment_Base(
+                fileLine,
+                commentData,
+            )
 
             assert fileLineComment is not None
             assert type(fileLineComment) is PostgresConfigurationComment_Base
@@ -928,7 +942,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
 
         try:
             fileLineData = PgCfgModel__DataControllerUtils.File__add_Line(
-                self.m_FileData
+                self.m_FileData,
             )
 
             assert self.m_FileData is not None
@@ -940,7 +954,10 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
 
             try:
                 includeData = PgCfgModel__DataControllerUtils.FileLine__add_Include(
-                    fileLineData, path, fileData, None
+                    fileLineData,
+                    path,
+                    fileData,
+                    None,
                 )
                 assert includeData is not None
                 assert type(includeData) is PgCfgModel__IncludeData
@@ -949,14 +966,20 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
                 assert includeData.m_Parent == fileLineData
 
                 # -----------
-                fileLine = PostgresConfigurationFileLine_Base(self, fileLineData)
+                fileLine = PostgresConfigurationFileLine_Base(
+                    self,
+                    fileLineData,
+                )
                 assert fileLine is not None
                 assert type(fileLine) is PostgresConfigurationFileLine_Base
                 assert fileLine.m_FileLineData is fileLineData
                 assert fileLine.m_Parent is self
 
                 # -----------
-                include = PostgresConfigurationInclude_Base(fileLine, includeData)
+                include = PostgresConfigurationInclude_Base(
+                    fileLine,
+                    includeData,
+                )
                 assert include.m_FileLine is fileLine
                 assert include.m_IncludeData is includeData
             except:  # rollback a line
@@ -1569,7 +1592,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
 
         try:
-            file = PostgresConfigurationFactory_Base.GetObject(self, fileData)
+            file = PostgresConfigurationFactory_Base.GetObject(
+                self,
+                fileData,
+            )
 
             assert file is not None
             assert type(file) is PostgresConfigurationTopLevelFile_Base
@@ -1826,14 +1852,18 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         # -------------------------------------- ROOT
         if sourceData is None:
             unionList = self.Helper__AggregateAllOptionValues(
-                self.m_Data.m_AllOptionsByName, optionName
+                self.m_Data.m_AllOptionsByName,
+                optionName,
             )
 
             if unionList is None:
                 return None
 
             assert type(unionList) is list
-            return self.Helper__PrepareGetValue(optionName, unionList)
+            return self.Helper__PrepareGetValue(
+                optionName,
+                unionList,
+            )
 
         # -------------------------------------- OPTION DATA
         if type(sourceData) is PgCfgModel__OptionData:
@@ -1869,7 +1899,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                     return None
 
                 assert type(unionList) is list
-                return self.Helper__PrepareGetValue(optionName, unionList)
+                return self.Helper__PrepareGetValue(
+                    optionName,
+                    unionList,
+                )
 
             BugCheckError.UnkObjectDataType(typeOfOption)
 
@@ -2203,7 +2236,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         # Unknown type of option data in dictionary
 
         assert type(optionName) is str
-        BugCheckError.UnkOptObjectDataType(optionName, type(data))
+        BugCheckError.UnkOptObjectDataType(
+            optionName,
+            type(data),
+        )
 
     # --------------------------------------------------------------------
     def Helper__FindAndDeleteOption(
@@ -2224,7 +2260,11 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert data.IsAlive()
             assert data.m_Name == optionName
 
-            PgCfgModel__DataControllerUtils.Option__delete(self.m_Data, data, True)
+            PgCfgModel__DataControllerUtils.Option__delete(
+                self.m_Data,
+                data,
+                True,
+            )
 
             return PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED
 
@@ -2253,7 +2293,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         # Unknown type of option data in dictionary
 
         assert type(optionName) is str
-        BugCheckError.UnkOptObjectDataType(optionName, type(data))
+        BugCheckError.UnkOptObjectDataType(
+            optionName,
+            type(data),
+        )
 
     # --------------------------------------------------------------------
     # returns tuple[FileData, Bool_signal_about_creating_a_new_file]
