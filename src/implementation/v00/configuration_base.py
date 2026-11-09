@@ -3640,7 +3640,7 @@ class PostgresConfigurationController__Base:
     @staticmethod
     def AddOption(
         cfg: PostgresConfiguration_Base,
-        target: typing.Union[
+        targetData: typing.Union[
             None,
             PgCfgModel__FileData,
             PgCfgModel__FileLineData,
@@ -3651,9 +3651,9 @@ class PostgresConfigurationController__Base:
     ) -> PostgresConfigurationOption_Base:
         assert isinstance(cfg, PostgresConfiguration_Base)
         assert (
-            target is None
-            or type(target) is PgCfgModel__FileData
-            or type(target) is PgCfgModel__FileLineData
+            targetData is None
+            or type(targetData) is PgCfgModel__FileData
+            or type(targetData) is PgCfgModel__FileLineData
         )
         assert type(optionName) is str
         assert optionValue is not None
@@ -3675,7 +3675,7 @@ class PostgresConfigurationController__Base:
 
         ctx = PgCfgModel__OptionHandlerCtxToAddOption(
             cfg,
-            target,
+            targetData,
             optionOffset,
             optionName,
             preparedOptionValue,
