@@ -60,7 +60,7 @@ class TestSet001__Common:
         assert isinstance(comment2, PgCfg_Comment)
 
         assert len(fileLines) == 2
-        fileLines_v: list[PgCfg_FileLine_Base] = list(fileLines)
+        fileLines_v = list(fileLines)
         assert len(fileLines_v) == 2
         assert type(fileLines_v[-1]) is PgCfg_FileLine_Base
         assert type(fileLines_v[-1].m_FileLineData) is PgCfgModel__FileLineData
