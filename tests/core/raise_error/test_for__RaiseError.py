@@ -7,6 +7,7 @@ from tests.ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import datetime
+import enum
 
 # //////////////////////////////////////////////////////////////////////////////
 # class TestFor_RaiseError
@@ -55,6 +56,24 @@ class TestFor_RaiseError:
             RaiseError.OptionNameHasBadType(int)
 
         assert str(x.value) == ErrorMessageBuilder.OptionNameHasBadType(int)
+        return
+
+    # --------------------------------------------------------------------
+    class tagTestEnum1(enum.Enum):
+        AAA = "aaa"
+
+    # --------------------------------------------------------------------
+    class tagTestEnum2(enum.Enum):
+        AAA = "aaa"
+
+    # --------------------------------------------------------------------
+    def test_OptionNameHasBadType__2(self):
+        with pytest.raises(expected_exception=PostgresConfigException) as x:
+            RaiseError.OptionNameHasBadType(__class__.tagTestEnum1)
+
+        assert str(x.value) == ErrorMessageBuilder.OptionNameHasBadType(
+            __class__.tagTestEnum1,
+        )
         return
 
     # --------------------------------------------------------------------
@@ -146,6 +165,24 @@ class TestFor_RaiseError:
         return
 
     # --------------------------------------------------------------------
+    def test_BadOptionValueType__2(self):
+        with pytest.raises(expected_exception=PostgresConfigException) as x:
+            RaiseError.BadOptionValueType(
+                "aa",
+                __class__.tagTestEnum1,
+                __class__.tagTestEnum2,
+            )
+
+        expectedMsg = ErrorMessageBuilder.BadOptionValueType(
+            "aa",
+            __class__.tagTestEnum1,
+            __class__.tagTestEnum2,
+        )
+
+        assert str(x.value) == expectedMsg
+        return
+
+    # --------------------------------------------------------------------
     def test_CantConvertOptionValue(self):
         with pytest.raises(expected_exception=PostgresConfigException) as x:
             RaiseError.CantConvertOptionValue(
@@ -164,6 +201,24 @@ class TestFor_RaiseError:
         return
 
     # --------------------------------------------------------------------
+    def test_CantConvertOptionValue__2(self):
+        with pytest.raises(expected_exception=PostgresConfigException) as x:
+            RaiseError.CantConvertOptionValue(
+                "aa",
+                __class__.tagTestEnum1,
+                __class__.tagTestEnum2,
+            )
+
+        expectedMsg = ErrorMessageBuilder.CantConvertOptionValue(
+            "aa",
+            __class__.tagTestEnum1,
+            __class__.tagTestEnum2,
+        )
+
+        assert str(x.value) == expectedMsg
+        return
+
+    # --------------------------------------------------------------------
     def test_BadOptionValueItemType(self):
         with pytest.raises(expected_exception=PostgresConfigException) as x:
             RaiseError.BadOptionValueItemType(
@@ -176,6 +231,24 @@ class TestFor_RaiseError:
             "aa",
             int,
             str,
+        )
+
+        assert str(x.value) == expectedMsg
+        return
+
+    # --------------------------------------------------------------------
+    def test_BadOptionValueItemType__2(self):
+        with pytest.raises(expected_exception=PostgresConfigException) as x:
+            RaiseError.BadOptionValueItemType(
+                "aa",
+                __class__.tagTestEnum1,
+                __class__.tagTestEnum2,
+            )
+
+        expectedMsg = ErrorMessageBuilder.BadOptionValueItemType(
+            "aa",
+            __class__.tagTestEnum1,
+            __class__.tagTestEnum2,
         )
 
         assert str(x.value) == expectedMsg

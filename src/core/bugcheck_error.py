@@ -15,7 +15,7 @@ class BugCheckError:
         objectType: type,
     ) -> typing.NoReturn:
         assert objectType is not None
-        assert type(objectType) is type
+        assert isinstance(objectType, type)
 
         errMsg = "Unknown object data type [{0}].".format(
             objectType,
@@ -44,7 +44,7 @@ class BugCheckError:
         optDataType: type,
     ) -> typing.NoReturn:
         assert type(optName) is str
-        assert type(optDataType) is type
+        assert isinstance(optDataType, type)
 
         errMsg = "Unknown type of the option object data [{0}] - {1}.".format(
             optName,
@@ -74,7 +74,7 @@ class BugCheckError:
         fileDataType: type,
     ) -> typing.NoReturn:
         assert type(fileName) is str
-        assert type(fileDataType) is type
+        assert isinstance(fileDataType, type)
 
         errMsg = "Unknown type of the file object data [{0}] - {1}.".format(
             fileName,
@@ -278,7 +278,7 @@ class BugCheckError:
     ) -> typing.NoReturn:
         assert type(optionName) is str
         assert optionName != ""
-        assert type(typeOfOptionValue) is type
+        assert isinstance(typeOfOptionValue, type)
 
         errMsg = "Unknown value type [{1}] of option [{0}].".format(
             optionName,
