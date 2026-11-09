@@ -93,6 +93,7 @@ class TEST_PROCESS_STATS:
     cTotalWarnings: int = 0
 
     # --------------------------------------------------------------------
+    @staticmethod
     def incrementTotalTestCount() -> None:
         assert type(__class__.cTotalTests) is int
         assert __class__.cTotalTests >= 0
@@ -102,6 +103,7 @@ class TEST_PROCESS_STATS:
         assert __class__.cTotalTests > 0
 
     # --------------------------------------------------------------------
+    @staticmethod
     def incrementNotExecutedTestCount() -> None:
         assert type(__class__.cNotExecutedTests) is int
         assert __class__.cNotExecutedTests >= 0
@@ -111,6 +113,7 @@ class TEST_PROCESS_STATS:
         assert __class__.cNotExecutedTests > 0
 
     # --------------------------------------------------------------------
+    @staticmethod
     def incrementExecutedTestCount() -> int:
         assert type(__class__.cExecutedTests) is int
         assert __class__.cExecutedTests >= 0
@@ -121,6 +124,7 @@ class TEST_PROCESS_STATS:
         return __class__.cExecutedTests
 
     # --------------------------------------------------------------------
+    @staticmethod
     def incrementPassedTestCount() -> None:
         assert type(__class__.cPassedTests) is int
         assert __class__.cPassedTests >= 0
@@ -130,6 +134,7 @@ class TEST_PROCESS_STATS:
         assert __class__.cPassedTests > 0
 
     # --------------------------------------------------------------------
+    @staticmethod
     def incrementFailedTestCount(testID: str, errCount: int) -> None:
         assert type(testID) is str
         assert type(errCount) is int
@@ -154,6 +159,7 @@ class TEST_PROCESS_STATS:
         assert __class__.cTotalErrors > 0
 
     # --------------------------------------------------------------------
+    @staticmethod
     def incrementXFailedTestCount(testID: str, errCount: int) -> None:
         assert type(testID) is str
         assert type(errCount) is int
@@ -170,6 +176,7 @@ class TEST_PROCESS_STATS:
         assert len(__class__.XFailedTests) == __class__.cXFailedTests
 
     # --------------------------------------------------------------------
+    @staticmethod
     def incrementSkippedTestCount() -> None:
         assert type(__class__.cSkippedTests) is int
         assert __class__.cSkippedTests >= 0
@@ -179,6 +186,7 @@ class TEST_PROCESS_STATS:
         assert __class__.cSkippedTests > 0
 
     # --------------------------------------------------------------------
+    @staticmethod
     def incrementNotXFailedTests(testID: str) -> None:
         assert type(testID) is str
         assert type(__class__.NotXFailedTests) is list
@@ -193,6 +201,7 @@ class TEST_PROCESS_STATS:
         assert len(__class__.NotXFailedTests) == __class__.cNotXFailedTests
 
     # --------------------------------------------------------------------
+    @staticmethod
     def incrementWarningTestCount(testID: str, warningCount: int) -> None:
         assert type(testID) is str
         assert type(warningCount) is int
@@ -218,6 +227,7 @@ class TEST_PROCESS_STATS:
         assert __class__.cTotalWarnings > 0
 
     # --------------------------------------------------------------------
+    @staticmethod
     def incrementUnexpectedTests() -> None:
         assert type(__class__.cUnexpectedTests) is int
         assert __class__.cUnexpectedTests >= 0
@@ -227,6 +237,7 @@ class TEST_PROCESS_STATS:
         assert __class__.cUnexpectedTests > 0
 
     # --------------------------------------------------------------------
+    @staticmethod
     def incrementAchtungTestCount(testID: str) -> None:
         assert type(testID) is str
         assert type(__class__.AchtungTests) is list
@@ -287,7 +298,9 @@ def helper__build_test_id(item: pytest.Function) -> str:
 
 
 def helper__makereport__setup(
-    item: pytest.Function, call: pytest.CallInfo, outcome: T_PLUGGY_RESULT
+    item: pytest.Function,
+    call: pytest.CallInfo,
+    outcome: T_PLUGGY_RESULT,
 ):
     assert item is not None
     assert call is not None
@@ -1005,8 +1018,8 @@ def helper__pytest_configure__logging(config: pytest.Config) -> None:
 
     pathlib.Path(log_dir).mkdir(exist_ok=True)
 
-    logging_plugin: _pytest.logging.LoggingPlugin = config.pluginmanager.get_plugin(
-        "logging-plugin"
+    logging_plugin = config.pluginmanager.get_plugin(
+        "logging-plugin",
     )
 
     assert logging_plugin is not None
