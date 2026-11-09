@@ -1232,9 +1232,10 @@ class PostgresConfigurationSetOptionValueResult_Base(
 
         if self.m_OptData is None:
             assert (
-                self.m_EventID
-                == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED
-                or self.m_EventID == PostgresConfigurationSetOptionValueEventID.NONE
+                self.m_EventID in [
+                    PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED,
+                    PostgresConfigurationSetOptionValueEventID.NONE,
+                ]
             )
 
             assert self.m_Opt is None
@@ -1244,14 +1245,12 @@ class PostgresConfigurationSetOptionValueResult_Base(
         assert self.m_Cfg is not None
 
         assert (
-            self.m_EventID
-            == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
-            or self.m_EventID
-            == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_UPDATED
-            or self.m_EventID
-            == PostgresConfigurationSetOptionValueEventID.VALUE_ITEM_WAS_ADDED
-            or self.m_EventID
-            == PostgresConfigurationSetOptionValueEventID.VALUE_ITEM_WAS_ALREADY_DEFINED
+            self.m_EventID in [
+                PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
+                PostgresConfigurationSetOptionValueEventID.OPTION_WAS_UPDATED,
+                PostgresConfigurationSetOptionValueEventID.VALUE_ITEM_WAS_ADDED,
+                PostgresConfigurationSetOptionValueEventID.VALUE_ITEM_WAS_ALREADY_DEFINED,
+            ]
         )
 
         if self.m_Opt is None:
@@ -1884,10 +1883,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 optionName,
             )
 
-            assert (
-                eventID == PostgresConfigurationSetOptionValueEventID.NONE
-                or PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED
-            )
+            assert eventID in [
+                PostgresConfigurationSetOptionValueEventID.NONE,
+                PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED,
+            ]
 
             return PostgresConfigurationSetOptionValueResult_Base(None, None, eventID)
 
@@ -1913,10 +1912,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 optionName,
             )
 
-            assert (
-                eventID == PostgresConfigurationSetOptionValueEventID.NONE
-                or PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED
-            )
+            assert eventID in [
+                PostgresConfigurationSetOptionValueEventID.NONE,
+                PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED,
+            ]
 
             return PostgresConfigurationSetOptionValueResult_Base(
                 None,
@@ -2707,10 +2706,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert result is not None
         assert type(result) is PostgresConfigurationSetOptionValueResult_Base
         assert isinstance(result, PostgresConfigurationSetOptionValueResult)
-        assert (
-            result.m_EventID
-            == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
-        )
+        assert result.m_EventID in [
+            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
+        ]
         assert result.m_OptData is not None
         assert type(result.m_OptData) is PgCfgModel__OptionData
         assert result.m_Cfg is self
@@ -2781,10 +2779,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert result is not None
         assert type(result) is PostgresConfigurationSetOptionValueResult_Base
-        assert (
-            result.m_EventID
-            == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
-        )
+        assert result.m_EventID in [
+            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
+        ]
         assert result.m_OptData is not None
         assert type(result.m_OptData) is PgCfgModel__OptionData
         assert result.m_OptData.IsAlive()
@@ -2909,10 +2906,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert result is not None
         assert type(result) is PostgresConfigurationSetOptionValueResult_Base
         assert isinstance(result, PostgresConfigurationSetOptionValueResult)
-        assert (
-            result.m_EventID
-            == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
-        )
+        assert result.m_EventID in [
+            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
+        ]
         assert result.m_OptData is not None
         assert type(result.m_OptData) is PgCfgModel__OptionData
         assert result.m_OptData.m_Name == optionName
@@ -3159,10 +3155,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert result is not None
         assert type(result) is PostgresConfigurationSetOptionValueResult_Base
-        assert (
-            result.m_EventID
-            == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
-        )
+        assert result.m_EventID in [
+            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
+        ]
         assert result.m_OptData is not None
         assert type(result.m_OptData) is PgCfgModel__OptionData
         assert result.m_OptData.IsAlive()
@@ -3216,10 +3211,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert result is not None
         assert type(result) is PostgresConfigurationSetOptionValueResult_Base
-        assert (
-            result.m_EventID
-            == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
-        )
+        assert result.m_EventID in [
+            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
+        ]
         assert result.m_OptData is not None
         assert type(result.m_OptData) is PgCfgModel__OptionData
         assert result.m_OptData.IsAlive()
@@ -3267,10 +3261,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             )
             assert result is not None
             assert type(result) is PostgresConfigurationSetOptionValueResult_Base
-            assert (
-                result.m_EventID
-                == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
-            )
+            assert result.m_EventID in [
+                PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
+            ]
             assert result.m_OptData is optionData
         except:  # rollback line with option
             assert optionData.IsAlive()
@@ -3288,10 +3281,9 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert result is not None
         assert type(result) is PostgresConfigurationSetOptionValueResult_Base
-        assert (
-            result.m_EventID
-            == PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED
-        )
+        assert result.m_EventID in [
+            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
+        ]
         assert result.m_OptData is optionData
 
         return result
