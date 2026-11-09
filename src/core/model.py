@@ -20,7 +20,7 @@ class ObjectData:
         pass
 
     # interface ----------------------------------------------------------
-    def get_Parent(self) -> ObjectData:
+    def get_Parent(self) -> typing.Optional[ObjectData]:
         RaiseError.MethodIsNotImplemented(__class__, "get_Parent")
 
     def IsAlive(self) -> bool:
@@ -32,7 +32,7 @@ class ObjectData:
 
 
 class FileLineElementData(ObjectData):
-    m_Parent: FileLineData
+    m_Parent: typing.Optional[FileLineData]
     m_Offset: typing.Optional[int]
 
     # --------------------------------------------------------------------
@@ -158,7 +158,7 @@ class FileLineData(ObjectData):
             self.m_Element = element
 
     # --------------------------------------------------------------------
-    m_Parent: FileData
+    m_Parent: typing.Optional[FileData]
     m_Items: typing.List[tagItem]
 
     # --------------------------------------------------------------------
@@ -311,7 +311,7 @@ class ConfigurationData(ObjectData):
         return self.m_OsOps
 
     # Object interface ---------------------------------------------------
-    def get_Parent(self) -> FileData:
+    def get_Parent(self) -> typing.Optional[FileData]:
         return None
 
     # --------------------------------------------------------------------
