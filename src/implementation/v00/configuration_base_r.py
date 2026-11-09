@@ -30,7 +30,6 @@ from ...os.abstract.configuration_os_ops import ConfigurationOsFile
 import typing
 import datetime
 
-
 # //////////////////////////////////////////////////////////////////////////////
 # class PostgresConfigurationReader_Base
 
@@ -706,3 +705,6 @@ class PostgresConfigurationReader_Base:
             optionOffset,
         )
         return
+
+
+# //////////////////////////////////////////////////////////////////////////////

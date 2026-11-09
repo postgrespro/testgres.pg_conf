@@ -547,3 +547,6 @@ class PostgresConfigurationWriter_Base:
         assert type(result) is str
         assert result != ""
         return result
+
+
+# //////////////////////////////////////////////////////////////////////////////
