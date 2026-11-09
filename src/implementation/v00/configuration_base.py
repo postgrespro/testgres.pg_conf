@@ -1883,7 +1883,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         self,
         sourceData: typing.Union[
             None,
-            PgCfgModel__FileLineData,
+            PgCfgModel__FileData,
             PgCfgModel__OptionData,
         ],
         optionName: str,

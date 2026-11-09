@@ -55,7 +55,7 @@ class ConfigurationDataHandler:
     # --------------------------------------------------------------------
     def DataHandler__GetOptionValue__UnionList(
         self,
-        sourceData: typing.Union[None, FileLineData, OptionData],
+        sourceData: typing.Union[None, FileData, OptionData],
         optionName: str,
     ) -> typing.Any:
         assert (
