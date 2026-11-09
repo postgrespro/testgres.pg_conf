@@ -52,7 +52,7 @@ class ErrorMessageBuilder:
         nameType: type,
     ) -> str:
         assert nameType is not None
-        assert type(nameType) is type
+        assert isinstance(nameType, type)
 
         errMsg = "Option name has a bad type [{}].".format(
             nameType.__name__,
@@ -122,8 +122,8 @@ class ErrorMessageBuilder:
         expectedType: type,
     ) -> str:
         assert type(optionName) is str
-        assert type(optionValueType) is type
-        assert type(expectedType) is type
+        assert isinstance(optionValueType, type)
+        assert isinstance(expectedType, type)
 
         errMsg = "Bad option [{}] value type [{}]. Expected type is [{}].".format(
             optionName,
@@ -140,8 +140,8 @@ class ErrorMessageBuilder:
         targetType: type,
     ) -> str:
         assert type(optionName) is str
-        assert type(sourceType) is type
-        assert type(targetType) is type
+        assert isinstance(sourceType, type)
+        assert isinstance(targetType, type)
 
         errMsg = "Can't convert option [{}] value from type [{}] to type [{}].".format(
             optionName,
@@ -158,8 +158,8 @@ class ErrorMessageBuilder:
         expectedType: type,
     ) -> str:
         assert type(optionName) is str
-        assert type(optionValueItemType) is type
-        assert type(expectedType) is type
+        assert isinstance(optionValueItemType, type)
+        assert isinstance(expectedType, type)
 
         errMsg = "Bad option [{}] value item type [{}]. Expected type is [{}].".format(
             optionName,
