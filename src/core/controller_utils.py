@@ -282,18 +282,16 @@ class DataControllerUtils:
         assert lastItem.m_Element is not None
         assert isinstance(lastItem.m_Element, PgCfgModel__FileLineElementData)
 
-        typeOfLastElement = type(lastItem.m_Element)
-
-        if typeOfLastElement == PgCfgModel__OptionData:
+        if type(lastItem.m_Element) is PgCfgModel__OptionData:
             RaiseError.FileLineAlreadyHasOption(lastItem.m_Element.m_Name)
 
-        if typeOfLastElement == PgCfgModel__IncludeData:
+        if type(lastItem.m_Element) is PgCfgModel__IncludeData:
             RaiseError.FileLineAlreadyHasIncludeDirective()
 
-        if typeOfLastElement is PgCfgModel__CommentData:
+        if type(lastItem.m_Element) is PgCfgModel__CommentData:
             RaiseError.FileLineAlreadyHasComment()
 
-        BugCheckError.UnkObjectDataType(typeOfLastElement)
+        BugCheckError.UnkObjectDataType(type(lastItem.m_Element))
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -630,9 +628,7 @@ class DataControllerUtils:
 
         assert indexItemData is not None
 
-        typeOfIndexItemData = type(indexItemData)
-
-        if typeOfIndexItemData == fileData:
+        if type(indexItemData) is PgCfgModel__FileData:
             assert indexItemData is fileData
 
             if indexItemData is not fileData:
@@ -642,7 +638,7 @@ class DataControllerUtils:
             assert fileKey not in filesByStrKeyDictionary.keys()
             return
 
-        if typeOfIndexItemData is list:
+        if type(indexItemData) is list:
             assert type(indexItemData) is list
             assert len(indexItemData) > 1
 
@@ -674,7 +670,10 @@ class DataControllerUtils:
 
             return
 
-        BugCheckError.UnkFileObjectDataType(fileKey, typeOfIndexItemData)
+        BugCheckError.UnkFileObjectDataType(
+            fileKey,
+            type(indexItemData),
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -693,20 +692,21 @@ class DataControllerUtils:
 
         data = optionsByNameDictionary[optionData.m_Name]
 
-        typeOfData = type(data)
-
-        if typeOfData is PgCfgModel__OptionData:
+        if type(data) is PgCfgModel__OptionData:
             assert data is not optionData
             optionsByNameDictionary[optionData.m_Name] = [data, optionData]
             return
 
-        if typeOfData is list:
+        if type(data) is list:
             assert type(data) is list
             assert len(data) > 1
             data.append(optionData)
             return
 
-        BugCheckError.UnkOptObjectDataType(optionData.m_Name, typeOfData)
+        BugCheckError.UnkOptObjectDataType(
+            optionData.m_Name,
+            type(data),
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -726,9 +726,7 @@ class DataControllerUtils:
 
         assert data is not None
 
-        typeOfData = type(data)
-
-        if typeOfData is PgCfgModel__OptionData:
+        if type(data) is PgCfgModel__OptionData:
             assert data is optionData
 
             if data is not optionData:
@@ -738,8 +736,7 @@ class DataControllerUtils:
             assert optionData.m_Name not in optionsByNameDictionary.keys()
             return
 
-        if typeOfData is list:
-            assert type(data) is list
+        if type(data) is list:
             assert len(data) > 1
 
             for i in range(len(data)):
@@ -760,7 +757,6 @@ class DataControllerUtils:
             if i == len(data):
                 BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
 
-            assert type(data) is list
             data.pop(i)
             assert len(data) > 0
 
@@ -771,7 +767,10 @@ class DataControllerUtils:
 
             return
 
-        BugCheckError.UnkOptObjectDataType(optionData.m_Name, typeOfData)
+        BugCheckError.UnkOptObjectDataType(
+            optionData.m_Name,
+            type(data),
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -847,18 +846,16 @@ class DataControllerUtils:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert isinstance(objectData, PgCfgModel__ObjectData)
 
-        typeOfObjectData = type(objectData)
-
-        if typeOfObjectData is PgCfgModel__CommentData:
+        if type(objectData) is PgCfgModel__CommentData:
             return __class__.Helper__DeleteComment(objectData)
 
-        if typeOfObjectData == PgCfgModel__OptionData:
+        if type(objectData) is PgCfgModel__OptionData:
             return __class__.Helper__DeleteOption(cfgData, objectData)
 
-        if typeOfObjectData == PgCfgModel__IncludeData:
+        if type(objectData) is PgCfgModel__IncludeData:
             return __class__.Helper__DeleteInclude(objectData)
 
-        BugCheckError.UnkObjectDataType(typeOfObjectData)
+        BugCheckError.UnkObjectDataType(type(objectData))
 
     # --------------------------------------------------------------------
     @staticmethod
