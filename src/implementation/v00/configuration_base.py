@@ -1639,7 +1639,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         result = PostgresConfigurationController__Base.SetOptionValueItem(
             self,
-            None, # target
+            None,  # target
             name,
             value_item,
         )
