@@ -516,6 +516,8 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         # Add/Get file
         # Add include element
 
+        assert self.m_FileLineData.m_Parent is not None
+
         baseFolder = cfg.m_Data.OsOps.Path_DirName(
             self.m_FileLineData.m_Parent.m_Path,
         )
@@ -3113,6 +3115,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert optionData2.m_Name == optionData.m_Name
                 assert optionData2.m_Value is not None
                 assert type(optionData2.m_Value) is list
+                assert optionData2.m_Parent is not None
                 assert optionData2.m_Parent.IsAlive()
 
                 fileData2 = optionData2.m_Parent.m_Parent
@@ -3491,19 +3494,21 @@ class PostgresConfigurationFactory_Base:
         while True:
             stack.append(objectData)
 
-            objectData = objectData.get_Parent()
+            objectData2 = objectData.get_Parent()
 
-            if objectData is None:
+            if objectData2 is None:
                 break
 
-            assert isinstance(objectData, PgCfgModel__ObjectData)
+            assert isinstance(objectData2, PgCfgModel__ObjectData)
+            objectData = objectData2
+            continue
 
         assert type(stack) is list
         assert len(stack) > 0
 
         # Build ConfigurationObjects
 
-        cfgObject: PostgresConfigurationObject = None
+        cfgObject: typing.Optional[PostgresConfigurationObject] = None
 
         while True:
             assert len(stack) > 0
@@ -3530,7 +3535,7 @@ class PostgresConfigurationFactory_Base:
     def Helper__CreateObject(
         cfg: PostgresConfiguration_Base,
         objectData: PgCfgModel__ObjectData,
-        objectParent: PostgresConfigurationObject,
+        objectParent: typing.Optional[PostgresConfigurationObject],
     ) -> PostgresConfigurationObject:
         assert cfg is not None
         assert isinstance(cfg, PostgresConfiguration_Base)
@@ -3546,18 +3551,21 @@ class PostgresConfigurationFactory_Base:
             return cfg
 
         if type(objectData) is PgCfgModel__FileData:
+            assert objectParent is not None
             return __class__.Helper__CreateFile(
                 objectData,
                 objectParent,
             )
 
         if type(objectData) is PgCfgModel__FileLineData:
+            assert objectParent is not None
             return __class__.Helper__CreateFileLine(
                 objectData,
                 objectParent,
             )
 
         if type(objectData) is PgCfgModel__OptionData:
+            assert objectParent is not None
             return __class__.Helper__CreateOption(
                 objectData,
                 objectParent,
