@@ -517,7 +517,8 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         assert type(baseFolder) is str
 
         fileData = PgCfgModel__DataControllerUtils.Cfg__GetOrCreateFile__USER(
-            cfg.m_Data, baseFolder,
+            cfg.m_Data,
+            baseFolder,
             path,
         )
         assert fileData is not None
@@ -1231,12 +1232,10 @@ class PostgresConfigurationSetOptionValueResult_Base(
         assert type(self.m_EventID) is PostgresConfigurationSetOptionValueEventID
 
         if self.m_OptData is None:
-            assert (
-                self.m_EventID in [
-                    PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED,
-                    PostgresConfigurationSetOptionValueEventID.NONE,
-                ]
-            )
+            assert self.m_EventID in [
+                PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED,
+                PostgresConfigurationSetOptionValueEventID.NONE,
+            ]
 
             assert self.m_Opt is None
             assert self.m_Cfg is None
@@ -1244,14 +1243,12 @@ class PostgresConfigurationSetOptionValueResult_Base(
 
         assert self.m_Cfg is not None
 
-        assert (
-            self.m_EventID in [
-                PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
-                PostgresConfigurationSetOptionValueEventID.OPTION_WAS_UPDATED,
-                PostgresConfigurationSetOptionValueEventID.VALUE_ITEM_WAS_ADDED,
-                PostgresConfigurationSetOptionValueEventID.VALUE_ITEM_WAS_ALREADY_DEFINED,
-            ]
-        )
+        assert self.m_EventID in [
+            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
+            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_UPDATED,
+            PostgresConfigurationSetOptionValueEventID.VALUE_ITEM_WAS_ADDED,
+            PostgresConfigurationSetOptionValueEventID.VALUE_ITEM_WAS_ALREADY_DEFINED,
+        ]
 
         if self.m_Opt is None:
             x = PostgresConfigurationFactory_Base.GetObject(
