@@ -131,7 +131,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
         return
 
     # Helper interface ---------------------------------------------------
-    def Helper__CheckAlive(self):
+    def Helper__CheckAlive(self) -> None:
         assert self.m_CommentData is not None
         assert type(self.m_CommentData) is PgCfgModel__CommentData
 
@@ -258,7 +258,7 @@ class PostgresConfigurationOption_Base(PostgresConfigurationOption):
         return r
 
     # Helper methods -----------------------------------------------------
-    def Helper__CheckAlive(self):
+    def Helper__CheckAlive(self) -> None:
         assert self.m_OptionData is not None
         assert type(self.m_OptionData) is PgCfgModel__OptionData
 
@@ -331,12 +331,12 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
         return
 
     # Private interface --------------------------------------------------
-    def Private__CheckAlive(self):
+    def Private__CheckAlive(self) -> None:
         self.Helper__CheckAlive()
         return
 
     # Helper methods -----------------------------------------------------
-    def Helper__CheckAlive(self):
+    def Helper__CheckAlive(self) -> None:
         assert self.m_IncludeData is not None
         assert type(self.m_IncludeData) is PgCfgModel__IncludeData
 
@@ -533,7 +533,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         PgCfgModel__DataControllerUtils.FileLine__clear(cfg.m_Data, self.m_FileLineData)
 
     # Helper methods -----------------------------------------------------
-    def Helper__CheckAlive(self):
+    def Helper__CheckAlive(self) -> None:
         assert self.m_FileLineData is not None
         assert type(self.m_FileLineData) is PgCfgModel__FileLineData
 
@@ -3049,7 +3049,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
 
     # Debug methods ------------------------------------------------------
-    def Debug__CheckOurObjectData(self, data: PgCfgModel__ObjectData):
+    def Debug__CheckOurObjectData(
+        self,
+        data: PgCfgModel__ObjectData,
+    ) -> None:
         assert data is not None
         assert isinstance(data, PgCfgModel__ObjectData)
 
@@ -3365,7 +3368,7 @@ class PostgresConfigurationReader_Base:
     @staticmethod
     def Helper__ProcessLineData(
         file: PostgresConfigurationFile_Base, lineReader: ReadUtils__LineReader
-    ):
+    ) -> None:
         assert isinstance(file, PostgresConfigurationFile_Base)
         assert type(lineReader) is ReadUtils__LineReader
 
@@ -3442,7 +3445,7 @@ class PostgresConfigurationReader_Base:
     @staticmethod
     def Helper__ProcessLineData__Comment(
         fileLine: PostgresConfigurationFileLine_Base, lineReader: ReadUtils__LineReader
-    ):
+    ) -> None:
         assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(lineReader) is ReadUtils__LineReader
 
@@ -3471,7 +3474,7 @@ class PostgresConfigurationReader_Base:
         fileLine: PostgresConfigurationFileLine_Base,
         lineReader: ReadUtils__LineReader,
         includeOffset: int,
-    ):
+    ) -> None:
         assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(lineReader) is ReadUtils__LineReader
         assert type(includeOffset) is int
@@ -3598,7 +3601,7 @@ class PostgresConfigurationReader_Base:
         lineReader: ReadUtils__LineReader,
         optionOffset: int,
         optionName: str,
-    ):
+    ) -> None:
         assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(lineReader) is ReadUtils__LineReader
         assert type(optionOffset) is int
@@ -3668,7 +3671,7 @@ class PostgresConfigurationReader_Base:
         lineReader: ReadUtils__LineReader,
         optionOffset: int,
         optionName: str,
-    ):
+    ) -> None:
         assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(lineReader) is ReadUtils__LineReader
         assert type(optionOffset) is int
@@ -3778,7 +3781,7 @@ class PostgresConfigurationReader_Base:
         lineReader: ReadUtils__LineReader,
         optionOffset: int,
         optionName: str,
-    ):
+    ) -> None:
         assert type(fileLine) is PostgresConfigurationFileLine_Base
         assert type(lineReader) is ReadUtils__LineReader
         assert type(optionOffset) is int
@@ -3863,7 +3866,7 @@ class PostgresConfigurationWriterCtx_Base:
         return
 
     # --------------------------------------------------------------------
-    def Init(self):
+    def Init(self) -> None:
         assert type(self.AllFiles) is list
         assert type(self.NewFiles) is list
         assert type(self.UpdFiles) is list
@@ -3890,7 +3893,9 @@ class PostgresConfigurationWriter_Base:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def DoWork(ctx: PostgresConfigurationWriterCtx_Base):
+    def DoWork(
+        ctx: PostgresConfigurationWriterCtx_Base,
+    ) -> None:
         assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
@@ -3899,7 +3904,9 @@ class PostgresConfigurationWriter_Base:
 
     # Helper Methods -----------------------------------------------------
     @staticmethod
-    def Helper__DoWork(ctx: PostgresConfigurationWriterCtx_Base):
+    def Helper__DoWork(
+        ctx: PostgresConfigurationWriterCtx_Base,
+    ) -> None:
         assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
@@ -3929,7 +3936,7 @@ class PostgresConfigurationWriter_Base:
     @staticmethod
     def Helper__DoWork__Stage01__CreateFileContexts(
         ctx: PostgresConfigurationWriterCtx_Base,
-    ):
+    ) -> None:
         assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
@@ -3963,7 +3970,7 @@ class PostgresConfigurationWriter_Base:
     @staticmethod
     def Helper__DoWork__Stage02__MakeFileDataContents(
         ctx: PostgresConfigurationWriterCtx_Base,
-    ):
+    ) -> None:
         assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
@@ -3984,7 +3991,7 @@ class PostgresConfigurationWriter_Base:
     @staticmethod
     def Helper__DoWork__Stage03__OpenUpdFilesToWrite(
         ctx: PostgresConfigurationWriterCtx_Base,
-    ):
+    ) -> None:
         assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
@@ -4027,7 +4034,7 @@ class PostgresConfigurationWriter_Base:
     @staticmethod
     def Helper__DoWork__Stage04__OpenNewFilesToWrite(
         ctx: PostgresConfigurationWriterCtx_Base,
-    ):
+    ) -> None:
         assert type(ctx) is PostgresConfigurationWriterCtx_Base
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
@@ -4093,7 +4100,7 @@ class PostgresConfigurationWriter_Base:
     @staticmethod
     def Helper__DoWork__Stage05__WriteContents(
         ctx: PostgresConfigurationWriterCtx_Base,
-    ):
+    ) -> None:
         assert type(ctx) is PostgresConfigurationWriterCtx_Base
 
         for iFile in range(len(ctx.AllFiles)):
