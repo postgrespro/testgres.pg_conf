@@ -140,6 +140,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
 
         assert type(self.m_FileLine) is PostgresConfigurationFileLine_Base
         assert isinstance(self.m_FileLine, PostgresConfigurationFileLine)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -332,6 +333,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
     # Private interface --------------------------------------------------
     def Private__CheckAlive(self):
         self.Helper__CheckAlive()
+        return
 
     # Helper methods -----------------------------------------------------
     def Helper__CheckAlive(self):
@@ -343,6 +345,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
 
         assert type(self.m_FileLine) is PostgresConfigurationFileLine_Base
         assert isinstance(self.m_FileLine, PostgresConfigurationFileLine)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -367,6 +370,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
 
         self.m_Parent = parent
         self.m_FileLineData = fileLineData
+        return
 
     # Object interface ---------------------------------------------------
     def get_Configuration(self) -> PostgresConfiguration_Base:
@@ -538,6 +542,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
 
         assert isinstance(self.m_Parent, PostgresConfigurationFile_Base)
         assert isinstance(self.m_Parent, PostgresConfigurationFile)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -616,6 +621,7 @@ class PostgresConfigurationFileLines_Base(PostgresConfigurationFileLines):
 
         self.m_Cfg = cfg
         self.m_File = file
+        return
 
     # interface ----------------------------------------------------------
     def __len__(self) -> int:
@@ -672,6 +678,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         self.m_Cfg = cfg
         self.m_FileData = fileData
         self.m_Lines = None
+        return
 
     # Object interface ---------------------------------------------------
     def get_Configuration(self) -> PostgresConfiguration_Base:
@@ -984,6 +991,7 @@ class PostgresConfigurationTopLevelFile_Base(PostgresConfigurationFile_Base):
         assert type(fileData) is PgCfgModel__FileData
 
         super().__init__(cfg, fileData)
+        return
 
     # Object interface ---------------------------------------------------
     def get_Parent(self) -> PostgresConfiguration_Base:
@@ -1075,6 +1083,7 @@ class PostgresConfigurationSetOptionValueResult_Base(
         self.m_Opt = None
         self.m_OptData = optData
         self.m_EventID = eventID
+        return
 
     # ---------------------------------------------------------------------
     @staticmethod
@@ -1267,6 +1276,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
         assert cfg is not None
         assert isinstance(cfg, PostgresConfiguration_Base)
         self.m_Cfg = cfg
+        return
 
     # PostgresConfigurationFiles interface -------------------------------
     def __len__(self) -> int:
@@ -1397,6 +1407,7 @@ class PostgresConfiguration_Base__AllOptions(PostgresConfigurationOptions):
         assert cfg is not None
         assert isinstance(cfg, PostgresConfiguration_Base)
         self.m_Cfg = cfg
+        return
 
     # PostgresConfigurationOptions interface -----------------------------
     def __len__(self) -> int:
@@ -3052,6 +3063,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert ptr not in stack
             stack.add(ptr)
             ptr = ptr.get_Parent()
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -3347,6 +3359,7 @@ class PostgresConfigurationReader_Base:
             lineReader.SetData(lineData)
 
             __class__.Helper__ProcessLineData(file, lineReader)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -3450,6 +3463,7 @@ class PostgresConfigurationReader_Base:
             commentText += ch
 
         fileLine.AddComment(commentText, commentOffset)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -3575,6 +3589,7 @@ class PostgresConfigurationReader_Base:
             RaiseError.CfgReader__IncludeHasEmptyPath(lineReader.GetLineNum())
 
         fileLine.AddInclude(filePath, includeOffset)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -3644,6 +3659,7 @@ class PostgresConfigurationReader_Base:
                 optionOffset,
                 optionName,
             )
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -3753,6 +3769,7 @@ class PostgresConfigurationReader_Base:
         assert type(optionValue) is str
 
         fileLine.AddOption(optionName, optionValue, optionOffset)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -3792,6 +3809,7 @@ class PostgresConfigurationReader_Base:
         assert optionValue != ""
 
         fileLine.AddOption(optionName, optionValue, optionOffset)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -3814,6 +3832,7 @@ class PostgresConfigurationWriterFileCtx_Base:
         self.FileData = fileData
         self.Content = None
         self.File = None
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -3841,6 +3860,7 @@ class PostgresConfigurationWriterCtx_Base:
         assert type(self.AllFiles) is list
         assert type(self.NewFiles) is list
         assert type(self.UpdFiles) is list
+        return
 
     # --------------------------------------------------------------------
     def Init(self):
@@ -3851,6 +3871,7 @@ class PostgresConfigurationWriterCtx_Base:
         self.AllFiles.clear()
         self.NewFiles.clear()
         self.UpdFiles.clear()
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
