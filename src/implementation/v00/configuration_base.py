@@ -461,6 +461,9 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         value: typing.Any,
         offset: typing.Optional[int],
     ) -> PostgresConfigurationOption_Base:
+        assert offset is None or type(offset) is int
+        assert offset is None or offset >= 0
+
         DataVerificator.CheckOptionName(name)
 
         assert name is not None
@@ -495,6 +498,9 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         path: str,
         offset: typing.Optional[int],
     ) -> PostgresConfigurationInclude_Base:
+        assert offset is None or type(offset) is int
+        assert offset is None or offset >= 0
+
         DataVerificator.CheckStringOfFilePath(path)
 
         assert type(path) is str
