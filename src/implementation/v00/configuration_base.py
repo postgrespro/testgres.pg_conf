@@ -1956,6 +1956,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         PgCfgModel__FileData.T_OPTIONS_BY_NAME,
     ]
 
+    # --------------------------------------------------------------------
     def Helper__FindSimpleOption(
         self,
         allOptionsByName: T_OPTIONS_BY_NAME,
@@ -3926,7 +3927,7 @@ class PostgresConfigurationWriter_Base:
         # 4.
         __class__.Helper__DoWork__Stage04__OpenNewFilesToWrite(ctx)
 
-        # 4.
+        # 5.
         __class__.Helper__DoWork__Stage05__WriteContents(ctx)
 
         # OK. Go HOME!
