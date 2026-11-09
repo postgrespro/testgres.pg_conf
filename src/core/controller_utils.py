@@ -128,7 +128,9 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def FileLine__add_Comment(
-        fileLineData: PgCfgModel__FileLineData, offset: typing.Optional[int], text: str
+        fileLineData: PgCfgModel__FileLineData,
+        offset: typing.Optional[int],
+        text: str,
     ) -> PgCfgModel__CommentData:
         assert type(fileLineData) is PgCfgModel__FileLineData
         assert (offset is None) or (type(offset) is int)
@@ -235,16 +237,19 @@ class DataControllerUtils:
 
         try:
             __class__.Helper__InsertOptionIntoIndex(
-                fileData.m_OptionsByName, optionData
+                fileData.m_OptionsByName,
+                optionData,
             )
 
             try:
                 __class__.Helper__InsertOptionIntoIndex(
-                    cfgData.m_AllOptionsByName, optionData
+                    cfgData.m_AllOptionsByName,
+                    optionData,
                 )
             except:  # rollback
                 __class__.Helper__DeleteOptionFromIndex(
-                    fileData.m_OptionsByName, optionData
+                    fileData.m_OptionsByName,
+                    optionData,
                 )
                 raise
         except:  # rollback
@@ -470,7 +475,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__FindIndexOfFileLine(
-        fileData: PgCfgModel__FileData, fileLineData: PgCfgModel__FileLineData
+        fileData: PgCfgModel__FileData,
+        fileLineData: PgCfgModel__FileLineData,
     ) -> int:
         assert fileData is not None
         assert fileLineData is not None
@@ -525,7 +531,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__RegFileInCfgData(
-        cfgData: PgCfgModel__ConfigurationData, fileData: PgCfgModel__FileData
+        cfgData: PgCfgModel__ConfigurationData,
+        fileData: PgCfgModel__FileData,
     ):
         assert cfgData is not None
         assert fileData is not None
@@ -542,13 +549,16 @@ class DataControllerUtils:
         assert fileName != ""
 
         __class__.Helper__InsertFileIntoIndex(
-            cfgData.m_AllFilesByName, fileName, fileData
+            cfgData.m_AllFilesByName,
+            fileName,
+            fileData,
         )
 
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__UnRegFileFromCfgData(
-        cfgData: PgCfgModel__ConfigurationData, fileData: PgCfgModel__FileData
+        cfgData: PgCfgModel__ConfigurationData,
+        fileData: PgCfgModel__FileData,
     ):
         assert cfgData is not None
         assert fileData is not None
@@ -564,7 +574,9 @@ class DataControllerUtils:
         assert fileName != ""
 
         __class__.Helper__DeleteFileIntoIndex(
-            cfgData.m_AllFilesByName, fileName, fileData
+            cfgData.m_AllFilesByName,
+            fileName,
+            fileData,
         )
 
     # --------------------------------------------------------------------
@@ -866,7 +878,8 @@ class DataControllerUtils:
 
         # 1.2 Set iFileLineItem
         iFileLineItem = __class__.Helper__FindIndexOfFileLineElement(
-            fileLineData, commentData
+            fileLineData,
+            commentData,
         )
 
         assert iFileLineItem >= 0
