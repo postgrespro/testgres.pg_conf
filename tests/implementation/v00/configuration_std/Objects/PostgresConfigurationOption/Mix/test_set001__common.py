@@ -39,6 +39,7 @@ class TestSet001__Common:
 
         r1 = cfg.SetOptionValue(optName, 234)
         assert type(r1) is PgCfg_SetOptionResult_Base
+        assert r1.Option is not None
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 234
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
@@ -62,6 +63,7 @@ class TestSet001__Common:
         r1 = cfg.SetOptionValue(optName, 234)
         assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
+        assert r1.Option is not None
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 234
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
@@ -71,6 +73,7 @@ class TestSet001__Common:
         r2 = r1.Option.set_Value(432)
         assert type(r2) is PgCfg_SetOptionResult_Base
         assert r2.EventID == PgCfg_SetOptionEventID.OPTION_WAS_UPDATED
+        assert r2.Option is not None
         assert r2.Option.get_Name() == optName
         assert r2.Option.get_Value() == 432
         assert type(r2.Option.get_Parent()) is PgCfg_FileLine_Base
@@ -78,6 +81,7 @@ class TestSet001__Common:
         assert r2.Option.get_Parent().get_Parent().get_Parent() is cfg
 
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
+        assert r1.Option is not None
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 432
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
@@ -101,6 +105,7 @@ class TestSet001__Common:
         r1 = cfg.SetOptionValue(optName, 234)
         assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
+        assert r1.Option is not None
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 234
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
@@ -146,6 +151,7 @@ class TestSet001__Common:
         r1 = cfg.SetOptionValue(optName, 234)
         assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
+        assert r1.Option is not None
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 234
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base
@@ -188,6 +194,7 @@ class TestSet001__Common:
         r1 = cfg.SetOptionValue(optName, 234)
         assert type(r1) is PgCfg_SetOptionResult_Base
         assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
+        assert r1.Option is not None
         assert r1.Option.get_Name() == optName
         assert r1.Option.get_Value() == 234
         assert type(r1.Option.get_Parent()) is PgCfg_FileLine_Base

@@ -106,6 +106,9 @@ class DataControllerUtils:
 
         commentData.IsAlive()
 
+        assert commentData.m_Parent is not None
+        assert commentData.m_Parent.m_Parent is not None
+
         assert cfgData is commentData.m_Parent.m_Parent.m_Parent
 
         fileLineData = commentData.m_Parent
