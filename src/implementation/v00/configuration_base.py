@@ -526,7 +526,10 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
 
         try:
             includeData = PgCfgModel__DataControllerUtils.FileLine__add_Include(
-                self.m_FileLineData, path, fileData, offset
+                self.m_FileLineData,
+                path,
+                fileData,
+                offset,
             )
             assert includeData is not None
             assert type(includeData) is PgCfgModel__IncludeData
@@ -541,7 +544,9 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
                 assert include.m_IncludeData is includeData
             except:  # rollback an include
                 PgCfgModel__DataControllerUtils.Include__delete(
-                    cfg.m_Data, includeData, False
+                    cfg.m_Data,
+                    includeData,
+                    False,
                 )
                 raise
         except:  # TODO: rollback a file
@@ -560,7 +565,10 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         assert cfg.m_Data is not None
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
 
-        PgCfgModel__DataControllerUtils.FileLine__clear(cfg.m_Data, self.m_FileLineData)
+        PgCfgModel__DataControllerUtils.FileLine__clear(
+            cfg.m_Data,
+            self.m_FileLineData,
+        )
 
     # Helper methods -----------------------------------------------------
     def Helper__CheckAlive(self) -> None:
