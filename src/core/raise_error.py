@@ -299,9 +299,9 @@ class RaiseError:
         assert type(optName) is str
 
         errMsg = "Another definition of option [{}] value item [{}] is found in the file [{}].".format(
-            filePath,
             optName,
             valueItem,
+            filePath,
         )
 
         __class__.Helper__RaiseErr__PostgresConfigException(
@@ -330,7 +330,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def UnknownFileName(fileName: str) -> typing.NoReturn:
+    def UnknownFileName(
+        fileName: str,
+    ) -> typing.NoReturn:
         assert type(fileName) is str
 
         errMsg = "Unknown file name [{}].".format(
@@ -400,7 +402,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def FileLineAlreadyHasOption(optionName: str) -> typing.NoReturn:
+    def FileLineAlreadyHasOption(
+        optionName: str,
+    ) -> typing.NoReturn:
         assert type(optionName) is str
 
         errMsg = "File line already has the option [{}].".format(
@@ -443,7 +447,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__IncludeWithoutPath(lineNum: int) -> typing.NoReturn:
+    def CfgReader__IncludeWithoutPath(
+        lineNum: int,
+    ) -> typing.NoReturn:
         assert type(lineNum) is int
         assert lineNum >= 0
 
@@ -457,7 +463,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__EndOfIncludePathIsNotFound(lineNum: int) -> typing.NoReturn:
+    def CfgReader__EndOfIncludePathIsNotFound(
+        lineNum: int,
+    ) -> typing.NoReturn:
         assert type(lineNum) is int
         assert lineNum >= 0
 
@@ -471,7 +479,9 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def CfgReader__IncompletedEscapeInInclude(lineNum: int) -> typing.NoReturn:
+    def CfgReader__IncompletedEscapeInInclude(
+        lineNum: int,
+    ) -> typing.NoReturn:
         assert type(lineNum) is int
         assert lineNum >= 0
 
@@ -601,6 +611,8 @@ class RaiseError:
         assert lineNum >= 0
         assert optionName != ""
         assert ch != ""
+
+        # TODO: Append a file name
 
         errMsg = "Unknown escape symbol {!r} in a value of quoted option [{}]. Line {}. Column {}.".format(
             ch,
