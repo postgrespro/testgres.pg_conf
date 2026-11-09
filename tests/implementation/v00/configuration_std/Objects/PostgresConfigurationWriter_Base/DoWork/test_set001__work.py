@@ -12,7 +12,7 @@ from src.implementation.v00.configuration_base import PostgresConfigurationTopLe
 from src.implementation.v00.configuration_base import PostgresConfigurationFile as PgCfg_File
 
 from src.implementation.v00.configuration_base import PgCfgModel__FileData
-from src.implementation.v00.configuration_base import PgCfgModel__FileStatus
+from src.implementation.v00.configuration_base_r import PgCfgModel__FileStatus
 
 from .......TestServices import TestServices
 # fmt: on

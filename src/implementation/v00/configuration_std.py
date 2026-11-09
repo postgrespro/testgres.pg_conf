@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 from .configuration_base import PostgresConfiguration_Base
-from .configuration_base import PostgresConfigurationReader_Base
 from .configuration_base import PgCfgModel__OptionHandlerToPrepareSetValue
 from .configuration_base import PgCfgModel__OptionHandlerToPrepareSetValueItem
 from .configuration_base import PgCfgModel__OptionHandlerToPrepareGetValue
@@ -13,6 +12,8 @@ from .configuration_base import PgCfgModel__OptionHandlerToGetValue
 from .configuration_base import PgCfgModel__OptionHandlerToAddOption
 from .configuration_base import PgCfgModel__OptionHandlerToSetValueItem
 from .configuration_base import PgCfgModel__OptionHandlerToWrite
+
+from .configuration_base_r import PostgresConfigurationReader_Base
 
 from .configuration_base_w import PostgresConfigurationWriter_Base
 from .configuration_base_w import PostgresConfigurationWriterCtx_Base
