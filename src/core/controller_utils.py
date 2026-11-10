@@ -723,22 +723,27 @@ class DataControllerUtils:
             optionsByNameDictionary[optionData.m_Name] = optionData
             return
 
-        data = optionsByNameDictionary[optionData.m_Name]
+        # TODO: it is not tested
 
-        if type(data) is PgCfgModel__OptionData:
-            assert data is not optionData
-            optionsByNameDictionary[optionData.m_Name] = [data, optionData]
+        indexItemData = optionsByNameDictionary[optionData.m_Name]
+
+        if type(indexItemData) is PgCfgModel__OptionData:
+            assert indexItemData is not optionData
+            optionsByNameDictionary[optionData.m_Name] = [
+                indexItemData,
+                optionData,
+            ]
             return
 
-        if type(data) is list:
-            assert type(data) is list
-            assert len(data) > 1
-            data.append(optionData)
+        if type(indexItemData) is list:
+            assert type(indexItemData) is list
+            assert len(indexItemData) > 1
+            indexItemData.append(optionData)
             return
 
         BugCheckError.UnkOptObjectDataType(
             optionData.m_Name,
-            type(data),
+            type(indexItemData),
         )
 
     # --------------------------------------------------------------------
