@@ -32,6 +32,7 @@ class LineReader:
         self.m_ColNum = 0
         self.m_Next = 0
         self.m_Data = ""
+        return
 
     # --------------------------------------------------------------------
     def SetData(self, lineData: str):
@@ -43,6 +44,7 @@ class LineReader:
         self.m_LineNum += 1
         self.m_ColNum = 0
         self.m_Next = 0
+        return
 
     # --------------------------------------------------------------------
     def GetLineNum(self) -> int:
@@ -82,6 +84,7 @@ class LineReader:
             assert self.m_ColNum > stepSize
             self.m_ColNum -= stepSize
             assert self.m_ColNum > 0
+        return
 
     # --------------------------------------------------------------------
     def ReadSymbol(self) -> typing.Optional[str]:
