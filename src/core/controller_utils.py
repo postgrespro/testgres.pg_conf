@@ -31,7 +31,7 @@ class DataControllerUtils:
     def Option__set_Value(
         optionData: PgCfgModel__OptionData,
         value: typing.Any,
-    ):
+    ) -> None:
         assert type(optionData) is PgCfgModel__OptionData
         assert value is not None
 
@@ -43,7 +43,7 @@ class DataControllerUtils:
     def Option__add_ValueItem(
         optionData: PgCfgModel__OptionData,
         valueItem: typing.Any,
-    ):
+    ) -> None:
         assert type(optionData) is PgCfgModel__OptionData
         assert type(optionData.m_Value) is list
         assert valueItem is not None
@@ -57,7 +57,7 @@ class DataControllerUtils:
         cfgData: PgCfgModel__ConfigurationData,
         optionData: PgCfgModel__OptionData,
         withLine: bool,
-    ):
+    ) -> None:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(optionData) is PgCfgModel__OptionData
         assert type(withLine) is bool
@@ -82,7 +82,7 @@ class DataControllerUtils:
         cfgData: PgCfgModel__ConfigurationData,
         includeData: PgCfgModel__IncludeData,
         withLine: bool,
-    ):
+    ) -> None:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(includeData) is PgCfgModel__IncludeData
         assert type(withLine) is bool
@@ -107,7 +107,7 @@ class DataControllerUtils:
         cfgData: PgCfgModel__ConfigurationData,
         commentData: PgCfgModel__CommentData,
         withLineIfLast: bool,
-    ):
+    ) -> None:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(commentData) is PgCfgModel__CommentData
         assert type(withLineIfLast) is bool
@@ -159,7 +159,7 @@ class DataControllerUtils:
     @staticmethod
     def Helper__CheckThatWeCanAddCommentToFileLine(
         fileLineData: PgCfgModel__FileLineData,
-    ):
+    ) -> None:
         assert type(fileLineData) is PgCfgModel__FileLineData
         assert type(fileLineData.m_Items) is list
 
@@ -275,7 +275,7 @@ class DataControllerUtils:
     @staticmethod
     def Helper__CheckThatWeCanAddWorkDataToFileLine(
         fileLineData: PgCfgModel__FileLineData,
-    ):
+    ) -> None:
         assert type(fileLineData) is PgCfgModel__FileLineData
         assert type(fileLineData.m_Items) is list
 
@@ -307,7 +307,7 @@ class DataControllerUtils:
     def FileLine__delete(
         cfgData: PgCfgModel__ConfigurationData,
         fileLineData: PgCfgModel__FileLineData,
-    ):
+    ) -> None:
         assert cfgData is not None
         assert fileLineData is not None
         assert type(cfgData) is PgCfgModel__ConfigurationData
@@ -324,7 +324,7 @@ class DataControllerUtils:
     def FileLine__clear(
         cfgData: PgCfgModel__ConfigurationData,
         fileLineData: PgCfgModel__FileLineData,
-    ):
+    ) -> None:
         assert cfgData is not None
         assert fileLineData is not None
         assert type(cfgData) is PgCfgModel__ConfigurationData
@@ -566,7 +566,7 @@ class DataControllerUtils:
     def Helper__RegFileInCfgData(
         cfgData: PgCfgModel__ConfigurationData,
         fileData: PgCfgModel__FileData,
-    ):
+    ) -> None:
         assert cfgData is not None
         assert fileData is not None
         assert type(cfgData) is PgCfgModel__ConfigurationData
@@ -593,7 +593,7 @@ class DataControllerUtils:
     def Helper__UnRegFileFromCfgData(
         cfgData: PgCfgModel__ConfigurationData,
         fileData: PgCfgModel__FileData,
-    ):
+    ) -> None:
         assert cfgData is not None
         assert fileData is not None
         assert type(cfgData) is PgCfgModel__ConfigurationData
@@ -626,7 +626,7 @@ class DataControllerUtils:
         filesByStrKeyDictionary: typing.Dict[str, T_FILE_OR_FILES],
         fileKey: str,
         fileData: PgCfgModel__FileData,
-    ):
+    ) -> None:
         assert type(filesByStrKeyDictionary) is dict
         assert type(fileKey) is str
         assert type(fileData) is PgCfgModel__FileData
@@ -666,7 +666,7 @@ class DataControllerUtils:
         filesByStrKeyDictionary: typing.Dict[str, T_FILE_OR_FILES],
         fileKey: str,
         fileData: PgCfgModel__FileData,
-    ):
+    ) -> None:
         assert type(filesByStrKeyDictionary) is dict
         assert type(fileKey) is str
         assert type(fileData) is PgCfgModel__FileData
@@ -748,7 +748,7 @@ class DataControllerUtils:
     def Helper__InsertOptionIntoIndex(
         optionsByNameDictionary: typing.Dict[str, T_OPTION_OR_OPTIONS],
         optionData: PgCfgModel__OptionData,
-    ):
+    ) -> None:
         assert optionsByNameDictionary is not None
         assert optionData is not None
         assert type(optionsByNameDictionary) is dict
@@ -786,7 +786,7 @@ class DataControllerUtils:
     def Helper__DeleteOptionFromIndex(
         optionsByNameDictionary: typing.Dict[str, T_OPTION_OR_OPTIONS],
         optionData: PgCfgModel__OptionData,
-    ):
+    ) -> None:
         assert optionsByNameDictionary is not None
         assert optionData is not None
         assert type(optionsByNameDictionary) is dict
@@ -852,7 +852,7 @@ class DataControllerUtils:
     def Helper__ClearFileLine(
         cfgData: PgCfgModel__ConfigurationData,
         fileLineData: PgCfgModel__FileLineData,
-    ):
+    ) -> None:
         assert cfgData is not None
         assert fileLineData is not None
         assert type(cfgData) is PgCfgModel__ConfigurationData
@@ -887,7 +887,7 @@ class DataControllerUtils:
     @staticmethod
     def Helper__FileLineHasWorkData(
         fileLineData: PgCfgModel__FileLineData,
-    ):
+    ) -> bool:
         assert fileLineData is not None
         assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
@@ -918,8 +918,9 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__DeleteElement(
-        cfgData: PgCfgModel__ConfigurationData, objectData: PgCfgModel__ObjectData
-    ):
+        cfgData: PgCfgModel__ConfigurationData,
+        objectData: PgCfgModel__ObjectData,
+    ) -> None:
         assert cfgData is not None
         assert objectData is not None
         assert type(cfgData) is PgCfgModel__ConfigurationData
@@ -940,7 +941,7 @@ class DataControllerUtils:
     @staticmethod
     def Helper__DeleteComment(
         commentData: PgCfgModel__CommentData,
-    ):
+    ) -> None:
         assert type(commentData) is PgCfgModel__CommentData
         assert commentData.IsAlive()
 
@@ -982,7 +983,7 @@ class DataControllerUtils:
     def Helper__DeleteOption(
         cfgData: PgCfgModel__ConfigurationData,
         optionData: PgCfgModel__OptionData,
-    ):
+    ) -> None:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(optionData) is PgCfgModel__OptionData
         assert type(optionData.m_Name) is str
@@ -1052,7 +1053,7 @@ class DataControllerUtils:
     @staticmethod
     def Helper__DeleteInclude(
         includeData: PgCfgModel__IncludeData,
-    ):
+    ) -> None:
         assert type(includeData) is PgCfgModel__IncludeData
         assert includeData.IsAlive()
 
@@ -1093,7 +1094,7 @@ class DataControllerUtils:
     def Helper__DeleteFileLine(
         cfgData: PgCfgModel__ConfigurationData,
         fileLineData: PgCfgModel__FileLineData,
-    ):
+    ) -> None:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
