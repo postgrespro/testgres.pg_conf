@@ -175,18 +175,16 @@ class DataControllerUtils:
         assert lastItem.m_Element is not None
         assert isinstance(lastItem.m_Element, PgCfgModel__FileLineElementData)
 
-        typeOfLastElement = type(lastItem.m_Element)
-
-        if typeOfLastElement == PgCfgModel__OptionData:
+        if type(lastItem.m_Element) is PgCfgModel__OptionData:
             return
 
-        if typeOfLastElement == PgCfgModel__IncludeData:
+        if type(lastItem.m_Element) is PgCfgModel__IncludeData:
             return
 
-        if typeOfLastElement is PgCfgModel__CommentData:
+        if type(lastItem.m_Element) is PgCfgModel__CommentData:
             RaiseError.FileLineAlreadyHasComment()
 
-        BugCheckError.UnkObjectDataType(typeOfLastElement)
+        BugCheckError.UnkObjectDataType(type(lastItem.m_Element))
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -900,18 +898,16 @@ class DataControllerUtils:
             assert item.m_Element is not None
             assert isinstance(item.m_Element, PgCfgModel__FileLineElementData)
 
-            typeOfElementData = type(item.m_Element)
-
-            if typeOfElementData == PgCfgModel__OptionData:
+            if type(item.m_Element) is PgCfgModel__OptionData:
                 return True
 
-            if typeOfElementData is PgCfgModel__CommentData:
+            if type(item.m_Element) is PgCfgModel__CommentData:
                 continue
 
-            if typeOfElementData == PgCfgModel__IncludeData:
+            if type(item.m_Element) is PgCfgModel__IncludeData:
                 return True
 
-            BugCheckError.UnkObjectDataType(typeOfElementData)
+            BugCheckError.UnkObjectDataType(type(item.m_Element))
 
         return False
 
