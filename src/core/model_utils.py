@@ -12,6 +12,9 @@ from .model import OptionData as PgCfgModel__OptionData
 from .model import IncludeData as PgCfgModel__IncludeData
 from .model import FileLineData as PgCfgModel__FileLineData
 from .model import FileData as PgCfgModel__FileData
+from .model import MultiIndex as PgCfgModel__MultiIndex
+from .model import T_OPTIONS_INDEX as PgCfgModel__T_OPTIONS_INDEX
+from .model import T_FILES_INDEX as PgCfgModel__T_FILES_INDEX
 # fmt: on
 
 from ..os.abstract.configuration_os_ops import ConfigurationOsOps
@@ -254,7 +257,7 @@ class ModelUtils:
         assert fileData is not None
         assert type(fileData) is PgCfgModel__FileData
         assert fileData.m_OptionsByName is not None
-        assert type(fileData.m_OptionsByName) is dict
+        assert type(fileData.m_OptionsByName) is PgCfgModel__MultiIndex
 
         optionData = PgCfgModel__OptionData(
             fileLineData,
@@ -423,7 +426,7 @@ class ModelUtils:
     ) -> PgCfgModel__FileData:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(cfgData.m_Files) is list
-        assert type(cfgData.m_AllFilesByName) is dict
+        assert type(cfgData.m_AllFilesByName) is PgCfgModel__MultiIndex
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert type(file_name) is str
         assert file_name != ""
@@ -453,7 +456,7 @@ class ModelUtils:
     ) -> PgCfgModel__FileData:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(cfgData.m_Files) is list
-        assert type(cfgData.m_AllFilesByName) is dict
+        assert type(cfgData.m_AllFilesByName) is PgCfgModel__MultiIndex
         assert type(path) is str
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert path != ""
@@ -492,7 +495,7 @@ class ModelUtils:
     ) -> PgCfgModel__FileData:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(cfgData.m_Files) is list
-        assert type(cfgData.m_AllFilesByName) is dict
+        assert type(cfgData.m_AllFilesByName) is PgCfgModel__MultiIndex
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert type(baseFolder) is str
         assert type(path) is str
@@ -684,232 +687,88 @@ class ModelUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__InsertFileIntoIndex(
-        filesByStrKeyDictionary: typing.Dict[str, T_FILE_OR_FILES],
+        filesByStrKeyDictionary: PgCfgModel__T_FILES_INDEX,
         fileKey: str,
         fileData: PgCfgModel__FileData,
     ) -> None:
-        assert type(filesByStrKeyDictionary) is dict
+        assert type(filesByStrKeyDictionary) is PgCfgModel__MultiIndex
         assert type(fileKey) is str
         assert type(fileData) is PgCfgModel__FileData
 
         assert fileKey != ""
         assert fileData.IsAlive()
 
-        if fileKey not in filesByStrKeyDictionary.keys():
-            filesByStrKeyDictionary[fileKey] = fileData
-            return
-
-        # TODO: it is not tested
-        indexItemData = filesByStrKeyDictionary[fileKey]
-
-        if type(indexItemData) is PgCfgModel__FileData:
-            assert indexItemData is not fileData
-            filesByStrKeyDictionary[fileKey] = [
-                indexItemData,
-                fileData,
-            ]
-            return
-
-        if type(indexItemData) is list:
-            assert type(indexItemData) is list
-            assert len(indexItemData) > 0
-            indexItemData.append(fileData)  # throw
-            return
-
-        BugCheckError.UnkFileObjectDataType(
+        filesByStrKeyDictionary.add(
             fileKey,
-            type(indexItemData),
+            fileData,
         )
+
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__DeleteFileIntoIndex(
-        filesByStrKeyDictionary: typing.Dict[str, T_FILE_OR_FILES],
+        filesByStrKeyDictionary: PgCfgModel__T_FILES_INDEX,
         fileKey: str,
         fileData: PgCfgModel__FileData,
     ) -> None:
-        assert type(filesByStrKeyDictionary) is dict
+        assert type(filesByStrKeyDictionary) is PgCfgModel__MultiIndex
         assert type(fileKey) is str
         assert type(fileData) is PgCfgModel__FileData
 
         assert fileKey != ""
         assert fileData.IsAlive()
 
-        if fileKey not in filesByStrKeyDictionary.keys():
+        r = filesByStrKeyDictionary.remove_exact(
+            fileKey,
+            fileData,
+        )
+
+        if not r:
             BugCheckError.FileIsNotFoundInIndex(
                 fileKey,
                 fileData.m_Path,
             )
 
-        indexItemData = filesByStrKeyDictionary[fileKey]
-
-        assert indexItemData is not None
-
-        if type(indexItemData) is PgCfgModel__FileData:
-            assert indexItemData is fileData
-
-            if indexItemData is not fileData:
-                BugCheckError.FileIsNotFoundInIndex(
-                    fileKey,
-                    fileData.m_Path,
-                )
-
-            filesByStrKeyDictionary.pop(fileKey)
-            assert fileKey not in filesByStrKeyDictionary.keys()
-            return
-
-        if type(indexItemData) is list:
-            assert type(indexItemData) is list
-            assert len(indexItemData) > 1
-
-            i = 0
-
-            while i != len(indexItemData):
-                ptr = indexItemData[i]
-                assert ptr is not None
-                assert type(ptr) is PgCfgModel__FileData
-
-                if ptr is fileData:
-                    break
-
-                i += 1
-                continue
-
-            assert i >= 0
-            assert i <= len(indexItemData)
-
-            if i == len(indexItemData):
-                BugCheckError.FileIsNotFoundInIndex(
-                    fileKey,
-                    fileData.m_Path,
-                )
-
-            assert type(indexItemData) is list
-            assert i < len(indexItemData)
-            indexItemData.pop(i)
-            assert len(indexItemData) > 0
-
-            if len(indexItemData) == 0:  # it is an abnormal situation
-                filesByStrKeyDictionary.pop(fileKey)
-            elif len(indexItemData) == 1:
-                filesByStrKeyDictionary[fileKey] = indexItemData[0]
-
-            return
-
-        BugCheckError.UnkFileObjectDataType(
-            fileKey,
-            type(indexItemData),
-        )
-
-    # --------------------------------------------------------------------
-    T_OPTION_OR_OPTIONS = typing.Union[
-        PgCfgModel__OptionData,
-        typing.List[PgCfgModel__OptionData],
-    ]
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__InsertOptionIntoIndex(
-        optionsByNameDictionary: typing.Dict[str, T_OPTION_OR_OPTIONS],
+        optionsByNameDictionary: PgCfgModel__T_OPTIONS_INDEX,
         optionData: PgCfgModel__OptionData,
     ) -> None:
         assert optionsByNameDictionary is not None
         assert optionData is not None
-        assert type(optionsByNameDictionary) is dict
+        assert type(optionsByNameDictionary) is PgCfgModel__MultiIndex
         assert type(optionData) is PgCfgModel__OptionData
 
-        if optionData.m_Name not in optionsByNameDictionary.keys():
-            optionsByNameDictionary[optionData.m_Name] = optionData
-            return
-
-        # TODO: it is not tested
-
-        indexItemData = optionsByNameDictionary[optionData.m_Name]
-
-        if type(indexItemData) is PgCfgModel__OptionData:
-            assert indexItemData is not optionData
-            optionsByNameDictionary[optionData.m_Name] = [
-                indexItemData,
-                optionData,
-            ]
-            return
-
-        if type(indexItemData) is list:
-            assert type(indexItemData) is list
-            assert len(indexItemData) > 1
-            indexItemData.append(optionData)
-            return
-
-        BugCheckError.UnkOptObjectDataType(
+        optionsByNameDictionary.add(
             optionData.m_Name,
-            type(indexItemData),
+            optionData,
         )
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__DeleteOptionFromIndex(
-        optionsByNameDictionary: typing.Dict[str, T_OPTION_OR_OPTIONS],
+        optionsByNameDictionary: PgCfgModel__T_OPTIONS_INDEX,
         optionData: PgCfgModel__OptionData,
     ) -> None:
         assert optionsByNameDictionary is not None
         assert optionData is not None
-        assert type(optionsByNameDictionary) is dict
+        assert type(optionsByNameDictionary) is PgCfgModel__MultiIndex
         assert type(optionData) is PgCfgModel__OptionData
 
-        if optionData.m_Name not in optionsByNameDictionary.keys():
+        r = optionsByNameDictionary.remove_exact(
+            optionData.m_Name,
+            optionData,
+        )
+
+        if not r:
             BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
 
-        indexItemData = optionsByNameDictionary[optionData.m_Name]
-
-        assert indexItemData is not None
-
-        if type(indexItemData) is PgCfgModel__OptionData:
-            assert indexItemData is optionData
-
-            if indexItemData is not optionData:
-                BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
-
-            optionsByNameDictionary.pop(optionData.m_Name)
-            assert optionData.m_Name not in optionsByNameDictionary.keys()
-            return
-
-        if type(indexItemData) is list:
-            assert len(indexItemData) > 1
-
-            i = 0
-            while i != len(indexItemData):
-                ptr = indexItemData[i]
-                assert ptr is not None
-                assert type(ptr) is PgCfgModel__OptionData
-                assert type(ptr.m_Name) is str
-                assert ptr.m_Name == optionData.m_Name
-
-                if ptr is optionData:
-                    break
-
-                i += 1
-                continue
-
-            assert i >= 0
-            assert i <= len(indexItemData)
-
-            if i == len(indexItemData):
-                BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
-
-            indexItemData.pop(i)
-            assert len(indexItemData) > 0
-
-            if len(indexItemData) == 0:  # an abnormal situation
-                optionsByNameDictionary.pop(optionData.m_Name)
-            elif len(indexItemData) == 1:
-                optionsByNameDictionary[optionData.m_Name] = indexItemData[0]
-
-            return
-
-        BugCheckError.UnkOptObjectDataType(
-            optionData.m_Name,
-            type(indexItemData),
-        )
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -1086,11 +945,11 @@ class ModelUtils:
         assert fileData.IsAlive()
 
         # 1.3
-        assert type(fileData.m_OptionsByName) is dict
+        assert type(fileData.m_OptionsByName) is PgCfgModel__MultiIndex
         assert optionData.m_Name in fileData.m_OptionsByName.keys()
 
         # 1.4
-        assert type(cfgData.m_AllOptionsByName) is dict
+        assert type(cfgData.m_AllOptionsByName) is PgCfgModel__MultiIndex
         assert optionData.m_Name in cfgData.m_AllOptionsByName.keys()
 
         # 2. Perform delete operations
