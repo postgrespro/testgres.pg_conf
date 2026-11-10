@@ -760,26 +760,26 @@ class DataControllerUtils:
         if optionData.m_Name not in optionsByNameDictionary.keys():
             BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
 
-        data = optionsByNameDictionary[optionData.m_Name]
+        indexItemData = optionsByNameDictionary[optionData.m_Name]
 
-        assert data is not None
+        assert indexItemData is not None
 
-        if type(data) is PgCfgModel__OptionData:
-            assert data is optionData
+        if type(indexItemData) is PgCfgModel__OptionData:
+            assert indexItemData is optionData
 
-            if data is not optionData:
+            if indexItemData is not optionData:
                 BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
 
             optionsByNameDictionary.pop(optionData.m_Name)
             assert optionData.m_Name not in optionsByNameDictionary.keys()
             return
 
-        if type(data) is list:
-            assert len(data) > 1
+        if type(indexItemData) is list:
+            assert len(indexItemData) > 1
 
             i = 0
-            while i != len(data):
-                ptr = data[i]
+            while i != len(indexItemData):
+                ptr = indexItemData[i]
                 assert ptr is not None
                 assert type(ptr) is PgCfgModel__OptionData
                 assert type(ptr.m_Name) is str
@@ -792,24 +792,24 @@ class DataControllerUtils:
                 continue
 
             assert i >= 0
-            assert i <= len(data)
+            assert i <= len(indexItemData)
 
-            if i == len(data):
+            if i == len(indexItemData):
                 BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
 
-            data.pop(i)
-            assert len(data) > 0
+            indexItemData.pop(i)
+            assert len(indexItemData) > 0
 
-            if len(data) == 0:  # an abnormal situation
+            if len(indexItemData) == 0:  # an abnormal situation
                 optionsByNameDictionary.pop(optionData.m_Name)
-            elif len(data) == 1:
-                optionsByNameDictionary[optionData.m_Name] = data[0]
+            elif len(indexItemData) == 1:
+                optionsByNameDictionary[optionData.m_Name] = indexItemData[0]
 
             return
 
         BugCheckError.UnkOptObjectDataType(
             optionData.m_Name,
-            type(data),
+            type(indexItemData),
         )
 
     # --------------------------------------------------------------------
