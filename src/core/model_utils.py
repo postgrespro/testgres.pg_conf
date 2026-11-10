@@ -23,10 +23,10 @@ from .helpers import Helpers
 import typing
 
 # //////////////////////////////////////////////////////////////////////////////
-# class DataControllerUtils
+# class ModelUtils
 
 
-class DataControllerUtils:
+class ModelUtils:
     @staticmethod
     def Option__set_Value(
         optionData: PgCfgModel__OptionData,
@@ -346,7 +346,7 @@ class DataControllerUtils:
         assert type(optName) is str
         assert optValue is not None
 
-        newLineData = DataControllerUtils.File__add_Line(fileData)  # raise
+        newLineData = ModelUtils.File__add_Line(fileData)  # raise
 
         assert type(newLineData) is PgCfgModel__FileLineData
 
@@ -358,7 +358,7 @@ class DataControllerUtils:
             assert type(optionData) is PgCfgModel__OptionData
             assert optionData.m_Name == optName
         except:
-            DataControllerUtils.FileLine__delete(cfgData, newLineData)
+            ModelUtils.FileLine__delete(cfgData, newLineData)
             raise
 
         assert optionData is not None
