@@ -128,7 +128,9 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def FileLine__add_Comment(
-        fileLineData: PgCfgModel__FileLineData, offset: typing.Optional[int], text: str
+        fileLineData: PgCfgModel__FileLineData,
+        offset: typing.Optional[int],
+        text: str,
     ) -> PgCfgModel__CommentData:
         assert type(fileLineData) is PgCfgModel__FileLineData
         assert (offset is None) or (type(offset) is int)
@@ -235,16 +237,19 @@ class DataControllerUtils:
 
         try:
             __class__.Helper__InsertOptionIntoIndex(
-                fileData.m_OptionsByName, optionData
+                fileData.m_OptionsByName,
+                optionData,
             )
 
             try:
                 __class__.Helper__InsertOptionIntoIndex(
-                    cfgData.m_AllOptionsByName, optionData
+                    cfgData.m_AllOptionsByName,
+                    optionData,
                 )
             except:  # rollback
                 __class__.Helper__DeleteOptionFromIndex(
-                    fileData.m_OptionsByName, optionData
+                    fileData.m_OptionsByName,
+                    optionData,
                 )
                 raise
         except:  # rollback
@@ -277,18 +282,16 @@ class DataControllerUtils:
         assert lastItem.m_Element is not None
         assert isinstance(lastItem.m_Element, PgCfgModel__FileLineElementData)
 
-        typeOfLastElement = type(lastItem.m_Element)
-
-        if typeOfLastElement == PgCfgModel__OptionData:
+        if type(lastItem.m_Element) is PgCfgModel__OptionData:
             RaiseError.FileLineAlreadyHasOption(lastItem.m_Element.m_Name)
 
-        if typeOfLastElement == PgCfgModel__IncludeData:
+        if type(lastItem.m_Element) is PgCfgModel__IncludeData:
             RaiseError.FileLineAlreadyHasIncludeDirective()
 
-        if typeOfLastElement is PgCfgModel__CommentData:
+        if type(lastItem.m_Element) is PgCfgModel__CommentData:
             RaiseError.FileLineAlreadyHasComment()
 
-        BugCheckError.UnkObjectDataType(typeOfLastElement)
+        BugCheckError.UnkObjectDataType(type(lastItem.m_Element))
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -470,7 +473,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__FindIndexOfFileLine(
-        fileData: PgCfgModel__FileData, fileLineData: PgCfgModel__FileLineData
+        fileData: PgCfgModel__FileData,
+        fileLineData: PgCfgModel__FileLineData,
     ) -> int:
         assert fileData is not None
         assert fileLineData is not None
@@ -480,7 +484,9 @@ class DataControllerUtils:
 
         cFileLines = len(fileData.m_Lines)
 
-        for iFileLine in range(cFileLines):
+        iFileLine = 0
+
+        while iFileLine != cFileLines:
             ptr = fileData.m_Lines[iFileLine]
             assert ptr is not None
             assert type(ptr) is PgCfgModel__FileLineData
@@ -489,6 +495,7 @@ class DataControllerUtils:
             if ptr is fileLineData:
                 return iFileLine
 
+            iFileLine += 1
             continue
 
         assert iFileLine == cFileLines
@@ -508,7 +515,9 @@ class DataControllerUtils:
 
         cItems = len(fileLineData.m_Items)
 
-        for iItem in range(cItems):
+        iItem = 0
+
+        while iItem != cItems:
             ptr = fileLineData.m_Items[iItem]
             assert ptr is not None
             assert type(ptr) is PgCfgModel__FileLineData.tagItem
@@ -517,6 +526,7 @@ class DataControllerUtils:
             if ptr.m_Element is elementData:
                 return iItem
 
+            iItem += 1
             continue
 
         assert iItem == cItems
@@ -525,7 +535,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__RegFileInCfgData(
-        cfgData: PgCfgModel__ConfigurationData, fileData: PgCfgModel__FileData
+        cfgData: PgCfgModel__ConfigurationData,
+        fileData: PgCfgModel__FileData,
     ):
         assert cfgData is not None
         assert fileData is not None
@@ -542,13 +553,17 @@ class DataControllerUtils:
         assert fileName != ""
 
         __class__.Helper__InsertFileIntoIndex(
-            cfgData.m_AllFilesByName, fileName, fileData
+            cfgData.m_AllFilesByName,
+            fileName,
+            fileData,
         )
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__UnRegFileFromCfgData(
-        cfgData: PgCfgModel__ConfigurationData, fileData: PgCfgModel__FileData
+        cfgData: PgCfgModel__ConfigurationData,
+        fileData: PgCfgModel__FileData,
     ):
         assert cfgData is not None
         assert fileData is not None
@@ -564,13 +579,22 @@ class DataControllerUtils:
         assert fileName != ""
 
         __class__.Helper__DeleteFileIntoIndex(
-            cfgData.m_AllFilesByName, fileName, fileData
+            cfgData.m_AllFilesByName,
+            fileName,
+            fileData,
         )
+        return
+
+    # --------------------------------------------------------------------
+    T_FILE_OR_FILES = typing.Union[
+        PgCfgModel__FileData,
+        typing.List[PgCfgModel__FileData],
+    ]
 
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__InsertFileIntoIndex(
-        filesByStrKeyDictionary: dict[str, PgCfgModel__FileData],
+        filesByStrKeyDictionary: typing.Dict[str, T_FILE_OR_FILES],
         fileKey: str,
         fileData: PgCfgModel__FileData,
     ):
@@ -583,24 +607,34 @@ class DataControllerUtils:
 
         if fileKey not in filesByStrKeyDictionary.keys():
             filesByStrKeyDictionary[fileKey] = fileData
-        else:
-            indexItemData = filesByStrKeyDictionary[fileKey]
+            return
 
-            if indexItemData is PgCfgModel__FileData:
-                filesByStrKeyDictionary[fileKey] = [indexItemData, fileData]  # throw
-            else:
-                assert type(indexItemData) is list
-                assert len(indexItemData) > 0
-                indexItemData.append(fileData)  # throw
+        # TODO: it is not tested
+        indexItemData = filesByStrKeyDictionary[fileKey]
 
-            assert type(filesByStrKeyDictionary[fileKey]) is list
-            assert len(filesByStrKeyDictionary[fileKey]) > 1
-            assert filesByStrKeyDictionary[fileKey][-1] is fileData
+        if type(indexItemData) is PgCfgModel__FileData:
+            assert indexItemData is not fileData
+            filesByStrKeyDictionary[fileKey] = [
+                indexItemData,
+                fileData,
+            ]
+            return
+
+        if type(indexItemData) is list:
+            assert type(indexItemData) is list
+            assert len(indexItemData) > 0
+            indexItemData.append(fileData)  # throw
+            return
+
+        BugCheckError.UnkFileObjectDataType(
+            fileKey,
+            type(indexItemData),
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__DeleteFileIntoIndex(
-        filesByStrKeyDictionary: dict[str, PgCfgModel__FileData],
+        filesByStrKeyDictionary: typing.Dict[str, T_FILE_OR_FILES],
         fileKey: str,
         fileData: PgCfgModel__FileData,
     ):
@@ -618,9 +652,7 @@ class DataControllerUtils:
 
         assert indexItemData is not None
 
-        typeOfIndexItemData = type(indexItemData)
-
-        if typeOfIndexItemData == fileData:
+        if type(indexItemData) is PgCfgModel__FileData:
             assert indexItemData is fileData
 
             if indexItemData is not fileData:
@@ -630,11 +662,13 @@ class DataControllerUtils:
             assert fileKey not in filesByStrKeyDictionary.keys()
             return
 
-        if typeOfIndexItemData is list:
+        if type(indexItemData) is list:
             assert type(indexItemData) is list
             assert len(indexItemData) > 1
 
-            for i in range(len(indexItemData)):
+            i = 0
+
+            while i != len(indexItemData):
                 ptr = indexItemData[i]
                 assert ptr is not None
                 assert type(ptr) is PgCfgModel__FileData
@@ -642,6 +676,7 @@ class DataControllerUtils:
                 if ptr is fileData:
                     break
 
+                i += 1
                 continue
 
             assert i >= 0
@@ -662,12 +697,21 @@ class DataControllerUtils:
 
             return
 
-        BugCheckError.UnkFileObjectDataType(fileKey, typeOfIndexItemData)
+        BugCheckError.UnkFileObjectDataType(
+            fileKey,
+            type(indexItemData),
+        )
+
+    # --------------------------------------------------------------------
+    T_OPTION_OR_OPTIONS = typing.Union[
+        PgCfgModel__OptionData,
+        typing.List[PgCfgModel__OptionData],
+    ]
 
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__InsertOptionIntoIndex(
-        optionsByNameDictionary: dict[str, PgCfgModel__OptionData],
+        optionsByNameDictionary: typing.Dict[str, T_OPTION_OR_OPTIONS],
         optionData: PgCfgModel__OptionData,
     ):
         assert optionsByNameDictionary is not None
@@ -679,27 +723,33 @@ class DataControllerUtils:
             optionsByNameDictionary[optionData.m_Name] = optionData
             return
 
-        data = optionsByNameDictionary[optionData.m_Name]
+        # TODO: it is not tested
 
-        typeOfData = type(data)
+        indexItemData = optionsByNameDictionary[optionData.m_Name]
 
-        if typeOfData is PgCfgModel__OptionData:
-            assert data is not optionData
-            optionsByNameDictionary[optionData.m_Name] = [data, optionData]
+        if type(indexItemData) is PgCfgModel__OptionData:
+            assert indexItemData is not optionData
+            optionsByNameDictionary[optionData.m_Name] = [
+                indexItemData,
+                optionData,
+            ]
             return
 
-        if typeOfData is list:
-            assert type(data) is list
-            assert len(data) > 1
-            data.append(optionData)
+        if type(indexItemData) is list:
+            assert type(indexItemData) is list
+            assert len(indexItemData) > 1
+            indexItemData.append(optionData)
             return
 
-        BugCheckError.UnkOptObjectDataType(optionData.m_Name, typeOfData)
+        BugCheckError.UnkOptObjectDataType(
+            optionData.m_Name,
+            type(indexItemData),
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__DeleteOptionFromIndex(
-        optionsByNameDictionary: dict[str, PgCfgModel__OptionData],
+        optionsByNameDictionary: typing.Dict[str, T_OPTION_OR_OPTIONS],
         optionData: PgCfgModel__OptionData,
     ):
         assert optionsByNameDictionary is not None
@@ -710,28 +760,26 @@ class DataControllerUtils:
         if optionData.m_Name not in optionsByNameDictionary.keys():
             BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
 
-        data = optionsByNameDictionary[optionData.m_Name]
+        indexItemData = optionsByNameDictionary[optionData.m_Name]
 
-        assert data is not None
+        assert indexItemData is not None
 
-        typeOfData = type(data)
+        if type(indexItemData) is PgCfgModel__OptionData:
+            assert indexItemData is optionData
 
-        if typeOfData is PgCfgModel__OptionData:
-            assert data is optionData
-
-            if data is not optionData:
+            if indexItemData is not optionData:
                 BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
 
             optionsByNameDictionary.pop(optionData.m_Name)
             assert optionData.m_Name not in optionsByNameDictionary.keys()
             return
 
-        if typeOfData is list:
-            assert type(data) is list
-            assert len(data) > 1
+        if type(indexItemData) is list:
+            assert len(indexItemData) > 1
 
-            for i in range(len(data)):
-                ptr = data[i]
+            i = 0
+            while i != len(indexItemData):
+                ptr = indexItemData[i]
                 assert ptr is not None
                 assert type(ptr) is PgCfgModel__OptionData
                 assert type(ptr.m_Name) is str
@@ -740,26 +788,29 @@ class DataControllerUtils:
                 if ptr is optionData:
                     break
 
+                i += 1
                 continue
 
             assert i >= 0
-            assert i <= len(data)
+            assert i <= len(indexItemData)
 
-            if i == len(data):
+            if i == len(indexItemData):
                 BugCheckError.OptionIsNotFoundInIndex(optionData.m_Name)
 
-            assert type(data) is list
-            data.pop(i)
-            assert len(data) > 0
+            indexItemData.pop(i)
+            assert len(indexItemData) > 0
 
-            if len(data) == 0:  # an abnormal situation
+            if len(indexItemData) == 0:  # an abnormal situation
                 optionsByNameDictionary.pop(optionData.m_Name)
-            elif len(data) == 1:
-                optionsByNameDictionary[optionData.m_Name] = data[0]
+            elif len(indexItemData) == 1:
+                optionsByNameDictionary[optionData.m_Name] = indexItemData[0]
 
             return
 
-        BugCheckError.UnkOptObjectDataType(optionData.m_Name, typeOfData)
+        BugCheckError.UnkOptObjectDataType(
+            optionData.m_Name,
+            type(indexItemData),
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -835,18 +886,16 @@ class DataControllerUtils:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert isinstance(objectData, PgCfgModel__ObjectData)
 
-        typeOfObjectData = type(objectData)
-
-        if typeOfObjectData is PgCfgModel__CommentData:
+        if type(objectData) is PgCfgModel__CommentData:
             return __class__.Helper__DeleteComment(objectData)
 
-        if typeOfObjectData == PgCfgModel__OptionData:
+        if type(objectData) is PgCfgModel__OptionData:
             return __class__.Helper__DeleteOption(cfgData, objectData)
 
-        if typeOfObjectData == PgCfgModel__IncludeData:
+        if type(objectData) is PgCfgModel__IncludeData:
             return __class__.Helper__DeleteInclude(objectData)
 
-        BugCheckError.UnkObjectDataType(typeOfObjectData)
+        BugCheckError.UnkObjectDataType(type(objectData))
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -866,7 +915,8 @@ class DataControllerUtils:
 
         # 1.2 Set iFileLineItem
         iFileLineItem = __class__.Helper__FindIndexOfFileLineElement(
-            fileLineData, commentData
+            fileLineData,
+            commentData,
         )
 
         assert iFileLineItem >= 0
@@ -884,6 +934,7 @@ class DataControllerUtils:
         commentData.MarkAsDeletedFrom(fileLineData)
         assert not commentData.IsAlive()
         fileLineData.m_Items.pop(iFileLineItem)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -946,6 +997,7 @@ class DataControllerUtils:
         optionData.MarkAsDeletedFrom(fileLineData)
         assert not optionData.IsAlive()
         fileLineData.m_Items.pop(iFileLineItem)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -983,6 +1035,7 @@ class DataControllerUtils:
         includeData.MarkAsDeletedFrom(fileLineData)
         assert not includeData.IsAlive()
         fileLineData.m_Items.pop(iFileLineItem)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -1027,6 +1080,7 @@ class DataControllerUtils:
         fileLineData.MarkAsDeletedFrom(fileData)
         assert not fileLineData.IsAlive()
         fileData.m_Lines.pop(iFileLine)
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
