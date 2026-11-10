@@ -28,7 +28,10 @@ import typing
 
 class DataControllerUtils:
     @staticmethod
-    def Option__set_Value(optionData: PgCfgModel__OptionData, value: typing.Any):
+    def Option__set_Value(
+        optionData: PgCfgModel__OptionData,
+        value: typing.Any,
+    ):
         assert type(optionData) is PgCfgModel__OptionData
         assert value is not None
 
@@ -38,7 +41,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Option__add_ValueItem(
-        optionData: PgCfgModel__OptionData, valueItem: typing.Any
+        optionData: PgCfgModel__OptionData,
+        valueItem: typing.Any,
     ):
         assert type(optionData) is PgCfgModel__OptionData
         assert type(optionData.m_Value) is list
@@ -301,7 +305,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def FileLine__delete(
-        cfgData: PgCfgModel__ConfigurationData, fileLineData: PgCfgModel__FileLineData
+        cfgData: PgCfgModel__ConfigurationData,
+        fileLineData: PgCfgModel__FileLineData,
     ):
         assert cfgData is not None
         assert fileLineData is not None
@@ -317,7 +322,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def FileLine__clear(
-        cfgData: PgCfgModel__ConfigurationData, fileLineData: PgCfgModel__FileLineData
+        cfgData: PgCfgModel__ConfigurationData,
+        fileLineData: PgCfgModel__FileLineData,
     ):
         assert cfgData is not None
         assert fileLineData is not None
@@ -364,7 +370,9 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def File__add_Line(fileData: PgCfgModel__FileData) -> PgCfgModel__FileLineData:
+    def File__add_Line(
+        fileData: PgCfgModel__FileData,
+    ) -> PgCfgModel__FileLineData:
         assert type(fileData) is PgCfgModel__FileData
         assert type(fileData.m_Lines) is list
 
@@ -375,7 +383,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Cfg__CreateAndAddTopLevelFile__AUTO(
-        cfgData: PgCfgModel__ConfigurationData, file_name: str
+        cfgData: PgCfgModel__ConfigurationData,
+        file_name: str,
     ) -> PgCfgModel__FileData:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(cfgData.m_Files) is list
@@ -396,7 +405,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Cfg__CreateAndAddTopLevelFile__USER(
-        cfgData: PgCfgModel__ConfigurationData, path: str
+        cfgData: PgCfgModel__ConfigurationData,
+        path: str,
     ) -> PgCfgModel__FileData:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(cfgData.m_Files) is list
@@ -426,7 +436,9 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Cfg__GetOrCreateFile__USER(
-        cfgData: PgCfgModel__ConfigurationData, baseFolder: str, path: str
+        cfgData: PgCfgModel__ConfigurationData,
+        baseFolder: str,
+        path: str,
     ) -> PgCfgModel__FileData:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(cfgData.m_Files) is list
@@ -436,7 +448,11 @@ class DataControllerUtils:
         assert type(path) is str
         assert path != ""
 
-        newFilePath = Helpers.NormalizeFilePath(cfgData.OsOps, baseFolder, path)
+        newFilePath = Helpers.NormalizeFilePath(
+            cfgData.OsOps,
+            baseFolder,
+            path,
+        )
 
         assert type(newFilePath) is str
         assert newFilePath != ""
@@ -452,16 +468,23 @@ class DataControllerUtils:
 
             continue
 
-        newFileData = PgCfgModel__FileData(cfgData, newFilePath)
+        newFileData = PgCfgModel__FileData(
+            cfgData,
+            newFilePath,
+        )
 
-        __class__.Helper__RegFileInCfgData(cfgData, newFileData)  # raise
+        __class__.Helper__RegFileInCfgData(
+            cfgData,
+            newFileData,
+        )  # raise
 
         return newFileData
 
     # Helper methods -----------------------------------------------------
     @staticmethod
     def Helper__FinishCreateTopLevelFile(
-        cfgData: PgCfgModel__ConfigurationData, newFilePath: str
+        cfgData: PgCfgModel__ConfigurationData,
+        newFilePath: str,
     ) -> PgCfgModel__FileData:
 
         newFileData = PgCfgModel__FileData(cfgData, newFilePath)
@@ -662,7 +685,10 @@ class DataControllerUtils:
             assert indexItemData is fileData
 
             if indexItemData is not fileData:
-                BugCheckError.FileIsNotFoundInIndex(fileKey, fileData.m_Path)
+                BugCheckError.FileIsNotFoundInIndex(
+                    fileKey,
+                    fileData.m_Path,
+                )
 
             filesByStrKeyDictionary.pop(fileKey)
             assert fileKey not in filesByStrKeyDictionary.keys()
@@ -689,7 +715,10 @@ class DataControllerUtils:
             assert i <= len(indexItemData)
 
             if i == len(indexItemData):
-                BugCheckError.FileIsNotFoundInIndex(fileKey, fileData.m_Path)
+                BugCheckError.FileIsNotFoundInIndex(
+                    fileKey,
+                    fileData.m_Path,
+                )
 
             assert type(indexItemData) is list
             assert i < len(indexItemData)
@@ -821,7 +850,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__ClearFileLine(
-        cfgData: PgCfgModel__ConfigurationData, fileLineData: PgCfgModel__FileLineData
+        cfgData: PgCfgModel__ConfigurationData,
+        fileLineData: PgCfgModel__FileLineData,
     ):
         assert cfgData is not None
         assert fileLineData is not None
@@ -855,7 +885,9 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def Helper__FileLineHasWorkData(fileLineData: PgCfgModel__FileLineData):
+    def Helper__FileLineHasWorkData(
+        fileLineData: PgCfgModel__FileLineData,
+    ):
         assert fileLineData is not None
         assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
@@ -906,7 +938,9 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def Helper__DeleteComment(commentData: PgCfgModel__CommentData):
+    def Helper__DeleteComment(
+        commentData: PgCfgModel__CommentData,
+    ):
         assert type(commentData) is PgCfgModel__CommentData
         assert commentData.IsAlive()
 
@@ -946,7 +980,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__DeleteOption(
-        cfgData: PgCfgModel__ConfigurationData, optionData: PgCfgModel__OptionData
+        cfgData: PgCfgModel__ConfigurationData,
+        optionData: PgCfgModel__OptionData,
     ):
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(optionData) is PgCfgModel__OptionData
@@ -966,7 +1001,8 @@ class DataControllerUtils:
 
         # 1.2 Set iFileLineItem
         iFileLineItem = __class__.Helper__FindIndexOfFileLineElement(
-            fileLineData, optionData
+            fileLineData,
+            optionData,
         )
 
         assert iFileLineItem >= 0
@@ -995,10 +1031,16 @@ class DataControllerUtils:
         # 2. Perform delete operations
 
         # delete option from global index
-        __class__.Helper__DeleteOptionFromIndex(cfgData.m_AllOptionsByName, optionData)
+        __class__.Helper__DeleteOptionFromIndex(
+            cfgData.m_AllOptionsByName,
+            optionData,
+        )
 
         # delete option from file index
-        __class__.Helper__DeleteOptionFromIndex(fileData.m_OptionsByName, optionData)
+        __class__.Helper__DeleteOptionFromIndex(
+            fileData.m_OptionsByName,
+            optionData,
+        )
 
         # delete from fileLine
         optionData.MarkAsDeletedFrom(fileLineData)
@@ -1008,7 +1050,9 @@ class DataControllerUtils:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def Helper__DeleteInclude(includeData: PgCfgModel__IncludeData):
+    def Helper__DeleteInclude(
+        includeData: PgCfgModel__IncludeData,
+    ):
         assert type(includeData) is PgCfgModel__IncludeData
         assert includeData.IsAlive()
 
@@ -1047,7 +1091,8 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__DeleteFileLine(
-        cfgData: PgCfgModel__ConfigurationData, fileLineData: PgCfgModel__FileLineData
+        cfgData: PgCfgModel__ConfigurationData,
+        fileLineData: PgCfgModel__FileLineData,
     ):
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(fileLineData) is PgCfgModel__FileLineData
@@ -1064,7 +1109,10 @@ class DataControllerUtils:
         assert fileData.IsAlive()
 
         # 1.2 Set iFileLine
-        iFileLine = __class__.Helper__FindIndexOfFileLine(fileData, fileLineData)
+        iFileLine = __class__.Helper__FindIndexOfFileLine(
+            fileData,
+            fileLineData,
+        )
 
         assert iFileLine >= 0
         assert iFileLine <= len(fileData.m_Lines)
