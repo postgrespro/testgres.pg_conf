@@ -484,6 +484,8 @@ class DataControllerUtils:
         cfgData: PgCfgModel__ConfigurationData,
         newFilePath: str,
     ) -> PgCfgModel__FileData:
+        assert type(cfgData) is PgCfgModel__ConfigurationData
+        assert type(newFilePath) is str
 
         newFileData = PgCfgModel__FileData(cfgData, newFilePath)
 
