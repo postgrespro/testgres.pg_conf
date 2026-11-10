@@ -45,7 +45,7 @@ from ...core.handlers import OptionHandlerCtxToSetValueItem as PgCfgModel__Optio
 from ...core.handlers import OptionHandlerToWrite as PgCfgModel__OptionHandlerToWrite
 from ...core.handlers import ConfigurationDataHandler as PgCfgModel__DataHandler
 
-from ...core.controller_utils import DataControllerUtils as PgCfgModel__DataControllerUtils
+from ...core.model_utils import ModelUtils as PgCfgModel__ModelUtils
 from ...core.data_verificator import DataVerificator
 from ...core.helpers import Helpers
 from ...core.raise_error import RaiseError
@@ -119,7 +119,7 @@ class PostgresConfigurationComment_Base(PostgresConfigurationComment):
         cfgData = self.m_CommentData.m_Parent.m_Parent.m_Parent
         assert type(cfgData) is PgCfgModel__ConfigurationData
 
-        PgCfgModel__DataControllerUtils.Comment__delete(
+        PgCfgModel__ModelUtils.Comment__delete(
             cfgData,
             self.m_CommentData,
             withLineIfLast,
@@ -331,7 +331,7 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
         cfgData = self.m_IncludeData.m_Parent.m_Parent.m_Parent
         assert type(cfgData) is PgCfgModel__ConfigurationData
 
-        PgCfgModel__DataControllerUtils.Include__delete(
+        PgCfgModel__ModelUtils.Include__delete(
             cfgData,
             self.m_IncludeData,
             withLine,
@@ -414,7 +414,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
 
         DataVerificator.CheckCommentText(text)
 
-        commentData = PgCfgModel__DataControllerUtils.FileLine__add_Comment(
+        commentData = PgCfgModel__ModelUtils.FileLine__add_Comment(
             self.m_FileLineData,
             offset,
             text,
@@ -442,7 +442,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
             assert cfg.m_Data is not None
             assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
 
-            PgCfgModel__DataControllerUtils.Comment__delete(
+            PgCfgModel__ModelUtils.Comment__delete(
                 cfg.m_Data,
                 commentData,
                 False,
@@ -523,7 +523,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         )
         assert type(baseFolder) is str
 
-        fileData = PgCfgModel__DataControllerUtils.Cfg__GetOrCreateFile__USER(
+        fileData = PgCfgModel__ModelUtils.Cfg__GetOrCreateFile__USER(
             cfg.m_Data,
             baseFolder,
             path,
@@ -532,7 +532,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         assert type(fileData) is PgCfgModel__FileData
 
         try:
-            includeData = PgCfgModel__DataControllerUtils.FileLine__add_Include(
+            includeData = PgCfgModel__ModelUtils.FileLine__add_Include(
                 self.m_FileLineData,
                 path,
                 fileData,
@@ -553,7 +553,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
                 assert include.m_FileLine is self
                 assert include.m_IncludeData is includeData
             except:  # rollback an include
-                PgCfgModel__DataControllerUtils.Include__delete(
+                PgCfgModel__ModelUtils.Include__delete(
                     cfg.m_Data,
                     includeData,
                     False,
@@ -575,7 +575,7 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
         assert cfg.m_Data is not None
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
 
-        PgCfgModel__DataControllerUtils.FileLine__clear(
+        PgCfgModel__ModelUtils.FileLine__clear(
             cfg.m_Data,
             self.m_FileLineData,
         )
@@ -781,7 +781,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
     def AddEmptyLine(self) -> PostgresConfigurationFileLine_Base:
         self.Internal__CheckAlive()
 
-        fileLineData = PgCfgModel__DataControllerUtils.File__add_Line(
+        fileLineData = PgCfgModel__ModelUtils.File__add_Line(
             self.m_FileData,
         )
 
@@ -810,7 +810,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
             assert fileLine.m_FileLineData is fileLineData
             assert fileLine.m_Parent is self
         except:  # rollback
-            PgCfgModel__DataControllerUtils.FileLine__delete(
+            PgCfgModel__ModelUtils.FileLine__delete(
                 self.m_Cfg.m_Data,
                 fileLineData,
             )
@@ -831,7 +831,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
 
         DataVerificator.CheckCommentText(text)
 
-        fileLineData = PgCfgModel__DataControllerUtils.File__add_Line(self.m_FileData)
+        fileLineData = PgCfgModel__ModelUtils.File__add_Line(self.m_FileData)
 
         assert self.m_FileData is not None
         assert type(self.m_FileData) is PgCfgModel__FileData
@@ -841,7 +841,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         assert self.m_FileData.m_Lines[-1] is fileLineData
 
         try:
-            commentData = PgCfgModel__DataControllerUtils.FileLine__add_Comment(
+            commentData = PgCfgModel__ModelUtils.FileLine__add_Comment(
                 fileLineData,
                 None,
                 text,
@@ -873,7 +873,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
             assert fileLineComment is not None
             assert type(fileLineComment) is PostgresConfigurationComment_Base
         except:  # rollback
-            PgCfgModel__DataControllerUtils.FileLine__delete(
+            PgCfgModel__ModelUtils.FileLine__delete(
                 self.m_Cfg.m_Data,
                 fileLineData,
             )
@@ -939,7 +939,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         baseFolder = self.m_Cfg.m_Data.OsOps.Path_DirName(self.m_FileData.m_Path)
         assert type(baseFolder) is str
 
-        fileData = PgCfgModel__DataControllerUtils.Cfg__GetOrCreateFile__USER(
+        fileData = PgCfgModel__ModelUtils.Cfg__GetOrCreateFile__USER(
             self.m_Cfg.m_Data,
             baseFolder,
             path,
@@ -949,7 +949,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         assert type(fileData) is PgCfgModel__FileData
 
         try:
-            fileLineData = PgCfgModel__DataControllerUtils.File__add_Line(
+            fileLineData = PgCfgModel__ModelUtils.File__add_Line(
                 self.m_FileData,
             )
 
@@ -961,7 +961,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
             assert self.m_FileData.m_Lines[-1] is fileLineData
 
             try:
-                includeData = PgCfgModel__DataControllerUtils.FileLine__add_Include(
+                includeData = PgCfgModel__ModelUtils.FileLine__add_Include(
                     fileLineData,
                     path,
                     fileData,
@@ -991,7 +991,7 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
                 assert include.m_FileLine is fileLine
                 assert include.m_IncludeData is includeData
             except:  # rollback a line
-                PgCfgModel__DataControllerUtils.FileLine__delete(
+                PgCfgModel__ModelUtils.FileLine__delete(
                     self.m_Cfg.m_Data,
                     fileLineData,
                 )
@@ -1629,7 +1629,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert isinstance(self.m_Data.OsOps, ConfigurationOsOps)
         assert self.m_Data.OsOps.Path_BaseName(path) != ""
 
-        fileData = PgCfgModel__DataControllerUtils.Cfg__CreateAndAddTopLevelFile__USER(
+        fileData = PgCfgModel__ModelUtils.Cfg__CreateAndAddTopLevelFile__USER(
             self.m_Data,
             path,
         )
@@ -1993,7 +1993,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         if type(targetData) is PgCfgModel__OptionData:
             self.Debug__CheckOurObjectData(targetData)
 
-            PgCfgModel__DataControllerUtils.Option__delete(
+            PgCfgModel__ModelUtils.Option__delete(
                 self.m_Data,
                 targetData,
                 True,
@@ -2325,7 +2325,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert data.IsAlive()
             assert data.m_Name == optionName
 
-            PgCfgModel__DataControllerUtils.Option__delete(
+            PgCfgModel__ModelUtils.Option__delete(
                 self.m_Data,
                 data,
                 True,
@@ -2343,7 +2343,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                 assert optionData.IsAlive()
                 assert optionData.m_Name == optionName
 
-                PgCfgModel__DataControllerUtils.Option__delete(
+                PgCfgModel__ModelUtils.Option__delete(
                     self.m_Data,
                     optionData,
                     True,
@@ -2397,7 +2397,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert fileData is None
 
-        fileData = PgCfgModel__DataControllerUtils.Cfg__CreateAndAddTopLevelFile__AUTO(
+        fileData = PgCfgModel__ModelUtils.Cfg__CreateAndAddTopLevelFile__AUTO(
             self.m_Data,
             self.Internal__GetAutoConfFileName(),
         )
@@ -2527,7 +2527,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         try:
             # may raise
-            optionData = PgCfgModel__DataControllerUtils.File__add_Option(
+            optionData = PgCfgModel__ModelUtils.File__add_Option(
                 self.m_Data,
                 fileData,
                 optionName,
@@ -2553,7 +2553,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             except:  # rollback line with option
                 assert optionData.IsAlive()
 
-                PgCfgModel__DataControllerUtils.FileLine__delete(
+                PgCfgModel__ModelUtils.FileLine__delete(
                     self.m_Data,
                     optionData.get_Parent(),
                 )
@@ -2646,7 +2646,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         # OK. Let's add this option
         assert optionValue is not None
 
-        optionData = PgCfgModel__DataControllerUtils.FileLine__add_Option(
+        optionData = PgCfgModel__ModelUtils.FileLine__add_Option(
             self.m_Data,
             fileLineData,
             optionName,
@@ -2670,7 +2670,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert type(option) is PostgresConfigurationOption_Base
             assert option.m_OptionData is optionData
         except:
-            PgCfgModel__DataControllerUtils.Option__delete(
+            PgCfgModel__ModelUtils.Option__delete(
                 self.m_Data,
                 optionData,
                 withLine=False,
@@ -2746,7 +2746,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         # OK. Let's add this option
         assert optionValue is not None
 
-        optionData = PgCfgModel__DataControllerUtils.File__add_Option(
+        optionData = PgCfgModel__ModelUtils.File__add_Option(
             self.m_Data,
             fileData,
             optionName,
@@ -2769,7 +2769,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert type(option) is PostgresConfigurationOption_Base
             assert option.m_OptionData is optionData
         except:
-            PgCfgModel__DataControllerUtils.FileLine__delete(
+            PgCfgModel__ModelUtils.FileLine__delete(
                 self.m_Data,
                 optionData.get_Parent(),
             )
@@ -2809,7 +2809,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert optionData.IsAlive()
             assert optionData.m_Name == optionName
 
-            PgCfgModel__DataControllerUtils.Option__set_Value(
+            PgCfgModel__ModelUtils.Option__set_Value(
                 optionData,
                 optionValue,
             )
@@ -2861,7 +2861,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert optionData.IsAlive()
             assert optionData.m_Name == optionName
 
-            PgCfgModel__DataControllerUtils.Option__set_Value(
+            PgCfgModel__ModelUtils.Option__set_Value(
                 optionData,
                 optionValue,
             )
@@ -2925,7 +2925,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         self.Debug__CheckOurObjectData(optionData)
 
         # ------------------------------------------------
-        PgCfgModel__DataControllerUtils.Option__set_Value(
+        PgCfgModel__ModelUtils.Option__set_Value(
             optionData,
             optionValue,
         )
@@ -2972,7 +2972,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
                         data,
                     )
 
-                PgCfgModel__DataControllerUtils.Option__add_ValueItem(
+                PgCfgModel__ModelUtils.Option__add_ValueItem(
                     data,
                     optionValueItem,
                 )
@@ -3091,7 +3091,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert data is optionData
             assert type(data.m_Value) is list
 
-            PgCfgModel__DataControllerUtils.Option__add_ValueItem(
+            PgCfgModel__ModelUtils.Option__add_ValueItem(
                 data,
                 optionPreparedValueItem,
             )
@@ -3384,7 +3384,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert optionName not in fileData.m_OptionsByName.keys()
         assert optionName not in self.m_Data.m_AllOptionsByName.keys()
 
-        optionData = PgCfgModel__DataControllerUtils.File__add_Option(
+        optionData = PgCfgModel__ModelUtils.File__add_Option(
             self.m_Data,
             fileData,
             optionName,
@@ -3414,7 +3414,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         except:  # rollback line with option
             assert optionData.IsAlive()
 
-            PgCfgModel__DataControllerUtils.FileLine__delete(
+            PgCfgModel__ModelUtils.FileLine__delete(
                 self.m_Data,
                 optionData.get_Parent(),
             )
