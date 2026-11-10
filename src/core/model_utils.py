@@ -66,14 +66,20 @@ class ModelUtils:
         assert fileLineData is not None
         assert type(fileLineData) is PgCfgModel__FileLineData
 
-        __class__.Helper__DeleteOption(cfgData, optionData)
+        __class__.Helper__DeleteOption(
+            cfgData,
+            optionData,
+        )
 
         if not withLine:
             return
 
         assert not __class__.Helper__FileLineHasWorkData(fileLineData)
 
-        __class__.Helper__DeleteFileLine(cfgData, fileLineData)
+        __class__.Helper__DeleteFileLine(
+            cfgData,
+            fileLineData,
+        )
         return
 
     # --------------------------------------------------------------------
@@ -131,7 +137,10 @@ class ModelUtils:
         if len(fileLineData.m_Items) != 0:
             return
 
-        __class__.Helper__DeleteFileLine(cfgData, fileLineData)
+        __class__.Helper__DeleteFileLine(
+            cfgData,
+            fileLineData,
+        )
         return
 
     # --------------------------------------------------------------------
@@ -205,9 +214,18 @@ class ModelUtils:
 
         __class__.Helper__CheckThatWeCanAddWorkDataToFileLine(fileLineData)
 
-        includeData = PgCfgModel__IncludeData(fileLineData, offset, filePath, fileData)
-        fileLineDataItem = PgCfgModel__FileLineData.tagItem(includeData)
-        fileLineData.m_Items.append(fileLineDataItem)
+        includeData = PgCfgModel__IncludeData(
+            fileLineData,
+            offset,
+            filePath,
+            fileData,
+        )
+        fileLineDataItem = PgCfgModel__FileLineData.tagItem(
+            includeData,
+        )
+        fileLineData.m_Items.append(
+            fileLineDataItem,
+        )
 
         # TODO: Reg include data in a global index?
 
@@ -238,9 +256,18 @@ class ModelUtils:
         assert fileData.m_OptionsByName is not None
         assert type(fileData.m_OptionsByName) is dict
 
-        optionData = PgCfgModel__OptionData(fileLineData, optOffset, optName, optValue)
-        fileLineDataItem = PgCfgModel__FileLineData.tagItem(optionData)
-        fileLineData.m_Items.append(fileLineDataItem)
+        optionData = PgCfgModel__OptionData(
+            fileLineData,
+            optOffset,
+            optName,
+            optValue,
+        )
+        fileLineDataItem = PgCfgModel__FileLineData.tagItem(
+            optionData,
+        )
+        fileLineData.m_Items.append(
+            fileLineDataItem,
+        )
 
         try:
             __class__.Helper__InsertOptionIntoIndex(
@@ -312,7 +339,10 @@ class ModelUtils:
         assert type(fileLineData) is PgCfgModel__FileLineData
         assert fileLineData.IsAlive()
 
-        __class__.Helper__DeleteFileLine(cfgData, fileLineData)
+        __class__.Helper__DeleteFileLine(
+            cfgData,
+            fileLineData,
+        )
 
         assert not fileLineData.IsAlive()
         return
@@ -352,13 +382,20 @@ class ModelUtils:
 
         try:
             optionData = __class__.FileLine__add_Option(
-                cfgData, newLineData, optName, optValue, None
+                cfgData,
+                newLineData,
+                optName,
+                optValue,
+                None,
             )  # raise
 
             assert type(optionData) is PgCfgModel__OptionData
             assert optionData.m_Name == optName
         except:
-            ModelUtils.FileLine__delete(cfgData, newLineData)
+            ModelUtils.FileLine__delete(
+                cfgData,
+                newLineData,
+            )
             raise
 
         assert optionData is not None
@@ -392,13 +429,21 @@ class ModelUtils:
         assert file_name != ""
         assert cfgData.OsOps.Path_BaseName(file_name) == file_name
 
-        newFilePath = cfgData.OsOps.Path_Join(cfgData.m_DataDir, file_name)
-        newFilePath = cfgData.OsOps.Path_NormPath(newFilePath)
+        newFilePath = cfgData.OsOps.Path_Join(
+            cfgData.m_DataDir,
+            file_name,
+        )
+        newFilePath = cfgData.OsOps.Path_NormPath(
+            newFilePath,
+        )
 
         assert type(newFilePath) is str
         assert newFilePath != ""
 
-        return __class__.Helper__FinishCreateTopLevelFile(cfgData, newFilePath)
+        return __class__.Helper__FinishCreateTopLevelFile(
+            cfgData,
+            newFilePath,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -413,7 +458,11 @@ class ModelUtils:
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert path != ""
 
-        newFilePath = Helpers.NormalizeFilePath(cfgData.OsOps, cfgData.m_DataDir, path)
+        newFilePath = Helpers.NormalizeFilePath(
+            cfgData.OsOps,
+            cfgData.m_DataDir,
+            path,
+        )
 
         assert type(newFilePath) is str
         assert newFilePath != ""
@@ -429,7 +478,10 @@ class ModelUtils:
 
             continue
 
-        return __class__.Helper__FinishCreateTopLevelFile(cfgData, newFilePath)
+        return __class__.Helper__FinishCreateTopLevelFile(
+            cfgData,
+            newFilePath,
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -487,14 +539,23 @@ class ModelUtils:
         assert type(cfgData) is PgCfgModel__ConfigurationData
         assert type(newFilePath) is str
 
-        newFileData = PgCfgModel__FileData(cfgData, newFilePath)
+        newFileData = PgCfgModel__FileData(
+            cfgData,
+            newFilePath,
+        )
 
-        __class__.Helper__RegFileInCfgData(cfgData, newFileData)  # raise
+        __class__.Helper__RegFileInCfgData(
+            cfgData,
+            newFileData,
+        )  # raise
 
         try:
             cfgData.m_Files.append(newFileData)  # raise
         except:
-            __class__.Helper__UnRegFileFromCfgData(cfgData, newFileData)
+            __class__.Helper__UnRegFileFromCfgData(
+                cfgData,
+                newFileData,
+            )
             raise
 
         return newFileData
@@ -675,7 +736,10 @@ class ModelUtils:
         assert fileData.IsAlive()
 
         if fileKey not in filesByStrKeyDictionary.keys():
-            BugCheckError.FileIsNotFoundInIndex(fileKey, fileData.m_Path)
+            BugCheckError.FileIsNotFoundInIndex(
+                fileKey,
+                fileData.m_Path,
+            )
 
         indexItemData = filesByStrKeyDictionary[fileKey]
 
@@ -1008,7 +1072,9 @@ class ModelUtils:
         assert iFileLineItem <= len(fileLineData.m_Items)
 
         if iFileLineItem == len(fileLineData.m_Items):
-            BugCheckError.OptionIsNotFoundInFileLine(optionData.m_Name)
+            BugCheckError.OptionIsNotFoundInFileLine(
+                optionData.m_Name,
+            )
 
         assert iFileLineItem >= 0
         assert iFileLineItem < len(fileLineData.m_Items)
@@ -1067,7 +1133,8 @@ class ModelUtils:
 
         # 1.2 Set iFileLineItem
         iFileLineItem = __class__.Helper__FindIndexOfFileLineElement(
-            fileLineData, includeData
+            fileLineData,
+            includeData,
         )
 
         assert iFileLineItem >= 0
