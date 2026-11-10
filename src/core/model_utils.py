@@ -679,12 +679,6 @@ class ModelUtils:
         return
 
     # --------------------------------------------------------------------
-    T_FILE_OR_FILES = typing.Union[
-        PgCfgModel__FileData,
-        typing.List[PgCfgModel__FileData],
-    ]
-
-    # --------------------------------------------------------------------
     @staticmethod
     def Helper__InsertFileIntoIndex(
         filesByStrKeyDictionary: PgCfgModel__T_FILES_INDEX,
