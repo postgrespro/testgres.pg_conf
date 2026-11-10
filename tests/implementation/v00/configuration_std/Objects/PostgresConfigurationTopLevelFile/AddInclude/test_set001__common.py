@@ -10,12 +10,14 @@ from src.implementation.v00.configuration_base import PostgresConfigurationTopLe
 
 from src.implementation.v00.configuration_base import PostgresConfigurationInclude as PgCfg_Include
 from src.implementation.v00.configuration_base import PostgresConfigurationFile as PgCfg_File
+
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
-import re
 import os
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -74,7 +76,7 @@ class TestSet001__Common:
         assert len(cfg.m_Data.m_Files) == 1
         assert cfg.m_Data.m_Files[0] is file1.m_FileData
 
-        assert len(cfg.m_Data.m_AllFilesByName.keys()) == 2
+        assert len(list(cfg.m_Data.m_AllFilesByName.keys())) == 2
 
         assert cfg.C_POSTGRESQL_CONF in cfg.m_Data.m_AllFilesByName.keys()
         assert cfg.m_Data.m_AllFilesByName[cfg.C_POSTGRESQL_CONF] is file1.m_FileData
@@ -97,17 +99,25 @@ class TestSet001__Common:
 
         assert len(bihaConfFileIncludeLine) == 0
 
-        with pytest.raises(Exception, match="Include object was deleted."):
+        with pytest.raises(PostgresConfigException) as x:
             len(bihaConfFile__Lines)
 
-        with pytest.raises(Exception, match="Include object was deleted."):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             len(bihaConfFile)
 
-        with pytest.raises(Exception, match="Include object was deleted."):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             bihaConfFileInclude.get_Configuration()
 
-        with pytest.raises(Exception, match="Include object was deleted."):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             bihaConfFileInclude.get_File()
+
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
         return
 
     # --------------------------------------------------------------------
@@ -137,8 +147,10 @@ class TestSet001__Common:
 
         bihaConfFileInclude1.get_Parent().Clear()
 
-        with pytest.raises(Exception, match="Include object was deleted."):
+        with pytest.raises(PostgresConfigException) as x:
             bihaConfFileInclude1.get_File()
+
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
 
         bihaConfFile2 = bihaConfFileInclude2.get_File()
 
@@ -161,8 +173,10 @@ class TestSet001__Common:
         assert file1 is not None
         assert type(file1) is PgCfg_TopLevelFile_Base
 
-        with pytest.raises(Exception, match=re.escape("File path is empty.")):
+        with pytest.raises(PostgresConfigException) as x:
             file1.AddInclude("")
+
+        assert str(x.value) == ErrorMessageBuilder.FilePathIsEmpty()
         return
 
 

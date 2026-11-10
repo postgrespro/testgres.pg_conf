@@ -7,13 +7,14 @@ from src.implementation.v00.configuration_std import PostgresConfigurationReader
 
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
 
+from src.exceptions import PostgresConfigException
+
 from ........TestServices import TestServices
 from ........CfgFileReader import CfgFileReader
 from ........ErrorMessageBuilder import ErrorMessageBuilder
 # fmt: on
 
 import pytest
-import re
 import typing
 import logging
 import datetime
@@ -183,12 +184,14 @@ class TestSet001__Common:
             assert data.set_value is not None
 
             try:
-                errMsg = ErrorMessageBuilder.CantConvertOptionValue(
-                    optionName, type(data.set_value), bool
-                )
-
-                with pytest.raises(Exception, match="^" + re.escape(errMsg) + "$"):
+                with pytest.raises(PostgresConfigException) as x:
                     cfg.SetOptionValue(optionName, data.set_value)
+
+                assert str(x.value) == ErrorMessageBuilder.CantConvertOptionValue(
+                    optionName,
+                    type(data.set_value),
+                    bool,
+                )
             except Exception as e:
                 logging.error(str(e))
             continue
@@ -230,12 +233,14 @@ class TestSet001__Common:
             assert data.set_value is not None
 
             try:
-                errMsg = ErrorMessageBuilder.BadOptionValueType(
-                    optionName, type(data.set_value), bool
-                )
-
-                with pytest.raises(Exception, match="^" + re.escape(errMsg) + "$"):
+                with pytest.raises(PostgresConfigException) as x:
                     cfg.SetOptionValue(optionName, data.set_value)
+
+                assert str(x.value) == ErrorMessageBuilder.BadOptionValueType(
+                    optionName,
+                    type(data.set_value),
+                    bool,
+                )
             except Exception as e:
                 logging.error(str(e))
             continue

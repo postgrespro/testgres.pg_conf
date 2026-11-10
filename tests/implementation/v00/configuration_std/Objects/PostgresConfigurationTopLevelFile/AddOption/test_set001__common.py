@@ -10,13 +10,14 @@ from src.implementation.v00.configuration_base import PostgresConfigurationOptio
 from src.implementation.v00.configuration_base import PgCfgModel__FileData
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
 
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import os
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -76,16 +77,13 @@ class TestSet001__Common:
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         option = file.AddOption(C_OPT_NAME, 123)
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "Option [{0}] already exist in this file [{1}]".format(
-                    C_OPT_NAME, file.get_Path()
-                )
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             file.AddOption(C_OPT_NAME, 321)
 
+        assert str(x.value) == ErrorMessageBuilder.OptionIsAlreadyExistInThisFile(
+            file.get_Path(),
+            C_OPT_NAME,
+        )
         assert option.get_Name() == C_OPT_NAME
         assert option.get_Value() == 123
 
@@ -114,16 +112,13 @@ class TestSet001__Common:
 
         file2 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "Option [{0}] already exist in another file [{1}]".format(
-                    C_OPT_NAME, file1.get_Path()
-                )
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             file2.AddOption(C_OPT_NAME, 321)
 
+        assert str(x.value) == ErrorMessageBuilder.OptionIsAlreadyExistInAnotherFile(
+            file1.get_Path(),
+            C_OPT_NAME,
+        )
         assert option.get_Name() == C_OPT_NAME
         assert option.get_Value() == 123
 
@@ -147,15 +142,14 @@ class TestSet001__Common:
 
         file = cfg.AddTopLevelFile("postgresql.proxima.conf")
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "Bad option [{0}] value type [bool]. Expected type is [int].".format(
-                    C_OPT_NAME,
-                )
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             file.AddOption(C_OPT_NAME, False)
+
+        assert str(x.value) == ErrorMessageBuilder.BadOptionValueType(
+            C_OPT_NAME,
+            bool,
+            int,
+        )
         return
 
     # --------------------------------------------------------------------
@@ -171,15 +165,14 @@ class TestSet001__Common:
 
         file = cfg.AddTopLevelFile("postgresql.proxima.conf")
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "Can't convert option [{0}] value from type [str] to type [int].".format(
-                    C_OPT_NAME,
-                )
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             file.AddOption(C_OPT_NAME, "blabla")
+
+        assert str(x.value) == ErrorMessageBuilder.CantConvertOptionValue(
+            C_OPT_NAME,
+            str,
+            int,
+        )
         return
 
     # --------------------------------------------------------------------
@@ -195,11 +188,10 @@ class TestSet001__Common:
 
         file = cfg.AddTopLevelFile("postgresql.proxima.conf")
 
-        with pytest.raises(
-            Exception,
-            match=re.escape("None value is not supported."),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             file.AddOption(C_OPT_NAME, None)
+
+        assert str(x.value) == ErrorMessageBuilder.NoneValueIsNotSupported()
         return
 
     # --------------------------------------------------------------------
@@ -213,11 +205,10 @@ class TestSet001__Common:
 
         file = cfg.AddTopLevelFile("postgresql.proxima.conf")
 
-        with pytest.raises(
-            Exception,
-            match=re.escape("Option name is None."),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             file.AddOption(None, 123)
+
+        assert str(x.value) == ErrorMessageBuilder.OptionNameIsNone()
         return
 
     # --------------------------------------------------------------------
@@ -231,11 +222,10 @@ class TestSet001__Common:
 
         file = cfg.AddTopLevelFile("postgresql.proxima.conf")
 
-        with pytest.raises(
-            Exception,
-            match=re.escape("Option name is empty."),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             file.AddOption("", 123)
+
+        assert str(x.value) == ErrorMessageBuilder.OptionNameIsEmpty()
         return
 
 

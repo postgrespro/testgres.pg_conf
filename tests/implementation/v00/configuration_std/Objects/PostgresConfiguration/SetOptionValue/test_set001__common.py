@@ -21,14 +21,15 @@ from src.implementation.v00.configuration_base import PgCfgModel__FileLineData
 from src.implementation.v00.configuration_base import PgCfgModel__FileData
 from src.implementation.v00.configuration_base import PgCfgModel__ConfigurationData
 from src.implementation.v00.configuration_base import PgCfgModel__MultiIndex
+from src.exceptions import PostgresConfigException
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 # fmt: on
 
 import pytest
 import typing
 import os
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -170,13 +171,15 @@ class TestSet001__Common:
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "Bad option [port] value type [bool]. Expected type is [int]."
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue("port", True)
+
+        assert str(x.value) == ErrorMessageBuilder.BadOptionValueType(
+            "port",
+            bool,
+            int,
+        )
+
         return
 
     # --------------------------------------------------------------------
@@ -188,13 +191,15 @@ class TestSet001__Common:
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "Can't convert option [port] value from type [str] to type [int]."
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue("port", "123.")
+
+        assert str(x.value) == ErrorMessageBuilder.CantConvertOptionValue(
+            "port",
+            str,
+            int,
+        )
+
         return
 
     # --------------------------------------------------------------------
@@ -304,23 +309,35 @@ class TestSet001__Common:
         assert type(r1.Option) is PgCfg_Option_Base
         assert isinstance(r1.Option, PgCfg_Option)
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.get_Name()
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.get_Value()
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.set_Value(123)
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.set_Value(None)
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.get_Parent()
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.get_Configuration()
+
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
 
         r3 = cfg.SetOptionValue(optName, None)
         assert type(r3) is PgCfg_SetOptionResult_Base
@@ -405,8 +422,10 @@ class TestSet001__Common:
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
-        with pytest.raises(Exception, match=re.escape("Option name is None.")):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue(None, 123)
+
+        assert str(x.value) == ErrorMessageBuilder.OptionNameIsNone()
         return
 
     # --------------------------------------------------------------------
@@ -418,8 +437,10 @@ class TestSet001__Common:
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
-        with pytest.raises(Exception, match=re.escape("Option name is empty.")):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue("", 123)
+
+        assert str(x.value) == ErrorMessageBuilder.OptionNameIsEmpty()
         return
 
     # --------------------------------------------------------------------
@@ -431,7 +452,8 @@ class TestSet001__Common:
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data012__values, ids=[x[0] for x in sm_data012__values])
     def data012(
-        self, request: pytest.FixtureRequest
+        self,
+        request: pytest.FixtureRequest,
     ) -> typing.Tuple[str, typing.Any, typing.Any]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple

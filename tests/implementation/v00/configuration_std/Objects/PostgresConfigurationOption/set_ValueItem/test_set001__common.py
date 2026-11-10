@@ -12,12 +12,13 @@ from src.implementation.v00.configuration_base import PostgresConfigurationOptio
 
 from src.implementation.v00.configuration_base import PgCfgModel__ConfigurationData
 
+from src.exceptions import PostgresConfigException
+
 from .......TestServices import TestServices
 from .......ErrorMessageBuilder import ErrorMessageBuilder
 # fmt: on
 
 import pytest
-import re
 import logging
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -98,8 +99,10 @@ class TestSet001__Common:
         assert type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
-        with pytest.raises(Exception, match=re.escape("None value is not supported.")):
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.set_ValueItem(None)
+
+        assert str(x.value) == ErrorMessageBuilder.NoneValueIsNotSupported()
 
         assert r1.Option.get_Value() == ["biha"]
         return
@@ -126,13 +129,14 @@ class TestSet001__Common:
         assert type(r1.Option.get_Parent().get_Parent()) is PgCfg_TopLevelFile_Base
         assert r1.Option.get_Parent().get_Parent().get_Parent() is cfg
 
-        errMsg = (
-            "Bad option [{0}] value item type [{1}]. Expected type is [{2}].".format(
-                C_OPT_NAME, "int", "str"
-            )
-        )
-        with pytest.raises(Exception, match=re.escape(errMsg)):
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.set_ValueItem(1)
+
+        assert str(x.value) == ErrorMessageBuilder.BadOptionValueItemType(
+            C_OPT_NAME,
+            int,
+            str,
+        )
 
         assert r1.Option.get_Value() == ["biha"]
         return
@@ -196,7 +200,7 @@ class TestSet001__Common:
         assert isinstance(r1.Option, PgCfg_Option_Base)
         assert sorted(r1.Option.get_Value()) == ["biha", "proxima"]
 
-        with pytest.raises(expected_exception=Exception) as x:
+        with pytest.raises(PostgresConfigException) as x:
             r1 = cfg.SetOptionValue(C_OPT_NAME, 123)
 
         assert str(x.value) == ErrorMessageBuilder.BadOptionValueType(

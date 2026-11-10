@@ -10,13 +10,14 @@ from src.implementation.v00.configuration_base import PostgresConfigurationOptio
 
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
 from src.implementation.v00.configuration_base import PgCfgModel__IncludeData
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import os
-import re
 import typing
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -99,10 +100,12 @@ class TestSet001__Common:
 
         option = fileLine.AddOption("port", 123, 2)
 
-        with pytest.raises(
-            Exception, match=re.escape("File line already has the option [port].")
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.AddInclude("a.conf", 222)
+
+        assert str(x.value) == ErrorMessageBuilder.FileLineAlreadyHasOption(
+            "port",
+        )
 
         assert len(fileLine) == 1
 
@@ -140,10 +143,10 @@ class TestSet001__Common:
 
         assert len(fileLine) == 1
 
-        with pytest.raises(
-            Exception, match=re.escape("File line already has an include directive.")
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.AddInclude("a.conf", 222)
+
+        assert str(x.value) == ErrorMessageBuilder.FileLineAlreadyHasIncludeDirective()
 
         assert len(fileLine) == 1
 
@@ -167,10 +170,10 @@ class TestSet001__Common:
 
         assert len(fileLine) == 1
 
-        with pytest.raises(
-            Exception, match=re.escape("File line already has a comment.")
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.AddInclude("a.conf", 222)
+
+        assert str(x.value) == ErrorMessageBuilder.FileLineAlreadyHasComment()
 
         assert len(fileLine) == 1
 

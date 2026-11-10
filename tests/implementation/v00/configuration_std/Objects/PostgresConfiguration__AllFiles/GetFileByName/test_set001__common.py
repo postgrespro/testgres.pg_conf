@@ -5,12 +5,14 @@
 from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 
 from src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
+
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -48,10 +50,12 @@ class TestSet001__Common:
 
         C_FILE_NAME = "a.conf"
 
-        errMsg = "Unknown file name [{0}].".format(C_FILE_NAME)
-
-        with pytest.raises(Exception, match=re.escape(errMsg)):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.get_AllFiles().GetFileByName(C_FILE_NAME)
+
+        assert str(x.value) == ErrorMessageBuilder.UnknownFileName(
+            C_FILE_NAME,
+        )
         return
 
 

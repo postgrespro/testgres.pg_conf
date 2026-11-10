@@ -12,6 +12,8 @@ from src.implementation.v00.configuration_base import PgCfgModel__FileData
 from src.implementation.v00.configuration_base import PgCfgModel__CommentData
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
 from src.implementation.v00.configuration_base import PgCfgModel__IncludeData
+
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
@@ -20,7 +22,6 @@ from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import typing
-import re
 import os
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -288,7 +289,9 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_204__option_without_value(
-        self, request: pytest.FixtureRequest, data204_tail: str
+        self,
+        request: pytest.FixtureRequest,
+        data204_tail: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data204_tail) is str
@@ -302,16 +305,13 @@ class TestSet001__Common:
 
         src = CfgFileReader("port" + data204_tail)
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                ErrorMessageBuilder.CfgReader__OptionWithoutValue(
-                    "port",
-                    1,
-                ),
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(x.value) == ErrorMessageBuilder.CfgReader__OptionWithoutValue(
+            "port",
+            1,
+        )
         return
 
     # --------------------------------------------------------------------
@@ -541,16 +541,15 @@ class TestSet001__Common:
 
         src = CfgFileReader("listen_addresses='" + endData3E01)
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                ErrorMessageBuilder.CfgReader__EndQuotedOptionValueIsNotFound(
-                    "listen_addresses",
-                    1,
-                ),
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(
+            x.value,
+        ) == ErrorMessageBuilder.CfgReader__EndQuotedOptionValueIsNotFound(
+            "listen_addresses",
+            1,
+        )
         return
 
     # --------------------------------------------------------------------
@@ -583,20 +582,22 @@ class TestSet001__Common:
 
         src = CfgFileReader("listen_addresses='\\" + endData3E02)
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                ErrorMessageBuilder.CfgReader__IncompletedEscapeInQuotedOptionValue(
-                    "listen_addresses",
-                    1,
-                ),
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(
+            x.value,
+        ) == ErrorMessageBuilder.CfgReader__IncompletedEscapeInQuotedOptionValue(
+            "listen_addresses",
+            1,
+        )
         return
 
     # --------------------------------------------------------------------
-    def test_3E03__optionQ__unk_escaped_symbol(self, request: pytest.FixtureRequest):
+    def test_3E03__optionQ__unk_escaped_symbol(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -608,18 +609,17 @@ class TestSet001__Common:
 
         src = CfgFileReader("listen_addresses='\\a")
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                ErrorMessageBuilder.CfgReader__UnknownEscapedSymbolInQuotedOptionValue(
-                    "listen_addresses",
-                    1,
-                    20,
-                    "a",
-                ),
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(
+            x.value,
+        ) == ErrorMessageBuilder.CfgReader__UnknownEscapedSymbolInQuotedOptionValue(
+            "listen_addresses",
+            1,
+            20,
+            "a",
+        )
         return
 
     # --------------------------------------------------------------------
@@ -663,15 +663,12 @@ class TestSet001__Common:
 
         src = CfgFileReader("include ''\n")
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                ErrorMessageBuilder.CfgReader__IncludeHasEmptyPath(
-                    1,
-                ),
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(x.value) == ErrorMessageBuilder.CfgReader__IncludeHasEmptyPath(
+            1,
+        )
         return
 
     # --------------------------------------------------------------------
@@ -701,15 +698,14 @@ class TestSet001__Common:
 
         src = CfgFileReader("include '" + data4E02)
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                ErrorMessageBuilder.CfgReader__EndOfIncludePathIsNotFound(
-                    1,
-                ),
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(
+            x.value,
+        ) == ErrorMessageBuilder.CfgReader__EndOfIncludePathIsNotFound(
+            1,
+        )
         return
 
     # --------------------------------------------------------------------
@@ -725,17 +721,17 @@ class TestSet001__Common:
 
         src = CfgFileReader("include '\\a")
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                ErrorMessageBuilder.CfgReader__UnknownEscapedSymbolInInclude(
-                    1,
-                    11,
-                    "a",
-                ),
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(
+            x.value,
+        ) == ErrorMessageBuilder.CfgReader__UnknownEscapedSymbolInInclude(
+            1,
+            11,
+            "a",
+        )
+        return
 
     # --------------------------------------------------------------------
     sm_dataE4E04: typing.List[typing.Tuple[str, str]] = [
@@ -762,15 +758,14 @@ class TestSet001__Common:
 
         src = CfgFileReader("include '\\" + data4E04)
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                ErrorMessageBuilder.CfgReader__IncompletedEscapeInInclude(
-                    1,
-                ),
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(
+            x.value,
+        ) == ErrorMessageBuilder.CfgReader__IncompletedEscapeInInclude(
+            1,
+        )
         return
 
     # --------------------------------------------------------------------
@@ -810,15 +805,12 @@ class TestSet001__Common:
 
         src = CfgFileReader("include" + data4E05)
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                ErrorMessageBuilder.CfgReader__IncludeWithoutPath(
-                    1,
-                ),
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(x.value) == ErrorMessageBuilder.CfgReader__IncludeWithoutPath(
+            1,
+        )
         return
 
 

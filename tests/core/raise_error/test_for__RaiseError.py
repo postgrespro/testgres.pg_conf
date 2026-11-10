@@ -15,7 +15,7 @@ import enum
 
 class TestFor_RaiseError:
     def test_MethodIsNotImplemented(self):
-        with pytest.raises(expected_exception=NotImplementedError) as x:
+        with pytest.raises(NotImplementedError) as x:
             RaiseError.MethodIsNotImplemented(
                 TestFor_RaiseError,
                 "a",
@@ -28,7 +28,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_GetPropertyIsNotImplemented(self):
-        with pytest.raises(expected_exception=NotImplementedError) as x:
+        with pytest.raises(NotImplementedError) as x:
             RaiseError.GetPropertyIsNotImplemented(
                 TestFor_RaiseError,
                 "a",
@@ -44,7 +44,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_OptionNameIsNone(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.OptionNameIsNone()
 
         assert str(x.value) == ErrorMessageBuilder.OptionNameIsNone()
@@ -52,7 +52,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_OptionNameHasBadType(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.OptionNameHasBadType(int)
 
         assert str(x.value) == ErrorMessageBuilder.OptionNameHasBadType(int)
@@ -68,7 +68,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_OptionNameHasBadType__2(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.OptionNameHasBadType(__class__.tagTestEnum1)
 
         assert str(x.value) == ErrorMessageBuilder.OptionNameHasBadType(
@@ -78,7 +78,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_OptionNameIsEmpty(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.OptionNameIsEmpty()
 
         assert str(x.value) == ErrorMessageBuilder.OptionNameIsEmpty()
@@ -86,7 +86,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_NoneValueIsNotSupported(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.NoneValueIsNotSupported()
 
         assert str(x.value) == ErrorMessageBuilder.NoneValueIsNotSupported()
@@ -94,7 +94,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_NoneOptionValueItemIsNotSupported(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.NoneOptionValueItemIsNotSupported(
                 "a",
             )
@@ -108,7 +108,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CommentObjectWasDeleted(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CommentObjectWasDeleted()
 
         assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
@@ -116,7 +116,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_OptionObjectWasDeleted(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.OptionObjectWasDeleted()
 
         assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
@@ -124,7 +124,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_IncludeObjectWasDeleted(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.IncludeObjectWasDeleted()
 
         assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
@@ -132,7 +132,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_FileLineObjectWasDeleted(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.FileLineObjectWasDeleted()
 
         assert str(x.value) == ErrorMessageBuilder.FileLineObjectWasDeleted()
@@ -140,7 +140,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_FileObjectWasDeleted(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.FileObjectWasDeleted()
 
         assert str(x.value) == ErrorMessageBuilder.FileObjectWasDeleted()
@@ -148,7 +148,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_BadOptionValueType(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.BadOptionValueType(
                 "aa",
                 int,
@@ -166,7 +166,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_BadOptionValueType__2(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.BadOptionValueType(
                 "aa",
                 __class__.tagTestEnum1,
@@ -184,7 +184,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CantConvertOptionValue(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CantConvertOptionValue(
                 "aa",
                 int,
@@ -202,7 +202,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CantConvertOptionValue__2(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CantConvertOptionValue(
                 "aa",
                 __class__.tagTestEnum1,
@@ -220,7 +220,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_BadOptionValueItemType(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.BadOptionValueItemType(
                 "aa",
                 int,
@@ -238,7 +238,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_BadOptionValueItemType__2(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.BadOptionValueItemType(
                 "aa",
                 __class__.tagTestEnum1,
@@ -256,7 +256,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CommentTextContainsInvalidSymbols(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CommentTextContainsInvalidSymbols()
 
         assert str(x.value) == ErrorMessageBuilder.CommentTextContainsInvalidSymbols()
@@ -264,7 +264,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_FileIsAlreadyRegistered(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.FileIsAlreadyRegistered(
                 "ppp",
             )
@@ -278,7 +278,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_OptionIsAlreadyExistInAnotherFile(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.OptionIsAlreadyExistInAnotherFile(
                 "fff",
                 "ppp",
@@ -294,7 +294,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_OptionIsAlreadyExistInFile(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.OptionIsAlreadyExistInFile(
                 "fff",
                 "ppp",
@@ -310,7 +310,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_OptionValueItemIsAlreadyDefined(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.OptionValueItemIsAlreadyDefined(
                 "fff",
                 "ppp",
@@ -328,7 +328,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_OptionValueItemIsAlreadyDefinedInAnotherFile(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.OptionValueItemIsAlreadyDefinedInAnotherFile(
                 "fff",
                 "ppp",
@@ -346,7 +346,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_UnknownFileName(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.UnknownFileName(
                 "fff",
             )
@@ -360,7 +360,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_MultipleDefOfFileIsFound(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.MultipleDefOfFileIsFound(
                 "fff",
                 3,
@@ -376,7 +376,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_FilePathIsEmpty(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.FilePathIsEmpty()
 
         assert str(x.value) == ErrorMessageBuilder.FilePathIsEmpty()
@@ -387,7 +387,7 @@ class TestFor_RaiseError:
         ts1 = datetime.datetime.now()
         ts2 = datetime.datetime.today()
 
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.FileWasModifiedExternally(
                 "fff",
                 ts1,
@@ -405,7 +405,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_FileLineAlreadyHasComment(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.FileLineAlreadyHasComment()
 
         assert str(x.value) == ErrorMessageBuilder.FileLineAlreadyHasComment()
@@ -413,7 +413,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_FileLineAlreadyHasOption(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.FileLineAlreadyHasOption(
                 "pp1",
             )
@@ -427,7 +427,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_FileLineAlreadyHasIncludeDirective(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.FileLineAlreadyHasIncludeDirective()
 
         assert str(x.value) == ErrorMessageBuilder.FileLineAlreadyHasIncludeDirective()
@@ -435,7 +435,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CfgReader__UnexpectedSymbol(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CfgReader__UnexpectedSymbol(
                 1,
                 2,
@@ -453,7 +453,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CfgReader__IncludeWithoutPath(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CfgReader__IncludeWithoutPath(
                 123,
             )
@@ -467,7 +467,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CfgReader__EndOfIncludePathIsNotFound(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CfgReader__EndOfIncludePathIsNotFound(
                 1234,
             )
@@ -481,7 +481,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CfgReader__IncompletedEscapeInInclude(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CfgReader__IncompletedEscapeInInclude(
                 1234,
             )
@@ -495,7 +495,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CfgReader__UnknownEscapedSymbolInInclude(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CfgReader__UnknownEscapedSymbolInInclude(
                 1,
                 2,
@@ -513,7 +513,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CfgReader__IncludeHasEmptyPath(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CfgReader__IncludeHasEmptyPath(
                 1234,
             )
@@ -527,7 +527,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CfgReader__OptionWithoutValue(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CfgReader__OptionWithoutValue(
                 "pp1",
                 1234,
@@ -541,7 +541,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CfgReader__EndQuotedOptionValueIsNotFound(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CfgReader__EndQuotedOptionValueIsNotFound(
                 "pp1",
                 1234,
@@ -557,7 +557,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CfgReader__IncompletedEscapeInQuotedOptionValue(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CfgReader__IncompletedEscapeInQuotedOptionValue(
                 "pp1",
                 1234,
@@ -575,7 +575,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_CfgReader__UnknownEscapedSymbolInQuotedOptionValue(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.CfgReader__UnknownEscapedSymbolInQuotedOptionValue(
                 "pp1",
                 1234,
@@ -597,7 +597,7 @@ class TestFor_RaiseError:
 
     # --------------------------------------------------------------------
     def test_BadFormatOfCommaSeparatedList(self):
-        with pytest.raises(expected_exception=PostgresConfigException) as x:
+        with pytest.raises(PostgresConfigException) as x:
             RaiseError.BadFormatOfCommaSeparatedList()
 
         assert str(x.value) == ErrorMessageBuilder.BadFormatOfCommaSeparatedList()
