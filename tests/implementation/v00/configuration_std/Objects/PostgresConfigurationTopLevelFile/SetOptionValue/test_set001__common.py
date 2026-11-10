@@ -248,8 +248,8 @@ class TestSet001__Common:
             with pytest.raises(Exception, match=re.escape(errMsg)):
                 file1.SetOptionValue(optName, badValue)
 
-            assert len(cfg.m_Data.m_AllOptionsByName) == 0
-            assert len(file1.m_FileData.m_OptionsByName) == 0
+            assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 0
+            assert file1.m_FileData.m_OptionsByName.get_values_count() == 0
             continue
         return
 
@@ -280,8 +280,8 @@ class TestSet001__Common:
             with pytest.raises(Exception, match=re.escape(errMsg)):
                 file1.SetOptionValue(optName, badValue)
 
-            assert len(cfg.m_Data.m_AllOptionsByName) == 0
-            assert len(file1.m_FileData.m_OptionsByName) == 0
+            assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 0
+            assert file1.m_FileData.m_OptionsByName.get_values_count() == 0
             continue
         return
 

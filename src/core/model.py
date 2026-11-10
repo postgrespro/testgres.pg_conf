@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from .model_s_multi_index import MultiIndex
 from .raise_error import RaiseError
 
 from ..os.abstract.configuration_os_ops import ConfigurationOsOps
@@ -116,6 +117,12 @@ class OptionData(FileLineElementData):
 
 
 # //////////////////////////////////////////////////////////////////////////////
+
+
+T_OPTIONS_INDEX = MultiIndex[OptionData]
+
+
+# //////////////////////////////////////////////////////////////////////////////
 # IncludeData
 
 
@@ -211,8 +218,6 @@ class FileStatus(enum.Enum):
 
 
 class FileData(ObjectData):
-    T_OPTIONS_BY_NAME = typing.Dict[str, OptionData]
-
     m_Parent: ConfigurationData
 
     m_Status: FileStatus
@@ -221,7 +226,7 @@ class FileData(ObjectData):
     m_Path: str
     m_Lines: typing.List[FileLineData]
 
-    m_OptionsByName: T_OPTIONS_BY_NAME
+    m_OptionsByName: T_OPTIONS_INDEX
 
     # --------------------------------------------------------------------
     def __init__(self, parent: ConfigurationData, path: str):
@@ -241,8 +246,8 @@ class FileData(ObjectData):
         self.m_Path = path
         self.m_Lines = list()
 
-        self.m_OptionsByName = dict()
-        assert type(self.m_OptionsByName) is dict
+        self.m_OptionsByName = MultiIndex()
+        assert type(self.m_OptionsByName) is MultiIndex
 
         assert type(self.m_Path) is str
         assert self.m_Path != ""
@@ -266,16 +271,6 @@ class FileData(ObjectData):
 
 
 class ConfigurationData(ObjectData):
-    T_OPTION_OR_OPTIONS = typing.Union[
-        OptionData,
-        typing.List[OptionData],
-    ]
-
-    T_ALL_OPTIONS_BY_NAME = typing.Dict[
-        str,
-        T_OPTION_OR_OPTIONS,
-    ]
-
     T_FILE_OR_FILES = typing.Union[
         FileData,
         typing.List[FileData],
@@ -291,7 +286,7 @@ class ConfigurationData(ObjectData):
 
     m_Files: typing.List[FileData]
 
-    m_AllOptionsByName: T_ALL_OPTIONS_BY_NAME
+    m_AllOptionsByName: T_OPTIONS_INDEX
     m_AllFilesByName: T_ALL_FILES_BY_NAME
 
     # --------------------------------------------------------------------
@@ -305,12 +300,13 @@ class ConfigurationData(ObjectData):
         self.m_OsOps = osOps
 
         self.m_Files = list()
-        self.m_AllOptionsByName = dict()
+        self.m_AllOptionsByName = MultiIndex()
         self.m_AllFilesByName = dict()
 
         assert type(self.m_Files) is list
-        assert type(self.m_AllOptionsByName) is dict
+        assert type(self.m_AllOptionsByName) is MultiIndex
         assert type(self.m_AllFilesByName) is dict
+        return
 
     # Own interface ------------------------------------------------------
     @property

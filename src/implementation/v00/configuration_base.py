@@ -27,6 +27,8 @@ from ...core.model import OptionData as PgCfgModel__OptionData
 from ...core.model import IncludeData as PgCfgModel__IncludeData
 from ...core.model import FileLineData as PgCfgModel__FileLineData
 from ...core.model import FileData as PgCfgModel__FileData
+from ...core.model import MultiIndex as PgCfgModel__MultiIndex
+from ...core.model import T_OPTIONS_INDEX as PgCfgModel__T_OPTIONS_INDEX
 
 from ...core.handlers import OptionHandlerToPrepareSetValue as PgCfgModel__OptionHandlerToPrepareSetValue
 from ...core.handlers import OptionHandlerCtxToPrepareSetValue as PgCfgModel__OptionHandlerCtxPrepareToSetValue
@@ -1482,9 +1484,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
 class PostgresConfiguration_Base__AllOptionsIterator(
     PostgresConfigurationOptionsIterator
 ):
-    T_OPTION_DATA_ITERATOR = typing.Iterator[
-        PgCfgModel__ConfigurationData.T_OPTION_OR_OPTIONS,
-    ]
+    T_OPTION_DATA_ITERATOR = typing.Iterator[PgCfgModel__OptionData]
 
     m_Cfg: PostgresConfiguration_Base
     m_OptionDataIterator: T_OPTION_DATA_ITERATOR
@@ -1563,15 +1563,15 @@ class PostgresConfiguration_Base__AllOptions(PostgresConfigurationOptions):
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) is PgCfgModel__ConfigurationData
-        assert type(self.m_Cfg.m_Data.m_AllOptionsByName) is dict
-        return len(self.m_Cfg.m_Data.m_AllOptionsByName.values())
+        assert type(self.m_Cfg.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
+        return self.m_Cfg.m_Data.m_AllOptionsByName.get_values_count()
 
     # --------------------------------------------------------------------
     def __iter__(self) -> PostgresConfiguration_Base__AllOptionsIterator:
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) is PgCfgModel__ConfigurationData
-        assert type(self.m_Cfg.m_Data.m_AllOptionsByName) is dict
+        assert type(self.m_Cfg.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
         optionDataIterator = self.m_Cfg.m_Data.m_AllOptionsByName.values().__iter__()
         assert optionDataIterator is not None
@@ -1858,7 +1858,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
             assert fileData.IsAlive()
             assert fileData.m_OptionsByName is not None
-            assert type(fileData.m_OptionsByName) is dict
+            assert type(fileData.m_OptionsByName) is PgCfgModel__MultiIndex
 
             optionData = self.Helper__FindSimpleOption(
                 fileData.m_OptionsByName,
@@ -1931,7 +1931,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
             assert type(sourceFileData) is PgCfgModel__FileData
             assert sourceFileData.IsAlive()
             assert sourceFileData.m_OptionsByName is not None
-            assert type(sourceFileData.m_OptionsByName) is dict
+            assert type(sourceFileData.m_OptionsByName) is PgCfgModel__MultiIndex
 
             typeOfOption = type(optionName)
 
@@ -2048,7 +2048,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert self.m_Data is not None
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
         assert self.m_Data.m_AllOptionsByName is not None
-        assert type(self.m_Data.m_AllOptionsByName) is dict
+        assert type(self.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
         if type(target) is PgCfgModel__FileLineData:
             return self.Helper__AddSimpleOption__FileLine(
@@ -2216,18 +2216,12 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
 
     # helper methods -----------------------------------------------------
-    T_OPTIONS_BY_NAME = typing.Union[
-        PgCfgModel__ConfigurationData.T_ALL_OPTIONS_BY_NAME,
-        PgCfgModel__FileData.T_OPTIONS_BY_NAME,
-    ]
-
-    # --------------------------------------------------------------------
     def Helper__FindSimpleOption(
         self,
-        allOptionsByName: T_OPTIONS_BY_NAME,
+        allOptionsByName: PgCfgModel__T_OPTIONS_INDEX,
         optionName: str,
     ) -> typing.Optional[PgCfgModel__OptionData]:
-        assert type(allOptionsByName) is dict
+        assert type(allOptionsByName) is PgCfgModel__MultiIndex
         assert type(optionName) is str
 
         if optionName not in allOptionsByName.keys():
@@ -2258,10 +2252,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     # --------------------------------------------------------------------
     def Helper__AggregateAllOptionValues(
         self,
-        allOptionsByName: PgCfgModel__ConfigurationData.T_ALL_OPTIONS_BY_NAME,
+        allOptionsByName: PgCfgModel__T_OPTIONS_INDEX,
         optionName: str,
     ) -> typing.Optional[list]:
-        assert type(allOptionsByName) is dict
+        assert type(allOptionsByName) is PgCfgModel__MultiIndex
         assert type(optionName) is str
 
         if optionName not in allOptionsByName.keys():
@@ -2309,10 +2303,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     # --------------------------------------------------------------------
     def Helper__FindAndDeleteOption(
         self,
-        allOptionsByName: T_OPTIONS_BY_NAME,
+        allOptionsByName: PgCfgModel__T_OPTIONS_INDEX,
         optionName: str,
     ) -> PostgresConfigurationSetOptionValueEventID:
-        assert type(allOptionsByName) is dict
+        assert type(allOptionsByName) is PgCfgModel__MultiIndex
         assert type(optionName) is str
 
         if optionName not in allOptionsByName.keys():
@@ -2484,7 +2478,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert self.m_Data is not None
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
         assert self.m_Data.m_AllOptionsByName is not None
-        assert type(self.m_Data.m_AllOptionsByName) is dict
+        assert type(self.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
         if optionName in self.m_Data.m_AllOptionsByName.keys():
             assert self.m_Data.m_AllOptionsByName[optionName] is not None
@@ -2598,14 +2592,14 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert self.m_Data is not None
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
         assert self.m_Data.m_AllOptionsByName is not None
-        assert type(self.m_Data.m_AllOptionsByName) is dict
+        assert type(self.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
         fileData = fileLineData.m_Parent
         assert fileData is not None
         assert type(fileData) is PgCfgModel__FileData
 
         assert fileData.m_OptionsByName is not None
-        assert type(fileData.m_OptionsByName) is dict
+        assert type(fileData.m_OptionsByName) is PgCfgModel__MultiIndex
 
         if optionName in fileData.m_OptionsByName.keys():
             assert fileData.m_OptionsByName[optionName] is not None
@@ -2702,10 +2696,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert self.m_Data is not None
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
         assert self.m_Data.m_AllOptionsByName is not None
-        assert type(self.m_Data.m_AllOptionsByName) is dict
+        assert type(self.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
         assert fileData.m_OptionsByName is not None
-        assert type(fileData.m_OptionsByName) is dict
+        assert type(fileData.m_OptionsByName) is PgCfgModel__MultiIndex
 
         if optionName in fileData.m_OptionsByName.keys():
             assert fileData.m_OptionsByName[optionName] is not None
@@ -2796,7 +2790,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert self.m_Data is not None
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
-        assert type(self.m_Data.m_AllOptionsByName) is dict
+        assert type(self.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
         # ------------------------------------------------
         optionData = self.Helper__FindSimpleOption(
@@ -2846,7 +2840,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         optionValue: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult_Base:
         assert type(fileData) is PgCfgModel__FileData
-        assert type(fileData.m_OptionsByName) is dict
+        assert type(fileData.m_OptionsByName) is PgCfgModel__MultiIndex
         assert type(optionName) is str
         assert optionValue is not None
 
@@ -2946,7 +2940,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert self.m_Data is not None
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
-        assert type(self.m_Data.m_AllOptionsByName) is dict
+        assert type(self.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
         # ------------------------------------------------
         while True:
@@ -3162,10 +3156,10 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert self.m_Data is not None
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
-        assert type(self.m_Data.m_AllOptionsByName) is dict
+        assert type(self.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
         assert fileData.m_OptionsByName is not None
-        assert type(fileData.m_OptionsByName) is dict
+        assert type(fileData.m_OptionsByName) is PgCfgModel__MultiIndex
 
         # ------------------------------------------------
         C_BUGCHECK_SRC = __class__.__name__ + "::Helper__SetUniqueOptionValueItem__File"
@@ -3321,7 +3315,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert self.m_Data is not None
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
-        assert type(self.m_Data.m_AllOptionsByName) is dict
+        assert type(self.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
         assert optionName not in self.m_Data.m_AllOptionsByName.keys()
 
@@ -3379,7 +3373,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         assert self.m_Data is not None
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
-        assert type(self.m_Data.m_AllOptionsByName) is dict
+        assert type(self.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
         assert optionName not in fileData.m_OptionsByName.keys()
         assert optionName not in self.m_Data.m_AllOptionsByName.keys()

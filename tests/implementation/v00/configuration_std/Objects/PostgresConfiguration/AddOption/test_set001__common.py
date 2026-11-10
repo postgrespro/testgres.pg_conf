@@ -15,6 +15,7 @@ from src.implementation.v00.configuration_base import PgCfgModel__OptionData
 from src.implementation.v00.configuration_base import PgCfgModel__FileLineData
 from src.implementation.v00.configuration_base import PgCfgModel__FileData
 from src.implementation.v00.configuration_base import PgCfgModel__ConfigurationData
+from src.implementation.v00.configuration_base import PgCfgModel__MultiIndex
 
 from .......TestServices import TestServices
 # fmt: on
@@ -117,10 +118,10 @@ class TestSet001__Common:
         assert len(cfg.m_Data.m_AllFilesByName.values()) == 1
         assert fileData in cfg.m_Data.m_AllFilesByName.values()
 
-        assert type(cfg.m_Data.m_AllOptionsByName) is dict
-        assert len(cfg.m_Data.m_AllOptionsByName) == 1
+        assert type(cfg.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
+        assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 1
         assert optName in cfg.m_Data.m_AllOptionsByName.keys()
-        assert len(cfg.m_Data.m_AllOptionsByName.values()) == 1
+        assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 1
         assert opt.m_OptionData in cfg.m_Data.m_AllOptionsByName.values()
         return
 
