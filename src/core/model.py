@@ -267,27 +267,23 @@ class FileData(ObjectData):
 
 
 # //////////////////////////////////////////////////////////////////////////////
+
+
+T_FILES_INDEX = MultiIndex[FileData]
+
+
+# //////////////////////////////////////////////////////////////////////////////
 # ConfigurationData
 
 
 class ConfigurationData(ObjectData):
-    T_FILE_OR_FILES = typing.Union[
-        FileData,
-        typing.List[FileData],
-    ]
-
-    T_ALL_FILES_BY_NAME = typing.Dict[
-        str,
-        T_FILE_OR_FILES,
-    ]
-
     m_DataDir: str
     m_OsOps: ConfigurationOsOps
 
     m_Files: typing.List[FileData]
 
     m_AllOptionsByName: T_OPTIONS_INDEX
-    m_AllFilesByName: T_ALL_FILES_BY_NAME
+    m_AllFilesByName: T_FILES_INDEX
 
     # --------------------------------------------------------------------
     def __init__(self, data_dir: str, osOps: ConfigurationOsOps):
@@ -301,11 +297,11 @@ class ConfigurationData(ObjectData):
 
         self.m_Files = list()
         self.m_AllOptionsByName = MultiIndex()
-        self.m_AllFilesByName = dict()
+        self.m_AllFilesByName = MultiIndex()
 
         assert type(self.m_Files) is list
         assert type(self.m_AllOptionsByName) is MultiIndex
-        assert type(self.m_AllFilesByName) is dict
+        assert type(self.m_AllFilesByName) is MultiIndex
         return
 
     # Own interface ------------------------------------------------------

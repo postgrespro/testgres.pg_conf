@@ -1335,9 +1335,7 @@ class PostgresConfigurationSetOptionValueResult_Base(
 
 
 class PostgresConfiguration_Base__AllFilesIterator(PostgresConfigurationFilesIterator):
-    T_FILE_DATA_ITERATOR = typing.Iterator[
-        PgCfgModel__ConfigurationData.T_FILE_OR_FILES,
-    ]
+    T_FILE_DATA_ITERATOR = typing.Iterator[PgCfgModel__FileData]
 
     m_Cfg: PostgresConfiguration_Base
     m_FileDataIterator: T_FILE_DATA_ITERATOR
@@ -1416,15 +1414,15 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) is PgCfgModel__ConfigurationData
-        assert type(self.m_Cfg.m_Data.m_AllFilesByName) is dict
-        return len(self.m_Cfg.m_Data.m_AllFilesByName.values())
+        assert type(self.m_Cfg.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
+        return self.m_Cfg.m_Data.m_AllFilesByName.get_values_count()
 
     # --------------------------------------------------------------------
     def __iter__(self) -> PostgresConfiguration_Base__AllFilesIterator:
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) is PgCfgModel__ConfigurationData
-        assert type(self.m_Cfg.m_Data.m_AllFilesByName) is dict
+        assert type(self.m_Cfg.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
 
         fileDataIterator = self.m_Cfg.m_Data.m_AllFilesByName.values().__iter__()
         assert fileDataIterator is not None
@@ -1443,7 +1441,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
         assert self.m_Cfg is not None
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) is PgCfgModel__ConfigurationData
-        assert type(self.m_Cfg.m_Data.m_AllFilesByName) is dict
+        assert type(self.m_Cfg.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
 
         file_name2 = self.m_Cfg.m_Data.OsOps.Path_NormCase(file_name)
 
@@ -2413,7 +2411,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert self.m_Data.OsOps.Path_BaseName(file_name) == file_name
 
         assert type(self.m_Data) is PgCfgModel__ConfigurationData
-        assert type(self.m_Data.m_AllFilesByName) is dict
+        assert type(self.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
 
         file_name_n = self.m_Data.OsOps.Path_NormCase(file_name)
 

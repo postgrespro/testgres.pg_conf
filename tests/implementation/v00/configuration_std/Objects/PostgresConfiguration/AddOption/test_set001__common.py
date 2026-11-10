@@ -111,11 +111,11 @@ class TestSet001__Common:
         assert len(cfg.m_Data.m_Files) == 1
         assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
         assert cfg.m_Data.m_Files[0] is fileData
-        assert type(cfg.m_Data.m_AllFilesByName) is dict
-        assert len(cfg.m_Data.m_AllFilesByName) == 1
-        assert len(cfg.m_Data.m_AllFilesByName.keys()) == 1
+        assert type(cfg.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
+        assert cfg.m_Data.m_AllFilesByName.get_values_count() == 1
+        assert len(list(cfg.m_Data.m_AllFilesByName.keys())) == 1
         assert cfg.C_POSTGRESQL_AUTO_CONF in cfg.m_Data.m_AllFilesByName.keys()
-        assert len(cfg.m_Data.m_AllFilesByName.values()) == 1
+        assert len(list(cfg.m_Data.m_AllFilesByName.values())) == 1
         assert fileData in cfg.m_Data.m_AllFilesByName.values()
 
         assert type(cfg.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
