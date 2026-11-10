@@ -31,7 +31,7 @@ class LineReader:
         self.m_LineNum = 0
         self.m_ColNum = 0
         self.m_Next = 0
-        self.m_Data = 0
+        self.m_Data = ""
 
     # --------------------------------------------------------------------
     def SetData(self, lineData: str):
