@@ -28,7 +28,7 @@ class OptionHandlerToPrepareGetValue__Std__UniqueStrList(
         assert type(ctx.OptionValue) is list
 
         result: typing.List[str] = list()
-        index: set[str] = set()
+        index: typing.Set[str] = set()
 
         for x in ctx.OptionValue:
             assert x is not None

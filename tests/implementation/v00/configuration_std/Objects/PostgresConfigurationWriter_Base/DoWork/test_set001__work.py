@@ -22,6 +22,7 @@ import logging
 import os
 import datetime
 import re
+import typing
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -313,7 +314,7 @@ class TestSet001__Common:
         cfg.AddOption(C_OPT_NAME, 123)
 
         # ---------------
-        files: list[PgCfg_File_Base] = [file1, file2]
+        files: typing.List[PgCfg_File_Base] = [file1, file2]
 
         for file in files:
             logging.info("Let's create our own [{0}]".format(file.get_Path()))

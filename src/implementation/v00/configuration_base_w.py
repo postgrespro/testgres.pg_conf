@@ -59,9 +59,9 @@ class PostgresConfigurationWriterFileCtx_Base:
 class PostgresConfigurationWriterCtx_Base:
     Cfg: PostgresConfiguration_Base
 
-    AllFiles: list[PostgresConfigurationWriterFileCtx_Base]
-    NewFiles: list[PostgresConfigurationWriterFileCtx_Base]
-    UpdFiles: list[PostgresConfigurationWriterFileCtx_Base]
+    AllFiles: typing.List[PostgresConfigurationWriterFileCtx_Base]
+    NewFiles: typing.List[PostgresConfigurationWriterFileCtx_Base]
+    UpdFiles: typing.List[PostgresConfigurationWriterFileCtx_Base]
 
     # --------------------------------------------------------------------
     def __init__(self, cfg: PostgresConfiguration_Base):

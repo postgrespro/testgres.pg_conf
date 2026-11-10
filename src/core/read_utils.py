@@ -185,8 +185,8 @@ class ReadUtils:
             mode: int
             curValueItem: typing.Optional[str]
             dataLength: int
-            result: list[str]
-            index: set[str]
+            result: typing.List[str]
+            index: typing.Set[str]
 
         ctx = tagCtx()
         ctx.mode = C_MODE__NONE
