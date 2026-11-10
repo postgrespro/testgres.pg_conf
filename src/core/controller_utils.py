@@ -696,9 +696,15 @@ class DataControllerUtils:
         )
 
     # --------------------------------------------------------------------
+    T_OPTION_OR_OPTIONS = typing.Union[
+        PgCfgModel__OptionData,
+        typing.List[PgCfgModel__OptionData],
+    ]
+
+    # --------------------------------------------------------------------
     @staticmethod
     def Helper__InsertOptionIntoIndex(
-        optionsByNameDictionary: dict[str, PgCfgModel__OptionData],
+        optionsByNameDictionary: typing.Dict[str, T_OPTION_OR_OPTIONS],
         optionData: PgCfgModel__OptionData,
     ):
         assert optionsByNameDictionary is not None
@@ -731,7 +737,7 @@ class DataControllerUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__DeleteOptionFromIndex(
-        optionsByNameDictionary: dict[str, PgCfgModel__OptionData],
+        optionsByNameDictionary: typing.Dict[str, T_OPTION_OR_OPTIONS],
         optionData: PgCfgModel__OptionData,
     ):
         assert optionsByNameDictionary is not None
