@@ -586,9 +586,15 @@ class DataControllerUtils:
         return
 
     # --------------------------------------------------------------------
+    T_FILE_OR_FILES = typing.Union[
+        PgCfgModel__FileData,
+        typing.List[PgCfgModel__FileData],
+    ]
+
+    # --------------------------------------------------------------------
     @staticmethod
     def Helper__InsertFileIntoIndex(
-        filesByStrKeyDictionary: dict[str, PgCfgModel__FileData],
+        filesByStrKeyDictionary: typing.Dict[str, T_FILE_OR_FILES],
         fileKey: str,
         fileData: PgCfgModel__FileData,
     ):
@@ -604,23 +610,24 @@ class DataControllerUtils:
         else:
             indexItemData = filesByStrKeyDictionary[fileKey]
 
-            if indexItemData is PgCfgModel__FileData:
-                filesByStrKeyDictionary[fileKey] = [indexItemData, fileData]  # throw
+            if type(indexItemData) is PgCfgModel__FileData:
+                indexItemData = [indexItemData, fileData]  # throw
+                filesByStrKeyDictionary[fileKey] = indexItemData  # throw
             else:
                 assert type(indexItemData) is list
                 assert len(indexItemData) > 0
                 indexItemData.append(fileData)  # throw
 
-            assert type(filesByStrKeyDictionary[fileKey]) is list
-            assert len(filesByStrKeyDictionary[fileKey]) > 1
-            assert filesByStrKeyDictionary[fileKey][-1] is fileData
+            assert type(indexItemData) is list
+            assert len(indexItemData) > 1
+            assert indexItemData[-1] is fileData
 
         return
 
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__DeleteFileIntoIndex(
-        filesByStrKeyDictionary: dict[str, PgCfgModel__FileData],
+        filesByStrKeyDictionary: typing.Dict[str, T_FILE_OR_FILES],
         fileKey: str,
         fileData: PgCfgModel__FileData,
     ):
