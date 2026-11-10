@@ -607,22 +607,29 @@ class DataControllerUtils:
 
         if fileKey not in filesByStrKeyDictionary.keys():
             filesByStrKeyDictionary[fileKey] = fileData
-        else:
-            indexItemData = filesByStrKeyDictionary[fileKey]
+            return
 
-            if type(indexItemData) is PgCfgModel__FileData:
-                indexItemData = [indexItemData, fileData]  # throw
-                filesByStrKeyDictionary[fileKey] = indexItemData  # throw
-            else:
-                assert type(indexItemData) is list
-                assert len(indexItemData) > 0
-                indexItemData.append(fileData)  # throw
+        # TODO: it is not tested
+        indexItemData = filesByStrKeyDictionary[fileKey]
 
+        if type(indexItemData) is PgCfgModel__FileData:
+            assert indexItemData is not fileData
+            filesByStrKeyDictionary[fileKey] = [
+                indexItemData,
+                fileData,
+            ]
+            return
+
+        if type(indexItemData) is list:
             assert type(indexItemData) is list
-            assert len(indexItemData) > 1
-            assert indexItemData[-1] is fileData
+            assert len(indexItemData) > 0
+            indexItemData.append(fileData)  # throw
+            return
 
-        return
+        BugCheckError.UnkFileObjectDataType(
+            fileKey,
+            type(indexItemData),
+        )
 
     # --------------------------------------------------------------------
     @staticmethod
