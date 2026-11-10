@@ -44,6 +44,7 @@ class FileLineElementData(ObjectData):
 
         self.m_Parent = parent
         self.m_Offset = offset
+        return
 
     # own interface ------------------------------------------------------
     def MarkAsDeletedFrom(self, fileLineData: FileLineData) -> None:
@@ -51,6 +52,7 @@ class FileLineElementData(ObjectData):
         assert isinstance(fileLineData, FileLineData)
         assert self.m_Parent is fileLineData
         self.m_Parent = None
+        return
 
     # Object interface ---------------------------------------------------
     def get_Parent(self) -> FileLineData:
@@ -81,6 +83,7 @@ class CommentData(FileLineElementData):
         super().__init__(parent, offset)
 
         self.m_Text = text
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -109,6 +112,7 @@ class OptionData(FileLineElementData):
 
         self.m_Name = name
         self.m_Value = value
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -141,6 +145,7 @@ class IncludeData(FileLineElementData):
 
         self.m_Path = path
         self.m_File = fileData
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -156,6 +161,7 @@ class FileLineData(ObjectData):
             assert isinstance(element, FileLineElementData)
 
             self.m_Element = element
+            return
 
     # --------------------------------------------------------------------
     m_Parent: typing.Optional[FileData]
@@ -169,6 +175,7 @@ class FileLineData(ObjectData):
 
         self.m_Parent = parent
         self.m_Items = list()
+        return
 
     # own interface ------------------------------------------------------
     def MarkAsDeletedFrom(self, fileData: FileData) -> None:
@@ -239,6 +246,7 @@ class FileData(ObjectData):
 
         assert type(self.m_Path) is str
         assert self.m_Path != ""
+        return
 
     # Object interface ---------------------------------------------------
     def get_Parent(self) -> ConfigurationData:
