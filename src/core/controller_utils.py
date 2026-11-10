@@ -33,6 +33,7 @@ class DataControllerUtils:
         assert value is not None
 
         optionData.m_Value = value
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -44,6 +45,7 @@ class DataControllerUtils:
         assert valueItem is not None
 
         optionData.m_Value.append(valueItem)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -68,6 +70,7 @@ class DataControllerUtils:
         assert not __class__.Helper__FileLineHasWorkData(fileLineData)
 
         __class__.Helper__DeleteFileLine(cfgData, fileLineData)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -92,6 +95,7 @@ class DataControllerUtils:
         assert not __class__.Helper__FileLineHasWorkData(fileLineData)
 
         __class__.Helper__DeleteFileLine(cfgData, fileLineData)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -124,6 +128,7 @@ class DataControllerUtils:
             return
 
         __class__.Helper__DeleteFileLine(cfgData, fileLineData)
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -307,6 +312,7 @@ class DataControllerUtils:
         __class__.Helper__DeleteFileLine(cfgData, fileLineData)
 
         assert not fileLineData.IsAlive()
+        return
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -845,6 +851,7 @@ class DataControllerUtils:
 
             assert cItems__new == cItems - 1
             cItems = cItems__new
+            continue
 
     # --------------------------------------------------------------------
     @staticmethod
