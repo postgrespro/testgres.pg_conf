@@ -4,12 +4,13 @@
 # fmt: off
 from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 from src.implementation.v00.configuration_base import PostgresConfigurationComment_Base as PgCfg_Comment_Base
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -38,26 +39,40 @@ class TestSet001__Common:
 
         comment.Delete(True)
 
-        with pytest.raises(Exception, match=re.escape("Comment object was deleted.")):
+        with pytest.raises(PostgresConfigException) as x:
             comment.get_Configuration()
 
-        with pytest.raises(Exception, match=re.escape("Comment object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             comment.get_Parent()
 
-        with pytest.raises(Exception, match=re.escape("Comment object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             comment.get_Text()
 
-        with pytest.raises(Exception, match=re.escape("Comment object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             comment.Delete(True)
 
-        with pytest.raises(Exception, match=re.escape("FileLine object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.get_Configuration()
 
-        with pytest.raises(Exception, match=re.escape("FileLine object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.FileLineObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.get_Parent()
 
-        with pytest.raises(Exception, match=re.escape("FileLine object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.FileLineObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             len(fileLine)
+
+        assert str(x.value) == ErrorMessageBuilder.FileLineObjectWasDeleted()
         return
 
     # --------------------------------------------------------------------
@@ -83,17 +98,25 @@ class TestSet001__Common:
 
         comment.Delete(False)
 
-        with pytest.raises(Exception, match=re.escape("Comment object was deleted.")):
+        with pytest.raises(PostgresConfigException) as x:
             comment.get_Configuration()
 
-        with pytest.raises(Exception, match=re.escape("Comment object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             comment.get_Parent()
 
-        with pytest.raises(Exception, match=re.escape("Comment object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             comment.get_Text()
 
-        with pytest.raises(Exception, match=re.escape("Comment object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             comment.Delete(False)
+
+        assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
 
         assert fileLine.get_Configuration() is cfg
 

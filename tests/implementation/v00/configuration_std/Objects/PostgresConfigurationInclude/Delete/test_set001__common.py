@@ -8,9 +8,11 @@ from src.implementation.v00.configuration_base import PostgresConfigurationInclu
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
+
+from src.exceptions import PostgresConfigException
 
 import pytest
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -39,26 +41,40 @@ class TestSet001__Common:
 
         include.Delete(True)
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        with pytest.raises(PostgresConfigException) as x:
             include.get_Configuration()
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             include.get_Parent()
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             include.get_File()
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             include.Delete(True)
 
-        with pytest.raises(Exception, match=re.escape("FileLine object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.get_Configuration()
 
-        with pytest.raises(Exception, match=re.escape("FileLine object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.FileLineObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.get_Parent()
 
-        with pytest.raises(Exception, match=re.escape("FileLine object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.FileLineObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             len(fileLine)
+
+        assert str(x.value) == ErrorMessageBuilder.FileLineObjectWasDeleted()
         return
 
     # --------------------------------------------------------------------
@@ -84,17 +100,25 @@ class TestSet001__Common:
 
         include.Delete(False)
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        with pytest.raises(PostgresConfigException) as x:
             include.get_Configuration()
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             include.get_Parent()
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             include.get_File()
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             include.Delete(False)
+
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
 
         assert fileLine.m_FileLineData.IsAlive()
 
@@ -132,35 +156,55 @@ class TestSet001__Common:
 
         include.Delete(True)
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        with pytest.raises(PostgresConfigException) as x:
             include.get_Configuration()
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             include.get_Parent()
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             include.get_File()
 
-        with pytest.raises(Exception, match=re.escape("Include object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             include.Delete(True)
 
-        with pytest.raises(Exception, match=re.escape("Comment object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.IncludeObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             comment.get_Configuration()
 
-        with pytest.raises(Exception, match=re.escape("Comment object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             comment.get_Parent()
 
-        with pytest.raises(Exception, match=re.escape("Comment object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             comment.get_Text()
 
-        with pytest.raises(Exception, match=re.escape("FileLine object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.CommentObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.get_Configuration()
 
-        with pytest.raises(Exception, match=re.escape("FileLine object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.FileLineObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.get_Parent()
 
-        with pytest.raises(Exception, match=re.escape("FileLine object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.FileLineObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             len(fileLine)
+
+        assert str(x.value) == ErrorMessageBuilder.FileLineObjectWasDeleted()
         return
 
 

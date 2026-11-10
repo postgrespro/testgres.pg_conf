@@ -17,13 +17,15 @@ from src.implementation.v00.configuration_base import PgCfgModel__FileData
 from src.implementation.v00.configuration_base import PgCfgModel__ConfigurationData
 from src.implementation.v00.configuration_base import PgCfgModel__MultiIndex
 
+from src.exceptions import PostgresConfigException
+
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 # fmt: on
 
 import pytest
 import typing
 import os
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -138,8 +140,10 @@ class TestSet001__Common:
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
-        with pytest.raises(Exception, match=re.escape("None value is not supported.")):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.AddOption(optName, None)
+
+        assert str(x.value) == ErrorMessageBuilder.NoneValueIsNotSupported()
         return
 
     # --------------------------------------------------------------------
@@ -153,8 +157,10 @@ class TestSet001__Common:
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
-        with pytest.raises(Exception, match=re.escape("Option name is empty.")):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.AddOption("", 123)
+
+        assert str(x.value) == ErrorMessageBuilder.OptionNameIsEmpty()
         return
 
     # --------------------------------------------------------------------
@@ -168,8 +174,10 @@ class TestSet001__Common:
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
-        with pytest.raises(Exception, match=re.escape("Option name is None.")):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.AddOption(None, 123)
+
+        assert str(x.value) == ErrorMessageBuilder.OptionNameIsNone()
         return
 
     # --------------------------------------------------------------------
@@ -187,15 +195,13 @@ class TestSet001__Common:
 
         option = cfg.AddOption(optName, 123)
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "Option [{0}] already exist in the file [{1}].".format(
-                    optName, option.get_Parent().get_Parent().get_Path()
-                )
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.AddOption(optName, 321)
+
+        assert str(x.value) == ErrorMessageBuilder.OptionIsAlreadyExistInFile(
+            option.get_Parent().get_Parent().get_Path(),
+            option.get_Name(),
+        )
 
         assert option.get_Name() == optName
         assert option.get_Value() == 123

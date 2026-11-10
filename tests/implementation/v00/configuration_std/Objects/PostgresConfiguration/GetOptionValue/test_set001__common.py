@@ -10,13 +10,14 @@ from src.implementation.v00.configuration_base import PostgresConfigurationSetOp
 from src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
 
 from src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueResult as PgCfg_SetOptionResult
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import typing
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -63,8 +64,10 @@ class TestSet001__Common:
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
-        with pytest.raises(Exception, match=re.escape("Option name is None.")):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.GetOptionValue(None)
+
+        assert str(x.value) == ErrorMessageBuilder.OptionNameIsNone()
         return
 
     # --------------------------------------------------------------------
@@ -76,8 +79,10 @@ class TestSet001__Common:
 
         cfg = PgCfg_Std(TestServices.GetRootTmpDir())
 
-        with pytest.raises(Exception, match=re.escape("Option name is empty.")):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.GetOptionValue("")
+
+        assert str(x.value) == ErrorMessageBuilder.OptionNameIsEmpty()
         return
 
     # --------------------------------------------------------------------

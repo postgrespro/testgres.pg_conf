@@ -5,12 +5,13 @@
 from src.implementation.v00.configuration_std import PostgresConfiguration_Std as PgCfg_Std
 from src.implementation.v00.configuration_std import PostgresConfigurationWriter_Base as PgCfg_Writer_Base
 from src.implementation.v00.configuration_std import PostgresConfigurationWriterCtx_Base as PgCfg_WriterCtx_Base
+from src.exceptions import PostgresConfigException
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 # fmt: on
 
 import pytest
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -67,13 +68,14 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         cfg = PgCfg_Std(rootTmpDir)
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "Bad option [listen_addresses] value type [int]. Expected type is [str]."
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue(__class__.C_OPTION_NAME, 123)
+
+        assert str(x.value) == ErrorMessageBuilder.BadOptionValueType(
+            "listen_addresses",
+            int,
+            str,
+        )
         return
 
 

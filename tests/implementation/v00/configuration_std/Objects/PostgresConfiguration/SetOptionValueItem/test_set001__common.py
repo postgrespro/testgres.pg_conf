@@ -8,14 +8,15 @@ from src.implementation.v00.configuration_base import PostgresConfigurationSetOp
 from src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
 
 from src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueEventID as PgCfg_SetOptionEventID
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import typing
 import logging
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -233,14 +234,14 @@ class TestSet001__Common:
         assert r1.Option is not None
         assert r1.Option.get_Value() == ["biha"]
 
-        errMsg = (
-            "Bad option [{0}] value item type [{1}]. Expected type is [{2}].".format(
-                C_OPT_NAME, "int", "str"
-            )
-        )
-
-        with pytest.raises(Exception, match=re.escape(errMsg)):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValueItem(C_OPT_NAME, 1)
+
+        assert str(x.value) == ErrorMessageBuilder.BadOptionValueItemType(
+            C_OPT_NAME,
+            int,
+            str,
+        )
 
         assert r1.m_OptData.m_Value == ["biha"]
         assert r1.Option.get_Value() == ["biha"]
@@ -264,10 +265,10 @@ class TestSet001__Common:
         assert r1.Option is not None
         assert r1.Option.get_Value() == ["biha"]
 
-        errMsg = "None value is not supported."
-
-        with pytest.raises(Exception, match=re.escape(errMsg)):
+        with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValueItem(C_OPT_NAME, None)
+
+        assert str(x.value) == ErrorMessageBuilder.NoneValueIsNotSupported()
 
         assert r1.m_OptData.m_Value == ["biha"]
         assert r1.Option.get_Value() == ["biha"]

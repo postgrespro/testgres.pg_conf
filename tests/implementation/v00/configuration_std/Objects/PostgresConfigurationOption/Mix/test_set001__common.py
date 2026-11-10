@@ -12,11 +12,13 @@ from src.implementation.v00.configuration_base import PostgresConfigurationTopLe
 from src.implementation.v00.configuration_base import PgCfgModel__ConfigurationData
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 # fmt: on
+
+from src.exceptions import PostgresConfigException
 
 import pytest
 import typing
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -117,20 +119,30 @@ class TestSet001__Common:
         assert r2.EventID == PgCfg_SetOptionEventID.OPTION_WAS_DELETED
         assert r2.Option is None
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.get_Name()
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.get_Value()
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.set_Value(123)
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.set_Value(None)
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             r1.Option.get_Parent()
+
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
         return
 
     # --------------------------------------------------------------------
@@ -161,15 +173,14 @@ class TestSet001__Common:
         invalidValues = [True, False]
 
         for invalidValue in invalidValues:
-            with pytest.raises(
-                Exception,
-                match=re.escape(
-                    "Bad option [{0}] value type [bool]. Expected type is [int].".format(
-                        optName,
-                    )
-                ),
-            ):
+            with pytest.raises(PostgresConfigException) as x:
                 r1.Option.set_Value(invalidValue)
+
+            assert str(x.value) == ErrorMessageBuilder.BadOptionValueType(
+                optName,
+                bool,
+                int,
+            )
 
             assert r1.Option.get_Name() == optName
             assert r1.Option.get_Value() == 234
@@ -204,15 +215,14 @@ class TestSet001__Common:
         invalidValues = ["qwe", "123."]
 
         for invalidValue in invalidValues:
-            with pytest.raises(
-                Exception,
-                match=re.escape(
-                    "Can't convert option [{0}] value from type [str] to type [int].".format(
-                        optName,
-                    )
-                ),
-            ):
+            with pytest.raises(PostgresConfigException) as x:
                 r1.Option.set_Value(invalidValue)
+
+            assert str(x.value) == ErrorMessageBuilder.CantConvertOptionValue(
+                optName,
+                str,
+                int,
+            )
 
             assert r1.Option.get_Name() == optName
             assert r1.Option.get_Value() == 234

@@ -14,14 +14,16 @@ from src.implementation.v00.configuration_base import PostgresConfigurationFile 
 from src.implementation.v00.configuration_base import PgCfgModel__FileData
 from src.implementation.v00.configuration_base_r import PgCfgModel__FileStatus
 
+from src.exceptions import PostgresConfigException
+
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 # fmt: on
 
 import pytest
 import logging
 import os
 import datetime
-import re
 import typing
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -398,12 +400,14 @@ class TestSet001__Common:
 
         cfg.SetOptionValue("port", 321)
 
-        errMsg = "File [{0}] was modified externally. Our timestamp is [{1}]. The current file timestamp is [{2}].".format(
-            file.get_Path(), mdate1, mdate2
-        )
-
-        with pytest.raises(Exception, match=re.escape(errMsg)):
+        with pytest.raises(PostgresConfigException) as x:
             PgCfg_Writer_Base.DoWork(cfgWriterCtx)
+
+        assert str(x.value) == ErrorMessageBuilder.FileWasModifiedExternally(
+            file.get_Path(),
+            mdate1,
+            mdate2,
+        )
 
         logging.info(
             "Last mofication date is [{0}]".format(

@@ -16,13 +16,15 @@ from src.implementation.v00.configuration_base import PgCfgModel__CommentData
 from src.abstract.v00.configuration import PostgresConfigurationComment as PgCfg_Comment
 from src.abstract.v00.configuration import PostgresConfigurationFileLines as PgCfg_FileLines
 from src.abstract.v00.configuration import PostgresConfigurationFile as PgCfg_File
+
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import os
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -133,10 +135,15 @@ class TestSet001__Common:
         invalidSymbols = "\r\n\0"
 
         for ch in invalidSymbols:
-            with pytest.raises(
-                Exception, match=re.escape("Comment text contains invalid symbols.")
-            ):
+            with pytest.raises(PostgresConfigException) as x:
                 file.AddComment("1234" + ch)
+
+            assert (
+                str(
+                    x.value,
+                )
+                == ErrorMessageBuilder.CommentTextContainsInvalidSymbols()
+            )
 
             assert len(file) == 3
 

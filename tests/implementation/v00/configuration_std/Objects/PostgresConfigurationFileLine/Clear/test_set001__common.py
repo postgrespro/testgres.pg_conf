@@ -20,13 +20,15 @@ from src.abstract.v00.configuration import PostgresConfigurationComment as PgCfg
 from src.abstract.v00.configuration import PostgresConfigurationFileLine as PgCfg_FileLine
 from src.abstract.v00.configuration import PostgresConfigurationFileLines as PgCfg_FileLines
 from src.abstract.v00.configuration import PostgresConfigurationFile as PgCfg_File
+
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import os
-import re
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -81,23 +83,35 @@ class TestSet001__Common:
 
         assert len(fileLine) == 0
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        with pytest.raises(PostgresConfigException) as x:
             set_r.Option.get_Name()
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             set_r.Option.get_Value()
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             set_r.Option.set_Value(123)
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             set_r.Option.set_Value(None)
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             set_r.Option.get_Parent()
 
-        with pytest.raises(Exception, match=re.escape("Option object was deleted.")):
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
+
+        with pytest.raises(PostgresConfigException) as x:
             set_r.Option.get_Configuration()
+
+        assert str(x.value) == ErrorMessageBuilder.OptionObjectWasDeleted()
 
         assert set_r.m_OptData is not None
         assert type(set_r.m_OptData) is PgCfgModel__OptionData

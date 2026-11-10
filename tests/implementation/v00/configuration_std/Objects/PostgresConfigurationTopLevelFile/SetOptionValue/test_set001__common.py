@@ -18,14 +18,16 @@ from src.implementation.v00.configuration_base import PgCfgModel__OptionData
 
 from src.abstract.v00.configuration import PostgresConfiguration as PgCfg
 from src.abstract.v00.configuration import PostgresConfigurationFile as PgCfg_File
+
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import typing
 import os
-import re
 import logging
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -202,15 +204,13 @@ class TestSet001__Common:
         assert len(file1.get_Lines()) == 1
         assert len(file2.get_Lines()) == 0
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "Option [{0}] already exist in another file [{1}].".format(
-                    optName, file1.get_Path()
-                )
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             file2.SetOptionValue(optName, 321)
+
+        assert str(x.value) == ErrorMessageBuilder.OptionIsAlreadyExistInAnotherFile(
+            file1.get_Path(),
+            optName,
+        )
 
         assert option1.get_Name() == optName
         assert option1.get_Value() == 123
@@ -239,14 +239,14 @@ class TestSet001__Common:
         for badValue in badValues:
             logging.info("--------- badValue: {0}".format(badValue))
 
-            errMsg = (
-                "Bad option [{0}] value type [{1}]. Expected type is [{2}].".format(
-                    optName, type(badValue).__name__, "int"
-                )
-            )
-
-            with pytest.raises(Exception, match=re.escape(errMsg)):
+            with pytest.raises(PostgresConfigException) as x:
                 file1.SetOptionValue(optName, badValue)
+
+            assert str(x.value) == ErrorMessageBuilder.BadOptionValueType(
+                optName,
+                type(badValue),
+                int,
+            )
 
             assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 0
             assert file1.m_FileData.m_OptionsByName.get_values_count() == 0
@@ -273,12 +273,14 @@ class TestSet001__Common:
         for badValue in badValues:
             logging.info("--------- badValue: {0}".format(badValue))
 
-            errMsg = "Can't convert option [{0}] value from type [{1}] to type [{2}].".format(
-                optName, type(badValue).__name__, "int"
-            )
-
-            with pytest.raises(Exception, match=re.escape(errMsg)):
+            with pytest.raises(PostgresConfigException) as x:
                 file1.SetOptionValue(optName, badValue)
+
+            assert str(x.value) == ErrorMessageBuilder.CantConvertOptionValue(
+                optName,
+                type(badValue),
+                int,
+            )
 
             assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 0
             assert file1.m_FileData.m_OptionsByName.get_values_count() == 0

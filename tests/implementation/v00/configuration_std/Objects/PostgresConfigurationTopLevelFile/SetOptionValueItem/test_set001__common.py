@@ -8,12 +8,14 @@ from src.implementation.v00.configuration_base import PostgresConfigurationSetOp
 from src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueEventID as PgCfg_SetOptionEventID
 
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
+
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
-import re
 import logging
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -34,8 +36,10 @@ class TestSet001__Common:
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
 
-        with pytest.raises(Exception, match=re.escape("None value is not supported.")):
+        with pytest.raises(PostgresConfigException) as x:
             file.SetOptionValueItem(C_OPT_NAME, None)
+
+        assert str(x.value) == ErrorMessageBuilder.NoneValueIsNotSupported()
         return
 
     # --------------------------------------------------------------------
@@ -52,13 +56,14 @@ class TestSet001__Common:
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
 
-        errMsg = (
-            "Bad option [{0}] value item type [{1}]. Expected type is [{2}].".format(
-                C_OPT_NAME, "int", "str"
-            )
-        )
-        with pytest.raises(Exception, match=re.escape(errMsg)):
+        with pytest.raises(PostgresConfigException) as x:
             file.SetOptionValueItem(C_OPT_NAME, 123)
+
+        assert str(x.value) == ErrorMessageBuilder.BadOptionValueItemType(
+            C_OPT_NAME,
+            int,
+            str,
+        )
         return
 
     # --------------------------------------------------------------------
@@ -145,12 +150,16 @@ class TestSet001__Common:
         )
         assert r1.Option.get_Value() == ["biha"]
 
-        errMsg = "Definition of option [{1}] value item [{2}] is found in another file [{0}].".format(
-            file1.get_Path(), C_OPT_NAME, "biha"
-        )
-
-        with pytest.raises(Exception, match=re.escape(errMsg)):
+        with pytest.raises(PostgresConfigException) as x:
             file2.SetOptionValueItem(C_OPT_NAME, "biha")
+
+        assert str(
+            x.value,
+        ) == ErrorMessageBuilder.OptionValueItemIsAlreadyDefinedInAnotherFile(
+            file1.get_Path(),
+            C_OPT_NAME,
+            "biha",
+        )
         return
 
     # --------------------------------------------------------------------
@@ -178,12 +187,13 @@ class TestSet001__Common:
         )
         assert r1.Option.get_Value() == ["biha"]
 
-        errMsg = "Option [{0}] already exist in another file [{1}].".format(
-            C_OPT_NAME, file1.get_Path()
-        )
-
-        with pytest.raises(Exception, match=re.escape(errMsg)):
+        with pytest.raises(PostgresConfigException) as x:
             file2.SetOptionValueItem(C_OPT_NAME, "proxima")
+
+        assert str(x.value) == ErrorMessageBuilder.OptionIsAlreadyExistInAnotherFile(
+            file1.get_Path(),
+            C_OPT_NAME,
+        )
         return
 
     # --------------------------------------------------------------------

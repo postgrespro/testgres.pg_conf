@@ -7,12 +7,13 @@ from src.implementation.v00.configuration_std import PostgresConfiguration_Std a
 from src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
 
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
-import re
 import typing
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -178,15 +179,14 @@ class TestSet001__Common:
 
         optValue_set = ["a", None, "c"]
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "None value item of option [{0}] is not supported.".format(C_OPT_NAME)
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.AddOption(C_OPT_NAME, optValue_set, None)
 
+        assert str(x.value) == ErrorMessageBuilder.NoneOptionValueItemIsNotSupported(
+            "shared_preload_libraries",
+        )
         assert len(fileLine) == 0
+        return
 
     # --------------------------------------------------------------------
     def test_E01__after_option(self, request: pytest.FixtureRequest):
@@ -205,11 +205,12 @@ class TestSet001__Common:
 
         option = fileLine.AddOption("port", 123, 2)
 
-        with pytest.raises(
-            Exception, match=re.escape("File line already has the option [port].")
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.AddOption("proxima.port", 321, 432)
 
+        assert str(x.value) == ErrorMessageBuilder.FileLineAlreadyHasOption(
+            "port",
+        )
         assert len(fileLine) == 1
 
         assert option is not None
@@ -245,11 +246,10 @@ class TestSet001__Common:
 
         assert len(fileLine) == 1
 
-        with pytest.raises(
-            Exception, match=re.escape("File line already has an include directive.")
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.AddOption("proxima.port", 321, 11)
 
+        assert str(x.value) == ErrorMessageBuilder.FileLineAlreadyHasIncludeDirective()
         assert len(fileLine) == 1
 
         assert fileLine.m_FileLineData.m_Items[0].m_Element is include.m_IncludeData
@@ -271,11 +271,10 @@ class TestSet001__Common:
 
         assert len(fileLine) == 1
 
-        with pytest.raises(
-            Exception, match=re.escape("File line already has a comment.")
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.AddOption("proxima.port", 321, 11)
 
+        assert str(x.value) == ErrorMessageBuilder.FileLineAlreadyHasComment()
         assert len(fileLine) == 1
 
         assert fileLine.m_FileLineData.m_Items[0].m_Element is comment.m_CommentData
@@ -298,16 +297,13 @@ class TestSet001__Common:
         fileLine2 = file.AddEmptyLine()
         assert len(fileLine2) == 0
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "Option [port] already exist in this file [{0}].".format(
-                    file.get_Path()
-                )
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             fileLine2.AddOption("port", 321, 2)
 
+        assert str(x.value) == ErrorMessageBuilder.OptionIsAlreadyExistInThisFile(
+            file.get_Path(),
+            "port",
+        )
         assert len(fileLine) == 1
 
         assert option is not None
@@ -344,16 +340,13 @@ class TestSet001__Common:
         fileLine2 = file2.AddEmptyLine()
         assert len(fileLine2) == 0
 
-        with pytest.raises(
-            Exception,
-            match=re.escape(
-                "Option [port] already exist in another file [{0}].".format(
-                    file.get_Path()
-                )
-            ),
-        ):
+        with pytest.raises(PostgresConfigException) as x:
             fileLine2.AddOption("port", 321, 2)
 
+        assert str(x.value) == ErrorMessageBuilder.OptionIsAlreadyExistInAnotherFile(
+            file.get_Path(),
+            "port",
+        )
         assert len(fileLine) == 1
 
         assert option is not None

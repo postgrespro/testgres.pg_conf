@@ -7,9 +7,11 @@ from src.implementation.v00.configuration_std import PostgresConfiguration_Std a
 from src.implementation.v00.configuration_base import PostgresConfigurationComment_Base as PgCfg_Comment_Base
 
 from src.implementation.v00.configuration_base import PgCfgModel__CommentData
+from src.exceptions import PostgresConfigException
 # fmt: on
 
 from .......TestServices import TestServices
+from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import typing
@@ -88,8 +90,10 @@ class TestSet001__Common:
 
         assert len(fileLine) == 1
 
-        with pytest.raises(Exception, match="File line already has a comment."):
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.AddComment("comment2", 4)
+
+        assert str(x.value) == ErrorMessageBuilder.FileLineAlreadyHasComment()
 
         assert comment is not None
         assert type(comment) is PgCfg_Comment_Base
@@ -121,8 +125,10 @@ class TestSet001__Common:
 
         assert len(fileLine) == 0
 
-        with pytest.raises(Exception, match="Comment text contains invalid symbols."):
+        with pytest.raises(PostgresConfigException) as x:
             fileLine.AddComment("\0", 4)
+
+        assert str(x.value) == ErrorMessageBuilder.CommentTextContainsInvalidSymbols()
         return
 
 
