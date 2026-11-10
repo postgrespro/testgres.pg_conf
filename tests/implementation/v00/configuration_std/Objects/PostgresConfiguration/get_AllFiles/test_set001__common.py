@@ -62,7 +62,7 @@ class TestSet001__Common:
         assert isinstance(allFiles1, PgCfg_Files)
         assert len(allFiles1) == 1
 
-        allFiles1_list: list[PgCfg_TopLevelFile_Base] = []
+        allFiles1_list: typing.List[PgCfg_TopLevelFile_Base] = []
         for file in allFiles1:
             assert file is not None
             assert type(file) is PgCfg_TopLevelFile_Base

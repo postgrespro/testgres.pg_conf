@@ -303,7 +303,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     # fmt: on
 
     # --------------------------------------------------------------------
-    sm_OptionHandlers: dict[str, tagOptionHandlers] = {
+    sm_OptionHandlers: typing.Dict[str, tagOptionHandlers] = {
         # fmt: off
         # STANDARD -------------------------------------------------------
         "port": sm_OptionHandlers__Std__Int,
