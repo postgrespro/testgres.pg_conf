@@ -114,17 +114,17 @@ class TestSet001__Common:
         assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
         assert cfg.m_Data.m_Files[0] is fileData
         assert type(cfg.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
-        assert cfg.m_Data.m_AllFilesByName.get_values_count() == 1
+        assert cfg.m_Data.m_AllFilesByName.get_elements_count() == 1
         assert len(list(cfg.m_Data.m_AllFilesByName.keys())) == 1
         assert cfg.C_POSTGRESQL_AUTO_CONF in cfg.m_Data.m_AllFilesByName.keys()
-        assert len(list(cfg.m_Data.m_AllFilesByName.values())) == 1
-        assert fileData in cfg.m_Data.m_AllFilesByName.values()
+        assert len(list(cfg.m_Data.m_AllFilesByName.elements())) == 1
+        assert fileData in cfg.m_Data.m_AllFilesByName.elements()
 
         assert type(cfg.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
-        assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 1
+        assert cfg.m_Data.m_AllOptionsByName.get_elements_count() == 1
         assert optName in cfg.m_Data.m_AllOptionsByName.keys()
-        assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 1
-        assert opt.m_OptionData in cfg.m_Data.m_AllOptionsByName.values()
+        assert cfg.m_Data.m_AllOptionsByName.get_elements_count() == 1
+        assert opt.m_OptionData in cfg.m_Data.m_AllOptionsByName.elements()
         return
 
     # --------------------------------------------------------------------

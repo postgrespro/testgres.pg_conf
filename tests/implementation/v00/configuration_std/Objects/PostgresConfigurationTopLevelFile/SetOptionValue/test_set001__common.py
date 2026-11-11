@@ -248,8 +248,8 @@ class TestSet001__Common:
                 int,
             )
 
-            assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 0
-            assert file1.m_FileData.m_OptionsByName.get_values_count() == 0
+            assert cfg.m_Data.m_AllOptionsByName.get_elements_count() == 0
+            assert file1.m_FileData.m_OptionsByName.get_elements_count() == 0
             continue
         return
 
@@ -282,8 +282,8 @@ class TestSet001__Common:
                 int,
             )
 
-            assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 0
-            assert file1.m_FileData.m_OptionsByName.get_values_count() == 0
+            assert cfg.m_Data.m_AllOptionsByName.get_elements_count() == 0
+            assert file1.m_FileData.m_OptionsByName.get_elements_count() == 0
             continue
         return
 

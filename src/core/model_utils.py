@@ -471,7 +471,7 @@ class ModelUtils:
         assert newFilePath != ""
 
         # TODO: use index
-        for fileData in cfgData.m_AllFilesByName.values():
+        for fileData in cfgData.m_AllFilesByName.elements():
             assert fileData is not None
             assert type(fileData) is PgCfgModel__FileData
             assert fileData.IsAlive()
@@ -511,7 +511,7 @@ class ModelUtils:
         assert newFilePath != ""
 
         # TODO: use index
-        for fileData in cfgData.m_AllFilesByName.values():
+        for fileData in cfgData.m_AllFilesByName.elements():
             assert fileData is not None
             assert type(fileData) is PgCfgModel__FileData
             assert fileData.IsAlive()

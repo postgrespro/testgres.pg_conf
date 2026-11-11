@@ -202,7 +202,11 @@ class TestSet001__Common:
         # ---------------
         logging.info("File {0} is loading...".format(C_FILE_NAME1))
 
-        PgCfg_Reader_Base.LoadConfigurationFile(cfg, cfg.C_POSTGRESQL_CONF)
+        load_r1 = PgCfg_Reader_Base.LoadConfigurationFile(cfg, C_FILE_NAME1)
+        assert isinstance(load_r1, PgCfg_File)
+
+        load_r2 = PgCfg_Reader_Base.LoadConfigurationFile(cfg, C_FILE_NAME2)
+        assert isinstance(load_r2, PgCfg_File)
 
         assert len(cfg.get_AllFiles()) == 2
 
@@ -210,6 +214,9 @@ class TestSet001__Common:
 
         file1 = cfg.get_AllFiles().GetFileByName(C_FILE_NAME1)
         file2 = cfg.get_AllFiles().GetFileByName(C_FILE_NAME2)
+
+        assert file1.m_FileData is load_r1.m_FileData
+        assert file2.m_FileData is load_r2.m_FileData
 
         assert file1.GetOptionValue("port") is None
         assert file2.GetOptionValue("port") == 123

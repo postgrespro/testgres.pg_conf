@@ -159,7 +159,7 @@ class PostgresConfigurationWriter_Base:
         assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
         assert type(ctx.Cfg.m_Data) is PgCfgModel__ConfigurationData
 
-        for fileData in ctx.Cfg.m_Data.m_AllFilesByName.values():
+        for fileData in ctx.Cfg.m_Data.m_AllFilesByName.elements():
             assert fileData is not None
             assert type(fileData) is PgCfgModel__FileData
 

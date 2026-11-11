@@ -1415,7 +1415,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) is PgCfgModel__ConfigurationData
         assert type(self.m_Cfg.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
-        return self.m_Cfg.m_Data.m_AllFilesByName.get_values_count()
+        return self.m_Cfg.m_Data.m_AllFilesByName.get_elements_count()
 
     # --------------------------------------------------------------------
     def __iter__(self) -> PostgresConfiguration_Base__AllFilesIterator:
@@ -1424,7 +1424,7 @@ class PostgresConfiguration_Base__AllFiles(PostgresConfigurationFiles):
         assert type(self.m_Cfg.m_Data) is PgCfgModel__ConfigurationData
         assert type(self.m_Cfg.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
 
-        fileDataIterator = self.m_Cfg.m_Data.m_AllFilesByName.values().__iter__()
+        fileDataIterator = self.m_Cfg.m_Data.m_AllFilesByName.elements().__iter__()
         assert fileDataIterator is not None
         assert isinstance(fileDataIterator, typing.Iterator)
 
@@ -1562,7 +1562,7 @@ class PostgresConfiguration_Base__AllOptions(PostgresConfigurationOptions):
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert type(self.m_Cfg.m_Data) is PgCfgModel__ConfigurationData
         assert type(self.m_Cfg.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
-        return self.m_Cfg.m_Data.m_AllOptionsByName.get_values_count()
+        return self.m_Cfg.m_Data.m_AllOptionsByName.get_elements_count()
 
     # --------------------------------------------------------------------
     def __iter__(self) -> PostgresConfiguration_Base__AllOptionsIterator:
@@ -1571,7 +1571,7 @@ class PostgresConfiguration_Base__AllOptions(PostgresConfigurationOptions):
         assert type(self.m_Cfg.m_Data) is PgCfgModel__ConfigurationData
         assert type(self.m_Cfg.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
-        optionDataIterator = self.m_Cfg.m_Data.m_AllOptionsByName.values().__iter__()
+        optionDataIterator = self.m_Cfg.m_Data.m_AllOptionsByName.elements().__iter__()
         assert optionDataIterator is not None
         assert isinstance(optionDataIterator, typing.Iterator)
 

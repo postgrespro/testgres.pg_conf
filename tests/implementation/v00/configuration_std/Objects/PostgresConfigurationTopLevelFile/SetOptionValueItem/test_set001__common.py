@@ -117,8 +117,8 @@ class TestSet001__Common:
             )
             assert r1.Option.get_Configuration() is cfg
 
-            assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 1
-            assert file.m_FileData.m_OptionsByName.get_values_count() == 1
+            assert cfg.m_Data.m_AllOptionsByName.get_elements_count() == 1
+            assert file.m_FileData.m_OptionsByName.get_elements_count() == 1
 
             assert C_OPT_NAME in cfg.m_Data.m_AllOptionsByName.keys()
             assert C_OPT_NAME in file.m_FileData.m_OptionsByName.keys()
