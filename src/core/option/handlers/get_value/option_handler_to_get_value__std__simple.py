@@ -21,7 +21,10 @@ class OptionHandlerToGetValue__Std__Simple(OptionHandlerToGetValue):
         return
 
     # interface ----------------------------------------------------------
-    def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> typing.Any:
+    def GetOptionValue(
+        self,
+        ctx: OptionHandlerCtxToGetValue,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToGetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (

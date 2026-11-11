@@ -22,9 +22,13 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
 ):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
-    def PrepareSetValue(self, ctx: OptionHandlerCtxToPrepareSetValue) -> typing.Any:
+    def PrepareSetValue(
+        self,
+        ctx: OptionHandlerCtxToPrepareSetValue,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToPrepareSetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert type(ctx.OptionName) is str
@@ -43,7 +47,9 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
 
             for x in ctx.OptionValue:
                 if x is None:
-                    RaiseError.NoneOptionValueItemIsNotSupported(ctx.OptionName)
+                    RaiseError.NoneOptionValueItemIsNotSupported(
+                        ctx.OptionName,
+                    )
 
                 v = str(x)
 
@@ -58,7 +64,11 @@ class OptionHandlerToPrepareSetValue__Std__UniqueStrList(
 
         optionName = ctx.OptionName
         assert type(optionName) is str
-        RaiseError.BadOptionValueType(optionName, typeOfOptionValue, list)
+        RaiseError.BadOptionValueType(
+            optionName,
+            typeOfOptionValue,
+            list,
+        )
 
 
 # //////////////////////////////////////////////////////////////////////////////

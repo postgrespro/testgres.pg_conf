@@ -37,21 +37,24 @@ class OptionHandlerToPrepareSetValue__Std__Bool(OptionHandlerToPrepareSetValue):
                 if any([x2 for x2 in __class__.sm_Str_True if x2.startswith(x1)])
             ]
         )
+        return
 
     # interface ----------------------------------------------------------
-    def PrepareSetValue(self, ctx: OptionHandlerCtxToPrepareSetValue) -> typing.Any:
+    def PrepareSetValue(
+        self,
+        ctx: OptionHandlerCtxToPrepareSetValue,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToPrepareSetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert type(ctx.OptionName) is str
         assert ctx.OptionValue is not None
 
         optionValue = ctx.OptionValue
-        optionValueType = type(optionValue)
 
-        if optionValueType is bool:
+        if type(optionValue) is bool:
             return optionValue
 
-        if optionValueType is int:
+        if type(optionValue) is int:
             assert type(optionValue) is int
 
             if optionValue == 0:
@@ -60,9 +63,13 @@ class OptionHandlerToPrepareSetValue__Std__Bool(OptionHandlerToPrepareSetValue):
             if optionValue == 1:
                 return True
 
-            RaiseError.CantConvertOptionValue(ctx.OptionName, optionValueType, bool)
+            RaiseError.CantConvertOptionValue(
+                ctx.OptionName,
+                type(optionValue),
+                bool,
+            )
 
-        if optionValueType is str:
+        if type(optionValue) is str:
             assert type(optionValue) is str
 
             if len(optionValue) < __class__.C_MIN_STR_VALUE_LENGTH:
@@ -78,9 +85,17 @@ class OptionHandlerToPrepareSetValue__Std__Bool(OptionHandlerToPrepareSetValue):
                 if optionValue_lower in __class__.sm_Str_True:
                     return True
 
-            RaiseError.CantConvertOptionValue(ctx.OptionName, optionValueType, bool)
+            RaiseError.CantConvertOptionValue(
+                ctx.OptionName,
+                type(optionValue),
+                bool,
+            )
 
-        RaiseError.BadOptionValueType(ctx.OptionName, optionValueType, bool)
+        RaiseError.BadOptionValueType(
+            ctx.OptionName,
+            type(optionValue),
+            bool,
+        )
 
     # Private data -------------------------------------------------------
     C_MIN_STR_VALUE_LENGTH = 1

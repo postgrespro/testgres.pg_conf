@@ -18,10 +18,12 @@ import typing
 class OptionHandlerToPrepareSetValueItem__Std__Str(OptionHandlerToPrepareSetValueItem):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
     def PrepareSetValueItem(
-        self, ctx: OptionHandlerCtxToPrepareSetValueItem
+        self,
+        ctx: OptionHandlerCtxToPrepareSetValueItem,
     ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToPrepareSetValueItem
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
@@ -33,7 +35,11 @@ class OptionHandlerToPrepareSetValueItem__Std__Str(OptionHandlerToPrepareSetValu
         if typeOfOptionValue is not str:
             optionName = ctx.OptionName
             assert type(optionName) is str
-            RaiseError.BadOptionValueItemType(optionName, typeOfOptionValue, str)
+            RaiseError.BadOptionValueItemType(
+                optionName,
+                typeOfOptionValue,
+                str,
+            )
 
         return ctx.OptionValueItem
 

@@ -22,7 +22,10 @@ class OptionHandlerToSetValue__Std__Simple(OptionHandlerToSetValue):
         return
 
     # interface ----------------------------------------------------------
-    def SetOptionValue(self, ctx: OptionHandlerCtxToSetValue) -> typing.Any:
+    def SetOptionValue(
+        self,
+        ctx: OptionHandlerCtxToSetValue,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToSetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (
