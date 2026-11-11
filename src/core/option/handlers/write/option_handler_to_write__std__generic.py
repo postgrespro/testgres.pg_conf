@@ -28,24 +28,26 @@ class OptionHandlerToWrite__Std__Generic(OptionHandlerToWrite):
     # --------------------------------------------------------------------
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
     def OptionValueToString(self, ctx: OptionHandlerCtxToWrite) -> str:
         assert type(ctx) is OptionHandlerCtxToWrite
         assert ctx.OptionValue is not None
 
-        typeOfOptionValue = type(ctx.OptionValue)
-
-        if typeOfOptionValue is int:
+        if type(ctx.OptionValue) is int:
             return __class__.sm_Handler_For_Int.OptionValueToString(ctx)
 
-        if typeOfOptionValue is str:
+        if type(ctx.OptionValue) is str:
             return __class__.sm_Handler_For_Str.OptionValueToString(ctx)
 
-        if typeOfOptionValue is bool:
+        if type(ctx.OptionValue) is bool:
             return __class__.sm_Handler_For_Bool.OptionValueToString(ctx)
 
-        BugCheckError.UnknownOptionValueType(ctx.OptionName, typeOfOptionValue)
+        BugCheckError.UnknownOptionValueType(
+            ctx.OptionName,
+            type(ctx.OptionValue),
+        )
 
 
 # //////////////////////////////////////////////////////////////////////////////

@@ -102,12 +102,16 @@ class PostgresConfigurationOption(PostgresConfigurationElement):
         RaiseError.MethodIsNotImplemented(__class__, "get_Value")
 
     # --------------------------------------------------------------------
-    def set_Value(self, value: typing.Any) -> PostgresConfigurationSetOptionValueResult:
+    def set_Value(
+        self,
+        value: typing.Any,
+    ) -> PostgresConfigurationSetOptionValueResult:
         RaiseError.MethodIsNotImplemented(__class__, "set_Value")
 
     # --------------------------------------------------------------------
     def set_ValueItem(
-        self, value_item: typing.Any
+        self,
+        value_item: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult:
         assert value_item is not None
         RaiseError.MethodIsNotImplemented(__class__, "set_ValueItem")
@@ -162,7 +166,10 @@ class PostgresConfigurationInclude(PostgresConfigurationElement):
         RaiseError.MethodIsNotImplemented(__class__, "get_File")
 
     # --------------------------------------------------------------------
-    def Delete(self, withLine: bool) -> None:
+    def Delete(
+        self,
+        withLine: bool,
+    ) -> None:
         assert type(withLine) is bool
         RaiseError.MethodIsNotImplemented(__class__, "Delete")
 
@@ -181,7 +188,9 @@ class PostgresConfigurationFileLine(PostgresConfigurationObject):
 
     # --------------------------------------------------------------------
     def AddComment(
-        self, text: str, offset: typing.Optional[int]
+        self,
+        text: str,
+        offset: typing.Optional[int],
     ) -> PostgresConfigurationComment:
         assert type(text) is str
         assert (offset is None) or (type(offset) is int)
@@ -189,7 +198,10 @@ class PostgresConfigurationFileLine(PostgresConfigurationObject):
 
     # --------------------------------------------------------------------
     def AddOption(
-        self, name: str, value: typing.Any, offset: typing.Optional[int]
+        self,
+        name: str,
+        value: typing.Any,
+        offset: typing.Optional[int],
     ) -> PostgresConfigurationOption:
         assert type(name) is str
         assert name != ""
@@ -199,7 +211,9 @@ class PostgresConfigurationFileLine(PostgresConfigurationObject):
 
     # --------------------------------------------------------------------
     def AddInclude(
-        self, path: str, offset: typing.Optional[int]
+        self,
+        path: str,
+        offset: typing.Optional[int],
     ) -> PostgresConfigurationInclude:
         assert type(path) is str
         assert path != ""
@@ -272,19 +286,29 @@ class PostgresConfigurationFile(PostgresConfigurationObject):
         RaiseError.MethodIsNotImplemented(__class__, "AddEmptyLine")
 
     # --------------------------------------------------------------------
-    def AddComment(self, text: str) -> PostgresConfigurationComment:
+    def AddComment(
+        self,
+        text: str,
+    ) -> PostgresConfigurationComment:
         assert type(text) is str
         RaiseError.MethodIsNotImplemented(__class__, "AddComment")
 
     # --------------------------------------------------------------------
-    def AddOption(self, name: str, value: typing.Any) -> PostgresConfigurationOption:
+    def AddOption(
+        self,
+        name: str,
+        value: typing.Any,
+    ) -> PostgresConfigurationOption:
         assert type(name) is str
         assert name != ""
         assert value is not None
         RaiseError.MethodIsNotImplemented(__class__, "AddOption")
 
     # --------------------------------------------------------------------
-    def AddInclude(self, path: str) -> PostgresConfigurationInclude:
+    def AddInclude(
+        self,
+        path: str,
+    ) -> PostgresConfigurationInclude:
         assert type(path) is str
         assert path != ""
         RaiseError.MethodIsNotImplemented(__class__, "AddInclude")
@@ -301,7 +325,9 @@ class PostgresConfigurationFile(PostgresConfigurationObject):
     #  PostgresConfigurationSetOptionValueResult object.
     #
     def SetOptionValue(
-        self, name: str, value: typing.Any
+        self,
+        name: str,
+        value: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult:
         assert type(name) is str
         assert name != ""
@@ -315,13 +341,18 @@ class PostgresConfigurationFile(PostgresConfigurationObject):
     #  - Value of option.
     #  - None if option is not found in this file.
     #
-    def GetOptionValue(self, name: str) -> typing.Any:
+    def GetOptionValue(
+        self,
+        name: str,
+    ) -> typing.Any:
         assert type(name) is str
         RaiseError.MethodIsNotImplemented(__class__, "GetOptionValue")
 
     # --------------------------------------------------------------------
     def SetOptionValueItem(
-        self, name: str, value_item: typing.Any
+        self,
+        name: str,
+        value_item: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult:
         assert type(name) is str
         assert name != ""
@@ -363,7 +394,10 @@ class PostgresConfigurationFiles(typing.Iterable[PostgresConfigurationFile]):
         RaiseError.MethodIsNotImplemented(__class__, "__iter__")
 
     # --------------------------------------------------------------------
-    def GetFileByName(self, file_name: str) -> PostgresConfigurationFile:
+    def GetFileByName(
+        self,
+        file_name: str,
+    ) -> PostgresConfigurationFile:
         assert file_name is not None
         RaiseError.MethodIsNotImplemented(__class__, "GetFileByName")
 
@@ -377,13 +411,20 @@ class PostgresConfiguration(PostgresConfigurationObject):
         pass
 
     # interface ----------------------------------------------------------
-    def AddTopLevelFile(self, path: str) -> PostgresConfigurationFile:
+    def AddTopLevelFile(
+        self,
+        path: str,
+    ) -> PostgresConfigurationFile:
         assert type(path) is str
         assert path != ""
         RaiseError.MethodIsNotImplemented(__class__, "AddTopLevelFile")
 
     # --------------------------------------------------------------------
-    def AddOption(self, name: str, value: typing.Any) -> PostgresConfigurationOption:
+    def AddOption(
+        self,
+        name: str,
+        value: typing.Any,
+    ) -> PostgresConfigurationOption:
         assert type(name) is str
         assert name != ""
         assert value is not None
@@ -401,7 +442,9 @@ class PostgresConfiguration(PostgresConfigurationObject):
     #  PostgresConfigurationSetOptionValueResult object.
     #
     def SetOptionValue(
-        self, name: str, value: typing.Any
+        self,
+        name: str,
+        value: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult:
         assert type(name) is str
         RaiseError.MethodIsNotImplemented(__class__, "SetOptionValue")
@@ -414,13 +457,18 @@ class PostgresConfiguration(PostgresConfigurationObject):
     #  - Value of option.
     #  - None if option is not found.
     #
-    def GetOptionValue(self, name: str) -> typing.Any:
+    def GetOptionValue(
+        self,
+        name: str,
+    ) -> typing.Any:
         assert type(name) is str
         RaiseError.MethodIsNotImplemented(__class__, "GetOptionValue")
 
     # --------------------------------------------------------------------
     def SetOptionValueItem(
-        self, name: str, value_item: typing.Any
+        self,
+        name: str,
+        value_item: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult:
         assert type(name) is str
         assert value_item is not None

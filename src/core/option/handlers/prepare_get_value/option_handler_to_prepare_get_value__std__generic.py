@@ -20,22 +20,26 @@ class OptionHandlerToPrepareGetValue__Std__Generic(OptionHandlerToPrepareGetValu
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> typing.Any:
+    def PrepareGetValue(
+        self,
+        ctx: OptionHandlerCtxToPrepareGetValue,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToPrepareGetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert type(ctx.OptionName) is str
         assert ctx.OptionValue is not None
 
-        typeOfOptionValue = type(ctx.OptionValue)
-
-        if typeOfOptionValue is int:
+        if type(ctx.OptionValue) is int:
             pass  # OK
-        elif typeOfOptionValue is str:
+        elif type(ctx.OptionValue) is str:
             pass  # OK
-        elif typeOfOptionValue is bool:
+        elif type(ctx.OptionValue) is bool:
             pass  # OK
         else:
-            BugCheckError.UnknownOptionValueType(ctx.OptionName, typeOfOptionValue)
+            BugCheckError.UnknownOptionValueType(
+                ctx.OptionName,
+                type(ctx.OptionValue),
+            )
 
         return ctx.OptionValue
 

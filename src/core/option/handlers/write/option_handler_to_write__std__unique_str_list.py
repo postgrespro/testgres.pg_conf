@@ -15,9 +15,13 @@ from ....write_utils import WriteUtils
 class OptionHandlerToWrite__Std__UniqueStrList(OptionHandlerToWrite):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
-    def OptionValueToString(self, ctx: OptionHandlerCtxToWrite) -> str:
+    def OptionValueToString(
+        self,
+        ctx: OptionHandlerCtxToWrite,
+    ) -> str:
         assert type(ctx) is OptionHandlerCtxToWrite
         assert ctx.OptionValue is not None
         assert type(ctx.OptionValue) is list

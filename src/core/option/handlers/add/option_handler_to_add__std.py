@@ -21,7 +21,10 @@ class OptionHandlerToAddOption__Std(OptionHandlerToAddOption):
         return
 
     # interface ----------------------------------------------------------
-    def AddOption(self, ctx: OptionHandlerCtxToAddOption) -> typing.Any:
+    def AddOption(
+        self,
+        ctx: OptionHandlerCtxToAddOption,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToAddOption
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (

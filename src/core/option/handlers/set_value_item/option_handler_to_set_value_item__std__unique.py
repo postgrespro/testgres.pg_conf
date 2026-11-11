@@ -22,7 +22,10 @@ class OptionHandlerToSetValueItem__Std__Unique(OptionHandlerToSetValueItem):
         return
 
     # interface ----------------------------------------------------------
-    def SetOptionValueItem(self, ctx: OptionHandlerCtxToSetValueItem) -> typing.Any:
+    def SetOptionValueItem(
+        self,
+        ctx: OptionHandlerCtxToSetValueItem,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToSetValueItem
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert (

@@ -16,9 +16,13 @@ import typing
 class OptionHandlerToPrepareGetValue__Std__Int(OptionHandlerToPrepareGetValue):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
-    def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> typing.Any:
+    def PrepareGetValue(
+        self,
+        ctx: OptionHandlerCtxToPrepareGetValue,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToPrepareGetValue
         assert isinstance(ctx.DataHandler, ConfigurationDataHandler)
         assert type(ctx.OptionName) is str
