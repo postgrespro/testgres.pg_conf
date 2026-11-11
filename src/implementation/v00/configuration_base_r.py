@@ -270,16 +270,17 @@ class PostgresConfigurationReader_Base:
                         lineReader,
                         sequenceOffset,
                     )
-                else:
-                    if ch is not None:
-                        lineReader.StepBack()
+                    continue
 
-                    __class__.Helper__ProcessLineData__Option(
-                        fileLine,
-                        lineReader,
-                        sequenceOffset,
-                        sequence,
-                    )
+                if ch is not None:
+                    lineReader.StepBack()
+
+                __class__.Helper__ProcessLineData__Option(
+                    fileLine,
+                    lineReader,
+                    sequenceOffset,
+                    sequence,
+                )
                 continue
 
             RaiseError.CfgReader__UnexpectedSymbol(
