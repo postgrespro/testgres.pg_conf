@@ -99,6 +99,7 @@ from ...core.option.handlers.write.option_handler_to_write__std__unique_str_list
 from ...core.bugcheck_error import BugCheckError
 
 import typing
+import dataclasses
 
 # //////////////////////////////////////////////////////////////////////////////
 # class PostgresConfiguration_Std
@@ -182,6 +183,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     # fmt: on
 
     # --------------------------------------------------------------------
+    @dataclasses.dataclass
     class tagOptionHandlers:
         PrepareSetValue: PgCfgModel__OptionHandlerToPrepareSetValue
         PrepareGetValue: PgCfgModel__OptionHandlerToPrepareGetValue
@@ -193,53 +195,6 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         AddOption: PgCfgModel__OptionHandlerToAddOption
         SetValueItem: typing.Optional[PgCfgModel__OptionHandlerToSetValueItem]
         Write: PgCfgModel__OptionHandlerToWrite
-
-        # ----------------------------------------------------------------
-        def __init__(
-            self,
-            prepareSetValue: PgCfgModel__OptionHandlerToPrepareSetValue,
-            prepareGetValue: PgCfgModel__OptionHandlerToPrepareGetValue,
-            prepareSetValueItem: typing.Optional[
-                PgCfgModel__OptionHandlerToPrepareSetValueItem
-            ],
-            setValue: typing.Optional[PgCfgModel__OptionHandlerToSetValue],
-            getValue: PgCfgModel__OptionHandlerToGetValue,
-            addIntoFile: PgCfgModel__OptionHandlerToAddOption,
-            setValueItem: typing.Optional[PgCfgModel__OptionHandlerToSetValueItem],
-            write: PgCfgModel__OptionHandlerToWrite,
-        ):
-            assert prepareSetValue is None or isinstance(
-                prepareSetValue, PgCfgModel__OptionHandlerToPrepareSetValue
-            )
-            assert prepareGetValue is None or isinstance(
-                prepareGetValue, PgCfgModel__OptionHandlerToPrepareGetValue
-            )
-            assert prepareSetValueItem is None or isinstance(
-                prepareSetValueItem, PgCfgModel__OptionHandlerToPrepareSetValueItem
-            )
-            assert setValue is None or isinstance(
-                setValue, PgCfgModel__OptionHandlerToSetValue
-            )
-            assert getValue is None or isinstance(
-                getValue, PgCfgModel__OptionHandlerToGetValue
-            )
-            assert setValueItem is None or isinstance(
-                setValueItem, PgCfgModel__OptionHandlerToSetValueItem
-            )
-            assert addIntoFile is None or isinstance(
-                addIntoFile, PgCfgModel__OptionHandlerToAddOption
-            )
-            assert write is None or isinstance(write, PgCfgModel__OptionHandlerToWrite)
-
-            self.PrepareSetValue = prepareSetValue
-            self.PrepareGetValue = prepareGetValue
-            self.PrepareSetValueItem = prepareSetValueItem
-            self.SetValue = setValue
-            self.AddOption = addIntoFile
-            self.GetValue = getValue
-            self.SetValueItem = setValueItem
-            self.Write = write
-            return
 
     # --------------------------------------------------------------------
     # fmt: off
