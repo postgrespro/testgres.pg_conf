@@ -8,6 +8,7 @@ from .configuration_base import PostgresConfigurationSetOptionValueEventID
 from .configuration_base import PostgresConfigurationSetOptionValueResult
 from .configuration_base import PostgresConfigurationOption_Base
 from .configuration_base import PostgresConfigurationFactory_Base
+from .configuration_base import PgCfgModel__DataHandler
 
 from ...core.model import ConfigurationData as PgCfgModel__ConfigurationData
 from ...core.model import OptionData as PgCfgModel__OptionData
@@ -38,11 +39,7 @@ class PostgresConfiguration_Base__DataHandler_Strong:
     @staticmethod
     def SetOptionValue__Simple(
         cfg: PostgresConfiguration_Base,
-        targetData: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__OptionData,
-        ],
+        targetData: PgCfgModel__DataHandler.T_TARGET_OF_SET_OPTION_VALUE,
         optionName: str,
         optionValue: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult_Base:
@@ -88,11 +85,7 @@ class PostgresConfiguration_Base__DataHandler_Strong:
     @staticmethod
     def GetOptionValue__Simple(
         cfg: PostgresConfiguration_Base,
-        sourceData: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__OptionData,
-        ],
+        sourceData: PgCfgModel__DataHandler.T_TARGET_OF_GET_OPTION_VALUE,
         optionName: str,
     ) -> typing.Any:
         assert isinstance(cfg, PostgresConfiguration_Base)
@@ -168,11 +161,7 @@ class PostgresConfiguration_Base__DataHandler_Strong:
     @staticmethod
     def GetOptionValue__UnionList(
         cfg: PostgresConfiguration_Base,
-        sourceData: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__OptionData,
-        ],
+        sourceData: PgCfgModel__DataHandler.T_TARGET_OF_GET_OPTION_VALUE,
         optionName: str,
     ) -> typing.Any:
         assert isinstance(cfg, PostgresConfiguration_Base)
@@ -251,11 +240,7 @@ class PostgresConfiguration_Base__DataHandler_Strong:
     @staticmethod
     def ResetOption(
         cfg: PostgresConfiguration_Base,
-        targetData: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__OptionData,
-        ],
+        targetData: PgCfgModel__DataHandler.T_TARGET_OF_RESET_OPTION,
         optionName: str,
     ) -> PostgresConfigurationSetOptionValueResult_Base:
         assert isinstance(cfg, PostgresConfiguration_Base)
@@ -327,20 +312,16 @@ class PostgresConfiguration_Base__DataHandler_Strong:
     @staticmethod
     def AddSimpleOption(
         cfg: PostgresConfiguration_Base,
-        target: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__FileLineData,
-        ],
+        targetData: PgCfgModel__DataHandler.T_TARGET_OF_ADD_OPTION,
         optionOffset: typing.Optional[int],
         optionName: str,
         optionValue: typing.Any,
     ) -> PostgresConfigurationOption_Base:
         assert isinstance(cfg, PostgresConfiguration_Base)
         assert (
-            target is None
-            or type(target) is PgCfgModel__FileData
-            or type(target) is PgCfgModel__FileLineData
+            targetData is None
+            or type(targetData) is PgCfgModel__FileData
+            or type(targetData) is PgCfgModel__FileLineData
         )
         assert optionOffset is None or type(optionOffset) is int
         assert type(optionName) is str
@@ -351,10 +332,10 @@ class PostgresConfiguration_Base__DataHandler_Strong:
         assert cfg.m_Data.m_AllOptionsByName is not None
         assert type(cfg.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
-        if type(target) is PgCfgModel__FileLineData:
+        if type(targetData) is PgCfgModel__FileLineData:
             return __class__.Helper__AddSimpleOption__FileLine(
                 cfg,
-                target,
+                targetData,
                 optionOffset,
                 optionName,
                 optionValue,
@@ -362,32 +343,28 @@ class PostgresConfiguration_Base__DataHandler_Strong:
 
         assert optionOffset is None
 
-        if type(target) is PgCfgModel__FileData:
+        if type(targetData) is PgCfgModel__FileData:
             return __class__.Helper__AddSimpleOption__File(
                 cfg,
-                target,
+                targetData,
                 optionName,
                 optionValue,
             )
 
-        if target is None:
+        if targetData is None:
             return __class__.Helper__AddSimpleOption__Common(
                 cfg,
                 optionName,
                 optionValue,
             )
 
-        BugCheckError.UnkObjectDataType(type(target))
+        BugCheckError.UnkObjectDataType(type(targetData))
 
     # --------------------------------------------------------------------
     @staticmethod
     def SetUniqueOptionValueItem(
         cfg: PostgresConfiguration_Base,
-        targetData: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__OptionData,
-        ],
+        targetData: PgCfgModel__DataHandler.T_TARGET_OF_SET_OPTION_VALUE,
         optionName: str,
         optionValueItem: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult_Base:

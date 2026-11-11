@@ -1589,7 +1589,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         SetOptionValue__Simple: typing.Callable[
             [
                 PostgresConfiguration_Base,
-                typing.Union[None, PgCfgModel__FileData, PgCfgModel__OptionData],
+                PgCfgModel__DataHandler.T_TARGET_OF_SET_OPTION_VALUE,
                 str,
                 typing.Any,
             ],
@@ -1598,7 +1598,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         GetOptionValue__Simple: typing.Callable[
             [
                 PostgresConfiguration_Base,
-                typing.Union[None, PgCfgModel__FileData, PgCfgModel__OptionData],
+                PgCfgModel__DataHandler.T_TARGET_OF_GET_OPTION_VALUE,
                 str,
             ],
             typing.Any,
@@ -1606,7 +1606,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         GetOptionValue__UnionList: typing.Callable[
             [
                 PostgresConfiguration_Base,
-                typing.Union[None, PgCfgModel__FileData, PgCfgModel__OptionData],
+                PgCfgModel__DataHandler.T_TARGET_OF_GET_OPTION_VALUE,
                 str,
             ],
             typing.Any,
@@ -1614,7 +1614,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         ResetOption: typing.Callable[
             [
                 PostgresConfiguration_Base,
-                typing.Union[None, PgCfgModel__FileData, PgCfgModel__OptionData],
+                PgCfgModel__DataHandler.T_TARGET_OF_RESET_OPTION,
                 str,
             ],
             typing.Any,
@@ -1622,7 +1622,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         AddSimpleOption: typing.Callable[
             [
                 PostgresConfiguration_Base,
-                typing.Union[None, PgCfgModel__FileData, PgCfgModel__FileLineData],
+                PgCfgModel__DataHandler.T_TARGET_OF_ADD_OPTION,
                 typing.Optional[int],
                 str,
                 typing.Any,
@@ -1632,7 +1632,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         SetUniqueOptionValueItem: typing.Callable[
             [
                 PostgresConfiguration_Base,
-                typing.Union[None, PgCfgModel__FileData, PgCfgModel__OptionData],
+                PgCfgModel__DataHandler.T_TARGET_OF_SET_OPTION_VALUE,
                 str,
                 typing.Any,
             ],
@@ -1821,11 +1821,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     # DataHandler interface ----------------------------------------------
     def DataHandler__SetOptionValue__Simple(
         self,
-        targetData: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__OptionData,
-        ],
+        targetData: PgCfgModel__DataHandler.T_TARGET_OF_SET_OPTION_VALUE,
         optionName: str,
         optionValue: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult_Base:
@@ -1850,11 +1846,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     # --------------------------------------------------------------------
     def DataHandler__GetOptionValue__Simple(
         self,
-        sourceData: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__OptionData,
-        ],
+        sourceData: PgCfgModel__DataHandler.T_TARGET_OF_GET_OPTION_VALUE,
         optionName: str,
     ) -> typing.Any:
         assert (
@@ -1876,11 +1868,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     # --------------------------------------------------------------------
     def DataHandler__GetOptionValue__UnionList(
         self,
-        sourceData: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__OptionData,
-        ],
+        sourceData: PgCfgModel__DataHandler.T_TARGET_OF_GET_OPTION_VALUE,
         optionName: str,
     ) -> typing.Any:
         assert (
@@ -1902,11 +1890,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     # --------------------------------------------------------------------
     def DataHandler__ResetOption(
         self,
-        targetData: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__OptionData,
-        ],
+        targetData: PgCfgModel__DataHandler.T_TARGET_OF_RESET_OPTION,
         optionName: str,
     ) -> PostgresConfigurationSetOptionValueResult_Base:
         assert (
@@ -1928,19 +1912,15 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     # --------------------------------------------------------------------
     def DataHandler__AddSimpleOption(
         self,
-        target: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__FileLineData,
-        ],
+        targetData: PgCfgModel__DataHandler.T_TARGET_OF_ADD_OPTION,
         optionOffset: typing.Optional[int],
         optionName: str,
         optionValue: typing.Any,
     ) -> PostgresConfigurationOption_Base:
         assert (
-            target is None
-            or type(target) is PgCfgModel__FileData
-            or type(target) is PgCfgModel__FileLineData
+            targetData is None
+            or type(targetData) is PgCfgModel__FileData
+            or type(targetData) is PgCfgModel__FileLineData
         )
         assert optionOffset is None or type(optionOffset) is int
         assert type(optionName) is str
@@ -1956,7 +1936,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
 
         return self.m_Handlers.AddSimpleOption(
             self,
-            target,
+            targetData,
             optionOffset,
             optionName,
             optionValue,
@@ -1965,11 +1945,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     # --------------------------------------------------------------------
     def DataHandler__SetUniqueOptionValueItem(
         self,
-        targetData: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__OptionData,
-        ],
+        targetData: PgCfgModel__DataHandler.T_TARGET_OF_SET_OPTION_VALUE,
         optionName: str,
         optionValueItem: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult_Base:
