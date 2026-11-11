@@ -150,6 +150,7 @@ class PostgresConfigurationReader_Base:
 
                     BugCheckError.UnkObjectDataType(type(fileLineElementData))
                 continue
+            continue  # while queuedFileDatas
 
         assert len(queuedFileDatas) == 0
         assert isinstance(rootFile, PostgresConfigurationTopLevelFile_Base)
@@ -196,6 +197,7 @@ class PostgresConfigurationReader_Base:
                 file,
                 lineReader,
             )
+            continue
         return
 
     # --------------------------------------------------------------------
@@ -268,16 +270,17 @@ class PostgresConfigurationReader_Base:
                         lineReader,
                         sequenceOffset,
                     )
-                else:
-                    if ch is not None:
-                        lineReader.StepBack()
+                    continue
 
-                    __class__.Helper__ProcessLineData__Option(
-                        fileLine,
-                        lineReader,
-                        sequenceOffset,
-                        sequence,
-                    )
+                if ch is not None:
+                    lineReader.StepBack()
+
+                __class__.Helper__ProcessLineData__Option(
+                    fileLine,
+                    lineReader,
+                    sequenceOffset,
+                    sequence,
+                )
                 continue
 
             RaiseError.CfgReader__UnexpectedSymbol(
@@ -310,6 +313,7 @@ class PostgresConfigurationReader_Base:
             if ReadUtils.IsEOL(ch):
                 break
             commentText += ch
+            continue
 
         fileLine.AddComment(
             commentText,

@@ -230,7 +230,7 @@ class PostgresConfigurationWriter_Base:
 
             # Let's open an exist file to read and write without truncation
             fileCtx.File = ctx.Cfg.m_Data.OsOps.OpenFileToWrite(
-                fileCtx.FileData.m_Path
+                fileCtx.FileData.m_Path,
             )  # raise
 
             assert fileCtx.File is not None
@@ -491,7 +491,9 @@ class PostgresConfigurationWriter_Base:
         assert optionData.m_Name != ""
         assert optionData.m_Value is not None
 
-        writeHandler = ctx.Cfg.Internal__GetOptionHandlerToWrite(optionData.m_Name)
+        writeHandler = ctx.Cfg.Internal__GetOptionHandlerToWrite(
+            optionData.m_Name,
+        )
 
         assert writeHandler is not None
         assert isinstance(writeHandler, PgCfgModel__OptionHandlerToWrite)
@@ -502,7 +504,9 @@ class PostgresConfigurationWriter_Base:
             optionData.m_Value,
         )
 
-        optValueAsText = writeHandler.OptionValueToString(writeHandlerCtx)
+        optValueAsText = writeHandler.OptionValueToString(
+            writeHandlerCtx,
+        )
 
         assert type(optValueAsText) is str
         assert optValueAsText != ""
