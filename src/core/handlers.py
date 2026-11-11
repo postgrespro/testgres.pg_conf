@@ -15,13 +15,17 @@ import typing
 
 
 class ConfigurationDataHandler:
-    def __init__(self):
-        pass
-
     # interface ----------------------------------------------------------
+    T_TARGET_OF_SET_OPTION_VALUE = typing.Union[
+        None,
+        FileData,
+        OptionData,
+    ]
+
+    # --------------------------------------------------------------------
     def DataHandler__SetOptionValue__Simple(
         self,
-        targetData: typing.Union[None, FileData, OptionData],
+        targetData: T_TARGET_OF_SET_OPTION_VALUE,
         optionName: str,
         optionValue: typing.Any,
     ) -> typing.Any:
@@ -38,9 +42,16 @@ class ConfigurationDataHandler:
         )
 
     # --------------------------------------------------------------------
+    T_TARGET_OF_GET_OPTION_VALUE = typing.Union[
+        None,
+        FileData,
+        OptionData,
+    ]
+
+    # --------------------------------------------------------------------
     def DataHandler__GetOptionValue__Simple(
         self,
-        sourceData: typing.Union[None, FileData, OptionData],
+        sourceData: T_TARGET_OF_GET_OPTION_VALUE,
         optionName: str,
     ) -> typing.Any:
         assert (
@@ -57,7 +68,7 @@ class ConfigurationDataHandler:
     # --------------------------------------------------------------------
     def DataHandler__GetOptionValue__UnionList(
         self,
-        sourceData: typing.Union[None, FileData, OptionData],
+        sourceData: T_TARGET_OF_GET_OPTION_VALUE,
         optionName: str,
     ) -> typing.Any:
         assert (
@@ -72,9 +83,16 @@ class ConfigurationDataHandler:
         )
 
     # --------------------------------------------------------------------
+    T_TARGET_OF_RESET_OPTION = typing.Union[
+        None,
+        FileData,
+        OptionData,
+    ]
+
+    # --------------------------------------------------------------------
     def DataHandler__ResetOption(
         self,
-        targetData: typing.Union[None, FileData, OptionData],
+        targetData: T_TARGET_OF_RESET_OPTION,
         optionName: str,
     ) -> typing.Any:
         assert (
@@ -89,15 +107,24 @@ class ConfigurationDataHandler:
         )
 
     # --------------------------------------------------------------------
+    T_TARGET_OF_ADD_OPTION = typing.Union[
+        None,
+        FileData,
+        OptionData,
+    ]
+
+    # --------------------------------------------------------------------
     def DataHandler__AddSimpleOption(
         self,
-        target: typing.Union[None, FileData, FileLineData],
+        targetData: T_TARGET_OF_ADD_OPTION,
         optionOffset: typing.Optional[int],
         optionName: str,
         optionValue: typing.Any,
     ) -> typing.Any:
         assert (
-            target is None or type(target) is FileData or type(target) is FileLineData
+            targetData is None
+            or type(targetData) is FileData
+            or type(targetData) is FileLineData
         )
         assert optionOffset is None or type(optionOffset) is int
         assert type(optionName) is str
@@ -110,7 +137,7 @@ class ConfigurationDataHandler:
     # --------------------------------------------------------------------
     def DataHandler__SetUniqueOptionValueItem(
         self,
-        targetData: typing.Union[None, FileData, OptionData],
+        targetData: T_TARGET_OF_SET_OPTION_VALUE,
         optionName: str,
         optionValueItem: typing.Any,
     ) -> typing.Any:
@@ -142,7 +169,7 @@ class OptionHandler:
 
 class OptionHandlerCtxToSetValue:
     DataHandler: ConfigurationDataHandler
-    TargetData: typing.Union[None, FileData, OptionData]
+    TargetData: ConfigurationDataHandler.T_TARGET_OF_SET_OPTION_VALUE
     OptionName: str
     OptionValue: typing.Any
 
@@ -150,7 +177,7 @@ class OptionHandlerCtxToSetValue:
     def __init__(
         self,
         dataHandler: ConfigurationDataHandler,
-        targetData: typing.Union[None, FileData, OptionData],
+        targetData: ConfigurationDataHandler.T_TARGET_OF_SET_OPTION_VALUE,
         optionName: str,
         optionValue: typing.Any,
     ):
@@ -198,14 +225,14 @@ class OptionHandlerToSetValue(OptionHandler):
 
 class OptionHandlerCtxToGetValue:
     DataHandler: ConfigurationDataHandler
-    SourceData: typing.Union[None, FileData, OptionData]
+    SourceData: ConfigurationDataHandler.T_TARGET_OF_GET_OPTION_VALUE
     OptionName: str
 
     # --------------------------------------------------------------------
     def __init__(
         self,
         dataHandler: ConfigurationDataHandler,
-        sourceData: typing.Union[None, FileData, OptionData],
+        sourceData: ConfigurationDataHandler.T_TARGET_OF_GET_OPTION_VALUE,
         optionName: str,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
@@ -255,7 +282,7 @@ class OptionHandlerToGetValue(OptionHandler):
 
 class OptionHandlerCtxToAddOption:
     DataHandler: ConfigurationDataHandler
-    Target: typing.Union[None, FileData, FileLineData]
+    Target: ConfigurationDataHandler.T_TARGET_OF_ADD_OPTION
     OptionOffset: typing.Optional[int]
     OptionName: str
     OptionValue: typing.Any
@@ -264,7 +291,7 @@ class OptionHandlerCtxToAddOption:
     def __init__(
         self,
         dataHandler: ConfigurationDataHandler,
-        target: typing.Union[None, FileData, FileLineData],
+        target: ConfigurationDataHandler.T_TARGET_OF_ADD_OPTION,
         optionOffset: typing.Optional[int],
         optionName: str,
         optionValue: typing.Any,
@@ -311,7 +338,7 @@ class OptionHandlerToAddOption(OptionHandler):
 
 class OptionHandlerCtxToSetValueItem:
     DataHandler: ConfigurationDataHandler
-    TargetData: typing.Union[None, FileData, OptionData]
+    TargetData: ConfigurationDataHandler.T_TARGET_OF_SET_OPTION_VALUE
     OptionName: str
     OptionValueItem: typing.Any
 
@@ -319,7 +346,7 @@ class OptionHandlerCtxToSetValueItem:
     def __init__(
         self,
         dataHandler: ConfigurationDataHandler,
-        targetData: typing.Union[None, FileData, OptionData],
+        targetData: ConfigurationDataHandler.T_TARGET_OF_SET_OPTION_VALUE,
         optionName: str,
         optionValueItem: typing.Any,
     ):
