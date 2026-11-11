@@ -18,6 +18,7 @@ import typing
 class OptionHandlerToAddOption__Std(OptionHandlerToAddOption):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
     def AddOption(self, ctx: OptionHandlerCtxToAddOption) -> typing.Any:
@@ -33,7 +34,10 @@ class OptionHandlerToAddOption__Std(OptionHandlerToAddOption):
         assert ctx.OptionName is not None
 
         return ctx.DataHandler.DataHandler__AddSimpleOption(
-            ctx.Target, ctx.OptionOffset, ctx.OptionName, ctx.OptionValue
+            ctx.Target,
+            ctx.OptionOffset,
+            ctx.OptionName,
+            ctx.OptionValue,
         )
 
 

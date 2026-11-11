@@ -18,6 +18,7 @@ import typing
 class OptionHandlerToGetValue__Std__UnionList(OptionHandlerToGetValue):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
     def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> typing.Any:
@@ -31,7 +32,8 @@ class OptionHandlerToGetValue__Std__UnionList(OptionHandlerToGetValue):
         assert type(ctx.OptionName) is str
 
         return ctx.DataHandler.DataHandler__GetOptionValue__UnionList(
-            ctx.SourceData, ctx.OptionName
+            ctx.SourceData,
+            ctx.OptionName,
         )
 
 
