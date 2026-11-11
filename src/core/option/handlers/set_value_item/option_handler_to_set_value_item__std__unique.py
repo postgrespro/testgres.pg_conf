@@ -19,6 +19,7 @@ import typing
 class OptionHandlerToSetValueItem__Std__Unique(OptionHandlerToSetValueItem):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
     def SetOptionValueItem(self, ctx: OptionHandlerCtxToSetValueItem) -> typing.Any:
@@ -33,7 +34,9 @@ class OptionHandlerToSetValueItem__Std__Unique(OptionHandlerToSetValueItem):
         assert ctx.OptionValueItem is not None
 
         return ctx.DataHandler.DataHandler__SetUniqueOptionValueItem(
-            ctx.TargetData, ctx.OptionName, ctx.OptionValueItem
+            ctx.TargetData,
+            ctx.OptionName,
+            ctx.OptionValueItem,
         )
 
 

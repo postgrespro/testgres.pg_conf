@@ -33,7 +33,8 @@ class ConfigurationDataHandler:
         assert type(optionName) is str
         assert optionValue is not None
         RaiseError.MethodIsNotImplemented(
-            __class__, "DataHandler__SetOptionValue__Simple"
+            __class__,
+            "DataHandler__SetOptionValue__Simple",
         )
 
     # --------------------------------------------------------------------
@@ -49,7 +50,8 @@ class ConfigurationDataHandler:
         )
         assert type(optionName) is str or type(optionName) is OptionData
         RaiseError.MethodIsNotImplemented(
-            __class__, "DataHandler__GetOptionValue__Simple"
+            __class__,
+            "DataHandler__GetOptionValue__Simple",
         )
 
     # --------------------------------------------------------------------
@@ -65,7 +67,8 @@ class ConfigurationDataHandler:
         )
         assert type(optionName) is str
         RaiseError.MethodIsNotImplemented(
-            __class__, "DataHandler__GetOptionValue__UnionList"
+            __class__,
+            "DataHandler__GetOptionValue__UnionList",
         )
 
     # --------------------------------------------------------------------
@@ -80,7 +83,10 @@ class ConfigurationDataHandler:
             or type(targetData) is OptionData
         )
         assert type(optionName) is str
-        RaiseError.MethodIsNotImplemented(__class__, "DataHandler__ResetOption")
+        RaiseError.MethodIsNotImplemented(
+            __class__,
+            "DataHandler__ResetOption",
+        )
 
     # --------------------------------------------------------------------
     def DataHandler__AddSimpleOption(
@@ -96,7 +102,10 @@ class ConfigurationDataHandler:
         assert optionOffset is None or type(optionOffset) is int
         assert type(optionName) is str
         assert optionValue is not None
-        RaiseError.MethodIsNotImplemented(__class__, "DataHandler__AddSimpleOption")
+        RaiseError.MethodIsNotImplemented(
+            __class__,
+            "DataHandler__AddSimpleOption",
+        )
 
     # --------------------------------------------------------------------
     def DataHandler__SetUniqueOptionValueItem(
@@ -156,6 +165,7 @@ class OptionHandlerCtxToSetValue:
         self.TargetData = targetData
         self.OptionName = optionName
         self.OptionValue = optionValue
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -165,6 +175,7 @@ class OptionHandlerCtxToSetValue:
 class OptionHandlerToSetValue(OptionHandler):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
     def SetOptionValue(self, ctx: OptionHandlerCtxToSetValue) -> typing.Any:
@@ -201,6 +212,7 @@ class OptionHandlerCtxToGetValue:
         self.DataHandler = dataHandler
         self.SourceData = sourceData
         self.OptionName = optionName
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -210,6 +222,7 @@ class OptionHandlerCtxToGetValue:
 class OptionHandlerToGetValue(OptionHandler):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
     def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> typing.Any:
@@ -255,6 +268,7 @@ class OptionHandlerCtxToAddOption:
         self.OptionOffset = optionOffset
         self.OptionName = optionName
         self.OptionValue = optionValue
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -264,6 +278,7 @@ class OptionHandlerCtxToAddOption:
 class OptionHandlerToAddOption(OptionHandler):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
     def AddOption(self, ctx: OptionHandlerCtxToAddOption) -> typing.Any:
@@ -301,6 +316,7 @@ class OptionHandlerCtxToSetValueItem:
         self.TargetData = targetData
         self.OptionName = optionName
         self.OptionValueItem = optionValueItem
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -310,6 +326,7 @@ class OptionHandlerCtxToSetValueItem:
 class OptionHandlerToSetValueItem(OptionHandler):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
     def SetOptionValueItem(self, ctx: OptionHandlerCtxToSetValueItem) -> typing.Any:
@@ -347,6 +364,7 @@ class OptionHandlerCtxToPrepareSetValue:
         self.DataHandler = dataHandler
         self.OptionName = optionName
         self.OptionValue = optionValue
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -386,6 +404,7 @@ class OptionHandlerCtxToPrepareSetValueItem:
         self.DataHandler = dataHandler
         self.OptionName = optionName
         self.OptionValueItem = optionValueItem
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -425,6 +444,7 @@ class OptionHandlerCtxToPrepareGetValue:
         self.DataHandler = dataHandler
         self.OptionName = optionName
         self.OptionValue = optionValue
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -434,6 +454,7 @@ class OptionHandlerCtxToPrepareGetValue:
 class OptionHandlerToPrepareGetValue(OptionHandler):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
     def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> str:
@@ -464,6 +485,7 @@ class OptionHandlerCtxToWrite:
         self.DataHandler = dataHandler
         self.OptionName = optionName
         self.OptionValue = optionValue
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -473,6 +495,7 @@ class OptionHandlerCtxToWrite:
 class OptionHandlerToWrite(OptionHandler):
     def __init__(self):
         super().__init__()
+        return
 
     # interface ----------------------------------------------------------
     def OptionValueToString(self, ctx: OptionHandlerCtxToWrite) -> str:
