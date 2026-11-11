@@ -706,6 +706,7 @@ class PostgresConfiguration_Base__DataHandler_Strong:
         optionName: str,
         optionValueItem: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult_Base:
+        assert isinstance(cfg, PostgresConfiguration_Base)
         assert type(optionName) is str
         assert optionValueItem is not None
 
@@ -812,6 +813,7 @@ class PostgresConfiguration_Base__DataHandler_Strong:
         optionData: PgCfgModel__OptionData,
         optionValueItem: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult_Base:
+        assert isinstance(cfg, PostgresConfiguration_Base)
         assert type(optionData) is PgCfgModel__OptionData
         assert optionData.IsAlive()
         assert optionValueItem is not None
@@ -829,6 +831,7 @@ class PostgresConfiguration_Base__DataHandler_Strong:
         optionData: PgCfgModel__OptionData,
         optionPreparedValueItem: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult_Base:
+        assert isinstance(cfg, PostgresConfiguration_Base)
         assert type(optionData) is PgCfgModel__OptionData
         assert optionData.IsAlive()
         assert optionData.m_Value is not None
@@ -925,6 +928,7 @@ class PostgresConfiguration_Base__DataHandler_Strong:
         optionName: str,
         optionValueItem: typing.Any,
     ) -> PostgresConfigurationSetOptionValueResult_Base:
+        assert isinstance(cfg, PostgresConfiguration_Base)
         assert type(fileData) is PgCfgModel__FileData
         assert type(optionName) is str
         assert fileData.IsAlive()
