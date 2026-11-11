@@ -18,6 +18,8 @@ from .configuration_base_r import PostgresConfigurationReader_Base
 from .configuration_base_w import PostgresConfigurationWriter_Base
 from .configuration_base_w import PostgresConfigurationWriterCtx_Base
 
+from .configuration_base_dh_strong import g_PgCfgBaseHandlers__Strong
+
 from ...os.abstract.configuration_os_ops import ConfigurationOsOps
 from ...os.local.configuration_os_ops import SingleInstance as LocalCfgOsOps
 
@@ -330,7 +332,11 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
         assert isinstance(cfgOsOps, ConfigurationOsOps)
 
-        super().__init__(data_dir, cfgOsOps)
+        super().__init__(
+            data_dir,
+            cfgOsOps,
+            g_PgCfgBaseHandlers__Strong,
+        )
         return
 
     # --------------------------------------------------------------------
