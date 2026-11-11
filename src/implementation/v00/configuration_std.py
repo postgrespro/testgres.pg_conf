@@ -13,6 +13,10 @@ from .configuration_base import PgCfgModel__OptionHandlerToAddOption
 from .configuration_base import PgCfgModel__OptionHandlerToSetValueItem
 from .configuration_base import PgCfgModel__OptionHandlerToWrite
 
+from .configuration_base_d import g_OptionHandlers__Std__Generic
+from .configuration_base_d import g_OptionHandlers
+from .configuration_base_d import PostgresConfigurationOptionHandlers
+
 from .configuration_base_r import PostgresConfigurationReader_Base
 
 from .configuration_base_w import PostgresConfigurationWriter_Base
@@ -23,83 +27,9 @@ from .configuration_base_dh_strong import g_PgCfgBaseHandlers__Strong
 from ...os.abstract.configuration_os_ops import ConfigurationOsOps
 from ...os.local.configuration_os_ops import SingleInstance as LocalCfgOsOps
 
-# fmt: off
-from ...core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__generic \
-    import OptionHandlerToPrepareSetValue__Std__Generic
-
-from ...core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__int \
-    import OptionHandlerToPrepareSetValue__Std__Int
-
-from ...core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__str \
-    import OptionHandlerToPrepareSetValue__Std__Str
-
-from ...core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__bool \
-    import OptionHandlerToPrepareSetValue__Std__Bool
-
-from ...core.option.handlers.prepare_set_value.option_handler_to_prepare_set_value__std__unique_str_list \
-    import OptionHandlerToPrepareSetValue__Std__UniqueStrList
-
-# -------------
-from ...core.option.handlers.prepare_set_value_item.option_handler_to_prepare_set_value_item__std__str \
-    import OptionHandlerToPrepareSetValueItem__Std__Str
-
-# -------------
-from ...core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__generic \
-    import OptionHandlerToPrepareGetValue__Std__Generic
-
-from ...core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__int \
-    import OptionHandlerToPrepareGetValue__Std__Int
-
-from ...core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__str \
-    import OptionHandlerToPrepareGetValue__Std__Str
-
-from ...core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__bool \
-    import OptionHandlerToPrepareGetValue__Std__Bool
-
-# -------------
-from ...core.option.handlers.prepare_get_value.option_handler_to_prepare_get_value__std__unique_str_list \
-    import OptionHandlerToPrepareGetValue__Std__UniqueStrList
-
-# -------------
-from ...core.option.handlers.set_value.option_handler_to_set_value__std__simple \
-    import OptionHandlerToSetValue__Std__Simple
-
-# -------------
-from ...core.option.handlers.get_value.option_handler_to_get_value__std__simple \
-    import OptionHandlerToGetValue__Std__Simple
-
-from ...core.option.handlers.get_value.option_handler_to_get_value__std__union_list \
-    import OptionHandlerToGetValue__Std__UnionList
-
-# -------------
-from ...core.option.handlers.add.option_handler_to_add__std \
-    import OptionHandlerToAddOption__Std
-
-# -------------
-from ...core.option.handlers.set_value_item.option_handler_to_set_value_item__std__unique \
-    import OptionHandlerToSetValueItem__Std__Unique
-
-# -------------
-from ...core.option.handlers.write.option_handler_to_write__std__generic \
-    import OptionHandlerToWrite__Std__Generic
-
-from ...core.option.handlers.write.option_handler_to_write__std__int \
-    import OptionHandlerToWrite__Std__Int
-
-from ...core.option.handlers.write.option_handler_to_write__std__str \
-    import OptionHandlerToWrite__Std__Str
-
-from ...core.option.handlers.write.option_handler_to_write__std__bool \
-    import OptionHandlerToWrite__Std__Bool
-
-from ...core.option.handlers.write.option_handler_to_write__std__unique_str_list \
-    import OptionHandlerToWrite__Std__UniqueStrList
-# fmt: on
-
 from ...core.bugcheck_error import BugCheckError
 
 import typing
-import dataclasses
 
 # //////////////////////////////////////////////////////////////////////////////
 # class PostgresConfiguration_Std
@@ -108,170 +38,6 @@ import dataclasses
 class PostgresConfiguration_Std(PostgresConfiguration_Base):
     C_POSTGRESQL_CONF = "postgresql.conf"
     C_POSTGRESQL_AUTO_CONF = "postgresql.auto.conf"
-
-    # --------------------------------------------------------------------
-    # fmt: off
-    sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__Generic = \
-        OptionHandlerToPrepareSetValue__Std__Generic()
-
-    sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__Int = \
-        OptionHandlerToPrepareSetValue__Std__Int()
-
-    sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__Str = \
-        OptionHandlerToPrepareSetValue__Std__Str()
-
-    sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__Bool = \
-        OptionHandlerToPrepareSetValue__Std__Bool()
-
-    sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__UniqueStrList = \
-        OptionHandlerToPrepareSetValue__Std__UniqueStrList()
-
-    # ---------
-    sm_SingleInstance__OptionHandlerToPrepareSetValueItem__Std__Str = \
-        OptionHandlerToPrepareSetValueItem__Std__Str()
-
-    # ---------
-    sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__Generic = \
-        OptionHandlerToPrepareGetValue__Std__Generic()
-
-    sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__Int = \
-        OptionHandlerToPrepareGetValue__Std__Int()
-
-    sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__Str = \
-        OptionHandlerToPrepareGetValue__Std__Str()
-
-    sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__Bool = \
-        OptionHandlerToPrepareGetValue__Std__Bool()
-
-    sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__UniqueStrList = \
-        OptionHandlerToPrepareGetValue__Std__UniqueStrList()
-
-    # ---------
-    sm_SingleInstance__OptionHandlerToSetValue__Std__Simple = \
-        OptionHandlerToSetValue__Std__Simple()
-
-    # ---------
-    sm_SingleInstance__OptionHandlerToGetValue__Std__Simple = \
-        OptionHandlerToGetValue__Std__Simple()
-
-    sm_SingleInstance__OptionHandlerToGetValue__Std__UnionList = \
-        OptionHandlerToGetValue__Std__UnionList()
-
-    # ---------
-    sm_SingleInstance__OptionHandlerToAddOption__Std = \
-        OptionHandlerToAddOption__Std()
-
-    # ---------
-    sm_SingleInstance__OptionHandlerToSetValueItem__Std__Unique = \
-        OptionHandlerToSetValueItem__Std__Unique()
-
-    # ---------
-    sm_SingleInstance__OptionHandlerToWrite__Std__Generic = \
-        OptionHandlerToWrite__Std__Generic()
-
-    sm_SingleInstance__OptionHandlerToWrite__Std__Int = \
-        OptionHandlerToWrite__Std__Int()
-
-    sm_SingleInstance__OptionHandlerToWrite__Std__Str = \
-        OptionHandlerToWrite__Std__Str()
-
-    sm_SingleInstance__OptionHandlerToWrite__Std__Bool = \
-        OptionHandlerToWrite__Std__Bool()
-
-    sm_SingleInstance__OptionHandlerToWrite__Std__UniqueStrList = \
-        OptionHandlerToWrite__Std__UniqueStrList()
-    # fmt: on
-
-    # --------------------------------------------------------------------
-    @dataclasses.dataclass
-    class tagOptionHandlers:
-        PrepareSetValue: PgCfgModel__OptionHandlerToPrepareSetValue
-        PrepareGetValue: PgCfgModel__OptionHandlerToPrepareGetValue
-        PrepareSetValueItem: typing.Optional[
-            PgCfgModel__OptionHandlerToPrepareSetValueItem,
-        ]
-        SetValue: typing.Optional[PgCfgModel__OptionHandlerToSetValue]
-        GetValue: PgCfgModel__OptionHandlerToGetValue
-        AddOption: PgCfgModel__OptionHandlerToAddOption
-        SetValueItem: typing.Optional[PgCfgModel__OptionHandlerToSetValueItem]
-        Write: PgCfgModel__OptionHandlerToWrite
-
-    # --------------------------------------------------------------------
-    # fmt: off
-    sm_OptionHandlers__Std__Generic = \
-        tagOptionHandlers(
-            sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__Generic,
-            sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__Generic,
-            None,
-            sm_SingleInstance__OptionHandlerToSetValue__Std__Simple,
-            sm_SingleInstance__OptionHandlerToGetValue__Std__Simple,
-            sm_SingleInstance__OptionHandlerToAddOption__Std,
-            None,
-            sm_SingleInstance__OptionHandlerToWrite__Std__Generic,
-        )
-
-    sm_OptionHandlers__Std__Int = \
-        tagOptionHandlers(
-            sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__Int,
-            sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__Int,
-            None,
-            sm_SingleInstance__OptionHandlerToSetValue__Std__Simple,
-            sm_SingleInstance__OptionHandlerToGetValue__Std__Simple,
-            sm_SingleInstance__OptionHandlerToAddOption__Std,
-            None,
-            sm_SingleInstance__OptionHandlerToWrite__Std__Int,
-        )
-
-    sm_OptionHandlers__Std__Str = \
-        tagOptionHandlers(
-            sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__Str,
-            sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__Str,
-            None,
-            sm_SingleInstance__OptionHandlerToSetValue__Std__Simple,
-            sm_SingleInstance__OptionHandlerToGetValue__Std__Simple,
-            sm_SingleInstance__OptionHandlerToAddOption__Std,
-            None,
-            sm_SingleInstance__OptionHandlerToWrite__Std__Str,
-        )
-
-    sm_OptionHandlers__Std__Bool = \
-        tagOptionHandlers(
-            sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__Bool,
-            sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__Bool,
-            None,
-            sm_SingleInstance__OptionHandlerToSetValue__Std__Simple,
-            sm_SingleInstance__OptionHandlerToGetValue__Std__Simple,
-            sm_SingleInstance__OptionHandlerToAddOption__Std,
-            None,
-            sm_SingleInstance__OptionHandlerToWrite__Std__Bool,
-        )
-
-    sm_OptionHandlers__Std__UniqueStrList = \
-        tagOptionHandlers(
-            sm_SingleInstance__OptionHandlerToPrepareSetValue__Std__UniqueStrList,
-            sm_SingleInstance__OptionHandlerToPrepareGetValue__Std__UniqueStrList,
-            sm_SingleInstance__OptionHandlerToPrepareSetValueItem__Std__Str,
-            sm_SingleInstance__OptionHandlerToSetValue__Std__Simple,
-            sm_SingleInstance__OptionHandlerToGetValue__Std__UnionList,
-            sm_SingleInstance__OptionHandlerToAddOption__Std,
-            sm_SingleInstance__OptionHandlerToSetValueItem__Std__Unique,
-            sm_SingleInstance__OptionHandlerToWrite__Std__UniqueStrList,
-        )
-    # fmt: on
-
-    # --------------------------------------------------------------------
-    sm_OptionHandlers: typing.Dict[str, tagOptionHandlers] = {
-        # fmt: off
-        # STANDARD -------------------------------------------------------
-        "port": sm_OptionHandlers__Std__Int,
-        "listen_addresses": sm_OptionHandlers__Std__Str,
-        "shared_preload_libraries": sm_OptionHandlers__Std__UniqueStrList,
-        "restart_after_crash": sm_OptionHandlers__Std__Bool,
-
-        # PROXIMA --------------------------------------------------------
-        "proxima.port": sm_OptionHandlers__Std__Int,
-        # fmt: on
-    }
 
     # --------------------------------------------------------------------
     def __init__(
@@ -327,10 +93,10 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         name: str,
     ) -> PgCfgModel__OptionHandlerToPrepareSetValue:
         assert type(name) is str
-        assert type(self.sm_OptionHandlers) is dict
+        assert type(g_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) is __class__.tagOptionHandlers
+        assert type(optionHandlers) is PostgresConfigurationOptionHandlers
 
         if optionHandlers.PrepareSetValue is None:
             BugCheckError.OptionHandlerToPrepareSetValueIsNotDefined(name)
@@ -347,10 +113,10 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         name: str,
     ) -> PgCfgModel__OptionHandlerToPrepareGetValue:
         assert type(name) is str
-        assert type(self.sm_OptionHandlers) is dict
+        assert type(g_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) is __class__.tagOptionHandlers
+        assert type(optionHandlers) is PostgresConfigurationOptionHandlers
 
         if optionHandlers.PrepareGetValue is None:
             BugCheckError.OptionHandlerToPrepareGetValueIsNotDefined(name)
@@ -367,10 +133,10 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         name: str,
     ) -> PgCfgModel__OptionHandlerToPrepareSetValueItem:
         assert type(name) is str
-        assert type(self.sm_OptionHandlers) is dict
+        assert type(g_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) is __class__.tagOptionHandlers
+        assert type(optionHandlers) is PostgresConfigurationOptionHandlers
 
         if optionHandlers.PrepareSetValueItem is None:
             BugCheckError.OptionHandlerToPrepareSetValueItemIsNotDefined(name)
@@ -388,10 +154,10 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         name: str,
     ) -> PgCfgModel__OptionHandlerToSetValue:
         assert type(name) is str
-        assert type(self.sm_OptionHandlers) is dict
+        assert type(g_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) is __class__.tagOptionHandlers
+        assert type(optionHandlers) is PostgresConfigurationOptionHandlers
 
         if optionHandlers.SetValue is None:
             BugCheckError.OptionHandlerToSetValueIsNotDefined(name)
@@ -406,10 +172,10 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         name: str,
     ) -> PgCfgModel__OptionHandlerToGetValue:
         assert type(name) is str
-        assert type(self.sm_OptionHandlers) is dict
+        assert type(g_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) is __class__.tagOptionHandlers
+        assert type(optionHandlers) is PostgresConfigurationOptionHandlers
 
         if optionHandlers.GetValue is None:
             BugCheckError.OptionHandlerToGetValueIsNotDefined(name)
@@ -424,10 +190,10 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         name: str,
     ) -> PgCfgModel__OptionHandlerToAddOption:
         assert type(name) is str
-        assert type(self.sm_OptionHandlers) is dict
+        assert type(g_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) is __class__.tagOptionHandlers
+        assert type(optionHandlers) is PostgresConfigurationOptionHandlers
 
         if optionHandlers.AddOption is None:
             BugCheckError.OptionHandlerToAddOptionIsNotDefined(name)
@@ -444,10 +210,10 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         name: str,
     ) -> PgCfgModel__OptionHandlerToSetValueItem:
         assert type(name) is str
-        assert type(self.sm_OptionHandlers) is dict
+        assert type(g_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) is __class__.tagOptionHandlers
+        assert type(optionHandlers) is PostgresConfigurationOptionHandlers
 
         if optionHandlers.SetValueItem is None:
             BugCheckError.OptionHandlerToSetValueIsNotDefined(name)
@@ -464,10 +230,10 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         name: str,
     ) -> PgCfgModel__OptionHandlerToWrite:
         assert type(name) is str
-        assert type(self.sm_OptionHandlers) is dict
+        assert type(g_OptionHandlers) is dict
 
         optionHandlers = self.Helper__GetOptionHandlers(name)
-        assert type(optionHandlers) is __class__.tagOptionHandlers
+        assert type(optionHandlers) is PostgresConfigurationOptionHandlers
 
         if optionHandlers.Write is None:
             BugCheckError.OptionHandlerToWriteIsNotDefined(name)
@@ -480,19 +246,19 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
     def Helper__GetOptionHandlers(
         self,
         name: str,
-    ) -> tagOptionHandlers:
+    ) -> PostgresConfigurationOptionHandlers:
         assert type(name) is str
-        assert type(self.sm_OptionHandlers) is dict
+        assert type(g_OptionHandlers) is dict
 
-        if name not in self.sm_OptionHandlers.keys():
-            return __class__.sm_OptionHandlers__Std__Generic
+        if name not in g_OptionHandlers.keys():
+            return g_OptionHandlers__Std__Generic
 
-        optionHandlers = self.sm_OptionHandlers[name]
+        optionHandlers = g_OptionHandlers[name]
 
         assert optionHandlers is not None
-        assert type(optionHandlers) is __class__.tagOptionHandlers
+        assert type(optionHandlers) is PostgresConfigurationOptionHandlers
 
-        return self.sm_OptionHandlers[name]
+        return g_OptionHandlers[name]
 
 
 # //////////////////////////////////////////////////////////////////////////////
