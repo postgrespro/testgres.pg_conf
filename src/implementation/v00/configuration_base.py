@@ -2250,11 +2250,7 @@ class PostgresConfigurationController__Base:
     @staticmethod
     def AddOption(
         cfg: PostgresConfiguration_Base,
-        targetData: typing.Union[
-            None,
-            PgCfgModel__FileData,
-            PgCfgModel__FileLineData,
-        ],
+        targetData: PgCfgModel__DataHandler.T_TARGET_OF_ADD_OPTION,
         optionName: str,
         optionValue: typing.Any,
         optionOffset: typing.Optional[int],

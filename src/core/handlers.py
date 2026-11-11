@@ -110,7 +110,7 @@ class ConfigurationDataHandler:
     T_TARGET_OF_ADD_OPTION = typing.Union[
         None,
         FileData,
-        OptionData,
+        FileLineData,
     ]
 
     # --------------------------------------------------------------------
@@ -291,20 +291,22 @@ class OptionHandlerCtxToAddOption:
     def __init__(
         self,
         dataHandler: ConfigurationDataHandler,
-        target: ConfigurationDataHandler.T_TARGET_OF_ADD_OPTION,
+        targetData: ConfigurationDataHandler.T_TARGET_OF_ADD_OPTION,
         optionOffset: typing.Optional[int],
         optionName: str,
         optionValue: typing.Any,
     ):
         assert isinstance(dataHandler, ConfigurationDataHandler)
         assert (
-            target is None or type(target) is FileData or type(target) is FileLineData
+            targetData is None
+            or type(targetData) is FileData
+            or type(targetData) is FileLineData
         )
         assert type(optionName) is str
         assert optionValue is not None
 
         self.DataHandler = dataHandler
-        self.Target = target
+        self.Target = targetData
         self.OptionOffset = optionOffset
         self.OptionName = optionName
         self.OptionValue = optionValue
