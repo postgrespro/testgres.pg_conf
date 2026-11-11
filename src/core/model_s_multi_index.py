@@ -178,13 +178,13 @@ class MultiIndex(typing.Generic[T]):
         return self.m_dict.keys()
 
     # --------------------------------------------------------------------
-    def values(self) -> typing.Iterable[T]:
+    def elements(self) -> typing.Iterable[T]:
         return __class__.T_ITERATOR(
             self.m_dict.values().__iter__(),
         )
 
     # --------------------------------------------------------------------
-    def get_values_count(self) -> int:
+    def get_elements_count(self) -> int:
         assert type(self.m_count) is int
         assert self.m_count >= 0
         assert len(self.m_dict) <= self.m_count

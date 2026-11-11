@@ -13,74 +13,74 @@ class TestFor_MultiIndex:
     def test_000__constructor(self):
         x: MultiIndex[int] = MultiIndex()
 
-        assert x.get_values_count() == 0
+        assert x.get_elements_count() == 0
         assert "x" not in x.keys()
 
-        assert list(x.values()) == []
+        assert list(x.elements()) == []
         return
 
     # --------------------------------------------------------------------
     def test_001__add(self):
         x: MultiIndex[int] = MultiIndex()
 
-        assert x.get_values_count() == 0
+        assert x.get_elements_count() == 0
         assert "x" not in x.keys()
-        assert list(x.values()) == []
+        assert list(x.elements()) == []
 
         x.add("a", 1)
-        assert x.get_values_count() == 1
+        assert x.get_elements_count() == 1
         assert "a" in x.keys()
         assert "a1" not in x.keys()
-        assert list(x.values()) == [1]
+        assert list(x.elements()) == [1]
 
         x.add("a", 2)
-        assert x.get_values_count() == 2
+        assert x.get_elements_count() == 2
         assert "a" in x.keys()
         assert "a1" not in x.keys()
-        assert list(x.values()) == [1, 2]
+        assert list(x.elements()) == [1, 2]
 
         x.add("b", 2)
-        assert x.get_values_count() == 3
+        assert x.get_elements_count() == 3
         assert "a" in x.keys()
         assert "b" in x.keys()
         assert "a1" not in x.keys()
-        assert list(x.values()) == [1, 2, 2]
+        assert list(x.elements()) == [1, 2, 2]
         return
 
     # --------------------------------------------------------------------
     def test_002__remove_exact(self):
         x: MultiIndex[int] = MultiIndex()
 
-        assert x.get_values_count() == 0
+        assert x.get_elements_count() == 0
         assert "x" not in x.keys()
-        assert list(x.values()) == []
+        assert list(x.elements()) == []
 
         assert not x.remove_exact("a", 1)
 
-        assert x.get_values_count() == 0
+        assert x.get_elements_count() == 0
         assert "x" not in x.keys()
-        assert list(x.values()) == []
+        assert list(x.elements()) == []
         return
 
     # --------------------------------------------------------------------
     def test_003__remove_exact(self):
         x: MultiIndex[int] = MultiIndex()
 
-        assert x.get_values_count() == 0
+        assert x.get_elements_count() == 0
         assert "x" not in x.keys()
-        assert list(x.values()) == []
+        assert list(x.elements()) == []
 
         x.add("a", 1)
-        assert x.get_values_count() == 1
+        assert x.get_elements_count() == 1
         assert "a" in x.keys()
         assert "a1" not in x.keys()
-        assert list(x.values()) == [1]
+        assert list(x.elements()) == [1]
 
         assert x.remove_exact("a", 1)
 
-        assert x.get_values_count() == 0
+        assert x.get_elements_count() == 0
         assert "x" not in x.keys()
-        assert list(x.values()) == []
+        assert list(x.elements()) == []
         return
 
     # --------------------------------------------------------------------
@@ -193,13 +193,13 @@ class TestFor_MultiIndex:
 
             x.add(s[0], s[1])
             __class__.helper__add_to_dict(expected, s)
-            assert len(list(x.values())) == i
+            assert len(list(x.elements())) == i
             assert x.m_dict == expected
 
-            assert list(x.values()) == __class__.helper__dict_to_all(expected)
+            assert list(x.elements()) == __class__.helper__dict_to_all(expected)
             continue
 
-        assert x.get_values_count() == len(source)
+        assert x.get_elements_count() == len(source)
 
         i = len(source)
         while i != 0:
@@ -207,18 +207,18 @@ class TestFor_MultiIndex:
             s = source[i]
 
             x.remove_exact(s[0], s[1])
-            assert x.get_values_count() == i
-            assert len(list(x.values())) == i
+            assert x.get_elements_count() == i
+            assert len(list(x.elements())) == i
 
             __class__.helper__del_from_dict(expected, s)
 
             assert x.m_dict == expected
 
-            assert list(x.values()) == __class__.helper__dict_to_all(expected)
+            assert list(x.elements()) == __class__.helper__dict_to_all(expected)
             continue
 
-        assert x.get_values_count() == 0
-        assert list(x.values()) == []
+        assert x.get_elements_count() == 0
+        assert list(x.elements()) == []
         return
 
 

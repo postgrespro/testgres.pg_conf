@@ -150,16 +150,16 @@ class TestSet001__Common:
         assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
         assert cfg.m_Data.m_Files[0] is fileData
         assert type(cfg.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
-        assert cfg.m_Data.m_AllFilesByName.get_values_count() == 1
+        assert cfg.m_Data.m_AllFilesByName.get_elements_count() == 1
         assert "postgresql.auto.conf" in cfg.m_Data.m_AllFilesByName.keys()
-        assert len(list(cfg.m_Data.m_AllFilesByName.values())) == 1
-        assert fileData in cfg.m_Data.m_AllFilesByName.values()
+        assert len(list(cfg.m_Data.m_AllFilesByName.elements())) == 1
+        assert fileData in cfg.m_Data.m_AllFilesByName.elements()
 
         assert type(cfg.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
-        assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 1
+        assert cfg.m_Data.m_AllOptionsByName.get_elements_count() == 1
         assert optName in cfg.m_Data.m_AllOptionsByName.keys()
-        assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 1
-        assert opt.m_OptionData in cfg.m_Data.m_AllOptionsByName.values()
+        assert cfg.m_Data.m_AllOptionsByName.get_elements_count() == 1
+        assert opt.m_OptionData in cfg.m_Data.m_AllOptionsByName.elements()
         return
 
     # --------------------------------------------------------------------
@@ -291,7 +291,7 @@ class TestSet001__Common:
         assert len(cfg.m_Data.m_Files) == 1
         assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
         assert len(cfg.m_Data.m_Files[0].m_Lines) == 1
-        assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 1
+        assert cfg.m_Data.m_AllOptionsByName.get_elements_count() == 1
 
         r2 = cfg.SetOptionValue(optName, None)
         assert type(r2) is PgCfg_SetOptionResult_Base
@@ -304,7 +304,7 @@ class TestSet001__Common:
         assert len(cfg.m_Data.m_Files) == 1
         assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
         assert len(cfg.m_Data.m_Files[0].m_Lines) == 0
-        assert cfg.m_Data.m_AllOptionsByName.get_values_count() == 0
+        assert cfg.m_Data.m_AllOptionsByName.get_elements_count() == 0
 
         assert type(r1.Option) is PgCfg_Option_Base
         assert isinstance(r1.Option, PgCfg_Option)
@@ -362,7 +362,7 @@ class TestSet001__Common:
         assert type(file1) is PgCfg_TopLevelFile_Base
         assert type(file1.m_FileData) is PgCfgModel__FileData
         assert type(file1.m_FileData.m_OptionsByName) is PgCfgModel__MultiIndex
-        assert file1.m_FileData.m_OptionsByName.get_values_count() == 0
+        assert file1.m_FileData.m_OptionsByName.get_elements_count() == 0
 
         assert len(cfg.get_AllFiles()) == 1
         assert (
@@ -376,7 +376,7 @@ class TestSet001__Common:
 
         for optValue in optValues:
             assert len(file1.get_Lines()) == 0
-            assert file1.m_FileData.m_OptionsByName.get_values_count() == 0
+            assert file1.m_FileData.m_OptionsByName.get_elements_count() == 0
 
             rs1 = cfg.SetOptionValue(C_OPT_NAME, optValue)
             assert type(rs1) is PgCfg_SetOptionResult_Base
@@ -389,7 +389,7 @@ class TestSet001__Common:
             assert rs1.Option.get_Configuration() is cfg
 
             assert len(file1.get_Lines()) == 1
-            assert file1.m_FileData.m_OptionsByName.get_values_count() == 1
+            assert file1.m_FileData.m_OptionsByName.get_elements_count() == 1
             assert C_OPT_NAME in file1.m_FileData.m_OptionsByName.keys()
             assert (
                 type(file1.m_FileData.m_OptionsByName[C_OPT_NAME])

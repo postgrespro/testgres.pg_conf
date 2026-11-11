@@ -48,33 +48,12 @@ class PostgresConfigurationReader_Base:
 
         existFileDatas: typing.Dict[str, PgCfgModel__FileData] = dict()
 
-        for fileName in cfg.m_Data.m_AllFilesByName.keys():
-            assert type(fileName) is str
-            assert fileName != ""
-
-            indexData = cfg.m_Data.m_AllFilesByName[fileName]
-            assert indexData is not None
-
-            if type(indexData) is PgCfgModel__FileData:
-                fileData: PgCfgModel__FileData = indexData
-                assert type(fileData.m_Path) is str
-                assert fileData.m_Path not in existFileDatas.keys()
-                existFileDatas[fileData.m_Path] = fileData
-                continue
-
-            if type(indexData) is list:
-                for fileData in indexData:
-                    assert type(fileData) is PgCfgModel__FileData
-                    assert type(fileData.m_Path) is str
-                    assert fileData.m_Path not in existFileDatas.keys()
-                    existFileDatas[fileData.m_Path] = fileData
-                    continue
-                continue
-
-            BugCheckError.UnkFileObjectDataType(
-                fileName,
-                type(indexData),
-            )
+        for fileData in cfg.m_Data.m_AllFilesByName.elements():
+            assert type(fileData) is PgCfgModel__FileData
+            assert type(fileData.m_Path) is str
+            assert fileData.m_Path not in existFileDatas.keys()
+            existFileDatas[fileData.m_Path] = fileData
+            continue
 
         # ----------------------------------------------------------------
         filePath_n = Helpers.NormalizeFilePath(
