@@ -122,7 +122,8 @@ class ConfigurationDataHandler:
         assert type(optionName) is str
         assert optionValueItem is not None
         RaiseError.MethodIsNotImplemented(
-            __class__, "DataHandler__SetUniqueOptionValueItem"
+            __class__,
+            "DataHandler__SetUniqueOptionValueItem",
         )
 
 
@@ -178,11 +179,17 @@ class OptionHandlerToSetValue(OptionHandler):
         return
 
     # interface ----------------------------------------------------------
-    def SetOptionValue(self, ctx: OptionHandlerCtxToSetValue) -> typing.Any:
+    def SetOptionValue(
+        self,
+        ctx: OptionHandlerCtxToSetValue,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToSetValue
         assert ctx.OptionName is not None
         assert ctx.OptionValue is not None
-        RaiseError.MethodIsNotImplemented(__class__, "SetOptionValue")
+        RaiseError.MethodIsNotImplemented(
+            __class__,
+            "SetOptionValue",
+        )
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -225,7 +232,10 @@ class OptionHandlerToGetValue(OptionHandler):
         return
 
     # interface ----------------------------------------------------------
-    def GetOptionValue(self, ctx: OptionHandlerCtxToGetValue) -> typing.Any:
+    def GetOptionValue(
+        self,
+        ctx: OptionHandlerCtxToGetValue,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToGetValue
         assert (
             ctx.SourceData is None
@@ -233,7 +243,10 @@ class OptionHandlerToGetValue(OptionHandler):
             or type(ctx.SourceData) is OptionData
         )
         assert type(ctx.OptionName) is str
-        RaiseError.MethodIsNotImplemented(__class__, "GetOptionValue")
+        RaiseError.MethodIsNotImplemented(
+            __class__,
+            "GetOptionValue",
+        )
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -281,9 +294,15 @@ class OptionHandlerToAddOption(OptionHandler):
         return
 
     # interface ----------------------------------------------------------
-    def AddOption(self, ctx: OptionHandlerCtxToAddOption) -> typing.Any:
+    def AddOption(
+        self,
+        ctx: OptionHandlerCtxToAddOption,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToAddOption
-        RaiseError.MethodIsNotImplemented(__class__, "AddOption")
+        RaiseError.MethodIsNotImplemented(
+            __class__,
+            "AddOption",
+        )
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -329,7 +348,10 @@ class OptionHandlerToSetValueItem(OptionHandler):
         return
 
     # interface ----------------------------------------------------------
-    def SetOptionValueItem(self, ctx: OptionHandlerCtxToSetValueItem) -> typing.Any:
+    def SetOptionValueItem(
+        self,
+        ctx: OptionHandlerCtxToSetValueItem,
+    ) -> typing.Any:
         assert type(ctx) is OptionHandlerCtxToSetValueItem
         assert (
             ctx.TargetData is None
@@ -338,7 +360,10 @@ class OptionHandlerToSetValueItem(OptionHandler):
         )
         assert type(ctx.OptionName) is str
         assert ctx.OptionValueItem is not None
-        RaiseError.MethodIsNotImplemented(__class__, "SetOptionValueItem")
+        RaiseError.MethodIsNotImplemented(
+            __class__,
+            "SetOptionValueItem",
+        )
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -376,9 +401,15 @@ class OptionHandlerToPrepareSetValue(OptionHandler):
         super().__init__()
 
     # interface ----------------------------------------------------------
-    def PrepareSetValue(self, ctx: OptionHandlerCtxToPrepareSetValue) -> str:
+    def PrepareSetValue(
+        self,
+        ctx: OptionHandlerCtxToPrepareSetValue,
+    ) -> str:
         assert type(ctx) is OptionHandlerCtxToPrepareSetValue
-        RaiseError.MethodIsNotImplemented(__class__, "PrepareSetValue")
+        RaiseError.MethodIsNotImplemented(
+            __class__,
+            "PrepareSetValue",
+        )
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -418,7 +449,10 @@ class OptionHandlerToPrepareSetValueItem(OptionHandler):
     # interface ----------------------------------------------------------
     def PrepareSetValueItem(self, ctx: OptionHandlerCtxToPrepareSetValueItem) -> str:
         assert type(ctx) is OptionHandlerCtxToPrepareSetValueItem
-        RaiseError.MethodIsNotImplemented(__class__, "PrepareSetValueItem")
+        RaiseError.MethodIsNotImplemented(
+            __class__,
+            "PrepareSetValueItem",
+        )
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -457,9 +491,15 @@ class OptionHandlerToPrepareGetValue(OptionHandler):
         return
 
     # interface ----------------------------------------------------------
-    def PrepareGetValue(self, ctx: OptionHandlerCtxToPrepareGetValue) -> str:
+    def PrepareGetValue(
+        self,
+        ctx: OptionHandlerCtxToPrepareGetValue,
+    ) -> str:
         assert type(ctx) is OptionHandlerCtxToPrepareGetValue
-        RaiseError.MethodIsNotImplemented(__class__, "PrepareGetValue")
+        RaiseError.MethodIsNotImplemented(
+            __class__,
+            "PrepareGetValue",
+        )
 
 
 # //////////////////////////////////////////////////////////////////////////////
@@ -498,9 +538,15 @@ class OptionHandlerToWrite(OptionHandler):
         return
 
     # interface ----------------------------------------------------------
-    def OptionValueToString(self, ctx: OptionHandlerCtxToWrite) -> str:
+    def OptionValueToString(
+        self,
+        ctx: OptionHandlerCtxToWrite,
+    ) -> str:
         assert type(ctx) is OptionHandlerCtxToWrite
-        RaiseError.MethodIsNotImplemented(__class__, "OptionValueToString")
+        RaiseError.MethodIsNotImplemented(
+            __class__,
+            "OptionValueToString",
+        )
 
 
 # //////////////////////////////////////////////////////////////////////////////
