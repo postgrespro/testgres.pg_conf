@@ -46,16 +46,6 @@ class PostgresConfigurationReader_Base:
         assert type(filePath) is str
         assert filePath != ""
 
-        existFileDatas: typing.Dict[str, PgCfgModel__FileData] = dict()
-
-        for fileData in cfg.m_Data.m_AllFilesByName.elements():
-            assert type(fileData) is PgCfgModel__FileData
-            assert type(fileData.m_Path) is str
-            assert fileData.m_Path not in existFileDatas.keys()
-            existFileDatas[fileData.m_Path] = fileData
-            continue
-
-        # ----------------------------------------------------------------
         filePath_n = Helpers.NormalizeFilePath(
             cfg.m_Data.OsOps,
             cfg.m_Data.m_DataDir,
@@ -63,13 +53,23 @@ class PostgresConfigurationReader_Base:
         )
         assert type(filePath_n) is str
 
-        if filePath_n in existFileDatas:
-            file = PostgresConfigurationFactory_Base.GetObject(
-                cfg,
-                existFileDatas[filePath_n],
-            )
-            assert type(file) is PostgresConfigurationTopLevelFile_Base
-            return file
+        existFileDatas: typing.Dict[str, PgCfgModel__FileData] = dict()
+
+        for fileData in cfg.m_Data.m_AllFilesByName.elements():
+            assert type(fileData) is PgCfgModel__FileData
+            assert type(fileData.m_Path) is str
+            assert fileData.m_Path not in existFileDatas.keys()
+
+            if filePath_n == fileData.m_Path:
+                file = PostgresConfigurationFactory_Base.GetObject(
+                    cfg,
+                    fileData,
+                )
+                assert type(file) is PostgresConfigurationTopLevelFile_Base
+                return file
+
+            existFileDatas[fileData.m_Path] = fileData
+            continue
 
         # ----------------------------------------------------------------
         rootFile = cfg.AddTopLevelFile(filePath)
@@ -130,7 +130,7 @@ class PostgresConfigurationReader_Base:
 
                     if type(fileLineElementData) is PgCfgModel__IncludeData:
                         # look at existFileDatas
-                        includeData: PgCfgModel__IncludeData = fileLineElementData
+                        includeData = fileLineElementData
                         assert type(includeData.m_File) is PgCfgModel__FileData
                         assert type(includeData.m_File.m_Path) is str
 
@@ -149,6 +149,7 @@ class PostgresConfigurationReader_Base:
                         continue
 
                     BugCheckError.UnkObjectDataType(type(fileLineElementData))
+                continue
 
         assert len(queuedFileDatas) == 0
         assert isinstance(rootFile, PostgresConfigurationTopLevelFile_Base)
