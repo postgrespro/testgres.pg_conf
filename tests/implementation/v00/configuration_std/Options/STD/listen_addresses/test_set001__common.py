@@ -21,7 +21,10 @@ class TestSet001__Common:
     C_OPTION_NAME = "listen_addresses"
 
     # --------------------------------------------------------------------
-    def test_001(self, request: pytest.FixtureRequest):
+    def test_001(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -62,7 +65,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_E01__bad_value(self, request: pytest.FixtureRequest):
+    def test_E01__bad_value(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()

@@ -35,7 +35,10 @@ import os
 
 
 class TestSet001__Common:
-    def test_001__line_with_option(self, request: pytest.FixtureRequest):
+    def test_001__line_with_option(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -118,7 +121,10 @@ class TestSet001__Common:
         assert set_r.m_OptData.m_Parent is None
 
     # --------------------------------------------------------------------
-    def test_002__line_with_comment(self, request: pytest.FixtureRequest):
+    def test_002__line_with_comment(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()

@@ -31,13 +31,20 @@ class TestSet001__Common:
             for x in sm_data001__offsets
         ],
     )
-    def offset001(self, request: pytest.FixtureRequest) -> typing.Optional[int]:
+    def offset001(
+        self,
+        request: pytest.FixtureRequest,
+    ) -> typing.Optional[int]:
         assert isinstance(request, pytest.FixtureRequest)
         assert request.param is None or type(request.param) is int
         return request.param
 
     # --------------------------------------------------------------------
-    def test_001(self, request: pytest.FixtureRequest, offset001: typing.Optional[int]):
+    def test_001(
+        self,
+        request: pytest.FixtureRequest,
+        offset001: typing.Optional[int],
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert offset001 is None or type(offset001) is int
 
@@ -74,7 +81,9 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_002__shared_preload_libraries(
-        self, request: pytest.FixtureRequest, offset001: typing.Optional[int]
+        self,
+        request: pytest.FixtureRequest,
+        offset001: typing.Optional[int],
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert offset001 is None or type(offset001) is int
@@ -117,7 +126,9 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_003__shared_preload_libraries__as_str(
-        self, request: pytest.FixtureRequest, offset001: typing.Optional[int]
+        self,
+        request: pytest.FixtureRequest,
+        offset001: typing.Optional[int],
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert offset001 is None or type(offset001) is int
@@ -160,7 +171,8 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_004__shared_preload_libraries__with_None_item(
-        self, request: pytest.FixtureRequest
+        self,
+        request: pytest.FixtureRequest,
     ):
         assert isinstance(request, pytest.FixtureRequest)
 
@@ -189,7 +201,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_E01__after_option(self, request: pytest.FixtureRequest):
+    def test_E01__after_option(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -230,7 +245,10 @@ class TestSet001__Common:
         assert option.get_Value() == 123
 
     # --------------------------------------------------------------------
-    def test_E02__after_include(self, request: pytest.FixtureRequest):
+    def test_E02__after_include(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -255,7 +273,10 @@ class TestSet001__Common:
         assert fileLine.m_FileLineData.m_Items[0].m_Element is include.m_IncludeData
 
     # --------------------------------------------------------------------
-    def test_E03__after_comment(self, request: pytest.FixtureRequest):
+    def test_E03__after_comment(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -280,7 +301,10 @@ class TestSet001__Common:
         assert fileLine.m_FileLineData.m_Items[0].m_Element is comment.m_CommentData
 
     # --------------------------------------------------------------------
-    def test_E04__conflict_with_this_file(self, request: pytest.FixtureRequest):
+    def test_E04__conflict_with_this_file(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -323,7 +347,10 @@ class TestSet001__Common:
         assert option.get_Value() == 123
 
     # --------------------------------------------------------------------
-    def test_E05__conflict_with_another_file(self, request: pytest.FixtureRequest):
+    def test_E05__conflict_with_another_file(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()

@@ -23,7 +23,11 @@ class TestSet001__Common:
     sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_001(self, request: pytest.FixtureRequest, optName: str):
+    def test_001(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -43,7 +47,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_002__two_opts(self, request: pytest.FixtureRequest):
+    def test_002__two_opts(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -58,7 +65,8 @@ class TestSet001__Common:
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
         actualFileContent = PgCfg_Writer_Base.MakeFileDataContent(
-            cfgWriterCtx, fileData
+            cfgWriterCtx,
+            fileData,
         )
 
         expectedFileContent = "port = 234\nproxima.port = 345\n"
@@ -67,7 +75,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_003__opt1_emptyline_opt2(self, request: pytest.FixtureRequest):
+    def test_003__opt1_emptyline_opt2(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -86,7 +97,8 @@ class TestSet001__Common:
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
         actualFileContent = PgCfg_Writer_Base.MakeFileDataContent(
-            cfgWriterCtx, fileData
+            cfgWriterCtx,
+            fileData,
         )
 
         expectedFileContent = "port = 234\n\nproxima.port = 345\n"
@@ -95,7 +107,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_004__opt1_comment_opt2(self, request: pytest.FixtureRequest):
+    def test_004__opt1_comment_opt2(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -114,7 +129,8 @@ class TestSet001__Common:
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
         actualFileContent = PgCfg_Writer_Base.MakeFileDataContent(
-            cfgWriterCtx, fileData
+            cfgWriterCtx,
+            fileData,
         )
 
         expectedFileContent = "port = 234\n#It is a comment!\nproxima.port = 345\n"
@@ -123,7 +139,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_005__opt_with_list(self, request: pytest.FixtureRequest):
+    def test_005__opt_with_list(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -137,7 +156,8 @@ class TestSet001__Common:
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
         actualFileContent = PgCfg_Writer_Base.MakeFileDataContent(
-            cfgWriterCtx, file.m_FileData
+            cfgWriterCtx,
+            file.m_FileData,
         )
 
         expectedFileContent = "shared_preload_libraries = 'a'\n"
@@ -146,7 +166,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_006__opt_with_list__empty(self, request: pytest.FixtureRequest):
+    def test_006__opt_with_list__empty(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -166,7 +189,8 @@ class TestSet001__Common:
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
         actualFileContent = PgCfg_Writer_Base.MakeFileDataContent(
-            cfgWriterCtx, file.m_FileData
+            cfgWriterCtx,
+            file.m_FileData,
         )
 
         expectedFileContent = "shared_preload_libraries = ''\n"
@@ -175,7 +199,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_007__opt_with_list__mix(self, request: pytest.FixtureRequest):
+    def test_007__opt_with_list__mix(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -207,7 +234,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_008__include(self, request: pytest.FixtureRequest):
+    def test_008__include(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -225,7 +255,8 @@ class TestSet001__Common:
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
         actualFileContent = PgCfg_Writer_Base.MakeFileDataContent(
-            cfgWriterCtx, file.m_FileData
+            cfgWriterCtx,
+            file.m_FileData,
         )
 
         expectedFileContent = "include '{0}'\n".format(C_INCLUDED_FILE_NAME)
@@ -271,14 +302,19 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_Data009, ids=[x.descr for x in sm_Data009])
-    def data009(self, request: pytest.FixtureRequest) -> tagData009:
+    def data009(
+        self,
+        request: pytest.FixtureRequest,
+    ) -> tagData009:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is __class__.tagData009
         return request.param
 
     # --------------------------------------------------------------------
     def test_009__include__mix(
-        self, request: pytest.FixtureRequest, data009: tagData009
+        self,
+        request: pytest.FixtureRequest,
+        data009: tagData009,
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data009) is __class__.tagData009
@@ -296,7 +332,8 @@ class TestSet001__Common:
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
 
         actualFileContent = PgCfg_Writer_Base.MakeFileDataContent(
-            cfgWriterCtx, file.m_FileData
+            cfgWriterCtx,
+            file.m_FileData,
         )
 
         assert actualFileContent == data009.result

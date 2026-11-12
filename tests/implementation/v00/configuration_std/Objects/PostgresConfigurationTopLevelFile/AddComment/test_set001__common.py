@@ -31,7 +31,10 @@ import os
 
 
 class TestSet001__Common:
-    def test_001(self, request: pytest.FixtureRequest):
+    def test_001(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -97,7 +100,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_002(self, request: pytest.FixtureRequest):
+    def test_002(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()

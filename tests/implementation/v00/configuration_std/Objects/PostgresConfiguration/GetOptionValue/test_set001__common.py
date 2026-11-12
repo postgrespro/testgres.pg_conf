@@ -27,7 +27,11 @@ class TestSet001__Common:
     sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_001__port(self, request: pytest.FixtureRequest, optName: str):
+    def test_001__port(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -56,7 +60,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_002__None_name(self, request: pytest.FixtureRequest):
+    def test_002__None_name(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -71,7 +78,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_003__empty_name(self, request: pytest.FixtureRequest):
+    def test_003__empty_name(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -86,7 +96,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_004__opt_with_list__get_None(self, request: pytest.FixtureRequest):
+    def test_004__opt_with_list__get_None(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "shared_preload_libraries"

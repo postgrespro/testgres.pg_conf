@@ -25,7 +25,10 @@ import os
 
 
 class TestSet001__Common:
-    def test_001(self, request: pytest.FixtureRequest):
+    def test_001(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -121,7 +124,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_002__include_twice(self, request: pytest.FixtureRequest):
+    def test_002__include_twice(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -161,7 +167,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_003__empty_file_path(self, request: pytest.FixtureRequest):
+    def test_003__empty_file_path(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()

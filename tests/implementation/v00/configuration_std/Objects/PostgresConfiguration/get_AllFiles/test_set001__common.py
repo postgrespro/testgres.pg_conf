@@ -23,7 +23,10 @@ import os
 
 
 class TestSet001__Common:
-    def test_000(self, request: pytest.FixtureRequest):
+    def test_000(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -45,7 +48,11 @@ class TestSet001__Common:
     sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_001(self, request: pytest.FixtureRequest, optName: str):
+    def test_001(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -77,7 +84,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_002__iter(self, request: pytest.FixtureRequest):
+    def test_002__iter(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -107,7 +117,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_003__transform_to_list(self, request: pytest.FixtureRequest):
+    def test_003__transform_to_list(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()

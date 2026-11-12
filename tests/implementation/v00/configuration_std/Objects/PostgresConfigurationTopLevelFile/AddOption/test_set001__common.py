@@ -24,7 +24,10 @@ import os
 
 
 class TestSet001__Common:
-    def test_001(self, request: pytest.FixtureRequest):
+    def test_001(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -64,7 +67,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_002__already_in_this(self, request: pytest.FixtureRequest):
+    def test_002__already_in_this(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "port"
@@ -95,7 +101,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_003__already_in_another(self, request: pytest.FixtureRequest):
+    def test_003__already_in_another(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "proxima.port"
@@ -130,7 +139,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_004__bad_value_type(self, request: pytest.FixtureRequest):
+    def test_004__bad_value_type(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "proxima.port"
@@ -153,7 +165,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_004__cant_convert_value(self, request: pytest.FixtureRequest):
+    def test_004__cant_convert_value(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "proxima.port"
@@ -176,7 +191,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_005__None_value(self, request: pytest.FixtureRequest):
+    def test_005__None_value(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "proxima.port"
@@ -195,7 +213,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_006__None_name(self, request: pytest.FixtureRequest):
+    def test_006__None_name(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -212,7 +233,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_007__empty_name(self, request: pytest.FixtureRequest):
+    def test_007__empty_name(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()

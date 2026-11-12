@@ -29,7 +29,8 @@ class TestSet001__GenericSupportOfOptions:
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data001, ids=[x[0] for x in sm_data001])
     def data001(
-        self, request: pytest.FixtureRequest
+        self,
+        request: pytest.FixtureRequest,
     ) -> typing.Tuple[typing.Any, typing.Any]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple
@@ -64,7 +65,8 @@ class TestSet001__GenericSupportOfOptions:
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data002, ids=[x[0] for x in sm_data002])
     def data002(
-        self, request: pytest.FixtureRequest
+        self,
+        request: pytest.FixtureRequest,
     ) -> typing.Tuple[typing.Any, typing.Any]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple

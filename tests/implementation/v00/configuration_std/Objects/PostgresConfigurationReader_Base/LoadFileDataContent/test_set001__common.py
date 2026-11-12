@@ -29,7 +29,10 @@ import os
 
 
 class TestSet001__Common:
-    def test_001__empty(self, request: pytest.FixtureRequest):
+    def test_001__empty(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -64,7 +67,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_002__space(self, request: pytest.FixtureRequest):
+    def test_002__space(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -84,7 +90,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_003__empty_line_with_eol(self, request: pytest.FixtureRequest):
+    def test_003__empty_line_with_eol(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -104,7 +113,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_101__comment(self, request: pytest.FixtureRequest):
+    def test_101__comment(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -129,7 +141,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_102__two_comments(self, request: pytest.FixtureRequest):
+    def test_102__two_comments(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -174,7 +189,10 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data201__assign, ids=[x[0] for x in sm_data201__assign])
-    def data201__assign(self, request: pytest.FixtureRequest) -> str:
+    def data201__assign(
+        self,
+        request: pytest.FixtureRequest,
+    ) -> str:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple
         assert len(request.param) == 2
@@ -182,7 +200,11 @@ class TestSet001__Common:
         return request.param[1]
 
     # --------------------------------------------------------------------
-    def test_201__option(self, request: pytest.FixtureRequest, data201__assign: str):
+    def test_201__option(
+        self,
+        request: pytest.FixtureRequest,
+        data201__assign: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data201__assign) is str
 
@@ -209,7 +231,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_202__option(self, request: pytest.FixtureRequest):
+    def test_202__option(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -235,7 +260,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_203__option__without_assign(self, request: pytest.FixtureRequest):
+    def test_203__option__without_assign(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -280,7 +308,10 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data204, ids=[x[0] for x in sm_data204])
-    def data204_tail(self, request: pytest.FixtureRequest) -> str:
+    def data204_tail(
+        self,
+        request: pytest.FixtureRequest,
+    ) -> str:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple
         assert len(request.param) == 2
@@ -315,7 +346,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_211__option_with_comment(self, request: pytest.FixtureRequest):
+    def test_211__option_with_comment(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -345,7 +379,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_212__option_with_comment_immediate(self, request: pytest.FixtureRequest):
+    def test_212__option_with_comment_immediate(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -375,7 +412,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_301__optionQ(self, request: pytest.FixtureRequest):
+    def test_301__optionQ(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -402,7 +442,9 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_302__optionQ__empty(
-        self, request: pytest.FixtureRequest, data201__assign: str
+        self,
+        request: pytest.FixtureRequest,
+        data201__assign: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data201__assign) is str
@@ -430,7 +472,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_303__optionQ__two_quote(self, request: pytest.FixtureRequest):
+    def test_303__optionQ__two_quote(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -472,7 +517,10 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_endData304, ids=[x[0] for x in sm_endData304])
-    def endData304(self, request: pytest.FixtureRequest) -> typing.Tuple[str, str, str]:
+    def endData304(
+        self,
+        request: pytest.FixtureRequest,
+    ) -> typing.Tuple[str, str, str]:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple
         assert len(request.param) == 3
@@ -480,7 +528,9 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_304__optionQ__escape(
-        self, request: pytest.FixtureRequest, endData304: str
+        self,
+        request: pytest.FixtureRequest,
+        endData304: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(endData304) is tuple
@@ -519,7 +569,10 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data3E01, ids=[x[0] for x in sm_data3E01])
-    def endData3E01(self, request: pytest.FixtureRequest) -> str:
+    def endData3E01(
+        self,
+        request: pytest.FixtureRequest,
+    ) -> str:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple
         assert type(request.param[1]) is str
@@ -527,7 +580,9 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_3E01__optionQ__no_end_quote(
-        self, request: pytest.FixtureRequest, endData3E01: str
+        self,
+        request: pytest.FixtureRequest,
+        endData3E01: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(endData3E01) is str
@@ -560,7 +615,10 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_data3E02, ids=[x[0] for x in sm_data3E02])
-    def endData3E02(self, request: pytest.FixtureRequest) -> str:
+    def endData3E02(
+        self,
+        request: pytest.FixtureRequest,
+    ) -> str:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is tuple
         assert type(request.param[1]) is str
@@ -568,7 +626,9 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_3E02__optionQ__incompleted_escape(
-        self, request: pytest.FixtureRequest, endData3E02: str
+        self,
+        request: pytest.FixtureRequest,
+        endData3E02: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(endData3E02) is str
@@ -623,7 +683,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_401__include(self, request: pytest.FixtureRequest):
+    def test_401__include(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -651,7 +714,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_4E01__empty_path(self, request: pytest.FixtureRequest):
+    def test_4E01__empty_path(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -684,7 +750,9 @@ class TestSet001__Common:
         "data4E02", [x[1] for x in sm_dataE4E02], ids=[x[0] for x in sm_dataE4E02]
     )
     def test_4E02__incompleted_path(
-        self, request: pytest.FixtureRequest, data4E02: str
+        self,
+        request: pytest.FixtureRequest,
+        data4E02: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data4E02) is str
@@ -709,7 +777,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_4E03__unknown_escape_symbol(self, request: pytest.FixtureRequest):
+    def test_4E03__unknown_escape_symbol(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -744,7 +815,9 @@ class TestSet001__Common:
         "data4E04", [x[1] for x in sm_dataE4E04], ids=[x[0] for x in sm_dataE4E04]
     )
     def test_4E04__incompleted_escape(
-        self, request: pytest.FixtureRequest, data4E04: str
+        self,
+        request: pytest.FixtureRequest,
+        data4E04: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data4E04) is str
@@ -791,7 +864,9 @@ class TestSet001__Common:
         "data4E05", [x[1] for x in sm_dataE4E05], ids=[x[0] for x in sm_dataE4E05]
     )
     def test_4E05__include_without_path(
-        self, request: pytest.FixtureRequest, data4E05: str
+        self,
+        request: pytest.FixtureRequest,
+        data4E05: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(data4E05) is str

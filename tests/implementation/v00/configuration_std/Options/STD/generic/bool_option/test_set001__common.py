@@ -30,7 +30,10 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.fixture(params=sm_OptionNames, ids=[x for x in sm_OptionNames])
-    def optionName(self, request: pytest.FixtureRequest) -> str:
+    def optionName(
+        self,
+        request: pytest.FixtureRequest,
+    ) -> str:
         assert isinstance(request, pytest.FixtureRequest)
         assert type(request.param) is str
         return request.param
@@ -97,7 +100,10 @@ class TestSet001__Common:
     ]
 
     # --------------------------------------------------------------------
-    def test_001__ok(self, optionName: str):
+    def test_001__ok(
+        self,
+        optionName: str,
+    ):
         assert type(optionName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -162,7 +168,10 @@ class TestSet001__Common:
     ]
 
     # --------------------------------------------------------------------
-    def test_002__cant_convert_value(self, optionName: str):
+    def test_002__cant_convert_value(
+        self,
+        optionName: str,
+    ):
         assert type(optionName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -211,7 +220,10 @@ class TestSet001__Common:
     ]
 
     # --------------------------------------------------------------------
-    def test_003__bad_option_value_type(self, optionName: str):
+    def test_003__bad_option_value_type(
+        self,
+        optionName: str,
+    ):
         assert type(optionName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -351,7 +363,10 @@ class TestSet001__Common:
     ]
 
     # --------------------------------------------------------------------
-    def test_101__parse_file_line(self, optionName: str):
+    def test_101__parse_file_line(
+        self,
+        optionName: str,
+    ):
         assert type(optionName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
