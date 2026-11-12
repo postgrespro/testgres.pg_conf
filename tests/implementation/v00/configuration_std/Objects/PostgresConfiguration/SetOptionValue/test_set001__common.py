@@ -153,10 +153,10 @@ class TestSet001__Common:
         assert len(fileData.m_Lines) == 1
         assert fileData.m_Lines[0] is fileLineData
 
-        assert type(cfg.m_Data.m_Files) is list
-        assert len(cfg.m_Data.m_Files) == 1
-        assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
-        assert cfg.m_Data.m_Files[0] is fileData
+        assert type(cfg.m_Data.m_TopLevelFiles) is list
+        assert len(cfg.m_Data.m_TopLevelFiles) == 1
+        assert type(cfg.m_Data.m_TopLevelFiles[0]) is PgCfgModel__FileData
+        assert cfg.m_Data.m_TopLevelFiles[0] is fileData
         assert type(cfg.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
         assert cfg.m_Data.m_AllFilesByName.get_elements_count() == 1
         assert "postgresql.auto.conf" in cfg.m_Data.m_AllFilesByName.keys()
@@ -314,9 +314,9 @@ class TestSet001__Common:
         assert r1.Option is not None
         assert r1.Option is r1.m_Opt
 
-        assert len(cfg.m_Data.m_Files) == 1
-        assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
-        assert len(cfg.m_Data.m_Files[0].m_Lines) == 1
+        assert len(cfg.m_Data.m_TopLevelFiles) == 1
+        assert type(cfg.m_Data.m_TopLevelFiles[0]) is PgCfgModel__FileData
+        assert len(cfg.m_Data.m_TopLevelFiles[0].m_Lines) == 1
         assert cfg.m_Data.m_AllOptionsByName.get_elements_count() == 1
 
         r2 = cfg.SetOptionValue(optName, None)
@@ -327,9 +327,9 @@ class TestSet001__Common:
         assert r2.m_OptData is None
         assert r2.Option is None
 
-        assert len(cfg.m_Data.m_Files) == 1
-        assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
-        assert len(cfg.m_Data.m_Files[0].m_Lines) == 0
+        assert len(cfg.m_Data.m_TopLevelFiles) == 1
+        assert type(cfg.m_Data.m_TopLevelFiles[0]) is PgCfgModel__FileData
+        assert len(cfg.m_Data.m_TopLevelFiles[0].m_Lines) == 0
         assert cfg.m_Data.m_AllOptionsByName.get_elements_count() == 0
 
         assert type(r1.Option) is PgCfg_Option_Base

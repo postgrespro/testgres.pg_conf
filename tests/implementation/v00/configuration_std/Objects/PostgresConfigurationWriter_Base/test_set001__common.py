@@ -33,10 +33,12 @@ class TestSet001__Common:
 
         rootTmpDir = TestServices.GetRootTmpDir()
         cfg = PgCfg_Std(rootTmpDir)
+        assert len(cfg.m_Data.m_TopLevelFiles) == 0
+
         cfg.SetOptionValue(optName, 234)
 
-        assert len(cfg.m_Data.m_Files) == 1
-        fileData = cfg.m_Data.m_Files[0]
+        assert len(cfg.m_Data.m_TopLevelFiles) == 1
+        fileData = cfg.m_Data.m_TopLevelFiles[0]
         assert type(fileData) is PgCfgModel__FileData
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
@@ -55,11 +57,13 @@ class TestSet001__Common:
 
         rootTmpDir = TestServices.GetRootTmpDir()
         cfg = PgCfg_Std(rootTmpDir)
+        assert len(cfg.m_Data.m_TopLevelFiles) == 0
+
         cfg.SetOptionValue("port", 234)
         cfg.SetOptionValue("proxima.port", 345)
 
-        assert len(cfg.m_Data.m_Files) == 1
-        fileData = cfg.m_Data.m_Files[0]
+        assert len(cfg.m_Data.m_TopLevelFiles) == 1
+        fileData = cfg.m_Data.m_TopLevelFiles[0]
         assert type(fileData) is PgCfgModel__FileData
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
@@ -83,6 +87,7 @@ class TestSet001__Common:
 
         rootTmpDir = TestServices.GetRootTmpDir()
         cfg = PgCfg_Std(rootTmpDir)
+        assert len(cfg.m_Data.m_TopLevelFiles) == 0
         cfg.SetOptionValue("port", 234)
         assert len(cfg.get_AllFiles()) == 1
         assert len(list(cfg.get_AllFiles())) == 1
@@ -90,8 +95,8 @@ class TestSet001__Common:
         cfg.SetOptionValue("proxima.port", 345)
         assert len(list(cfg.get_AllFiles())[0].get_Lines()) == 3
 
-        assert len(cfg.m_Data.m_Files) == 1
-        fileData = cfg.m_Data.m_Files[0]
+        assert len(cfg.m_Data.m_TopLevelFiles) == 1
+        fileData = cfg.m_Data.m_TopLevelFiles[0]
         assert type(fileData) is PgCfgModel__FileData
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
@@ -115,6 +120,7 @@ class TestSet001__Common:
 
         rootTmpDir = TestServices.GetRootTmpDir()
         cfg = PgCfg_Std(rootTmpDir)
+        assert len(cfg.get_AllFiles()) == 0
         cfg.SetOptionValue("port", 234)
         assert len(cfg.get_AllFiles()) == 1
         assert len(list(cfg.get_AllFiles())) == 1
@@ -122,8 +128,8 @@ class TestSet001__Common:
         cfg.SetOptionValue("proxima.port", 345)
         assert len(list(cfg.get_AllFiles())[0].get_Lines()) == 3
 
-        assert len(cfg.m_Data.m_Files) == 1
-        fileData = cfg.m_Data.m_Files[0]
+        assert len(cfg.m_Data.m_TopLevelFiles) == 1
+        fileData = cfg.m_Data.m_TopLevelFiles[0]
         assert type(fileData) is PgCfgModel__FileData
 
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
