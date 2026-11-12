@@ -420,6 +420,39 @@ class ModelUtils:
 
     # --------------------------------------------------------------------
     @staticmethod
+    def Cfg__FindTopLevelFileByName(
+        cfgData: PgCfgModel__ConfigurationData,
+        file_name: str,
+    ) -> typing.Optional[PgCfgModel__FileData]:
+        assert type(cfgData) is PgCfgModel__ConfigurationData
+        assert type(file_name) is str
+        assert file_name != ""
+        assert isinstance(cfgData.OsOps, ConfigurationOsOps)
+        assert cfgData.OsOps.Path_BaseName(file_name) == file_name
+        assert type(cfgData.m_AllFilesByName) is PgCfgModel__MultiIndex
+
+        file_path = cfgData.OsOps.Path_Join(
+            cfgData.m_DataDir,
+            file_name,
+        )
+        file_path_n = cfgData.OsOps.Path_NormPath(
+            file_path,
+        )
+
+        for fileData in cfgData.m_AllFilesByName.elements():
+            assert fileData is not None
+            assert type(fileData) is PgCfgModel__FileData
+            assert fileData.IsAlive()
+
+            if fileData.m_Path == file_path_n:
+                return fileData
+
+            continue
+
+        return None
+
+    # --------------------------------------------------------------------
+    @staticmethod
     def Cfg__CreateAndAddTopLevelFile__AUTO(
         cfgData: PgCfgModel__ConfigurationData,
         file_name: str,
@@ -442,6 +475,17 @@ class ModelUtils:
 
         assert type(newFilePath) is str
         assert newFilePath != ""
+
+        # TODO: use index
+        for fileData in cfgData.m_AllFilesByName.elements():
+            assert fileData is not None
+            assert type(fileData) is PgCfgModel__FileData
+            assert fileData.IsAlive()
+
+            if fileData.m_Path == newFilePath:
+                BugCheckError.FileIsAlreadyRegistered(newFilePath)
+
+            continue
 
         return __class__.Helper__FinishCreateTopLevelFile(
             cfgData,

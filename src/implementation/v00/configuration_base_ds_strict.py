@@ -25,8 +25,6 @@ from ...core.handlers import OptionHandlerToPrepareGetValue as PgCfgModel__Optio
 from ...core.helpers import Helpers
 from ...core.raise_error import RaiseError
 from ...core.bugcheck_error import BugCheckError
-
-from ...os.abstract.configuration_os_ops import ConfigurationOsOps
 # fmt: on
 
 import typing
@@ -1125,7 +1123,7 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
         assert optionValue is not None
 
         # Let's select the file to append this new option
-        getFileData_r = __class__.Helper__GetFileForSimpleOption(
+        getFileData_r = __class__.Helper__GetFileForNewSimpleOption(
             cfg,
             optionName,
         )
@@ -1442,7 +1440,7 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
     # --------------------------------------------------------------------
     # returns tuple[FileData, Bool_signal_about_creating_a_new_file]
     @staticmethod
-    def Helper__GetFileForSimpleOption(
+    def Helper__GetFileForNewSimpleOption(
         cfg: PostgresConfiguration_Base,
         option_name: str,
     ) -> typing.Tuple[PgCfgModel__FileData, bool]:
@@ -1459,8 +1457,8 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
             specFileName = "postgresql." + ".".join(option_name_parts[:-1]) + ".conf"
             assert type(specFileName) is str
 
-            fileData = __class__.Helper__FindFileByName(
-                cfg,
+            fileData = PgCfgModel__ModelUtils.Cfg__FindTopLevelFileByName(
+                cfg.m_Data,
                 specFileName,
             )
 
@@ -1470,8 +1468,8 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
 
         # Let's use standard "postgresql.auto.conf"
 
-        fileData = __class__.Helper__FindFileByName(
-            cfg,
+        fileData = PgCfgModel__ModelUtils.Cfg__FindTopLevelFileByName(
+            cfg.m_Data,
             cfg.Internal__GetAutoConfFileName(),
         )
 
@@ -1493,46 +1491,6 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def Helper__FindFileByName(
-        cfg: PostgresConfiguration_Base,
-        file_name: str,
-    ) -> typing.Optional[PgCfgModel__FileData]:
-        assert isinstance(cfg, PostgresConfiguration_Base)
-        assert type(file_name) is str
-        assert file_name != ""
-        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
-        assert isinstance(cfg.m_Data.OsOps, ConfigurationOsOps)
-        assert cfg.m_Data.OsOps.Path_BaseName(file_name) == file_name
-
-        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
-        assert type(cfg.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
-
-        file_name_n = cfg.m_Data.OsOps.Path_NormCase(file_name)
-
-        if file_name_n not in cfg.m_Data.m_AllFilesByName.keys():
-            return None
-
-        data = cfg.m_Data.m_AllFilesByName[file_name_n]
-
-        assert data is not None
-
-        if type(data) is PgCfgModel__FileData:
-            return data
-
-        if type(data) is list:
-            assert len(data) > 1
-            BugCheckError.MultipleDefOfFileIsFound(
-                file_name_n,
-                len(data),
-            )
-
-        BugCheckError.UnkFileObjectDataType(
-            file_name_n,
-            type(data),
-        )
-
-    # --------------------------------------------------------------------
-    @staticmethod
     def Helper__FinalRegSimpleOptionValue__Common(
         cfg: PostgresConfiguration_Base,
         optionName: str,
@@ -1549,7 +1507,7 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
         assert optionName not in cfg.m_Data.m_AllOptionsByName.keys()
 
         # Select the file to append this new option
-        getFileData_r = __class__.Helper__GetFileForSimpleOption(
+        getFileData_r = __class__.Helper__GetFileForNewSimpleOption(
             cfg,
             optionName,
         )

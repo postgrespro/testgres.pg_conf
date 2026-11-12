@@ -114,6 +114,15 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
+    def FileIsAlreadyRegistered(
+        file_path: str,
+    ) -> typing.NoReturn:
+        errMsg = "File [{}] is already registered.".format(file_path)
+
+        __class__.Helper__Raise(errMsg)
+
+    # --------------------------------------------------------------------
+    @staticmethod
     def OptionIsNotFoundInIndex(
         optName: str,
     ) -> typing.NoReturn:
