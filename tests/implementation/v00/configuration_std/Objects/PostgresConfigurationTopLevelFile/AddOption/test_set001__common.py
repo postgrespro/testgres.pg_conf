@@ -30,7 +30,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
@@ -72,7 +72,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         option = file.AddOption(C_OPT_NAME, 123)
@@ -103,7 +103,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file1 = cfg.AddTopLevelFile("postgresql.proxima.conf")
         option = cfg.SetOptionValue(C_OPT_NAME, 123).Option
@@ -138,7 +138,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile("postgresql.proxima.conf")
 
@@ -161,7 +161,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile("postgresql.proxima.conf")
 
@@ -184,7 +184,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile("postgresql.proxima.conf")
 
@@ -201,7 +201,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile("postgresql.proxima.conf")
 
@@ -218,7 +218,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile("postgresql.proxima.conf")
 

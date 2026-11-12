@@ -22,7 +22,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         C_FILE_NAME = "postgresql.auto.conf"
 

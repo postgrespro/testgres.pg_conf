@@ -31,7 +31,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
@@ -51,7 +51,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
@@ -75,7 +75,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
@@ -134,7 +134,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file1 = cfg.AddTopLevelFile("a.conf")
         assert file1 is not None
@@ -171,7 +171,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file1 = cfg.AddTopLevelFile("a.conf")
         assert file1 is not None
@@ -205,7 +205,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None

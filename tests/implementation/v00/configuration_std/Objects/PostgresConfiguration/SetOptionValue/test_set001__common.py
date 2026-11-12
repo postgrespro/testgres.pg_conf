@@ -169,7 +169,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue("port", True)
@@ -189,7 +189,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue("port", "123.")
@@ -355,7 +355,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         file1 = cfg.AddTopLevelFile("postgresql.proxima.conf")
         assert file1 is not None
@@ -420,7 +420,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue(None, 123)
@@ -435,7 +435,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue("", 123)
