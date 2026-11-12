@@ -32,10 +32,10 @@ from ...os.abstract.configuration_os_ops import ConfigurationOsOps
 import typing
 
 # //////////////////////////////////////////////////////////////////////////////
-# PostgresConfiguration_Base__DataHandler_Strong
+# PostgresConfiguration_Base__DataStrategy_Strict
 
 
-class PostgresConfiguration_Base__DataHandler_Strong:
+class PostgresConfiguration_Base__DataStrategy_Strict:
     @staticmethod
     def SetOptionValue__Simple(
         cfg: PostgresConfiguration_Base,
@@ -1694,17 +1694,17 @@ class PostgresConfiguration_Base__DataHandler_Strong:
 
 
 # //////////////////////////////////////////////////////////////////////////////
-# g_PgCfgBaseHandlers__Strong
+# g_PgCfgBaseDataStrategy__Strict
 
 
-g_PgCfgBaseHandlers__Strong = PostgresConfiguration_Base.tagDataHandlers(
+g_PgCfgBaseDataStrategy__Strict = PostgresConfiguration_Base.tagDataStrategy(
     # fmt: off
-    SetOptionValue__Simple=PostgresConfiguration_Base__DataHandler_Strong.SetOptionValue__Simple,
-    GetOptionValue__Simple=PostgresConfiguration_Base__DataHandler_Strong.GetOptionValue__Simple,
-    GetOptionValue__UnionList=PostgresConfiguration_Base__DataHandler_Strong.GetOptionValue__UnionList,
-    ResetOption=PostgresConfiguration_Base__DataHandler_Strong.ResetOption,
-    AddSimpleOption=PostgresConfiguration_Base__DataHandler_Strong.AddSimpleOption,
-    SetUniqueOptionValueItem=PostgresConfiguration_Base__DataHandler_Strong.SetUniqueOptionValueItem,
+    SetOptionValue__Simple=PostgresConfiguration_Base__DataStrategy_Strict.SetOptionValue__Simple,
+    GetOptionValue__Simple=PostgresConfiguration_Base__DataStrategy_Strict.GetOptionValue__Simple,
+    GetOptionValue__UnionList=PostgresConfiguration_Base__DataStrategy_Strict.GetOptionValue__UnionList,
+    ResetOption=PostgresConfiguration_Base__DataStrategy_Strict.ResetOption,
+    AddSimpleOption=PostgresConfiguration_Base__DataStrategy_Strict.AddSimpleOption,
+    SetUniqueOptionValueItem=PostgresConfiguration_Base__DataStrategy_Strict.SetUniqueOptionValueItem,
     # fmt: on
 )
 

@@ -18,7 +18,7 @@ from .configuration_base_r import PostgresConfigurationReader_Base
 from .configuration_base_w import PostgresConfigurationWriter_Base
 from .configuration_base_w import PostgresConfigurationWriterCtx_Base
 
-from .configuration_base_dh_strong import g_PgCfgBaseHandlers__Strong
+from .configuration_base_ds_strict import g_PgCfgBaseDataStrategy__Strict
 
 from ...core.option.handlers.instances import g_OptionHandlers__Std__Bool
 from ...core.option.handlers.instances import g_OptionHandlers__Std__Int
@@ -76,7 +76,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         super().__init__(
             data_dir,
             cfgOsOps,
-            g_PgCfgBaseHandlers__Strong,
+            g_PgCfgBaseDataStrategy__Strict,
         )
         return
 

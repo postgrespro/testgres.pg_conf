@@ -1585,7 +1585,7 @@ class PostgresConfiguration_Base__AllOptions(PostgresConfigurationOptions):
 
 class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler):
     @dataclasses.dataclass
-    class tagDataHandlers:
+    class tagDataStrategy:
         SetOptionValue__Simple: typing.Callable[
             [
                 PostgresConfiguration_Base,
@@ -1645,18 +1645,18 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
     m_AllFiles: typing.Optional[PostgresConfiguration_Base__AllFiles]
     m_AllOptions: typing.Optional[PostgresConfiguration_Base__AllOptions]
 
-    m_Handlers: tagDataHandlers
+    m_DataStrategy: tagDataStrategy
 
     # --------------------------------------------------------------------
     def __init__(
         self,
         data_dir: str,
         osOps: ConfigurationOsOps,
-        handlers: tagDataHandlers,
+        dataStrategy: tagDataStrategy,
     ):
         assert type(data_dir) is str
         assert isinstance(osOps, ConfigurationOsOps)
-        assert type(handlers) is __class__.tagDataHandlers
+        assert type(dataStrategy) is __class__.tagDataStrategy
 
         super(PostgresConfiguration, self).__init__()
         super(PgCfgModel__DataHandler, self).__init__()
@@ -1665,7 +1665,7 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         self.m_AllFiles = None
         self.m_AllOptions = None
 
-        self.m_Handlers = handlers
+        self.m_DataStrategy = dataStrategy
         return
 
     # interface ----------------------------------------------------------
@@ -1833,10 +1833,13 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert type(optionName) is str
         assert optionValue is not None
 
-        assert type(self.m_Handlers) is __class__.tagDataHandlers
-        assert isinstance(self.m_Handlers.SetOptionValue__Simple, typing.Callable)
+        assert type(self.m_DataStrategy) is __class__.tagDataStrategy
+        assert isinstance(
+            self.m_DataStrategy.SetOptionValue__Simple,
+            typing.Callable,
+        )
 
-        return self.m_Handlers.SetOptionValue__Simple(
+        return self.m_DataStrategy.SetOptionValue__Simple(
             self,
             targetData,
             optionName,
@@ -1856,10 +1859,13 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
         assert type(optionName) is str
 
-        assert type(self.m_Handlers) is __class__.tagDataHandlers
-        assert isinstance(self.m_Handlers.GetOptionValue__Simple, typing.Callable)
+        assert type(self.m_DataStrategy) is __class__.tagDataStrategy
+        assert isinstance(
+            self.m_DataStrategy.GetOptionValue__Simple,
+            typing.Callable,
+        )
 
-        return self.m_Handlers.GetOptionValue__Simple(
+        return self.m_DataStrategy.GetOptionValue__Simple(
             self,
             sourceData,
             optionName,
@@ -1878,10 +1884,13 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
         assert type(optionName) is str
 
-        assert type(self.m_Handlers) is __class__.tagDataHandlers
-        assert isinstance(self.m_Handlers.GetOptionValue__UnionList, typing.Callable)
+        assert type(self.m_DataStrategy) is __class__.tagDataStrategy
+        assert isinstance(
+            self.m_DataStrategy.GetOptionValue__UnionList,
+            typing.Callable,
+        )
 
-        return self.m_Handlers.GetOptionValue__UnionList(
+        return self.m_DataStrategy.GetOptionValue__UnionList(
             self,
             sourceData,
             optionName,
@@ -1900,10 +1909,13 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         )
         assert type(optionName) is str
 
-        assert type(self.m_Handlers) is __class__.tagDataHandlers
-        assert isinstance(self.m_Handlers.ResetOption, typing.Callable)
+        assert type(self.m_DataStrategy) is __class__.tagDataStrategy
+        assert isinstance(
+            self.m_DataStrategy.ResetOption,
+            typing.Callable,
+        )
 
-        return self.m_Handlers.ResetOption(
+        return self.m_DataStrategy.ResetOption(
             self,
             targetData,
             optionName,
@@ -1931,10 +1943,13 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert self.m_Data.m_AllOptionsByName is not None
         assert type(self.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
 
-        assert type(self.m_Handlers) is __class__.tagDataHandlers
-        assert isinstance(self.m_Handlers.AddSimpleOption, typing.Callable)
+        assert type(self.m_DataStrategy) is __class__.tagDataStrategy
+        assert isinstance(
+            self.m_DataStrategy.AddSimpleOption,
+            typing.Callable,
+        )
 
-        return self.m_Handlers.AddSimpleOption(
+        return self.m_DataStrategy.AddSimpleOption(
             self,
             targetData,
             optionOffset,
@@ -1957,10 +1972,13 @@ class PostgresConfiguration_Base(PostgresConfiguration, PgCfgModel__DataHandler)
         assert type(optionName) is str
         assert optionValueItem is not None
 
-        assert type(self.m_Handlers) is __class__.tagDataHandlers
-        assert isinstance(self.m_Handlers.SetUniqueOptionValueItem, typing.Callable)
+        assert type(self.m_DataStrategy) is __class__.tagDataStrategy
+        assert isinstance(
+            self.m_DataStrategy.SetUniqueOptionValueItem,
+            typing.Callable,
+        )
 
-        return self.m_Handlers.SetUniqueOptionValueItem(
+        return self.m_DataStrategy.SetUniqueOptionValueItem(
             self,
             targetData,
             optionName,
