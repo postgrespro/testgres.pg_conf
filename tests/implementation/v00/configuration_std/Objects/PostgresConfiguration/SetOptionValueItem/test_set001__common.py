@@ -31,7 +31,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         for nPass in range(3):
             logging.info("--------- pass: {0}".format(nPass))
@@ -80,7 +80,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         expectedValue: typing.List[str] = list()
 
@@ -150,7 +150,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
@@ -173,7 +173,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
@@ -199,7 +199,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
@@ -225,7 +225,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
@@ -256,7 +256,7 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+        cfg = PgCfg_Std(rootTmpDir)
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 

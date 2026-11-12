@@ -369,7 +369,7 @@ class TestSet001__Common:
                         )
                     )
 
-                    cfg = PgCfg_Std(TestServices.GetRootTmpDir())
+                    cfg = PgCfg_Std(rootTmpDir)
                     file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
                     line = optionName
