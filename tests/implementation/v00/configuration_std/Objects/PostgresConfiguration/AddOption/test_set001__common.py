@@ -233,5 +233,65 @@ class TestSet001__Common:
         assert option.get_Value() == 123
         return
 
+    # --------------------------------------------------------------------
+    def test_006__two_options(
+        self,
+        request: pytest.FixtureRequest,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(rootTmpDir)
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
+        assert cfg.m_Data.m_DataDir == rootTmpDir
+
+        opt1 = cfg.AddOption("OPT1", 123)
+        assert opt1 is not None
+        assert opt1.m_FileLine is not None
+        assert opt1.m_FileLine.m_FileLineData is not None
+        assert opt1.m_FileLine.get_Parent() is not None
+        assert opt1.m_FileLine.get_Parent().m_FileData is not None
+        assert len(opt1.m_FileLine.get_Parent().m_FileData.m_Lines) == 1
+        opt1_filelineData = opt1.m_FileLine.m_FileLineData
+        assert opt1_filelineData is not None
+        opt1_fileData = opt1_filelineData.m_Parent
+        assert opt1_fileData is not None
+
+        opt2 = cfg.AddOption("OPT2", 321)
+        assert opt2 is not None
+        assert opt2.m_FileLine is not None
+        assert opt2.m_FileLine.m_FileLineData is not None
+        assert opt2.m_FileLine.get_Parent() is not None
+        assert opt2.m_FileLine.get_Parent().m_FileData is not None
+        assert len(opt1.m_FileLine.get_Parent().m_FileData.m_Lines) == 2
+        opt2_filelineData = opt2.m_FileLine.m_FileLineData
+        assert opt2_filelineData is not None
+        opt2_fileData = opt2_filelineData.m_Parent
+        assert opt2_fileData is not None
+
+        assert opt1 is not opt2
+        assert opt1_filelineData is not opt2_filelineData
+        assert opt1_fileData is opt2_fileData
+
+        # --------
+        assert opt1.get_Name() == "OPT1"
+        assert opt1.get_Value() == 123
+
+        assert opt2.get_Name() == "OPT2"
+        assert opt2.get_Value() == 321
+
+        # --------
+        assert len(opt1_fileData.m_Lines) == 2
+        assert opt1_fileData.m_Lines[0] is opt1_filelineData
+        assert opt1_fileData.m_Lines[1] is opt2_filelineData
+
+        assert opt1_fileData.m_Path == os.path.join(
+            rootTmpDir,
+            cfg.Internal__GetAutoConfFileName(),
+        )
+        return
+
 
 # //////////////////////////////////////////////////////////////////////////////
