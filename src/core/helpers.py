@@ -13,7 +13,9 @@ import typing
 
 class Helpers:
     @staticmethod
-    def ExtractOptionDataName(option: typing.Union[str, OptionData]) -> str:
+    def ExtractOptionDataName(
+        option: typing.Union[str, OptionData],
+    ) -> str:
         assert type(option) is str or type(option) is OptionData
 
         if type(option) is str:
@@ -27,7 +29,8 @@ class Helpers:
     # --------------------------------------------------------------------
     @staticmethod
     def ExtractFirstOptionFromIndexItem(
-        optionName: str, indexItem: typing.Union[OptionData, typing.List[OptionData]]
+        optionName: str,
+        indexItem: typing.Union[OptionData, typing.List[OptionData]],
     ) -> OptionData:
         assert type(optionName) is str
 
@@ -47,7 +50,8 @@ class Helpers:
     # --------------------------------------------------------------------
     @staticmethod
     def DoesContainerContainsValue__NotNullAndExact(
-        container: typing.Iterable, value: typing.Any
+        container: typing.Iterable,
+        value: typing.Any,
     ) -> bool:
         assert container is not None
         assert isinstance(container, typing.Iterable)
@@ -66,7 +70,9 @@ class Helpers:
     # --------------------------------------------------------------------
     @staticmethod
     def NormalizeFilePath(
-        cfgOsOps: ConfigurationOsOps, baseFolder: str, filePath: str
+        cfgOsOps: ConfigurationOsOps,
+        baseFolder: str,
+        filePath: str,
     ) -> str:
         assert cfgOsOps is not None
         assert isinstance(cfgOsOps, ConfigurationOsOps)
