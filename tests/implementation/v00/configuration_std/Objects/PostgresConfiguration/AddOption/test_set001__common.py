@@ -121,10 +121,10 @@ class TestSet001__Common:
         assert len(fileData.m_Lines) == 1
         assert fileData.m_Lines[0] is fileLineData
 
-        assert type(cfg.m_Data.m_Files) is list
-        assert len(cfg.m_Data.m_Files) == 1
-        assert type(cfg.m_Data.m_Files[0]) is PgCfgModel__FileData
-        assert cfg.m_Data.m_Files[0] is fileData
+        assert type(cfg.m_Data.m_TopLevelFiles) is list
+        assert len(cfg.m_Data.m_TopLevelFiles) == 1
+        assert type(cfg.m_Data.m_TopLevelFiles[0]) is PgCfgModel__FileData
+        assert cfg.m_Data.m_TopLevelFiles[0] is fileData
         assert type(cfg.m_Data.m_AllFilesByName) is PgCfgModel__MultiIndex
         assert cfg.m_Data.m_AllFilesByName.get_elements_count() == 1
         assert len(list(cfg.m_Data.m_AllFilesByName.keys())) == 1

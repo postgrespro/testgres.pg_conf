@@ -280,7 +280,7 @@ class ConfigurationData(ObjectData):
     m_DataDir: str
     m_OsOps: ConfigurationOsOps
 
-    m_Files: typing.List[FileData]
+    m_TopLevelFiles: typing.List[FileData]
 
     m_AllOptionsByName: T_OPTIONS_INDEX
     m_AllFilesByName: T_FILES_INDEX
@@ -295,11 +295,11 @@ class ConfigurationData(ObjectData):
         self.m_DataDir = data_dir
         self.m_OsOps = osOps
 
-        self.m_Files = list()
+        self.m_TopLevelFiles = list()
         self.m_AllOptionsByName = MultiIndex()
         self.m_AllFilesByName = MultiIndex()
 
-        assert type(self.m_Files) is list
+        assert type(self.m_TopLevelFiles) is list
         assert type(self.m_AllOptionsByName) is MultiIndex
         assert type(self.m_AllFilesByName) is MultiIndex
         return

@@ -73,11 +73,11 @@ class TestSet001__Common:
             is bihaConfFile.m_FileData
         )
 
-        assert file1.m_FileData in cfg.m_Data.m_Files
-        assert bihaConfFile.m_FileData not in cfg.m_Data.m_Files
+        assert file1.m_FileData in cfg.m_Data.m_TopLevelFiles
+        assert bihaConfFile.m_FileData not in cfg.m_Data.m_TopLevelFiles
 
-        assert len(cfg.m_Data.m_Files) == 1
-        assert cfg.m_Data.m_Files[0] is file1.m_FileData
+        assert len(cfg.m_Data.m_TopLevelFiles) == 1
+        assert cfg.m_Data.m_TopLevelFiles[0] is file1.m_FileData
 
         assert len(list(cfg.m_Data.m_AllFilesByName.keys())) == 2
 

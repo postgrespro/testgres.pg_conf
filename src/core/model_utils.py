@@ -425,7 +425,7 @@ class ModelUtils:
         file_name: str,
     ) -> PgCfgModel__FileData:
         assert type(cfgData) is PgCfgModel__ConfigurationData
-        assert type(cfgData.m_Files) is list
+        assert type(cfgData.m_TopLevelFiles) is list
         assert type(cfgData.m_AllFilesByName) is PgCfgModel__MultiIndex
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert type(file_name) is str
@@ -455,7 +455,7 @@ class ModelUtils:
         path: str,
     ) -> PgCfgModel__FileData:
         assert type(cfgData) is PgCfgModel__ConfigurationData
-        assert type(cfgData.m_Files) is list
+        assert type(cfgData.m_TopLevelFiles) is list
         assert type(cfgData.m_AllFilesByName) is PgCfgModel__MultiIndex
         assert type(path) is str
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
@@ -494,7 +494,7 @@ class ModelUtils:
         path: str,
     ) -> PgCfgModel__FileData:
         assert type(cfgData) is PgCfgModel__ConfigurationData
-        assert type(cfgData.m_Files) is list
+        assert type(cfgData.m_TopLevelFiles) is list
         assert type(cfgData.m_AllFilesByName) is PgCfgModel__MultiIndex
         assert isinstance(cfgData.OsOps, ConfigurationOsOps)
         assert type(baseFolder) is str
@@ -553,7 +553,7 @@ class ModelUtils:
         )  # raise
 
         try:
-            cfgData.m_Files.append(newFileData)  # raise
+            cfgData.m_TopLevelFiles.append(newFileData)  # raise
         except:
             __class__.Helper__UnRegFileFromCfgData(
                 cfgData,
