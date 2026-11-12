@@ -33,12 +33,17 @@ from ...os.local.configuration_os_ops import SingleInstance as LocalCfgOsOps
 from ...core.bugcheck_error import BugCheckError
 
 import typing
+import enum
 
 # //////////////////////////////////////////////////////////////////////////////
 # class PostgresConfiguration_Std
 
 
 class PostgresConfiguration_Std(PostgresConfiguration_Base):
+    class Strategy(enum.Enum):
+        Strict = "Strict"
+
+    # --------------------------------------------------------------------
     C_POSTGRESQL_CONF = "postgresql.conf"
     C_POSTGRESQL_AUTO_CONF = "postgresql.auto.conf"
 
@@ -64,6 +69,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         self,
         data_dir: str,
         cfgOsOps: typing.Optional[ConfigurationOsOps] = None,
+        strategy: Strategy = Strategy.Strict,
     ):
         assert type(data_dir) is str
         assert cfgOsOps is None or isinstance(cfgOsOps, ConfigurationOsOps)
@@ -73,10 +79,15 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
         assert isinstance(cfgOsOps, ConfigurationOsOps)
 
+        dataStrategy = __class__.Helper__GetDataStrategy(
+            strategy,
+        )
+        assert dataStrategy is not None
+
         super().__init__(
             data_dir,
             cfgOsOps,
-            g_PgCfgBaseDataStrategy__Strict,
+            dataStrategy,
         )
         return
 
@@ -259,6 +270,20 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         return optionHandlers.Write
 
     # Helper methods -----------------------------------------------------
+    @staticmethod
+    def Helper__GetDataStrategy(
+        strategy: Strategy,
+    ) -> PostgresConfiguration_Base.tagDataStrategy:
+        assert type(strategy) is __class__.Strategy
+
+        if strategy == __class__.Strategy.Strict:
+            return g_PgCfgBaseDataStrategy__Strict
+
+        BugCheckError.UnsupportedPgConfStrategy(
+            strategy,
+        )
+
+    # --------------------------------------------------------------------
     def Helper__GetOptionHandlers(
         self,
         name: str,

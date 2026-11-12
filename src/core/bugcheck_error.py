@@ -296,6 +296,18 @@ class BugCheckError:
 
         __class__.Helper__Raise(errMsg)
 
+    # --------------------------------------------------------------------
+    @staticmethod
+    def UnsupportedPgConfStrategy(
+        strategy: typing.Any,
+    ) -> typing.NoReturn:
+
+        errMsg = "Unsupported data strategy {!r}.".format(
+            strategy,
+        )
+
+        __class__.Helper__Raise(errMsg)
+
     # Helper methods -----------------------------------------------------
     @staticmethod
     def Helper__Raise(msg: str) -> typing.NoReturn:
