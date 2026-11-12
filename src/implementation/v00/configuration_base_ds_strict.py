@@ -1459,7 +1459,7 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
             specFileName = "postgresql." + ".".join(option_name_parts[:-1]) + ".conf"
             assert type(specFileName) is str
 
-            fileData = __class__.Helper__FindFile(
+            fileData = __class__.Helper__FindFileByName(
                 cfg,
                 specFileName,
             )
@@ -1470,7 +1470,7 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
 
         # Let's use standard "postgresql.auto.conf"
 
-        fileData = __class__.Helper__FindFile(
+        fileData = __class__.Helper__FindFileByName(
             cfg,
             cfg.Internal__GetAutoConfFileName(),
         )
@@ -1493,7 +1493,7 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def Helper__FindFile(
+    def Helper__FindFileByName(
         cfg: PostgresConfiguration_Base,
         file_name: str,
     ) -> typing.Optional[PgCfgModel__FileData]:
