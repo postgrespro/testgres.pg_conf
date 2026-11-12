@@ -55,7 +55,12 @@ class TestSet001__Common:
         assert type(option) is PgCfg_Option_Base
         assert isinstance(option, PgCfg_Option)
 
-        __class__.Helper__CheckStateOfCfgWithOneIntOpt(cfg, option, optName, 123)
+        __class__.Helper__CheckStateOfCfgWithOneIntOpt(
+            cfg,
+            option,
+            optName,
+            123,
+        )
 
         # Amen
         return
@@ -63,7 +68,10 @@ class TestSet001__Common:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__CheckStateOfCfgWithOneIntOpt(
-        cfg: PgCfg_Std, opt: PgCfg_Option_Base, optName: str, optValue: int
+        cfg: PgCfg_Std,
+        opt: PgCfg_Option_Base,
+        optName: str,
+        optValue: int,
     ):
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert type(opt) is PgCfg_Option_Base

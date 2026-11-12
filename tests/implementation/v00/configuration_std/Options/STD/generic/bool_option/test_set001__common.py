@@ -29,7 +29,10 @@ class TestSet001__Common:
     ]
 
     # --------------------------------------------------------------------
-    @pytest.fixture(params=sm_OptionNames, ids=[x for x in sm_OptionNames])
+    @pytest.fixture(
+        params=sm_OptionNames,
+        ids=[x for x in sm_OptionNames],
+    )
     def optionName(
         self,
         request: pytest.FixtureRequest,
