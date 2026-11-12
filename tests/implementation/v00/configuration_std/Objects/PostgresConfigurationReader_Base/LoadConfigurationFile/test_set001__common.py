@@ -29,7 +29,10 @@ import datetime
 
 
 class TestSet001__Common:
-    def test_000__empty(self, request: pytest.FixtureRequest):
+    def test_000__empty(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -67,7 +70,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_001__comment_and_options(self, request: pytest.FixtureRequest):
+    def test_001__comment_and_options(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -153,7 +159,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_002__two_files(self, request: pytest.FixtureRequest):
+    def test_002__two_files(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -224,7 +233,8 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     def test_003__two_files__duplication_and_cycles(
-        self, request: pytest.FixtureRequest
+        self,
+        request: pytest.FixtureRequest,
     ):
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 

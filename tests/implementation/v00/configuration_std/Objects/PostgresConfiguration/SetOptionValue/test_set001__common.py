@@ -40,7 +40,11 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_001__int_opt(self, request: pytest.FixtureRequest, optName: str):
+    def test_001__int_opt(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -68,7 +72,11 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_002__port___reasign(self, request: pytest.FixtureRequest, optName: str):
+    def test_002__port___reasign(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -163,7 +171,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_003__port___bad_type(self, request: pytest.FixtureRequest):
+    def test_003__port___bad_type(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -183,7 +194,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_004__port___cont_convert_value(self, request: pytest.FixtureRequest):
+    def test_004__port___cont_convert_value(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -204,7 +218,11 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_006(self, request: pytest.FixtureRequest, optName: str):
+    def test_006(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -246,7 +264,11 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_007__set_None(self, request: pytest.FixtureRequest, optName: str):
+    def test_007__set_None(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -268,7 +290,11 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_008__set_Int_set_None(self, request: pytest.FixtureRequest, optName: str):
+    def test_008__set_Int_set_None(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -349,7 +375,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_009__spec_file(self, request: pytest.FixtureRequest):
+    def test_009__spec_file(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -414,7 +443,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_010__None_name(self, request: pytest.FixtureRequest):
+    def test_010__None_name(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -429,7 +461,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_011__empty_name(self, request: pytest.FixtureRequest):
+    def test_011__empty_name(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()

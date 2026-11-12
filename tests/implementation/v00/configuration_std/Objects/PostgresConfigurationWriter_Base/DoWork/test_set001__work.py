@@ -31,7 +31,10 @@ import typing
 
 
 class TestSet001__Common:
-    def test_000__empty(self, request: pytest.FixtureRequest):
+    def test_000__empty(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -86,7 +89,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_001(self, request: pytest.FixtureRequest):
+    def test_001(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -155,7 +161,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_003__two_files(self, request: pytest.FixtureRequest):
+    def test_003__two_files(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -242,7 +251,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_004__check_truncate(self, request: pytest.FixtureRequest):
+    def test_004__check_truncate(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -293,7 +305,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_E01__file_is_exist(self, request: pytest.FixtureRequest):
+    def test_E01__file_is_exist(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -356,7 +371,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_E02__external_modification(self, request: pytest.FixtureRequest):
+    def test_E02__external_modification(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)

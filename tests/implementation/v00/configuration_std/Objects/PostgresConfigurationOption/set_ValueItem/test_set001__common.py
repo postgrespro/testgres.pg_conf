@@ -26,7 +26,10 @@ import logging
 
 
 class TestSet001__Common:
-    def test_001(self, request: pytest.FixtureRequest):
+    def test_001(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "shared_preload_libraries"
@@ -78,7 +81,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_002__set_None(self, request: pytest.FixtureRequest):
+    def test_002__set_None(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "shared_preload_libraries"
@@ -108,7 +114,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_003__set_value_item_with_bad_type(self, request: pytest.FixtureRequest):
+    def test_003__set_value_item_with_bad_type(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "shared_preload_libraries"
@@ -142,7 +151,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_004_set_list(self, request: pytest.FixtureRequest):
+    def test_004_set_list(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "shared_preload_libraries"
@@ -168,7 +180,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_005__set_str(self, request: pytest.FixtureRequest):
+    def test_005__set_str(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "shared_preload_libraries"

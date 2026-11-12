@@ -36,7 +36,11 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_001__int_opt(self, request: pytest.FixtureRequest, optName: str):
+    def test_001__int_opt(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -129,7 +133,11 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_002__None_value(self, request: pytest.FixtureRequest, optName: str):
+    def test_002__None_value(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -147,7 +155,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_003__empty_name(self, request: pytest.FixtureRequest):
+    def test_003__empty_name(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -164,7 +175,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_004__None_name(self, request: pytest.FixtureRequest):
+    def test_004__None_name(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         rootTmpDir = TestServices.GetRootTmpDir()
@@ -182,7 +196,11 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_005__already_defined(self, request: pytest.FixtureRequest, optName: str):
+    def test_005__already_defined(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 

@@ -28,7 +28,11 @@ class TestSet001__Common:
     sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_001(self, request: pytest.FixtureRequest, optName: str):
+    def test_001(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -51,7 +55,11 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_002__set_Value__int(self, request: pytest.FixtureRequest, optName: str):
+    def test_002__set_Value__int(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -93,7 +101,11 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_003__set_Value__None(self, request: pytest.FixtureRequest, optName: str):
+    def test_003__set_Value__None(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -148,7 +160,9 @@ class TestSet001__Common:
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_004__set_Value__invalid(
-        self, request: pytest.FixtureRequest, optName: str
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
@@ -190,7 +204,9 @@ class TestSet001__Common:
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
     def test_005__set_Value__cant_convert_value(
-        self, request: pytest.FixtureRequest, optName: str
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str

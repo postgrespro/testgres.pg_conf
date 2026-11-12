@@ -19,7 +19,11 @@ class TestSet001__Common:
     sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_001__no_opt(self, request: pytest.FixtureRequest, optName: str):
+    def test_001__no_opt(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -35,7 +39,11 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_002(self, request: pytest.FixtureRequest, optName: str):
+    def test_002(
+        self,
+        request: pytest.FixtureRequest,
+        optName: str,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
         assert type(optName) is str
 
@@ -59,7 +67,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_003__opt_with_list__get_None(self, request: pytest.FixtureRequest):
+    def test_003__opt_with_list__get_None(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "shared_preload_libraries"
@@ -77,7 +88,10 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_004__opt_with_list__with_data(self, request: pytest.FixtureRequest):
+    def test_004__opt_with_list__with_data(
+        self,
+        request: pytest.FixtureRequest,
+    ):
         assert isinstance(request, pytest.FixtureRequest)
 
         C_OPT_NAME = "shared_preload_libraries"
