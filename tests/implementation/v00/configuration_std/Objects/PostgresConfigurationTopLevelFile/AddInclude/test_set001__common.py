@@ -56,7 +56,8 @@ class TestSet001__Common:
         assert isinstance(bihaConfFile, PgCfg_File)
 
         assert bihaConfFile.get_Path() == os.path.join(
-            rootTmpDir, C_BIHA_CONF_FILE_NAME
+            rootTmpDir,
+            C_BIHA_CONF_FILE_NAME,
         )
 
         assert bihaConfFile.get_Configuration() is cfg
@@ -162,7 +163,8 @@ class TestSet001__Common:
 
         assert bihaConfFile2.get_Parent() is bihaConfFileInclude2
         assert bihaConfFile2.get_Path() == os.path.join(
-            rootTmpDir, C_BIHA_CONF_FILE_NAME
+            rootTmpDir,
+            C_BIHA_CONF_FILE_NAME,
         )
         return
 

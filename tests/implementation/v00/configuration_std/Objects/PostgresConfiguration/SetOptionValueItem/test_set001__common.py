@@ -97,7 +97,8 @@ class TestSet001__Common:
 
             logging.info(
                 "-------------- iOptValue: {0}, value: [{1}]".format(
-                    iOptValue, optValue
+                    iOptValue,
+                    optValue,
                 )
             )
 
