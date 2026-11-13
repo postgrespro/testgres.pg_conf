@@ -119,6 +119,7 @@ class TestSet001__Common:
         assert set_r.m_OptData is not None
         assert type(set_r.m_OptData) is PgCfgModel__OptionData
         assert set_r.m_OptData.m_Parent is None
+        return
 
     # --------------------------------------------------------------------
     def test_002__line_with_comment(
@@ -166,6 +167,7 @@ class TestSet001__Common:
         assert type(comment1.m_CommentData) is PgCfgModel__CommentData
 
         assert comment1.m_CommentData.m_Parent is None
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

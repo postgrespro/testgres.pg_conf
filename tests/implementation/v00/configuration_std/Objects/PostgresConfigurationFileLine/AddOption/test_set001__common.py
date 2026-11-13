@@ -78,6 +78,7 @@ class TestSet001__Common:
         assert option.get_Parent().m_FileLineData is fileLine.m_FileLineData
         assert option.get_Name() == "port"
         assert option.get_Value() == 123
+        return
 
     # --------------------------------------------------------------------
     def test_002__shared_preload_libraries(
@@ -123,6 +124,7 @@ class TestSet001__Common:
         assert option.get_Parent().m_FileLineData is fileLine.m_FileLineData
         assert option.get_Name() == C_OPT_NAME
         assert option.get_Value() == optValue_get
+        return
 
     # --------------------------------------------------------------------
     def test_003__shared_preload_libraries__as_str(
@@ -168,6 +170,7 @@ class TestSet001__Common:
         assert option.get_Parent().m_FileLineData is fileLine.m_FileLineData
         assert option.get_Name() == C_OPT_NAME
         assert option.get_Value() == optValue_get
+        return
 
     # --------------------------------------------------------------------
     def test_004__shared_preload_libraries__with_None_item(
@@ -243,6 +246,7 @@ class TestSet001__Common:
         assert option.get_Parent().m_FileLineData is fileLine.m_FileLineData
         assert option.get_Name() == "port"
         assert option.get_Value() == 123
+        return
 
     # --------------------------------------------------------------------
     def test_E02__after_include(
@@ -271,6 +275,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert fileLine.m_FileLineData.m_Items[0].m_Element is include.m_IncludeData
+        return
 
     # --------------------------------------------------------------------
     def test_E03__after_comment(
@@ -299,6 +304,7 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert fileLine.m_FileLineData.m_Items[0].m_Element is comment.m_CommentData
+        return
 
     # --------------------------------------------------------------------
     def test_E04__conflict_with_this_file(
@@ -345,6 +351,7 @@ class TestSet001__Common:
         assert option.get_Parent().m_FileLineData is fileLine.m_FileLineData
         assert option.get_Name() == "port"
         assert option.get_Value() == 123
+        return
 
     # --------------------------------------------------------------------
     def test_E05__conflict_with_another_file(
@@ -391,6 +398,7 @@ class TestSet001__Common:
         assert option.get_Parent().m_FileLineData is fileLine.m_FileLineData
         assert option.get_Name() == "port"
         assert option.get_Value() == 123
+        return
 
 
 # //////////////////////////////////////////////////////////////////////////////

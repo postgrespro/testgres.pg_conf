@@ -1155,6 +1155,7 @@ class PostgresConfigurationIncludedFile_Base(PostgresConfigurationFile_Base):
         )
 
         self.m_Include = include
+        return
 
     # Object interface ---------------------------------------------------
     def get_Parent(self) -> PostgresConfigurationInclude_Base:
