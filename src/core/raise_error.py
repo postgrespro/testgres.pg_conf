@@ -290,46 +290,6 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
-    def OptionValueItemIsAlreadyDefined(
-        filePath: str,
-        optName: str,
-        valueItem: typing.Any,
-    ) -> typing.NoReturn:
-        assert type(filePath) is str
-        assert type(optName) is str
-
-        errMsg = "Another definition of option [{}] value item [{}] is found in the file [{}].".format(
-            optName,
-            valueItem,
-            filePath,
-        )
-
-        __class__.Helper__RaiseErr__PostgresConfigException(
-            errMsg,
-        )
-
-    # --------------------------------------------------------------------
-    @staticmethod
-    def OptionValueItemIsAlreadyDefinedInAnotherFile(
-        filePath: str,
-        optName: str,
-        valueItem: typing.Any,
-    ) -> typing.NoReturn:
-        assert type(filePath) is str
-        assert type(optName) is str
-
-        errMsg = "Definition of option [{}] value item [{}] is found in another file [{}].".format(
-            optName,
-            valueItem,
-            filePath,
-        )
-
-        __class__.Helper__RaiseErr__PostgresConfigException(
-            errMsg,
-        )
-
-    # --------------------------------------------------------------------
-    @staticmethod
     def UnknownFileName(
         fileName: str,
     ) -> typing.NoReturn:

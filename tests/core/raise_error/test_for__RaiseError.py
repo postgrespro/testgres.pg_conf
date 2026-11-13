@@ -309,42 +309,6 @@ class TestFor_RaiseError:
         return
 
     # --------------------------------------------------------------------
-    def test_OptionValueItemIsAlreadyDefined(self):
-        with pytest.raises(PostgresConfigException) as x:
-            RaiseError.OptionValueItemIsAlreadyDefined(
-                "fff",
-                "ppp",
-                "vvv",
-            )
-
-        expectedMsg = ErrorMessageBuilder.OptionValueItemIsAlreadyDefined(
-            "fff",
-            "ppp",
-            "vvv",
-        )
-
-        assert str(x.value) == expectedMsg
-        return
-
-    # --------------------------------------------------------------------
-    def test_OptionValueItemIsAlreadyDefinedInAnotherFile(self):
-        with pytest.raises(PostgresConfigException) as x:
-            RaiseError.OptionValueItemIsAlreadyDefinedInAnotherFile(
-                "fff",
-                "ppp",
-                "vvv",
-            )
-
-        expectedMsg = ErrorMessageBuilder.OptionValueItemIsAlreadyDefinedInAnotherFile(
-            "fff",
-            "ppp",
-            "vvv",
-        )
-
-        assert str(x.value) == expectedMsg
-        return
-
-    # --------------------------------------------------------------------
     def test_UnknownFileName(self):
         with pytest.raises(PostgresConfigException) as x:
             RaiseError.UnknownFileName(

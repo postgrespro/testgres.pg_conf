@@ -96,23 +96,24 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
 
         # -------------------------------------- ROOT
         if sourceData is None:
-            optionData = __class__.Helper__FindSimpleOption(
+            optionData = __class__.Helper__FindActiveSimpleOption__Common(
                 cfg,
-                cfg.m_Data.m_AllOptionsByName,
                 optionName,
             )
 
-            if optionData is not None:
-                assert type(optionData) is PgCfgModel__OptionData
-                assert optionData.IsAlive()
-                assert optionData.m_Value is not None
-                return __class__.Helper__PrepareGetValue(
-                    cfg,
-                    optionData.m_Name,
-                    optionData.m_Value,
-                )
+            if optionData is None:
+                return None
 
-            return None
+            assert optionData is not None
+            assert optionData.IsAlive()
+            assert optionData.m_Name == optionName
+            assert optionData.m_Value is not None
+
+            return __class__.Helper__PrepareGetValue(
+                cfg,
+                optionName,
+                optionData.m_Value,
+            )
 
         # -------------------------------------- OPTION DATA
         if type(sourceData) is PgCfgModel__OptionData:
@@ -160,6 +161,21 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
 
     # --------------------------------------------------------------------
     @staticmethod
+    def Helper__FindActiveSimpleOption__Common(
+        cfg: PostgresConfiguration_Base,
+        optionName: str,
+    ) -> typing.Optional[PgCfgModel__OptionData]:
+        assert isinstance(cfg, PostgresConfiguration_Base)
+        assert type(optionName) is str
+
+        return __class__.Helper__FindSimpleOption(
+            cfg,
+            cfg.m_Data.m_AllOptionsByName,
+            optionName,
+        )
+
+    # --------------------------------------------------------------------
+    @staticmethod
     def GetOptionValue__UnionList(
         cfg: PostgresConfiguration_Base,
         sourceData: PgCfgModel__DataHandler.T_TARGET_OF_GET_OPTION_VALUE,
@@ -173,69 +189,13 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
         )
         assert type(optionName) is str
 
-        # -------------------------------------- ROOT
-        if sourceData is None:
-            unionList = __class__.Helper__AggregateAllOptionValues(
-                cfg.m_Data.m_AllOptionsByName,
-                optionName,
-            )
-
-            if unionList is None:
-                return None
-
-            assert type(unionList) is list
-            return __class__.Helper__PrepareGetValue(
-                cfg,
-                optionName,
-                unionList,
-            )
-
-        # -------------------------------------- OPTION DATA
-        if type(sourceData) is PgCfgModel__OptionData:
-            optionData = sourceData
-
-            assert optionData.IsAlive()
-            assert optionData.m_Value is not None
-            cfg.Debug__CheckOurObjectData(
-                optionData,
-            )
-            assert optionData.m_Name == optionName
-            return __class__.Helper__PrepareGetValue(
-                cfg,
-                optionData.m_Name,
-                optionData.m_Value,
-            )
-
-        # -------------------------------------- FILE DATA
-        if type(sourceData) is PgCfgModel__FileData:
-            sourceFileData = sourceData
-
-            assert type(sourceFileData) is PgCfgModel__FileData
-            assert sourceFileData.IsAlive()
-            assert sourceFileData.m_OptionsByName is not None
-            assert type(sourceFileData.m_OptionsByName) is PgCfgModel__MultiIndex
-
-            typeOfOption = type(optionName)
-
-            if typeOfOption is str:
-                unionList = __class__.Helper__AggregateAllOptionValues(
-                    sourceFileData.m_OptionsByName,
-                    optionName,
-                )
-
-                if unionList is None:
-                    return None
-
-                assert type(unionList) is list
-                return __class__.Helper__PrepareGetValue(
-                    cfg,
-                    optionName,
-                    unionList,
-                )
-
-            BugCheckError.UnkObjectDataType(typeOfOption)
-
-        BugCheckError.UnkObjectDataType(type(sourceData))
+        r = __class__.GetOptionValue__Simple(
+            cfg,
+            sourceData,
+            optionName,
+        )
+        assert r is None or type(r) is list
+        return r
 
     # --------------------------------------------------------------------
     @staticmethod
@@ -271,7 +231,7 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
                 eventID,
             )
 
-        # -------------------------------- target is FileData or OptionData
+        # -------------------------------- target is OptionData
         if type(targetData) is PgCfgModel__OptionData:
             cfg.Debug__CheckOurObjectData(
                 targetData,
@@ -287,6 +247,7 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
                 PostgresConfigurationSetOptionValueResult_Base.Create__OptWasDeleted()
             )
 
+        # -------------------------------- target is FileData
         if type(targetData) is PgCfgModel__FileData:
             assert type(targetData) is PgCfgModel__FileData
 
@@ -378,34 +339,67 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
         assert type(optionName) is str
         assert optionValueItem is not None
 
-        # -------------------------------- target is NONE
+        currentOptData: typing.Optional[PgCfgModel__OptionData] = None
+
         if targetData is None:
-            return __class__.Helper__SetUniqueOptionValueItem__Common(
+            currentOptData = __class__.Helper__FindActiveSimpleOption__Common(
                 cfg,
                 optionName,
-                optionValueItem,
             )
-
-        # -------------------------------- target is OPTION DATA
-        if type(targetData) is PgCfgModel__OptionData:
+        elif type(targetData) is PgCfgModel__OptionData:
+            assert targetData.IsAlive()
             assert targetData.m_Name == optionName
-
-            return __class__.Helper__SetUniqueOptionValueItem__Exact(
-                cfg,
+            cfg.Debug__CheckOurObjectData(targetData)
+            currentOptData = targetData
+        elif type(targetData) is PgCfgModel__FileData:
+            assert targetData.IsAlive()
+            findCtx = PgCfgModel__ModelUtils.tagFindCtx()
+            currentOptData = PgCfgModel__ModelUtils.File__FindSimpleOption(
+                findCtx,
                 targetData,
-                optionValueItem,
+                optionName,
+                enterIntoIncludes=True,
             )
+        else:
+            BugCheckError.UnkObjectDataType(type(targetData))
 
-        # -------------------------------- target is FILE DATA
-        if type(targetData) is PgCfgModel__FileData:
-            return __class__.Helper__SetUniqueOptionValueItem__File(
+        if currentOptData is None:
+            return __class__.SetOptionValue__Simple(
                 cfg,
                 targetData,
                 optionName,
-                optionValueItem,
+                [optionValueItem],
             )
 
-        BugCheckError.UnkObjectDataType(type(targetData))
+        assert currentOptData.IsAlive()
+        assert type(currentOptData.m_Value) is list
+
+        if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
+            currentOptData,
+            optionValueItem,
+        ):
+            return PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAlreadyDefined(
+                cfg,
+                currentOptData,
+            )
+
+        newList = currentOptData.m_Value.copy()
+        newList.append(optionValueItem)
+
+        res = __class__.SetOptionValue__Simple(
+            cfg,
+            targetData,
+            optionName,
+            newList,
+        )
+
+        assert res.m_OptData is not None
+        return (
+            PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAdded(
+                cfg,
+                res.m_OptData,
+            )
+        )
 
     # Helper methods -----------------------------------------------------
     @staticmethod
@@ -457,57 +451,6 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
             assert optionName not in allOptionsByName.keys()
 
             return PostgresConfigurationSetOptionValueEventID.OPTION_WAS_DELETED
-
-        # Unknown type of option data in dictionary
-
-        assert type(optionName) is str
-        BugCheckError.UnkOptObjectDataType(
-            optionName,
-            type(data),
-        )
-
-    # --------------------------------------------------------------------
-    @staticmethod
-    def Helper__AggregateAllOptionValues(
-        allOptionsByName: PgCfgModel__T_OPTIONS_INDEX,
-        optionName: str,
-    ) -> typing.Optional[list]:
-        assert type(allOptionsByName) is PgCfgModel__MultiIndex
-        assert type(optionName) is str
-
-        if optionName not in allOptionsByName.keys():
-            return None
-
-        data = allOptionsByName[optionName]
-        assert data is not None
-
-        if type(data) is PgCfgModel__OptionData:
-            assert data.IsAlive()
-            assert data.m_Name == optionName
-            assert data.m_Value is not None
-            assert type(data.m_Value) is list
-            return data.m_Value
-
-        if type(data) is list:
-            data = data.copy()
-            assert type(data) is list
-
-            result = []
-
-            for optionData in data:
-                assert optionData is not None
-                assert type(optionData) is PgCfgModel__OptionData
-                assert optionData.m_Name == optionName
-                assert optionData.IsAlive()
-                assert optionData.m_Value is not None
-                assert type(optionData.m_Value) is list
-                result.extend(optionData.m_Value)
-                continue
-
-            assert result is not None
-            assert type(result) is list
-
-            return result
 
         # Unknown type of option data in dictionary
 
@@ -676,393 +619,6 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
             cfg,
             optionData,
         )
-
-    # --------------------------------------------------------------------
-    @staticmethod
-    def Helper__SetUniqueOptionValueItem__Common(
-        cfg: PostgresConfiguration_Base,
-        optionName: str,
-        optionValueItem: typing.Any,
-    ) -> PostgresConfigurationSetOptionValueResult_Base:
-        assert isinstance(cfg, PostgresConfiguration_Base)
-        assert type(optionName) is str
-        assert optionValueItem is not None
-
-        assert cfg.m_Data is not None
-        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
-        assert type(cfg.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
-
-        # ------------------------------------------------
-        while True:
-            if optionName not in cfg.m_Data.m_AllOptionsByName.keys():
-                break
-
-            data = cfg.m_Data.m_AllOptionsByName[optionName]
-
-            typeOfData = type(data)
-
-            if typeOfData == PgCfgModel__OptionData:
-                assert type(data) is PgCfgModel__OptionData
-                assert data.m_Name == optionName
-                assert data.m_Value is not None
-                assert type(data.m_Value) is list
-
-                if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-                    data,
-                    optionValueItem,
-                ):
-                    return PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAlreadyDefined(
-                        cfg,
-                        data,
-                    )
-
-                PgCfgModel__ModelUtils.Option__add_ValueItem(
-                    data,
-                    optionValueItem,
-                )
-
-                return PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAdded(
-                    cfg,
-                    data,
-                )
-
-            if typeOfData is list:
-                assert type(data) is list
-                assert len(data) > 1
-
-                for optionData in data:
-                    assert optionData is not None
-                    assert type(optionData) is PgCfgModel__OptionData
-                    assert optionData.m_Name == optionName
-                    assert optionData.m_Value is not None
-                    assert type(optionData.m_Value) is list
-
-                    if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-                        optionData,
-                        optionValueItem,
-                    ):
-                        # Create__OptWithThisValueItemAlreadyExist
-                        return PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAlreadyDefined(
-                            cfg,
-                            optionData,
-                        )
-                    continue
-
-                # [2025-01-07] Postgres does not able to join multiple list
-                # TODO: We have to take into account overriding the values of postgresql.conf
-                BugCheckError.MultipleDefOfOptionIsFound(
-                    optionName,
-                    len(data),
-                )
-
-            BugCheckError.UnkOptObjectDataType(
-                optionName,
-                typeOfData,
-            )
-
-        # ------------------------------------------------
-        assert optionName not in cfg.m_Data.m_AllOptionsByName.keys()
-
-        # OK. Let's add a new option with list that contains our optionValueItem
-
-        result = __class__.Helper__FinalRegSimpleOptionValue__Common(
-            cfg,
-            optionName,
-            [optionValueItem],
-        )
-
-        assert result is not None
-        assert type(result) is PostgresConfigurationSetOptionValueResult_Base
-        assert isinstance(result, PostgresConfigurationSetOptionValueResult)
-        assert result.m_EventID in [
-            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
-        ]
-        assert result.m_OptData is not None
-        assert type(result.m_OptData) is PgCfgModel__OptionData
-        assert result.m_OptData.m_Name == optionName
-        assert result.m_Cfg is cfg
-
-        return result
-
-    # --------------------------------------------------------------------
-    @staticmethod
-    def Helper__SetUniqueOptionValueItem__Exact(
-        cfg: PostgresConfiguration_Base,
-        optionData: PgCfgModel__OptionData,
-        optionValueItem: typing.Any,
-    ) -> PostgresConfigurationSetOptionValueResult_Base:
-        assert isinstance(cfg, PostgresConfiguration_Base)
-        assert type(optionData) is PgCfgModel__OptionData
-        assert optionData.IsAlive()
-        assert optionValueItem is not None
-
-        return __class__.Helper__SetUniqueOptionPreparedValueItem__Exact(
-            cfg,
-            optionData,
-            optionValueItem,
-        )
-
-    # --------------------------------------------------------------------
-    @staticmethod
-    def Helper__SetUniqueOptionPreparedValueItem__Exact(
-        cfg: PostgresConfiguration_Base,
-        optionData: PgCfgModel__OptionData,
-        optionPreparedValueItem: typing.Any,
-    ) -> PostgresConfigurationSetOptionValueResult_Base:
-        assert isinstance(cfg, PostgresConfiguration_Base)
-        assert type(optionData) is PgCfgModel__OptionData
-        assert optionData.IsAlive()
-        assert optionData.m_Value is not None
-        assert type(optionData.m_Value) is list
-        assert optionPreparedValueItem is not None
-
-        # ------------------------------------------------
-        if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-            optionData,
-            optionPreparedValueItem,
-        ):
-            return PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAlreadyDefined(
-                cfg,
-                optionData,
-            )
-
-        # ------------------------------------------------
-        cfg.Debug__CheckOurObjectData(optionData)
-
-        assert optionData.m_Name in cfg.m_Data.m_AllOptionsByName.keys()
-
-        data = cfg.m_Data.m_AllOptionsByName[optionData.m_Name]
-
-        typeOfData = type(data)
-
-        if typeOfData is PgCfgModel__OptionData:
-            assert type(data) is PgCfgModel__OptionData
-            # It is the single property!
-            assert data is optionData
-            assert type(data.m_Value) is list
-
-            PgCfgModel__ModelUtils.Option__add_ValueItem(
-                data,
-                optionPreparedValueItem,
-            )
-
-            return PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAdded(
-                cfg,
-                data,
-            )
-
-        if typeOfData is list:
-            assert type(data) is list
-            assert len(data) > 1
-
-            for optionData2 in data:
-                if optionData2 is optionData:
-                    continue
-
-                assert optionData2 is not None
-                assert type(optionData2) is PgCfgModel__OptionData
-                assert optionData2.IsAlive()
-                assert optionData2.m_Name == optionData.m_Name
-                assert optionData2.m_Value is not None
-                assert type(optionData2.m_Value) is list
-                assert optionData2.m_Parent is not None
-                assert optionData2.m_Parent.IsAlive()
-
-                fileData2 = optionData2.m_Parent.m_Parent
-                assert type(fileData2) is PgCfgModel__FileData
-                assert fileData2.IsAlive()
-
-                if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-                    optionData2,
-                    optionPreparedValueItem,
-                ):
-                    RaiseError.OptionValueItemIsAlreadyDefined(
-                        fileData2.m_Path,
-                        optionData2.m_Name,
-                        optionPreparedValueItem,
-                    )
-                continue
-
-            # [2025-01-07] Postgres does not able to join multiple list
-            # TODO: We have to take into account overriding the values of postgresql.conf
-            BugCheckError.MultipleDefOfOptionIsFound(
-                optionData.m_Name,
-                len(data),
-            )
-
-        assert typeOfData is not PgCfgModel__OptionData
-        assert typeOfData is not list
-
-        BugCheckError.UnkOptObjectDataType(
-            optionData.m_Name,
-            typeOfData,
-        )
-
-    # --------------------------------------------------------------------
-    @staticmethod
-    def Helper__SetUniqueOptionValueItem__File(
-        cfg: PostgresConfiguration_Base,
-        fileData: PgCfgModel__FileData,
-        optionName: str,
-        optionValueItem: typing.Any,
-    ) -> PostgresConfigurationSetOptionValueResult_Base:
-        assert isinstance(cfg, PostgresConfiguration_Base)
-        assert type(fileData) is PgCfgModel__FileData
-        assert type(optionName) is str
-        assert fileData.IsAlive()
-        assert optionValueItem is not None
-
-        assert cfg.m_Data is not None
-        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
-        assert type(cfg.m_Data.m_AllOptionsByName) is PgCfgModel__MultiIndex
-
-        assert fileData.m_OptionsByName is not None
-        assert type(fileData.m_OptionsByName) is PgCfgModel__MultiIndex
-
-        # ------------------------------------------------
-        C_BUGCHECK_SRC = __class__.__name__ + "::Helper__SetUniqueOptionValueItem__File"
-
-        # ------------------------------------------------
-        while True:
-            if optionName not in cfg.m_Data.m_AllOptionsByName.keys():
-                # It is an absolutely new option
-                assert optionName not in fileData.m_OptionsByName.keys()
-                break
-
-            if optionName in fileData.m_OptionsByName.keys():
-                data = fileData.m_OptionsByName[optionName]
-                assert data is not None
-
-                if type(data) is PgCfgModel__OptionData:
-                    assert data.IsAlive()
-                    assert data.m_Name == optionName
-                    assert data.m_Value is not None
-                    assert type(data.m_Value) is list
-
-                    if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-                        data,
-                        optionValueItem,
-                    ):
-                        return PostgresConfigurationSetOptionValueResult_Base.Create__OptValueItemWasAlreadyDefined(
-                            cfg,
-                            data,
-                        )
-
-                    # this option value does not have this item
-
-                    return __class__.Helper__SetUniqueOptionPreparedValueItem__Exact(
-                        cfg,
-                        data,
-                        optionValueItem,
-                    )
-
-                assert type(data) is not PgCfgModel__OptionData
-                assert type(data) is not list
-
-                BugCheckError.UnkOptObjectDataType(
-                    optionName,
-                    type(data),
-                )
-
-            assert optionName not in fileData.m_OptionsByName.keys()
-
-            assert optionName in cfg.m_Data.m_AllOptionsByName.keys()
-
-            data = cfg.m_Data.m_AllOptionsByName[optionName]
-            assert data is not None
-
-            if type(data) is PgCfgModel__OptionData:
-                assert data.IsAlive()
-                assert data.m_Name == optionName
-                assert data.m_Value is not None
-                assert type(data.m_Value) is list
-                assert data.get_Parent().IsAlive()
-
-                fileData2 = data.get_Parent().get_Parent()
-                assert fileData2 is not None
-                assert type(fileData2) is PgCfgModel__FileData
-                assert fileData2.IsAlive()
-                assert fileData2 is not fileData
-
-                if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-                    data,
-                    optionValueItem,
-                ):
-                    RaiseError.OptionValueItemIsAlreadyDefinedInAnotherFile(
-                        fileData2.m_Path,
-                        optionName,
-                        optionValueItem,
-                    )
-
-                RaiseError.OptionIsAlreadyExistInAnotherFile(
-                    fileData2.m_Path,
-                    optionName,
-                )
-
-            if type(data) is list:
-                assert len(data) > 1
-
-                for optionData2 in data:
-                    assert optionData2 is not None
-                    assert type(optionData2) is PgCfgModel__OptionData
-                    assert optionData2.IsAlive()
-                    assert optionData2.m_Name == optionName
-                    assert optionData2.m_Value is not None
-                    assert type(optionData2.m_Value) is list
-
-                    fileData2 = optionData2.get_Parent().get_Parent()
-                    assert fileData2 is not None
-                    assert type(fileData2) is PgCfgModel__FileData
-                    assert fileData2.IsAlive()
-                    assert fileData2 is not fileData
-
-                    if __class__.Helper__DoesOptionValueAlreadyHaveThisUniqueItem(
-                        optionData2,
-                        optionValueItem,
-                    ):
-                        RaiseError.OptionValueItemIsAlreadyDefinedInAnotherFile(
-                            fileData2.m_Path,
-                            optionName,
-                            optionValueItem,
-                        )
-
-                    RaiseError.OptionIsAlreadyExistInAnotherFile(
-                        fileData2.m_Path,
-                        optionName,
-                    )
-                    continue
-
-                BugCheckError.UnexpectedSituation(
-                    C_BUGCHECK_SRC,
-                    "#001",
-                    "optionName=[{0}].".format(optionName),
-                )
-
-            BugCheckError.UnkOptObjectDataType(
-                optionName,
-                type(data),
-            )
-
-        assert optionName not in fileData.m_OptionsByName.keys()
-        assert optionName not in cfg.m_Data.m_AllOptionsByName.keys()
-
-        result = __class__.Helper__FinalRegSimpleOptionValue__File(
-            cfg,
-            fileData,
-            optionName,
-            [optionValueItem],
-        )
-
-        assert result is not None
-        assert type(result) is PostgresConfigurationSetOptionValueResult_Base
-        assert result.m_EventID in [
-            PostgresConfigurationSetOptionValueEventID.OPTION_WAS_ADDED,
-        ]
-        assert result.m_OptData is not None
-        assert type(result.m_OptData) is PgCfgModel__OptionData
-        assert result.m_OptData.IsAlive()
-        assert result.m_OptData.m_Name == optionName
-        return result
 
     # --------------------------------------------------------------------
     @staticmethod

@@ -2,7 +2,6 @@
 # Postgres Pro. PostgreSQL Configuration Python Library. Tests
 
 import datetime
-import typing
 
 # //////////////////////////////////////////////////////////////////////////////
 # class ErrorMessageBuilder
@@ -231,40 +230,6 @@ class ErrorMessageBuilder:
 
         errMsg = "Option [{}] already exist in the file [{}].".format(
             optionName,
-            filePath,
-        )
-        return errMsg
-
-    # --------------------------------------------------------------------
-    @staticmethod
-    def OptionValueItemIsAlreadyDefined(
-        filePath: str,
-        optName: str,
-        valueItem: typing.Any,
-    ) -> str:
-        assert type(filePath) is str
-        assert type(optName) is str
-
-        errMsg = "Another definition of option [{}] value item [{}] is found in the file [{}].".format(
-            optName,
-            valueItem,
-            filePath,
-        )
-        return errMsg
-
-    # --------------------------------------------------------------------
-    @staticmethod
-    def OptionValueItemIsAlreadyDefinedInAnotherFile(
-        filePath: str,
-        optName: str,
-        valueItem: typing.Any,
-    ) -> str:
-        assert type(filePath) is str
-        assert type(optName) is str
-
-        errMsg = "Definition of option [{}] value item [{}] is found in another file [{}].".format(
-            optName,
-            valueItem,
             filePath,
         )
         return errMsg
