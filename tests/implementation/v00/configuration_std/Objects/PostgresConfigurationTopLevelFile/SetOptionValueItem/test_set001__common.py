@@ -167,10 +167,9 @@ class TestSet001__Common:
 
         assert str(
             x.value,
-        ) == ErrorMessageBuilder.OptionValueItemIsAlreadyDefinedInAnotherFile(
+        ) == ErrorMessageBuilder.OptionIsAlreadyExistInAnotherFile(
             file1.get_Path(),
             C_OPT_NAME,
-            "biha",
         )
         return
 
