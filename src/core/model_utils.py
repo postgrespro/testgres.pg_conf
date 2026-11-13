@@ -392,19 +392,23 @@ class ModelUtils:
     # --------------------------------------------------------------------
     @staticmethod
     def File__FindSimpleOption(
-        findCtx: tagFindCtx,
+        findCtx: typing.Optional[tagFindCtx],
         fileData: PgCfgModel__FileData,
         optionName: str,
         enterIntoIncludes: bool,
     ) -> typing.Optional[PgCfgModel__OptionData]:
-        assert type(findCtx) is __class__.tagFindCtx
+        assert not enterIntoIncludes or type(findCtx) is __class__.tagFindCtx
         assert type(fileData) is PgCfgModel__FileData
         assert type(fileData.m_Lines) is list
         assert type(optionName) is str
         assert type(enterIntoIncludes) is bool
 
-        if not findCtx.reg_file(fileData.m_Path):
-            return None
+        if not enterIntoIncludes:
+            pass
+        else:
+            assert findCtx is not None
+            if not findCtx.reg_file(fileData.m_Path):
+                return None
 
         stack: typing.List[
             typing.Tuple[
@@ -461,6 +465,7 @@ class ModelUtils:
                         # might be overridden by that included file.
                         return None  # <--------- FAIL
 
+                    assert findCtx is not None
                     if not findCtx.reg_file(firstItem.m_Element.m_File.m_Path):
                         continue
 
