@@ -38,18 +38,26 @@ class TestSet001__Common:
     sm_OPTS001: typing.List[str] = ["port", "proxima.port"]
 
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_001(
+    def test_001__Strict(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Standard:
+            TestServices.RaiseSkip_NotApplicable()
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
@@ -145,15 +153,20 @@ class TestSet001__Common:
     def test_002__set_None(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
@@ -191,18 +204,26 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_003__already_exist(
+    def test_003__already_exist__Strict(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Standard:
+            TestServices.RaiseSkip_NotApplicable()
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         file2 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
@@ -236,15 +257,20 @@ class TestSet001__Common:
     def test_004__set_value_with_bad_type(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
@@ -272,15 +298,20 @@ class TestSet001__Common:
     def test_005__cant_convert_value(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
