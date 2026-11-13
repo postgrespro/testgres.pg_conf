@@ -2290,12 +2290,12 @@ class PostgresConfigurationController__Base:
             optionName,
             optionValue,
         )
-
         assert preparedOptionValue is not None
 
         # ----------------------
-        addHandler = cfg.Internal__GetOptionHandlerToAddOption(optionName)
-
+        addHandler = cfg.Internal__GetOptionHandlerToAddOption(
+            optionName,
+        )
         assert isinstance(addHandler, PgCfgModel__OptionHandlerToAddOption)
 
         ctx = PgCfgModel__OptionHandlerCtxToAddOption(
