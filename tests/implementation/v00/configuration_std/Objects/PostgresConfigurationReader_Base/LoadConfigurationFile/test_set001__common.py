@@ -227,7 +227,7 @@ class TestSet001__Common:
         assert file1.m_FileData is load_r1.m_FileData
         assert file2.m_FileData is load_r2.m_FileData
 
-        assert file1.GetOptionValue("port") is None
+        assert file1.GetOptionValue("port") == 123
         assert file2.GetOptionValue("port") == 123
         return
 
@@ -296,7 +296,7 @@ class TestSet001__Common:
         file1 = cfg.get_AllFiles().GetFileByName(C_FILE_NAME1)
         file2 = cfg.get_AllFiles().GetFileByName(C_FILE_NAME2)
 
-        assert file1.GetOptionValue("port") is None
+        assert file1.GetOptionValue("port") == 123
         assert file2.GetOptionValue("port") == 123
         return
 
