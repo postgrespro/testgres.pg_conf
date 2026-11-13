@@ -43,15 +43,20 @@ class TestSet001__Common:
     def test_001(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         offset001: typing.Optional[int],
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert offset001 is None or type(offset001) is int
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
@@ -82,13 +87,18 @@ class TestSet001__Common:
     def test_E01__second_comment_in_line(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
@@ -124,13 +134,18 @@ class TestSet001__Common:
     def test_E02__bad_symbol(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 

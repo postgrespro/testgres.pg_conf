@@ -39,15 +39,20 @@ class TestSet001__Common:
     def test_001__int_opt(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -145,15 +150,20 @@ class TestSet001__Common:
     def test_002__None_value(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -167,13 +177,18 @@ class TestSet001__Common:
     def test_003__empty_name(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -187,13 +202,18 @@ class TestSet001__Common:
     def test_004__None_name(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -205,18 +225,26 @@ class TestSet001__Common:
 
     # --------------------------------------------------------------------
     @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
-    def test_005__already_defined(
+    def test_005__00A__already_defined__Strict(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Standard:
+            TestServices.RaiseSkip_NotApplicable()
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=PgCfg_Std.Strategy.Strict,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -235,16 +263,74 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_006__two_options(
+    @pytest.mark.parametrize("optName", sm_OPTS001, ids=lambda x: f"{x}")
+    def test_005__00B__already_defined__Standard(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+        optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+        assert type(optName) is str
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Strict:
+            TestServices.RaiseSkip_NotApplicable()
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=PgCfg_Std.Strategy.Standard,
+        )
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
+        assert cfg.m_Data.m_DataDir == rootTmpDir
+
+        option1 = cfg.AddOption(optName, 123)
+        assert option1 is not None
+        assert option1.m_FileLine is not None
+        assert option1.m_FileLine.get_Parent() is not None
+        assert option1.m_FileLine.get_Parent().m_FileData is not None
+        assert len(option1.m_FileLine.get_Parent().m_FileData.m_Lines) == 1
+
+        option2 = cfg.AddOption(optName, 321)
+        assert option2 is not None
+        assert option2.m_FileLine is not None
+        assert option2.m_FileLine.get_Parent() is not None
+        assert option2.m_FileLine.get_Parent().m_FileData is not None
+        assert len(option2.m_FileLine.get_Parent().m_FileData.m_Lines) == 2
+
+        assert option1 is not option2
+        assert option1.m_FileLine is not option2.m_FileLine
+        assert (
+            option1.m_FileLine.get_Parent().m_FileData
+            is option2.m_FileLine.get_Parent().m_FileData
+        )
+
+        assert option1.get_Name() == optName
+        assert option1.get_Value() == 123
+
+        assert option2.get_Name() == optName
+        assert option2.get_Value() == 321
+        return
+
+    # --------------------------------------------------------------------
+    def test_006__two_options(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 

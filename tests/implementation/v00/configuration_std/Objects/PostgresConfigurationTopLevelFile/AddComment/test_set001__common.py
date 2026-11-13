@@ -34,13 +34,18 @@ class TestSet001__Common:
     def test_001(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         cfg.SetOptionValue("port", 123)
 
@@ -103,13 +108,18 @@ class TestSet001__Common:
     def test_002(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         cfg.SetOptionValue("port", 123)
 

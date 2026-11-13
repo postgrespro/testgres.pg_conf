@@ -29,15 +29,20 @@ class TestSet001__Common:
     def test_001(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -84,15 +89,20 @@ class TestSet001__Common:
     def test_002__set_None(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -117,15 +127,20 @@ class TestSet001__Common:
     def test_003__set_value_item_with_bad_type(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -154,15 +169,20 @@ class TestSet001__Common:
     def test_004_set_list(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -183,15 +203,20 @@ class TestSet001__Common:
     def test_005__set_str(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 

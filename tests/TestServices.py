@@ -99,6 +99,11 @@ class TestServices:
 
     # --------------------------------------------------------------------
     @staticmethod
+    def RaiseSkip_NotApplicable():
+        pytest.skip("Тot applicable")
+
+    # --------------------------------------------------------------------
+    @staticmethod
     def ThrowWeWaitAnException():
         raise Exception("We wait an exception!")
 

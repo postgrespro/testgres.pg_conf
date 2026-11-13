@@ -26,13 +26,18 @@ class TestSet001__Common:
     def test_000(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         allOptions1 = cfg.get_AllOptions()
         assert allOptions1 is not None
@@ -51,15 +56,20 @@ class TestSet001__Common:
     def test_001(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         cfg.SetOptionValue(optName, 123)
 
@@ -90,13 +100,18 @@ class TestSet001__Common:
     def test_002__iter(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         allOptions1 = cfg.get_AllOptions()
         assert type(allOptions1) is PgCfg_Base__AllOptions
@@ -123,13 +138,18 @@ class TestSet001__Common:
     def test_003__transform_to_list(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         allOptions1 = cfg.get_AllOptions()
         v = list(allOptions1)
@@ -144,13 +164,18 @@ class TestSet001__Common:
     def test_004__two_options(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         cfg.SetOptionValue("port", 123)
         cfg.SetOptionValue("proxima.port", 321)

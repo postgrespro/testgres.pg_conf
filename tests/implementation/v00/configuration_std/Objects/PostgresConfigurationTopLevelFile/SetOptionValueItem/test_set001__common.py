@@ -26,15 +26,20 @@ class TestSet001__Common:
     def test_001__set_None(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
@@ -49,15 +54,20 @@ class TestSet001__Common:
     def test_002__set_value_item_with_bad_type(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
@@ -76,15 +86,20 @@ class TestSet001__Common:
     def test_003(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
@@ -135,18 +150,26 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_004__already_defined_in_another_file(
+    def test_004__already_defined_in_another_file__Strict(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Standard:
+            TestServices.RaiseSkip_NotApplicable()
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file1 = cfg.AddTopLevelFile("a.conf")
         assert file1 is not None
@@ -174,18 +197,26 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_005__opt_is_defined_in_another_file(
+    def test_005__opt_is_defined_in_another_file__Strict(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Standard:
+            TestServices.RaiseSkip_NotApplicable()
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file1 = cfg.AddTopLevelFile("a.conf")
         assert file1 is not None
@@ -214,15 +245,20 @@ class TestSet001__Common:
     def test_006__two_items(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
         assert file is not None
@@ -241,6 +277,91 @@ class TestSet001__Common:
         assert r2.Option.get_Value() == ["biha", "proxima"]
 
         assert r1.Option.get_Value() == ["biha", "proxima"]
+        return
+
+    # --------------------------------------------------------------------
+    def test_006__two_items__around_include__Standard(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Strict:
+            TestServices.RaiseSkip_NotApplicable()
+
+        C_OPT_NAME = "shared_preload_libraries"
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+
+        file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
+        assert file is not None
+
+        r1 = file.SetOptionValueItem(C_OPT_NAME, "biha")
+        assert r1 is not None
+        assert type(r1) is PgCfg_SetOptionResult_Base
+        assert r1.Option is not None
+        assert r1.Option.get_Value() == ["biha"]
+
+        file.AddInclude("a.conf")
+
+        r2 = file.SetOptionValueItem(C_OPT_NAME, "proxima")
+        assert r2 is not None
+        assert type(r2) is PgCfg_SetOptionResult_Base
+        assert r2.EventID == PgCfg_SetOptionEventID.VALUE_ITEM_WAS_ADDED
+        assert r2.Option is not None
+        assert r2.Option.get_Value() == ["biha", "proxima"]
+
+        assert r1.Option.get_Value() == ["biha"]
+        return
+
+    # --------------------------------------------------------------------
+    def test_006__two_items_and_two_files__Standard(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Strict:
+            TestServices.RaiseSkip_NotApplicable()
+
+        C_OPT_NAME = "shared_preload_libraries"
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+
+        file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
+        assert file1 is not None
+
+        file2 = file1.AddInclude("a.conf").get_File()
+        assert file2 is not None
+
+        file2_r = file2.SetOptionValueItem(C_OPT_NAME, "biha")
+        assert file2_r is not None
+        assert type(file2_r) is PgCfg_SetOptionResult_Base
+        assert file2_r.Option is not None
+        assert file2_r.Option.get_Value() == ["biha"]
+
+        file1_r = file1.SetOptionValueItem(C_OPT_NAME, "proxima")
+        assert file1_r is not None
+        assert type(file1_r) is PgCfg_SetOptionResult_Base
+        assert file1_r.EventID == PgCfg_SetOptionEventID.VALUE_ITEM_WAS_ADDED
+        assert file1_r.Option is not None
+        assert file1_r.Option.get_Value() == ["biha", "proxima"]
         return
 
 

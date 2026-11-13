@@ -26,13 +26,18 @@ class TestSet001__Common:
     def test_001(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert len(cfg.m_Data.m_TopLevelFiles) == 0
 
         cfg.SetOptionValue(optName, 234)
@@ -52,11 +57,16 @@ class TestSet001__Common:
     def test_002__two_opts(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert len(cfg.m_Data.m_TopLevelFiles) == 0
 
         cfg.SetOptionValue("port", 234)
@@ -82,11 +92,16 @@ class TestSet001__Common:
     def test_003__opt1_emptyline_opt2(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert len(cfg.m_Data.m_TopLevelFiles) == 0
         cfg.SetOptionValue("port", 234)
         assert len(cfg.get_AllFiles()) == 1
@@ -115,11 +130,16 @@ class TestSet001__Common:
     def test_004__opt1_comment_opt2(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert len(cfg.get_AllFiles()) == 0
         cfg.SetOptionValue("port", 234)
         assert len(cfg.get_AllFiles()) == 1
@@ -148,11 +168,16 @@ class TestSet001__Common:
     def test_005__opt_with_list(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
 
         C_OPT_NAME = "shared_preload_libraries"
@@ -175,11 +200,16 @@ class TestSet001__Common:
     def test_006__opt_with_list__empty(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
 
         C_OPT_NAME = "shared_preload_libraries"
@@ -208,11 +238,16 @@ class TestSet001__Common:
     def test_007__opt_with_list__mix(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
 
         C_OPT_NAME = "shared_preload_libraries"
@@ -243,11 +278,16 @@ class TestSet001__Common:
     def test_008__include(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
 
         C_INCLUDED_FILE_NAME = "postgresql.proxima.conf"
@@ -320,13 +360,18 @@ class TestSet001__Common:
     def test_009__include__mix(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         data009: tagData009,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(data009) is __class__.tagData009
 
         rootTmpDir = TestServices.GetRootTmpDir()
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
 
         file2 = file.AddInclude(data009.fileName).get_File()

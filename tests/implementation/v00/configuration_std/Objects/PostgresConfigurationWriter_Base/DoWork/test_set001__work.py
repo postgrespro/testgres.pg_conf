@@ -34,7 +34,11 @@ class TestSet001__Common:
     def test_000__empty(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -42,7 +46,10 @@ class TestSet001__Common:
         # ---------------
         logging.info("File object is building...")
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
         assert type(file) is PgCfg_TopLevelFile_Base
@@ -92,7 +99,11 @@ class TestSet001__Common:
     def test_001(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -102,7 +113,10 @@ class TestSet001__Common:
 
         portNumber = 234
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         cfg.SetOptionValue("port", portNumber)
 
         file = cfg.get_AllFiles().GetFileByName(cfg.C_POSTGRESQL_AUTO_CONF)
@@ -164,7 +178,11 @@ class TestSet001__Common:
     def test_003__two_files(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -178,7 +196,10 @@ class TestSet001__Common:
         # ---------------
         logging.info("File object is building...")
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file1 = cfg.AddTopLevelFile(C_FILE1_NAME)
 
@@ -186,7 +207,7 @@ class TestSet001__Common:
 
         portNumber = 321
 
-        cfg.AddOption(C_OPT_NAME, portNumber)
+        file2.AddOption(C_OPT_NAME, portNumber)
 
         assert file2.GetOptionValue(C_OPT_NAME) == portNumber
 
@@ -207,7 +228,7 @@ class TestSet001__Common:
             else:
                 portNumber += 1
                 logging.info("Port is changed with number {0}".format(portNumber))
-                cfg.SetOptionValue(C_OPT_NAME, portNumber)
+                file2.SetOptionValue(C_OPT_NAME, portNumber)
                 assert file2.GetOptionValue(C_OPT_NAME) == portNumber
 
             # ---------------
@@ -254,13 +275,21 @@ class TestSet001__Common:
     def test_004__check_truncate(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
 
         # ---------------
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+
         cfg.SetOptionValue("port", 123)
         cfg.SetOptionValue("listen_addresses", "*")
 
@@ -308,7 +337,11 @@ class TestSet001__Common:
     def test_E01__file_is_exist(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -322,7 +355,10 @@ class TestSet001__Common:
         # ---------------
         logging.info("File object is building...")
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file1 = cfg.AddTopLevelFile(C_FILE1_NAME)
 
@@ -374,13 +410,20 @@ class TestSet001__Common:
     def test_E02__external_modification(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
 
         # ---------------
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         cfg.SetOptionValue("port", 123)
         cfg.SetOptionValue("listen_addresses", "*")
 
@@ -440,7 +483,7 @@ class TestSet001__Common:
         assert text is not None
         assert type(text) is str
 
-        r = text.replace("\r\n", "\r")
+        r = text.replace("\r\n", "\n")
 
         assert r is not None
         assert type(r) is str

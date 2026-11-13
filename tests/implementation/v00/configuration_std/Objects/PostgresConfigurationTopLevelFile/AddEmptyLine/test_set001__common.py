@@ -25,13 +25,18 @@ class TestSet001__Common:
     def test_001(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         cfg.SetOptionValue("port", 123)
 
@@ -59,7 +64,12 @@ class TestSet001__Common:
         assert isinstance(fileLine2, PgCfg_FileLine)
 
         assert len(fileLines) == 2
-        assert list(fileLines)[-1].m_FileLineData is fileLine2.m_FileLineData
+
+        fileLines_v = list(fileLines)
+        lastFileLine = fileLines_v[-1]
+        assert lastFileLine is not None
+        assert isinstance(lastFileLine, PgCfg_FileLine_Base)
+        assert lastFileLine.m_FileLineData is fileLine2.m_FileLineData
 
         assert len(fileLine2.m_FileLineData.m_Items) == 0
 
