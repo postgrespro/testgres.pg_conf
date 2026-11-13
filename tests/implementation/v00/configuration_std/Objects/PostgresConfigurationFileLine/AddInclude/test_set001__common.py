@@ -7,6 +7,8 @@ from src.implementation.v00.configuration_std import PostgresConfiguration_Std a
 from src.implementation.v00.configuration_base import PostgresConfigurationIncludedFile_Base as PgCfg_IncludedFile_Base
 from src.implementation.v00.configuration_base import PostgresConfigurationInclude_Base as PgCfg_Include_Base
 from src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationFile_Base as PgCfg_File_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationFileLine_Base as PgCfg_FileLine_Base
 
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
 from src.implementation.v00.configuration_base import PgCfgModel__IncludeData
@@ -19,6 +21,7 @@ from .......ErrorMessageBuilder import ErrorMessageBuilder
 import pytest
 import os
 import typing
+import logging
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -47,15 +50,20 @@ class TestSet001__Common:
     def test_001(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         offset001: typing.Optional[int],
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert offset001 is None or type(offset001) is int
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
@@ -65,7 +73,74 @@ class TestSet001__Common:
 
         C_FILE_NAME = "a.conf"
 
-        include = fileLine.AddInclude(C_FILE_NAME, offset001)
+        __class__.Helper__AddLineAndInclude(
+            file,
+            C_FILE_NAME,
+            offset001,
+            rootTmpDir,
+        )
+        return
+
+    # --------------------------------------------------------------------
+    def test_002__multiple(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+        offset001: typing.Optional[int],
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+        assert offset001 is None or type(offset001) is int
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+
+        file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
+
+        C_FILE_NAME = "a.conf"
+        C_INCLUDES = 3
+
+        passN = 0
+
+        while passN < C_INCLUDES:
+            passN += 1
+
+            logging.info("------------- pass: {}".format(passN))
+
+            __class__.Helper__AddLineAndInclude(
+                file,
+                C_FILE_NAME,
+                offset001,
+                rootTmpDir,
+            )
+            continue
+
+        assert len(file.get_Lines()) == C_INCLUDES
+        assert len(file.m_FileData.m_Lines) == C_INCLUDES
+
+        return
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def Helper__AddLineAndInclude(
+        file: PgCfg_File_Base,
+        name: str,
+        offset: typing.Optional[int],
+        rootTmpDir: str,
+    ) -> typing.Tuple[PgCfg_FileLine_Base, PgCfg_Include_Base]:
+
+        fileLine = file.AddEmptyLine()
+
+        assert len(fileLine) == 0
+
+        C_FILE_NAME = "a.conf"
+
+        include = fileLine.AddInclude(name, offset)
 
         assert len(fileLine) == 1
 
@@ -74,13 +149,13 @@ class TestSet001__Common:
         assert include.m_FileLine.m_FileLineData is fileLine.m_FileLineData
         assert include.m_FileLine is fileLine
         assert type(include.m_IncludeData) is PgCfgModel__IncludeData
-        assert include.m_IncludeData.m_Offset == offset001
+        assert include.m_IncludeData.m_Offset == offset
 
         assert include.m_IncludeData.IsAlive()
         assert include.m_IncludeData.m_Path == C_FILE_NAME
         assert include.m_IncludeData.m_Parent == fileLine.m_FileLineData
 
-        assert include.get_Configuration() is cfg
+        assert include.get_Configuration() is file.get_Configuration()
         assert include.get_Parent() is fileLine
 
         includedFile = include.get_File()
@@ -88,19 +163,25 @@ class TestSet001__Common:
         # assert include.get_File() is includedFile
         assert includedFile.get_Path() == os.path.join(rootTmpDir, C_FILE_NAME)
         assert includedFile.get_Parent() is include
-        return
+
+        return (fileLine, include)
 
     # --------------------------------------------------------------------
     def test_E01__after_option(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
@@ -140,13 +221,18 @@ class TestSet001__Common:
     def test_E02__after_include(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
@@ -170,13 +256,18 @@ class TestSet001__Common:
     def test_E03__after_comment(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 

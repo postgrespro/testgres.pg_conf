@@ -26,15 +26,20 @@ class TestSet001__Common:
     def test_001(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         for nPass in range(3):
             logging.info("--------- pass: {0}".format(nPass))
@@ -76,8 +81,10 @@ class TestSet001__Common:
     def test_002(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
@@ -86,7 +93,10 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         expectedValue: typing.List[str] = list()
 
@@ -152,15 +162,20 @@ class TestSet001__Common:
     def test_003(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
@@ -176,15 +191,20 @@ class TestSet001__Common:
     def test_004__check_get_prepare_filter__unique(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
@@ -203,15 +223,20 @@ class TestSet001__Common:
     def test_005__check_get_prepare_filter__to_str(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
@@ -232,15 +257,20 @@ class TestSet001__Common:
     def test_006__set_value_item_with_bad_type(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
@@ -266,15 +296,20 @@ class TestSet001__Common:
     def test_007__set_None(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         C_OPT_NAME = "shared_preload_libraries"
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
 
@@ -289,6 +324,83 @@ class TestSet001__Common:
         assert str(x.value) == ErrorMessageBuilder.NoneValueIsNotSupported()
 
         assert r1.m_OptData.m_Value == ["biha"]
+        assert r1.Option.get_Value() == ["biha"]
+        return
+
+    # --------------------------------------------------------------------
+    def test_008__two_items(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        C_OPT_NAME = "shared_preload_libraries"
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+
+        r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
+        assert r1 is not None
+        assert type(r1) is PgCfg_SetOptionResult_Base
+        assert r1.Option is not None
+        assert r1.Option.get_Value() == ["biha"]
+
+        r2 = cfg.SetOptionValueItem(C_OPT_NAME, "proxima")
+        assert r2 is not None
+        assert type(r2) is PgCfg_SetOptionResult_Base
+        assert r2.EventID == PgCfg_SetOptionEventID.VALUE_ITEM_WAS_ADDED
+        assert r2.Option is not None
+        assert r2.Option.get_Value() == ["biha", "proxima"]
+
+        assert r1.Option.get_Value() == ["biha", "proxima"]
+        return
+
+    # --------------------------------------------------------------------
+    def test_009__two_items__arround_include__Standard(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Strict:
+            TestServices.RaiseSkip_NotApplicable()
+
+        C_OPT_NAME = "shared_preload_libraries"
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+
+        r1 = cfg.SetOptionValueItem(C_OPT_NAME, "biha")
+        assert r1 is not None
+        assert type(r1) is PgCfg_SetOptionResult_Base
+        assert r1.Option is not None
+        assert r1.Option.get_Value() == ["biha"]
+
+        r1.Option.get_Parent().get_Parent().AddInclude("a.conf")
+
+        r2 = cfg.SetOptionValueItem(C_OPT_NAME, "proxima")
+        assert r2 is not None
+        assert type(r2) is PgCfg_SetOptionResult_Base
+        assert r2.EventID == PgCfg_SetOptionEventID.VALUE_ITEM_WAS_ADDED
+        assert r2.Option is not None
+        assert r2.Option.get_Value() == ["biha", "proxima"]
+
+        assert r1.Option.m_OptionData is not r2.Option.m_OptionData
+
         assert r1.Option.get_Value() == ["biha"]
         return
 

@@ -43,15 +43,20 @@ class TestSet001__Common:
     def test_001__int_opt(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -80,15 +85,20 @@ class TestSet001__Common:
     def test_002__port___reasign(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -183,13 +193,18 @@ class TestSet001__Common:
     def test_003__port___bad_type(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue("port", True)
@@ -206,13 +221,18 @@ class TestSet001__Common:
     def test_004__port___cont_convert_value(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue("port", "123.")
@@ -230,15 +250,20 @@ class TestSet001__Common:
     def test_006(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -276,15 +301,20 @@ class TestSet001__Common:
     def test_007__set_None(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -302,15 +332,20 @@ class TestSet001__Common:
     def test_008__set_Int_set_None(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         optName: str,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(optName) is str
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -384,7 +419,7 @@ class TestSet001__Common:
         return
 
     # --------------------------------------------------------------------
-    def test_009__spec_file(
+    def test_009__spec_file__Strict(
         self,
         request: pytest.FixtureRequest,
     ):
@@ -393,7 +428,10 @@ class TestSet001__Common:
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=PgCfg_Std.Strategy.Strict,
+        )
 
         file1 = cfg.AddTopLevelFile("postgresql.proxima.conf")
         assert file1 is not None
@@ -455,13 +493,18 @@ class TestSet001__Common:
     def test_010__None_name(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue(None, 123)
@@ -473,13 +516,18 @@ class TestSet001__Common:
     def test_011__empty_name(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         with pytest.raises(PostgresConfigException) as x:
             cfg.SetOptionValue("", 123)
@@ -509,16 +557,21 @@ class TestSet001__Common:
     def test_012__one_opt(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
         data012: typing.Tuple[str, typing.Any, typing.Any],
     ):
         assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
         assert type(data012) is tuple
         assert len(data012) == 3
 
         rootTmpDir = TestServices.GetRootTmpDir()
         assert type(rootTmpDir) is str
 
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
@@ -538,6 +591,180 @@ class TestSet001__Common:
             data012[0],
             data012[2],
         )
+        return
+
+    # --------------------------------------------------------------------
+    def test_013__set_twice(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
+        assert cfg.m_Data.m_DataDir == rootTmpDir
+
+        C_OPT_NAME = "port"
+
+        r1 = cfg.SetOptionValue(C_OPT_NAME, 123)
+        assert r1 is not None
+        assert r1.Option is not None
+        assert r1.Option.get_Name() == C_OPT_NAME
+        assert r1.Option.get_Value() == 123
+
+        r2 = cfg.SetOptionValue(C_OPT_NAME, 321)
+        assert r2 is not None
+        assert r2.Option is not None
+        assert r2.Option.get_Name() == C_OPT_NAME
+        assert r2.Option.get_Value() == 321
+
+        assert r1.Option.m_OptionData is r2.Option.m_OptionData
+        return
+
+    # --------------------------------------------------------------------
+    def test_014__00A__opt_in_file__Strict(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Standard:
+            TestServices.RaiseSkip_NotApplicable()
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
+        assert cfg.m_Data.m_DataDir == rootTmpDir
+
+        C_OPT_NAME = "port"
+
+        file1 = cfg.AddTopLevelFile("file1.conf")
+
+        r1 = file1.SetOptionValue(C_OPT_NAME, 123)
+        assert r1 is not None
+        assert r1.Option is not None
+        assert r1.Option.get_Name() == C_OPT_NAME
+        assert r1.Option.get_Value() == 123
+
+        r2 = cfg.SetOptionValue(C_OPT_NAME, 321)
+        assert r2 is not None
+        assert r2.Option is not None
+        assert r2.Option.get_Name() == C_OPT_NAME
+        assert r2.Option.get_Value() == 321
+
+        assert r1.Option.m_OptionData is r2.Option.m_OptionData
+
+        assert cfg.GetOptionValue(C_OPT_NAME) == 321
+        return
+
+    # --------------------------------------------------------------------
+    def test_014__00B__opt_in_file__Standard(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Strict:
+            TestServices.RaiseSkip_NotApplicable()
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
+        assert cfg.m_Data.m_DataDir == rootTmpDir
+
+        C_OPT_NAME = "port"
+
+        file1 = cfg.AddTopLevelFile("file1.conf")
+        assert file1.get_Path() == cfg.m_Data.OsOps.Path_Join(
+            rootTmpDir,
+            "file1.conf",
+        )
+
+        r1 = file1.SetOptionValue(C_OPT_NAME, 123)
+        assert r1 is not None
+        assert r1.Option is not None
+        assert r1.Option.get_Name() == C_OPT_NAME
+        assert r1.Option.get_Value() == 123
+
+        r2 = cfg.SetOptionValue(C_OPT_NAME, 321)
+        assert r2 is not None
+        assert r2.Option is not None
+        assert r2.Option.get_Name() == C_OPT_NAME
+        assert r2.Option.get_Value() == 321
+        r2_file = r2.Option.get_Parent().get_Parent()
+        assert r2_file.get_Path() == cfg.m_Data.OsOps.Path_Join(
+            rootTmpDir,
+            cfg.C_POSTGRESQL_AUTO_CONF,
+        )
+
+        assert r1.Option.m_OptionData is not r2.Option.m_OptionData
+
+        assert cfg.GetOptionValue(C_OPT_NAME) == 321
+        assert file1.GetOptionValue(C_OPT_NAME) == 123
+        return
+
+    # --------------------------------------------------------------------
+    def test_015__set_twice_around_include__Standard(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        if pg_conf_strategy == PgCfg_Std.Strategy.Strict:
+            TestServices.RaiseSkip_NotApplicable()
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
+        assert cfg.m_Data.m_DataDir == rootTmpDir
+
+        C_OPT_NAME = "port"
+
+        r1 = cfg.SetOptionValue(C_OPT_NAME, 1)
+        assert r1.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
+        assert r1.Option is not None
+        assert r1.Option.get_Value() == 1
+        file2 = r1.Option.get_Parent().get_Parent().AddInclude("a.conf")
+        assert file2 is not None
+        assert cfg.GetOptionValue(C_OPT_NAME) == 1
+        assert r1.Option.get_Value() == 1
+        r2 = cfg.SetOptionValue(C_OPT_NAME, 2)
+        assert r2.EventID == PgCfg_SetOptionEventID.OPTION_WAS_ADDED
+        assert r2.Option is not None
+        assert r2.Option.get_Value() == 2
+        assert r2.Option.m_OptionData is not r1.Option.m_OptionData
+        assert r1.Option.get_Value() == 1
+
+        assert cfg.GetOptionValue(C_OPT_NAME) == 2
         return
 
 

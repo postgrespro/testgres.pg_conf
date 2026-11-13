@@ -32,7 +32,11 @@ class TestSet001__Common:
     def test_000__empty(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -50,7 +54,10 @@ class TestSet001__Common:
             f.close()
 
         # ---------------
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         # ---------------
         logging.info("File object is loading...")
@@ -73,7 +80,11 @@ class TestSet001__Common:
     def test_001__comment_and_options(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -100,7 +111,10 @@ class TestSet001__Common:
             f.close()
 
         # ---------------
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         # ---------------
         logging.info("File object is loading...")
@@ -162,7 +176,11 @@ class TestSet001__Common:
     def test_002__two_files(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -206,7 +224,10 @@ class TestSet001__Common:
             f.close()
 
         # ---------------
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         # ---------------
         logging.info("File {0} is loading...".format(C_FILE_NAME1))
@@ -235,7 +256,11 @@ class TestSet001__Common:
     def test_003__two_files__duplication_and_cycles(
         self,
         request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
     ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
         rootTmpDir = TestServices.GetCurTestTmpDir(request)
 
         os.makedirs(rootTmpDir, exist_ok=True)
@@ -282,7 +307,10 @@ class TestSet001__Common:
             f.close()
 
         # ---------------
-        cfg = PgCfg_Std(rootTmpDir)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
 
         # ---------------
         logging.info("File {0} is loading...".format(C_FILE_NAME1))
@@ -298,6 +326,185 @@ class TestSet001__Common:
 
         assert file1.GetOptionValue("port") == 123
         assert file2.GetOptionValue("port") == 123
+        return
+
+    # --------------------------------------------------------------------
+    def test_004__realistic_config_overrides__Standard(
+        self,
+        request: pytest.FixtureRequest,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+
+        # Author: Mark G. <mark@google.com>
+
+        rootTmpDir = TestServices.GetCurTestTmpDir(request)
+
+        os.makedirs(rootTmpDir, exist_ok=True)
+
+        # ---------------
+        C_PG_CONF = PgCfg_Std.C_POSTGRESQL_CONF
+        C_BIHA_CONF = "postgresql.biha.conf"
+        C_PROXIMA_CONF = "postgresql.proxima.conf"
+        C_AUTO_CONF = PgCfg_Std.C_POSTGRESQL_AUTO_CONF
+
+        # 1. Create main postgresql.conf
+        # Contains base settings, an inline duplicate, and includes for extensions.
+        pgConfPath = os.path.join(rootTmpDir, C_PG_CONF)
+        logging.info("Creating {0}...".format(pgConfPath))
+
+        with open(pgConfPath, "x") as f:
+            # fmt: off
+            f.write("# Base PostgreSQL configuration\n")
+            f.write("listen_addresses = 'localhost'\n")
+            f.write("port = 5432\n")
+            f.write("max_connections = 100\n")
+            f.write("shared_buffers = '128MB'\n")
+            f.write("shared_preload_libraries = 'pg_stat_statements'\n")
+            f.write("\n")
+            f.write("# Inline override within the same file\n")
+            f.write("max_connections = 200\n")
+            f.write("\n")
+            f.write("# Include extension configurations in specific order\n")
+            f.write("include '{0}'\n".format(C_BIHA_CONF))
+            f.write("include '{0}'\n".format(C_PROXIMA_CONF))
+            f.write("\n")
+            f.write("# Final override at the tail of main config\n")
+            f.write("listen_addresses = '*'\n")
+            f.flush()
+            # fmt: on
+            f.close()
+
+        # 2. Create postgresql.biha.conf
+        # Overrides shared_preload_libraries and sets BiHA-specific options.
+        bihaConfPath = os.path.join(rootTmpDir, C_BIHA_CONF)
+        logging.info("Creating {0}...".format(bihaConfPath))
+
+        with open(bihaConfPath, "x") as f:
+            # fmt: off
+            f.write("# BiHA extension configuration\n")
+            f.write("shared_preload_libraries = 'pg_stat_statements, biha'\n")
+            f.write("wal_level = 'logical'\n")
+            f.write("biha.node_id = 1\n")
+            f.flush()
+            # fmt: on
+            f.close()
+
+        # 3. Create postgresql.proxima.conf
+        # Included after BiHA; overrides shared_preload_libraries again and tunes memory.
+        proximaConfPath = os.path.join(rootTmpDir, C_PROXIMA_CONF)
+        logging.info("Creating {0}...".format(proximaConfPath))
+
+        with open(proximaConfPath, "x") as f:
+            # fmt: off
+            f.write("# Proxima extension configuration\n")
+            f.write("shared_preload_libraries = 'pg_stat_statements, biha, proxima'\n")
+            f.write("shared_buffers = '1GB'\n")
+            f.write("proxima.pool_size = 64\n")
+            f.flush()
+            # fmt: on
+            f.close()
+
+        # 4. Create postgresql.auto.conf (simulating ALTER SYSTEM overrides)
+        # Takes highest precedence over postgresql.conf and all its includes.
+        autoConfPath = os.path.join(rootTmpDir, C_AUTO_CONF)
+        logging.info("Creating {0}...".format(autoConfPath))
+
+        with open(autoConfPath, "x") as f:
+            # fmt: off
+            f.write("# Do not edit this file manually!\n")
+            f.write("# It will be overwritten by the ALTER SYSTEM command.\n")
+            f.write("max_connections = 500\n")
+            f.write("port = 5433\n")
+            f.flush()
+            # fmt: on
+            f.close()
+
+        # ---------------
+        # Initialize configuration manager in Standard mode (duplicates allowed)
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=PgCfg_Std.Strategy.Standard,
+        )
+
+        # ---------------
+        # Load top-level configuration files
+        logging.info("Loading configuration files...")
+
+        pgFile = PgCfg_Reader_Base.LoadConfigurationFile(cfg, C_PG_CONF)
+        autoFile = PgCfg_Reader_Base.LoadConfigurationFile(cfg, C_AUTO_CONF)
+
+        assert len(cfg.get_AllFiles()) == 4
+
+        bihaFile = cfg.get_AllFiles().GetFileByName(C_BIHA_CONF)
+        proximaFile = cfg.get_AllFiles().GetFileByName(C_PROXIMA_CONF)
+
+        # ---------------
+        # Verify effective global configuration values (last definition wins)
+
+        # Overridden in postgresql.auto.conf
+        assert cfg.GetOptionValue("port") == 5433
+        assert cfg.GetOptionValue("max_connections") == 500
+
+        # Overridden at the tail of postgresql.conf (after includes)
+        assert cfg.GetOptionValue("listen_addresses") == "*"
+
+        # Overridden in postgresql.proxima.conf (the last include defining these)
+        assert cfg.GetOptionValue("shared_buffers") == "1GB"
+        assert cfg.GetOptionValue("shared_preload_libraries") == [
+            "pg_stat_statements",
+            "biha",
+            "proxima",
+        ]
+
+        # Defined only in specific extension files
+        assert cfg.GetOptionValue("wal_level") == "logical"
+        assert cfg.GetOptionValue("biha.node_id") == 1
+        assert cfg.GetOptionValue("proxima.pool_size") == 64
+
+        # ---------------
+        # Verify file-scoped effective values (subtree lookup)
+
+        # In context of postgresql.conf (ignoring postgresql.auto.conf):
+        # max_connections is 200 (inline override), port is 5432
+        assert pgFile.GetOptionValue("max_connections") == 200
+        assert pgFile.GetOptionValue("port") == 5432
+        assert pgFile.GetOptionValue("shared_preload_libraries") == [
+            "pg_stat_statements",
+            "biha",
+            "proxima",
+        ]
+
+        # In context of postgresql.biha.conf (ignoring proxima.conf):
+        assert bihaFile.GetOptionValue("shared_preload_libraries") == [
+            "pg_stat_statements",
+            "biha",
+        ]
+        assert bihaFile.GetOptionValue("proxima.pool_size") is None
+
+        # In context of postgresql.proxima.conf:
+        assert proximaFile.GetOptionValue("shared_preload_libraries") == [
+            "pg_stat_statements",
+            "biha",
+            "proxima",
+        ]
+        assert proximaFile.GetOptionValue("biha.node_id") is None
+
+        # In context of postgresql.auto.conf:
+        assert autoFile.GetOptionValue("port") == 5433
+        assert autoFile.GetOptionValue("max_connections") == 500
+        assert autoFile.GetOptionValue("shared_buffers") is None
+
+        # ---------------
+        # Verify total count of all option instances (including duplicates)
+        # postgresql.conf: 6 options (listen_addresses x2, port, max_connections x2, shared_buffers, shared_preload_libraries -> 7 total)
+        # biha.conf: 3 options
+        # proxima.conf: 3 options
+        # auto.conf: 2 options
+        # Total = 15 option instances across 4 files
+        allOptions = list(cfg.get_AllOptions())
+        assert len(allOptions) == 15
+        assert len(cfg.get_AllOptions()) == 15
+
         return
 
 
