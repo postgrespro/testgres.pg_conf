@@ -65,7 +65,12 @@ class TestSet001__Common:
         assert isinstance(r_option, PostgresConfigurationOption)
         assert r.Option is r_option  # check a cache
 
-        __class__.Helper__CheckStateOfCfgWithOneOpt(cfg, r_option, optName, 123)
+        __class__.Helper__CheckStateOfCfgWithOneOpt(
+            cfg,
+            r_option,
+            optName,
+            123,
+        )
 
         # Amen
         return
@@ -103,7 +108,10 @@ class TestSet001__Common:
     # --------------------------------------------------------------------
     @staticmethod
     def Helper__CheckStateOfCfgWithOneOpt(
-        cfg: PgCfg_Std, opt: PgCfg_Option_Base, optName: str, optValue: typing.Any
+        cfg: PgCfg_Std,
+        opt: PgCfg_Option_Base,
+        optName: str,
+        optValue: typing.Any,
     ):
         assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
         assert type(opt) is PgCfg_Option_Base
@@ -146,7 +154,8 @@ class TestSet001__Common:
         assert fileData is file.m_FileData
         assert type(fileData) is PgCfgModel__FileData
         assert fileData.m_Path == os.path.join(
-            cfg.m_Data.m_DataDir, "postgresql.auto.conf"
+            cfg.m_Data.m_DataDir,
+            "postgresql.auto.conf",
         )
         assert fileData.m_Parent is cfg.m_Data
         assert type(fileData.m_Lines) is list
@@ -524,7 +533,10 @@ class TestSet001__Common:
         assert r.Option is r_option  # check a cache
 
         __class__.Helper__CheckStateOfCfgWithOneOpt(
-            cfg, r_option, data012[0], data012[2]
+            cfg,
+            r_option,
+            data012[0],
+            data012[2],
         )
         return
 

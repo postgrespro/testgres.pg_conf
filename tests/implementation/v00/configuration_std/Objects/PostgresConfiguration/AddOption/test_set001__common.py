@@ -114,7 +114,8 @@ class TestSet001__Common:
         assert fileData is file.m_FileData
         assert type(fileData) is PgCfgModel__FileData
         assert fileData.m_Path == os.path.join(
-            cfg.m_Data.m_DataDir, cfg.C_POSTGRESQL_AUTO_CONF
+            cfg.m_Data.m_DataDir,
+            cfg.C_POSTGRESQL_AUTO_CONF,
         )
         assert fileData.m_Parent is cfg.m_Data
         assert type(fileData.m_Lines) is list

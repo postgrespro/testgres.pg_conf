@@ -79,7 +79,8 @@ class TestSet001__Common:
         assert len(allFiles1_list) == 1
 
         assert allFiles1_list[0].get_Path() == os.path.join(
-            rootTmpDir, "postgresql.auto.conf"
+            rootTmpDir,
+            "postgresql.auto.conf",
         )
         return
 

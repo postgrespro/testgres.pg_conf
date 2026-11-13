@@ -41,7 +41,10 @@ class TestSet001__Common:
         assert file is not None
         assert type(file) is PgCfg_TopLevelFile_Base
 
-        assert file.get_Path() == os.path.join(rootTmpDir, "postgresql.auto.conf")
+        assert file.get_Path() == os.path.join(
+            rootTmpDir,
+            "postgresql.auto.conf",
+        )
 
         fileLines = file.get_Lines()
         assert fileLines is not None
