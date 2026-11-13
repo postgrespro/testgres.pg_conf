@@ -367,6 +367,137 @@ class ModelUtils:
         return __class__.Helper__ClearFileLine(cfgData, fileLineData)
 
     # --------------------------------------------------------------------
+    class tagFindCtx:
+        m_processedFiles: typing.Optional[typing.Set[str]]
+
+        def __init__(self):
+            self.m_processedFiles = None
+            return
+
+        def reg_file(
+            self,
+            filePath: str,
+        ) -> bool:
+            assert type(filePath) is str
+            assert filePath != ""
+
+            if self.m_processedFiles is None:
+                self.m_processedFiles = set()
+            elif filePath in self.m_processedFiles:
+                return False
+
+            self.m_processedFiles.add(filePath)
+            return True
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def File__FindSimpleOption(
+        findCtx: tagFindCtx,
+        fileData: PgCfgModel__FileData,
+        optionName: str,
+        enterIntoIncludes: bool,
+    ) -> typing.Optional[PgCfgModel__OptionData]:
+        assert type(findCtx) is __class__.tagFindCtx
+        assert type(fileData) is PgCfgModel__FileData
+        assert type(fileData.m_Lines) is list
+        assert type(optionName) is str
+        assert type(enterIntoIncludes) is bool
+
+        if not findCtx.reg_file(fileData.m_Path):
+            return None
+
+        stack: typing.List[
+            typing.Tuple[
+                PgCfgModel__FileData,
+                int,
+            ]
+        ] = []
+
+        top_fileData = fileData
+        top_index = len(fileData.m_Lines)
+
+        while True:
+            assert top_index <= len(top_fileData.m_Lines)
+            assert top_index >= 0
+
+            nextFile: typing.Optional[PgCfgModel__FileData] = None
+
+            while top_index > 0:
+                top_index -= 1
+
+                lineData = top_fileData.m_Lines[top_index]
+
+                if len(lineData.m_Items) == 0:
+                    continue
+
+                assert len(lineData.m_Items) > 0
+                assert len(lineData.m_Items) <= 2
+
+                firstItem = lineData.m_Items[0]
+                assert firstItem is not None
+                assert firstItem.m_Element is not None
+
+                # Debug checks
+                if len(lineData.m_Items) == 1:
+                    pass
+                else:
+                    assert len(lineData.m_Items) == 2
+                    assert lineData.m_Items[1] is not None
+                    assert lineData.m_Items[1].m_Element is not None
+                    assert (
+                        type(lineData.m_Items[1].m_Element) is PgCfgModel__CommentData
+                    )
+                    pass
+
+                if type(firstItem.m_Element) is PgCfgModel__OptionData:
+                    if firstItem.m_Element.m_Name != optionName:
+                        continue
+
+                    return firstItem.m_Element  # <--------- BINGO
+
+                if type(firstItem.m_Element) is PgCfgModel__IncludeData:
+                    if not enterIntoIncludes:
+                        # Stop searching upwards: any option defined above an include
+                        # might be overridden by that included file.
+                        return None  # <--------- FAIL
+
+                    if not findCtx.reg_file(firstItem.m_Element.m_File.m_Path):
+                        continue
+
+                    nextFile = firstItem.m_Element.m_File
+                    break
+
+                if type(firstItem.m_Element) is PgCfgModel__CommentData:
+                    assert len(lineData.m_Items) == 1
+                    continue
+
+                BugCheckError.UnkObjectDataType(
+                    type(firstItem.m_Element),
+                )
+
+            if nextFile is None:
+                assert top_index == 0
+
+                if len(stack) == 0:
+                    return None  # <--------- FAIL
+
+                top = stack.pop()
+                assert top is not None
+                top_fileData = top[0]
+                top_index = top[1]
+                continue
+
+            assert nextFile is not None
+            assert top_index >= 0
+            assert top_index < len(top_fileData.m_Lines)
+
+            stack.append((top_fileData, top_index))
+
+            top_fileData = nextFile
+            top_index = len(nextFile.m_Lines)
+            continue
+
+    # --------------------------------------------------------------------
     @staticmethod
     def File__add_Option(
         cfgData: PgCfgModel__ConfigurationData,

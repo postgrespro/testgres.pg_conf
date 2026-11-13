@@ -129,22 +129,25 @@ class PostgresConfiguration_Base__DataStrategy_Strict:
 
         # -------------------------------------- FILE DATA
         if type(sourceData) is PgCfgModel__FileData:
-            fileData = sourceData
+            assert sourceData.IsAlive()
 
-            assert fileData.IsAlive()
-            assert fileData.m_OptionsByName is not None
-            assert type(fileData.m_OptionsByName) is PgCfgModel__MultiIndex
+            if optionName not in cfg.m_Data.m_AllOptionsByName.keys():
+                return None
 
-            optionData = __class__.Helper__FindSimpleOption(
-                cfg,
-                fileData.m_OptionsByName,
+            findCtx = PgCfgModel__ModelUtils.tagFindCtx()
+
+            optionData = PgCfgModel__ModelUtils.File__FindSimpleOption(
+                findCtx,
+                sourceData,
                 optionName,
+                enterIntoIncludes=True,
             )
 
             if optionData is not None:
                 assert type(optionData) is PgCfgModel__OptionData
                 assert optionData.IsAlive()
                 assert optionData.m_Value is not None
+                assert optionData.m_Name == optionName
                 return __class__.Helper__PrepareGetValue(
                     cfg,
                     optionData.m_Name,
