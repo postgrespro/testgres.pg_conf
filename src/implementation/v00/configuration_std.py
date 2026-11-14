@@ -77,7 +77,7 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
         self,
         data_dir: str,
         cfgOsOps: typing.Optional[ConfigurationOsOps] = None,
-        strategy: Strategy = Strategy.Strict,
+        strategy: Strategy = Strategy.Standard,
     ):
         assert type(data_dir) is str
         assert cfgOsOps is None or isinstance(cfgOsOps, ConfigurationOsOps)
