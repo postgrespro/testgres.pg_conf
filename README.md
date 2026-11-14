@@ -2,13 +2,13 @@
 [![PyPI package version](https://badge.fury.io/py/testgres_postgres-configuration.svg)](https://badge.fury.io/py/testgres.postgres-configuration)
 [![PyPI python versions](https://img.shields.io/pypi/pyversions/testgres_postgres_configuration)](https://pypi.org/project/testgres.postgres-configuration)
 
-# testgres.pg_conf
+# testgres.postgres_configration
 
 A robust, enterprise-grade Python library designed for parsing, manipulating, and writing PostgreSQL configuration files. This library functions as a modular component of the `testgres` ecosystem.
 
 ## What is it?
 
-`testgres.pg_conf` provides a comprehensive object-oriented interface to manage complex, multi-file PostgreSQL configurations (such as `postgresql.conf` and `postgresql.auto.conf`). It allows developers and QA engineers to programmatically inspect, modify, and save database settings within isolation layers, making it ideal for automated testing infrastructure and database orchestration.
+`testgres.postgres_configration` provides a comprehensive object-oriented interface to manage complex, multi-file PostgreSQL configurations (such as `postgresql.conf` and `postgresql.auto.conf`). It allows developers and QA engineers to programmatically inspect, modify, and save database settings within isolation layers, making it ideal for automated testing infrastructure and database orchestration.
 
 ## Key Features
 
