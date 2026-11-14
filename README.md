@@ -97,6 +97,13 @@ print(f"Preloaded libraries: {res_libs}")  # Expected output: auto_explain,pg_st
 # 5. Stop the process and clean up temporary node directories
 node.cleanup()
 ```
+Output:
+```
+Initial PostgreSQL port: 53916
+Configured max_connections: 15
+Preloaded libraries: auto_explain,pg_stat_statements
+```
+
 
 ## Authors
 
