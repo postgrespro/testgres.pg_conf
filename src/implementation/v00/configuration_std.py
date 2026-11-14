@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from .configuration_base import PostgresConfiguration_Base
+from .configuration_base import PostgresConfigurationFile
 from .configuration_base import PgCfgModel__OptionHandlerToPrepareSetValue
 from .configuration_base import PgCfgModel__OptionHandlerToPrepareSetValueItem
 from .configuration_base import PgCfgModel__OptionHandlerToPrepareGetValue
@@ -318,19 +319,35 @@ class PostgresConfiguration_Std(PostgresConfiguration_Base):
 
 class PostgresConfigurationReader_Std:
     @staticmethod
-    def LoadConfiguration(cfg: PostgresConfiguration_Std) -> None:
+    def LoadConfiguration(
+        cfg: PostgresConfiguration_Std,
+    ) -> None:
         assert isinstance(cfg, PostgresConfiguration_Std)
 
         # We expect that both files exist
-        PostgresConfigurationReader_Base.LoadConfigurationFile(
+        __class__.LoadConfigurationFile(
             cfg,
             cfg.C_POSTGRESQL_CONF,
         )
-        PostgresConfigurationReader_Base.LoadConfigurationFile(
+        __class__.LoadConfigurationFile(
             cfg,
             cfg.C_POSTGRESQL_AUTO_CONF,
         )
         return
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def LoadConfigurationFile(
+        cfg: PostgresConfiguration_Std,
+        filePath: str,
+    ) -> PostgresConfigurationFile:
+        assert isinstance(cfg, PostgresConfiguration_Std)
+        assert type(filePath) is str
+
+        return PostgresConfigurationReader_Base.LoadConfigurationFile(
+            cfg,
+            filePath,
+        )
 
 
 # //////////////////////////////////////////////////////////////////////////////
