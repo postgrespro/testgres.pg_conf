@@ -304,7 +304,9 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
         return self.m_FileLine
 
     # Include interface --------------------------------------------------
-    def get_File(self) -> PostgresConfigurationIncludedFile_Base:
+    def get_File(
+        self,
+    ) -> PostgresConfigurationIncludedFile_Base:
         self.Helper__CheckAlive()
 
         return PostgresConfigurationIncludedFile_Base(
@@ -936,7 +938,9 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         # Add empty line
         # Add include element
 
-        baseFolder = self.m_Cfg.m_Data.OsOps.Path_DirName(self.m_FileData.m_Path)
+        baseFolder = self.m_Cfg.m_Data.OsOps.Path_DirName(
+            self.m_FileData.m_Path,
+        )
         assert type(baseFolder) is str
 
         fileData = PgCfgModel__ModelUtils.Cfg__GetOrCreateFile__USER(

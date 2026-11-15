@@ -364,7 +364,10 @@ class ModelUtils:
         assert fileLineData.m_Items is not None
         assert type(fileLineData.m_Items) is list
 
-        return __class__.Helper__ClearFileLine(cfgData, fileLineData)
+        return __class__.Helper__ClearFileLine(
+            cfgData,
+            fileLineData,
+        )
 
     # --------------------------------------------------------------------
     class tagFindCtx:
@@ -969,7 +972,10 @@ class ModelUtils:
             assert lastItem is not None
             assert isinstance(lastItem.m_Element, PgCfgModel__FileLineElementData)
 
-            __class__.Helper__DeleteElement(cfgData, lastItem.m_Element)
+            __class__.Helper__DeleteElement(
+                cfgData,
+                lastItem.m_Element,
+            )
 
             assert fileLineData.m_Items is not None
             assert type(fileLineData.m_Items) is list
