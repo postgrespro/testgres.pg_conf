@@ -11,6 +11,7 @@ from ...abstract.v00.configuration import PostgresConfigurationOption
 from ...abstract.v00.configuration import PostgresConfigurationOptions
 from ...abstract.v00.configuration import PostgresConfigurationOptionsIterator
 from ...abstract.v00.configuration import PostgresConfigurationInclude
+from ...abstract.v00.configuration import PostgresConfigurationIncludeIfExists
 from ...abstract.v00.configuration import PostgresConfigurationFileLine
 from ...abstract.v00.configuration import PostgresConfigurationFileLines
 from ...abstract.v00.configuration import PostgresConfigurationFileLinesIterator
@@ -19,12 +20,14 @@ from ...abstract.v00.configuration import PostgresConfigurationFiles
 from ...abstract.v00.configuration import PostgresConfigurationFilesIterator
 from ...abstract.v00.configuration import PostgresConfigurationSetOptionValueEventID
 from ...abstract.v00.configuration import PostgresConfigurationSetOptionValueResult
+from ...abstract.v00.configuration import AddIncludeIfExistsRule
 
 from ...core.model import ConfigurationData as PgCfgModel__ConfigurationData
 from ...core.model import ObjectData as PgCfgModel__ObjectData
 from ...core.model import CommentData as PgCfgModel__CommentData
 from ...core.model import OptionData as PgCfgModel__OptionData
 from ...core.model import IncludeData as PgCfgModel__IncludeData
+from ...core.model import IncludeIfExistsData as PgCfgModel__IncludeIfExistsData
 from ...core.model import FileLineData as PgCfgModel__FileLineData
 from ...core.model import FileData as PgCfgModel__FileData
 from ...core.model import MultiIndex as PgCfgModel__MultiIndex
@@ -359,6 +362,99 @@ class PostgresConfigurationInclude_Base(PostgresConfigurationInclude):
 
 
 # //////////////////////////////////////////////////////////////////////////////
+# class PostgresConfigurationIncludeIfExists_Base
+
+
+class PostgresConfigurationIncludeIfExists_Base(PostgresConfigurationIncludeIfExists):
+    m_FileLine: PostgresConfigurationFileLine_Base
+    m_IncludeIfExistsData: PgCfgModel__IncludeIfExistsData
+
+    # --------------------------------------------------------------------
+    def __init__(
+        self,
+        fileLine: PostgresConfigurationFileLine_Base,
+        includeIfExistsData: PgCfgModel__IncludeIfExistsData,
+    ):
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
+        assert type(includeIfExistsData) is PgCfgModel__IncludeIfExistsData
+
+        super().__init__()
+
+        self.m_FileLine = fileLine
+        self.m_IncludeIfExistsData = includeIfExistsData
+        return
+
+    # Object interface ---------------------------------------------------
+    def get_Configuration(self) -> PostgresConfiguration_Base:
+        self.Helper__CheckAlive()
+        return self.m_FileLine.get_Configuration()
+
+    # --------------------------------------------------------------------
+    def get_Parent(self) -> PostgresConfigurationFileLine_Base:
+        self.Helper__CheckAlive()
+        return self.m_FileLine
+
+    # IncludeIfExists interface ------------------------------------------
+    def get_File(
+        self,
+    ) -> typing.Optional[PostgresConfigurationIncludedIfExistsFile_Base]:
+        self.Helper__CheckAlive()
+
+        if self.m_IncludeIfExistsData.m_File is None:
+            return None
+
+        return PostgresConfigurationIncludedIfExistsFile_Base(
+            self,
+            self.m_IncludeIfExistsData.m_File,
+        )
+
+    # --------------------------------------------------------------------
+    def Delete(
+        self,
+        withLine: bool,
+    ) -> None:
+        assert type(withLine) is bool
+
+        self.Helper__CheckAlive()
+        assert type(self.m_IncludeIfExistsData) is PgCfgModel__IncludeIfExistsData
+        assert type(self.m_IncludeIfExistsData.m_Parent) is PgCfgModel__FileLineData
+        assert (
+            type(self.m_IncludeIfExistsData.m_Parent.m_Parent) is PgCfgModel__FileData
+        )
+        assert (
+            type(self.m_IncludeIfExistsData.m_Parent.m_Parent.m_Parent)
+            is PgCfgModel__ConfigurationData
+        )
+
+        cfgData = self.m_IncludeIfExistsData.m_Parent.m_Parent.m_Parent
+        assert type(cfgData) is PgCfgModel__ConfigurationData
+
+        PgCfgModel__ModelUtils.IncludeIfExists__delete(
+            cfgData,
+            self.m_IncludeIfExistsData,
+            withLine,
+        )
+        return
+
+    # Private interface --------------------------------------------------
+    def Private__CheckAlive(self) -> None:
+        self.Helper__CheckAlive()
+        return
+
+    # Helper methods -----------------------------------------------------
+    def Helper__CheckAlive(self) -> None:
+        assert self.m_IncludeIfExistsData is not None
+        assert type(self.m_IncludeIfExistsData) is PgCfgModel__IncludeIfExistsData
+
+        if not self.m_IncludeIfExistsData.IsAlive():
+            RaiseError.IncludeIfExistsObjectWasDeleted()
+
+        assert type(self.m_FileLine) is PostgresConfigurationFileLine_Base
+        assert isinstance(self.m_FileLine, PostgresConfigurationFileLine)
+        return
+
+
+# //////////////////////////////////////////////////////////////////////////////
 # class PostgresConfigurationFileLine_Base
 
 
@@ -556,6 +652,90 @@ class PostgresConfigurationFileLine_Base(PostgresConfigurationFileLine):
                 assert include.m_IncludeData is includeData
             except:  # rollback an include
                 PgCfgModel__ModelUtils.Include__delete(
+                    cfg.m_Data,
+                    includeData,
+                    False,
+                )
+                raise
+        except:  # TODO: rollback a file
+            raise
+
+        return include
+
+    # --------------------------------------------------------------------
+    def AddIncludeIfExists(
+        self,
+        path: str,
+        offset: typing.Optional[int],
+        rule: AddIncludeIfExistsRule,
+    ) -> PostgresConfigurationIncludeIfExists_Base:
+        assert offset is None or type(offset) is int
+        assert offset is None or offset >= 0
+        assert type(rule) is AddIncludeIfExistsRule
+
+        DataVerificator.CheckStringOfFilePath(path)
+
+        assert type(path) is str
+        assert path != ""
+
+        self.Helper__CheckAlive()
+
+        assert isinstance(self.m_Parent, PostgresConfigurationFile_Base)
+
+        cfg = self.m_Parent.m_Cfg
+        assert isinstance(cfg, PostgresConfiguration_Base)
+        assert type(cfg.m_Data) is PgCfgModel__ConfigurationData
+
+        # Add/Get file
+        # Add include element
+
+        if rule == AddIncludeIfExistsRule.without_file:
+            withFile = False
+        elif rule == AddIncludeIfExistsRule.with_file:
+            withFile = True
+        else:
+            BugCheckError.UnknownAddIncludeIfExistsRule(rule)
+
+        if not withFile:
+            fileData = None
+        else:
+            assert self.m_FileLineData.m_Parent is not None
+
+            baseFolder = cfg.m_Data.OsOps.Path_DirName(
+                self.m_FileLineData.m_Parent.m_Path,
+            )
+            assert type(baseFolder) is str
+
+            fileData = PgCfgModel__ModelUtils.Cfg__GetOrCreateFile__USER(
+                cfg.m_Data,
+                baseFolder,
+                path,
+            )
+            assert type(fileData) is PgCfgModel__FileData
+
+        try:
+            includeData = PgCfgModel__ModelUtils.FileLine__add_IncludeIfExists(
+                self.m_FileLineData,
+                path,
+                fileData,
+                offset,
+            )
+            assert includeData is not None
+            assert type(includeData) is PgCfgModel__IncludeIfExistsData
+            assert includeData.m_Path == path
+            assert includeData.m_File is fileData
+            assert includeData.m_Parent == self.m_FileLineData
+
+            try:
+                # -----------
+                include = PostgresConfigurationIncludeIfExists_Base(
+                    self,
+                    includeData,
+                )
+                assert include.m_FileLine is self
+                assert include.m_IncludeIfExistsData is includeData
+            except:  # rollback an include
+                PgCfgModel__ModelUtils.IncludeIfExists__delete(
                     cfg.m_Data,
                     includeData,
                     False,
@@ -1006,6 +1186,103 @@ class PostgresConfigurationFile_Base(PostgresConfigurationFile):
         return include
 
     # --------------------------------------------------------------------
+    def AddIncludeIfExists(
+        self,
+        path: str,
+        rule: AddIncludeIfExistsRule,
+    ) -> PostgresConfigurationIncludeIfExists_Base:
+        DataVerificator.CheckStringOfFilePath(path)
+
+        assert type(path) is str
+        assert path != ""
+        assert type(rule) is AddIncludeIfExistsRule
+
+        self.Internal__CheckAlive()
+
+        assert self.m_Cfg is not None
+        assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
+        assert type(self.m_Cfg.m_Data) is PgCfgModel__ConfigurationData
+
+        # Add/Get file
+        # Add empty line
+        # Add include element
+
+        if rule == AddIncludeIfExistsRule.without_file:
+            withFile = False
+        elif rule == AddIncludeIfExistsRule.with_file:
+            withFile = True
+        else:
+            BugCheckError.UnknownAddIncludeIfExistsRule(rule)
+
+        if not withFile:
+            fileData = None
+        else:
+            baseFolder = self.m_Cfg.m_Data.OsOps.Path_DirName(
+                self.m_FileData.m_Path,
+            )
+            assert type(baseFolder) is str
+
+            fileData = PgCfgModel__ModelUtils.Cfg__GetOrCreateFile__USER(
+                self.m_Cfg.m_Data,
+                baseFolder,
+                path,
+            )
+            assert type(fileData) is PgCfgModel__FileData
+
+        try:
+            fileLineData = PgCfgModel__ModelUtils.File__add_Line(
+                self.m_FileData,
+            )
+
+            assert self.m_FileData is not None
+            assert type(self.m_FileData) is PgCfgModel__FileData
+            assert self.m_FileData.m_Lines is not None
+            assert type(self.m_FileData.m_Lines) is list
+            assert len(self.m_FileData.m_Lines) > 0
+            assert self.m_FileData.m_Lines[-1] is fileLineData
+
+            try:
+                includeData = PgCfgModel__ModelUtils.FileLine__add_IncludeIfExists(
+                    fileLineData,
+                    path,
+                    fileData,
+                    None,
+                )
+                assert includeData is not None
+                assert type(includeData) is PgCfgModel__IncludeIfExistsData
+                assert includeData.m_Path == path
+                assert includeData.m_File is fileData
+                assert includeData.m_Parent == fileLineData
+
+                # -----------
+                fileLine = PostgresConfigurationFileLine_Base(
+                    self,
+                    fileLineData,
+                )
+                assert fileLine is not None
+                assert type(fileLine) is PostgresConfigurationFileLine_Base
+                assert fileLine.m_FileLineData is fileLineData
+                assert fileLine.m_Parent is self
+
+                # -----------
+                include = PostgresConfigurationIncludeIfExists_Base(
+                    fileLine,
+                    includeData,
+                )
+                assert include.m_FileLine is fileLine
+                assert include.m_IncludeIfExistsData is includeData
+            except:  # rollback a line
+                PgCfgModel__ModelUtils.FileLine__delete(
+                    self.m_Cfg.m_Data,
+                    fileLineData,
+                )
+                raise
+        except:  # TODO: rollback a file
+            raise
+
+        return include
+
+    # --------------------------------------------------------------------
     #
     # Method for inserting, updating and deleting of an option.
     #
@@ -1179,6 +1456,60 @@ class PostgresConfigurationIncludedFile_Base(PostgresConfigurationFile_Base):
             RaiseError.FileObjectWasDeleted()
 
         self.m_Include.Private__CheckAlive()
+
+        assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
+        assert isinstance(self.m_Cfg, PostgresConfiguration)
+        return
+
+
+# //////////////////////////////////////////////////////////////////////////////
+# class PostgresConfigurationIncludedIfExistsFile_Base
+
+
+class PostgresConfigurationIncludedIfExistsFile_Base(PostgresConfigurationFile_Base):
+    m_IncludeIfExists: PostgresConfigurationIncludeIfExists_Base
+
+    # --------------------------------------------------------------------
+    def __init__(
+        self,
+        include: PostgresConfigurationIncludeIfExists_Base,
+        fileData: PgCfgModel__FileData,
+    ):
+        assert type(include) is PostgresConfigurationIncludeIfExists_Base
+        assert type(fileData) is PgCfgModel__FileData
+
+        super().__init__(
+            include.get_Configuration(),
+            fileData,
+        )
+
+        self.m_IncludeIfExists = include
+        return
+
+    # Object interface ---------------------------------------------------
+    def get_Parent(self) -> PostgresConfigurationIncludeIfExists_Base:
+        self.Internal__CheckAlive()
+        assert isinstance(
+            self.m_IncludeIfExists,
+            PostgresConfigurationIncludeIfExists_Base,
+        )
+        assert isinstance(
+            self.m_IncludeIfExists,
+            PostgresConfigurationIncludeIfExists,
+        )
+        return self.m_IncludeIfExists
+
+    # Internal interface -------------------------------------------------
+    def Internal__CheckAlive(self) -> None:
+        assert self.m_FileData is not None
+        assert self.m_IncludeIfExists is not None
+        assert type(self.m_FileData) is PgCfgModel__FileData
+        assert type(self.m_IncludeIfExists) is PostgresConfigurationIncludeIfExists_Base
+
+        if not self.m_FileData.IsAlive():
+            RaiseError.FileObjectWasDeleted()
+
+        self.m_IncludeIfExists.Private__CheckAlive()
 
         assert isinstance(self.m_Cfg, PostgresConfiguration_Base)
         assert isinstance(self.m_Cfg, PostgresConfiguration)

@@ -156,6 +156,41 @@ class IncludeData(FileLineElementData):
 
 
 # //////////////////////////////////////////////////////////////////////////////
+# IncludeIfExistsData
+
+
+class IncludeIfExistsData(FileLineElementData):
+    m_Path: str
+    m_File: typing.Optional[FileData]
+
+    # --------------------------------------------------------------------
+    def __init__(
+        self,
+        parent: FileLineData,
+        offset: typing.Optional[int],
+        path: str,
+        fileData: typing.Optional[FileData],
+    ):
+        assert type(parent) is FileLineData
+        assert type(path) is str
+        assert fileData is None or type(fileData) is FileData
+        assert offset is None or type(offset) is int
+
+        assert parent.IsAlive()
+
+        if fileData is not None:
+            assert fileData.IsAlive()
+            assert fileData.get_Parent() is parent.get_Parent().get_Parent()
+            pass
+
+        super().__init__(parent, offset)
+
+        self.m_Path = path
+        self.m_File = fileData
+        return
+
+
+# //////////////////////////////////////////////////////////////////////////////
 # FileLineData
 
 

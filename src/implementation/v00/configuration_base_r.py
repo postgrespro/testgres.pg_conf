@@ -9,10 +9,12 @@ from .configuration_base import PostgresConfigurationFileLine_Base
 from .configuration_base import PostgresConfigurationFile_Base
 from .configuration_base import PostgresConfigurationTopLevelFile_Base
 from .configuration_base import PostgresConfigurationFactory_Base
+from .configuration_base import AddIncludeIfExistsRule
 
 from ...core.model import CommentData as PgCfgModel__CommentData
 from ...core.model import OptionData as PgCfgModel__OptionData
 from ...core.model import IncludeData as PgCfgModel__IncludeData
+from ...core.model import IncludeIfExistsData as PgCfgModel__IncludeIfExistsData
 from ...core.model import FileLineData as PgCfgModel__FileLineData
 from ...core.model import FileData as PgCfgModel__FileData
 from ...core.model import FileStatus as PgCfgModel__FileStatus
@@ -148,6 +150,33 @@ class PostgresConfigurationReader_Base:
                         queuedFileDatas.add(includeData.m_File)
                         continue
 
+                    if type(fileLineElementData) is PgCfgModel__IncludeIfExistsData:
+                        # look at existFileDatas
+                        includeIfExistsData = fileLineElementData
+
+                        if includeIfExistsData.m_File is None:
+                            continue
+
+                        assert type(includeIfExistsData.m_File) is PgCfgModel__FileData
+                        assert type(includeIfExistsData.m_File.m_Path) is str
+
+                        if includeIfExistsData.m_File.m_Path in existFileDatas:
+                            continue  # it is an old file
+
+                        assert (
+                            includeIfExistsData.m_File.m_Status
+                            == PgCfgModel__FileStatus.IS_NEW
+                        )
+                        assert (
+                            includeIfExistsData.m_File.m_LastModifiedTimestamp is None
+                        )
+
+                        if includeIfExistsData.m_File in queuedFileDatas:
+                            continue  # already in queue
+
+                        queuedFileDatas.add(includeIfExistsData.m_File)
+                        continue
+
                     BugCheckError.UnkObjectDataType(type(fileLineElementData))
                 continue
             continue  # while queuedFileDatas
@@ -272,6 +301,17 @@ class PostgresConfigurationReader_Base:
                     )
                     continue
 
+                if sequence.lower() == "include_if_exists":
+                    if ch is not None:
+                        lineReader.StepBack()
+
+                    __class__.Helper__ProcessLineData__IncludeIfExists(
+                        fileLine,
+                        lineReader,
+                        sequenceOffset,
+                    )
+                    continue
+
                 if ch is not None:
                     lineReader.StepBack()
 
@@ -332,6 +372,69 @@ class PostgresConfigurationReader_Base:
         assert type(lineReader) is ReadUtils__LineReader
         assert type(includeOffset) is int
         assert includeOffset >= 0
+
+        filePath = __class__.Helper__ProcessFilePath(
+            fileLine,
+            lineReader,
+        )
+
+        fileLine.AddInclude(
+            filePath,
+            includeOffset,
+        )
+        return
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def Helper__ProcessLineData__IncludeIfExists(
+        fileLine: PostgresConfigurationFileLine_Base,
+        lineReader: ReadUtils__LineReader,
+        includeOffset: int,
+    ) -> None:
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
+        assert type(lineReader) is ReadUtils__LineReader
+        assert type(includeOffset) is int
+        assert includeOffset >= 0
+        assert fileLine.m_Parent is not None
+        assert fileLine.m_Parent.m_FileData is not None
+        assert fileLine.m_Parent.m_FileData.m_Parent is not None
+
+        filePath = __class__.Helper__ProcessFilePath(
+            fileLine,
+            lineReader,
+        )
+
+        osOps = fileLine.m_Parent.m_FileData.m_Parent.m_OsOps
+        assert osOps is not None
+
+        normFilePath = Helpers.NormalizeFilePath(
+            osOps,
+            osOps.Path_DirName(fileLine.m_Parent.m_FileData.m_Path),
+            filePath,
+        )
+        assert type(normFilePath) is str
+        assert normFilePath != ""
+
+        if osOps.Path_IsExists(normFilePath):
+            rule = AddIncludeIfExistsRule.with_file
+        else:
+            rule = AddIncludeIfExistsRule.without_file
+
+        fileLine.AddIncludeIfExists(
+            filePath,
+            includeOffset,
+            rule=rule,
+        )
+        return
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def Helper__ProcessFilePath(
+        fileLine: PostgresConfigurationFileLine_Base,
+        lineReader: ReadUtils__LineReader,
+    ) -> str:
+        assert type(fileLine) is PostgresConfigurationFileLine_Base
+        assert type(lineReader) is ReadUtils__LineReader
 
         # find first quote
         while True:
@@ -452,11 +555,7 @@ class PostgresConfigurationReader_Base:
                 lineReader.GetLineNum(),
             )
 
-        fileLine.AddInclude(
-            filePath,
-            includeOffset,
-        )
-        return
+        return filePath
 
     # --------------------------------------------------------------------
     @staticmethod

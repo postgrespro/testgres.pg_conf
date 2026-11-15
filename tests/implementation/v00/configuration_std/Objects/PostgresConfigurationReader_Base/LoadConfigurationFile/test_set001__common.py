@@ -13,6 +13,7 @@ from src.implementation.v00.configuration_base import PostgresConfigurationFile 
 from src.implementation.v00.configuration_base import PgCfgModel__CommentData
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
 from src.implementation.v00.configuration_base import PgCfgModel__FileData
+from src.implementation.v00.configuration_base import PgCfgModel__IncludeIfExistsData
 
 from src.implementation.v00.configuration_base_r import PgCfgModel__FileStatus
 
@@ -268,6 +269,8 @@ class TestSet001__Common:
         # ---------------
         C_FILE_NAME1 = PgCfg_Std.C_POSTGRESQL_CONF
         C_FILE_NAME2 = "postgresql.biha.conf"
+        C_FILE_NAME3 = "file3.conf"
+        C_FILE_NAME4 = "file4.conf"
 
         # ---------------
         filePath1 = os.path.join(rootTmpDir, C_FILE_NAME1)
@@ -278,6 +281,9 @@ class TestSet001__Common:
             # fmt: off
             f.write("include '{0}'\n".format(C_FILE_NAME2))
             f.write("include '{0}'\n".format(C_FILE_NAME2))
+            f.write("include_if_exists '{}'\n".format(C_FILE_NAME2))
+            f.write("include_if_exists '{}'\n".format(C_FILE_NAME3))
+            f.write("include_if_exists '{}'\n".format(C_FILE_NAME4))
             f.flush()
             # fmt: on
 
@@ -307,6 +313,23 @@ class TestSet001__Common:
             f.close()
 
         # ---------------
+        filePath3 = os.path.join(rootTmpDir, C_FILE_NAME3)
+
+        logging.info("File {0} is creating...".format(filePath3))
+
+        with open(filePath3, "x") as f:
+            # fmt: off
+            f.write("prop3 321 # HAHA\n")
+            f.flush()
+            # fmt: on
+
+            fd = f.fileno()
+            assert type(fd) is int
+            lastMDate3 = datetime.datetime.fromtimestamp(os.path.getmtime(fd))
+            assert type(lastMDate3) is datetime.datetime
+            f.close()
+
+        # ---------------
         cfg = PgCfg_Std(
             rootTmpDir,
             strategy=pg_conf_strategy,
@@ -317,15 +340,38 @@ class TestSet001__Common:
 
         PgCfg_Reader_Base.LoadConfigurationFile(cfg, cfg.C_POSTGRESQL_CONF)
 
-        assert len(cfg.get_AllFiles()) == 2
+        assert len(cfg.get_AllFiles()) == 3
 
         assert (cfg.GetOptionValue("port")) == 123
+        assert (cfg.GetOptionValue("prop3")) == "321"
 
         file1 = cfg.get_AllFiles().GetFileByName(C_FILE_NAME1)
         file2 = cfg.get_AllFiles().GetFileByName(C_FILE_NAME2)
+        file3 = cfg.get_AllFiles().GetFileByName(C_FILE_NAME3)
 
         assert file1.GetOptionValue("port") == 123
         assert file2.GetOptionValue("port") == 123
+        assert file3.GetOptionValue("prop3") == "321"
+
+        assert len(file1.get_Lines()) == 5
+        assert len(file1.m_FileData.m_Lines) == 5
+
+        file1_line3data = file1.m_FileData.m_Lines[3]
+        assert len(file1_line3data.m_Items) == 1
+        element = file1_line3data.m_Items[0].m_Element
+        assert element is not None
+        assert type(element) is PgCfgModel__IncludeIfExistsData
+        assert element.m_Path == C_FILE_NAME3
+        assert element.m_File is not None
+
+        file1_line4data = file1.m_FileData.m_Lines[4]
+        assert len(file1_line4data.m_Items) == 1
+        element = file1_line4data.m_Items[0].m_Element
+        assert element is not None
+        assert type(element) is PgCfgModel__IncludeIfExistsData
+        assert element.m_Path == C_FILE_NAME4
+        assert element.m_File is None
+
         return
 
     # --------------------------------------------------------------------

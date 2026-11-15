@@ -12,6 +12,7 @@ from src.implementation.v00.configuration_base import PostgresConfigurationTopLe
 from src.implementation.v00.configuration_base import PostgresConfigurationFile as PgCfg_File
 
 from src.implementation.v00.configuration_base import PgCfgModel__FileData
+from src.implementation.v00.configuration_base import AddIncludeIfExistsRule
 from src.implementation.v00.configuration_base_r import PgCfgModel__FileStatus
 
 from src.exceptions import PostgresConfigException
@@ -190,6 +191,8 @@ class TestSet001__Common:
         # ---------------
         C_FILE1_NAME = PgCfg_Std.C_POSTGRESQL_CONF
         C_FILE2_NAME = "postgresql.proxima.conf"
+        C_FILE3_NAME = "file3.conf"
+        C_FILE4_NAME = "file4.conf"
 
         C_OPT_NAME = "proxima.port"
 
@@ -204,14 +207,23 @@ class TestSet001__Common:
         file1 = cfg.AddTopLevelFile(C_FILE1_NAME)
 
         file2 = file1.AddInclude(C_FILE2_NAME).get_File()
+        file3 = file1.AddIncludeIfExists(
+            C_FILE3_NAME,
+            AddIncludeIfExistsRule.with_file,
+        ).get_File()
+        file1.AddIncludeIfExists(
+            C_FILE4_NAME,
+            AddIncludeIfExistsRule.without_file,
+        )
 
         portNumber = 321
 
         file2.AddOption(C_OPT_NAME, portNumber)
-
         assert file2.GetOptionValue(C_OPT_NAME) == portNumber
-
         assert file2.AddComment(" IT IS ALL!")
+
+        assert file3 is not None
+        file3.AddOption("prop3", True)
 
         # ---------------
         cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
@@ -240,8 +252,20 @@ class TestSet001__Common:
             logging.info("File objects are being checked...")
 
             fileDatas = [
-                (file1, "include 'postgresql.proxima.conf'\n"),
-                (file2, "{0} = {1}\n# IT IS ALL!\n".format(C_OPT_NAME, portNumber)),
+                (
+                    file1,
+                    "include 'postgresql.proxima.conf'\n"
+                    "include_if_exists 'file3.conf'\n"
+                    "include_if_exists 'file4.conf'\n",
+                ),
+                (
+                    file2,
+                    "{0} = {1}\n# IT IS ALL!\n".format(C_OPT_NAME, portNumber),
+                ),
+                (
+                    file3,
+                    "prop3 = on\n",
+                ),
             ]
 
             for fileData in fileDatas:
@@ -268,6 +292,13 @@ class TestSet001__Common:
 
                     assert fileContent_n == fileData[1]
                 continue
+
+            assert not os.path.exists(
+                os.path.join(
+                    rootTmpDir,
+                    C_FILE4_NAME,
+                )
+            )
             continue
         return
 

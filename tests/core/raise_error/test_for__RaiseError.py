@@ -398,6 +398,17 @@ class TestFor_RaiseError:
         return
 
     # --------------------------------------------------------------------
+    def test_FileLineAlreadyHasIncludeIfExistsDirective(self):
+        with pytest.raises(PostgresConfigException) as x:
+            RaiseError.FileLineAlreadyHasIncludeIfExistsDirective()
+
+        assert (
+            str(x.value)
+            == ErrorMessageBuilder.FileLineAlreadyHasIncludeIfExistsDirective()
+        )
+        return
+
+    # --------------------------------------------------------------------
     def test_CfgReader__UnexpectedSymbol(self):
         with pytest.raises(PostgresConfigException) as x:
             RaiseError.CfgReader__UnexpectedSymbol(

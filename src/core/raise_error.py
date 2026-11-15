@@ -130,6 +130,15 @@ class RaiseError:
 
     # --------------------------------------------------------------------
     @staticmethod
+    def IncludeIfExistsObjectWasDeleted() -> typing.NoReturn:
+        errMsg = "IncludeIfExists object was deleted."
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
+
+    # --------------------------------------------------------------------
+    @staticmethod
     def FileLineObjectWasDeleted() -> typing.NoReturn:
         errMsg = "FileLine object was deleted."
 
@@ -379,6 +388,15 @@ class RaiseError:
     @staticmethod
     def FileLineAlreadyHasIncludeDirective() -> typing.NoReturn:
         errMsg = "File line already has an include directive."
+
+        __class__.Helper__RaiseErr__PostgresConfigException(
+            errMsg,
+        )
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def FileLineAlreadyHasIncludeIfExistsDirective() -> typing.NoReturn:
+        errMsg = "File line already has an include_if_exists directive."
 
         __class__.Helper__RaiseErr__PostgresConfigException(
             errMsg,

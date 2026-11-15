@@ -103,6 +103,12 @@ class ErrorMessageBuilder:
 
     # --------------------------------------------------------------------
     @staticmethod
+    def IncludeIfExistsObjectWasDeleted() -> str:
+        errMsg = "IncludeIfExists object was deleted."
+        return errMsg
+
+    # --------------------------------------------------------------------
+    @staticmethod
     def FileLineObjectWasDeleted() -> str:
         errMsg = "FileLine object was deleted."
         return errMsg
@@ -307,6 +313,12 @@ class ErrorMessageBuilder:
     @staticmethod
     def FileLineAlreadyHasIncludeDirective() -> str:
         errMsg = "File line already has an include directive."
+        return errMsg
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def FileLineAlreadyHasIncludeIfExistsDirective() -> str:
+        errMsg = "File line already has an include_if_exists directive."
         return errMsg
 
     # --------------------------------------------------------------------

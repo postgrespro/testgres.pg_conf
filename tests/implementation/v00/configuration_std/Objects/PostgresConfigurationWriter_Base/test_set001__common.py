@@ -8,12 +8,14 @@ from src.implementation.v00.configuration_std import PostgresConfigurationWriter
 from src.implementation.v00.configuration_std import PostgresConfigurationWriterCtx_Base as PgCfg_WriterCtx_Base
 
 from src.implementation.v00.configuration_base import PgCfgModel__FileData
+from src.implementation.v00.configuration_base import AddIncludeIfExistsRule as PgCfg__AddIncludeIfExistsRule
 
 from ......TestServices import TestServices
 # fmt: on
 
 import pytest
 import typing
+import dataclasses
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -388,6 +390,162 @@ class TestSet001__Common:
         )
 
         assert actualFileContent == data009.result
+        return
+
+    # --------------------------------------------------------------------
+    @dataclasses.dataclass
+    class tagData010:
+        descr: str
+        fileName: str
+        result: str
+
+    # --------------------------------------------------------------------
+    sm_Data010: typing.List[tagData010] = [
+        # fmt: off
+        tagData010(
+            "a_space_a_conf",
+            "a a.conf",
+            "include_if_exists 'a a.conf'\n"
+        ),
+        tagData010(
+            "quote_a_quote_conf",
+            "'a'.conf",
+            "include_if_exists '\\'a\\'.conf'\n"
+        ),
+        tagData010(
+            "quote2_a_quote2_conf",
+            "\"a\".conf",
+            "include_if_exists '\"a\".conf'\n"
+        ),
+    ]
+
+    # --------------------------------------------------------------------
+    @pytest.fixture(
+        params=sm_Data010,
+        ids=[x.descr for x in sm_Data010],
+    )
+    def data010(
+        self,
+        request: pytest.FixtureRequest,
+    ) -> tagData010:
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(request.param) is __class__.tagData010
+        return request.param
+
+    # --------------------------------------------------------------------
+    def test_010__include_if_exists__mix(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+        data010: tagData010,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+        assert type(data010) is __class__.tagData010
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+        file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
+
+        file2 = file.AddIncludeIfExists(
+            data010.fileName,
+            PgCfg__AddIncludeIfExistsRule.with_file,
+        ).get_File()
+
+        assert file2 is not None
+        assert (
+            file2.get_Parent().get_Parent().get_Parent() is file
+        )  # check a references
+
+        cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
+
+        actualFileContent = PgCfg_Writer_Base.MakeFileDataContent(
+            cfgWriterCtx,
+            file.m_FileData,
+        )
+
+        assert actualFileContent == data010.result
+        return
+
+    # --------------------------------------------------------------------
+    def test_011__include_if_exists__with_file(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+        file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
+
+        C_INCLUDED_FILE_NAME = "postgresql.proxima.conf"
+
+        file2 = file.AddIncludeIfExists(
+            C_INCLUDED_FILE_NAME,
+            PgCfg__AddIncludeIfExistsRule.with_file,
+        ).get_File()
+
+        assert file2 is not None
+
+        assert (
+            file2.get_Parent().get_Parent().get_Parent() is file
+        )  # check a references
+
+        cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
+
+        actualFileContent = PgCfg_Writer_Base.MakeFileDataContent(
+            cfgWriterCtx,
+            file.m_FileData,
+        )
+
+        expectedFileContent = "include_if_exists '{0}'\n".format(C_INCLUDED_FILE_NAME)
+
+        assert actualFileContent == expectedFileContent
+        return
+
+    # --------------------------------------------------------------------
+    def test_012__include_if_exists__without_file(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+        file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_AUTO_CONF)
+
+        C_INCLUDED_FILE_NAME = "postgresql.proxima.conf"
+
+        file2 = file.AddIncludeIfExists(
+            C_INCLUDED_FILE_NAME,
+            PgCfg__AddIncludeIfExistsRule.without_file,
+        ).get_File()
+
+        assert file2 is None
+
+        cfgWriterCtx = PgCfg_WriterCtx_Base(cfg)
+
+        actualFileContent = PgCfg_Writer_Base.MakeFileDataContent(
+            cfgWriterCtx,
+            file.m_FileData,
+        )
+
+        expectedFileContent = "include_if_exists '{0}'\n".format(C_INCLUDED_FILE_NAME)
+
+        assert actualFileContent == expectedFileContent
         return
 
 

@@ -7,8 +7,8 @@ from src.implementation.v00.configuration_std import PostgresConfigurationReader
 from src.implementation.v00.configuration_std import PostgresConfigurationWriterCtx_Base as PgCfg_WriterCtx_Base
 from src.implementation.v00.configuration_std import PostgresConfigurationWriter_Base as PgCfg_Writer_Base
 
+from src.implementation.v00.configuration_base import AddIncludeIfExistsRule as PgCfg_AddIncludeIfExistsRule
 from src.implementation.v00.configuration_base import PostgresConfigurationSetOptionValueEventID as PgCfg_SetOptionEventID
-
 
 from .....TestServices import TestServices
 # fmt: on
@@ -152,6 +152,77 @@ class TestSet002__RealWork:
         assert pgFile_reloaded.GetOptionValue("max_connections") == 200
         assert len(pgFile_reloaded.get_Lines()) == 8
 
+        return
+
+    # --------------------------------------------------------------------
+    def test_002__integration_and_overrides__Standard(
+        self,
+        request: pytest.FixtureRequest,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+
+        # Author: Mark G. <mark@google.com>
+
+        rootTmpDir = TestServices.GetCurTestTmpDir(request)
+        os.makedirs(rootTmpDir, exist_ok=True)
+
+        C_PG_CONF = PgCfg_Std.C_POSTGRESQL_CONF
+        C_MISSING_CONF = "missing_extension.conf"
+        C_EXISTS_CONF = "active_extension.conf"
+
+        # 1. Create the optional file that DOES exist
+        existsConfPath = os.path.join(rootTmpDir, C_EXISTS_CONF)
+
+        # Note: 'missing_extension.conf' is deliberately NOT created on disk
+
+        # 2. Initialize manager and programmatic layout tree
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=PgCfg_Std.Strategy.Standard,
+        )
+        pgFile = cfg.AddTopLevelFile(C_PG_CONF)
+
+        # Base configuration parameters
+        pgFile.SetOptionValue("port", 5432)
+        pgFile.SetOptionValue("max_connections", 100)
+
+        # 3. Add include_if_exists for the MISSING file
+        # Standard behavior: Must NOT raise exception despite file absence on disk.
+        line_missing = pgFile.AddEmptyLine()
+        inc_missing = line_missing.AddIncludeIfExists(
+            C_MISSING_CONF,
+            offset=None,
+            rule=PgCfg_AddIncludeIfExistsRule.without_file,
+        )
+        assert inc_missing.get_File() is None
+
+        # 4. Add include_if_exists for the EXISTING file
+        inc_exists = pgFile.AddIncludeIfExists(
+            C_EXISTS_CONF,
+            rule=PgCfg_AddIncludeIfExistsRule.with_file,
+        )
+
+        # Load the content of the existing optional file into the graph context
+        # (simulating reader loading pass)
+        attachedFile = inc_exists.get_File()
+        assert attachedFile is not None
+        assert attachedFile.get_Path() == existsConfPath
+
+        attachedFile.AddComment("# Optional active extension configuration")
+        attachedFile.AddOption("max_connections", 300)
+        attachedFile.AddOption("shared_buffers", "512MB")
+
+        # 5. Verify the effective global configuration behavior
+        # 'port' was never modified by missing.conf -> stays 5432
+        assert cfg.GetOptionValue("port") == 5432
+
+        # 'max_connections' was overridden by active_extension.conf -> last definition wins (300)
+        assert cfg.GetOptionValue("max_connections") == 300
+        assert cfg.GetOptionValue("shared_buffers") == "512MB"
+
+        # 6. Verify total option count (2 from postgresql.conf + 2 from active_extension.conf)
+        allOptions = list(cfg.get_AllOptions())
+        assert len(allOptions) == 4
         return
 
 

@@ -10,6 +10,7 @@ from .model import FileLineElementData as PgCfgModel__FileLineElementData
 from .model import CommentData as PgCfgModel__CommentData
 from .model import OptionData as PgCfgModel__OptionData
 from .model import IncludeData as PgCfgModel__IncludeData
+from .model import IncludeIfExistsData as PgCfgModel__IncludeIfExistsData
 from .model import FileLineData as PgCfgModel__FileLineData
 from .model import FileData as PgCfgModel__FileData
 from .model import MultiIndex as PgCfgModel__MultiIndex
@@ -112,6 +113,31 @@ class ModelUtils:
 
     # --------------------------------------------------------------------
     @staticmethod
+    def IncludeIfExists__delete(
+        cfgData: PgCfgModel__ConfigurationData,
+        includeIfExistsData: PgCfgModel__IncludeIfExistsData,
+        withLine: bool,
+    ) -> None:
+        assert type(cfgData) is PgCfgModel__ConfigurationData
+        assert type(includeIfExistsData) is PgCfgModel__IncludeIfExistsData
+        assert type(withLine) is bool
+
+        fileLineData = includeIfExistsData.m_Parent
+        assert fileLineData is not None
+        assert type(fileLineData) is PgCfgModel__FileLineData
+
+        __class__.Helper__DeleteIncludeIfExists(includeIfExistsData)
+
+        if not withLine:
+            return
+
+        assert not __class__.Helper__FileLineHasWorkData(fileLineData)
+
+        __class__.Helper__DeleteFileLine(cfgData, fileLineData)
+        return
+
+    # --------------------------------------------------------------------
+    @staticmethod
     def Comment__delete(
         cfgData: PgCfgModel__ConfigurationData,
         commentData: PgCfgModel__CommentData,
@@ -193,6 +219,9 @@ class ModelUtils:
         if type(lastItem.m_Element) is PgCfgModel__IncludeData:
             return
 
+        if type(lastItem.m_Element) is PgCfgModel__IncludeIfExistsData:
+            return
+
         if type(lastItem.m_Element) is PgCfgModel__CommentData:
             RaiseError.FileLineAlreadyHasComment()
 
@@ -230,7 +259,39 @@ class ModelUtils:
             fileLineDataItem,
         )
 
-        # TODO: Reg include data in a global index?
+        return includeData
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def FileLine__add_IncludeIfExists(
+        fileLineData: PgCfgModel__FileLineData,
+        filePath: str,
+        fileData: typing.Optional[PgCfgModel__FileData],
+        offset: typing.Optional[int],
+    ) -> PgCfgModel__IncludeIfExistsData:
+        assert type(fileLineData) is PgCfgModel__FileLineData
+        assert type(filePath) is str
+        assert fileData is None or type(fileData) is PgCfgModel__FileData
+        assert filePath != ""
+        assert offset is None or type(offset) is int
+
+        assert fileLineData.IsAlive()
+        assert fileData is None or fileData.IsAlive()
+
+        __class__.Helper__CheckThatWeCanAddWorkDataToFileLine(fileLineData)
+
+        includeData = PgCfgModel__IncludeIfExistsData(
+            fileLineData,
+            offset,
+            filePath,
+            fileData,
+        )
+        fileLineDataItem = PgCfgModel__FileLineData.tagItem(
+            includeData,
+        )
+        fileLineData.m_Items.append(
+            fileLineDataItem,
+        )
 
         return includeData
 
@@ -324,6 +385,9 @@ class ModelUtils:
 
         if type(lastItem.m_Element) is PgCfgModel__IncludeData:
             RaiseError.FileLineAlreadyHasIncludeDirective()
+
+        if type(lastItem.m_Element) is PgCfgModel__IncludeIfExistsData:
+            RaiseError.FileLineAlreadyHasIncludeIfExistsDirective()
 
         if type(lastItem.m_Element) is PgCfgModel__CommentData:
             RaiseError.FileLineAlreadyHasComment()
@@ -463,6 +527,27 @@ class ModelUtils:
                     return firstItem.m_Element  # <--------- BINGO
 
                 if type(firstItem.m_Element) is PgCfgModel__IncludeData:
+                    assert firstItem.m_Element.m_File is not None
+                    assert type(firstItem.m_Element.m_File.m_Path) is str
+
+                    if not enterIntoIncludes:
+                        # Stop searching upwards: any option defined above an include
+                        # might be overridden by that included file.
+                        return None  # <--------- FAIL
+
+                    assert findCtx is not None
+                    if not findCtx.reg_file(firstItem.m_Element.m_File.m_Path):
+                        continue
+
+                    nextFile = firstItem.m_Element.m_File
+                    break
+
+                if type(firstItem.m_Element) is PgCfgModel__IncludeIfExistsData:
+                    if firstItem.m_Element.m_File is None:
+                        continue
+
+                    assert type(firstItem.m_Element.m_File.m_Path) is str
+
                     if not enterIntoIncludes:
                         # Stop searching upwards: any option defined above an include
                         # might be overridden by that included file.
@@ -1036,6 +1121,9 @@ class ModelUtils:
         if type(objectData) is PgCfgModel__IncludeData:
             return __class__.Helper__DeleteInclude(objectData)
 
+        if type(objectData) is PgCfgModel__IncludeIfExistsData:
+            return __class__.Helper__DeleteIncludeIfExists(objectData)
+
         BugCheckError.UnkObjectDataType(type(objectData))
 
     # --------------------------------------------------------------------
@@ -1192,6 +1280,49 @@ class ModelUtils:
         # delete from fileLine
         includeData.MarkAsDeletedFrom(fileLineData)
         assert not includeData.IsAlive()
+        fileLineData.m_Items.pop(iFileLineItem)
+        return
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def Helper__DeleteIncludeIfExists(
+        includeIfExistsData: PgCfgModel__IncludeIfExistsData,
+    ) -> None:
+        assert type(includeIfExistsData) is PgCfgModel__IncludeIfExistsData
+        assert includeIfExistsData.IsAlive()
+
+        # 0.
+        fileLineData = None
+        iFileLineItem = None
+
+        # 1.1 Set fileLineData
+        fileLineData = includeIfExistsData.m_Parent
+        assert fileLineData is not None
+        assert type(fileLineData) is PgCfgModel__FileLineData
+        assert fileLineData.IsAlive()
+
+        # 1.2 Set iFileLineItem
+        iFileLineItem = __class__.Helper__FindIndexOfFileLineElement(
+            fileLineData,
+            includeIfExistsData,
+        )
+
+        assert iFileLineItem >= 0
+        assert iFileLineItem <= len(fileLineData.m_Items)
+
+        if iFileLineItem == len(fileLineData.m_Items):
+            BugCheckError.IncludeIfExistsIsNotFoundInFileLine()
+
+        assert iFileLineItem >= 0
+        assert iFileLineItem < len(fileLineData.m_Items)
+        assert fileLineData.m_Items[iFileLineItem] is not None
+        assert fileLineData.m_Items[iFileLineItem].m_Element is includeIfExistsData
+
+        # 2. Perform delete operations
+
+        # delete from fileLine
+        includeIfExistsData.MarkAsDeletedFrom(fileLineData)
+        assert not includeIfExistsData.IsAlive()
         fileLineData.m_Items.pop(iFileLineItem)
         return
 
