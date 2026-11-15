@@ -1184,6 +1184,8 @@ class ModelUtils:
 
         assert iFileLineItem >= 0
         assert iFileLineItem < len(fileLineData.m_Items)
+        assert fileLineData.m_Items[iFileLineItem] is not None
+        assert fileLineData.m_Items[iFileLineItem].m_Element is includeData
 
         # 2. Perform delete operations
 
