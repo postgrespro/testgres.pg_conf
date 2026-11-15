@@ -155,6 +155,12 @@ class BugCheckError:
 
     # --------------------------------------------------------------------
     @staticmethod
+    def IncludeIfExistsIsNotFoundInFileLine() -> typing.NoReturn:
+        errMsg = "IncludeIfExists is not found in file line."
+        __class__.Helper__Raise(errMsg)
+
+    # --------------------------------------------------------------------
+    @staticmethod
     def FileLineIsNotFoundInFile() -> typing.NoReturn:
         errMsg = "FileLine is not found in file."
         __class__.Helper__Raise(errMsg)
@@ -292,6 +298,18 @@ class BugCheckError:
         errMsg = "Unknown value type [{1}] of option [{0}].".format(
             optionName,
             typeOfOptionValue.__name__,
+        )
+
+        __class__.Helper__Raise(errMsg)
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def UnknownAddIncludeIfExistsRule(
+        value: typing.AnyStr,
+    ) -> typing.NoReturn:
+
+        errMsg = "Unknown AddIncludeIfExistsRule: {}.".format(
+            value,
         )
 
         __class__.Helper__Raise(errMsg)

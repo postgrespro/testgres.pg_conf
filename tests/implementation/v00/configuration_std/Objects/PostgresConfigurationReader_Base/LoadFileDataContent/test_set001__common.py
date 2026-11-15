@@ -12,6 +12,7 @@ from src.implementation.v00.configuration_base import PgCfgModel__FileData
 from src.implementation.v00.configuration_base import PgCfgModel__CommentData
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
 from src.implementation.v00.configuration_base import PgCfgModel__IncludeData
+from src.implementation.v00.configuration_base import PgCfgModel__IncludeIfExistsData
 
 from src.exceptions import PostgresConfigException
 # fmt: on
@@ -879,6 +880,183 @@ class TestSet001__Common:
         file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
 
         src = CfgFileReader("include" + data4E05)
+
+        with pytest.raises(PostgresConfigException) as x:
+            PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(x.value) == ErrorMessageBuilder.CfgReader__IncludeWithoutPath(
+            1,
+        )
+        return
+
+    # --------------------------------------------------------------------
+    def test_501__include_if_exists(
+        self,
+        request: pytest.FixtureRequest,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(rootTmpDir)
+
+        file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
+        assert len(cfg.get_AllFiles()) == 1
+
+        src = CfgFileReader("include_if_exists 'a.conf'\n")
+
+        PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert len(file1) == 1
+        assert len(file1.m_FileData.m_Lines) == 1
+
+        fileLineData0 = file1.m_FileData.m_Lines[0]
+        assert len(fileLineData0.m_Items) == 1
+        assert (
+            type(fileLineData0.m_Items[0].m_Element) is PgCfgModel__IncludeIfExistsData
+        )
+        assert fileLineData0.m_Items[0].m_Element.m_Offset == 0
+        assert fileLineData0.m_Items[0].m_Element.m_Path == "a.conf"
+        assert fileLineData0.m_Items[0].m_Element.m_File is None
+
+        assert len(cfg.get_AllFiles()) == 1
+        return
+
+    # --------------------------------------------------------------------
+    def test_5E01__empty_path(
+        self,
+        request: pytest.FixtureRequest,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(rootTmpDir)
+
+        file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
+
+        src = CfgFileReader("include_if_exists ''\n")
+
+        with pytest.raises(PostgresConfigException) as x:
+            PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(x.value) == ErrorMessageBuilder.CfgReader__IncludeHasEmptyPath(
+            1,
+        )
+        return
+
+    # --------------------------------------------------------------------
+    @pytest.mark.parametrize(
+        "data", [x[1] for x in sm_dataE4E02], ids=[x[0] for x in sm_dataE4E02]
+    )
+    def test_5E02__incompleted_path(
+        self,
+        request: pytest.FixtureRequest,
+        data: str,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(data) is str
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(rootTmpDir)
+
+        file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
+
+        src = CfgFileReader("include '" + data)
+
+        with pytest.raises(PostgresConfigException) as x:
+            PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(
+            x.value,
+        ) == ErrorMessageBuilder.CfgReader__EndOfIncludePathIsNotFound(
+            1,
+        )
+        return
+
+    # --------------------------------------------------------------------
+    def test_5E03__unknown_escape_symbol(
+        self,
+        request: pytest.FixtureRequest,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(rootTmpDir)
+
+        file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
+
+        src = CfgFileReader("include_if_exists '\\a")
+
+        with pytest.raises(PostgresConfigException) as x:
+            PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(
+            x.value,
+        ) == ErrorMessageBuilder.CfgReader__UnknownEscapedSymbolInInclude(
+            1,
+            21,
+            "a",
+        )
+        return
+
+    # --------------------------------------------------------------------
+    @pytest.mark.parametrize(
+        "data", [x[1] for x in sm_dataE4E04], ids=[x[0] for x in sm_dataE4E04]
+    )
+    def test_5E04__incompleted_escape(
+        self,
+        request: pytest.FixtureRequest,
+        data: str,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(data) is str
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(rootTmpDir)
+
+        file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
+
+        src = CfgFileReader("include_if_exists '\\" + data)
+
+        with pytest.raises(PostgresConfigException) as x:
+            PgCfg_Reader_Base.LoadFileContent(file1, src)
+
+        assert str(
+            x.value,
+        ) == ErrorMessageBuilder.CfgReader__IncompletedEscapeInInclude(
+            1,
+        )
+        return
+
+    # --------------------------------------------------------------------
+    @pytest.mark.parametrize(
+        "data", [x[1] for x in sm_dataE4E05], ids=[x[0] for x in sm_dataE4E05]
+    )
+    def test_5E05__include_without_path(
+        self,
+        request: pytest.FixtureRequest,
+        data: str,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(data) is str
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(rootTmpDir)
+
+        file1 = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
+
+        src = CfgFileReader("include_if_exists" + data)
 
         with pytest.raises(PostgresConfigException) as x:
             PgCfg_Reader_Base.LoadFileContent(file1, src)

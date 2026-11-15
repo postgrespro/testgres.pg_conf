@@ -9,9 +9,11 @@ from src.implementation.v00.configuration_base import PostgresConfigurationInclu
 from src.implementation.v00.configuration_base import PostgresConfigurationOption_Base as PgCfg_Option_Base
 from src.implementation.v00.configuration_base import PostgresConfigurationFile_Base as PgCfg_File_Base
 from src.implementation.v00.configuration_base import PostgresConfigurationFileLine_Base as PgCfg_FileLine_Base
+from src.implementation.v00.configuration_base import AddIncludeIfExistsRule as PgCfg_AddIncludeIfExistsRule
 
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
 from src.implementation.v00.configuration_base import PgCfgModel__IncludeData
+from src.implementation.v00.configuration_base import PgCfgModel__IncludeIfExistsData
 from src.exceptions import PostgresConfigException
 # fmt: on
 
@@ -140,7 +142,10 @@ class TestSet001__Common:
 
         C_FILE_NAME = "a.conf"
 
-        include = fileLine.AddInclude(name, offset)
+        include = fileLine.AddInclude(
+            name,
+            offset,
+        )
 
         assert len(fileLine) == 1
 
@@ -285,6 +290,50 @@ class TestSet001__Common:
         assert len(fileLine) == 1
 
         assert fileLine.m_FileLineData.m_Items[0].m_Element is comment.m_CommentData
+        return
+
+    # --------------------------------------------------------------------
+    def test_E04__after_include_if_exists(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+
+        file = cfg.AddTopLevelFile(cfg.C_POSTGRESQL_CONF)
+
+        comment = file.AddIncludeIfExists(
+            "aa.conf",
+            PgCfg_AddIncludeIfExistsRule.with_file,
+        )
+
+        fileLine = comment.m_FileLine
+
+        assert len(fileLine) == 1
+
+        with pytest.raises(PostgresConfigException) as x:
+            fileLine.AddInclude("a.conf", 222)
+
+        assert (
+            str(x.value)
+            == ErrorMessageBuilder.FileLineAlreadyHasIncludeIfExistsDirective()
+        )
+
+        assert len(fileLine) == 1
+
+        elementData = fileLine.m_FileLineData.m_Items[0].m_Element
+        assert elementData is not None
+        assert type(elementData) is PgCfgModel__IncludeIfExistsData
+        assert elementData.m_Path == "aa.conf"
         return
 
 

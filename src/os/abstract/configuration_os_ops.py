@@ -55,6 +55,10 @@ class ConfigurationOsFile(ConfigurationFileReader):
 
 
 class ConfigurationOsOps:
+    def Path_IsExists(self, a: str) -> bool:
+        assert type(a) is str
+        RaiseError.MethodIsNotImplemented(__class__, "Path_IsExists")
+
     def Path_IsAbs(self, a: str) -> bool:
         assert type(a) is str
         RaiseError.MethodIsNotImplemented(__class__, "Path_IsAbs")

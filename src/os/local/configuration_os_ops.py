@@ -97,6 +97,10 @@ class ConfigurationOsFile(abstract.ConfigurationOsFile):
 
 
 class ConfigurationOsOps(abstract.ConfigurationOsOps):
+    def Path_IsExists(self, a: str) -> bool:
+        assert type(a) is str
+        return os.path.exists(a)
+
     def Path_IsAbs(self, a: str) -> bool:
         assert type(a) is str
         return os.path.isabs(a)

@@ -9,6 +9,15 @@ import typing
 import enum
 
 # //////////////////////////////////////////////////////////////////////////////
+# AddIncludeIfExistsRule
+
+
+class AddIncludeIfExistsRule(enum.Enum):
+    without_file = 0
+    with_file = 1
+
+
+# //////////////////////////////////////////////////////////////////////////////
 # class PostgresConfigurationObject
 
 
@@ -175,6 +184,27 @@ class PostgresConfigurationInclude(PostgresConfigurationElement):
 
 
 # //////////////////////////////////////////////////////////////////////////////
+# class PostgresConfigurationIncludeIfExists
+
+
+class PostgresConfigurationIncludeIfExists(PostgresConfigurationElement):
+    def __init__(self):
+        super().__init__()
+
+    # interface ----------------------------------------------------------
+    def get_File(self) -> typing.Optional[PostgresConfigurationFile]:
+        RaiseError.MethodIsNotImplemented(__class__, "get_File")
+
+    # --------------------------------------------------------------------
+    def Delete(
+        self,
+        withLine: bool,
+    ) -> None:
+        assert type(withLine) is bool
+        RaiseError.MethodIsNotImplemented(__class__, "Delete")
+
+
+# //////////////////////////////////////////////////////////////////////////////
 # class PostgresConfigurationFileLine
 
 
@@ -219,6 +249,19 @@ class PostgresConfigurationFileLine(PostgresConfigurationObject):
         assert path != ""
         assert (offset is None) or (type(offset) is int)
         RaiseError.MethodIsNotImplemented(__class__, "AddInclude")
+
+    # --------------------------------------------------------------------
+    def AddIncludeIfExists(
+        self,
+        path: str,
+        offset: typing.Optional[int],
+        rule: AddIncludeIfExistsRule,
+    ) -> PostgresConfigurationIncludeIfExists:
+        assert type(path) is str
+        assert path != ""
+        assert (offset is None) or (type(offset) is int)
+        assert type(rule) is AddIncludeIfExistsRule
+        RaiseError.MethodIsNotImplemented(__class__, "AddIncludeIfExists")
 
     # --------------------------------------------------------------------
     def Clear(self) -> None:
@@ -312,6 +355,17 @@ class PostgresConfigurationFile(PostgresConfigurationObject):
         assert type(path) is str
         assert path != ""
         RaiseError.MethodIsNotImplemented(__class__, "AddInclude")
+
+    # --------------------------------------------------------------------
+    def AddIncludeIfExists(
+        self,
+        path: str,
+        rule: AddIncludeIfExistsRule,
+    ) -> PostgresConfigurationIncludeIfExists:
+        assert type(path) is str
+        assert path != ""
+        assert type(rule) is AddIncludeIfExistsRule
+        RaiseError.MethodIsNotImplemented(__class__, "AddIncludeIfExists")
 
     # --------------------------------------------------------------------
     #

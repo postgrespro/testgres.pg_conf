@@ -9,12 +9,14 @@ from src.implementation.v00.configuration_base import PostgresConfigurationSetOp
 from src.implementation.v00.configuration_base import PostgresConfigurationFile_Base as PgCfg_File_Base
 from src.implementation.v00.configuration_base import PostgresConfigurationTopLevelFile_Base as PgCfg_TopLevelFile_Base
 from src.implementation.v00.configuration_base import PostgresConfigurationFileLine_Base as PgCfg_FileLine_Base
+from src.implementation.v00.configuration_base import PostgresConfigurationInclude_Base as PgCfg_Include_Base
 from src.implementation.v00.configuration_base import PostgresConfigurationComment_Base as PgCfg_Comment_Base
 from src.implementation.v00.configuration_base import PostgresConfigurationFileLines_Base as PgCfg_FileLines_Base
 
 from src.implementation.v00.configuration_base import PgCfgModel__FileLineData
 from src.implementation.v00.configuration_base import PgCfgModel__CommentData
 from src.implementation.v00.configuration_base import PgCfgModel__OptionData
+from src.implementation.v00.configuration_base import PgCfgModel__IncludeData
 
 from src.abstract.v00.configuration import PostgresConfigurationComment as PgCfg_Comment
 from src.abstract.v00.configuration import PostgresConfigurationFileLine as PgCfg_FileLine
@@ -177,6 +179,54 @@ class TestSet001__Common:
         assert type(comment1.m_CommentData) is PgCfgModel__CommentData
 
         assert comment1.m_CommentData.m_Parent is None
+        return
+
+    # --------------------------------------------------------------------
+    def test_003__line_with_include(
+        self,
+        request: pytest.FixtureRequest,
+        pg_conf_strategy: PgCfg_Std.Strategy,
+    ):
+        assert isinstance(request, pytest.FixtureRequest)
+        assert type(pg_conf_strategy) is PgCfg_Std.Strategy
+
+        rootTmpDir = TestServices.GetRootTmpDir()
+        assert type(rootTmpDir) is str
+
+        cfg = PgCfg_Std(
+            rootTmpDir,
+            strategy=pg_conf_strategy,
+        )
+
+        file = cfg.AddTopLevelFile("a.conf")
+        assert file is not None
+        assert type(file) is PgCfg_TopLevelFile_Base
+        assert isinstance(file, PgCfg_File_Base)
+        assert isinstance(file, PgCfg_File)
+        assert len(file) == 0
+
+        include1 = file.AddInclude("file.conf")
+        assert include1 is not None
+        assert type(include1) is PgCfg_Include_Base
+        assert isinstance(include1, PgCfg_Include_Base)
+        assert len(file) == 1
+
+        fileLine = include1.get_Parent()
+        assert fileLine is not None
+        assert type(fileLine) is PgCfg_FileLine_Base
+        assert len(fileLine) == 1
+
+        assert (
+            include1.get_Parent().get_Parent().Private__GetFileData() is file.m_FileData
+        )
+
+        fileLine.Clear()
+
+        assert len(fileLine) == 0
+        assert include1.m_FileLine is not None
+        assert type(include1.m_IncludeData) is PgCfgModel__IncludeData
+
+        assert include1.m_IncludeData.m_Parent is None
         return
 
 

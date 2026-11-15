@@ -11,6 +11,7 @@ from ...core.model import FileLineElementData as PgCfgModel__FileLineElementData
 from ...core.model import CommentData as PgCfgModel__CommentData
 from ...core.model import OptionData as PgCfgModel__OptionData
 from ...core.model import IncludeData as PgCfgModel__IncludeData
+from ...core.model import IncludeIfExistsData as PgCfgModel__IncludeIfExistsData
 from ...core.model import FileLineData as PgCfgModel__FileLineData
 from ...core.model import FileData as PgCfgModel__FileData
 from ...core.model import FileStatus as PgCfgModel__FileStatus
@@ -475,6 +476,12 @@ class PostgresConfigurationWriter_Base:
                 elementData,
             )
 
+        if type(elementData) is PgCfgModel__IncludeIfExistsData:
+            return __class__.Helper__IncludeIfExistsToString(
+                ctx,
+                elementData,
+            )
+
         BugCheckError.UnkObjectDataType(type(elementData))
 
     # --------------------------------------------------------------------
@@ -547,6 +554,26 @@ class PostgresConfigurationWriter_Base:
         assert includeData.m_Path != ""
 
         result = "include " + WriteUtils.Pack_Str(includeData.m_Path)
+
+        assert type(result) is str
+        assert result != ""
+        return result
+
+    # --------------------------------------------------------------------
+    @staticmethod
+    def Helper__IncludeIfExistsToString(
+        ctx: PostgresConfigurationWriterCtx_Base,
+        includeIfExistsData: PgCfgModel__IncludeIfExistsData,
+    ) -> str:
+        assert type(ctx) is PostgresConfigurationWriterCtx_Base
+        assert ctx.Cfg is not None
+        assert isinstance(ctx.Cfg, PostgresConfiguration_Base)
+        assert type(includeIfExistsData) is PgCfgModel__IncludeIfExistsData
+        assert includeIfExistsData.m_Path is not None
+        assert type(includeIfExistsData.m_Path) is str
+        assert includeIfExistsData.m_Path != ""
+
+        result = "include_if_exists " + WriteUtils.Pack_Str(includeIfExistsData.m_Path)
 
         assert type(result) is str
         assert result != ""
