@@ -218,7 +218,10 @@ class TestSet001__Common:
         assert cfg.m_Data.m_DataDir == rootTmpDir
 
         with pytest.raises(PostgresConfigException) as x:
-            cfg.AddOption(None, 123)
+            cfg.AddOption(
+                typing.cast(typing.Any, None),
+                123,
+            )
 
         assert str(x.value) == ErrorMessageBuilder.OptionNameIsNone()
         return

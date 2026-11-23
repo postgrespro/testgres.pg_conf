@@ -82,7 +82,9 @@ class TestSet001__Common:
         )
 
         with pytest.raises(PostgresConfigException) as x:
-            cfg.GetOptionValue(None)
+            cfg.GetOptionValue(
+                typing.cast(typing.Any, None),
+            )
 
         assert str(x.value) == ErrorMessageBuilder.OptionNameIsNone()
         return

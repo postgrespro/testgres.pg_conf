@@ -20,6 +20,7 @@ from .......ErrorMessageBuilder import ErrorMessageBuilder
 
 import pytest
 import os
+import typing
 
 # //////////////////////////////////////////////////////////////////////////////
 # TestSet001__Common
@@ -371,7 +372,10 @@ class TestSet001__Common:
         file = cfg.AddTopLevelFile("postgresql.proxima.conf")
 
         with pytest.raises(PostgresConfigException) as x:
-            file.AddOption(None, 123)
+            file.AddOption(
+                typing.cast(typing.Any, None),
+                123,
+            )
 
         assert str(x.value) == ErrorMessageBuilder.OptionNameIsNone()
         return
